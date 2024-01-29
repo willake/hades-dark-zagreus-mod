@@ -5808,8 +5808,6 @@
       Name = "EnemySwordWeapon"
       InheritFrom = "1_BaseDamagingWeapon"
       Control = "Attack2"
-      Cooldown = 0.5
-      UseTargetAngle = true
       Type = "GUN"
       Projectile = "SwordWeapon"
       ClipSize = 1
@@ -5942,7 +5940,6 @@
       FireGraphic = "ZagreusSwordDashAttack"
       FireFx = "SwordSwipeC"
       Enabled = true
-      SwapOnFire = "EnemySwordWeapon"
       ForceReleaseOnSwap = false
       ControlWindow = 0.45
       AutoLockArcDistance = 150
@@ -6031,7 +6028,6 @@
       FireGraphic = "ZagreusSwordAttack2"
       LockTriggerForCharge = true
       CancelChargeOnRelease = true
-      SwapOnFire = "EnemySwordWeapon3"
       ControlWindow = 0.425
       NumProjectiles = 1
       ChargeTimeFrames = 10

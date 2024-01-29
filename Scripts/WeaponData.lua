@@ -16473,6 +16473,24 @@ WeaponData =
 			{ ScreenPreWait = 0.02, RightFraction = 0.2, Duration = 0.15 },
 		},
 
+		AIData =
+		{
+			--PreAttackAnimation = "EnemyHydraBite_Charge",
+			--FireAnimation = "EnemyHydraBite_Attack",
+			--PostAttackAnimation = "EnemyHydraIdle",
+			PreAttackDuration = 0,
+			--PreAttackEndDuration = 0.5,
+			--PreAttackEndShake = true,
+			--PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+			FireDuration = 0.8,
+			PostAttackDuration = 0,
+			AIAttackDistance = 175,
+			AIBufferDistance = 175,
+			AIAngleTowardsPlayerWhileFiring = true,
+			AITrackTargetDuringCharge = true,
+			AIMoveWithinRangeTimeout = 1.0,
+		},
+
 		Sounds =
 		{
 			FireSounds =
@@ -16532,6 +16550,24 @@ WeaponData =
 			{ ScreenPreWait = 0.02, LeftFraction = 0.25, Duration = 0.2 },
 		},
 
+		AIData =
+		{
+			--PreAttackAnimation = "EnemyHydraBite_Charge",
+			--FireAnimation = "EnemyHydraBite_Attack",
+			--PostAttackAnimation = "EnemyHydraIdle",
+			PreAttackDuration = 0,
+			--PreAttackEndDuration = 0.5,
+			--PreAttackEndShake = true,
+			--PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+			FireDuration = 0.8,
+			PostAttackDuration = 0,
+			AIAttackDistance = 175,
+			AIBufferDistance = 175,
+			AIAngleTowardsPlayerWhileFiring = true,
+			AITrackTargetDuringCharge = true,
+			AIMoveWithinRangeTimeout = 1.0,
+		},
+
 		Sounds =
 		{
 			FireSounds =
@@ -16584,6 +16620,24 @@ WeaponData =
 			--{ ScreenPreWait = 0.00, Fraction = 0.01, LerpTime = 0 },
 			--{ ScreenPreWait = 0.02, Fraction = 0.15, LerpTime = 0.07 },
 			--{ ScreenPreWait = 0.035, Fraction = 1.0, LerpTime = 0.1 },
+		},
+
+		AIData =
+		{
+			--PreAttackAnimation = "EnemyHydraBite_Charge",
+			--FireAnimation = "EnemyHydraBite_Attack",
+			--PostAttackAnimation = "EnemyHydraIdle",
+			PreAttackDuration = 0,
+			--PreAttackEndDuration = 0.5,
+			--PreAttackEndShake = true,
+			--PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+			FireDuration = 0.8,
+			PostAttackDuration = 0,
+			AIAttackDistance = 175,
+			AIBufferDistance = 175,
+			AIAngleTowardsPlayerWhileFiring = true,
+			AITrackTargetDuringCharge = true,
+			AIMoveWithinRangeTimeout = 1.0,
 		},
 
 		Sounds =

@@ -10777,7 +10777,7 @@ UnitSetData.Enemies =
 		DefaultAIData =
 		{
 		},
-		WeaponOptions = { "EnemySwordWeapon" },
+		WeaponOptions = { "EnemySwordWeapon", "EnemySwordWeapon2", "EnemySwordWeapon3", "EnemySwordParry", "EnemySwordWeaponDash" },
 		DisarmedWeapon = "EnemySwordWeapon",
 
 		ShrineMetaUpgradeName = "BossDifficultyShrineUpgrade",
