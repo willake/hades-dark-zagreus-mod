@@ -1,4 +1,4 @@
-local mod = ModUtil.Mod.Register("TestMod")
+local mod = ModUtil.Mod.Register("EvilZagreus")
 
 mod.Config = {
     Enabled = true
