@@ -10760,7 +10760,7 @@ UnitSetData.Enemies =
 
 		SpeechCooldownTime = 11,
 
-		Groups = { "GroundEnemies", "FlyingEnemies" },
+		Groups = { "GroundEnemies" },
 		OnDeathFunctionName = "HarpyKillPresentation",
 		OnDeathFunctionArgs = { Message = "HarpyDefeatedMessage", BossDifficultyMessage = "HarpiesDefeatedMessage", CameraPanTime = 1.5, StartSound = "/Leftovers/Menu Sounds/EmoteShocked", BatsAfterDeath = true, FlashRed = true, AddInterBiomeTimerBlock = true },
 		DeathAnimation = "FuryDead",
@@ -10776,10 +10776,11 @@ UnitSetData.Enemies =
 
 		DefaultAIData =
 		{
-
+			DashWeapon = "SwordWeaponDash",
+			PreAttackDash = "SwordWeaponDash",
 		},
-		WeaponOptions = { "HarpyLunge", "SwordWeapon", "SwordWeaponDash", "SwordParry" },
-		DisarmedWeapon = "HarpyLunge",
+		WeaponOptions = { "SwordWeapon", "SwordParry" },
+		DisarmedWeapon = "SwordWeapon",
 
 		ShrineMetaUpgradeName = "BossDifficultyShrineUpgrade",
 		SupportAIWeaponSetOptions = { "Tisiphone", "Alecto" },
