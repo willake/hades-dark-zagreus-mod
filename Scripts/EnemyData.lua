@@ -10778,7 +10778,7 @@ UnitSetData.Enemies =
 		{
 
 		},
-		WeaponOptions = { "HarpyLunge", "HarpyWhipWhirl" },
+		WeaponOptions = { "HarpyLunge", "SwordWeapon", "SwordWeaponDash", "SwordParry" },
 		DisarmedWeapon = "HarpyLunge",
 
 		ShrineMetaUpgradeName = "BossDifficultyShrineUpgrade",
