@@ -10776,11 +10776,9 @@ UnitSetData.Enemies =
 
 		DefaultAIData =
 		{
-			DashWeapon = "SwordWeaponDash",
-			PreAttackDash = "SwordWeaponDash",
 		},
-		WeaponOptions = { "SwordWeapon", "SwordParry" },
-		DisarmedWeapon = "SwordWeapon",
+		WeaponOptions = { "EnemySwordWeapon" },
+		DisarmedWeapon = "EnemySwordWeapon",
 
 		ShrineMetaUpgradeName = "BossDifficultyShrineUpgrade",
 		SupportAIWeaponSetOptions = { "Tisiphone", "Alecto" },
