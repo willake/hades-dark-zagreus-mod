@@ -1,3 +1,4 @@
 Top Import "config.lua"
 Import "main.lua"
 Import "harpy.lua"
+Import "EvilZagreus/Weapon.lua"
