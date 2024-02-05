@@ -1,8 +1,8 @@
 DebugPrint({ Text = "Load SwordWeapon" })
 
-WeaponData.EnemySwordWeapon = {
+WeaponData.EnemySwordWeapon =
+{
     Name = "EnemySwordWeapon",
-
     AIData =
     {
         --PreAttackAnimation = "EnemyHydraBite_Charge",
