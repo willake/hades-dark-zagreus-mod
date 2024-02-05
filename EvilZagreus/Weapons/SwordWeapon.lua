@@ -1,4 +1,4 @@
-DebugPrint({ Text = "Load new weapons" })
+DebugPrint({ Text = "Load SwordWeapon" })
 
 WeaponData.EnemySwordWeapon = {
     Name = "EnemySwordWeapon",
