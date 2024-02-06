@@ -14,6 +14,7 @@
       StartFrame = 1
       OffsetY = -105.0
       SetOwnerEndAngle = true
+      Scale = 1.05
       CancelOnOwnerMove = true
       Material =
       {
@@ -222,19 +223,23 @@
     {
       Name = "FuryStart"
       ChainTo = "FuryRun"
-      FilePath = "Animations\Fury\StartStop\FuryStartStop"
+      FilePath = "Animations\Zagreus\Start\ZagreusStart"
       Type = "Slide"
-      VideoTexture = "Enemy_Fury_StartStop_Bink"
-      EndFrame = 20
-      NumAngles = 32
-      NumFrames = 20
+      VideoTexture = "ZagreusStart_Bink"
+      EndFrame = 32
+      FrameDataFile = "Game\Animations\FrameData\ZagreusStart.sga"
+      NumAngles = 64
+      NumFrames = 32
       StartFrame = 1
-      OffsetY = -50.0
+      OffsetY = -105.0
+      Scale = 1.05
+      NativeMoveSpeed = 540.0
+	    SoundManagerCap = 16
       Slides = [
 
         { DurationFrames = 1 }
         /*Frame 1*/
-        { DurationFrames = 1 Sound = "/Leftovers/SFX/FootstepsConcreteMedium" }
+        { DurationFrames = 1 FootstepFxR = "FireFootstepR-Spawner" FootstepSound = "/SFX/Player Sounds/FootstepsHardSurface" }
         { DurationFrames = 1 }
         { DurationFrames = 1 }
         { DurationFrames = 1 }
@@ -245,17 +250,32 @@
         { DurationFrames = 1 }
         /*Frame 10*/
 
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 Sound = "/Leftovers/SFX/FootstepsConcreteMedium" }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 FootstepFxL = "FireFootstepL-Spawner" FootstepSound = "/SFX/Player Sounds/FootstepsHardSurface" }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
         /*Frame 20*/
+
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        /*Frame 30*/
+
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
       ]
       Material =
       {
@@ -282,33 +302,37 @@
     {
       Name = "FuryStop"
       ChainTo = "FuryIdle"
-      FilePath = "Animations\Fury\StartStop\FuryStartStop"
+      FilePath = "Animations\Zagreus\Stop\ZagreusStop"
       Type = "Slide"
-      VideoTexture = "Enemy_Fury_StartStop_Bink"
-      EndFrame = 20
+      VideoTexture = "ZagreusStop_Bink"
+      EndFrame = 32
+      FrameDataFile = "Game\Animations\FrameData\ZagreusStop.sga"
       NumAngles = 32
-      NumFrames = 20
+      NumFrames = 32
       StartFrame = 1
-      OffsetY = -50.0
+      OffsetY = -105.0
+      Scale = 1.05
+      CancelOnOwnerMove = true
+	    SoundManagerCap = 16
       Slides = [
 
         { DurationFrames = 0 }
         /*Frame 1*/
-        { DurationFrames = 0 Sound = "/Leftovers/SFX/FootstepsConcreteMedium" }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
-        { DurationFrames = 0 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 FootstepSound = "/SFX/Player Sounds/FootstepsHardSurface" }
+        { DurationFrames = 1 }
         /*Frame 10*/
 
         { DurationFrames = 1 }
         { DurationFrames = 1 }
         { DurationFrames = 1 }
-        { DurationFrames = 1 Sound = "/Leftovers/SFX/FootstepsConcreteMedium" }
+        { DurationFrames = 1 }
         { DurationFrames = 1 }
         { DurationFrames = 1 }
         { DurationFrames = 1 }
@@ -316,6 +340,21 @@
         { DurationFrames = 1 }
         { DurationFrames = 1 }
         /*Frame 20*/
+
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
+        /*Frame 30*/
+
+        { DurationFrames = 1 }
+        { DurationFrames = 1 }
       ]
       Material =
       {
@@ -341,48 +380,26 @@
 
     {
       Name = "FuryRun"
-      FilePath = "Animations\Fury\Run\FuryRun"
-      Type = "Slide"
-      VideoTexture = "Enemy_Fury_Run_Bink"
-      EndFrame = 22
+      FilePath = "Animations\Zagreus\Run\ZagreusRun"
+      Type = "Book"
+      VideoTexture = "ZagreusRun_Bink"
+      FrameDataFile = "Game\Animations\FrameData\ZagreusRun.sga"
+      EndFrame = 32
       Loop = true
       NumAngles = 64
-      NumFrames = 22
+      NumFrames = 32
       StartFrame = 1
-      OffsetY = -50.0
+      OffsetY = -105.0
+      Scale = 1.05
+      NativeMoveSpeed = 540.0
       CancelOnOwnerMove = true
       VisualFx = "FuryRunBlur"
       VisualFxDistanceMin = 25
       VisualFxDistanceMax = 25
+      SoundManagerCap = 16
       Slides = [
-
-        { DurationFrames = 1 }
-        /*Frame 1*/
-        { DurationFrames = 1 Sound = "/Leftovers/SFX/FootstepsConcreteMedium" }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        /*Frame 10*/
-
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 Sound = "/Leftovers/SFX/FootstepsConcreteMedium" }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
-        /*Frame 20*/
-
-        { DurationFrames = 1 }
-        { DurationFrames = 1 }
+        { DurationFrames = 1 FootstepFxR = "FireFootstepR-Spawner" FootstepSound = "/SFX/Player Sounds/FootstepsHardSurfaceRun" Frame = 1 }
+        { DurationFrames = 1 FootstepFxL = "FireFootstepL-Spawner" FootstepSound = "/SFX/Player Sounds/FootstepsHardSurfaceRun" Frame = 16 }
       ]
       Material =
       {
