@@ -1,0 +1,481 @@
+{
+  Projectiles = [
+    "_append"
+    {
+      Name = "EnemySwordWeapon"
+      InheritFrom = "1_BaseDamagingProjectile"
+      DetonateGraphic = "null"
+      Type = "ARC"
+      ArcStart = -75
+      ArcEnd = 90
+      AffectsEnemies = true
+      AffectsFriends = false
+      AffectsSelf = false
+      CheckUnitImpact = true
+      CheckObstacleImpact = true
+      UnlimitedUnitPenetration = true
+      DamageLow = 20
+      DamageHigh = 20
+      Speed = 2700
+      Range = 260
+      NumPenetrations = 99999
+      CriticalFx = "CriticalHit"
+      HitVulnerabilityFx = "Backstab"
+      UseArmor = true
+      UseVulnerability = true
+      AttachToMarker = "null"
+      AngleFromMarker = "null"
+      InvulnerableImpactOwnerVelocity = 300
+      StartFx = "null"
+      UseRadialImpact = false
+      ImpactLineOfSightFromOwner = true
+      ProjectileDefenseAngle = 90
+      ProjectileDefenseRadius = 235
+      DeflectProjectiles = false
+      Thing = {
+        Graphic = "null"
+        OffsetZ = 70
+        RotateGeometry = true
+        Grip = 999999
+        SortBoundsScale = 0.5
+        Tallness = 10
+        Points = [
+          {
+            X = -260
+            Y = 0
+          }
+          {
+            X = 0
+            Y = 100
+          }
+          {
+            X = 0
+            Y = -100
+          }
+        ]
+      }
+      Effects = [
+        {
+          Name = "RushGrip"
+          Type = "GRIP"
+          Duration = 0.35
+          Modifier = 0.1
+          HaltOnEnd = true
+          Active = false
+        }
+        {
+          Name = "OnHitStun"
+          Duration = 0.5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+        {
+          Name = "SwordBackstabVulnerability"
+          FrontFx = "null"
+          BackFx = "AthenaBackstabDebuffStatus"
+          Duration = 1
+          Active = false
+          IsVulnerabilityEffect = true
+        }
+      ]
+    }
+
+    {
+      Name = "EnemySwordWeapon2"
+      InheritFrom = "1_BaseDamagingProjectile"
+      AffectsEnemies = true
+      AffectsFriends = false
+      AffectsSelf = false
+      CheckUnitImpact = true
+      CheckObstacleImpact = true
+      UnlimitedUnitPenetration = true
+      DamageRadius = 0
+      DamageRadiusScaleY = 0.6
+      DamageLow = 25
+      DamageHigh = 25
+      ImpactVelocity = 0
+
+      Speed = 0
+      Range = 0
+      Fuse = 0.03
+      CriticalFx = "CriticalHit"
+      HitVulnerabilityFx = "Backstab"
+      UseArmor = true
+      UseVulnerability = true
+      StartDelay = 0.02
+      NumPenetrations = 99999
+      AttachToMarker = "null"
+      AngleFromMarker = "null"
+      InvulnerableImpactOwnerVelocity = 300
+      UseRadialImpact = false
+      ImpactLineOfSightFromOwner = true
+      ProjectileDefenseAngle = 180
+      ProjectileDefenseRadius = 230
+      DeflectProjectiles = false
+      Thing = {
+        Graphic = "null"
+        OffsetZ = 79
+        Grip = 999999
+        RotateGeometry = true
+        Points = [
+          {
+            X = -180
+            Y = 0
+          }
+          /* Start */
+          {
+            X = -100
+            Y = 80
+          }
+          /* Player-Right-Wing */
+          {
+            X = 150
+            Y = 80
+          }
+          /* Right-Tip */
+          {
+            X = 150
+            Y = -80
+          }
+          /* Left-Tip */
+          {
+            X = -100
+            Y = -80
+          }
+          /* Player-Left-Wing */
+        ]
+      }
+       Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+        {
+          Name = "SwordBackstabVulnerability"
+          FrontFx = "null"
+          BackFx = "AthenaBackstabDebuffStatus"
+          Duration = 1
+          Active = false
+          IsVulnerabilityEffect = true
+        }
+      ]
+    }
+    {
+      Name = "EnemySwordWeapon3"
+      InheritFrom = "1_BaseDamagingProjectile"
+      AffectsEnemies = true
+      AffectsFriends = false
+      AffectsSelf = false
+      CheckUnitImpact = true
+      CheckObstacleImpact = true
+      UnlimitedUnitPenetration = true
+      DamageRadius = 0
+      DamageRadiusScaleY = 0.6
+      DamageLow = 30
+      DamageHigh = 30
+      Speed = 0
+      Range = 0
+      Fuse = 0.5
+      UseRadialImpact = false
+      ImpactVelocity = 3000
+      ImpactVelocityCap = 3000
+      CriticalFx = "CriticalHit"
+      HitVulnerabilityFx = "Backstab"
+      UseArmor = true
+      UseVulnerability = true
+      StartDelay = 0.02
+      NumPenetrations = 99999
+      AttachToOwner = true
+      AttachToMarker = "null"
+      AngleFromMarker = "null"
+      InvulnerableImpactOwnerVelocity = 350
+      ImpactLineOfSightFromOwner = true
+      ProjectileDefenseAngle = 90
+      ProjectileDefenseRadius = 235
+      DeflectProjectiles = false
+      Thing = {
+        Graphic = "null"
+        Grip = 999999
+        OffsetZ = 30
+        RotateGeometry = true
+        Points = [
+          {
+            X = 240
+            Y = 70
+          }
+          {
+            X = 240
+            Y = -70
+          }
+          {
+            X = 0
+            Y = -70
+          }
+          {
+            X = 0
+            Y = 70
+          }
+        ]
+      }
+      Effects = [
+        {
+          Name = "RushGrip"
+          Type = "GRIP"
+          Duration = 0.25
+          Modifier = 0.7
+          HaltOnEnd = true
+          Active = false
+        }
+        {
+          Name = "OnHitStun"
+          Duration = 0.5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+        {
+          Name = "SwordBackstabVulnerability"
+          FrontFx = "null"
+          BackFx = "AthenaBackstabDebuffStatus"
+          Duration = 1
+          Active = false
+          IsVulnerabilityEffect = true
+        }
+      ]
+    }
+    {
+      Name = "EnemySwordWeaponDash"
+      InheritFrom = "SwordWeapon3"
+      DamageLow = 30
+      DamageHigh = 30
+      ImpactVelocity = 0
+      ImpactVelocityCap = 0
+      Fuse = 0.3
+      Thing = {
+        Graphic = "null"
+        Grip = 999999
+        OffsetZ = 30
+        UseBoundsForSortDrawArea = true
+        RotateGeometry = true
+        Points = [
+          {
+            X = 240
+            Y = 70
+          }
+          {
+            X = 240
+            Y = -70
+          }
+          {
+            X = 0
+            Y = -70
+          }
+          {
+            X = 0
+            Y = 70
+          }
+        ]
+      }
+    }
+
+	{
+		Name = "EnemySwordWeaponArthur1"
+		InheritFrom = "SwordWeapon3"
+		DamageLow = 60
+		DamageHigh = 60
+		ProjectileDefenseAngle = 40
+		ProjectileDefenseRadius = 420
+    ImpactVelocity = 0
+    ImpactVelocityCap = 0
+		Fuse = 0.26
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 450
+				Y = 70
+			  }
+			  {
+				X = 450
+				Y = -120
+			  }
+			  {
+				X = 0
+				Y = -120
+			  }
+			  {
+				X = 0
+				Y = 70
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+	{
+		Name = "EnemySwordWeaponArthur2"
+		InheritFrom = "SwordWeapon"
+		DamageLow = 80
+		DamageHigh = 80
+		ArcStart = 90
+		ArcEnd = -130
+		Speed = 2000
+		AttachToOwner = true
+    ImpactVelocity = 0
+    ImpactVelocityCap = 0
+    StartDelay = 0.03
+    ProjectileDefenseAngle = 40
+    ProjectileDefenseRadius = 420
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 0
+				Y = 0
+			  }
+			  {
+				X = 430
+				Y = 190
+			  }
+			  {
+				X = 430
+				Y = -190
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+	{
+		Name = "EnemySwordWeaponArthur3"
+		InheritFrom = "SwordWeapon"
+		DamageLow = 200
+		DamageHigh = 200
+		ArcStart = -110
+		ArcEnd = 130
+		Speed = 2400
+		AttachToOwner = true
+    StartDelay = 0.02
+    ProjectileDefenseAngle = 40
+    ProjectileDefenseRadius = 420
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 0
+				Y = 0
+			  }
+			  {
+				X = 430
+				Y = 110
+			  }
+			  {
+				X = 430
+				Y = -110
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+
+    {
+      Name = "EnemySwordParry"
+      InheritFrom = "1_BaseDamagingProjectile"
+      DetonateGraphic = "RadialNovaSwordParry"
+      Type = "STRAIGHT"
+      AffectsEnemies = true
+      AffectsFriends = false
+      AffectsSelf = false
+      CheckUnitImpact = true
+      CheckObstacleImpact = true
+      UnlimitedUnitPenetration = true
+      NumPenetrations = 99999
+      Fuse = 0.02
+      DamageRadius = 380
+      DamageLow = 50
+      DamageHigh = 50
+      BlastDuration = 0.1
+      BlastSpeed = 2200
+      AttachToOwner = true
+      ImpactVelocity = 1500
+      ImpactVelocityCap = 1500
+      UseRadialImpact = true
+      DamageRadiusScaleX = 1.175
+      DamageRadiusScaleY = 0.56
+      ProjectileDefenseRadius = 350
+      CriticalFx = "CriticalHit"
+      HitVulnerabilityFx = "Backstab"
+      UseArmor = true
+      UseVulnerability = false
+      DetonateLineOfSightFromOwner = true
+	  DetonateSound = "/SFX/Player Sounds/ZagreusSwordParry"
+      Effects = [
+        {
+          Name = "RushGrip"
+          Type = "GRIP"
+          Duration = 0.3
+          Modifier = 0.1
+          HaltOnEnd = true
+          Active = false
+        }
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+    }
+  ]
+}
