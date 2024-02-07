@@ -79,5 +79,72 @@
 					}
 			]
 		}
+    {
+      Name = "EnemyBowSplitShot"
+      InheritFrom = "1_BaseTrapProjectile"
+      DetonateGraphic = "null"
+      Type = "HOMING"
+      AffectsEnemies = true
+      AffectsFriends = false
+      AffectsSelf = false
+      CheckUnitImpact = true
+      CheckObstacleImpact = true
+      ObstacleCollisionCheck = "PolygonContainsPoint"
+      NumPenetrations = 0
+      Range = 1000.0
+      Speed = 3000.0
+      MaxAdjustRate = 3000
+	    AdjustRateAcceleration = 6000
+      ManuallySetTarget = true
+	    DamageRadius = 0
+      DamageLow = 10
+      DamageHigh = 10
+      ImpactVelocity = 0
+      CriticalFx = "CriticalHit"
+      HitVulnerabilityFx = "Backstab"
+      UseArmor = true
+      UseVulnerability = true
+      UnpauseFx = "BowSplitShotFlare"
+	    UnpauseResetLocation = true
+      ProjectileDefenseRadius = 45
+      DeflectProjectiles = false
+      Thing = {
+        Graphic = "BowWeaponArrowSplitShot"
+        OffsetZ = 70
+        UseBoundsForSortDrawArea = true
+        RotateGeometry = true
+        Grip = 999999
+        Points = [
+          {
+            X = 24
+            Y = 24
+          }
+          {
+            X = 24
+            Y = -24
+          }
+          {
+            X = -24
+            Y = -24
+          }
+          {
+            X = -24
+            Y = 24
+          }
+        ]
+      }
+  		 Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+    }
 	]
 }

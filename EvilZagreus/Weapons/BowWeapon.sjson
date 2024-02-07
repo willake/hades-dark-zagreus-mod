@@ -95,5 +95,93 @@
         }
       ]
     }
+    {
+      Name = "EnemyBowSplitShot"
+      InheritFrom = "EnemyBowWeapon"
+      Projectile = "EnemyBowSplitShot"
+      Control = "Attack3"
+      DisallowedControl = "null"
+      RootOwnerWhileFiring = true
+      BlockMoveInput = true
+      CancelMovement = true
+      ChargeCancelMovement = true
+      NumProjectiles = 9
+      ProjectileSpacing = 0
+      ProjectileAngleOffset = 12
+      ProjectileOffsetStart = "LEFT"
+      ProjectileInterval = 0.03
+      Enabled = true
+      AutoLock = false
+      ReloadTime = 0.85
+      ChargeStartAnimation = "ZagreusBowRapidFire_Start"
+      FireGraphic = "ZagreusBowRapidFire_Fire"
+      ShowFreeAimLine = false
+      AimLineAnimation = "AuraAimLine"
+      ChargeStartFx = "null"
+      FullyAutomatic = false
+      LockTriggerForCharge = true
+      FireOnRelease = false
+      ChargeCancelGraphic = "null"
+      SelfVelocity = 0
+      MinChargeToFire = 1.0
+      ChargeTime = 0.1
+      DisableOwnerForDuration = 0
+      ChargeDamageMultiplier = 1.0
+      ChargeRangeMultiplier = 1
+      ChargeSpeedMultiplier = 1.0
+      ChargeVelocityMultiplier = 1.0
+      PerfectChargeWindowDuration = 0
+      CanCancelDisables = true
+	    AllowExternalForceRelease = false
+      AcceptTriggerLockRequests = true
+      Effects = [
+        {
+          Name = "SplitShotDisable"
+          DurationFrames = 20
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+        }
+        {
+          Name = "SplitShotDisableCancelable"
+          DurationFrames = 42
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = true
+        }
+        {
+          Name = "SplitShotDisableFast"
+          DurationFrames = 12
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "SplitShotDisableFastCancelable"
+          DurationFrames = 26
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = true
+          Active = false
+        }
+
+        {
+          Name = "SplitShotDisableLong"
+          DurationFrames = 42
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = false
+        }
+      ]
+    }
   ]
 }
