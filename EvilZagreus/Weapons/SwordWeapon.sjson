@@ -3,7 +3,7 @@
 		"_append"
     {
       Name = "EnemySwordWeapon"
-      InheritFrom = "1_BaseDamagingWeapon"
+      InheritFrom = "1_BaseTrapWeapon"
       Control = "Attack2"
       Type = "GUN"
       Projectile = "EnemySwordWeapon"
@@ -126,88 +126,8 @@
       ]
     }
     {
-      Name = "EnemySwordWeaponDash"
-      InheritFrom = "EnemySwordWeapon"
-      Control = "Attack2"
-      Projectile = "EnemySwordWeaponDash"
-      BarrelLength = 0
-      ChargeTimeFrames = 0
-      Cooldown = 0.02
-      ChargeStartAnimation = "null"
-      FireGraphic = "ZagreusSwordDashAttack"
-      FireFx = "SwordSwipeC"
-      Enabled = true
-      ForceReleaseOnSwap = false
-      ControlWindow = 0.45
-      AutoLockArcDistance = 150
-      AutoLockRange = 250
-      SelfVelocity = 400
-      CanCancelDisables = true
-      CanCancelOwnDisables = true
-      LockTriggerTransferFromOnSwap = false
-      AllowExternalForceRelease = false
-      LockTrigger = false
-      SetCompleteAngleOnFire = true
-      SetCompleteAngleOnCharge = true
-      Effects = [
-        {
-          Name = "SwordDisable"
-          DurationFrames = 6
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = false
-		  		RequestTriggerLock = true
-        }
-        {
-          Name = "SwordDisable2"
-          DurationFrames = 10
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = false
-		  		RequestTriggerLock = true
-        }
-        {
-          Name = "SwordDisable3"
-          DurationFrames = 22
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = false
-          Cancelable = true
-          RequestTriggerLock = true
-        }
-        {
-          Name = "SwordDisableDoubleDashAttack"
-          DurationFrames = 12
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Active = false
-		  		RequestTriggerLock = true
-        }
-        {
-          Name = "SwordDisableDoubleDashAttackCancelable"
-          DurationFrames = 24
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = false
-          Cancelable = true
-          Active = false
-        }
-        {
-          Name = "SwordWeaponSelfGrip"
-          Type = "GRIP"
-          DurationFrames = 14
-          Modifier = 1.5
-          HaltOnEnd = true
-          Cancelable = false
-        }
-      ]
-    }
-    {
       Name = "EnemySwordWeapon2"
-      InheritFrom = "1_BaseDamagingWeapon"
+      InheritFrom = "1_BaseTrapWeapon"
       Type = "GUN"
       Control = "Attack2"
       Projectile = "EnemySwordWeapon2"
@@ -264,7 +184,7 @@
           DisableMove = true
           DisableRotate = true
           DisableAttack = true
-		  RequestTriggerLock = true
+		      RequestTriggerLock = true
         }
         {
           Name = "SwordDisableCancelableAndLockTrigger2"
@@ -327,7 +247,7 @@
     }
     {
       Name = "EnemySwordWeapon3"
-      InheritFrom = "1_BaseDamagingWeapon"
+      InheritFrom = "1_BaseTrapWeapon"
       Control = "Attack2"
       Type = "GUN"
       Projectile = "EnemySwordWeapon3"
@@ -440,6 +360,86 @@
           Active = false
         }
 
+      ]
+    }
+    {
+      Name = "EnemySwordWeaponDash"
+      InheritFrom = "EnemySwordWeapon"
+      Control = "Attack2"
+      Projectile = "EnemySwordWeaponDash"
+      BarrelLength = 0
+      ChargeTimeFrames = 0
+      Cooldown = 0.02
+      ChargeStartAnimation = "null"
+      FireGraphic = "ZagreusSwordDashAttack"
+      FireFx = "SwordSwipeC"
+      Enabled = true
+      ForceReleaseOnSwap = false
+      ControlWindow = 0.45
+      AutoLockArcDistance = 150
+      AutoLockRange = 250
+      SelfVelocity = 400
+      CanCancelDisables = true
+      CanCancelOwnDisables = true
+      LockTriggerTransferFromOnSwap = false
+      AllowExternalForceRelease = false
+      LockTrigger = false
+      SetCompleteAngleOnFire = true
+      SetCompleteAngleOnCharge = true
+      Effects = [
+        {
+          Name = "SwordDisable"
+          DurationFrames = 6
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = false
+		  		RequestTriggerLock = true
+        }
+        {
+          Name = "SwordDisable2"
+          DurationFrames = 10
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = false
+		  		RequestTriggerLock = true
+        }
+        {
+          Name = "SwordDisable3"
+          DurationFrames = 22
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          Cancelable = true
+          RequestTriggerLock = true
+        }
+        {
+          Name = "SwordDisableDoubleDashAttack"
+          DurationFrames = 12
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = false
+		  		RequestTriggerLock = true
+        }
+        {
+          Name = "SwordDisableDoubleDashAttackCancelable"
+          DurationFrames = 24
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          Cancelable = true
+          Active = false
+        }
+        {
+          Name = "SwordWeaponSelfGrip"
+          Type = "GRIP"
+          DurationFrames = 14
+          Modifier = 1.5
+          HaltOnEnd = true
+          Cancelable = false
+        }
       ]
     }
     {
