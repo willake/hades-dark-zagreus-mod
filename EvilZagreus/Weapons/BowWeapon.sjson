@@ -1,0 +1,187 @@
+{
+  Weapons = [
+    "_append"
+    {
+      Name = "EnemyBowWeapon"
+      InheritFrom = "1_BaseTrapWeapon"
+      Type = "GUN"
+      Projectile = "EnemyBowWeapon"
+      ClipSize = 1
+      RootOwnerWhileFiring = true
+      CancelMovement = true
+      AutoLock = true
+      FireFx = "null"
+      MinChargeStartFx = "BowCharge"
+      ChargeFinishFx = "null"
+      SelfVelocity = 0
+      NumProjectiles = 1
+      ProjectileSpacing = 36
+      Effects = [
+        {
+          Trigger = "Charging"
+          Name = "BowSelfSpeed"
+          Type = "SPEED"
+          Duration = 0.02
+          Modifier = 0.1
+          Active = true
+          CanAffectInvulnerable = true
+        }
+        {
+          Trigger = "Charging"
+          Name = "BowSelfHalt"
+          Type = "GRIP"
+          Duration = 0.02
+          Modifier = 1.4
+          HaltOnEnd = true
+          Active = true
+          CanAffectInvulnerable = true
+        }
+        {
+          Name = "BowWeaponDisable"
+          DurationFrames = 5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = false
+          RequestTriggerLock = true
+        }
+        {
+          Name = "BowWeaponDisableCancelable"
+          DurationFrames = 12
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = true
+          RequestTriggerLock = true
+        }
+        {
+          Name = "BowDoubleShotDisable"
+          DurationFrames = 20
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = false
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "BowDoubleShotDisableCancelable"
+          DurationFrames = 35
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = true
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "BowWeaponExplosiveChargeWeapon"
+          Type = "WEAPON_FIRE"
+          Trigger = "Charging"
+          Duration = 999.0
+          Active = false
+        }
+
+        {
+          Name = "BowBeamDisable"
+          DurationFrames = 8
+          RotationMultiplier = 0.01
+          DisableMove = true
+          DisableRotate = false
+          DisableAttack = false
+          Cancelable = false
+          RequestTriggerLock = false
+          Active = false
+        }
+      ]
+    }
+    {
+      Name = "EnemyBowSplitShot"
+      InheritFrom = "EnemyBowWeapon"
+      Projectile = "EnemyBowSplitShot"
+      Control = "Attack3"
+      DisallowedControl = "null"
+      RootOwnerWhileFiring = true
+      BlockMoveInput = true
+      CancelMovement = true
+      ChargeCancelMovement = true
+      NumProjectiles = 9
+      ProjectileSpacing = 0
+      ProjectileAngleOffset = 12
+      ProjectileOffsetStart = "LEFT"
+      ProjectileInterval = 0.03
+      Enabled = true
+      AutoLock = false
+      ReloadTime = 0.85
+      ChargeStartAnimation = "ZagreusBowRapidFire_Start"
+      FireGraphic = "ZagreusBowRapidFire_Fire"
+      ShowFreeAimLine = false
+      AimLineAnimation = "AuraAimLine"
+      ChargeStartFx = "null"
+      FullyAutomatic = false
+      LockTriggerForCharge = true
+      FireOnRelease = false
+      ChargeCancelGraphic = "null"
+      SelfVelocity = 0
+      MinChargeToFire = 1.0
+      ChargeTime = 0.1
+      DisableOwnerForDuration = 0
+      ChargeDamageMultiplier = 1.0
+      ChargeRangeMultiplier = 1
+      ChargeSpeedMultiplier = 1.0
+      ChargeVelocityMultiplier = 1.0
+      PerfectChargeWindowDuration = 0
+      CanCancelDisables = true
+	    AllowExternalForceRelease = false
+      AcceptTriggerLockRequests = true
+      Effects = [
+        {
+          Name = "SplitShotDisable"
+          DurationFrames = 20
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+        }
+        {
+          Name = "SplitShotDisableCancelable"
+          DurationFrames = 42
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = true
+        }
+        {
+          Name = "SplitShotDisableFast"
+          DurationFrames = 12
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "SplitShotDisableFastCancelable"
+          DurationFrames = 26
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = true
+          Active = false
+        }
+
+        {
+          Name = "SplitShotDisableLong"
+          DurationFrames = 42
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = false
+        }
+      ]
+    }
+  ]
+}
