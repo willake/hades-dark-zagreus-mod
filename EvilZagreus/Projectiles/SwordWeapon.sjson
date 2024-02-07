@@ -91,8 +91,8 @@
       UnlimitedUnitPenetration = true
       DamageRadius = 0
       DamageRadiusScaleY = 0.6
-      DamageLow = 25
-      DamageHigh = 25
+      DamageLow = 2
+      DamageHigh = 2
       ImpactVelocity = 0
       Speed = 0
       Range = 0
@@ -176,8 +176,8 @@
       UnlimitedUnitPenetration = true
       DamageRadius = 0
       DamageRadiusScaleY = 0.6
-      DamageLow = 30
-      DamageHigh = 30
+      DamageLow = 2
+      DamageHigh = 2
       Speed = 0
       Range = 0
       Fuse = 0.5
@@ -252,10 +252,10 @@
       ]
     }
     {
-      Name = "SwordWeaponDash"
-      InheritFrom = "SwordWeapon3"
-      DamageLow = 30
-      DamageHigh = 30
+      Name = "EnemySwordWeaponDash"
+      InheritFrom = "EnemySwordWeapon3"
+      DamageLow = 2
+      DamageHigh = 2
       ImpactVelocity = 0
       ImpactVelocityCap = 0
       Fuse = 0.3
@@ -284,6 +284,58 @@
           }
         ]
       }
+    }
+    {
+      Name = "EnemySwordParry"
+      InheritFrom = "1_BaseTrapProjectile"
+      DetonateGraphic = "RadialNovaSwordParry"
+      Type = "STRAIGHT"
+      AffectsEnemies = true
+      AffectsFriends = false
+      AffectsSelf = false
+      CheckUnitImpact = true
+      CheckObstacleImpact = true
+      UnlimitedUnitPenetration = true
+      NumPenetrations = 99999
+      Fuse = 0.02
+      DamageRadius = 380
+      DamageLow = 2
+      DamageHigh = 2
+      BlastDuration = 0.1
+      BlastSpeed = 2200
+      AttachToOwner = true
+      ImpactVelocity = 1500
+      ImpactVelocityCap = 1500
+      UseRadialImpact = true
+      DamageRadiusScaleX = 1.175
+      DamageRadiusScaleY = 0.56
+      ProjectileDefenseRadius = 350
+      CriticalFx = "CriticalHit"
+      HitVulnerabilityFx = "Backstab"
+      UseArmor = true
+      UseVulnerability = false
+      DetonateLineOfSightFromOwner = true
+	  DetonateSound = "/SFX/Player Sounds/ZagreusSwordParry"
+      Effects = [
+        {
+          Name = "RushGrip"
+          Type = "GRIP"
+          Duration = 0.3
+          Modifier = 0.1
+          HaltOnEnd = true
+          Active = false
+        }
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
     }
   ]
 }

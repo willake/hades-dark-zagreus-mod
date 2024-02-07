@@ -444,7 +444,7 @@
     }
     {
       Name = "EnemySwordParry"
-      InheritFrom = "1_BaseDamagingWeapon"
+      InheritFrom = "1_BaseTrapWeapon"
       Control = "Attack3"
       Cooldown = 0.5
       UseTargetAngle = true
