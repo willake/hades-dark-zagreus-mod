@@ -15,7 +15,7 @@
 			CheckObstacleImpact = true
 			ObstacleCollisionCheck = "PolygonContainsPoint"
 			UnlimitedUnitPenetration = true
-					AttachedPowershotAnimation = "BowWeaponPowerShot"
+			AttachedPowershotAnimation = "BowWeaponPowerShot"
 			Range = 1000.0
 			Speed = 3000.0
 			DamageRadius = 0

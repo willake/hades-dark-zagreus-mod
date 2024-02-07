@@ -1,6 +1,6 @@
 {
   Weapons = [
-    "_append",
+    "_append"
     {
       Name = "EnemyBowWeapon"
       InheritFrom = "1_BaseTrapWeapon"

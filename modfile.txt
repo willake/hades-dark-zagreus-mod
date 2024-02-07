@@ -9,6 +9,8 @@ Import "EvilZagreus/Weapons/BowWeapon.lua"
 
 To "Game/Weapons/EnemyWeapons.sjson"
 SJSON "EvilZagreus/Weapons/BowWeapon.sjson"
+SJSON "EvilZagreus/Weapons/SwordWeapon.sjson"
 
 To "Game/Projectiles/EnemyProjectiles.sjson"
 SJSON "EvilZagreus/Projectiles/BowWeapon.sjson"
+SJSON "EvilZagreus/Projectiles/SwordWeapon.sjson"

@@ -2,5 +2,5 @@
 --     "EnemySwordWeaponDash", "EnemySwordParry" }
 -- UnitSetData.Enemies.Harpy.DisarmedWeapon = "EnemySwordWeapon"
 
-UnitSetData.Enemies.Harpy.WeaponOptions = { "EnemyBowWeapon" }
-UnitSetData.Enemies.Harpy.DisarmedWeapon = "EnemyBowWeapon"
+UnitSetData.Enemies.Harpy.WeaponOptions = { "EnemySwordWeapon" }
+UnitSetData.Enemies.Harpy.DisarmedWeapon = "EnemySwordWeapon"
