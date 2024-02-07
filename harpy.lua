@@ -7,17 +7,30 @@ UnitSetData.Enemies.Harpy.DisarmedWeapon = "EnemyBowWeapon"
 
 local StartChargingTime = 0
 
-OnWeaponCharging { "BowWeapon",
+OnWeaponCharging { "BowWeapon BowWeaponDash",
     function(triggerArgs)
         DebugPrint({ Text = "Start Charging" })
         StartChargingTime = _worldTime
     end }
 
 
-OnWeaponTriggerRelease { "BowWeapon",
+OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
     function(triggerArgs)
         local duration = _worldTime - StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrintString("ButtonX" .. duration)
+    end }
+
+OnWeaponFired { "BowSplitShot",
+    function(triggerArgs)
+        DebugPrint({ Text = "SplitShot" })
+        DebugPrintString("ButtonY")
+    end }
+
+OnWeaponFired { "RushWeapon",
+    function(triggerArgs)
+        DebugPrint({ Text = "RushWeapon" })
+        DebugPrintString("ButtonA")
     end }
 
 local fistStartHoldtime = 0
