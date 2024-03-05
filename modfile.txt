@@ -2,4 +2,4 @@ Top Import "config.lua"
 Import "main.lua"
 
 To "Scripts/EnemyData.lua"
-Import "HadesReplacement.lua"
+Import "Scripts/EnemyData.lua"
