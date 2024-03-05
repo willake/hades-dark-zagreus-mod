@@ -1,0 +1,45 @@
+{
+  Units = {
+    "_sequence" = true,
+    146 = {
+      Name = "Hades"
+      InheritFrom = "1_BaseBoss"
+      CharmBreakModifier = 5.0
+      CollisionDamagePerVelocity = 0.0
+      CollisionWeapon = "HarpyCollisionWeapon"
+      CollisionWeaponRequiredVelocity = 500.0
+      CosmeticRotationSpeed = 500.0
+      DefaultAngle = 30.0
+      DisplayInEditor = true
+      MoveGraphic = "ZagreusRun"
+      RotationSpeed = 1500.0
+      Speed = 600.0
+      Life = 
+      {
+        DeathFx = "null"
+        DieOnCollisionRequiredVelocityMultiplier = 0.0
+        HitSound = "/SFX/Enemy Sounds/Hades/EmoteHurt"
+        InvulnerableFx = "Invincibubble_Hades"
+      }
+      Thing = 
+      {
+        AttachedAnim = "MedusaShadow"
+        EditorOutlineDrawBounds = false
+        ExternalForceMultiplier = 0.2
+        Graphic = "ZagreusIdle"
+        SelectionHeight = 350.0
+        SelectionShiftY = 40.0
+        Scale = 0.7
+        SpeechCapable = true
+        Tallness = 200.0
+        Points = [
+          { X = -10 Y = 75 }
+          { X = 110 Y = 0 }
+          { X = 0 Y = -75 }
+          { X = -110 Y = 10 }
+        ]
+        SubtitleColor = { Red = 0.95 Green = 0.31 Blue = 0.26 }
+      }
+    }
+  }
+}

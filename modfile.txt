@@ -3,3 +3,6 @@ Import "main.lua"
 
 To "Scripts/EnemyData.lua"
 Import "Scripts/EnemyData.lua"
+
+To "Game/Units/Enemies.sjson"
+SJSON "Game/Units/Hades.sjson"
