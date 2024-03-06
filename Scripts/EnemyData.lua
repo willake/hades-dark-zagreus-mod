@@ -18,3 +18,16 @@ UnitSetData.Enemies.Hades.AIStages =
         StageTransitionGlobalVoiceLines = "FatherSonArgumentVoiceLines",
     }
 }
+
+UnitSetData.Enemies.Hades.WeaponOptions = { "RushWeapon", "SwordWeapon" }
+
+UnitSetData.Enemies.Hades.PactDataStage0 = 
+{
+    Default = {
+    },
+
+    [4] = {
+        UnequipWeapons = { },
+        EquipWeapons = {  },
+    },
+}
