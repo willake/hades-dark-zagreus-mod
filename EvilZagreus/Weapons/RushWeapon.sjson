@@ -1,0 +1,229 @@
+{
+	Weapons = [
+	"_append"
+    {
+        Name = "EnemyRushWeapon"
+        InheritFrom = "1_BaseTrapWeapon"
+        Type = "BLINK"
+        Control = "Rush"
+        FireGraphic = "ZagreusDashNoCollide"
+        UnblockedBlinkFx = "DashCrack"
+        SelfVelocity = 0
+        SelfVelocityCap = 0
+        BlinkDuration = 0.21
+        BlinkEaseIn = 0
+        BlinkEaseOut = 0.8
+        Projectile = "EnemyRushWeapon"
+        WeaponRange = 300
+        BlinkMaxRange = 400
+        ClipSize = 1
+        ClipRegenInterval = 0.74
+        FullClipRegen = true
+        ChargeFx = "null"
+        CancelMovement = false
+        FullyAutomatic = false
+        AutoLock = false
+        UseTargetAngle = true
+        BlinkDetonateAtEndpoint = false
+        BlinkDetonateAtOrigin = true
+        BlinkNumGhosts = 3
+        BlinkGhostAnimation = "null"
+        CheckMovementReactionDistance = 150
+        CheckDanger = true
+        CanUseKeyboardAim = true
+        FireFx = "BlinkTrailVerticalB"
+        SilentImpact = true
+        AllowMultiFireRequest = true
+        CancelAttachedProjectiles = true
+        SetTargetAngleOnRequest = false
+        SetCompleteAngleOnFire = true
+        SetCompleteAngleOnCharge = true
+        Effects = [
+            {
+            Name = "RushWeaponInvulnerable"
+            Type = "INVULNERABLE"
+            Duration = 0.24
+            Modifier = 1.0
+            NoUnitCollision = true
+            Active = true
+            CanAffectInvulnerable = true
+            Cancelable = true
+            }
+            {
+            Name = "RushWeaponImmuneToForce"
+            ImmuneToForce = true
+            Duration = 0.24
+            Active = true
+            CanAffectInvulnerable = true
+            Cancelable = true
+            }
+            {
+            Name = "RushWeaponSelfSlow"
+            Type = "SPEED"
+            DurationFrames = 15
+            Modifier = 0.65
+            Cancelable = true
+            }
+            {
+            Name = "RushWeaponSpeedBoost"
+            Type = "SPEED"
+            DurationFrames = 15
+            Modifier = 0.65
+            Cancelable = true
+            Active = false
+            HaltOnEnd = true
+            BackFx = "HermesRushSpeedTrail"
+            }
+            {
+            Name = "RushWeaponDodgeBoost"
+            OnlyAffectName = "_PlayerUnit"
+            ExtendDurationOnReapply = true
+            Duration = 0.5
+            DodgeChance = 0.5
+            ClearOnAttack = true
+            Active = false
+            }
+            {
+            Name = "RushHyperArmor"
+            Type = "DAMAGE_TAKEN"
+            Duration = 5
+            Modifier = 1.0
+            FrontFx = "HyperArmorLoop"
+            ExtendDurationOnReapply = true
+            BackFx = "null"
+            Active = false
+            FlashFrontFxWhenExpiring = true
+            FlashBackFxWhenExpiring = true
+            ImmuneToForce = true
+            ClearOnAttack = false
+            }
+            {
+            Name = "RushWeaponSelfGrip"
+            Type = "GRIP"
+            DurationFrames = 1
+            Modifier = 1.0
+            HaltOnEnd = true
+            Cancelable = false
+            }
+            {
+            Name = "RushWeaponDisableRotation"
+            DurationFrames = 1
+            DisableMove = false
+            DisableRotate = true
+            DisableAttack = false
+            Cancelable = true
+            }
+            {
+            Name = "RushWeaponDisableMove"
+            DurationFrames = 12
+            DisableMove = true
+            DisableRotate = false
+            DisableAttack = false
+            Cancelable = true
+            }
+            {
+            Name = "RushWeaponDisableRapid"
+            DurationFrames = 4
+            DisableMove = true
+            DisableRotate = false
+            DisableAttack = false
+            Cancelable = true
+            Active = false
+            }
+            {
+            Name = "DashDamageIncrease"
+            Duration = 0
+            CritAddition = 0
+            Active = false
+            FrontFx = "ArtemisCritSparkles"
+            BackFx = "null"
+            }
+            {
+            Name = "DashDamageShield"
+            Type = "DAMAGE_TAKEN"
+            Duration = 1.5
+            Modifier = 0.75
+            Active = false
+            FrontFx = "Shielded"
+            }
+            {
+            Name = "MagicShieldBlast"
+            Duration = 0.35
+            Active = false
+            BackFx = "AthenaSingleShieldRushFront"
+            }
+            {
+            Name = "AthenaDashShieldReflection"
+            Duration = 0.175
+            ReflectAddition = 1.0
+            Active = false
+            FrontFx = "AthenaProtectionFront"
+            BackFx = "AthenaProtectionBack"
+            FlashFrontFxWhenExpiring = false
+            FlashBackFxWhenExpiring = false
+            }
+            {
+            Name = "AthenaDashShieldReflect"
+            Type = "PROJECTILE_DEFENSE"
+            Duration = 0.175
+            Range = 210
+            Deflect = true
+            Active = false
+            }
+            {
+            Name = "SlowShieldDeflect"
+            Duration = 0.25
+            ReflectAddition = 1.0
+            Active = false
+            CanAffectInvulnerable = true
+            FrontFx = "Invincibubble"
+            BackFx = "null"
+            Sound = "/Leftovers/SFX/AuraOnLoud"
+            }
+            {
+            Name = "SlowShieldInvulnerable"
+            Type = "INVULNERABLE"
+            Duration = 0.25
+            Modifier = 1.0
+            Active = false
+            CanAffectInvulnerable = true
+            }
+            {
+            Name = "SlowShieldReflectRange"
+            Type = "PROJECTILE_DEFENSE"
+            Duration = 0.25
+            Range = 200
+            Deflect = true
+            Active = false
+            }
+            {
+            Trigger = "Charging"
+            Name = "AreaSlowWeapon"
+            Type = "WEAPON_FIRE"
+            Duration = 0.05
+            Active = false
+            CanAffectInvulnerable = true
+            TimeModifierFraction = 0
+            }
+            {
+            Trigger = "Fire"
+            Name = "RushAreaSlowWeapon"
+            Type = "WEAPON_FIRE"
+            Duration = 0.05
+            Active = false
+            CanAffectInvulnerable = true
+            TimeModifierFraction = 0
+            }
+            {
+            Trigger = "Fire"
+            Name = "RushRuptureWeapon"
+            Type = "WEAPON_FIRE"
+            Duration = 0.15
+            Active = false
+            CanAffectInvulnerable = true
+            TimeModifierFraction = 0
+            }
+        ]
+    }
+  ]
+}

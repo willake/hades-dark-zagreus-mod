@@ -61,6 +61,7 @@ WeaponData.EnemySwordWeapon =
         "ZagreusSwordRun_Bink",
         "ZagreusSwordRunStop_Bink",
         "ZagreusSwordParry_Bink",
+        "ZagreusSwordArthurAttack1_Bink"
     },
 }
 
