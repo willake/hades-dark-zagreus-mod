@@ -2,20 +2,13 @@
   Weapons = [
     "_append"
     {
-      Name = "DarkBow"
-      InheritFrom = "1_BaseTrapWeapon"
-      Type = "GUN"
-      Projectile = "DarkBow"
-      ClipSize = 1
-      RootOwnerWhileFiring = true
-      CancelMovement = true
-      AutoLock = true
-      FireFx = "null"
-      MinChargeStartFx = "BowCharge"
-      ChargeFinishFx = "null"
-      SelfVelocity = 0
-      NumProjectiles = 1
-      ProjectileSpacing = 36
+      Name = "DarkChironBow"
+      InheritFrom = "DarkBow"
+      ChargeStartAnimation = "ZagreusBowAlt01DashStart"
+      FireGraphic = "ZagreusBowAlt01DashFire"
+      ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
+      Graphic = "BowWeaponArrow-Alt01"
+      AttachedAnim = "BowWeaponArrowShadow-Alt01"
       Effects = [
         {
           Trigger = "Charging"
@@ -96,28 +89,11 @@
       ]
     }
     {
-      Name = "DarkBowDash"
-      InheritFrom = "DarkBow"
-      Control = "Attack2"
-      Type = "GUN"
-      Projectile = "DarkBowDash"
-      SelfVelocity = 0
-      ChargeStartFx = "BowChargeFast"
-      Cooldown = 0.02
-      MinChargeToFire = 0.3
-      ChargeTime = 0.4
-      ChargeRumbleRight = 0.0
-      CanCancelDisables = true
-      CanCancelOwnDisables = true
-      ControlWindow = 0.45
-      PerfectChargeWindowDuration = 0.15
-      ChargeDamageMultiplier = 4.0
-      PerfectChargeDamageMultiplier = 1.25
-      ChargeStartAnimation = "ZagreusBowStart"
-      ChargeCancelGraphic = "ZagreusBowStartCancel"
-      FireGraphic = "ZagreusBowFire"
-      AllowExternalForceRelease = false
-      AllowExternalForceReleaseIfAnyCharged = true
+      Name = "DarkChironBowDash"
+      InheritFrom = "DarkBowDash"
+      ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
+      ChargeStartAnimation = "ChargeStartAnimation"
+      FireGraphic = "ZagreusBowAlt01Fire"
       Effects = [
         {
           Trigger = "Charging"
@@ -165,44 +141,13 @@
       ]
     }
     {
-      Name = "DarkBowSplitShot"
-      InheritFrom = "DarkBowWeapon"
-      Projectile = "DarkBowSplitShot"
-      Control = "Attack3"
-      DisallowedControl = "null"
-      RootOwnerWhileFiring = true
-      BlockMoveInput = true
-      CancelMovement = true
-      ChargeCancelMovement = true
-      NumProjectiles = 9
-      ProjectileSpacing = 0
-      ProjectileAngleOffset = 12
-      ProjectileOffsetStart = "LEFT"
-      ProjectileInterval = 0.03
-      Enabled = true
-      AutoLock = false
-      ReloadTime = 0.85
-      ChargeStartAnimation = "ZagreusBowRapidFire_Start"
-      FireGraphic = "ZagreusBowRapidFire_Fire"
-      ShowFreeAimLine = false
-      AimLineAnimation = "AuraAimLine"
-      ChargeStartFx = "null"
-      FullyAutomatic = false
-      LockTriggerForCharge = true
-      FireOnRelease = false
-      ChargeCancelGraphic = "null"
-      SelfVelocity = 0
-      MinChargeToFire = 1.0
-      ChargeTime = 0.1
-      DisableOwnerForDuration = 0
-      ChargeDamageMultiplier = 1.0
-      ChargeRangeMultiplier = 1
-      ChargeSpeedMultiplier = 1.0
-      ChargeVelocityMultiplier = 1.0
-      PerfectChargeWindowDuration = 0
-      CanCancelDisables = true
-	    AllowExternalForceRelease = false
-      AcceptTriggerLockRequests = true
+      Name = "DarkChironBowSplitShot"
+      InheritFrom = "DarkBowSplitShot"
+      NumProjectiles = 4 // -5
+      ChargeStartAnimation = "ZagreusBowAlt01RapidFire_Start"
+      FireGraphic = "ZagreusBowAlt01RapidFire_Fire"
+      Graphic = "BowWeaponArrowSplitShot-Alt01"
+      AttachedAnim = "BowWeaponArrowShadow-Alt01"
       Effects = [
         {
           Name = "SplitShotDisable"
@@ -254,3 +199,10 @@
     }
   ]
 }
+// not found
+// {
+// 	WeaponNames = { "BowWeapon", "BowWeaponDash" },
+// 	EffectName = "MarkTarget",
+// 	EffectProperty = "Active",
+// 	ChangeValue = true,
+// },
