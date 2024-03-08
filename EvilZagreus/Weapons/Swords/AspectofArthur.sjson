@@ -7,7 +7,7 @@
       ChargeStartAnimation = "ZagreusSwordArthurAttack1_Charge"
       FireGraphic = "ZagreusSwordArthurAttack1_Fire"
       FireFx = "SwordSwipeC-Arthur"
-      Projectile = "SwordWeaponArthur1"
+      Projectile = "DarkArthurSword"
       FullyAutomatic = true
       ChargeTime = 0.25
       RootOwnerWhileFiring = true
@@ -120,7 +120,7 @@
     //   ControlWindow = 0.6
       ChargeCancelMovement = true
       RootOwnerWhileFiring = true
-      Projectile = "SwordWeaponArthur2"
+      Projectile = "DarkArthurSword2"
       BarrelLength = "0"
       Effects = [
         {
@@ -219,7 +219,7 @@
       ChargeFx = "ChargeAttack-Arthur"
       FireGraphic = "ZagreusSwordArthurAttack3_Fire"
       FireFx = "SwordSwipeAFlipped-Arthur"
-      Projectile = "SwordWeapon3"
+      Projectile = "DarkArthurSword3"
       SelfVelocity = 0.75
       SelfVelocityCap = 0.75
       FullyAutomatic = true

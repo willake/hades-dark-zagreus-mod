@@ -1,0 +1,138 @@
+{
+  Projectiles = [
+    "_append"
+    {
+		Name = "DarkArthurSword"
+		InheritFrom = "DarkSword3"
+		DamageLow = 10
+		DamageHigh = 10
+		ProjectileDefenseAngle = 40
+		ProjectileDefenseRadius = 420
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+		Fuse = 0.26
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 450
+				Y = 70
+			  }
+			  {
+				X = 450
+				Y = -120
+			  }
+			  {
+				X = 0
+				Y = -120
+			  }
+			  {
+				X = 0
+				Y = 70
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+    {
+		Name = "DarkArthurSword2"
+		InheritFrom = "DarkSword"
+		DamageLow = 10
+		DamageHigh = 10
+		ArcStart = 90
+		ArcEnd = -130
+		Speed = 2000
+		AttachToOwner = true
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+        StartDelay = 0.03
+        ProjectileDefenseAngle = 40
+        ProjectileDefenseRadius = 420
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 0
+				Y = 0
+			  }
+			  {
+				X = 430
+				Y = 190
+			  }
+			  {
+				X = 430
+				Y = -190
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+	{
+		Name = "DarkArthurSword3"
+		InheritFrom = "DarkSword"
+		DamageLow = 10 // 200
+		DamageHigh = 10 // 200
+		ArcStart = -110
+		ArcEnd = 130
+		Speed = 2400
+		AttachToOwner = true
+        StartDelay = 0.02
+        ProjectileDefenseAngle = 40
+        ProjectileDefenseRadius = 420
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 0
+				Y = 0
+			  }
+			  {
+				X = 430
+				Y = 110
+			  }
+			  {
+				X = 430
+				Y = -110
+			  }
+			]
+        Effects = [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+            ]
+		}
+	}
+  ]
+}

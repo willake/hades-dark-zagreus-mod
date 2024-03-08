@@ -24,4 +24,5 @@ SJSON "EvilZagreus/Weapons/RushWeapon.sjson"
 
 To "Game/Projectiles/EnemyProjectiles.sjson"
 SJSON "EvilZagreus/Projectiles/Swords/SwordWeapon.sjson"
+SJSON "EvilZagreus/Projectiles/Swords/AspectofArthur.sjson"
 SJSON "EvilZagreus/Projectiles/RushWeapon.sjson"
