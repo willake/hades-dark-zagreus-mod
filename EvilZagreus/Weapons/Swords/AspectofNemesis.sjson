@@ -3,30 +3,30 @@
 		"_append"
     {
       Name = "DarkNemesisSword"
-      InheritFrom = "EnemySwordWeapon"
+      InheritFrom = "DarkSword"
       ChargeStartAnimation = "ZagreusSwordAlt01Charge1"
       FireGraphic = "ZagreusSwordAlt01Attack1"
     }
     {
       Name = "DarkNemesisSword2"
-      InheritFrom = "EnemySwordWeapon2"
+      InheritFrom = "DarkSword2"
       ChargeStartAnimation = "ZagreusSwordAlt01Charge2"
       FireGraphic = "ZagreusSwordAlt01Attack2"
     }
     {
       Name = "DarkNemesisSword3"
-      InheritFrom = "EnemySwordWeapon3"
+      InheritFrom = "DarkSword3"
       ChargeStartAnimation = "ZagreusSwordAlt01Charge3"
       FireGraphic = "ZagreusSwordAlt01Attack3"
     }
     {
       Name = "DarkNemesisSwordDash"
-      InheritFrom = "EnemySwordWeaponDash"
+      InheritFrom = "DarkSwordDash"
       FireGraphic = "ZagreusSwordAlt01DashAttack"
     }
     {
       Name = "DarkNemesisSwordParry"
-      InheritFrom = "EnemySwordParry"
+      InheritFrom = "DarkSwordParry"
       ChargeStartAnimation = "ZagreusSwordAlt01ParryCharge"
       FireGraphic = "ZagreusSwordAlt01ParryFire"
       Effects = [
