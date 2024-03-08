@@ -12,10 +12,12 @@ To "Scripts/WeaponData.lua"
 Import "EvilZagreus/Weapons/SwordWeapon.lua"
 Import "EvilZagreus/Weapons/RushWeapon.lua"
 Import "EvilZagreus/Weapons/Swords/AspectofNemesis.lua"
+Import "EvilZagreus/Weapons/Swords/AspectofPoseidon.lua"
 
 To "Game/Weapons/EnemyWeapons.sjson"
 SJSON "EvilZagreus/Weapons/SwordWeapon.sjson"
 SJSON "EvilZagreus/Weapons/Swords/AspectofNemesis.sjson"
+SJSON "EvilZagreus/Weapons/Swords/AspectofPoseidon.sjson"
 SJSON "EvilZagreus/Weapons/RushWeapon.sjson"
 
 To "Game/Projectiles/EnemyProjectiles.sjson"
