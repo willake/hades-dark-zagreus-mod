@@ -2,7 +2,7 @@
 	Projectiles = [
 		"_append"
 		{
-			Name = "EnemyBowWeapon"
+			Name = "DarkBow"
 			InheritFrom = "1_BaseTrapProjectile"
 			DetonateGraphic = "null"
 			Type = "HOMING"
@@ -80,7 +80,7 @@
 			]
 		}
     {
-      Name = "EnemyBowSplitShot"
+      Name = "DarkBowSplitShot"
       InheritFrom = "1_BaseTrapProjectile"
       DetonateGraphic = "null"
       Type = "HOMING"

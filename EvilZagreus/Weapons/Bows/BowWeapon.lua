@@ -1,8 +1,8 @@
-DebugPrint({ Text = "Load BowWeapon" })
+DebugPrint({ Text = "Load DarkBow" })
 
-WeaponData.EnemyBowWeapon =
+WeaponData.DarkBow =
 {
-    Name = "EnemyBowWeapon",
+    Name = "DarkBow",
     -- ShortName = "EnemyBowWeapon_Short",
     -- DashWeapon = "BowWeaponDash",
     -- SecondaryWeapon = "BowSplitShot",
@@ -12,6 +12,7 @@ WeaponData.EnemyBowWeapon =
         PreAttackAnimation = "ZagreusBowStart",
         FireAnimation = "ZagreusBowFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
+        PreAttackDuration = 0.4,
         PreAttackWaitForAnimation = true,
         FireDuration = 0.6,
         -- PostAttackDuration = 2.0,
@@ -106,7 +107,7 @@ WeaponData.EnemyBowWeapon =
     Upgrades = {},
 }
 
-WeaponData.EnemyBowSplitShot =
+WeaponData.DarkBowSplitShot =
 {
     StartingWeapon = false,
 
@@ -121,6 +122,7 @@ WeaponData.EnemyBowSplitShot =
     AIData =
     {
         -- PreAttackAnimation = "ZagreusBowStart",
+        PreAttackDuration = 0.4,
         -- FireAnimation = "ZagreusBowFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
         PreAttackWaitForAnimation = true,

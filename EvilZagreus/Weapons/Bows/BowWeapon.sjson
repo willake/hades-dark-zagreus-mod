@@ -2,10 +2,10 @@
   Weapons = [
     "_append"
     {
-      Name = "EnemyBowWeapon"
+      Name = "DarkBow"
       InheritFrom = "1_BaseTrapWeapon"
       Type = "GUN"
-      Projectile = "EnemyBowWeapon"
+      Projectile = "DarkBow"
       ClipSize = 1
       RootOwnerWhileFiring = true
       CancelMovement = true
@@ -96,9 +96,9 @@
       ]
     }
     {
-      Name = "EnemyBowSplitShot"
-      InheritFrom = "EnemyBowWeapon"
-      Projectile = "EnemyBowSplitShot"
+      Name = "DarkBowSplitShot"
+      InheritFrom = "DarkBowWeapon"
+      Projectile = "DarkBowSplitShot"
       Control = "Attack3"
       DisallowedControl = "null"
       RootOwnerWhileFiring = true
