@@ -1,16 +1,23 @@
 Top Import "config.lua"
-Import "main.lua"
 Import "helper.lua"
-Import "harpy.lua"
+Import "main.lua"
+
+To "Scripts/EnemyData.lua"
+Import "Scripts/EnemyData.lua"
+
+To "Game/Units/Enemies.sjson"
+SJSON "Game/Units/Hades.sjson"
 
 To "Scripts/WeaponData.lua"
 Import "EvilZagreus/Weapons/SwordWeapon.lua"
-Import "EvilZagreus/Weapons/BowWeapon.lua"
+Import "EvilZagreus/Weapons/RushWeapon.lua"
+Import "EvilZagreus/Weapons/Swords/AspectofNemesis.lua"
 
 To "Game/Weapons/EnemyWeapons.sjson"
-SJSON "EvilZagreus/Weapons/BowWeapon.sjson"
 SJSON "EvilZagreus/Weapons/SwordWeapon.sjson"
+SJSON "EvilZagreus/Weapons/Swords/AspectofNemesis.sjson"
+SJSON "EvilZagreus/Weapons/RushWeapon.sjson"
 
 To "Game/Projectiles/EnemyProjectiles.sjson"
-SJSON "EvilZagreus/Projectiles/BowWeapon.sjson"
 SJSON "EvilZagreus/Projectiles/SwordWeapon.sjson"
+SJSON "EvilZagreus/Projectiles/RushWeapon.sjson"

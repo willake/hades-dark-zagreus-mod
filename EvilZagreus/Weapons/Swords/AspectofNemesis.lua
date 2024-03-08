@@ -1,8 +1,8 @@
-DebugPrint({ Text = "Load SwordWeapon" })
+DebugPrint({ Text = "Load DarkNemesisSword" })
 
-WeaponData.EnemySwordWeapon =
+WeaponData.DarkNemesisSword =
 {
-    Name = "EnemySwordWeapon",
+    Name = "DarkNemesisSword",
     AIData =
     {
         --PreAttackAnimation = "EnemyHydraBite_Charge",
@@ -55,19 +55,18 @@ WeaponData.EnemySwordWeapon =
 
     WeaponBinks =
     {
-        "ZagreusSword_Bink",
-        "ZagreusSwordReturnToIdle_Bink",
-        "ZagreusSwordDashAttack_Bink",
-        "ZagreusSwordRun_Bink",
-        "ZagreusSwordRunStop_Bink",
-        "ZagreusSwordParry_Bink",
-        "ZagreusSwordArthurAttack1_Bink"
+        "ZagreusSword01_Bink",
+        "ZagreusSword01ReturnToIdle_Bink",
+        "ZagreusSword01DashAttack_Bink",
+        "ZagreusSword01Run_Bink",
+        "ZagreusSword01RunStop_Bink",
+        "ZagreusSword01Parry_Bink"
     },
 }
 
-WeaponData.EnemySwordWeapon2 =
+WeaponData.DarkNemesisSword2 =
 {
-    Name = "EnemySwordWeapon2",
+    Name = "DarkNemesisSword2",
     StartingWeapon = false,
     CauseImpactReaction = true,
     HitScreenshake = { Distance = 6, Speed = 300, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
@@ -126,9 +125,9 @@ WeaponData.EnemySwordWeapon2 =
     Upgrades = {},
 }
 
-WeaponData.EnemySwordWeapon3 =
+WeaponData.DarkNemesisSword3 =
 {
-    Name = "EnemySwordWeapon3",
+    Name = "DarkNemesisSword3",
     StartingWeapon = false,
     CauseImpactReaction = true,
 
@@ -197,9 +196,9 @@ WeaponData.EnemySwordWeapon3 =
     Upgrades = {},
 }
 
-WeaponData.EnemySwordWeaponDash =
+WeaponData.DarkNemesisSwordDash =
 {
-    Name = "EnemySwordWeaponDash",
+    Name = "DarkNemesisSwordDash",
     StartingWeapon = false,
     CauseImpactReaction = true,
 
@@ -271,9 +270,9 @@ WeaponData.EnemySwordWeaponDash =
     Upgrades = {},
 }
 
-WeaponData.EnemySwordParry =
+WeaponData.DarkNemesisSwordParry =
 {
-    Name = "EnemySwordParry",
+    Name = "DarkNemesisSwordParry",
     StartingWeapon = false,
 
     CauseImpactReaction = true,
@@ -340,7 +339,6 @@ WeaponData.EnemySwordParry =
 
     Binks =
     {
-        "ZagreusSwordParry_Bink",
     },
 
     Upgrades = {},
