@@ -2,7 +2,7 @@
   Projectiles = [
     "_append"
     {
-      Name = "EnemySwordWeapon"
+      Name = "DarkSword"
       InheritFrom = "1_BaseTrapProjectile"
       DetonateGraphic = "null"
       Type = "ARC"
@@ -81,7 +81,7 @@
       ]
     }
     {
-      Name = "EnemySwordWeapon2"
+      Name = "DarkSword2"
       InheritFrom = "1_BaseTrapProjectile"
       AffectsEnemies = true
       AffectsFriends = false
@@ -166,7 +166,7 @@
       ]
     }
     {
-      Name = "EnemySwordWeapon3"
+      Name = "DarkSword3"
       InheritFrom = "1_BaseTrapProjectile"
       AffectsEnemies = true
       AffectsFriends = false
@@ -252,8 +252,8 @@
       ]
     }
     {
-      Name = "EnemySwordWeaponDash"
-      InheritFrom = "EnemySwordWeapon3"
+      Name = "DarkSwordDash"
+      InheritFrom = "DarkSword3"
       DamageLow = 2
       DamageHigh = 2
       ImpactVelocity = 0
@@ -286,7 +286,7 @@
       }
     }
     {
-      Name = "EnemySwordParry"
+      Name = "DarkSwordParry"
       InheritFrom = "1_BaseTrapProjectile"
       DetonateGraphic = "RadialNovaSwordParry"
       Type = "STRAIGHT"

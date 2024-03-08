@@ -2,11 +2,11 @@
 	Weapons = [
 		"_append"
     {
-      Name = "EnemySwordWeapon"
+      Name = "DarkSword"
       InheritFrom = "1_BaseTrapWeapon"
       Control = "Attack2"
       Type = "GUN"
-      Projectile = "EnemySwordWeapon"
+      Projectile = "DarkSword"
       ClipSize = 1
       RootOwnerWhileFiring = false
       BlockMoveInput = false
@@ -126,11 +126,11 @@
       ]
     }
     {
-      Name = "EnemySwordWeapon2"
+      Name = "DarkSword2"
       InheritFrom = "1_BaseTrapWeapon"
       Type = "GUN"
       Control = "Attack2"
-      Projectile = "EnemySwordWeapon2"
+      Projectile = "DarkSword2"
       ClipSize = 1
       RootOwnerWhileFiring = false
       BlockMoveInput = false
@@ -246,11 +246,11 @@
       ]
     }
     {
-      Name = "EnemySwordWeapon3"
+      Name = "DarkSword3"
       InheritFrom = "1_BaseTrapWeapon"
       Control = "Attack2"
       Type = "GUN"
-      Projectile = "EnemySwordWeapon3"
+      Projectile = "DarkSword3"
       TreatProjectilesAsUniqueVolleys = true
       ClipSize = 1
       ChargeSoundFadeTime = 0.25
@@ -363,10 +363,10 @@
       ]
     }
     {
-      Name = "EnemySwordWeaponDash"
+      Name = "DarkSwordDash"
       InheritFrom = "EnemySwordWeapon"
       Control = "Attack2"
-      Projectile = "EnemySwordWeaponDash"
+      Projectile = "DarkSwordDash"
       BarrelLength = 0
       ChargeTimeFrames = 0
       Cooldown = 0.02
@@ -443,13 +443,13 @@
       ]
     }
     {
-      Name = "EnemySwordParry"
+      Name = "DarkSwordParry"
       InheritFrom = "1_BaseTrapWeapon"
       Control = "Attack3"
       Cooldown = 0.5
       UseTargetAngle = true
       Type = "GUN"
-      Projectile = "EnemySwordParry"
+      Projectile = "DarkSwordParry"
       ChargeSoundFadeTime = 0.25
       CancelMovement = false
       CanCancelDisables = true

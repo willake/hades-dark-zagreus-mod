@@ -1,0 +1,491 @@
+{
+	Weapons = [
+		"_append"
+    {
+      Name = "DarkArthurSword"
+      InheritFrom = "DarkSword"
+      ChargeStartAnimation = "ZagreusSwordArthurAttack1_Charge"
+      FireGraphic = "ZagreusSwordArthurAttack1_Fire"
+      FireFx = "SwordSwipeC-Arthur"
+      Projectile = "DarkArthurSword"
+      FullyAutomatic = true
+      ChargeTime = 0.25
+      RootOwnerWhileFiring = true
+      ChargeCancelMovement = true
+      Effects = [
+        {
+          Name = "SwordDisable"
+          DurationFrames = 5
+          DisableMove = false
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "SwordDisableCancelableAndLockTrigger"
+          DurationFrames = 11
+          DisableMove = false
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = true
+          Active = false
+        }
+        {
+          Name = "SwordDisableHeavy"
+          DurationFrames = 14
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = false
+          Cancelable = true
+        }
+        {
+          Trigger = "Charging"
+          Name = "SwordSelfSlowCharge"
+          Type = "SPEED"
+          DurationFrames = 15
+          Modifier = 0.35
+          Active = true
+          CanAffectInvulnerable = true
+        }
+        {
+          Trigger = "Fire"
+          Name = "SwordSelfSlowFire"
+          Type = "SPEED"
+          DurationFrames = 12
+          Modifier = 0.35
+          Active = true
+          CanAffectInvulnerable = true
+        }
+
+        {
+          Name = "SwordWeaponSpinExplosiveChargeWeapon"
+          Type = "WEAPON_FIRE"
+          Trigger = "Charging"
+          Duration = 1.0
+          Active = false
+        }
+        {
+          Trigger = "Charging"
+          ClearOnAttack = true
+          Name = "DefensiveThrustEffect"
+          Type = "DAMAGE_TAKEN"
+          Duration = 9999
+          Modifier = 0.1
+          FrontFx = "AthenaProtectionFront"
+          BackFx = "AthenaProtectionBack"
+          Active = false
+          ImmuneToForce = true
+        }
+        {
+          Name = "DefensivePostFireEffect"
+          Type = "DAMAGE_TAKEN"
+          DurationFrames = 16
+          Modifier = 0.1
+          FrontFx = "Invincibubble_Zag_Loop"
+          Active = false
+          ImmuneToForce = true
+        }
+        {
+          Name = "SwordDisableArthur"
+          DurationFrames = 16
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = true
+        }
+        {
+          Name = "SwordDisableArthurCancellable"
+          DurationFrames = 18
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          RequestTriggerLock = true
+          Active = true
+        }
+      ]
+    }
+    {
+      Name = "DarkArthurSword2"
+      InheritFrom = "DarkSword2"
+      ChargeStartAnimation = "ZagreusSwordArthurAttack2_Charge"
+      FireGraphic = "ZagreusSwordArthurAttack2_Fire"
+      FullyAutomatic = true
+      ChargeTime = 0.35
+      ChargeFx = "ChargeAttack-Arthur"
+      FireFx = "SwordSwipeA-Arthur"
+    //   ControlWindow = 0.6
+      ChargeCancelMovement = true
+      RootOwnerWhileFiring = true
+      Projectile = "DarkArthurSword2"
+      BarrelLength = "0"
+      Effects = [
+        {
+          Trigger = "Charging"
+          ClearOnAttack = true
+          Name = "DefensiveThrustEffect"
+          Type = "DAMAGE_TAKEN"
+          Duration = 9999
+          Modifier = 0.1
+          FrontFx = "AthenaProtectionFront"
+          BackFx = "AthenaProtectionBack"
+          Active = false
+          ImmuneToForce = true
+        }
+        {
+          Name = "DefensivePostFireEffect"
+          Type = "DAMAGE_TAKEN"
+          DurationFrames = 115
+          Modifier = 0.1
+          FrontFx = "Invincibubble_Zag_Loop"
+          Active = false
+          ImmuneToForce = true
+        }
+        {
+          Name = "SwordDisable2"
+          DurationFrames = 3
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+		  RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "SwordDisableCancelableAndLockTrigger2"
+          DurationFrames = 14
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = false
+        }
+        {
+          Trigger = "Charging"
+          Name = "SwordHalt2"
+          Type = "GRIP"
+          Duration = 0.12
+          Modifier = 1.0
+          HaltOnEnd = true
+          Active = true
+          CanAffectInvulnerable = true
+        }
+        {
+          Name = "SwordDisableCancelableAndLockTriggerChargeAttack"
+          DurationFrames = 14
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = false
+          Active = true
+        }
+
+        {
+          Name = "SwordWeaponSpinExplosiveChargeWeapon"
+          Type = "WEAPON_FIRE"
+          Trigger = "Charging"
+          Duration = 1.0
+          Active = false
+        }
+         {
+          Name = "SwordDisableArthur2"
+          DurationFrames = 15
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+      		RequestTriggerLock = true
+      		Active = true
+        }
+        {
+          Name = "SwordDisableArthurCancellable2"
+          DurationFrames = 28
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = true
+          Active = true
+        }
+
+      ]
+    }
+    {
+      Name = "DarkArthurSword3"
+      InheritFrom = "DarkSword3"
+      ChargeStartAnimation = "ZagreusSwordArthurAttack3_Charge"
+      ChargeFx = "ChargeAttack-Arthur"
+      FireGraphic = "ZagreusSwordArthurAttack3_Fire"
+      FireFx = "SwordSwipeAFlipped-Arthur"
+      Projectile = "DarkArthurSword3"
+      SelfVelocity = 0.75
+      SelfVelocityCap = 0.75
+      FullyAutomatic = true
+      ChargeTime = 0.50
+      CancelMovement = false
+      ChargeCancelMovement = false
+    //   ControlWindow = 0.6
+      Effects = [
+        {
+          Name = "SwordWeaponHalt"
+          Type = "GRIP"
+          Duration = 0.4
+          Modifier = 1.0
+          HaltOnEnd = true
+          Active = false
+        }
+        {
+          Name = "SwordDisable3"
+          DurationFrames = 12
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+		  RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "SwordDisableAttackCancelable3"
+          DurationFrames = 25
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = true
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Trigger = "Charging"
+          ClearOnAttack = true
+          Name = "DefensiveThrustEffect"
+          Type = "DAMAGE_TAKEN"
+          Duration = 9999
+          Modifier = 0.1
+          FrontFx = "AthenaProtectionFront"
+          BackFx = "AthenaProtectionBack"
+          Active = false
+          ImmuneToForce = true
+        }
+        {
+          Name = "DefensivePostFireEffect"
+          Type = "DAMAGE_TAKEN"
+          DurationFrames = 18
+          Modifier = 0.1
+          FrontFx = "Invincibubble_Zag_Loop"
+          Active = false
+          ImmuneToForce = true
+        }
+        {
+          Name = "SwordDisableCancelable3"
+          DurationFrames = 33
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          Cancelable = true
+		  RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "ArthurSwordDisable3"
+          DurationFrames = 18
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Active = true
+        }
+         {
+          Name = "ArthurSwordDisableCancelable3"
+          DurationFrames = 26
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          Cancelable = true
+          RequestTriggerLock = true
+          Active = true
+        }
+        {
+          Name = "SwordWeaponSpinExplosiveChargeWeapon"
+          Type = "WEAPON_FIRE"
+          Trigger = "Charging"
+          Duration = 1.0
+          Active = false
+        }
+
+      ]
+    }
+    {
+      Name = "DarkArthurSwordDash"
+      InheritFrom = "DarkSwordDash"
+      ChargeStartAnimation = "ZagreusSwordArthurAttack1_Charge"
+      FireGraphic = "ZagreusSwordArthurAttack1_Fire"
+      FireFx = "SwordSwipeC-Arthur"
+      DamageLow = 10 // 50
+      DamageHigh = 10 // 50
+      FullyAutomatic = true
+      ChargeTime = 0.2
+      ChargeCancelMovement = true
+      CancelMovement = true
+      RootOwnerWhileFiring = true
+    }
+    {
+      Name = "DarkArthurSwordParry"
+      InheritFrom = "DarkSwordParry"
+      ChargeStartAnimation = "ZagreusSwordAlt03ParryCharge"
+      FireGraphic = "ZagreusSwordAlt03ParryFire"
+      DetonateGraphic = "RadialNovaSwordParry-Arthur"
+      ChargeTime = 0.5
+      DamageLow = 10 // 70
+      DamageHigh = 10 // 70
+      FullyAutomatic = true
+      Effects = [
+        {
+          Trigger = "Fire"
+          Name = "SwordParrySelfReflection"
+          Duration = 0.2
+          ReflectAddition = 1.0
+          Active = false
+          CanAffectInvulnerable = true
+          FrontFx = "AthenaInvincibleFront"
+          BackFx = "AthenaInvincibleBack"
+          Sound = "null"
+        }
+        {
+          Trigger = "Fire"
+          Name = "SwordParrySelfInvulnerable"
+          Type = "INVULNERABLE"
+          Duration = 0.2
+          Modifier = 1.0
+          Active = false
+          CanAffectInvulnerable = true
+        }
+        {
+          Name = "SwordParrySelfReflectRange"
+          Type = "PROJECTILE_DEFENSE"
+          Duration = 0.4
+          Range = 350
+          Deflect = true
+          Active = false
+        }
+        {
+          Name = "SwordParryDisable"
+          DurationFrames = 14
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          RequestTriggerLock = true
+          Cancelable = false
+        }
+        {
+          Name = "SwordParryDisableCancelable"
+          DurationFrames = 25
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          RequestTriggerLock = true
+          Cancelable = true
+        }
+        {
+          Name = "SwordParryDisableBlink"
+          DurationFrames = 8
+          DisableMove = true
+          DisableRotate = false
+          DisableAttack = false
+          Cancelable = false
+          RequestTriggerLock = true
+          Active = false
+        }
+        {
+          Name = "SwordParryDisableBlinkCancelable"
+          DurationFrames = 16
+          DisableMove = true
+          DisableRotate = false
+          DisableAttack = false
+          Cancelable = true
+          Active = false
+        }
+        {
+          Name = "SwordParryDisableFast"
+          DurationFrames = 10
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = false
+          Active = false
+        }
+        {
+          Name = "SwordParryDisableFastCancelable"
+          DurationFrames = 20
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = false
+          Cancelable = true
+          Active = false
+        }
+        {
+          Name = "SwordPostParryCritical"
+          Duration = 2.0
+          Active = false
+          FrontFx = "ArtemisCritSparkles-SwordPostParryCritical"
+          BackFx = "null"
+        }
+        {
+          Trigger = "Charging"
+          Name = "SwordParryInstantStop"
+          Type = "SPEED"
+          Modifier = 0.6
+          Duration = 0.1
+          Active = true
+        }
+        {
+          Trigger = "Charging"
+          Name = "SwordParryInstantHalt"
+          Type = "GRIP"
+          Modifier = 9999
+          Duration = 0.02
+          HaltOnEnd = false
+          Active = false
+        }
+
+        {
+          Name = "SwordBlinkTraitDefense"
+          Type = "DAMAGE_TAKEN"
+          Duration = 1.3
+          Modifier = 1.0
+          Active = false
+          ImmuneToForce = true
+          ExtendDurationOnReapply = true
+          FrontFx = "HyperArmorLoop"
+          BackFx = "null"
+          FlashFrontFxWhenExpiring = true
+          FlashBackFxWhenExpiring = true
+          ClearOnAttack = false
+        }
+      ]
+    }
+  ]
+}
+
+// There are ConseceationField weapon can be added
+// -- Consecration Field
+// 			{
+// 				WeaponName = "ConsecrationField",
+// 				EffectName = "ConsecrationSlow",
+// 				EffectProperty = "Modifier",
+// 				ChangeValue = 0.50,
+// 				ChangeType = "Absolute",
+// 			},
+// 			{
+// 				WeaponName = "ConsecrationField",
+// 				EffectName = "ConsecrationDamageReduction",
+// 				EffectProperty = "Modifier",
+// 				BaseValue = 0.8,
+// 				SourceIsMultiplier = true,
+// 				ChangeType = "Multiply",
+// 				ExtractValue =
+// 				{
+// 					ExtractAs = "TooltipDamageReduction",
+// 					Format = "NegativePercentDelta",
+// 				}
+// 			},
