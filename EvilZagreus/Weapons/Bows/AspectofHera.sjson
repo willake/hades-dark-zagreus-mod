@@ -2,15 +2,15 @@
   Weapons = [
     "_append"
     {
-      Name = "DarDarkHeraBowkBow"
+      Name = "DarkHeraBow"
       InheritFrom = "DarkBow"
+      Projectile = "DarkHeraBow"
       ChargeCancelGraphic = "ZagreusBowAlt02StartCancel"
-      Graphic = "BowWeaponArrow-Alt02"
-      AttachedAnim = "BowWeaponArrowShadow-Alt02"
     }
     {
       Name = "DarkHeraBowDash"
       InheritFrom = "DarkBowDash"
+      Projectile = "DarkHeraBowDash"
       ChargeCancelGraphic = "ZagreusBowAlt02StartCancel"
       ChargeStartAnimation = "ZagreusBowAlt02Start"
       FireGraphic = "ZagreusBowAlt02Fire"
@@ -18,10 +18,9 @@
     {
       Name = "DarkHeraBowSplitShot"
       InheritFrom = "DarkBowSplitShot"
+      Projectile = "DarkHeraBowSplitShot"
       ChargeStartAnimation = "ZagreusBowAlt02RapidFire_Start"
       FireGraphic = "ZagreusBowAlt02RapidFire_Fire"
-      Graphic = "BowWeaponArrowSplitShot-Alt02"
-      AttachedAnim = "BowWeaponArrowShadow-Alt0"
     }
   ]
 }

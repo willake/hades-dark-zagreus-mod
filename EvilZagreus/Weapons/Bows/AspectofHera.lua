@@ -1,4 +1,4 @@
-DebugPrint({ Text = "Load DarkBow" })
+DebugPrint({ Text = "Load DarkHeraBow" })
 
 WeaponData.DarkHeraBow =
 {
