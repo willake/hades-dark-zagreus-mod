@@ -4,198 +4,26 @@
     {
       Name = "DarkChironBow"
       InheritFrom = "DarkBow"
+      Projectile = "DarkChironBow"
       ChargeStartAnimation = "ZagreusBowAlt01DashStart"
       FireGraphic = "ZagreusBowAlt01DashFire"
       ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
-      Graphic = "BowWeaponArrow-Alt01"
-      AttachedAnim = "BowWeaponArrowShadow-Alt01"
-      Effects = [
-        {
-          Trigger = "Charging"
-          Name = "BowSelfSpeed"
-          Type = "SPEED"
-          Duration = 0.02
-          Modifier = 0.1
-          Active = true
-          CanAffectInvulnerable = true
-        }
-        {
-          Trigger = "Charging"
-          Name = "BowSelfHalt"
-          Type = "GRIP"
-          Duration = 0.02
-          Modifier = 1.4
-          HaltOnEnd = true
-          Active = true
-          CanAffectInvulnerable = true
-        }
-        {
-          Name = "BowWeaponDisable"
-          DurationFrames = 5
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = false
-          RequestTriggerLock = true
-        }
-        {
-          Name = "BowWeaponDisableCancelable"
-          DurationFrames = 12
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = true
-          RequestTriggerLock = true
-        }
-        {
-          Name = "BowDoubleShotDisable"
-          DurationFrames = 20
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = false
-          RequestTriggerLock = true
-          Active = false
-        }
-        {
-          Name = "BowDoubleShotDisableCancelable"
-          DurationFrames = 35
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = true
-          RequestTriggerLock = true
-          Active = false
-        }
-        {
-          Name = "BowWeaponExplosiveChargeWeapon"
-          Type = "WEAPON_FIRE"
-          Trigger = "Charging"
-          Duration = 999.0
-          Active = false
-        }
-
-        {
-          Name = "BowBeamDisable"
-          DurationFrames = 8
-          RotationMultiplier = 0.01
-          DisableMove = true
-          DisableRotate = false
-          DisableAttack = false
-          Cancelable = false
-          RequestTriggerLock = false
-          Active = false
-        }
-      ]
     }
     {
       Name = "DarkChironBowDash"
       InheritFrom = "DarkBowDash"
+      Projectile = "DarkChironBowDash"
       ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
       ChargeStartAnimation = "ChargeStartAnimation"
       FireGraphic = "ZagreusBowAlt01Fire"
-      Effects = [
-        {
-          Trigger = "Charging"
-          Name = "BowSelfSpeed"
-          Type = "SPEED"
-          Duration = 0.02
-          Modifier = 0.5
-          Active = true
-          CanAffectInvulnerable = true
-        }
-        {
-          Name = "BowWeaponDashHalt"
-          Type = "GRIP"
-          Duration = 0.02
-          Modifier = 1.0
-          HaltOnEnd = true
-          Active = true
-        }
-         {
-          Name = "BowWeaponDisable"
-          DurationFrames = 5
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = false
-          RequestTriggerLock = true
-        }
-        {
-          Name = "BowWeaponDisableCancelable"
-          DurationFrames = 18
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          Cancelable = true
-          RequestTriggerLock = true
-        }
-        {
-          Name = "BowWeaponExplosiveChargeWeapon"
-          Type = "WEAPON_FIRE"
-          Trigger = "Charging"
-          Duration = 999.0
-          Active = false
-          ClearOnAttack = true
-        }
-      ]
     }
     {
       Name = "DarkChironBowSplitShot"
       InheritFrom = "DarkBowSplitShot"
+      Projectile = "DarkChironBowSplitShot"
       NumProjectiles = 4 // -5
       ChargeStartAnimation = "ZagreusBowAlt01RapidFire_Start"
       FireGraphic = "ZagreusBowAlt01RapidFire_Fire"
-      Graphic = "BowWeaponArrowSplitShot-Alt01"
-      AttachedAnim = "BowWeaponArrowShadow-Alt01"
-      Effects = [
-        {
-          Name = "SplitShotDisable"
-          DurationFrames = 20
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          RequestTriggerLock = true
-        }
-        {
-          Name = "SplitShotDisableCancelable"
-          DurationFrames = 42
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          RequestTriggerLock = true
-          Cancelable = true
-        }
-        {
-          Name = "SplitShotDisableFast"
-          DurationFrames = 12
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          RequestTriggerLock = true
-          Active = false
-        }
-        {
-          Name = "SplitShotDisableFastCancelable"
-          DurationFrames = 26
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          RequestTriggerLock = true
-          Cancelable = true
-          Active = false
-        }
-
-        {
-          Name = "SplitShotDisableLong"
-          DurationFrames = 42
-          DisableMove = true
-          DisableRotate = true
-          DisableAttack = true
-          RequestTriggerLock = true
-          Active = false
-        }
-      ]
     }
   ]
 }

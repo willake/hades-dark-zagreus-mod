@@ -1,16 +1,16 @@
 DebugPrint({ Text = "Load DarkBow" })
 
-WeaponData.DarkBow =
+WeaponData.DarkHeraBow =
 {
-    Name = "DarkBow",
+    Name = "DarkHeraBow",
     -- ShortName = "EnemyBowWeapon_Short",
     -- DashWeapon = "BowWeaponDash",
     -- SecondaryWeapon = "BowSplitShot",
     RapidDamageType = true,
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowStart",
-        FireAnimation = "ZagreusBowFire",
+        PreAttackAnimation = "ZagreusBowAlt02DashStart",
+        FireAnimation = "ZagreusBowAlt02DashFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
         PreAttackDuration = 0.4,
         PreAttackWaitForAnimation = true,
@@ -97,18 +97,19 @@ WeaponData.DarkBow =
 
     WeaponBinks =
     {
-        "ZagreusBow_Bink",
-        "ZagreusBowRapidFire_Bink",
-        "ZagreusBowDash_Bink",
-        "ZagreusBowRun_Bink",
-        "ZagreusBowRunStop_Bink",
+        "ZagreusBow02Dash_Bink",
+        "ZagreusBow02_Bink",
+        "ZagreusBow02Run_Bink",
+        "ZagreusBow02RunStop_Bink",
+        "ZagreusBow02RapidFire_Bink"
     },
 
     Upgrades = {},
 }
 
-WeaponData.DarkBowDash =
+WeaponData.DarkHeraBowDash =
 {
+    Name = "DarkHeraBowDash",
     StartingWeapon = false,
 
     FireRumbleParameters =
@@ -118,8 +119,8 @@ WeaponData.DarkBowDash =
 
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowStart",
-        FireAnimation = "ZagreusBowFire",
+        PreAttackAnimation = "ZagreusBowAlt02Start",
+        FireAnimation = "ZagreusBowAlt02Fire",
         PreAttackDuration = 0.4,
         -- FireAnimation = "ZagreusBowFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
@@ -185,7 +186,7 @@ WeaponData.DarkBowDash =
     },
 }
 
-WeaponData.DarkBowSplitShot =
+WeaponData.DarkHeraBowSplitShot =
 {
     StartingWeapon = false,
 
@@ -247,3 +248,5 @@ WeaponData.DarkBowSplitShot =
 
     },
 }
+
+-- this upgrade also change the cast action, but I don't know how to apply it

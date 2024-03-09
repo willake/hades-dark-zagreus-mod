@@ -1,0 +1,21 @@
+{
+	Projectiles = [
+		"_append"
+		{
+			Name = "DarkChironBow"
+			InheritFrom = "DarkBow"
+			Graphic = "BowWeaponArrow-Alt01"
+            AttachedAnim = "BowWeaponArrowShadow-Alt01"
+		}
+		{
+			Name = "DarkChironBowDash"
+			InheritFrom = "DarkBowDash"
+    	}
+		{
+            Name = "DarkChironBowSplitShot"
+            InheritFrom = "DarkBowSplitShot"
+            Graphic = "BowWeaponArrowSplitShot-Alt01"
+            AttachedAnim = "BowWeaponArrowShadow-Alt01"
+        }
+	]
+}
