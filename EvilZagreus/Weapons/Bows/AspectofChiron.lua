@@ -201,7 +201,8 @@ WeaponData.DarkChironBowSplitShot =
 
     AIData =
     {
-        -- PreAttackAnimation = "ZagreusBowStart",
+        PreAttackAnimation = "ChargeStartAnimation",
+        FireAnimation = "ZagreusBowAlt01Fire",
         PreAttackDuration = 0.4,
         -- FireAnimation = "ZagreusBowFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
