@@ -1,0 +1,26 @@
+{
+  Weapons = [
+    "_append"
+    {
+      Name = "DarkHeraBow"
+      InheritFrom = "DarkBow"
+      Projectile = "DarkHeraBow"
+      ChargeCancelGraphic = "ZagreusBowAlt02StartCancel"
+    }
+    {
+      Name = "DarkHeraBowDash"
+      InheritFrom = "DarkBowDash"
+      Projectile = "DarkHeraBowDash"
+      ChargeCancelGraphic = "ZagreusBowAlt02StartCancel"
+      ChargeStartAnimation = "ZagreusBowAlt02Start"
+      FireGraphic = "ZagreusBowAlt02Fire"
+    }
+    {
+      Name = "DarkHeraBowSplitShot"
+      InheritFrom = "DarkBowSplitShot"
+      Projectile = "DarkHeraBowSplitShot"
+      ChargeStartAnimation = "ZagreusBowAlt02RapidFire_Start"
+      FireGraphic = "ZagreusBowAlt02RapidFire_Fire"
+    }
+  ]
+}

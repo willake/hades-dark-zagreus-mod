@@ -1,0 +1,36 @@
+{
+  Weapons = [
+    "_append"
+    {
+      Name = "DarkChironBow"
+      InheritFrom = "DarkBow"
+      Projectile = "DarkChironBow"
+      ChargeStartAnimation = "ZagreusBowAlt01DashStart"
+      FireGraphic = "ZagreusBowAlt01DashFire"
+      ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
+    }
+    {
+      Name = "DarkChironBowDash"
+      InheritFrom = "DarkBowDash"
+      Projectile = "DarkChironBowDash"
+      ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
+      ChargeStartAnimation = "ChargeStartAnimation"
+      FireGraphic = "ZagreusBowAlt01Fire"
+    }
+    {
+      Name = "DarkChironBowSplitShot"
+      InheritFrom = "DarkBowSplitShot"
+      Projectile = "DarkChironBowSplitShot"
+      NumProjectiles = 4 // -5
+      ChargeStartAnimation = "ZagreusBowAlt01RapidFire_Start"
+      FireGraphic = "ZagreusBowAlt01RapidFire_Fire"
+    }
+  ]
+}
+// not found
+// {
+// 	WeaponNames = { "BowWeapon", "BowWeaponDash" },
+// 	EffectName = "MarkTarget",
+// 	EffectProperty = "Active",
+// 	ChangeValue = true,
+// },

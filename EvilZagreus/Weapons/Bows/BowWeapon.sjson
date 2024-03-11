@@ -2,10 +2,10 @@
   Weapons = [
     "_append"
     {
-      Name = "EnemyBowWeapon"
+      Name = "DarkBow"
       InheritFrom = "1_BaseTrapWeapon"
       Type = "GUN"
-      Projectile = "EnemyBowWeapon"
+      Projectile = "DarkBow"
       ClipSize = 1
       RootOwnerWhileFiring = true
       CancelMovement = true
@@ -96,9 +96,78 @@
       ]
     }
     {
-      Name = "EnemyBowSplitShot"
-      InheritFrom = "EnemyBowWeapon"
-      Projectile = "EnemyBowSplitShot"
+      Name = "DarkBowDash"
+      InheritFrom = "DarkBow"
+      Control = "Attack2"
+      Type = "GUN"
+      Projectile = "DarkBowDash"
+      SelfVelocity = 0
+      ChargeStartFx = "BowChargeFast"
+      Cooldown = 0.02
+      MinChargeToFire = 0.3
+      ChargeTime = 0.4
+      ChargeRumbleRight = 0.0
+      CanCancelDisables = true
+      CanCancelOwnDisables = true
+      ControlWindow = 0.45
+      PerfectChargeWindowDuration = 0.15
+      ChargeDamageMultiplier = 4.0
+      PerfectChargeDamageMultiplier = 1.25
+      ChargeStartAnimation = "ZagreusBowStart"
+      ChargeCancelGraphic = "ZagreusBowStartCancel"
+      FireGraphic = "ZagreusBowFire"
+      AllowExternalForceRelease = false
+      AllowExternalForceReleaseIfAnyCharged = true
+      Effects = [
+        {
+          Trigger = "Charging"
+          Name = "BowSelfSpeed"
+          Type = "SPEED"
+          Duration = 0.02
+          Modifier = 0.5
+          Active = true
+          CanAffectInvulnerable = true
+        }
+        {
+          Name = "BowWeaponDashHalt"
+          Type = "GRIP"
+          Duration = 0.02
+          Modifier = 1.0
+          HaltOnEnd = true
+          Active = true
+        }
+         {
+          Name = "BowWeaponDisable"
+          DurationFrames = 5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = false
+          RequestTriggerLock = true
+        }
+        {
+          Name = "BowWeaponDisableCancelable"
+          DurationFrames = 18
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Cancelable = true
+          RequestTriggerLock = true
+        }
+        {
+          Name = "BowWeaponExplosiveChargeWeapon"
+          Type = "WEAPON_FIRE"
+          Trigger = "Charging"
+          Duration = 999.0
+          Active = false
+          ClearOnAttack = true
+        }
+      ]
+    }
+    {
+      Name = "DarkBowSplitShot"
+      InheritFrom = "DarkBowWeapon"
+      Projectile = "DarkBowSplitShot"
       Control = "Attack3"
       DisallowedControl = "null"
       RootOwnerWhileFiring = true

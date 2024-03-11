@@ -1,17 +1,18 @@
-DebugPrint({ Text = "Load BowWeapon" })
+DebugPrint({ Text = "Load DarkChironBow" })
 
-WeaponData.EnemyBowWeapon =
+WeaponData.DarkChironBow =
 {
-    Name = "EnemyBowWeapon",
+    Name = "DarkChironBow",
     -- ShortName = "EnemyBowWeapon_Short",
     -- DashWeapon = "BowWeaponDash",
     -- SecondaryWeapon = "BowSplitShot",
     RapidDamageType = true,
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowStart",
-        FireAnimation = "ZagreusBowFire",
+        PreAttackAnimation = "ZagreusBowAlt01DashStart",
+        FireAnimation = "ZagreusBowAlt01DashFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
+        PreAttackDuration = 0.4,
         PreAttackWaitForAnimation = true,
         FireDuration = 0.6,
         -- PostAttackDuration = 2.0,
@@ -96,18 +97,98 @@ WeaponData.EnemyBowWeapon =
 
     WeaponBinks =
     {
-        "ZagreusBow_Bink",
-        "ZagreusBowRapidFire_Bink",
-        "ZagreusBowDash_Bink",
-        "ZagreusBowRun_Bink",
-        "ZagreusBowRunStop_Bink",
+        "ZagreusBow01Dash_Bink",
+        "ZagreusBow01_Bink",
+        "ZagreusBow01Run_Bink",
+        "ZagreusBow01RunStop_Bink",
+        "ZagreusBow01RapidFire_Bink"
     },
 
     Upgrades = {},
 }
 
-WeaponData.EnemyBowSplitShot =
+WeaponData.DarkChironBowDash =
 {
+    StartingWeapon = false,
+
+    FireRumbleParameters =
+    {
+        { ScreenPreWait = 0.02, RightFraction = 0.15, Duration = 0.15 },
+    },
+
+    AIData =
+    {
+        PreAttackAnimation = "ZagreusBowAlt01Start",
+        FireAnimation = "ZagreusBowAlt01Fire",
+        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
+        PreAttackDuration = 0.4,
+        PreAttackWaitForAnimation = true,
+        FireDuration = 0.6,
+        -- PostAttackDuration = 2.0,
+        AIAttackDistance = 500,
+        AIBufferDistance = 100,
+        AIChargeTargetMarker = true,
+        AIAngleTowardsPlayerWhileFiring = true,
+        AITrackTargetDuringCharge = true,
+        AIMoveWithinRangeTimeout = 2.5,
+
+        AIFireTicksMin = 1,
+        AIFireTicksMax = 1,
+        AIFireTicksCooldown = 0.6,
+
+        -- MinAttacksBetweenUse = 2,
+
+    },
+
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            PerfectChargeSounds =
+            {
+                { Name = "/Leftovers/SFX/AuraPerfectThrow" },
+                { Name = "/VO/ZagreusEmotes/EmoteAttacking_BowPowerShot" },
+            },
+            ImperfectChargeSounds =
+            {
+                { Name = "/VO/ZagreusEmotes/EmoteAttacking_Bow"},
+                { Name = "/SFX/Player Sounds/BowFire" },
+            },
+            { Name = "/Leftovers/SFX/AuraOn"},
+        },
+        ChargeSounds =
+        {
+            {
+                Name = "/SFX/Player Sounds/ZagreusBowChargeup" ,
+                StoppedBy = { "ChargeCancel", "TriggerRelease", "Fired" },
+                SetPitchToPropertyValue = "ChargeTime",
+            },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/ArrowMetalBoneSmash",
+            Brick = "/SFX/ArrowMetalStoneClang",
+            Stone = "/SFX/ArrowMetalStoneClang",
+            Organic = "/SFX/ArrowImpactSplatter",
+            StoneObstacle = "/SFX/ArrowWallHitClankSmall",
+            BrickObstacle = "/SFX/ArrowWallHitClankSmall",
+            MetalObstacle = "/SFX/ArrowWallHitClankSmall",
+            BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+        },
+    },
+
+    Upgrades =
+    {
+
+    },
+}
+
+WeaponData.DarkChironBowSplitShot =
+{
+    Name = "DarkChironBowSplitShot",
     StartingWeapon = false,
 
     FireRumbleParameters =
@@ -120,7 +201,9 @@ WeaponData.EnemyBowSplitShot =
 
     AIData =
     {
-        -- PreAttackAnimation = "ZagreusBowStart",
+        PreAttackAnimation = "ChargeStartAnimation",
+        FireAnimation = "ZagreusBowAlt01Fire",
+        PreAttackDuration = 0.4,
         -- FireAnimation = "ZagreusBowFire",
         -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
         PreAttackWaitForAnimation = true,
@@ -144,8 +227,7 @@ WeaponData.EnemyBowSplitShot =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteRanged", },
-            { Name = "/Leftovers/SFX/AuraOn" },
+            -- these are on the animation
         },
         ImpactSounds =
         {
@@ -167,3 +249,11 @@ WeaponData.EnemyBowSplitShot =
 
     },
 }
+
+-- {
+--     WeaponNames = { "BowWeapon", "BowWeaponDash" },
+--     WeaponProperty = "ChargeCancelGraphic",
+--     ChangeValue = "ZagreusBowAlt01StartCancel",
+--     ChangeType = "Absolute",
+--     ExcludeLinked = true,
+-- }
