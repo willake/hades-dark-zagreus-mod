@@ -23,14 +23,6 @@ WeaponData.DarkSword =
 
     CauseImpactReaction = true,
 
-    FireScreenshake = { Distance = 2, Speed = 200, FalloffSpeed = 1400, Duration = 0.1, Angle = 225 },
-
-    HitSimSlowParameters =
-    {
-        { ScreenPreWait = 0.04, Fraction = 0.1, LerpTime = 0 },
-        { ScreenPreWait = 0.01, Fraction = 1.0, LerpTime = 0.03 },
-    },
-
     Sounds =
     {
         FireSounds =
@@ -70,18 +62,6 @@ WeaponData.DarkSword2 =
     Name = "DarkSword2",
     StartingWeapon = false,
     CauseImpactReaction = true,
-    HitScreenshake = { Distance = 6, Speed = 300, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
-
-    HitSimSlowParameters =
-    {
-        { ScreenPreWait = 0.02, Fraction = 0.1, LerpTime = 0 },
-        { ScreenPreWait = 0.02, Fraction = 1.0, LerpTime = 0.07 },
-    },
-
-    HitRumbleParameters =
-    {
-        { ScreenPreWait = 0.02, RightFraction = 0.2, Duration = 0.15 },
-    },
 
     AIData =
     {
@@ -131,22 +111,6 @@ WeaponData.DarkSword3 =
     Name = "DarkSword3",
     StartingWeapon = false,
     CauseImpactReaction = true,
-
-    HitSimSlowCooldown = 0.03,
-    HitSimSlowParameters =
-    {
-        { ScreenPreWait = 0.06, Fraction = 0.1, LerpTime = 0.0 },
-        { ScreenPreWait = 0.05, Fraction = 1.0, LerpTime = 0.07 },
-
-        --{ ScreenPreWait = 0.01, Fraction = 0.01, LerpTime = 0 },
-        --{ ScreenPreWait = 0.06, Fraction = 0.3, LerpTime = 0.07 },
-        --{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0.07 },
-    },
-
-    -- HitRumbleParameters =
-    -- {
-    -- 	{ ScreenPreWait = 0.02, LeftFraction = 0.25, Duration = 0.2 },
-    -- },
 
     AIData =
     {
@@ -202,23 +166,6 @@ WeaponData.DarkSwordDash =
     Name = "DarkSwordDash",
     StartingWeapon = false,
     CauseImpactReaction = true,
-
-    --HitScreenshake = { Distance = 3, Speed = 10000, Duration = 0.08, FalloffSpeed = 30000 },
-    -- HitRumbleParameters =
-    -- {
-    -- 	{ ScreenPreWait = 0.02, LeftFraction = 0.125, Duration = 0.15 },
-    -- },
-
-    HitSimSlowParameters =
-    {
-
-        { ScreenPreWait = 0.04, Fraction = 0.1, LerpTime = 0.0 },
-        { ScreenPreWait = 0.03, Fraction = 1.0, LerpTime = 0.07 },
-
-        --{ ScreenPreWait = 0.00, Fraction = 0.01, LerpTime = 0 },
-        --{ ScreenPreWait = 0.02, Fraction = 0.15, LerpTime = 0.07 },
-        --{ ScreenPreWait = 0.035, Fraction = 1.0, LerpTime = 0.1 },
-    },
 
     AIData =
     {
@@ -279,17 +226,6 @@ WeaponData.DarkSwordParry =
     CauseImpactReaction = true,
     ImpactReactionHitsOverride = 2,
 
-    SkipAttackNotReadySounds = true,
-
-    FireScreenshake = { Distance = 4, Speed = 300, FalloffSpeed = 4000, Duration = 0.25, Angle = 0 },
-    ChargeCameraMotion = { ZoomType = "Ease", Fraction = 1.05, Duration = 0.04, HoldDuration = 0.4, RestoreDefaultDuration = 0.8 },
-
-    FireSimSlowParameters =
-    {
-        --{ ScreenPreWait = 0.0, Fraction = 0.01, LerpTime = 0 },
-        --{ ScreenPreWait = 0.04, Fraction = 0.1, LerpTime = 0.07 },
-        --{ ScreenPreWait = 0.14, Fraction = 1.0, LerpTime = 0.1 },
-    },
     AIData =
     {
         --PreAttackAnimation = "EnemyHydraBite_Charge",
@@ -307,12 +243,7 @@ WeaponData.DarkSwordParry =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
     },
-
-    -- FireRumbleParameters =
-    -- {
-    -- 	{ ScreenPreWait = 0.08, Fraction = 0.2, Duration = 0.22 },
-    -- },
-
+    
     Sounds =
     {
         ChargeSounds =

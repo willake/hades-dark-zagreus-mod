@@ -1,0 +1,277 @@
+{
+	Projectiles = [
+		"_append"
+        {
+            Name = "DarkSpear"
+            // InheritFrom = "1_BaseDamagingProjectile"
+            DetonateGraphic = "null"
+            Type = "STRAIGHT"
+            AffectsEnemies = true
+            AffectsFriends = false
+            AffectsSelf = false
+            UseRadialImpact = false
+            CheckUnitImpact = true
+            CheckObstacleImpact = true
+            UnlimitedUnitPenetration = true
+            ObstacleCollisionCheck = "PolygonContainsPoint"
+            ImpactLineOfSightFromOwner = true
+            Range = 430
+            Speed = 6000
+            DamageRadius = 0
+            DamageLow = 10 //25
+            DamageHigh = 10 // 25
+            CriticalFx = "CriticalHit"
+            HitVulnerabilityFx = "Backstab"
+            UseArmor = true
+            UseVulnerability = true
+            InvulnerableImpactOwnerVelocity = 350
+            GroupName = "FX_Standing_Add"
+            ProjectileDefenseAngle = 60
+            ProjectileDefenseRadius = 275
+            DeflectProjectiles = false
+            Thing =
+            {
+                Graphic = "SpearThrustProjectile"
+                OffsetZ = 40
+                RotateGeometry = true
+                Grip = 999999
+                UseBoundsForSortDrawArea = true
+                SortBoundsScale = 0.33
+                Tallness = 10
+                Points =
+                [
+                {
+                    X = 130
+                    Y = 50
+                }
+                {
+                    X = 130
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = 50
+                }
+                ]
+            }
+            Effects = [
+                {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+                }
+                {
+                Name = "RushGrip"
+                Type = "GRIP"
+                Duration = 0.35
+                Modifier = 0.1
+                HaltOnEnd = true
+                Active = false
+                }
+            ]
+        }
+        {
+            Name = "DarkSpearDash"
+            InheritFrom = "DarkSpear"
+            DetonateGraphic = "SpearDashSwipe"
+            ProjectileDefenseAngle = 100
+            ProjectileDefenseRadius = 240
+            DamageLow = 10 // 20
+            DamageHigh = 10 // 20
+            Thing =
+                {
+                Graphic = "SpearDashSwipe"
+                    Points =
+                    [
+                    {
+                        X = 200
+                        Y = 100
+                }
+                    {
+                        X = 200
+                        Y = -100
+            }
+            {
+                        X = -10
+                        Y = -150
+                    }
+                    {
+                        X = -10
+                        Y = 150
+                    }
+                    ]
+            }
+        }
+        {
+            Name = "DarkSpearTwoThree"
+            InheritFrom = "DarkSpear"
+            DamageLow = 10 // 30
+            DamageHigh = 10 // 30
+        }
+        {
+            Name = "DarkSpearLunarThree"
+            InheritFrom = "DarkSpear"
+            DamageLow = 10 // 70
+            DamageHigh = 10 // 70
+        }
+        {
+            Name = "DarkSpearSpin"
+            // InheritFrom = "1_BaseDamagingProjectile"
+            DetonateGraphic = "SpearSwipe360"
+            Type = "STRAIGHT"
+            DetonateSound = "null"
+            Fuse = 0.0
+            AffectsEnemies = true
+            AffectsFriends = false
+            Range = 1.0
+            ActiveBlinkSpeedMultiplier = 1.4
+            ActiveBlinkRangeMultiplier = 1.8
+            DamageRadius = 210
+            DamageRadiusScaleY = 0.62
+            RequireHitCenter = false
+            BlastDuration = 0.16
+            AttachToOwner = true
+            NumPenetrations = 9999
+            AffectsSelf = false
+            CheckUnitImpact = false
+            CheckObstacleImpact = true
+            UnlimitedUnitPenetration = true
+            DamageLow = 10 // 30
+            DamageHigh = 10 // 30
+            ImpactVelocity = 0
+
+            CriticalFx = "CriticalHit"
+            HitVulnerabilityFx = "Backstab"
+            UseArmor = false
+            UseVulnerability = false
+            UseDetonationForProjectileDefense = true
+            DeflectProjectiles = false
+            Thing = {
+                Graphic = "null"
+                OffsetZ = 70
+                Grip = 999999
+            }
+            Effects = [
+                {
+                Name = "RushGrip"
+                Type = "GRIP"
+                Duration = 0.35
+                Modifier = 0.1
+                HaltOnEnd = true
+                Active = false
+                }
+                {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+                }
+            ]
+        }
+        {
+            Name = "DarkSpearSpin2"
+            InheritFrom = "DarkSpearSpin"
+            DamageLow = 10 // 50
+            DamageHigh = 10 // 50
+            DamageRadius = 350
+            DeflectProjectiles = false
+        }
+        {
+            Name = "DarkSpearSpin3"
+            InheritFrom = "DarkSpearSpin"
+            DamageLow = 10 // 100
+            DamageHigh = 10 // 100
+            DamageRadius = 500
+            DeflectProjectiles = false
+        }
+        {
+            Name = "DarkSpearThrow"
+            // InheritFrom = "1_BaseDamagingProjectile"
+            DetonateGraphic = "null"
+            Type = "STRAIGHT"
+            AffectsEnemies = true
+            AffectsFriends = false
+            AffectsSelf = false
+            UseRadialImpact = false
+            CheckUnitImpact = true
+            CheckObstacleImpact = true
+            ImpactSound = "/SFX/ArrowImpactSplatter"
+            UnlimitedUnitPenetration = true
+            Range = 880
+            Speed = 3000
+            DamageLow = 10 // 25
+            DamageHigh = 10 // 25
+            ProjectileDefenseRadius = 75
+            CriticalFx = "CriticalHit"
+            HitVulnerabilityFx = "Backstab"
+            UseArmor = true
+            UseVulnerability = true
+            ImpactTargetUnitOnly = false
+            VacuumStrength = 0
+            ObstacleCollisionCheck = "PolygonContainsPoint"
+            SpawnOnDeath = "SpearReturnPoint"
+            SpawnType = "OBSTACLE"
+            CanBeReflected = false
+            Thing = {
+                Graphic = "SpearThrowProjectile"
+                OffsetZ = 70
+                Grip = 999999
+                RotateGeometry = true
+                SortBoundsScale = 0.33
+                UseBoundsForSortDrawArea = true
+                Tallness = 10
+                Points = [
+                {
+                    X = 96
+                    Y = 32
+                }
+                {
+                    X = 96
+                    Y = -32
+                }
+                {
+                    X = -96
+                    Y = -32
+                }
+                {
+                    X = -96
+                    Y = 32
+                }
+                ]
+            }
+            Effect = {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        }
+        {
+            Name = "DarkSpearThrowReturn"
+            InheritFrom = "DarkSpearThrow"
+            SpawnOnDeath = "null"
+            Speed = 6000
+            Range = 3000
+            DetonateAtTarget = true
+            UseVulnerability = true
+            NumPenetrations = 9999
+        }
+	]
+}
