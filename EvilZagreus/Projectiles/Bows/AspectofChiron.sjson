@@ -4,18 +4,90 @@
 		{
 			Name = "DarkChironBow"
 			InheritFrom = "DarkBow"
-			Graphic = "BowWeaponArrow-Alt01"
-            AttachedAnim = "BowWeaponArrowShadow-Alt01"
+			Thing = {
+					Graphic = "BowWeaponArrow-Alt01"
+					OffsetZ = 70
+					AttachedAnim = "BowWeaponArrowShadow-Alt01"
+					RotateGeometry = true
+					Grip = 999999
+					Points = [
+					{
+							X = 24
+							Y = 36
+					}
+					{
+							X = 24
+							Y = -36
+					}
+					{
+							X = -24
+							Y = -36
+					}
+					{
+							X = -24
+							Y = 36
+					}
+					]
+			}
 		}
 		{
 			Name = "DarkChironBowDash"
 			InheritFrom = "DarkBowDash"
+			Thing = {
+					Graphic = "BowWeaponArrow-Alt01"
+					OffsetZ = 70
+					AttachedAnim = "BowWeaponArrowShadow-Alt01"
+					RotateGeometry = true
+					Grip = 999999
+					Points = [
+					{
+							X = 24
+							Y = 36
+					}
+					{
+							X = 24
+							Y = -36
+					}
+					{
+							X = -24
+							Y = -36
+					}
+					{
+							X = -24
+							Y = 36
+					}
+					]
+			}
     	}
 		{
             Name = "DarkChironBowSplitShot"
             InheritFrom = "DarkBowSplitShot"
-            Graphic = "BowWeaponArrowSplitShot-Alt01"
-            AttachedAnim = "BowWeaponArrowShadow-Alt01"
+			Thing = {
+				Graphic = "BowWeaponArrowSplitShot-Alt01"
+				AttachedAnim = "BowWeaponArrowShadow-Alt01"
+				OffsetZ = 70
+				UseBoundsForSortDrawArea = true
+				RotateGeometry = true
+				Grip = 999999
+				Points = [
+					{
+						X = 24
+						Y = 24
+					}
+					{
+						X = 24
+						Y = -24
+					}
+					{
+						X = -24
+						Y = -24
+					}
+					{
+						X = -24
+						Y = 24
+					}
+				]
+			}
         }
 	]
 }
