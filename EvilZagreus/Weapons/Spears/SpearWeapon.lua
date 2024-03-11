@@ -181,7 +181,6 @@ WeaponData.DarkSpearThrow =
 	{
 		Name = "DarkSpearThrow",
 		StartingWeapon = false,
-		CompleteObjectivesOnFire = { "SpearWeaponThrow", "SpearWeaponThrowTeleport", "SpearWeaponThrowSingle" },
 
 		AIData =
 		{
@@ -449,8 +448,6 @@ WeaponData.DarkSpearSpin3 =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 		},
-
-		CompleteObjectivesOnFire = { "SpearWeaponSpin", "SpearWeaponSpinRanged" },
 	}
 
 WeaponData.DarkSpearSpinExplosiveChargeWeapon =
