@@ -4,16 +4,65 @@
 		{
 			Name = "DarkRamaBow"
 			InheritFrom = "DarkBow"
-            Scale = 3
-            ExtentScale = 2
-            AttachedAnim = "BRamaWideShot"
+            Thing = {
+				Graphic = "BowWeaponArrow"
+				OffsetZ = 70
+				Scale = 3.0
+				ExtentScale = 2.0
+				AttachedAnim = "RamaWideShot"
+				RotateGeometry = true
+				Grip = 999999
+				Points = [
+				{
+						X = 24
+						Y = 36
+				}
+				{
+						X = 24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = 36
+				}
+				]
+			}
 		}
 		{
 			Name = "DarkRamaBowDash"
 			InheritFrom = "DarkBowDash"
-            Scale = 3
-            ExtentScale = 2
-            AttachedAnim = "BRamaWideShot"
+			Thing = 
+			{
+				Graphic = "BowWeaponArrow"
+				OffsetZ = 70
+				Scale = 3.0
+				ExtentScale = 2.0
+				AttachedAnim = "RamaWideShot"
+				RotateGeometry = true
+				Grip = 999999
+				Points = [
+				{
+						X = 24
+						Y = 36
+				}
+				{
+						X = 24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = 36
+				}
+				]
+			}
     	}
 		{
             Name = "DarkRamaBowSplitShot"
