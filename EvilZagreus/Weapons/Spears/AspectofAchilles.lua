@@ -1,8 +1,8 @@
 DebugPrint({ Text = "Load SpearWeapon" })
 
-WeaponData.DarkSpear =
+WeaponData.DarkAchillesSpear =
 	{
-		Name = "DarkSpear",
+		Name = "DarkAchillesSpear",
 		-- DashSwaps = { "SpearWeapon", "SpearWeapon2", "SpearWeapon3", },
 		-- ExpireDashWeaponOnDash = true,
 		-- SecondaryWeapon = "SpearWeaponThrow",
@@ -47,14 +47,14 @@ WeaponData.DarkSpear =
 
 		WeaponBinks =
 		{
-			"ZagreusSpear_Bink",
-			"ZagreusSpearRun_Bink",
-			"ZagreusSpearReturnToIdle_Bink",
-			"ZagreusSpearSpin_Bink",
-			"ZagreusSpearThrow_Bink",
-			"ZagreusSpearDashAttack_Bink",
-			"ZagreusSpearThrowReceive_Bink",
-			"ZagreusSpearRunStop_Bink",
+            "ZagreusSpear01Run_Bink",
+            "ZagreusSpear01RunStop_Bink",
+            "ZagreusSpear01_Bink",
+            "ZagreusSpear01ReturnToIdle_Bink",
+            "ZagreusSpear01Spin_Bink",
+            "ZagreusSpear01DashAttack_Bink",
+            "ZagreusSpear01Throw_Bink",
+            "ZagreusSpear01ThrowReceive_Bink"
 		},
 }
 
@@ -177,9 +177,9 @@ WeaponData.DarkSpearDash =
 		},
 	}
 
-WeaponData.DarkSpearThrow =
+WeaponData.DarkAchillesSpearThrow =
 	{
-		Name = "DarkSpearThrow",
+		Name = "DarkAchillesSpearThrow",
 		StartingWeapon = false,
 
 		AIData =
@@ -202,40 +202,26 @@ WeaponData.DarkSpearThrow =
 	
 		},
 
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/SFX/Player Sounds/ZagreusBowFire" },
-				{ Name = "/SFX/Player Sounds/ZagreusSpearThrow" },
-				{
-					Name = "/VO/ZagreusEmotes/EmoteSpearThrow",
-					Cooldown = 0.5
-				},
-			},
-			ChargeSounds =
-			{
-				{ Name = "/VO/ZagreusEmotes/EmoteRanged" },
-				{
-					Name = "/Leftovers/SFX/AuraCharge" ,
-					StoppedBy = { "TriggerRelease" }
-				},
-			},
-			ImpactSounds =
-			{
-				Invulnerable = "/SFX/SwordWallHitClank",
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/ArrowMetalBoneSmash",
-				Brick = "/SFX/ArrowMetalStoneClang",
-				Stone = "/SFX/ArrowMetalStoneClang",
-				Organic = "/SFX/ArrowImpactSplatter",
-				StoneObstacle = "/SFX/SwordWallHitClankSmall",
-				BrickObstacle = "/SFX/SwordWallHitClankSmall",
-				MetalObstacle = "/SFX/SwordWallHitClankSmall",
-				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
-			},
-		},
-
+        Sounds =
+        {
+            ChargeSounds =
+            {
+                { Name = "/VO/ZagreusEmotes/EmoteHeavyBowCharge",
+                    StoppedBy = { "TriggerRelease", "ChargeCancel", "Fired" },
+                },
+                {
+                    Name = "/SFX/Player Sounds/ZagreusWeaponChargeup" ,
+                    StoppedBy = { "TriggerRelease", "ChargeCancel", "Fired" },
+                    SetPitchToPropertyValue = "ChargeTime",
+                },
+            },
+            FireSounds =
+            {
+                { Name = "/VO/ZagreusEmotes/EmoteHeavyShieldThrow" },
+                { Name = "/SFX/Player Sounds/ZagreusDash" },
+                { Name = "/SFX/Player Sounds/ZagreusSpearThrow" },
+            },
+        },
 		Upgrades = { },
 	}
 
@@ -411,7 +397,7 @@ WeaponData.DarkSpearSpin =
 
 		Upgrades = { },
 	}
-
+    
 WeaponData.DarkSpearSpinExplosiveChargeWeapon =
 	{
 		Name = "DarkSpearSpinExplosiveChargeWeapon",
@@ -446,9 +432,9 @@ WeaponData.DarkSpearSpinExplosiveChargeWeapon =
 		}
 	}
 
-WeaponData.DarkSpearRush =
-	{
-		Name = "DarkSpearRush",
+WeaponData.DarkSpearRush = 
+    {
+        Name = "DarkSpearRush",
 		-- FailToFireFunctionName = "SetSpearTeleportBuffer",
 
 		SimSlowBlur =
@@ -461,34 +447,26 @@ WeaponData.DarkSpearRush =
 		},
 
 		SkipAttackNotReadySounds = true,
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/VO/ZagreusEmotes/EmoteEvading" },
-				{ Name = "/SFX/Player Sounds/ZagreusDash" },
-			},
-
-			ImpactSounds =
-			{
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/FistImpactMedium",
-				Brick = "/SFX/FistImpactMedium",
-				Stone = "/SFX/FistImpactMedium",
-				Organic = "/SFX/FistImpactMedium",
-			},
-
-			CancelEffectSounds =
-			{
-			},
-
-			NearbyEnemyFireSounds =
-			{
-				{ Name = "/Leftovers/Menu Sounds/TitanToggleShort" },
-			},
-		},
+        Sounds =
+        {
+            FireSounds =
+            {
+                { Name = "/VO/ZagreusEmotes/EmoteAttacking_DashUppercut" },
+                { Name = "/SFX/Enemy Sounds/Hades/HadesDash" },
+                { Name = "/Leftovers/World Sounds/QuickSnap" },
+            },
+            ImpactSounds =
+            {
+                Invulnerable = "/SFX/SwordWallHitClank",
+                Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+                Bone = "/SFX/FistImpactSmall",
+                Brick = "/SFX/FistImpactSmall",
+                Stone = "/SFX/FistImpactSmall",
+                Organic = "/SFX/FistImpactSmall",
+            },
+        },
 
 		NoExpressiveAnim = true,
 
-		Upgrades = { },
-	}
+		-- Upgrades = { },
+    }

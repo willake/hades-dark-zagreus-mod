@@ -1,0 +1,101 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkAchillesSpear"
+            InheritFrom = "DarkSpear"
+            ChargeStartAnimation = "ZagreusSpearAlt01Charge1"
+            FireGraphic = "ZagreusSpearAlt01Attack1"
+        }
+        {
+            Name = "DarkAchillesSpearDash"
+            InheritFrom = "DarkSpearDash"
+            ChargeStartAnimation = "ZagreusSpearAlt01DashAttack_Charge"
+            FireGraphic = "ZagreusSpearAlt01DashAttack"
+        }
+        {
+            Name = "DarkAchillesSpear2"
+            InheritFrom = "DarkAchillesSpear"
+            Projectile = "DarkSpearTwoThree"
+            ChargeStartAnimation = "ZagreusSpearAlt01Charge2"
+            FireGraphic = "ZagreusSpearAlt01Attack2"
+        }
+        {
+            Name = "DarkAchillesSpear3"
+            InheritFrom = "DarkAchillesSpear"
+            Projectile = "DarkSpearTwoThree"
+            ChargeStartAnimation = "ZagreusSpearAlt01Charge3"
+            FireGraphic = "ZagreusSpearAlt01Attack3"
+        }
+        {
+            Name = "DarkAchillesSpearSpin"
+            InheritFrom = "DarkSpearSpin"
+            ChargeStartAnimation = "ZagreusSpearAlt01SpinStart"
+            ChargeCancelGraphic = "ZagreusSpearAlt01SpinStartChargeCancel"
+        }
+        {
+            Name = "DarkAchillesSpearThrow"
+            InheritFrom = "DarkSpearThrow"
+            // FireOnRelease = true
+            // FullyAutomatic = true
+            LockTriggerForCharge = false
+            LockTriggerForCharge = false
+            ChargeTime = 0.07
+            RemoveControlOnCharge = "SpearWeaponSpin"
+            MinChargeToFire = 0.04
+            ChargeRangeMultiplier = 3.34
+            AllowExternalForceRelease = false
+            AllowExternalForceReleaseIfAnyCharged = true
+            ChargeStartFx = "SpearChargeThrowTrait"
+            ChargeCancelGraphic = "ZagreusSpearAlt01ThrowFireReturnToIdle"
+            ChargeStartAnimation = "ZagreusSpearAlt01ThrowCharge"
+            FireGraphic = "ZagreusSpearAlt01ThrowFire"
+            // SwapOnFire = "SpearRushWeapon"
+            // AddControlOnFire = "SpearWeaponThrowReturn"
+        }
+        {
+            Name = "DarkAchillesSpearThrowReturn"
+            InheritFrom = "DarkAchillesSpearThrow"
+            AllowExternalForceRelease = true
+            // Control = "Attack2"
+            // AlternateControl = "null"
+            FireFromObstacle = "SpearReturnPointAlt01"
+            FireGraphic = "ZagreusSpearAlt01ThrowFireReturn"
+        }
+        {
+            Name = "DarkAchillesSpearThrowInvisibleReturn"
+            InheritFrom = "DarkSpearThrowInvisibleReturn"
+            FireFromObstacle = "SpearReturnPointAlt01"
+            DestroyTargetedObstacle = true
+        }
+        {
+            Name = "DarkAchillesSpearRush"
+            InheritFrom = "DarkSpearRush"
+            BlinkDetonateAtOrigin = false
+            Enabled = true
+            BlinkDetonateAtEndpoint = false
+            BlinkDetonateOnInterval = 130
+            FireToObstacle = "SpearReturnPointAlt01"
+            Effects =
+                [
+                    {
+                        Name = "SpearRushBonus"
+                        Duration = 1000.0
+                        CanAffectInvulnerable = true
+                        FrontFx = "GrenadeSelfDamageOutputFx"
+                        FlashFrontFxWhenExpiring = true
+                        Modifier = 0.5
+                        OnlyAffectName = "_PlayerUnit"
+                    },
+                    {
+                        Name = "SpearRushWeaponDisable"
+                        Duration = 0.21
+                        DisableMove = true
+                        DisableRotate = true
+                        DisableAttack = true
+                        RequestTriggerLock = true
+                    }
+                ]
+            }
+    ]
+}

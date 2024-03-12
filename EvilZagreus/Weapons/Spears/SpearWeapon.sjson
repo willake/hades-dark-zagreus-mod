@@ -360,18 +360,6 @@
             ]
         }
         {
-            Name = "DarkSpearSpin2"
-            InheritFrom = "DarkSpearSpin"
-            Projectile = "DarkSpearSpin2"
-            ChargeTime = 0.0
-            FireOnRelease = false
-        }
-        {
-            Name = "DarkSpearSpin3"
-            InheritFrom = "DarkSpearSpin2"
-            Projectile = "DarkSpearSpin3"
-        }
-        {
             Name = "DarkSpearThrow"
             InheritFrom = "1_BaseDamagingWeapon"
             Control = "Attack3"
@@ -513,5 +501,58 @@
         //     Cooldown = 0.95
         //     Projectile = "DarkSpearSpinExplosiveChargeWeapon"
         // }
+        {
+            Name = "DarkSpearRush"
+            InheritFrom = "1_BasePlayerSlowWeapon"
+            Type = "BLINK"
+            Control = "Attack3"
+            //SwapOnFire = "SpearWeaponThrow"
+            // AddControlOnFire = "SpearWeapon"
+            // AddControlOnFire2 = "SpearWeaponSpin"
+            FireToObstacle = "SpearReturnPoint"
+            DestroyTargetedObstacle = true
+            FireGraphic = "ZagreusDashNoCollide"
+            UnblockedBlinkFx = "DashCrack"
+            ChargeTime = 0
+            SelfVelocity = 0
+            SelfVelocityCap = 0
+            BlinkDuration = 0.21
+            BlinkEaseIn = 0
+            BlinkEaseOut = 0.8
+            WeaponRange = 1200
+            Projectile = "DarkSpearRush"
+            Cooldown = 0.05
+            ChargeFx = "null"
+            ArsenalCooldown = 0.0
+            CancelMovement = false
+            Enabled = false
+            FullyAutomatic = false
+            AutoLock = false
+            UseTargetAngle = true
+            BlockMoveInput = true
+            IgnoreForceCooldown = true
+            ForceReleaseAllOnFire = true
+            CanCancelDisables = true
+            SetTargetAngleOnRequest = false
+            SetCompleteAngleOnFire = true
+            SetCompleteAngleOnCharge = true
+            Effects =
+            [{
+                Name = "SpearRushBonus"
+                Duration = 1000.0
+                CanAffectInvulnerable = true
+                FrontFx = "GrenadeSelfDamageOutputFx"
+                FlashFrontFxWhenExpiring = true
+                OnlyAffectName = "_PlayerUnit"
+            },
+            {
+                Name = "SpearRushWeaponDisable"
+                Duration = 0.21
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                RequestTriggerLock = true
+                }]
+            }
     ]
 }
