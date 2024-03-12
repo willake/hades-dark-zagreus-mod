@@ -2,33 +2,10 @@
 	Projectiles = [
 		"_append"
         {
-            Name = "DarkSpear"
-            // InheritFrom = "1_BaseDamagingProjectile"
-            DetonateGraphic = "null"
-            Type = "STRAIGHT"
-            AffectsEnemies = true
-            AffectsFriends = false
-            AffectsSelf = false
-            UseRadialImpact = false
-            CheckUnitImpact = true
-            CheckObstacleImpact = true
-            UnlimitedUnitPenetration = true
-            ObstacleCollisionCheck = "PolygonContainsPoint"
-            ImpactLineOfSightFromOwner = true
-            Range = 430
-            Speed = 6000
-            DamageRadius = 0
-            DamageLow = 10 //25
-            DamageHigh = 10 // 25
-            CriticalFx = "CriticalHit"
-            HitVulnerabilityFx = "Backstab"
-            UseArmor = true
-            UseVulnerability = true
-            InvulnerableImpactOwnerVelocity = 350
-            GroupName = "FX_Standing_Add"
-            ProjectileDefenseAngle = 60
-            ProjectileDefenseRadius = 275
-            DeflectProjectiles = false
+            Name = "DarkGuanYuSpear"
+            InheritFrom = "DarkSpear"
+            DamageLow = 4 // 40
+            DamageHigh = 4 // 40
             Thing =
             {
                 Graphic = "SpearThrustProjectile"
@@ -38,6 +15,7 @@
                 UseBoundsForSortDrawArea = true
                 SortBoundsScale = 0.33
                 Tallness = 10
+                AttachedAnim = "GuanYuThrust"
                 Points =
                 [
                 {
@@ -80,13 +58,13 @@
             ]
         }
         {
-            Name = "DarkSpearDash"
-            InheritFrom = "DarkSpear"
+            Name = "DarkGuanYuSpearDash"
+            InheritFrom = "DarkGuanYuSpear"
             DetonateGraphic = "SpearDashSwipe"
             ProjectileDefenseAngle = 100
             ProjectileDefenseRadius = 240
-            DamageLow = 10 // 20
-            DamageHigh = 10 // 20
+            DamageLow = 3 // 30
+            DamageHigh = 3 // 30
             Thing =
                 {
                 Graphic = "SpearDashSwipe"
@@ -112,52 +90,63 @@
             }
         }
         {
-            Name = "DarkSpearTwoThree"
+            Name = "DarkGuanYuSpearTwoThree"
             InheritFrom = "DarkSpear"
             DamageLow = 10 // 30
             DamageHigh = 10 // 30
+            Thing =
+            {
+                Graphic = "SpearThrustProjectile"
+                OffsetZ = 40
+                RotateGeometry = true
+                Grip = 999999
+                UseBoundsForSortDrawArea = true
+                SortBoundsScale = 0.33
+                Tallness = 10
+                AttachedAnim = "GuanYuThrust_Flip"
+                Points =
+                [
+                {
+                    X = 130
+                    Y = 50
+                }
+                {
+                    X = 130
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = 50
+                }
+                ]
+            }
         }
         {
-            Name = "DarkSpearLunarThree"
-            InheritFrom = "DarkSpear"
-            DamageLow = 10 // 70
-            DamageHigh = 10 // 70
-        }
-        {
-            Name = "DarkSpearSpin"
-            // InheritFrom = "1_BaseDamagingProjectile"
-            DetonateGraphic = "SpearSwipe360"
-            Type = "STRAIGHT"
-            DetonateSound = "null"
-            Fuse = 0.0
-            AffectsEnemies = true
-            AffectsFriends = false
-            Range = 1.0
-            ActiveBlinkSpeedMultiplier = 1.4
-            ActiveBlinkRangeMultiplier = 1.8
-            DamageRadius = 210
-            DamageRadiusScaleY = 0.62
-            RequireHitCenter = false
-            BlastDuration = 0.16
-            AttachToOwner = true
-            NumPenetrations = 9999
-            AffectsSelf = false
-            CheckUnitImpact = false
-            CheckObstacleImpact = true
+            Name = "DarkGuanYuSpearSpin"
+            InheritFrom = "DarkGuanYuSpin"
+            MultiDetonate = true
+            Range = 1001 // 1 + 1000
+            Speed = 400
+            Fuse = 0.25 // 0 + 0.25
+            TotalFuse = 0.75 // 0 + 0.75 
             UnlimitedUnitPenetration = true
-            DamageLow = 10 // 30
-            DamageHigh = 10 // 30
-            ImpactVelocity = 0
-            CriticalFx = "CriticalHit"
-            HitVulnerabilityFx = "Backstab"
-            UseArmor = false
-            UseVulnerability = false
-            UseDetonationForProjectileDefense = true
-            DeflectProjectiles = false
+            AttachToOwner = false
+            MultipleObstacleCollisions = false
+            CheckObstacleImpact = true
+            NumBounces = 99999
+            DamageRadius = 105 // 210 * 0.50
+            // ProjectileDefenseRadius = 275, original SpearSpin do not have this...
+            DamageLow = 2 // 20
+            DamageHigh = 2 // 20
             Thing = {
                 Graphic = "null"
                 OffsetZ = 70
                 Grip = 999999
+                AttachedAnim = "GuanYuSpin"
             }
             Effects = [
                 {
@@ -181,33 +170,26 @@
             ]
         }
         {
-            Name = "DarkSpearThrow"
-            // InheritFrom = "1_BaseDamagingProjectile"
-            DetonateGraphic = "null"
-            Type = "STRAIGHT"
-            AffectsEnemies = true
-            AffectsFriends = false
-            AffectsSelf = false
-            UseRadialImpact = false
-            CheckUnitImpact = true
-            CheckObstacleImpact = true
-            ImpactSound = "/SFX/ArrowImpactSplatter"
-            UnlimitedUnitPenetration = true
-            Range = 880
-            Speed = 3000
-            DamageLow = 10 // 25
-            DamageHigh = 10 // 25
-            ProjectileDefenseRadius = 75
-            CriticalFx = "CriticalHit"
-            HitVulnerabilityFx = "Backstab"
-            UseArmor = true
+            Name = "DarkGuanYuSpearThrow"
+            InheritFrom = "DarkSpearThrow"
+            SpawnType = "PROJECTILE"
+            SpawnOnDetonate = "null"
+            SpawnCount = 0
+            MultiDetonate = true
+            Fuse = 0.08
+            ImmunityDuration = 0.5
             UseVulnerability = true
-            ImpactTargetUnitOnly = false
-            VacuumStrength = 0
-            ObstacleCollisionCheck = "PolygonContainsPoint"
-            SpawnOnDeath = "SpearReturnPoint"
-            SpawnType = "OBSTACLE"
-            CanBeReflected = false
+            DamageLow = 4 // 45
+            DamageHigh = 4 // 45
+            ChargeTime = 1.8
+            DamageRadius = 250
+            DamageRadiusScaleX = 1.1
+            DamageRadiusScaleY = 0.67
+            Speed = 2500
+            DetonateGraphic = "GuanYuFirecrackers"
+            DetonateSound = "null"
+            CheckUnitImpact = false
+            CheckObstacleImpact = true
             Thing = {
                 Graphic = "SpearThrowProjectile"
                 OffsetZ = 70
@@ -247,17 +229,12 @@
             }
         }
         {
-            Name = "DarkSpearThrowReturn"
-            InheritFrom = "DarkSpearThrow"
-            SpawnOnDeath = "null"
-            Speed = 6000
-            Range = 3000
-            DetonateAtTarget = true
-            UseVulnerability = true
-            NumPenetrations = 9999
+            Name = "DarkGuanYuSpearThrowReturn"
+            InheritFrom = "DarkGuanYuSpearThrow"
+            Speed = 2500
         }
         {
-            Name = "DarkSpearRush"
+            Name = "DarkGuanYuSpearRush"
             // InheritFrom = "1_BaseDamagingProjectile"
             DetonateGraphic = "SpearRushTrailFx"
             AutoAdjustForTarget = true
