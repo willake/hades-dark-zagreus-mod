@@ -4,82 +4,10 @@
         {
             Name = "DarkAchillesSpear"
             InheritFrom = "DarkSpear"
-            Thing =
-            {
-                Graphic = "SpearThrustProjectile"
-                OffsetZ = 40
-                RotateGeometry = true
-                Grip = 999999
-                UseBoundsForSortDrawArea = true
-                SortBoundsScale = 0.33
-                Tallness = 10
-                Points =
-                [
-                {
-                    X = 130
-                    Y = 50
-                }
-                {
-                    X = 130
-                    Y = -50
-                }
-                {
-                    X = -25
-                    Y = -50
-                }
-                {
-                    X = -25
-                    Y = 50
-                }
-                ]
-            }
-            Effects = [
-                {
-                Name = "OnHitStun"
-                Duration = 0.5
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                Active = true
-                CanAffectInvulnerable = false
-                FrontFx = "null"
-                }
-                {
-                Name = "RushGrip"
-                Type = "GRIP"
-                Duration = 0.35
-                Modifier = 0.1
-                HaltOnEnd = true
-                Active = false
-                }
-            ]
         }
         {
             Name = "DarkAchillesSpearDash"
             InheritFrom = "DarkSpearDash"
-            Thing =
-                {
-                Graphic = "SpearDashSwipe"
-                    Points =
-                    [
-                    {
-                        X = 200
-                        Y = 100
-                }
-                    {
-                        X = 200
-                        Y = -100
-            }
-            {
-                        X = -10
-                        Y = -150
-                    }
-                    {
-                        X = -10
-                        Y = 150
-                    }
-                    ]
-            }
         }
         {
             Name = "DarkAchillesSpearTwoThree"
@@ -96,31 +24,6 @@
         {
             Name = "DarkAchillesSpearSpin"
             InheritFrom = "DarkSpearSpin"
-            Thing = {
-                Graphic = "null"
-                OffsetZ = 70
-                Grip = 999999
-            }
-            Effects = [
-                {
-                Name = "RushGrip"
-                Type = "GRIP"
-                Duration = 0.35
-                Modifier = 0.1
-                HaltOnEnd = true
-                Active = false
-                }
-                {
-                Name = "OnHitStun"
-                Duration = 0.5
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                Active = true
-                CanAffectInvulnerable = false
-                FrontFx = "null"
-                }
-            ]
         }
         {
             Name = "DarkAchillesSpearThrow"
@@ -128,43 +31,6 @@
             Range = 264 // 880 * 0.3
             SpawnType = "OBSTACLE"
             SpawnOnDeath = "SpearReturnPointAlt01"
-            Thing = {
-                Graphic = "SpearThrowProjectile"
-                OffsetZ = 70
-                Grip = 999999
-                RotateGeometry = true
-                SortBoundsScale = 0.33
-                UseBoundsForSortDrawArea = true
-                Tallness = 10
-                Points = [
-                {
-                    X = 96
-                    Y = 32
-                }
-                {
-                    X = 96
-                    Y = -32
-                }
-                {
-                    X = -96
-                    Y = -32
-                }
-                {
-                    X = -96
-                    Y = 32
-                }
-                ]
-            }
-            Effect = {
-                Name = "OnHitStun"
-                Duration = 0.5
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                Active = true
-                CanAffectInvulnerable = false
-                FrontFx = "null"
-            }
         }
         {
             Name = "DarkAchillesSpearThrowReturn"

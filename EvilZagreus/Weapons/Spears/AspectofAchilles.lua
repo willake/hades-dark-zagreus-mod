@@ -1,4 +1,4 @@
-DebugPrint({ Text = "Load SpearWeapon" })
+DebugPrint({ Text = "Load DarkAchillesSpear" })
 
 WeaponData.DarkAchillesSpear =
 	{
@@ -397,7 +397,7 @@ WeaponData.DarkSpearSpin =
 
 		Upgrades = { },
 	}
-    
+
 WeaponData.DarkSpearSpinExplosiveChargeWeapon =
 	{
 		Name = "DarkSpearSpinExplosiveChargeWeapon",
