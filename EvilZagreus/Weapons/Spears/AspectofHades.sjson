@@ -1,0 +1,60 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkHadesSpear"
+            InheritFrom = "DarkSpear"
+            ChargeStartAnimation = "ZagreusSpearAlt02Charge1"
+            FireGraphic = "ZagreusSpearAlt02Attack1"
+        }
+        {
+            Name = "DarkHadesSpearDash"
+            InheritFrom = "DarkSpearDash"
+            ChargeStartAnimation = "ZagreusSpearAlt02DashAttack_Charge"
+            FireGraphic = "ZagreusSpearAlt02DashAttack"
+        }
+        {
+            Name = "DarkHadesSpear2"
+            InheritFrom = "DarkHadesSpear"
+            Projectile = "DarkSpearTwoThree"
+            ChargeStartAnimation = "ZagreusSpearAlt02Charge2"
+            FireGraphic = "ZagreusSpearAlt02Attack2"
+        }
+        {
+            Name = "DarkHadesSpear3"
+            InheritFrom = "DarkHadesSpear"
+            Projectile = "DarkSpearTwoThree"
+            ChargeStartAnimation = "ZagreusSpearAlt02Charge3"
+            FireGraphic = "ZagreusSpearAlt02Attack3"
+        }
+        {
+            Name = "DarkHadesSpearSpin"
+            InheritFrom = "DarkSpearSpin"
+            ChargeStartAnimation = "ZagreusSpearAlt02SpinStart"
+            ChargeCancelGraphic = "ZagreusSpearAlt02SpinStartChargeCancel"
+            FireGraphic = "ZagreusSpearAlt02SpinAttack"
+        }
+        {
+            Name = "DarkHadesSpearThrow"
+            InheritFrom = "DarkSpearThrow"
+            ChargeStartAnimation = "ZagreusSpearAlt02ThrowCharge"
+            ChargeCancelGraphic = "ZagreusSpearAlt02ThrowFireReturnToIdle"
+            FireGraphic = "ZagreusSpearAlt02ThrowFire"
+        }
+        {
+            Name = "DarkHadesSpearThrowReturn"
+            InheritFrom = "DarkHadesSpearThrow"
+            FireGraphic = "ZagreusSpearAlt02ThrowFireReturn"
+            FireFromObstacle = "SpearReturnPointAlt02"
+        }
+        {
+            Name = "DarkHadesSpearThrowInvisibleReturn"
+            InheritFrom = "DarkSpearThrowInvisibleReturn"
+            FireFromObstacle = "SpearReturnPointAlt02"
+        }
+        {
+            Name = "DarkHadesSpearRush"
+            InheritFrom = "DarkSpearRush"
+        }
+    ]
+}

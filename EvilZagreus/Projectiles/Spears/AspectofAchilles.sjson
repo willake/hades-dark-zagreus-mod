@@ -1,0 +1,44 @@
+{
+	Projectiles = [
+		"_append"
+        {
+            Name = "DarkAchillesSpear"
+            InheritFrom = "DarkSpear"
+        }
+        {
+            Name = "DarkAchillesSpearDash"
+            InheritFrom = "DarkSpearDash"
+        }
+        {
+            Name = "DarkAchillesSpearTwoThree"
+            InheritFrom = "DarkAchillesSpear"
+            DamageLow = 10 // 30
+            DamageHigh = 10 // 30
+        }
+        {
+            Name = "DarkAchillesSpearLunarThree"
+            InheritFrom = "DarkAchillesSpear"
+            DamageLow = 10 // 70
+            DamageHigh = 10 // 70
+        }
+        {
+            Name = "DarkAchillesSpearSpin"
+            InheritFrom = "DarkSpearSpin"
+        }
+        {
+            Name = "DarkAchillesSpearThrow"
+            InheritFrom = "DarkSpearThrow"
+            Range = 264 // 880 * 0.3
+            SpawnType = "OBSTACLE"
+            SpawnOnDeath = "SpearReturnPointAlt01"
+        }
+        {
+            Name = "DarkAchillesSpearThrowReturn"
+            InheritFrom = "DarkSpearThrowReturn"
+        }
+        {
+            Name = "DarkAchillesSpearRush"
+            InheritFrom = "DarkSpearRush"
+        }
+	]
+}

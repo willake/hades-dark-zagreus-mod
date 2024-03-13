@@ -31,26 +31,6 @@ WeaponData.DarkBow =
 
     },
 
-    -- ChargeCameraMotion = { ZoomType = "Overshoot", Fraction = 0.95, Duration = 0.6 },
-    -- FireCameraMotion = { ZoomType = "Ease", Fraction = 1.0, Duration = 0.06 },
-
-    --FireScreenshake = { Distance = 2, Speed = 300, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
-    --HitScreenshake = { Distance = 6, Speed = 3000, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
-
-    --[[
-		HitSimSlowCooldown = 0.2,
-		HitSimSlowParameters =
-		{
-			{ ScreenPreWait = 0.02, Fraction = 0.1, LerpTime = 0 },
-			{ ScreenPreWait = 0.04, Fraction = 1.0, LerpTime = 0.1 },
-		},
-		]]
-
-    -- FireRumbleParameters =
-    -- {
-    --     { ScreenPreWait = 0.02, RightFraction = 0.15, Duration = 0.15 },
-    -- },
-
     Sounds =
     {
         FireSounds =

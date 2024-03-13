@@ -1,0 +1,66 @@
+{
+	Projectiles = [
+		"_append"
+        {
+            Name = "DarkHadesSpear"
+            InheritFrom = "DarkSpear"
+        }
+        {
+            Name = "DarkHadesSpearDash"
+            InheritFrom = "DarkSpearDash"
+        }
+        {
+            Name = "DarkHadesSpearTwoThree"
+            InheritFrom = "DarkAchillesSpear"
+            DamageLow = 10 // 30
+            DamageHigh = 10 // 30
+        }
+        {
+            Name = "DarkHadesSpearLunarThree"
+            InheritFrom = "DarkAchillesSpear"
+            DamageLow = 10 // 70
+            DamageHigh = 10 // 70
+        }
+        {
+            Name = "DarkHadesSpearSpin"
+            InheritFrom = "DarkSpearSpin"
+            DamageRadius = 309.75 // 210 * 1.475
+        }
+        {
+            Name = "DarkHadesSpearThrow"
+            InheritFrom = "DarkSpearThrow"
+            Range = 264 // 880 * 0.3
+            SpawnType = "OBSTACLE"
+            SpawnOnDeath = "SpearReturnPointAlt02"
+        }
+        {
+            Name = "DarkHadesSpearThrowReturn"
+            InheritFrom = "DarkSpearThrowReturn"
+        }
+        {
+            Name = "DarkHadesSpearRush"
+            InheritFrom = "DarkSpearRush"
+        }
+	]
+}
+
+// {
+// 	WeaponNames = { "SpearWeaponSpin", "SpearWeaponSpin2", "SpearWeaponSpin3" },
+// 	EffectName = "MarkTargetSpin",
+// 	EffectProperty = "Active",
+// 	ChangeValue = true,
+// 	ExcludeLinked = true,
+// }
+// {
+// 	WeaponNames = WeaponSets.HeroPhysicalWeapons,
+// 	EffectName = "MarkTargetSpin",
+// 	EffectProperty = "Modifier",
+// 	BaseValue = 0.30,
+// 	ChangeType = "Add",
+// 	ExtractValue =
+// 	{
+// 		ExtractAs = "TooltipDamage",
+// 		Format = "Percent"
+// 	},
+// 	DeriveSource = "DeriveSource"
+// }
