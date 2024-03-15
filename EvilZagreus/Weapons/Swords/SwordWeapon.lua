@@ -19,6 +19,7 @@ WeaponData.DarkSword =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        ChainedWeapon = "DarkSword2"
     },
 
     CauseImpactReaction = true,
@@ -79,6 +80,8 @@ WeaponData.DarkSword2 =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        ChainedWeapon = "DarkSword3",
+        SkipMovement = true
     },
 
     Sounds =
@@ -128,6 +131,7 @@ WeaponData.DarkSword3 =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        SkipMovement = true
     },
 
     Sounds =

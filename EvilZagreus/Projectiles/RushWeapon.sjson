@@ -2,7 +2,7 @@
   Projectiles = [
     "_append"
     {
-      Name = "EnemyRushWeapon"
+      Name = "DarkRush"
       InheritFrom = "1_BaseTrapProjectile"
       DetonateSound = "null"
       Type = "STRAIGHT"

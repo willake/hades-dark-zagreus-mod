@@ -2,7 +2,7 @@
 	Weapons = [
 	"_append"
     {
-        Name = "EnemyRushWeapon"
+        Name = "DarkRush"
         InheritFrom = "1_BaseTrapWeapon"
         Type = "BLINK"
         Control = "Rush"
@@ -13,7 +13,7 @@
         BlinkDuration = 0.21
         BlinkEaseIn = 0
         BlinkEaseOut = 0.8
-        Projectile = "EnemyRushWeapon"
+        Projectile = "DarkRush"
         WeaponRange = 300
         BlinkMaxRange = 400
         ClipSize = 1

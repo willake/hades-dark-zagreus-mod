@@ -8,44 +8,54 @@ function DarkZagreusAI( enemy, currentRun )
 end
 
 function DoDarkZagreusAILoop(enemy, currentRun, targetId, weaponAIData)
-    if weaponAIData == nil then
-        -- select a weapon to use if not exist
-    end
-
     local state = GetAIState()
     local actionData = GetAIActionData(state)
 
-    enemy.WeaponName = SelectDarkWeapon(weaponAIData, state, actionData)
+    -- select a weapon to use if not exist
+    if weaponAIData == nil then
+        enemy.WeaponName = SelectDarkWeapon(enemy, state, actionData)
+        DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+        table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
-    -- use original getTargetId function to get target
-    if targetId == nil then
-		targetId = GetTargetId(enemy, weaponAIData)
-	end
+		weaponAIData = GetWeaponAIData(enemy)
+    end
 
     -- pass ChainedWeapon to enemy object
     if weaponAIData.ChainedWeapon ~= nil then
 		enemy.ChainedWeapon = weaponAIData.ChainedWeapon
 	end
 
+    -- use original getTargetId function to get target
+    if targetId == nil then
+		targetId = GetTargetId(enemy, weaponAIData)
+	end
+
+    -- if there is a target
     if targetId ~= nil and targetId ~= 0 then
         local moveToId = targetId
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, moveToId, weaponAIData, actionData )
+			local didTimeout = DoDarkZagreusMove( enemy, currentRun, moveToId, weaponAIData, actionData )
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
 			end
 		end
 
+        if enemy.WeaponName == nil then
+            return true
+        end
+
         -- Attack
 		local attackSuccess = false
 		while not attackSuccess do
 			attackSuccess = DoDarkZagreusAttackOnce( enemy, currentRun, targetId, weaponAIData )
 			FinishTargetMarker( enemy )
-			if weaponAIData.ForcedEarlyExit then
-				return true
+            if not attackSuccess then
+				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
+				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
+				waitUntil( enemy.AINotifyName )
 			end
 		end
     end
@@ -188,9 +198,14 @@ function SelectDarkWeapon(enemy, state, actionData)
     if r < actionData.AttackProb then
         -- if the last action is also attack, do weapon combo
         if state.IsLastActionAttack then
-            enemy.WeaponName = enemy.ChainedWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
+            if enemy.ChainedWeapon ~= nil then
+                enemy.WeaponName = enemy.ChainedWeapon
+                enemy.ChainedWeapon = nil
+                return enemy.WeaponName
+            else
+                enemy.WeaponName = enemy.PrimaryWeapon
+                return enemy.WeaponName
+            end
         end
         
         -- if the last action is dash, do dash attack
@@ -212,5 +227,6 @@ function SelectDarkWeapon(enemy, state, actionData)
         return enemy.WeaponName
     end
 
+    enemy.WeaponName = nil
     return nil
 end
