@@ -185,9 +185,9 @@ function GetAIActionData(state)
     {
         AttackDistance = 175,    
         IsCombo = true,
-        AttackProb = 0.8,
-        SpectialAttackProb = 0.1,
-        DashProb = 0.1
+        AttackProb = 0.4,
+        SpectialAttackProb = 0.3,
+        DashProb = 0.3
     }
 end
 
@@ -216,13 +216,13 @@ function SelectDarkWeapon(enemy, state, actionData)
     end
 
     -- use special attack
-    if r < actionData.SpectialAttackProb then
+    if r < actionData.AttackProb + actionData.SpectialAttackProb then
         enemy.WeaponName = enemy.SpecialAttackWeapon
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.DashProb then
+    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
         enemy.WeaponName = enemy.DashWeapon
         return enemy.WeaponName
     end
