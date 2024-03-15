@@ -182,8 +182,8 @@
       Range = 0
       Fuse = 0.5
       UseRadialImpact = false
-      ImpactVelocity = 3000
-      ImpactVelocityCap = 3000
+      // ImpactVelocity = 3000
+      // ImpactVelocityCap = 3000
       CriticalFx = "CriticalHit"
       HitVulnerabilityFx = "Backstab"
       UseArmor = true
