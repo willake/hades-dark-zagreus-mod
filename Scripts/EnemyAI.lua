@@ -1,4 +1,14 @@
 function DarkZagreusAI( enemy, currentRun )
+    enemy.AIState = {
+        OwnHP = 100,
+        ClosestEnemyHP = 100,
+        Distance = 0.5,
+        IsLastActionAttack = 1,
+        IsLastActionSpectialAttack = 0,
+        IsLastActionDash = 0,
+        IsLastActionCast = 0,
+        LastActionTime = 0
+    }
 	while IsAIActive( enemy, currentRun ) do
 		local continue = DoDarkZagreusAILoop( enemy, currentRun )
 		if not continue then
@@ -8,12 +18,11 @@ function DarkZagreusAI( enemy, currentRun )
 end
 
 function DoDarkZagreusAILoop(enemy, currentRun, targetId, weaponAIData)
-    local state = GetAIState()
-    local actionData = GetAIActionData(state)
+    local actionData = GetAIActionData(enemy.AIState)
 
     -- select a weapon to use if not exist
     if weaponAIData == nil then
-        enemy.WeaponName = SelectDarkWeapon(enemy, state, actionData)
+        enemy.WeaponName = SelectDarkWeapon(enemy, actionData)
         DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
         table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -150,9 +159,18 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
     -- ATTACK
 
     if not weaponAIData.SkipFireWeapon then
+        -- if the next attack is within combo threshold, 
+        -- then replace the weapon to combo weapon
+        -- the threshold is 0.3
+        -- if _worldTime - enemy.AIState.LastActionTime < 0.3 then
+        --     if enemy.ComboWeapon ~= nil then
+        --         enemy.WeaponName = enemy.ComboWeapon
+        --     end
+        -- end
 		if not AttackerFireWeapon( enemy, weaponAIData, currentRun, targetId, animationId ) then
 			return false
 		end
+        enemy.AIState.LastActionTime = _worldTime
 	end
 
     if weaponAIData.AIChargeTargetMarker then
@@ -191,25 +209,30 @@ function GetAIActionData(state)
     }
 end
 
-function SelectDarkWeapon(enemy, state, actionData)
+function SelectDarkWeapon(enemy, actionData)
     local r = math.random()
+    -- init combo weapon to nil
+    enemy.ComboWeapon = nil
 
     -- use attack weapon
     if r < actionData.AttackProb then
         -- if the last action is also attack, do weapon combo
-        if state.IsLastActionAttack then
-            if enemy.ChainedWeapon ~= nil then
+        if enemy.AIState.IsLastActionAttack then
+            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
                 enemy.WeaponName = enemy.ChainedWeapon
                 enemy.ChainedWeapon = nil
                 return enemy.WeaponName
+                -- enemy.ComboWeapon = enemy.ChainedWeapon
+                -- enemy.ChainedWeapon = nil
             else
                 enemy.WeaponName = enemy.PrimaryWeapon
                 return enemy.WeaponName
             end
+            -- return enemy.WeaponName
         end
         
         -- if the last action is dash, do dash attack
-        if state.IsLastActionDash then
+        if enemy.AIState.IsLastActionDash then
             enemy.WeaponName = enemy.DashAttackWeapon
             return enemy.WeaponName
         end
