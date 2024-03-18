@@ -9,6 +9,7 @@ function DarkZagreusAI( enemy, currentRun )
         IsLastActionCast = 0,
         LastActionTime = 0
     }
+    enemy.LastAction = ""
 	while IsAIActive( enemy, currentRun ) do
 		local continue = DoDarkZagreusAILoop( enemy, currentRun )
 		if not continue then
@@ -171,6 +172,7 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
 			return false
 		end
         enemy.AIState.LastActionTime = _worldTime
+        SetLastActionOnAIState(enemy)
 	end
 
     if weaponAIData.AIChargeTargetMarker then
@@ -203,9 +205,9 @@ function GetAIActionData(state)
     {
         AttackDistance = 175,    
         IsCombo = true,
-        AttackProb = 0.4,
-        SpectialAttackProb = 0.3,
-        DashProb = 0.3
+        AttackProb = 0.9,
+        SpectialAttackProb = 0.05,
+        DashProb = 0.05
     }
 end
 
@@ -213,9 +215,11 @@ function SelectDarkWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     enemy.ComboWeapon = nil
+    enemy.LastAction = ""
 
     -- use attack weapon
     if r < actionData.AttackProb then
+        enemy.LastAction = "Attack"
         -- if the last action is also attack, do weapon combo
         if enemy.AIState.IsLastActionAttack then
             if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
@@ -240,16 +244,34 @@ function SelectDarkWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
+        enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
         return enemy.WeaponName
     end
 
     -- use dash
     if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
+        enemy.LastAction = "Dash"
         enemy.WeaponName = enemy.DashWeapon
         return enemy.WeaponName
     end
 
     enemy.WeaponName = nil
     return nil
+end
+
+function SetLastActionOnAIState(enemy)
+    enemy.AIState.IsLastActionAttack = 0
+    enemy.AIState.IsLastActionSpectialAttack = 0
+    enemy.AIState.IsLastActionDash = 0
+    enemy.AIState.IsLastActionCast = 0
+    if enemy.LastAction == "Attack" then
+        enemy.AIState.IsLastActionAttack = 1
+    elseif enemy.LastAction == "SpecialAttack" then
+        enemy.AIState.IsLastActionSpectialAttack = 1
+    elseif enemy.LastAction == "Dash" then
+        enemy.AIState.IsLastActionDash = 1
+    elseif enemy.LastAction == "Cast" then
+        enemy.AIState.IsLastActionCast = 1    
+    end
 end
