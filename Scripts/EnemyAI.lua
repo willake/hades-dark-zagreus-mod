@@ -18,17 +18,15 @@ function DarkZagreusAI( enemy, currentRun )
 	end
 end
 
-function DoDarkZagreusAILoop(enemy, currentRun, targetId, weaponAIData)
+function DoDarkZagreusAILoop(enemy, currentRun, targetId)
     local actionData = GetAIActionData(enemy.AIState)
 
     -- select a weapon to use if not exist
-    if weaponAIData == nil then
-        enemy.WeaponName = SelectDarkWeapon(enemy, actionData)
-        DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
-        table.insert(enemy.WeaponHistory, enemy.WeaponName)
+    enemy.WeaponName = SelectDarkWeapon(enemy, actionData)
+    DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+    table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
-		weaponAIData = GetWeaponAIData(enemy)
-    end
+	local weaponAIData = GetWeaponAIData(enemy)
 
     -- pass ChainedWeapon to enemy object
     if weaponAIData.ChainedWeapon ~= nil then
@@ -194,7 +192,7 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
         --         enemy.WeaponName = enemy.ComboWeapon
         --     end
         -- end
-		if not AttackerFireWeapon( enemy, weaponAIData, currentRun, targetId, animationId ) then
+		if not FireDarkWeapon( enemy, weaponAIData, currentRun, targetId ) then
 			return false
 		end
         enemy.AIState.LastActionTime = _worldTime
@@ -210,7 +208,85 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
     return true
 end
 
-function DoDarkSwordAttack(enemy, currentRun, targetId, weaponAIData, actionData)
+function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
+    local fireTicks = weaponAIData.FireTicks or 1
+	-- if weaponAIData.AIFireTicksMin ~= nil and weaponAIData.AIFireTicksMax ~= nil then
+	-- 	fireTicks = RandomInt( weaponAIData.AIFireTicksMin, weaponAIData.AIFireTicksMax )
+	-- end
+
+    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+        weaponAIData.ForcedEarlyExit = true
+        return true
+    end
+
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
+
+    if weaponAIData.AIChargeTargetMarker then
+        FinishTargetMarker( enemy )
+    end
+
+    if weaponAIData.AIAngleTowardsPlayerWhileFiring then
+        AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
+    end
+
+    if weaponAIData.PreFireAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
+    end
+
+    if weaponAIData.PreFireFx then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
+    end
+
+    if weaponAIData.PreFireDuration then
+        wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
+    end
+
+    if weaponAIData.PreFireFx then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
+    end
+
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
+
+    if weaponAIData.FireAnimation then
+        SetAnimation({ DestinationId = animationId, Name = weaponAIData.FireAnimation })
+    end
+
+    if weaponAIData.FireFxOnSelf then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+
+    if weaponAIData.FireFxAtTarget then
+        CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    
+    if weaponAIData.WaitUntilProjectileDeath then
+		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		waitUntil( enemy.AINotifyName )
+	else
+		wait( CalcEnemyWait( enemy, weaponAIData.FireDuration, { MinWaitTime = weaponAIData.FireDurationMinWaitTime }), enemy.AIThreadName )
+	end
+
+    if weaponAIData.FireFxOnSelf then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+
+    if weaponAIData.FireFxAtTarget then
+        StopAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+		weaponAIData.ForcedEarlyExit = true
+		return true
+	end
+
+    return true
 end
 
 function GetAIState()

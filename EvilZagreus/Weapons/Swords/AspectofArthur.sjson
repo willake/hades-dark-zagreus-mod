@@ -111,15 +111,15 @@
     {
       Name = "DarkArthurSword2"
       InheritFrom = "DarkSword2"
-      ChargeStartAnimation = "ZagreusSwordArthurAttack2_Charge"
+      // ChargeStartAnimation = "ZagreusSwordArthurAttack2_Charge"
       FireGraphic = "ZagreusSwordArthurAttack2_Fire"
-      FullyAutomatic = true
-      ChargeTime = 0.35
-      ChargeFx = "ChargeAttack-Arthur"
+      // FullyAutomatic = true
+      // ChargeTime = 1
+      // ChargeFx = "ChargeAttack-Arthur"
       FireFx = "SwordSwipeA-Arthur"
     //   ControlWindow = 0.6
-      ChargeCancelMovement = true
-      RootOwnerWhileFiring = true
+      // ChargeCancelMovement = true
+      // RootOwnerWhileFiring = true
       Projectile = "DarkArthurSword2"
       BarrelLength = "0"
       Effects = [
@@ -215,17 +215,17 @@
     {
       Name = "DarkArthurSword3"
       InheritFrom = "DarkSword3"
-      ChargeStartAnimation = "ZagreusSwordArthurAttack3_Charge"
-      ChargeFx = "ChargeAttack-Arthur"
+      // ChargeStartAnimation = "ZagreusSwordArthurAttack3_Charge"
+      // ChargeFx = "ChargeAttack-Arthur"
       FireGraphic = "ZagreusSwordArthurAttack3_Fire"
       FireFx = "SwordSwipeAFlipped-Arthur"
       Projectile = "DarkArthurSword3"
       SelfVelocity = 0.75
       SelfVelocityCap = 0.75
-      FullyAutomatic = true
-      ChargeTime = 0.50
-      CancelMovement = false
-      ChargeCancelMovement = false
+      // FullyAutomatic = true
+      // ChargeTime = 0.50
+      // CancelMovement = false
+      // ChargeCancelMovement = false
     //   ControlWindow = 0.6
       Effects = [
         {

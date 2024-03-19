@@ -11,14 +11,16 @@ WeaponData.DarkArthurSword =
         --PreAttackEndDuration = 0.5,
         --PreAttackEndShake = true,
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        PreAttackDuration = 0.25,
         AIAttackDistance = 300,
         AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkArthurSword2",
-        PreAttackAnimation = "ZagreusSwordArthurAttack1_Charge"
+        PreFireDuration = 0.25,
+        PreFireMinWaitTime = 0.25,
+        PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
+        WaitUntilProjectileDeath = true
     },
 
     CauseImpactReaction = true,
@@ -85,13 +87,7 @@ WeaponData.DarkArthurSword2 =
 
     AIData =
     {
-        PreAttackDuration = 0.35,
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        -- PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+        PreFireDuration = 0.35,
         AIAttackDistance = 300,
         AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
@@ -100,9 +96,9 @@ WeaponData.DarkArthurSword2 =
         ChainedWeapon = "DarkArthurSword3",
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreAttackAnimation = "ZagreusSwordArthurAttack2_Charge",
-        PreAttackFx = "ChargeAttack-Arthur",
-        PreAttackSound = "/VO/ZagreusEmotes/EmoteCharging"
+        PreFireAnimation = "ZagreusSwordArthurAttack2_Charge",
+        -- FireFxOnSelf = "SwordSwipeA",
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -146,13 +142,7 @@ WeaponData.DarkArthurSword3 =
 
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        PreAttackDuration = 0.5,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+        PreFireDuration = 0.4,
         AIAttackDistance = 300,
         AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
@@ -160,9 +150,8 @@ WeaponData.DarkArthurSword3 =
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreAttackAnimation = "ZagreusSwordArthurAttack3_Charge",
-        PreAttackFx = "ChargeAttack-Arthur",
-        PreAttackSound = "/VO/ZagreusEmotes/EmoteHeavyCharging"
+        PreFireAnimation = "ZagreusSwordArthurAttack3_Charge",
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
