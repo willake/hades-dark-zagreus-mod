@@ -231,6 +231,10 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
     end
 
+    -- Prefire Related
+    -- While there is preattack for actions like aiming
+    -- , prefire is for actions like charging weapons
+
     if weaponAIData.PreFireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
     end
@@ -239,6 +243,11 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
     end
 
+    if weaponAIData.PreAttackSound then
+        PlaySound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
+    end
+
+    -- wait for charging
     if weaponAIData.PreFireDuration then
         wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
     end
@@ -247,9 +256,17 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
     end
 
+    if weaponAIData.PreAttackSound then
+        StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
+    end
+
+    -- Prefire End
+
     if not CanAttack({ Id = enemy.ObjectId }) then
         return false
     end
+
+    -- Fire
 
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = animationId, Name = weaponAIData.FireAnimation })
@@ -280,6 +297,8 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
     if weaponAIData.FireFxAtTarget then
         StopAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
     end
+
+    -- Fire end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true

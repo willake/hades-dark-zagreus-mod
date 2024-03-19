@@ -3,14 +3,10 @@ DebugPrint({ Text = "Load DarkArthurSword" })
 WeaponData.DarkArthurSword =
 {
     Name = "DarkArthurSword",
+    CauseImpactReaction = true,
+
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
         AIAttackDistance = 300,
         AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
@@ -18,19 +14,8 @@ WeaponData.DarkArthurSword =
         AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkArthurSword2",
         PreFireDuration = 0.25,
-        PreFireMinWaitTime = 0.25,
         PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
         WaitUntilProjectileDeath = true
-    },
-
-    CauseImpactReaction = true,
-
-    FireScreenshake = { Distance = 2, Speed = 200, FalloffSpeed = 1400, Duration = 0.1, Angle = 225 },
-
-    HitSimSlowParameters =
-    {
-        { ScreenPreWait = 0.04, Fraction = 0.1, LerpTime = 0 },
-        { ScreenPreWait = 0.01, Fraction = 1.0, LerpTime = 0.03 },
     },
 
     Sounds =
@@ -72,18 +57,6 @@ WeaponData.DarkArthurSword2 =
     Name = "DarkArthurSword2",
     StartingWeapon = false,
     CauseImpactReaction = true,
-    HitScreenshake = { Distance = 6, Speed = 300, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
-
-    HitSimSlowParameters =
-    {
-        { ScreenPreWait = 0.02, Fraction = 0.1, LerpTime = 0 },
-        { ScreenPreWait = 0.02, Fraction = 1.0, LerpTime = 0.07 },
-    },
-
-    HitRumbleParameters =
-    {
-        { ScreenPreWait = 0.02, RightFraction = 0.2, Duration = 0.15 },
-    },
 
     AIData =
     {
@@ -97,7 +70,9 @@ WeaponData.DarkArthurSword2 =
         SkipMovement = true,
         SkipAngleTowardTarget = true,
         PreFireAnimation = "ZagreusSwordArthurAttack2_Charge",
-        -- FireFxOnSelf = "SwordSwipeA",
+        PreFireFx = "ChargeAttack-Arthur",
+        PreFireSound = "/VO/ZagreusEmotes/EmoteCharging",
+        -- FireFxOnSelf = "SwordSwipeA-Arthur",
         WaitUntilProjectileDeath = true
     },
 
@@ -151,6 +126,8 @@ WeaponData.DarkArthurSword3 =
         SkipMovement = true,
         SkipAngleTowardTarget = true,
         PreFireAnimation = "ZagreusSwordArthurAttack3_Charge",
+        PreFireFx = "ChargeAttack-Arthur",
+        PreFireSound = "/VO/ZagreusEmotes/EmoteHeavyCharging",
         WaitUntilProjectileDeath = true
     },
 
@@ -193,39 +170,16 @@ WeaponData.DarkArthurSwordDash =
     StartingWeapon = false,
     CauseImpactReaction = true,
 
-    --HitScreenshake = { Distance = 3, Speed = 10000, Duration = 0.08, FalloffSpeed = 30000 },
-    -- HitRumbleParameters =
-    -- {
-    -- 	{ ScreenPreWait = 0.02, LeftFraction = 0.125, Duration = 0.15 },
-    -- },
-    HitSimSlowCooldown = 0.2,
-    HitSimSlowParameters =
-    {
-
-        { ScreenPreWait = 0.04, Fraction = 0.1, LerpTime = 0.0 },
-        { ScreenPreWait = 0.03, Fraction = 1.0, LerpTime = 0.07 },
-
-        --{ ScreenPreWait = 0.00, Fraction = 0.01, LerpTime = 0 },
-        --{ ScreenPreWait = 0.02, Fraction = 0.15, LerpTime = 0.07 },
-        --{ ScreenPreWait = 0.035, Fraction = 1.0, LerpTime = 0.1 },
-    },
-
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+        PreFireDuration = 0.2,
         FireDuration = 0.8,
-        PostAttackDuration = 0,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
+        AIAttackDistance = 300,
+        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        PreFireAnimation = "ZagreusSwordArthurAttack1_Charg",
     },
 
     Sounds =
@@ -257,43 +211,21 @@ WeaponData.DarkArthurSwordParry =
 {
     Name = "DarkArthurSwordParry",
     StartingWeapon = false,
-
     CauseImpactReaction = true,
     ImpactReactionHitsOverride = 2,
-
     SkipAttackNotReadySounds = true,
 
-    FireScreenshake = { Distance = 4, Speed = 300, FalloffSpeed = 4000, Duration = 0.25, Angle = 0 },
-    ChargeCameraMotion = { ZoomType = "Ease", Fraction = 1.05, Duration = 0.04, HoldDuration = 0.4, RestoreDefaultDuration = 0.8 },
-
-    FireSimSlowParameters =
-    {
-        --{ ScreenPreWait = 0.0, Fraction = 0.01, LerpTime = 0 },
-        --{ ScreenPreWait = 0.04, Fraction = 0.1, LerpTime = 0.07 },
-        --{ ScreenPreWait = 0.14, Fraction = 1.0, LerpTime = 0.1 },
-    },
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
+        PreFireDuration = 0.3, -- should be 0.5, but it looks weird
         FireDuration = 0.8,
-        PostAttackDuration = 0,
         AIAttackDistance = 175,
         AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        PreFireAnimation = "ZagreusSwordAlt03ParryCharge",
     },
-
-    -- FireRumbleParameters =
-    -- {
-    -- 	{ ScreenPreWait = 0.08, Fraction = 0.2, Duration = 0.22 },
-    -- },
 
     Sounds =
     {
