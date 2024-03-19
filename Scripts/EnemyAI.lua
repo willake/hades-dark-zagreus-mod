@@ -129,11 +129,25 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
 		return false
 	end
 
+    Stop({ Id = enemy.ObjectId })
+
     -- don't know what does it do but should better keep it
     if weaponAIData.TrackKillSteal then
 		currentRun.Hero.KillStolenFromId = enemy.ObjectId
 		currentRun.Hero.KillStealVictimId = targetId
 	end
+
+    if weaponAIData.PreAttackAnimation ~= nil then
+        SetAnimation({ Name = weaponAIData.PreAttackAnimation, DestinationId = enemy.ObjectId })
+    end
+
+    if weaponAIData.PreAttackFx ~= nil then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreAttackFx })
+    end
+
+    if weaponAIData.PreAttackSound ~= nil then
+        PlaySound({ Name = weaponAIData.PreAttackSound, Id = enemy.ObjectId })
+    end
 
     if weaponAIData.SkipAngleTowardTarget then
 		--DebugPrint({ Text = "Skipping default AngleTowardTarget" })
@@ -155,9 +169,21 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
 		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
 	end
 
+    if weaponAIData.PreAttackDuration ~= nil then
+        wait( CalcEnemyWait( enemy, weaponAIData.PreAttackDuration), enemy.AIThreadName ) 
+    end
+
     -- PRE ATTACK END
 
+    if weaponAIData.PreAttackFx then
+		StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreAttackFx })
+	end
+
     -- ATTACK
+
+    if not CanAttack({ Id = enemy.ObjectId }) then
+		return false
+	end
 
     if not weaponAIData.SkipFireWeapon then
         -- if the next attack is within combo threshold, 
