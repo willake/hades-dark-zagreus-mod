@@ -48,10 +48,10 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- EquipWeapon({ Name = "DarkSpearSpin2", DestinationId = enemy.ObjectId })
             -- table.insert(enemy.WeaponOptions, "DarkSpearSpin3")
             -- EquipWeapon({ Name = "DarkSpearSpin3", DestinationId = enemy.ObjectId })
-            enemy.PrimaryWeapon = "DarkNemesisSword";
+            enemy.PrimaryWeapon = "DarkArthurSword";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkNemesisSwordParry";
-            enemy.DashAttackWeapon = "DarkNemesisSwordDash";
+            enemy.SpecialAttackWeapon = "DarkArthurSwordParry";
+            enemy.DashAttackWeapon = "DarkArthurSwordDash";
             -- table.insert(enemy.WeaponOptions, "DarkSpearThrow")
             -- EquipWeapon({ Name = "DarkSpearThrow", DestinationId = enemy.ObjectId })
             -- table.insert(enemy.WeaponOptions, "DarkSpearThrowReturn")

@@ -4,8 +4,9 @@
     {
       Name = "DarkArthurSword"
       InheritFrom = "DarkSword"
-      FireGraphic = "ZagreusSwordArthurAttack1_Fire"
-      FireFx = "SwordSwipeC-Arthur"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+      FireFx = "null"
       Projectile = "DarkArthurSword"
       RootOwnerWhileFiring = true
       Effects = [
@@ -107,8 +108,8 @@
     {
       Name = "DarkArthurSword2"
       InheritFrom = "DarkSword2"
-      FireGraphic = "ZagreusSwordArthurAttack2_Fire"
-      FireFx = "SwordSwipeA-Arthur"
+      // FireGraphic = "ZagreusSwordArthurAttack2_Fire"
+      // FireFx = "SwordSwipeA-Arthur"
       Projectile = "DarkArthurSword2"
       BarrelLength = "0"
       Effects = [
@@ -204,11 +205,11 @@
     {
       Name = "DarkArthurSword3"
       InheritFrom = "DarkSword3"
-      FireGraphic = "ZagreusSwordArthurAttack3_Fire"
-      FireFx = "SwordSwipeAFlipped-Arthur"
+      // FireGraphic = "ZagreusSwordArthurAttack3_Fire"
+      // FireFx = "SwordSwipeAFlipped-Arthur"
       Projectile = "DarkArthurSword3"
-      SelfVelocity = 450 // 600 * 0.75
-      SelfVelocityCap = 450 // 600 * 0.75
+      SelfVelocity = 1000 // 600 * 0.75
+      SelfVelocityCap = 1000 // 600 * 0.75
       Effects = [
         {
           Name = "SwordWeaponHalt"
@@ -307,6 +308,7 @@
     {
       Name = "DarkArthurSwordParry"
       InheritFrom = "DarkSwordParry"
+      ChargeStartAnimation = "ZagreusSwordAlt03ParryCharge"
       FireGraphic = "ZagreusSwordAlt03ParryFire"
       Projectile = "DarkArthurSwordParry"
       Effects = [

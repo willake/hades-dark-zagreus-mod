@@ -155,11 +155,13 @@ WeaponData.DarkNemesisSwordDash =
     AIData =
     {
         FireDuration = 0.3,
-        AIAttackDistance = 500,
-        AIBufferDistance = 500,
+        AIAttackDistance = 9999,
+        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0
+        AIMoveWithinRangeTimeout = 1.0,
+        SkipMovement = true,
+        SkipAngleTowardTarget = true,
     },
 
     Sounds =
