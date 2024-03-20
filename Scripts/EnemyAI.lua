@@ -3,9 +3,10 @@ function DarkZagreusAI( enemy, currentRun )
         OwnHP = 100,
         ClosestEnemyHP = 100,
         Distance = 0.5,
-        IsLastActionAttack = 1,
+        IsLastActionAttack = 0,
         IsLastActionSpectialAttack = 0,
         IsLastActionDash = 0,
+        IsLastActionDashAttack = 0,
         IsLastActionCast = 0,
         LastActionTime = 0
     }
@@ -314,9 +315,10 @@ function GetAIState()
         OwnHP = 100,
         ClosestEnemyHP = 100,
         Distance = 0.5,
-        IsLastActionAttack = 1,
+        IsLastActionAttack = 0,
         IsLastActionSpectialAttack = 0,
         IsLastActionDash = 0,
+        IsLastActionDashAttack = 0,
         IsLastActionCast = 0
     }
 end
@@ -340,27 +342,27 @@ function SelectDarkWeapon(enemy, actionData)
 
     -- use attack weapon
     if r < actionData.AttackProb then
+
+        -- if the last action is dash, do dash attack
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+            enemy.LastAction = "DashAttack"
+            enemy.WeaponName = enemy.DashAttackWeapon
+            return enemy.WeaponName
+        end
+
         enemy.LastAction = "Attack"
         -- if the last action is also attack, do weapon combo
-        if enemy.AIState.IsLastActionAttack then
+        if enemy.AIState.IsLastActionAttack > 0 then
             if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
                 enemy.WeaponName = enemy.ChainedWeapon
                 enemy.ChainedWeapon = nil
                 return enemy.WeaponName
-                -- enemy.ComboWeapon = enemy.ChainedWeapon
-                -- enemy.ChainedWeapon = nil
-            else
-                enemy.WeaponName = enemy.PrimaryWeapon
-                return enemy.WeaponName
             end
-            -- return enemy.WeaponName
         end
-        
-        -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash then
-            enemy.WeaponName = enemy.DashAttackWeapon
-            return enemy.WeaponName
-        end
+
+        -- or just do a regular attack
+        enemy.WeaponName = enemy.PrimaryWeapon
+        return enemy.WeaponName
     end
 
     -- use special attack
@@ -385,6 +387,7 @@ function SetLastActionOnAIState(enemy)
     enemy.AIState.IsLastActionAttack = 0
     enemy.AIState.IsLastActionSpectialAttack = 0
     enemy.AIState.IsLastActionDash = 0
+    enemy.AIState.IsLastActionDashAttack = 0
     enemy.AIState.IsLastActionCast = 0
     if enemy.LastAction == "Attack" then
         enemy.AIState.IsLastActionAttack = 1
@@ -392,7 +395,9 @@ function SetLastActionOnAIState(enemy)
         enemy.AIState.IsLastActionSpectialAttack = 1
     elseif enemy.LastAction == "Dash" then
         enemy.AIState.IsLastActionDash = 1
+    elseif enemy.LastAction == "DashAttack" then
+        enemy.AIState.IsLastActionDashAttack = 1
     elseif enemy.LastAction == "Cast" then
-        enemy.AIState.IsLastActionCast = 1    
+        enemy.AIState.IsLastActionCast = 1
     end
 end

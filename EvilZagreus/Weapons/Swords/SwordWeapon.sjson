@@ -267,8 +267,8 @@
       FireGraphic = "null"
       FireFx = "SwordSwipeC"
       // ChargeTime = 0.3
-      SelfVelocity = 800 // 600.0
-      SelfVelocityCap = 800 // 600
+      SelfVelocity = 1000 // originally is 600.0, but it does not working
+      SelfVelocityCap = 1000 // 600
       BarrelLength = 120
       // ControlWindow = 0.35
       // BlockMoveInput = true
@@ -377,7 +377,7 @@
       BarrelLength = 0
       ChargeTimeFrames = 0
       Cooldown = 0.02
-      SelfVelocity = 400
+      SelfVelocity = 1000 // 400
       ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordDashAttack"
       FireFx = "SwordSwipeC"
