@@ -11,9 +11,6 @@ WeaponData.DarkSword =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkSword2",
-        -- PreFireDuration = 0.25,
-        -- PreFireAnimation = "ZagreusSwordCharge1",
-        -- WaitUntilProjectileDeath = true
         FireDuration = 0.2,
     },
 
@@ -61,28 +58,16 @@ WeaponData.DarkSword2 =
 
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        -- PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        -- FireDuration = 0.8,
-        -- PostAttackDuration = 0,
         AIAttackDistance = 9999,
         AIBufferDistance = 9999,
-        -- AIAngleTowardsPlayerWhileFiring = true,
-        -- AITrackTargetDuringCharge = true,
-        -- AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        -- WaitUntilProjectileDeath = true,
         ChainedWeapon = "DarkSword3",
         PreFireDuration = 0.2, -- 0.3
         PreFireAnimation = "ZagreusSwordCharge2",
-        FireAnimation = "ZagreusSwordAttack2"
+        FireAnimation = "ZagreusSwordAttack2",
+        FireFxOnSelf = "SwordSwipeB"
     },
 
     Sounds =
@@ -118,29 +103,17 @@ WeaponData.DarkSword3 =
 
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        -- PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        -- FireDuration = 0.8,
-        -- PostAttackDuration = 0,
         AIAttackDistance = 9999,
         AIBufferDistance = 9999,
-        -- AIAngleTowardsPlayerWhileFiring = true,
-        -- AITrackTargetDuringCharge = true,
-        -- AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        -- WaitUntilProjectileDeath = true,
         PreFireDuration = 0.3,
         PreFireAnimation = "ZagreusSwordCharge3",
         PreFireFx = "ChargeAttack",
         PreFireSound = "/Leftovers/SFX/AuraCharge",
-        FireAnimation = "ZagreusSwordAttack3"
+        FireAnimation = "ZagreusSwordAttack3",
+        FireFxOnSelf = "SwordSwipeC"
     },
 
     Sounds =
@@ -182,15 +155,6 @@ WeaponData.DarkSwordDash =
 
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        -- PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        -- FireDuration = 0.8,
-        -- PostAttackDuration = 0,
         FireDuration = 0.3,
         AIAttackDistance = 500,
         AIBufferDistance = 500,
@@ -243,22 +207,12 @@ WeaponData.DarkSwordParry =
 
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        -- PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        -- FireDuration = 0.8,
-        -- PostAttackDuration = 0,
         FireDuration = 0.5,
         AIAttackDistance = 175,
         AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true
+        AIMoveWithinRangeTimeout = 1.0
     },
     
     Sounds =

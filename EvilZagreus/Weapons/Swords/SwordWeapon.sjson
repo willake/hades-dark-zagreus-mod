@@ -145,7 +145,7 @@
       ChargeFx = "null"
       // FireGraphic = "ZagreusSwordAttack2"
       FireGraphic = "null"
-      FireFx = "SwordSwipeB"
+      FireFx = "null"
       // BlockMoveInput = false
       // ForceReleaseOnSwap = true
       // CancelMovement = false
@@ -265,7 +265,7 @@
       ChargeStartAnimation = "null"
       ChargeFx = "null"
       FireGraphic = "null"
-      FireFx = "SwordSwipeC"
+      FireFx = "null"
       // ChargeTime = 0.3
       SelfVelocity = 1000 // originally is 600.0, but it does not working
       SelfVelocityCap = 1000 // 600
