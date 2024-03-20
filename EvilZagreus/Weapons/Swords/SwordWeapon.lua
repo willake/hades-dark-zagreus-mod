@@ -13,7 +13,8 @@ WeaponData.DarkSword =
         ChainedWeapon = "DarkSword2",
         -- PreFireDuration = 0.25,
         -- PreFireAnimation = "ZagreusSwordCharge1",
-        WaitUntilProjectileDeath = true
+        -- WaitUntilProjectileDeath = true
+        FireDuration = 0.2,
     },
 
     CauseImpactReaction = true,
@@ -74,10 +75,14 @@ WeaponData.DarkSword2 =
         -- AIAngleTowardsPlayerWhileFiring = true,
         -- AITrackTargetDuringCharge = true,
         -- AIMoveWithinRangeTimeout = 1.0,
-        ChainedWeapon = "DarkSword3",
+        FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        WaitUntilProjectileDeath = true
+        -- WaitUntilProjectileDeath = true,
+        ChainedWeapon = "DarkSword3",
+        PreFireDuration = 0.2, -- 0.3
+        PreFireAnimation = "ZagreusSwordCharge2",
+        FireAnimation = "ZagreusSwordAttack2"
     },
 
     Sounds =
@@ -127,9 +132,15 @@ WeaponData.DarkSword3 =
         -- AIAngleTowardsPlayerWhileFiring = true,
         -- AITrackTargetDuringCharge = true,
         -- AIMoveWithinRangeTimeout = 1.0,
+        FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        WaitUntilProjectileDeath = true
+        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.3,
+        PreFireAnimation = "ZagreusSwordCharge3",
+        PreFireFx = "ChargeAttack",
+        PreFireSound = "/Leftovers/SFX/AuraCharge",
+        FireAnimation = "ZagreusSwordAttack3"
     },
 
     Sounds =
@@ -180,6 +191,7 @@ WeaponData.DarkSwordDash =
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
         -- FireDuration = 0.8,
         -- PostAttackDuration = 0,
+        FireDuration = 0.3,
         AIAttackDistance = 500,
         AIBufferDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
@@ -240,6 +252,7 @@ WeaponData.DarkSwordParry =
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
         -- FireDuration = 0.8,
         -- PostAttackDuration = 0,
+        FireDuration = 0.5,
         AIAttackDistance = 175,
         AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,

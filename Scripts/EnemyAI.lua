@@ -243,7 +243,7 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
     end
 
-    if weaponAIData.PreAttackSound then
+    if weaponAIData.PreFireSound then
         PlaySound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     end
 
@@ -256,7 +256,7 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
     end
 
-    if weaponAIData.PreAttackSound then
+    if weaponAIData.PreFireSound then
         StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     end
 
@@ -269,7 +269,7 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
     -- Fire
 
     if weaponAIData.FireAnimation then
-        SetAnimation({ DestinationId = animationId, Name = weaponAIData.FireAnimation })
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
     end
 
     if weaponAIData.FireFxOnSelf then
@@ -282,12 +282,12 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
 
     FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
     
-    if weaponAIData.WaitUntilProjectileDeath then
+    if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
 		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
 		waitUntil( enemy.AINotifyName )
 	else
-		wait( CalcEnemyWait( enemy, weaponAIData.FireDuration, { MinWaitTime = weaponAIData.FireDurationMinWaitTime }), enemy.AIThreadName )
+		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
 
     if weaponAIData.FireFxOnSelf then
