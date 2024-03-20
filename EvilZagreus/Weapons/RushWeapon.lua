@@ -1,8 +1,8 @@
 DebugPrint({ Text = "Load RushWeapon" })
 
-WeaponData.EnemyRushWeapon =
+WeaponData.DarkRush =
 {
-    Name = "EnemyRushWeapon",
+    Name = "DarkRush",
     IgnoreCancelSimOnEffects = { "RushWeaponDisable", "RushWeaponDisableCancelable" },
     --[[
     CancelEffectSimSlowParameters =
@@ -28,13 +28,6 @@ WeaponData.EnemyRushWeapon =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-    },
-
-    CompleteObjectivesOnFire = { "RushWeapon", "RushWeaponGilgamesh" },
-
-    FireRumbleParameters =
-    {
-        --{ ScreenPreWait = 0.02, Fraction = 0.125, Duration = 0.1 },
     },
 
     SimSlowBlur =

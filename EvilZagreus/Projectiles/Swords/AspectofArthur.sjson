@@ -134,5 +134,12 @@
             ]
 		}
 	}
+	{
+      Name = "DarkArthurSwordParry"
+      InheritFrom = "DarkSwordParry"
+	  DamageLow = 10 // 70
+      DamageHigh = 10 // 70
+	  DetonateGraphic = "RadialNovaSwordParry-Arthur"
+	}
   ]
 }

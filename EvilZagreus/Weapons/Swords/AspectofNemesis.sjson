@@ -10,14 +10,14 @@
     {
       Name = "DarkNemesisSword2"
       InheritFrom = "DarkSword2"
-      ChargeStartAnimation = "ZagreusSwordAlt01Charge2"
-      FireGraphic = "ZagreusSwordAlt01Attack2"
+      // ChargeStartAnimation = "ZagreusSwordAlt01Charge2"
+      // FireGraphic = "ZagreusSwordAlt01Attack2"
     }
     {
       Name = "DarkNemesisSword3"
       InheritFrom = "DarkSword3"
-      ChargeStartAnimation = "ZagreusSwordAlt01Charge3"
-      FireGraphic = "ZagreusSwordAlt01Attack3"
+      // ChargeStartAnimation = "ZagreusSwordAlt01Charge3"
+      // FireGraphic = "ZagreusSwordAlt01Attack3"
     }
     {
       Name = "DarkNemesisSwordDash"

@@ -9,7 +9,7 @@ UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
 UnitSetData.Enemies.Hades.AIStages = 
 {
     {
-        RandomAIFunctionNames = { "AttackerAI" },
+        RandomAIFunctionNames = { "DarkZagreusAI" },
         SelectPactLevelAIStage = "PactDataStage0",
         AIData =
         {
