@@ -160,8 +160,7 @@ WeaponData.DarkSwordDash =
         AIBufferDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true
+        AIMoveWithinRangeTimeout = 1.0
     },
 
     Sounds =
