@@ -1,25 +1,19 @@
-DebugPrint({ Text = "Load SwordWeapon" })
+DebugPrint({ Text = "Load DarkSword" })
 
 WeaponData.DarkSword =
 {
     Name = "DarkSword",
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
-        -- PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        -- FireDuration = 0.8,
-        -- PostAttackDuration = 0,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
+        AIAttackDistance = 300,
+        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
-        -- AITrackTargetDuringCharge = true,
+        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        ChainedWeapon = "DarkSword2"
+        ChainedWeapon = "DarkSword2",
+        -- PreFireDuration = 0.25,
+        -- PreFireAnimation = "ZagreusSwordCharge1",
+        WaitUntilProjectileDeath = true
     },
 
     CauseImpactReaction = true,
@@ -74,15 +68,16 @@ WeaponData.DarkSword2 =
         --PreAttackEndShake = true,
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
         -- FireDuration = 0.8,
-        PostAttackDuration = 0,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
+        -- PostAttackDuration = 0,
+        AIAttackDistance = 9999,
+        AIBufferDistance = 9999,
         -- AIAngleTowardsPlayerWhileFiring = true,
         -- AITrackTargetDuringCharge = true,
         -- AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkSword3",
         SkipMovement = true,
-        SkipAngleTowardTarget = true
+        SkipAngleTowardTarget = true,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -127,13 +122,14 @@ WeaponData.DarkSword3 =
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
         -- FireDuration = 0.8,
         -- PostAttackDuration = 0,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
+        AIAttackDistance = 9999,
+        AIBufferDistance = 9999,
         -- AIAngleTowardsPlayerWhileFiring = true,
         -- AITrackTargetDuringCharge = true,
         -- AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
-        SkipAngleTowardTarget = true
+        SkipAngleTowardTarget = true,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -178,17 +174,18 @@ WeaponData.DarkSwordDash =
         --PreAttackAnimation = "EnemyHydraBite_Charge",
         --FireAnimation = "EnemyHydraBite_Attack",
         --PostAttackAnimation = "EnemyHydraIdle",
-        PreAttackDuration = 0,
+        -- PreAttackDuration = 0,
         --PreAttackEndDuration = 0.5,
         --PreAttackEndShake = true,
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        FireDuration = 0.8,
-        PostAttackDuration = 0,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
+        -- FireDuration = 0.8,
+        -- PostAttackDuration = 0,
+        AIAttackDistance = 500,
+        AIBufferDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -237,17 +234,18 @@ WeaponData.DarkSwordParry =
         --PreAttackAnimation = "EnemyHydraBite_Charge",
         --FireAnimation = "EnemyHydraBite_Attack",
         --PostAttackAnimation = "EnemyHydraIdle",
-        PreAttackDuration = 0,
+        -- PreAttackDuration = 0,
         --PreAttackEndDuration = 0.5,
         --PreAttackEndShake = true,
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        FireDuration = 0.8,
-        PostAttackDuration = 0,
+        -- FireDuration = 0.8,
+        -- PostAttackDuration = 0,
         AIAttackDistance = 175,
         AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        WaitUntilProjectileDeath = true
     },
     
     Sounds =
