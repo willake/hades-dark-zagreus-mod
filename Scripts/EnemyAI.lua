@@ -160,10 +160,6 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
 		end
 	end
 
-    if weaponAIData.AIChargeTargetMarker then
-		CreateTargetMarker( enemy, targetId, weaponAIData )
-	end
-
     if weaponAIData.AITrackTargetDuringCharge then
 		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
 	end
@@ -200,10 +196,6 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
         SetLastActionOnAIState(enemy)
 	end
 
-    if weaponAIData.AIChargeTargetMarker then
-		FinishTargetMarker( enemy )
-	end
-
     local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
     
     return true
@@ -224,9 +216,9 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         return false
     end
 
-    if weaponAIData.AIChargeTargetMarker then
-        FinishTargetMarker( enemy )
-    end
+    -- if weaponAIData.AIChargeTargetMarker then
+    --     FinishTargetMarker( enemy )
+    -- end
 
     if weaponAIData.AIAngleTowardsPlayerWhileFiring then
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
@@ -248,6 +240,10 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         PlaySound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     end
 
+    if weaponAIData.AIChargeTargetMarker then
+		CreateTargetMarker( enemy, targetId, weaponAIData )
+	end
+
     -- wait for charging
     if weaponAIData.PreFireDuration then
         wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
@@ -260,6 +256,10 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
     if weaponAIData.PreFireSound then
         StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     end
+
+    if weaponAIData.AIChargeTargetMarker then
+		FinishTargetMarker( enemy )
+	end
 
     -- Prefire End
 
@@ -279,6 +279,10 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
 
     if weaponAIData.FireFxAtTarget then
         CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    if weaponAIData.FireSound then
+        PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
     end
 
     FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
