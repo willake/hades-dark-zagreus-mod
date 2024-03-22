@@ -5,25 +5,25 @@
       Name = "DarkChironBow"
       InheritFrom = "DarkBow"
       Projectile = "DarkChironBow"
-      ChargeStartAnimation = "ZagreusBowAlt01DashStart"
-      FireGraphic = "ZagreusBowAlt01DashFire"
-      ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+      ChargeCancelGraphic = "null"
     }
     {
       Name = "DarkChironBowDash"
       InheritFrom = "DarkBowDash"
       Projectile = "DarkChironBowDash"
-      ChargeCancelGraphic = "ZagreusBowAlt01StartCancel"
-      ChargeStartAnimation = "ChargeStartAnimation"
-      FireGraphic = "ZagreusBowAlt01Fire"
+      ChargeCancelGraphic = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
     }
     {
       Name = "DarkChironBowSplitShot"
       InheritFrom = "DarkBowSplitShot"
       Projectile = "DarkChironBowSplitShot"
-      NumProjectiles = 4 // -5
-      ChargeStartAnimation = "ZagreusBowAlt01RapidFire_Start"
-      FireGraphic = "ZagreusBowAlt01RapidFire_Fire"
+      NumProjectiles = 4 // 9 - 5
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
     }
   ]
 }

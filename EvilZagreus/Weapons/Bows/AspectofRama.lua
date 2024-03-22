@@ -3,54 +3,26 @@ DebugPrint({ Text = "Load DarkRamaBow" })
 WeaponData.DarkRamaBow =
 {
     Name = "DarkRamaBow",
-    -- ShortName = "EnemyBowWeapon_Short",
-    -- DashWeapon = "BowWeaponDash",
-    -- SecondaryWeapon = "BowSplitShot",
     RapidDamageType = true,
+
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowRamaHeavyShotStart",
-        FireAnimation = "ZagreusBowRamaHeavyShotFire",
-        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
-        PreAttackDuration = 0.4,
-        PreAttackWaitForAnimation = true,
-        FireDuration = 0.6,
-        -- PostAttackDuration = 2.0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 100,
+        AIAttackDistance = 800,
+        -- AIBufferDistance = 100,
         AIChargeTargetMarker = true,
-        AIAngleTowardsPlayerWhileFiring = true,
+        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-
-        AIFireTicksMin = 1,
-        AIFireTicksMax = 1,
-        AIFireTicksCooldown = 0.6,
-
-        -- MinAttacksBetweenUse = 2,
-
+        FireDuration = 0.425,
+        PreFireDuration = 2.1,
+        PreFireAnimation = "ZagreusBowRamaHeavyShotStart",
+        PreFireFx = "BowChargeRama",
+        PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
+        FireAnimation = "ZagreusBowRamaHeavyShotFire",
+        PreFireCancelAnimation = "ZagreusBowRamaHeavyShotStartCancel",
+        MinChargeStartFx = "BowCharge",
+        MinChargeToFire = 0.2,
     },
-
-    -- ChargeCameraMotion = { ZoomType = "Overshoot", Fraction = 0.95, Duration = 0.6 },
-    -- FireCameraMotion = { ZoomType = "Ease", Fraction = 1.0, Duration = 0.06 },
-
-    --FireScreenshake = { Distance = 2, Speed = 300, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
-    --HitScreenshake = { Distance = 6, Speed = 3000, FalloffSpeed = 0, Duration = 0.1, Angle = 90 },
-
-    --[[
-        HitSimSlowCooldown = 0.3,
-        HitSimSlowParameters =
-        {
-            { ScreenPreWait = 0.04, Fraction = 0.03, LerpTime = 0.0 },
-            { ScreenPreWait = 0.02, Fraction = 0.20, LerpTime = 0.06 },
-            { ScreenPreWait = 0.02, Fraction = 1.00, LerpTime = 0.07 },
-        },
-		]]
-
-    -- FireRumbleParameters =
-    -- {
-    --     { ScreenPreWait = 0.02, RightFraction = 0.15, Duration = 0.15 },
-    -- },
 
     Sounds =
     {
@@ -112,35 +84,26 @@ WeaponData.DarkRamaBow =
 
 WeaponData.DarkRamaBowDash =
 {
+    Name = "DarkRamaBowDash",
     StartingWeapon = false,
-
-    FireRumbleParameters =
-    {
-        { ScreenPreWait = 0.02, RightFraction = 0.15, Duration = 0.15 },
-    },
 
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowRamaDashShot_Start",
-        FireAnimation = "ZagreusBowRamaDashShot_Fire",
-        PreAttackDuration = 0.4,
-        -- FireAnimation = "ZagreusBowFire",
-        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
-        PreAttackWaitForAnimation = true,
-        FireDuration = 0.6,
-        -- PostAttackDuration = 2.0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 100,
-        AIAngleTowardsPlayerWhileFiring = true,
+        AIAttackDistance = 800,
+        -- AIBufferDistance = 100,
+        AIChargeTargetMarker = true,
+        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-
-        AIFireTicksMin = 1,
-        AIFireTicksMax = 1,
-        AIFireTicksCooldown = 0.6,
-
-        -- MinAttacksBetweenUse = 2,
-
+        FireDuration = 0.45,
+        PreFireDuration = 2.1,
+        PreFireAnimation = "ZagreusBowRamaDashShot_Start",
+        PreFireFx = "BowChargeRamaDash",
+        PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
+        FireAnimation = "ZagreusBowRamaDashShot_Fire",
+        PreFireCancelAnimation = "ZagreusBowRamaDashShot_Cancel",
+        MinChargeStartFx = "BowCharge",
+        MinChargeToFire = 0.3,
     },
 
     Sounds =
@@ -190,37 +153,24 @@ WeaponData.DarkRamaBowDash =
 
 WeaponData.DarkRamaBowSplitShot =
 {
+    Name = "DarkRamaBowSplitShot",
     StartingWeapon = false,
-
-    FireRumbleParameters =
-    {
-        { ScreenPreWait = 0.02, LeftFraction = 0.225,  Duration = 0.15 },
-        { ScreenPreWait = 0.17, LeftFraction = 0.225,  Duration = 0.15 },
-        { ScreenPreWait = 0.17, RightFraction = 0.225, Duration = 0.2 },
-        --{ ScreenPreWait = 0.20, RightFraction = 0.6, Duration = 0.3 },
-    },
 
     AIData =
     {
-        -- PreAttackAnimation = "ZagreusBowStart",
-        PreAttackDuration = 0.4,
-        -- FireAnimation = "ZagreusBowFire",
-        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
-        PreAttackWaitForAnimation = true,
-        FireDuration = 0.6,
-        -- PostAttackDuration = 2.0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 100,
-        AIAngleTowardsPlayerWhileFiring = true,
+        AIAttackDistance = 800,
+        -- AIBufferDistance = 100,
+        AIChargeTargetMarker = true,
+        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-
-        AIFireTicksMin = 1,
-        AIFireTicksMax = 1,
-        AIFireTicksCooldown = 0.6,
-
-        -- MinAttacksBetweenUse = 2,
-
+        -- FireDuration = 0.45,
+        PreFireDuration = 0.18,
+        PreFireAnimation = "ZagreusBowRamaRapidLoop_Start",
+        PreFireFx = "BowChargeFast",
+        FireAnimation = "ZagreusBowRamaRapidLoop_Fire",
+        -- FireSound = "/VO/ZagreusEmotes/EmoteRanged",
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =

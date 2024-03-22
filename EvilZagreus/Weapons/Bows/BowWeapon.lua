@@ -3,32 +3,25 @@ DebugPrint({ Text = "Load DarkBow" })
 WeaponData.DarkBow =
 {
     Name = "DarkBow",
-    -- ShortName = "EnemyBowWeapon_Short",
-    -- DashWeapon = "BowWeaponDash",
-    -- SecondaryWeapon = "BowSplitShot",
     RapidDamageType = true,
+
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowStart",
-        FireAnimation = "ZagreusBowFire",
-        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
-        PreAttackDuration = 0.4,
-        PreAttackWaitForAnimation = true,
-        FireDuration = 0.6,
-        -- PostAttackDuration = 2.0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 100,
+        AIAttackDistance = 800,
+        -- AIBufferDistance = 100,
         AIChargeTargetMarker = true,
-        AIAngleTowardsPlayerWhileFiring = true,
+        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-
-        AIFireTicksMin = 1,
-        AIFireTicksMax = 1,
-        AIFireTicksCooldown = 0.6,
-
-        -- MinAttacksBetweenUse = 2,
-
+        FireDuration = 0.425,
+        PreFireDuration = 0.6,
+        PreFireAnimation = "ZagreusBowDashStart",
+        PreFireFx = "BowCharge",
+        PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
+        FireAnimation = "ZagreusBowDashFire",
+        PreFireCancelAnimation = "ZagreusBowDashStartCancel",
+        MinChargeStartFx = "BowCharge",
+        MinChargeToFire = 0.2,
     },
 
     Sounds =
@@ -91,33 +84,23 @@ WeaponData.DarkBowDash =
 {
     StartingWeapon = false,
 
-    FireRumbleParameters =
-    {
-        { ScreenPreWait = 0.02, RightFraction = 0.15, Duration = 0.15 },
-    },
-
     AIData =
     {
-        PreAttackAnimation = "ZagreusBowStart",
-        FireAnimation = "ZagreusBowFire",
-        PreAttackDuration = 0.4,
-        -- FireAnimation = "ZagreusBowFire",
-        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
-        PreAttackWaitForAnimation = true,
-        FireDuration = 0.6,
-        -- PostAttackDuration = 2.0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 100,
-        AIAngleTowardsPlayerWhileFiring = true,
+        AIAttackDistance = 800,
+        -- AIBufferDistance = 100,
+        AIChargeTargetMarker = true,
+        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-
-        AIFireTicksMin = 1,
-        AIFireTicksMax = 1,
-        AIFireTicksCooldown = 0.6,
-
-        -- MinAttacksBetweenUse = 2,
-
+        FireDuration = 0.45,
+        PreFireDuration = 0.4,
+        PreFireAnimation = "ZagreusBowStart",
+        PreFireFx = "BowChargeFast",
+        PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
+        FireAnimation = "ZagreusBowFire",
+        PreFireCancelAnimation = "ZagreusBowStartCancel",
+        MinChargeStartFx = "BowCharge",
+        MinChargeToFire = 0.3,
     },
 
     Sounds =
@@ -169,35 +152,21 @@ WeaponData.DarkBowSplitShot =
 {
     StartingWeapon = false,
 
-    FireRumbleParameters =
-    {
-        { ScreenPreWait = 0.02, LeftFraction = 0.225,  Duration = 0.15 },
-        { ScreenPreWait = 0.17, LeftFraction = 0.225,  Duration = 0.15 },
-        { ScreenPreWait = 0.17, RightFraction = 0.225, Duration = 0.2 },
-        --{ ScreenPreWait = 0.20, RightFraction = 0.6, Duration = 0.3 },
-    },
-
     AIData =
     {
-        -- PreAttackAnimation = "ZagreusBowStart",
-        PreAttackDuration = 0.4,
-        -- FireAnimation = "ZagreusBowFire",
-        -- PostAttackAnimation = "EnemyHydraRangedPostAttack",
-        PreAttackWaitForAnimation = true,
-        FireDuration = 0.6,
-        -- PostAttackDuration = 2.0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 100,
-        AIAngleTowardsPlayerWhileFiring = true,
+        AIAttackDistance = 800,
+        -- AIBufferDistance = 100,
+        AIChargeTargetMarker = true,
+        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-
-        AIFireTicksMin = 1,
-        AIFireTicksMax = 1,
-        AIFireTicksCooldown = 0.6,
-
-        -- MinAttacksBetweenUse = 2,
-
+        -- FireDuration = 0.45,
+        PreFireDuration = 0.1,
+        PreFireAnimation = "ZagreusBowRapidFire_Start",
+        PreFireFx = "BowChargeFast",
+        FireAnimation = "ZagreusBowRapidFire_Fire",
+        FireSound = "/VO/ZagreusEmotes/EmoteRanged",
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =

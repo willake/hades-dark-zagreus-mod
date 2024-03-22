@@ -5,22 +5,24 @@
       Name = "DarkHeraBow"
       InheritFrom = "DarkBow"
       Projectile = "DarkHeraBow"
-      ChargeCancelGraphic = "ZagreusBowAlt02StartCancel"
+      ChargeCancelGraphic = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
     }
     {
       Name = "DarkHeraBowDash"
       InheritFrom = "DarkBowDash"
       Projectile = "DarkHeraBowDash"
-      ChargeCancelGraphic = "ZagreusBowAlt02StartCancel"
-      ChargeStartAnimation = "ZagreusBowAlt02Start"
-      FireGraphic = "ZagreusBowAlt02Fire"
+      ChargeCancelGraphic = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
     }
     {
       Name = "DarkHeraBowSplitShot"
       InheritFrom = "DarkBowSplitShot"
       Projectile = "DarkHeraBowSplitShot"
-      ChargeStartAnimation = "ZagreusBowAlt02RapidFire_Start"
-      FireGraphic = "ZagreusBowAlt02RapidFire_Fire"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
     }
   ]
 }
