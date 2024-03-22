@@ -3,10 +3,8 @@ DebugPrint({ Text = "Load DarkBow" })
 WeaponData.DarkBow =
 {
     Name = "DarkBow",
-    -- ShortName = "EnemyBowWeapon_Short",
-    -- DashWeapon = "BowWeaponDash",
-    -- SecondaryWeapon = "BowSplitShot",
     RapidDamageType = true,
+
     AIData =
     {
         AIAttackDistance = 800,
@@ -166,7 +164,6 @@ WeaponData.DarkBowSplitShot =
         PreFireDuration = 0.1,
         PreFireAnimation = "ZagreusBowRapidFire_Start",
         PreFireFx = "BowChargeFast",
-        PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
         FireAnimation = "ZagreusBowRapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
         WaitUntilProjectileDeath = true

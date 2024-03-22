@@ -5,15 +5,15 @@
       Name = "DarkRamaBow"
       InheritFrom = "DarkBow"
       Projectile = "DarkRamaBow"
-      ChargeTime = 2.1
-      MinChargeToFire = 0.13
+      // ChargeTime = 2.1
+      // MinChargeToFire = 0.13
       ChargeDamageMultiplier = 2.0 // multiply
       PerfectChargeDamageMultiplier = 1.25 // multiply
       ChargeRangeMultiplier = 1.15 // multiple
-      MinChargeStartFx = "BowChargeRama"
-      ChargeStartAnimation = "ZagreusBowRamaHeavyShotStart"
-      FireGraphic = "ZagreusBowRamaHeavyShotFire"
-      ChargeCancelGraphic = "ZagreusBowRamaHeavyShotStartCancel"
+      MinChargeStartFx = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+      ChargeCancelGraphic = "null"
       Effects = [
         {
           Trigger = "Charging"
@@ -102,10 +102,10 @@
       ChargeDamageMultiplier = 2.0 // multiply
       PerfectChargeDamageMultiplier = 1.25 // multiply
       ChargeRangeMultiplier = 1.15 // multiple
-      ChargeStartFx = "BowChargeRamaDash"
-      ChargeStartAnimation = "ZagreusBowRamaDashShot_Start"
-      FireGraphic = "ZagreusBowRamaDashShot_Fire"
-      ChargeCancelGraphic = "ZagreusBowRamaDashShot_Cancel"
+      ChargeStartFx = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+      ChargeCancelGraphic = "null"
       Effects = [
         {
           Trigger = "Charging"
@@ -158,13 +158,13 @@
       Projectile = "DarkRamaBowSplitShot"
       ProjectileAngleOffsetMin = -0.06981 // -1 * math.rad(4)
       ProjectileAngleOffsetMax =  0.06981 // math.rad(4)
-      ProjectileAngleOffset = 0
+      ProjectileAngleOffset = 0.06981 
       NumProjectiles = 3
       ProjectileInterval = 0.045 // 0.03 * 1.5
       ChargeTime = 0.18
-      AutoLock = true
-      AutoLockRange = 1000
-      AutoLockArcDistance = 1.5708
+      // AutoLock = true
+      // AutoLockRange = 1000
+      // AutoLockArcDistance = 1.5708
       ChargeStartAnimation = "ZagreusBowRamaRapidLoop_Start"
       FireGraphic = "ZagreusBowRamaRapidLoop_Fire"
     //   LockTriggerForCharge = true
