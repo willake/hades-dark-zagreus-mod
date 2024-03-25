@@ -58,9 +58,9 @@ WeaponData.DarkAchillesSpear =
 		},
 }
 
-WeaponData.DarkSpear2 =
+WeaponData.DarkAchillesSpear2 =
 	{
-		Name = "DarkSpear2",
+		Name = "DarkAchillesSpear2",
 
 		AIData =
 		{
@@ -98,9 +98,9 @@ WeaponData.DarkSpear2 =
 
 }
 
-WeaponData.DarkSpear3 =
+WeaponData.DarkAchillesSpear3 =
 	{
-		Name = "DarkSpear3",
+		Name = "DarkAchillesSpear3",
 
 		AIData =
 		{
@@ -138,7 +138,7 @@ WeaponData.DarkSpear3 =
 		},
 }
 
-WeaponData.DarkSpearDash =
+WeaponData.DarkAchillesSpearDash =
 	{
 		Name = "DarkSpearDash",
 
@@ -281,66 +281,6 @@ WeaponData.DarkSpearThrowReturn =
 		Upgrades = { },
 	}
 
-WeaponData.DarkSpearThrowInvisibleReturn =
-	{
-		Name = "DarkSpearThrowInvisibleReturn",
-		InheritFrom = { "DarkSpearThrowReturn" },
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 600,
-			AIBufferDistance = 600,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		CompleteObjectivesOnFire = {},
-	}
-
-WeaponData.DarkSpearThrowImmolation =
-	{
-		Name = "DarkSpearThrowImmolation",
-		InheritFrom = { "DarkSpearSpin" },
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/SFX/Player Sounds/ZagreusSpearSwipe" },
-				{ Name = "/SFX/Enemy Sounds/Megaera/MegaeraRapidEnergyBlastFire" }
-			},
-			ImpactSounds =
-			{
-				Invulnerable = "/SFX/SwordWallHitClank",
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/MetalBoneSmash",
-				Brick = "/SFX/MetalStoneClang",
-				Stone = "/SFX/MetalStoneClang",
-				Organic = "/SFX/StabSplatterSmall",
-				StoneObstacle = "/SFX/SwordWallHitClank",
-				BrickObstacle = "/SFX/SwordWallHitClank",
-				MetalObstacle = "/SFX/SwordWallHitClank",
-				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
-			}
-		}
-	}
-
 WeaponData.DarkSpearSpin =
 	{
 		Name = "DarkSpearSpin",
@@ -397,76 +337,3 @@ WeaponData.DarkSpearSpin =
 
 		Upgrades = { },
 	}
-
-WeaponData.DarkSpearSpinExplosiveChargeWeapon =
-	{
-		Name = "DarkSpearSpinExplosiveChargeWeapon",
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		Sounds =
-		{
-			ImpactSounds =
-			{
-				Invulnerable = "/SFX/SwordWallHitClank",
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/MetalBoneSmash",
-				Brick = "/SFX/MetalStoneClang",
-				Stone = "/SFX/MetalStoneClang",
-				Organic = "/SFX/StabSplatterSmall",
-				StoneObstacle = "/SFX/SwordWallHitClank",
-				BrickObstacle = "/SFX/SwordWallHitClank",
-				MetalObstacle = "/SFX/SwordWallHitClank",
-				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
-			},
-		}
-	}
-
-WeaponData.DarkSpearRush = 
-    {
-        Name = "DarkSpearRush",
-		-- FailToFireFunctionName = "SetSpearTeleportBuffer",
-
-		SimSlowBlur =
-		{
-			Strength = 0.3,
-			Distance = 1.6,
-			FXInTime = 0.06,
-			FXHoldTime = 0.4,
-			FXOutTime = 0.4,
-		},
-
-		SkipAttackNotReadySounds = true,
-        Sounds =
-        {
-            FireSounds =
-            {
-                { Name = "/VO/ZagreusEmotes/EmoteAttacking_DashUppercut" },
-                { Name = "/SFX/Enemy Sounds/Hades/HadesDash" },
-                { Name = "/Leftovers/World Sounds/QuickSnap" },
-            },
-            ImpactSounds =
-            {
-                Invulnerable = "/SFX/SwordWallHitClank",
-                Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-                Bone = "/SFX/FistImpactSmall",
-                Brick = "/SFX/FistImpactSmall",
-                Stone = "/SFX/FistImpactSmall",
-                Organic = "/SFX/FistImpactSmall",
-            },
-        },
-
-		NoExpressiveAnim = true,
-
-		-- Upgrades = { },
-    }

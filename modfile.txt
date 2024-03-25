@@ -4,6 +4,7 @@ Import "main.lua"
 
 To "Scripts/EnemyAI.lua"
 Import "Scripts/EnemyAI.lua"
+Import "Scripts/EnemySpearAI.lua"
 
 To "Scripts/EnemyData.lua"
 Import "Scripts/EnemyData.lua"

@@ -4,23 +4,22 @@ WeaponData.DarkSpear =
 	{
 		Name = "DarkSpear",
 		-- DashSwaps = { "SpearWeapon", "SpearWeapon2", "SpearWeapon3", },
-		-- ExpireDashWeaponOnDash = true,
-		-- SecondaryWeapon = "SpearWeaponThrow",
-		-- ResourceName = "LockKeys",
-		UnlockCost = 4,
-		LockKeyTextOffsetY = -125,
-		--DashWeaponWindow = 0.6,
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			ChainedWeapon = "DarkSpear2",
+			FireDuration = 0.4,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+			}
 		},
 
 		Sounds =
@@ -64,14 +63,19 @@ WeaponData.DarkSpear2 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			SkipMovement = true,
+			SkipAngleTowardTarget = true,
+			ChainedWeapon = "DarkSpear3",
+			FireDuration = 0.4,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+			}
 		},
 
 		Sounds =
@@ -104,14 +108,20 @@ WeaponData.DarkSpear3 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
+			SkipAngleTowardTarget = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.4,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+			}
 		},
 
 		Sounds =
@@ -144,14 +154,15 @@ WeaponData.DarkSpearDash =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
+			SkipAngleTowardTarget = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			ChainedWeapon = "DarkSpear2",
+			FireDuration = 0.425,
 		},
 
 		Sounds =
@@ -184,22 +195,13 @@ WeaponData.DarkSpearThrow =
 
 		AIData =
 		{
-			FireAnimation = "ZagreusSpearThrowFireReturn",
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			ChainedWeapon = "DarkSpearThrowReturn",
+			FireDuration = 0.2,
 		},
 
 		Sounds =
@@ -246,25 +248,14 @@ WeaponData.DarkSpearThrowReturn =
 
 		AIData =
 		{
-			PreAttackAnimation = "ZagreusSpearThrowCharge",
-			FireAnimation = "ZagreusSpearThrowFire",
-			PreAttackDuration = 0.4,
-			PreAttackWaitForAnimation = true,
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
+			SkipAngleTowardTarget = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.425,
 		},
 
 		Sounds =
@@ -295,66 +286,6 @@ WeaponData.DarkSpearThrowReturn =
 		Upgrades = { },
 	}
 
-WeaponData.DarkSpearThrowInvisibleReturn =
-	{
-		Name = "DarkSpearThrowInvisibleReturn",
-		InheritFrom = { "DarkSpearThrowReturn" },
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 600,
-			AIBufferDistance = 600,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		CompleteObjectivesOnFire = {},
-	}
-
-WeaponData.DarkSpearThrowImmolation =
-	{
-		Name = "DarkSpearThrowImmolation",
-		InheritFrom = { "DarkSpearSpin" },
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/SFX/Player Sounds/ZagreusSpearSwipe" },
-				{ Name = "/SFX/Enemy Sounds/Megaera/MegaeraRapidEnergyBlastFire" }
-			},
-			ImpactSounds =
-			{
-				Invulnerable = "/SFX/SwordWallHitClank",
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/MetalBoneSmash",
-				Brick = "/SFX/MetalStoneClang",
-				Stone = "/SFX/MetalStoneClang",
-				Organic = "/SFX/StabSplatterSmall",
-				StoneObstacle = "/SFX/SwordWallHitClank",
-				BrickObstacle = "/SFX/SwordWallHitClank",
-				MetalObstacle = "/SFX/SwordWallHitClank",
-				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
-			}
-		}
-	}
-
 WeaponData.DarkSpearSpin =
 	{
 		Name = "DarkSpearSpin",
@@ -365,14 +296,17 @@ WeaponData.DarkSpearSpin =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			FireDuration = 0.4,
+			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			PreFireDuration = 0.26,
+			PreFireAnimation = "ZagreusSpearSpinStart",
+            PreFireCancelAnimation = "ZagreusSpearSpinStartChargeCancel",
+            FireAnimation = "ZagreusSpearSpinAttack",
+			IsChargable = true,
+			MaxChargeTime = 1.16, -- 0.26 + 0.9
 		},
 
 		Sounds =
@@ -410,40 +344,6 @@ WeaponData.DarkSpearSpin =
 		},
 
 		Upgrades = { },
-	}
-
-WeaponData.DarkSpearSpinExplosiveChargeWeapon =
-	{
-		Name = "DarkSpearSpinExplosiveChargeWeapon",
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		Sounds =
-		{
-			ImpactSounds =
-			{
-				Invulnerable = "/SFX/SwordWallHitClank",
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/MetalBoneSmash",
-				Brick = "/SFX/MetalStoneClang",
-				Stone = "/SFX/MetalStoneClang",
-				Organic = "/SFX/StabSplatterSmall",
-				StoneObstacle = "/SFX/SwordWallHitClank",
-				BrickObstacle = "/SFX/SwordWallHitClank",
-				MetalObstacle = "/SFX/SwordWallHitClank",
-				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
-			},
-		}
 	}
 
 WeaponData.DarkSpearRush =
