@@ -58,16 +58,16 @@ function DoSpearAILoop(enemy, currentRun, targetId)
 
         -- Attack
 		local attackSuccess = false
-        attackSuccess = DoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
-		-- while not attackSuccess do
-		-- 	attackSuccess = DoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
-            -- if not attackSuccess then
-			-- 	enemy.AINotifyName = "CanAttack"..enemy.ObjectId
-			-- 	NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
-			-- 	waitUntil( enemy.AINotifyName )
-			-- end
-		-- end
+        while not attackSuccess do
+            attackSuccess = DoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+
+            if not attackSuccess then
+				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
+				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
+				waitUntil( enemy.AINotifyName )
+			end
+        end
     end
 
     return true
@@ -125,6 +125,7 @@ function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     --         enemy.WeaponName = enemy.ComboWeapon
     --     end
     -- end
+
     if not FireDarkWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
@@ -264,6 +265,7 @@ function SelectSpearWeapon(enemy, actionData)
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.IsSpearThrown = false
+            enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
@@ -271,15 +273,11 @@ function SelectSpearWeapon(enemy, actionData)
         if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
             enemy.LastAction = "DashAttack"
             enemy.WeaponName = enemy.DashAttackWeapon
+            enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         enemy.LastAction = "Attack"
-
-        -- spear will charge after primary attack
-        -- if enemy.PostPrimaryChargeWeapon ~= nil then
-        --     enemy.PostPrimaryChargeWeapon = enemy.PostPrimaryChargeWeapon
-        -- end
 
         -- if the last action is also attack, do weapon combo
         if enemy.AIState.IsLastActionAttack > 0 then
@@ -292,6 +290,7 @@ function SelectSpearWeapon(enemy, actionData)
 
         -- or just do a regular attack
         enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
@@ -300,12 +299,14 @@ function SelectSpearWeapon(enemy, actionData)
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.IsSpearThrown = false
+            enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.IsSpearThrown = true
+        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
@@ -313,6 +314,7 @@ function SelectSpearWeapon(enemy, actionData)
     if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
         enemy.LastAction = "Dash"
         enemy.WeaponName = enemy.DashWeapon
+        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 

@@ -159,7 +159,7 @@
             InheritFrom = "DarkSpear"
             //   SwapOnFire = "SpearWeapon3"
             Projectile = "DarkSpearTwoThree"
-            ControlWindow = 0.5
+            // ControlWindow = 0.5
             ChargeStartAnimation = "ZagreusSpearCharge2"
             FireGraphic = "ZagreusSpearAttack2"
             ChargeTimeFrames = 5
