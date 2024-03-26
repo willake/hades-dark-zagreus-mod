@@ -19,7 +19,8 @@ WeaponData.DarkSpear =
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
 				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
 				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
-			}
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -74,7 +75,8 @@ WeaponData.DarkSpear2 =
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
 				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
 				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
-			}
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -112,13 +114,14 @@ WeaponData.DarkSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.3,
+			FireDuration = 0.425,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
 				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
 				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
-			}
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -300,8 +303,6 @@ WeaponData.DarkSpearSpin =
 			PreFireAnimation = "ZagreusSpearSpinStart",
             PreFireCancelAnimation = "ZagreusSpearSpinStartChargeCancel",
             FireAnimation = "ZagreusSpearSpinAttack",
-			IsChargable = true,
-			MaxChargeTime = 1.16, -- 0.26 + 0.9
 		},
 
 		Sounds =
@@ -339,6 +340,16 @@ WeaponData.DarkSpearSpin =
 		},
 
 		Upgrades = { },
+	}
+
+WeaponData.DarkSpearSpin2 =
+	{
+		InheritFrom = { "DarkSpearSpin" }
+	}
+
+WeaponData.DarkSpearSpin3 =
+	{
+		InheritFrom = { "DarkSpearSpin" }
 	}
 
 WeaponData.DarkSpearRush =

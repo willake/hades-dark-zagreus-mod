@@ -379,17 +379,19 @@
             ClipSize = 1
             RootOwnerWhileFiring = true
             BarrelLength = 100
-            // ChargeStartAnimation = "ZagreusSpearSpinStart"
-            // ChargeCancelGraphic = "ZagreusSpearSpinStartChargeCancel"
-            // FireGraphic = "ZagreusSpearSpinAttack"
             NumProjectiles = 1
             MinChargeToFire = 1.0
-            ChargeTime = 0.26
+            // ChargeTime = 0.26
             ChargeRumbleRight = 0.06
             ChargeFx = "null"
             FireFx = "null"
+            ChargeStartAnimation = "null"
+            FireGraphic = "null"
             SelfVelocity = 0
             SelfVelocityCap = 0
+            // ChargeStartAnimation = "ZagreusSpearSpinStart"
+            // ChargeCancelGraphic = "ZagreusSpearSpinStartChargeCancel"
+            // FireGraphic = "ZagreusSpearSpinAttack"
             // BlockMoveInput = true
             // CancelMovement = true
             // ChargeCancelMovement = true
@@ -484,6 +486,18 @@
                 ExtendDurationOnReapply = true
                 }
             ]
+        }
+        {
+            Name = "DarkSpearSpin2"
+            InheritFrom = "DarkSpearSpin"
+            Projectile = "DarkSpearSpin2"
+            // ChargeTime = 0.0
+            // FireOnRelease = false
+        }
+        {
+            Name = "DarkSpearSpin3"
+            InheritFrom = "DarkSpearSpin2"
+            Projectile = "DarkSpearSpin3"
         }
         {
             Name = "DarkSpearRush"

@@ -225,9 +225,9 @@ WeaponData.DarkAchillesSpearThrow =
 		Upgrades = { },
 	}
 
-WeaponData.DarkSpearThrowReturn =
+WeaponData.DarkAchillesSpearThrowReturn =
 	{
-		Name = "DarkSpearThrowReturn",
+		Name = "DarkAchillesSpearThrowReturn",
 		StartingWeapon = false,
 
 		AIData =
@@ -281,9 +281,9 @@ WeaponData.DarkSpearThrowReturn =
 		Upgrades = { },
 	}
 
-WeaponData.DarkSpearSpin =
+WeaponData.DarkAchillesSpearSpin =
 	{
-		Name = "DarkSpearSpin",
+		Name = "DarkAchillesSpearSpin",
 		StartingWeapon = false,
 
 		CauseImpactReaction = true,

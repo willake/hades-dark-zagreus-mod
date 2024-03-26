@@ -126,7 +126,7 @@ function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     --     end
     -- end
 
-    if not FireDarkWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not FireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
     enemy.AIState.LastActionTime = _worldTime
@@ -138,11 +138,11 @@ function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 end
 
 function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local fireTicks = weaponAIData.FireTicks or 1
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
         chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
+        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -206,24 +206,31 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire end
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
+
+    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+		weaponAIData.ForcedEarlyExit = true
+		return true
+	end
+
+    Stop({ Id = enemy.ObjectId })
 
     -- PostAttackCharge
     -- Only spear weapons have this
     -- Spear will charge after attack if player still holding the button
     if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.0 then
         local chargeWeaponAIData = 
-        DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[0].ChargeWeapon)
+            DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local stageReached = 0
         local maxStage = #weaponAIData.PostFireChargeStages 
-
+        
+        -- DebugPrintTable("ChargeWeaponAIData", chargeWeaponAIData, 3)
         DoPreFire(enemy, chargeWeaponAIData)
         
         local remainChargeTime = 0.0
-        for stage = 1, maxStage do 
-            DebugPrintf({ Text = "Charging stage " .. stage })
+        for stage = 2, maxStage do 
             local lastStageData = weaponAIData.PostFireChargeStages[stage - 1]
             local stageData = weaponAIData.PostFireChargeStages[stage]
 
@@ -239,6 +246,11 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         end
 
         wait(remainChargeTime, enemy.AIThreadName)
+
+        if chargeWeaponAIData.FireAnimation then
+            SetAnimation({ DestinationId = enemy.ObjectId, Name = chargeWeaponAIData.FireAnimation })
+        end
+
         FireWeaponFromUnit({ Weapon = chargeWeaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
     
         wait(chargeWeaponAIData.FireDuration, enemy.AIThreadName)

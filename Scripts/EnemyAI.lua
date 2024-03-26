@@ -309,7 +309,7 @@ function GetAIActionData(state)
     local chargeTime = 0.0
 
     if r > 0.5 then
-        chargeTime = 0.5 + (math.random() * 0.5)
+        chargeTime = 0.1 + (math.random() * 0.9)
     end
     return 
     {
@@ -318,7 +318,7 @@ function GetAIActionData(state)
         AttackProb = 0.9,
         SpectialAttackProb = 0.05,
         DashProb = 0.05,
-        ChargeTime = 0.0
+        ChargeTime = chargeTime
     }
 end
 
@@ -408,9 +408,9 @@ function DoPreFire(enemy, weaponAIData)
         StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
     end
 
-    if weaponAIData.PreFireSound then
-        StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
-    end
+    -- if weaponAIData.PreFireSound then
+    --     StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
+    -- end
 end
 
 function SetLastActionOnAIState(enemy)
