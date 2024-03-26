@@ -3,9 +3,6 @@ DebugPrint({ Text = "Load DarkAchillesSpear" })
 WeaponData.DarkAchillesSpear =
 	{
 		Name = "DarkAchillesSpear",
-		UnlockCost = 4,
-		LockKeyTextOffsetY = -125,
-		--DashWeaponWindow = 0.6,
 
 		AIData =
 		{
@@ -277,6 +274,12 @@ WeaponData.DarkAchillesSpearThrowReturn =
 		Upgrades = { },
 	}
 
+WeaponData.DarkAchillesSpearThrowInvisibleReturn =
+	{
+		Name = "DarkAchillesSpearThrowInvisibleReturn",
+		InheritFrom = { "DarkAchillesSpearThrowReturn" },
+	}
+
 WeaponData.DarkAchillesSpearSpin =
 	{
 		Name = "DarkAchillesSpearSpin",
@@ -287,14 +290,15 @@ WeaponData.DarkAchillesSpearSpin =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			FireDuration = 0.4,
+			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			PreFireDuration = 0.26,
+			PreFireAnimation = "ZagreusSpearAlt01SpinStart",
+            PreFireCancelAnimation = "ZagreusSpearAlt01SpinStartChargeCancel",
+            FireAnimation = "ZagreusSpearAlt01SpinAttack",
 		},
 
 		Sounds =
@@ -332,4 +336,16 @@ WeaponData.DarkAchillesSpearSpin =
 		},
 
 		Upgrades = { },
+	}
+
+WeaponData.DarkAchillesSpearSpin2 =
+	{
+		Name = "DarkAchillesSpearSpin2",
+		InheritFrom = { "DarkAchillesSpearSpin" }
+	}
+
+WeaponData.DarkAchillesSpearSpin3 =
+	{
+		Name = "DarkAchillesSpearSpin3",
+		InheritFrom = { "DarkAchillesSpearSpin" }
 	}

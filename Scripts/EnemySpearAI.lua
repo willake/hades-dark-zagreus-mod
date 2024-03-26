@@ -183,7 +183,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 		return true
 	end
 
-    Stop({ Id = enemy.ObjectId })
+    -- Stop({ Id = enemy.ObjectId })
 
     -- PostAttackCharge
     -- Only spear weapons have this

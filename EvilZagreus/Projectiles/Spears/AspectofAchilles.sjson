@@ -16,14 +16,16 @@
             DamageHigh = 10 // 30
         }
         {
-            Name = "DarkAchillesSpearLunarThree"
-            InheritFrom = "DarkAchillesSpear"
-            DamageLow = 10 // 70
-            DamageHigh = 10 // 70
-        }
-        {
             Name = "DarkAchillesSpearSpin"
             InheritFrom = "DarkSpearSpin"
+        }
+        {
+            Name = "DarkAchillesSpearSpin2"
+            InheritFrom = "DarkAchillesSpearSpin"
+        }
+        {
+            Name = "DarkAchillesSpearSpin3"
+            InheritFrom = "DarkAchillesSpearSpin"
         }
         {
             Name = "DarkAchillesSpearThrow"
@@ -35,6 +37,10 @@
         {
             Name = "DarkAchillesSpearThrowReturn"
             InheritFrom = "DarkSpearThrowReturn"
+        }
+        {
+            Name = "DarkAchillesSpearThrowInvisibleReturn"
+            InheritFrom = "DarkAchillesSpearThrowReturn"
         }
         {
             Name = "DarkAchillesSpearRush"
