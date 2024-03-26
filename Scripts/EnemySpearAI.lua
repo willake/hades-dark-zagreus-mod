@@ -170,39 +170,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire
 
-    if weaponAIData.FireAnimation then
-        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
-    end
-
-    if weaponAIData.FireFxOnSelf then
-        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
-    end
-
-    if weaponAIData.FireFxAtTarget then
-        CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
-    end
-
-    if weaponAIData.FireSound then
-        PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
-    end
-
-    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
-    
-    if weaponAIData.WaitUntilProjectileDeath ~= nil then
-		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
-		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
-		waitUntil( enemy.AINotifyName )
-	else
-		wait( weaponAIData.FireDuration, enemy.AIThreadName )
-	end
-
-    if weaponAIData.FireFxOnSelf then
-        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
-    end
-
-    if weaponAIData.FireFxAtTarget then
-        StopAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
-    end
+    DoRegularFire(enemy, weaponAIData)
 
     -- Fire end
 
@@ -247,13 +215,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
         wait(remainChargeTime, enemy.AIThreadName)
 
-        if chargeWeaponAIData.FireAnimation then
-            SetAnimation({ DestinationId = enemy.ObjectId, Name = chargeWeaponAIData.FireAnimation })
-        end
-
-        FireWeaponFromUnit({ Weapon = chargeWeaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
-    
-        wait(chargeWeaponAIData.FireDuration, enemy.AIThreadName)
+        DoRegularFire(enemy, chargeWeaponAIData)
     end
     
 

@@ -378,8 +378,8 @@ function SelectDarkWeapon(enemy, actionData)
     return nil
 end
 
--- Prefire Related
--- pre fire means the animation that plays before attack,
+-- Prefire
+-- pre-fire means the animation that plays before attack,
 -- which you can clearly see that the character is going to attack
 function DoPreFire(enemy, weaponAIData)
 
@@ -411,6 +411,77 @@ function DoPreFire(enemy, weaponAIData)
     -- if weaponAIData.PreFireSound then
     --     StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     -- end
+end
+
+function DoRegularFire(enemy, weaponAIData)
+    if weaponAIData.FireAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
+    end
+
+    if weaponAIData.FireFxOnSelf then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+
+    if weaponAIData.FireFxAtTarget then
+        CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    if weaponAIData.FireSound then
+        PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
+    end
+
+    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    
+    if weaponAIData.WaitUntilProjectileDeath ~= nil then
+		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		waitUntil( enemy.AINotifyName )
+	else
+		wait( weaponAIData.FireDuration, enemy.AIThreadName )
+	end
+
+    if weaponAIData.FireFxOnSelf then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+end
+
+-- Do fire that distance will vary by how much player charged
+function DoChargeDistanceFire(enemy, weaponAIData, percentageCharged)
+    if weaponAIData.FireAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
+    end
+
+    if weaponAIData.FireFxOnSelf then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+
+    if weaponAIData.FireFxAtTarget then
+        CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    if weaponAIData.FireSound then
+        PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
+    end
+
+    -- need to think of a way to modify the distance of the projectile
+    -- local selfLocation = GetLocation({ Id = enemy.ObjectId })
+    -- local targetLocation = GetLocation({ Id = targetId })
+    -- local chargedTarget = 
+    --     SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY })
+
+    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    
+    if weaponAIData.WaitUntilProjectileDeath ~= nil then
+		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		waitUntil( enemy.AINotifyName )
+	else
+		wait( weaponAIData.FireDuration, enemy.AIThreadName )
+	end
+
+    if weaponAIData.FireFxOnSelf then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
 end
 
 function SetLastActionOnAIState(enemy)

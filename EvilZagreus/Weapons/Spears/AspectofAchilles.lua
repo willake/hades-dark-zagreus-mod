@@ -3,10 +3,6 @@ DebugPrint({ Text = "Load DarkAchillesSpear" })
 WeaponData.DarkAchillesSpear =
 	{
 		Name = "DarkAchillesSpear",
-		-- DashSwaps = { "SpearWeapon", "SpearWeapon2", "SpearWeapon3", },
-		-- ExpireDashWeaponOnDash = true,
-		-- SecondaryWeapon = "SpearWeaponThrow",
-		-- ResourceName = "LockKeys",
 		UnlockCost = 4,
 		LockKeyTextOffsetY = -125,
 		--DashWeaponWindow = 0.6,
