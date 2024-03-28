@@ -11,15 +11,9 @@
         }
         {
             Name = "DarkHadesSpearTwoThree"
-            InheritFrom = "DarkAchillesSpear"
+            InheritFrom = "DarkHadesSpear"
             DamageLow = 10 // 30
             DamageHigh = 10 // 30
-        }
-        {
-            Name = "DarkHadesSpearLunarThree"
-            InheritFrom = "DarkAchillesSpear"
-            DamageLow = 10 // 70
-            DamageHigh = 10 // 70
         }
         {
             Name = "DarkHadesSpearSpin"
@@ -27,9 +21,18 @@
             DamageRadius = 309.75 // 210 * 1.475
         }
         {
+            Name = "DarkHadesSpearSpin2"
+            InheritFrom = "DarkSpearSpin"
+            DamageRadius = 481.25 // 350 * 1.375
+        }
+        {
+            Name = "DarkHadesSpearSpin3"
+            InheritFrom = "DarkSpearSpin"
+            DamageRadius = 637.5 // 500 * 1.275
+        }
+        {
             Name = "DarkHadesSpearThrow"
             InheritFrom = "DarkSpearThrow"
-            Range = 264 // 880 * 0.3
             SpawnType = "OBSTACLE"
             SpawnOnDeath = "SpearReturnPointAlt02"
         }

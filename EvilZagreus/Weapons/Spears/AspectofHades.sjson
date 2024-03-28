@@ -3,40 +3,54 @@
 		"_append"
         {
             Name = "DarkHadesSpear"
-            InheritFrom = "DarkSpear"
+            InheritFrom = "DarkHadesSpear"
+            Projectile = "DarkHadesSpear"
             ChargeStartAnimation = "ZagreusSpearAlt02Charge1"
             FireGraphic = "ZagreusSpearAlt02Attack1"
         }
         {
-            Name = "DarkHadesSpearDash"
-            InheritFrom = "DarkSpearDash"
-            ChargeStartAnimation = "ZagreusSpearAlt02DashAttack_Charge"
-            FireGraphic = "ZagreusSpearAlt02DashAttack"
-        }
-        {
             Name = "DarkHadesSpear2"
             InheritFrom = "DarkHadesSpear"
-            Projectile = "DarkSpearTwoThree"
+            Projectile = "DarkHadesSpearTwoThree"
             ChargeStartAnimation = "ZagreusSpearAlt02Charge2"
             FireGraphic = "ZagreusSpearAlt02Attack2"
         }
         {
             Name = "DarkHadesSpear3"
             InheritFrom = "DarkHadesSpear"
-            Projectile = "DarkSpearTwoThree"
+            Projectile = "DarkHadesSpearTwoThree"
             ChargeStartAnimation = "ZagreusSpearAlt02Charge3"
             FireGraphic = "ZagreusSpearAlt02Attack3"
         }
         {
+            Name = "DarkHadesSpearDash"
+            InheritFrom = "DarkSpearDash"
+            Projectile = "DarkHadesSpearDash"
+            ChargeStartAnimation = "ZagreusSpearAlt02DashAttack_Charge"
+            FireGraphic = "ZagreusSpearAlt02DashAttack"
+        }
+        {
             Name = "DarkHadesSpearSpin"
             InheritFrom = "DarkSpearSpin"
-            ChargeStartAnimation = "ZagreusSpearAlt02SpinStart"
-            ChargeCancelGraphic = "ZagreusSpearAlt02SpinStartChargeCancel"
-            FireGraphic = "ZagreusSpearAlt02SpinAttack"
+            Projectile = "DarkHadesSpearSpin"
+            // ChargeStartAnimation = "ZagreusSpearAlt02SpinStart"
+            // ChargeCancelGraphic = "ZagreusSpearAlt02SpinStartChargeCancel"
+            // FireGraphic = "ZagreusSpearAlt02SpinAttack"
+        }
+        {
+            Name = "DarkHadesSpearSpin2"
+            InheritFrom = "DarkHadesSpearSpin"
+            Projectile = "DarkHadesSpearSpin2"
+        }
+        {
+            Name = "DarkHadesSpearSpin3"
+            InheritFrom = "DarkHadesSpearSpin"
+            Projectile = "DarkHadesSpearSpin3"
         }
         {
             Name = "DarkHadesSpearThrow"
             InheritFrom = "DarkSpearThrow"
+            Projectile = "DarkHadesSpearThrow"
             ChargeStartAnimation = "ZagreusSpearAlt02ThrowCharge"
             ChargeCancelGraphic = "ZagreusSpearAlt02ThrowFireReturnToIdle"
             FireGraphic = "ZagreusSpearAlt02ThrowFire"
@@ -44,17 +58,16 @@
         {
             Name = "DarkHadesSpearThrowReturn"
             InheritFrom = "DarkHadesSpearThrow"
+            Projectile = "DarkHadesSpearThrowReturn"
+            FireFromObstacle = "SpearReturnPoint"
+            DestroyTargetedObstacle = true
+            ShowFreeAimLine = false
+            AimLineAnimation = "null"
+            SelfVelocity = 0.0
+            ChargeTimeFrames = 0
+            ChargeStartAnimation = "null"
             FireGraphic = "ZagreusSpearAlt02ThrowFireReturn"
             FireFromObstacle = "SpearReturnPointAlt02"
-        }
-        {
-            Name = "DarkHadesSpearThrowInvisibleReturn"
-            InheritFrom = "DarkSpearThrowInvisibleReturn"
-            FireFromObstacle = "SpearReturnPointAlt02"
-        }
-        {
-            Name = "DarkHadesSpearRush"
-            InheritFrom = "DarkSpearRush"
         }
     ]
 }

@@ -20,6 +20,9 @@
 	end
 end
 
+-- SpearWeaponThrowInvisibleReturn will be trrigger when player touch the dropped spear
+-- not sure how to handle it yet
+
 function DoSpearAILoop(enemy, currentRun, targetId)
     local actionData = GetAIActionData(enemy.AIState)
 
@@ -197,28 +200,44 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
         
-        -- DebugPrintTable("ChargeWeaponAIData", chargeWeaponAIData, 3)
         DoPreFire(enemy, chargeWeaponAIData)
-        
-        local remainChargeTime = 0.0
-        for stage = 2, maxStage do 
-            local lastStageData = weaponAIData.PostFireChargeStages[stage - 1]
-            local stageData = weaponAIData.PostFireChargeStages[stage]
 
-            if chargeTime < stageData.Threshold then
-                remainChargeTime = chargeTime - lastStageData.Threshold
-                break
+        -- if the charge time is larger than the threshold, at least play the first stage
+        if chargeTime > weaponAIData.PostFireChargeStages[1].Threshold then
+        
+            local remainChargeTime = 0.0
+            -- lua array index starts from 1
+            for stage = 1, maxStage do 
+                local lastStageData = nil
+                if state == 1 then
+                    lastStageData = { Threshold = 0.0 }
+                else
+                    lastStageData = weaponAIData.PostFireChargeStages[stage - 1]
+                end
+                local stageData = weaponAIData.PostFireChargeStages[stage]
+
+                if chargeTime < stageData.Threshold then
+                    remainChargeTime = chargeTime - lastStageData.Threshold
+                    break
+                end
+
+                wait(stageData.Threshold, enemy.AIThreadName)
+                PlaySound({ Name = "/Leftovers/SFX/AuraOnLoud" })
+                Flash({ Id = enemy.ObjectId, Speed = 4, MinFraction = 0.5, MaxFraction = 0.6, Color = Color.White, Duration = 0.3 })
+                chargeWeaponAIData = DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[stage].ChargeWeapon)
             end
 
-            wait(stageData.Threshold, enemy.AIThreadName)
-            PlaySound({ Name = "/Leftovers/SFX/AuraOnLoud" })
-            Flash({ Id = enemy.ObjectId, Speed = 4, MinFraction = 0.5, MaxFraction = 0.6, Color = Color.White, Duration = 0.3 })
-            chargeWeaponAIData = DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[stage].ChargeWeapon)
+            wait(remainChargeTime, enemy.AIThreadName)
+
+            DoRegularFire(enemy, chargeWeaponAIData) 
+        -- otherwise, play charge cancel animation
+        else
+            wait(chargeTime, enemy.AIThreadName)
+
+            if chargeWeaponAIData.PreFireCancelAnimation then
+                SetAnimation({ DestinationId = enemy.ObjectId, Name = chargeWeaponAIData.PreFireCancelAnimation })
+            end
         end
-
-        wait(remainChargeTime, enemy.AIThreadName)
-
-        DoRegularFire(enemy, chargeWeaponAIData)
     end
 
     -- Spear will return internally after rush to the spear

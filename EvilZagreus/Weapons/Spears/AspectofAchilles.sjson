@@ -32,16 +32,19 @@
         {
             Name = "DarkAchillesSpearSpin"
             InheritFrom = "DarkSpearSpin"
+            Projectile = "DarkAchillesSpearSpin"
             // ChargeStartAnimation = "ZagreusSpearAlt01SpinStart"
             // ChargeCancelGraphic = "ZagreusSpearAlt01SpinStartChargeCancel"
         }
         {
             Name = "DarkAchillesSpearSpin2"
             InheritFrom = "DarkAchillesSpearSpin"
+            Projectile = "DarkAchillesSpearSpin2"
         }
         {
             Name = "DarkAchillesSpearSpin3"
             InheritFrom = "DarkAchillesSpearSpin"
+            Projectile = "DarkAchillesSpearSpin3"
         }
         {
             Name = "DarkAchillesSpearThrow"
