@@ -315,9 +315,9 @@ function GetAIActionData(state)
     {
         AttackDistance = 175,    
         IsCombo = true,
-        AttackProb = 0.9,
-        SpectialAttackProb = 0.05,
-        DashProb = 0.05,
+        AttackProb = 0.7,
+        SpectialAttackProb = 0.2,
+        DashProb = 0.1,
         ChargeTime = chargeTime
     }
 end
@@ -447,6 +447,7 @@ end
 
 -- Do fire that distance will vary by how much player charged
 function DoChargeDistanceFire(enemy, weaponAIData, percentageCharged)
+    local chargeTime = percentageCharged * weaponAIData.MaxChargeTime
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
     end

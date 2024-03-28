@@ -169,8 +169,12 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     end
 
     -- Fire
-
-    DoRegularFire(enemy, weaponAIData)
+    
+    if weaponAIData.IsRangeBasedOnCharge then
+        DoChargeDistanceFire(enemy, weaponAIData, actionData.ChargeTime)
+    else
+        DoRegularFire(enemy, weaponAIData)
+    end
 
     -- Fire end
 
@@ -178,10 +182,10 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     --     return false
     -- end
 
-    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-		weaponAIData.ForcedEarlyExit = true
-		return true
-	end
+    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+	-- 	weaponAIData.ForcedEarlyExit = true
+	-- 	return true
+	-- end
 
     -- Stop({ Id = enemy.ObjectId })
 
@@ -191,7 +195,6 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.0 then
         local chargeWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
-        local stageReached = 0
         local maxStage = #weaponAIData.PostFireChargeStages 
         
         -- DebugPrintTable("ChargeWeaponAIData", chargeWeaponAIData, 3)
@@ -217,6 +220,23 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
         DoRegularFire(enemy, chargeWeaponAIData)
     end
+
+    -- Spear will return internally after rush to the spear
+    -- while equiping Aspect of Achilles
+    if weaponAIData.PostFireWeapon ~= nil then
+        local postFireWeaponAIData = 
+            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+
+        DoRegularFire(enemy, postFireWeaponAIData)
+    end
+
+    if weaponAIData.WillThrowSpear then
+        enemy.IsSpearThrown = true
+    end
+
+    if weaponAIData.WillReturnSpear then
+        enemy.IsSpearThrown = false
+    end
     
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -238,7 +258,6 @@ function SelectSpearWeapon(enemy, actionData)
 
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
-            enemy.IsSpearThrown = false
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
@@ -271,15 +290,20 @@ function SelectSpearWeapon(enemy, actionData)
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+
+            if enemy.SpecialAttackWeaponRush then
+                enemy.WeaponName = enemy.SpecialAttackWeaponRush
+                enemy.ChainedWeapon = nil
+                return enemy.WeaponName        
+            end
+
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
-            enemy.IsSpearThrown = false
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
-        enemy.IsSpearThrown = true
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end

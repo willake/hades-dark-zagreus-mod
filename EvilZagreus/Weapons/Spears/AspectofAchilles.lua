@@ -6,14 +6,20 @@ WeaponData.DarkAchillesSpear =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			ChainedWeapon = "DarkAchillesSpear2",
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 0.66 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -57,14 +63,19 @@ WeaponData.DarkAchillesSpear2 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			SkipMovement = true,
+			ChainedWeapon = "DarkAchillesSpear3",
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 0.66 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -97,14 +108,19 @@ WeaponData.DarkAchillesSpear3 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -133,18 +149,17 @@ WeaponData.DarkAchillesSpear3 =
 
 WeaponData.DarkAchillesSpearDash =
 	{
-		Name = "DarkSpearDash",
+		Name = "DarkAchillesSpearDash",
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.425,
 		},
 
 		Sounds =
@@ -177,22 +192,21 @@ WeaponData.DarkAchillesSpearThrow =
 
 		AIData =
 		{
-			FireAnimation = "ZagreusSpearThrowFireReturn",
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.5,
+			IsRangeBasedOnCharge = true,
+			MinChargeTime = 0.04,
+			MaxChargeTime = 0.07,
+			WillThrowSpear = true,
+			PreFireDuration = 0.04,
+			PreFireFx = "SpearChargeThrowTrait",
+			PreFireAnimation = "ZagreusSpearAlt01ThrowCharge",
+			PreFireCancelAnimation = "ZagreusSpearAlt01ThrowFireReturnToIdle",
+			FireAnimation = "ZagreusSpearAlt01ThrowFire"
 		},
 
         Sounds =
@@ -225,25 +239,15 @@ WeaponData.DarkAchillesSpearThrowReturn =
 
 		AIData =
 		{
-			PreAttackAnimation = "ZagreusSpearThrowCharge",
-			FireAnimation = "ZagreusSpearThrowFire",
-			PreAttackDuration = 0.4,
-			PreAttackWaitForAnimation = true,
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			-- FireDuration = 0.425,
+			WaitUntilProjectileDeath = true,
+			WillReturnSpear = true
 		},
 
 		Sounds =
@@ -298,7 +302,7 @@ WeaponData.DarkAchillesSpearSpin =
 			PreFireDuration = 0.26,
 			PreFireAnimation = "ZagreusSpearAlt01SpinStart",
             PreFireCancelAnimation = "ZagreusSpearAlt01SpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearAlt01SpinAttack",
+            FireAnimation = "ZagreusSpearAlt01SpinAttack"
 		},
 
 		Sounds =
@@ -348,4 +352,63 @@ WeaponData.DarkAchillesSpearSpin3 =
 	{
 		Name = "DarkAchillesSpearSpin3",
 		InheritFrom = { "DarkAchillesSpearSpin" }
+	}
+
+WeaponData.DarkAchillesSpearRush =
+	{
+		Name = "DarkAchillesSpearRush",
+		-- FailToFireFunctionName = "SetSpearTeleportBuffer",
+
+		SimSlowBlur =
+		{
+			Strength = 0.3,
+			Distance = 1.6,
+			FXInTime = 0.06,
+			FXHoldTime = 0.4,
+			FXOutTime = 0.4,
+		},
+
+		AIData =
+		{
+			FireDuration = 0.4,
+			AIAttackDistance = 1200,
+			SkipMovement = true,
+			-- AIAngleTowardsPlayerWhileFiring = true,
+			-- AITrackTargetDuringCharge = true,
+			AIMoveWithinRangeTimeout = 1.0,
+			WillReturnSpear = true,
+			PostFireWeapon = "DarkAchillesSpearThrowInvisibleReturn"
+		},
+
+		SkipAttackNotReadySounds = true,
+		Sounds =
+		{
+			FireSounds =
+			{
+				{ Name = "/VO/ZagreusEmotes/EmoteEvading" },
+				{ Name = "/SFX/Player Sounds/ZagreusDash" },
+			},
+
+			ImpactSounds =
+			{
+				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+				Bone = "/SFX/FistImpactMedium",
+				Brick = "/SFX/FistImpactMedium",
+				Stone = "/SFX/FistImpactMedium",
+				Organic = "/SFX/FistImpactMedium",
+			},
+
+			CancelEffectSounds =
+			{
+			},
+
+			NearbyEnemyFireSounds =
+			{
+				{ Name = "/Leftovers/Menu Sounds/TitanToggleShort" },
+			},
+		},
+
+		NoExpressiveAnim = true,
+
+		Upgrades = { },
 	}

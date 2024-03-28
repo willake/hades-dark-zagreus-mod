@@ -13,7 +13,7 @@ WeaponData.DarkSpear =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			ChainedWeapon = "DarkSpear2",
-			FireDuration = 0.4,
+			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
@@ -114,7 +114,7 @@ WeaponData.DarkSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.425,
+			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
@@ -160,7 +160,6 @@ WeaponData.DarkSpearDash =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			ChainedWeapon = "DarkSpear2",
 			FireDuration = 0.425,
 		},
 
@@ -199,8 +198,8 @@ WeaponData.DarkSpearThrow =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			ChainedWeapon = "DarkSpearThrowReturn",
 			FireDuration = 0.2,
+			WillThrowSpear = true,
 		},
 
 		Sounds =
@@ -254,6 +253,7 @@ WeaponData.DarkSpearThrowReturn =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.425,
+			WillReturnSpear = true
 		},
 
 		Sounds =
