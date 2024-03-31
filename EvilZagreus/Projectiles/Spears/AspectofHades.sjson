@@ -22,12 +22,12 @@
         }
         {
             Name = "DarkHadesSpearSpin2"
-            InheritFrom = "DarkSpearSpin"
+            InheritFrom = "DarkHadesSpearSpin"
             DamageRadius = 481.25 // 350 * 1.375
         }
         {
             Name = "DarkHadesSpearSpin3"
-            InheritFrom = "DarkSpearSpin"
+            InheritFrom = "DarkHadesSpearSpin"
             DamageRadius = 637.5 // 500 * 1.275
         }
         {

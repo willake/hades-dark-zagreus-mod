@@ -3,31 +3,33 @@ DebugPrint({ Text = "Load DarkGuanYuSpear" })
 WeaponData.DarkGuanYuSpear =
 	{
 		Name = "DarkGuanYuSpear",
-		-- DashSwaps = { "SpearWeapon", "SpearWeapon2", "SpearWeapon3", },
-		-- ExpireDashWeaponOnDash = true,
-		-- SecondaryWeapon = "SpearWeaponThrow",
-		-- ResourceName = "LockKeys",
 		UnlockCost = 4,
 		LockKeyTextOffsetY = -125,
 		--DashWeaponWindow = 0.6,
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			ChainedWeapon = "DarkGuanYuSpear2",
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 0.66 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
 		{
 			FireSounds =
 			{
-				{ Name = "/VO/ZagreusEmotes/EmoteAttacking_Spear" },
+				{ Name = "/VO/ZagreusEmotes/EmoteMartialSpearAttack" },
 				{ Name = "/SFX/Player Sounds/ZagreusSpearThrust" },
 			},
 			ImpactSounds =
@@ -47,14 +49,17 @@ WeaponData.DarkGuanYuSpear =
 
 		WeaponBinks =
 		{
-			"ZagreusSpear_Bink",
-			"ZagreusSpearRun_Bink",
-			"ZagreusSpearReturnToIdle_Bink",
-			"ZagreusSpearSpin_Bink",
-			"ZagreusSpearThrow_Bink",
-			"ZagreusSpearDashAttack_Bink",
-			"ZagreusSpearThrowReceive_Bink",
-			"ZagreusSpearRunStop_Bink",
+			"ZagreusSpear03Run_Bink",
+			"ZagreusSpear03RunStop_Bink",
+			"ZagreusSpear03Spin_Bink",
+			"ZagreusSpear03DashAttack_Bink",
+			"ZagreusSpear03Throw_Bink",
+			"ZagreusSpearLunarThrust1_Bink",
+			"ZagreusSpearLunarThrust2_Bink",
+			"ZagreusSpearLunarThrust3_Bink",
+			"ZagreusSpearLunarThrustIdle_Bink",
+			"ZagreusSpear03ReturnToIdle_Bink",
+			"ZagreusSpear03ThrowReceive_Bink",
 		},
 }
 
@@ -64,21 +69,26 @@ WeaponData.DarkGuanYuSpear2 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			SkipMovement = true,
+			ChainedWeapon = "DarkGuanYuSpear3",
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 0.66 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
 		{
 			FireSounds =
 			{
-				{ Name = "/VO/ZagreusEmotes/EmoteAttacking_Spear" },
+				{ Name = "/VO/ZagreusEmotes/EmotePowerAttacking_Sword" },
 				{ Name = "/SFX/Player Sounds/ZagreusSpearThrust" },
 			},
 			ImpactSounds =
@@ -95,7 +105,6 @@ WeaponData.DarkGuanYuSpear2 =
 				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
 			},
 		},
-
 }
 
 WeaponData.DarkGuanYuSpear3 =
@@ -104,23 +113,27 @@ WeaponData.DarkGuanYuSpear3 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.0 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.33 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 0.66 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
 		{
 			FireSounds =
 			{
-				{ Name = "/VO/ZagreusEmotes/EmoteAttacking_Spear" },
-				{ Name = "/SFX/Player Sounds/ZagreusSpearThrust" },
-				{ Name = "/SFX/Player Sounds/BowFire" },
+				{ Name = "/VO/ZagreusEmotes/EmoteAttacking_FistKick" },
+				{ Name = "/SFX/Player Sounds/ZagreusSwordOverhead" },
 			},
 			ImpactSounds =
 			{
@@ -144,14 +157,13 @@ WeaponData.DarkGuanYuSpearDash =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.425,
 		},
 
 		Sounds =
@@ -184,22 +196,13 @@ WeaponData.DarkGuanYuSpearThrow =
 
 		AIData =
 		{
-			FireAnimation = "ZagreusSpearThrowFireReturn",
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.2,
+			WillThrowSpear = true,
 		},
 
 		Sounds =
@@ -209,16 +212,17 @@ WeaponData.DarkGuanYuSpearThrow =
 				{ Name = "/SFX/Player Sounds/ZagreusBowFire" },
 				{ Name = "/SFX/Player Sounds/ZagreusSpearThrow" },
 				{
-					Name = "/VO/ZagreusEmotes/EmoteSpearThrow",
+					Name = "/VO/ZagreusEmotes/EmoteMartialSpearThrow",
 					Cooldown = 0.5
 				},
 			},
 			ChargeSounds =
 			{
-				{ Name = "/VO/ZagreusEmotes/EmoteRanged" },
+				{ Name = "/VO/ZagreusEmotes/EmoteCharging" },
 				{
 					Name = "/Leftovers/SFX/AuraCharge" ,
-					StoppedBy = { "TriggerRelease" }
+					StoppedBy = { "TriggerRelease" },
+					SetPitchToPropertyValue = "ChargeTime",
 				},
 			},
 			ImpactSounds =
@@ -239,46 +243,6 @@ WeaponData.DarkGuanYuSpearThrow =
 		Upgrades = { },
 	}
 
--- WeaponData.DarkGuanYuSpearThrowImmolation =
--- 	{
--- 		Name = "DarkSpearThrowImmolation",
--- 		InheritFrom = { "DarkSpearSpin" },
-
--- 		AIData =
--- 		{
--- 			PreAttackDuration = 0,
--- 			FireDuration = 0.8,
--- 			PostAttackDuration = 0,
--- 			AIAttackDistance = 175,
--- 			AIBufferDistance = 175,
--- 			AIAngleTowardsPlayerWhileFiring = true,
--- 			AITrackTargetDuringCharge = true,
--- 			AIMoveWithinRangeTimeout = 1.0,
--- 		},
-
--- 		Sounds =
--- 		{
--- 			FireSounds =
--- 			{
--- 				{ Name = "/SFX/Player Sounds/ZagreusSpearSwipe" },
--- 				{ Name = "/SFX/Enemy Sounds/Megaera/MegaeraRapidEnergyBlastFire" }
--- 			},
--- 			ImpactSounds =
--- 			{
--- 				Invulnerable = "/SFX/SwordWallHitClank",
--- 				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
--- 				Bone = "/SFX/MetalBoneSmash",
--- 				Brick = "/SFX/MetalStoneClang",
--- 				Stone = "/SFX/MetalStoneClang",
--- 				Organic = "/SFX/StabSplatterSmall",
--- 				StoneObstacle = "/SFX/SwordWallHitClank",
--- 				BrickObstacle = "/SFX/SwordWallHitClank",
--- 				MetalObstacle = "/SFX/SwordWallHitClank",
--- 				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
--- 			}
--- 		}
--- 	}
-
 WeaponData.DarkGuanYuSpearSpin =
 	{
 		Name = "DarkGuanYuSpearSpin",
@@ -289,21 +253,23 @@ WeaponData.DarkGuanYuSpearSpin =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			FireDuration = 0.4,
+			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			PreFireDuration = 0.26,
+			PreFireAnimation = "ZagreusSpearAlt03SpinStart",
+            PreFireCancelAnimation = "ZagreusSpearAlt03SpinStartChargeCancel",
+            FireAnimation = "ZagreusSpearAlt03SpinAttack",
+			WaitUntilProjectileDeath = true
 		},
 
 		Sounds =
 		{
 			FireSounds =
 			{
-				{ Name = "/VO/ZagreusEmotes/EmotePoweringUp" },
+				{ Name = "/VO/ZagreusEmotes/EmoteMartialSpearSpinAttack" },
 				{ Name = "/SFX/Player Sounds/ZagreusSpearSwipe" },
 				{ Name = "/Leftovers/SFX/AuraThrow" }
 			},
@@ -326,7 +292,7 @@ WeaponData.DarkGuanYuSpearSpin =
 				{ Name = "/VO/ZagreusEmotes/EmoteCharging" },
 				{
 					Name = "/SFX/Player Sounds/ZagreusWeaponChargeup" ,
-					Key = "SpearWeaponSpin",
+					Key = "SpearWeaponSpinTravel",
 					StoppedBy = { "ChargeCancel", "TriggerRelease", "Fired" },
 					SetPitchToPropertyValue = "ChargeTime",
 				},
@@ -336,49 +302,16 @@ WeaponData.DarkGuanYuSpearSpin =
 		Upgrades = { },
 	}
 
-WeaponData.DarkGuanYuSpearRush =
+WeaponData.DarkGuanYuSpearSpin2 =
 	{
-		Name = "DarkGuanYuSpearRush",
-		-- FailToFireFunctionName = "SetSpearTeleportBuffer",
-
-		SimSlowBlur =
-		{
-			Strength = 0.3,
-			Distance = 1.6,
-			FXInTime = 0.06,
-			FXHoldTime = 0.4,
-			FXOutTime = 0.4,
-		},
-
-		SkipAttackNotReadySounds = true,
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/VO/ZagreusEmotes/EmoteEvading" },
-				{ Name = "/SFX/Player Sounds/ZagreusDash" },
-			},
-
-			ImpactSounds =
-			{
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/FistImpactMedium",
-				Brick = "/SFX/FistImpactMedium",
-				Stone = "/SFX/FistImpactMedium",
-				Organic = "/SFX/FistImpactMedium",
-			},
-
-			CancelEffectSounds =
-			{
-			},
-
-			NearbyEnemyFireSounds =
-			{
-				{ Name = "/Leftovers/Menu Sounds/TitanToggleShort" },
-			},
-		},
-
-		NoExpressiveAnim = true,
-
-		Upgrades = { },
+		Name = "DarkGuanYuSpearSpin2",
+		InheritFrom = { "DarkGuanYuSpearSpin" }
 	}
+
+WeaponData.DarkGuanYuSpearSpin3 =
+	{
+		Name = "DarkGuanYuSpearSpin3",
+		InheritFrom = { "DarkGuanYuSpearSpin" }
+	}
+
+-- should handle charge sounds

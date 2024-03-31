@@ -4,9 +4,102 @@
         {
             Name = "DarkGuanYuSpear"
             InheritFrom = "DarkSpear"
+            Projectile = "DarkGuanYuSpear"
             ChargeStartAnimation = "ZagreusSpearLunarThrust1_Start"
             FireGraphic = "ZagreusSpearLunarThrust1_Fire"
             ChargeTime = 0.12
+        }
+        {
+            Name = "DarkGuanYuSpear2"
+            InheritFrom = "DarkGuanYuSpear"
+            Projectile = "DarkGuanYuSpear2"
+            ControlWindow = 0.5
+            ChargeStartAnimation = "ZagreusSpearLunarThrust2_Start"
+            FireGraphic = "ZagreusSpearLunarThrust2_Fire"
+            ChargeTime = 0.33
+            ChargeTimeFrames = 5
+            CanCancelDisables = false
+            ControlWindow = 0.43
+            Effects = [
+                {
+                Name = "SpearDisable2"
+                DurationFrames = 5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                RequestTriggerLock = true
+                }
+                {
+                Name = "SpearDisableCancelableAndLockTrigger2"
+                DurationFrames = 12
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                RequestTriggerLock = true
+                Cancelable = true
+                }
+                {
+                Name = "SpearDisableCancelableAndLockRotation"
+                DurationFrames = 15
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = false
+                Cancelable = true
+                }
+
+                {
+                Name = "SpearLunarAerialSlow2"
+                Duration = 0.2
+                Trigger = "Charging"
+                Type = "SPEED"
+                Modifier = 0.90
+                Active = true
+                Cancelable = true
+                }
+            ]
+        }
+        {
+            Name = "DarkGuanYuSpear3"
+            InheritFrom = "DarkGuanYuSpear"
+            Projectile = "DarkGuanYuSpear3"
+            ControlWindow = 0.5
+            //   RemoveControlOnFire = "SpearWeapon3"
+            //   AddControlOnFire = "SpearWeapon"
+            ChargeStartAnimation = "ZagreusSpearLunarThrust3_Start"
+            FireGraphic = "ZagreusSpearLunarThrust3_Fire"
+            ChargeTime = 0.52
+            ControlWindow = 0.62
+            ChargeTimeFrames = 3
+            CanCancelDisables = false
+            Effects = [
+                {
+                Name = "SpearDisable3"
+                DurationFrames = 14
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                RequestTriggerLock = true
+                }
+                {
+                Name = "SpearDisableCancelable3"
+                DurationFrames = 18
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Cancelable = true
+                RequestTriggerLock = true
+                }
+
+                {
+                Name = "SpearLunarAerialSlow3"
+                Duration = 0.5
+                Trigger = "Charging"
+                Type = "SPEED"
+                Modifier = 0.82
+                Active = true
+                Cancelable = true
+                }
+            ]
         }
         {
             Name = "DarkGuanYuSpearDash"
@@ -54,228 +147,88 @@
             ]
         }
         {
-            Name = "DarkGuanYuSpear2"
-            InheritFrom = "DarkGuanYuSpear"
-            //   SwapOnFire = "SpearWeapon3"
-            Projectile = "DarkGuanYuSpearTwoThree"
-            ControlWindow = 0.5
-            ChargeStartAnimation = "ZagreusSpearCharge2"
-            FireGraphic = "ZagreusSpearLunarThrust2_Fire"
-            ChargeTime = 0.33
-            ChargeTimeFrames = 5
-            CanCancelDisables = false
-            ControlWindow = 0.43
-            Effects = [
-                {
-                Name = "SpearDisable2"
-                DurationFrames = 5
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                RequestTriggerLock = true
-                }
-                {
-                Name = "SpearDisableCancelableAndLockTrigger2"
-                DurationFrames = 12
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                RequestTriggerLock = true
-                Cancelable = true
-                }
-                {
-                Name = "SpearDisableCancelableAndLockRotation"
-                DurationFrames = 15
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = false
-                Cancelable = true
-                }
-
-                {
-                Name = "SpearLunarAerialSlow2"
-                Duration = 0.2
-                Trigger = "Charging"
-                Type = "SPEED"
-                Modifier = 0.90
-                Active = true
-                Cancelable = true
-                }
-            ]
-        }
-        {
-            Name = "DarkGuanYuSpear3"
-            InheritFrom = "DarkGuanYuSpear"
-            Projectile = "DarkGuanYuSpearTwoThree"
-            ControlWindow = 0.5
-            //   RemoveControlOnFire = "SpearWeapon3"
-            //   AddControlOnFire = "SpearWeapon"
-            ChargeStartAnimation = "ZagreusSpearLunarThrust3_Start"
-            FireGraphic = "ZagreusSpearLunarThrust3_Fire"
-            ChargeTime = 0.52
-            ControlWindow = 0.62
-            ChargeTimeFrames = 3
-            CanCancelDisables = false
-            Effects = [
-                {
-                Name = "SpearDisable3"
-                DurationFrames = 14
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                RequestTriggerLock = true
-                }
-                {
-                Name = "SpearDisableCancelable3"
-                DurationFrames = 18
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                Cancelable = true
-                RequestTriggerLock = true
-                }
-
-                {
-                Name = "SpearLunarAerialSlow3"
-                Duration = 0.5
-                Trigger = "Charging"
-                Type = "SPEED"
-                Modifier = 0.82
-                Active = true
-                Cancelable = true
-                }
-            ]
-        }
-        {
             Name = "DarkGuanYuSpearSpin"
             InheritFrom = "DarkSpearSpin"
-            ChargeStartAnimation = "ZagreusSpearAlt03SpinStart"
-            ChargeCancelGraphic = "ZagreusSpearAlt03SpinStartChargeCancel"
-            FireGraphic = "ZagreusSpearAlt03SpinAttack"
+            Projectile = "DarkGuanYuSpearSpin"
+            // ChargeStartAnimation = "null"
+            // ChargeCancelGraphic = "null"
+            // FireGraphic = "null"
+        }
+        {
+            Name = "DarkGuanYuSpearSpin2"
+            InheritFrom = "DarkGuanYuSpearSpin"
+            Projectile = "DarkGuanYuSpearSpin2"
+        }
+        {
+            Name = "DarkGuanYuSpearSpin3"
+            InheritFrom = "DarkGuanYuSpearSpin"
+            Projectile = "DarkGuanYuSpearSpin3"
         }
         {
             Name = "DarkGuanYuSpearThrow"
             InheritFrom = "DarkSpearThrow"
+            Projectile = "DarkGuanYuSpearThrow"
             ChargeTime = 0.288 // 0.16 * 1.8
-            SwapOnFire = "null"
-            RemoveControlOnFire = "null"
-            RemoveControlOnFire2 = "null"
-            RemoveControlOnFire3 = "null"
-            RemoveControlOnFire4 = "null"
+            // SwapOnFire = "null"
+            // RemoveControlOnFire = "null"
+            // RemoveControlOnFire2 = "null"
+            // RemoveControlOnFire3 = "null"
+            // RemoveControlOnFire4 = "null"
             ReloadTime = 0.6
             SpawnOnDeath = "null"
             ChargeStartAnimation = "ZagreusSpearAlt03ThrowCharge"
             ChargeCancelGraphic = "ZagreusSpearAlt03ThrowFireReturnToIdle"
             FireGraphic = "ZagreusSpearAlt03ThrowFire"
         }
-        {
-            Name = "DarkGuanYuSpearThrowReturn"
-            InheritFrom = "DarkGuanYuSpearThrow"
-            AlternateControl = "Attack2"
-            //   SwapOnFire = "SpearWeaponThrow"
-            FireFromObstacle = "SpearReturnPoint"
-            DestroyTargetedObstacle = true
-            FireGraphic = "null"
-            Projectile = "SpearWeaponThrowReturn"
-            ShowFreeAimLine = false
-            AimLineAnimation = "null"
-            //   AddControlOnFire = "SpearWeapon"
-            //   AddControlOnFire2 = "SpearWeaponSpin"
-            RemoveControlOnFire = "null"
-            SelfVelocity = 0.0
-            ChargeTimeFrames = 0
-            ChargeStartAnimation = "null"
-            LockTriggerTransferFromOnSwap = false
-            SetCompleteAngleOnFire = false
-            OwnerFaceProjectile = true
-            Effects = [
-                {
-                Name = "SpearThrowReturnDisable"
-                DurationFrames = 14
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                RequestTriggerLock = true
-                }
-                {
-                Name = "SpearThrowReturnDisableFast"
-                DurationFrames = 10
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                RequestTriggerLock = true
-                Active = false
-                }
-            ]
-        }
-        {
-            Name = "DarkGuanYuSpearThrowInvisibleReturn"
-            InheritFrom = "1_BaseMagicWeapon"
-            FireFromObstacle = "SpearReturnPoint"
-            DestroyTargetedObstacle = true
-            //   SwapOnFire = "SpearWeaponThrow"
-            //   AddControlOnFire = "DarkSpear"
-            //   AddControlOnFire2 = "DarkSpearSpin"
-        }
         // {
-        //     Name = "DarkSpearSpinExplosiveChargeWeapon"
-        //     InheritFrom = "1_BaseMagicWeapon"
-        //     Type = "GUN"
-        //     Cooldown = 0.95
-        //     Projectile = "DarkSpearSpinExplosiveChargeWeapon"
+        //     Name = "DarkGuanYuSpearThrowReturn"
+        //     InheritFrom = "DarkGuanYuSpearThrow"
+        //     AlternateControl = "Attack2"
+        //     //   SwapOnFire = "SpearWeaponThrow"
+        //     FireFromObstacle = "SpearReturnPoint"
+        //     DestroyTargetedObstacle = true
+        //     FireGraphic = "null"
+        //     Projectile = "SpearWeaponThrowReturn"
+        //     ShowFreeAimLine = false
+        //     AimLineAnimation = "null"
+        //     //   AddControlOnFire = "SpearWeapon"
+        //     //   AddControlOnFire2 = "SpearWeaponSpin"
+        //     RemoveControlOnFire = "null"
+        //     SelfVelocity = 0.0
+        //     ChargeTimeFrames = 0
+        //     ChargeStartAnimation = "null"
+        //     LockTriggerTransferFromOnSwap = false
+        //     SetCompleteAngleOnFire = false
+        //     OwnerFaceProjectile = true
+        //     Effects = [
+        //         {
+        //         Name = "SpearThrowReturnDisable"
+        //         DurationFrames = 14
+        //         DisableMove = true
+        //         DisableRotate = true
+        //         DisableAttack = true
+        //         RequestTriggerLock = true
+        //         }
+        //         {
+        //         Name = "SpearThrowReturnDisableFast"
+        //         DurationFrames = 10
+        //         DisableMove = true
+        //         DisableRotate = true
+        //         DisableAttack = true
+        //         RequestTriggerLock = true
+        //         Active = false
+        //         }
+        //     ]
         // }
-        {
-            Name = "DarkGuanYuSpearRush"
-            InheritFrom = "1_BasePlayerSlowWeapon"
-            Type = "BLINK"
-            Control = "Attack3"
-            //SwapOnFire = "SpearWeaponThrow"
-            // AddControlOnFire = "SpearWeapon"
-            // AddControlOnFire2 = "SpearWeaponSpin"
-            FireToObstacle = "SpearReturnPoint"
-            DestroyTargetedObstacle = true
-            FireGraphic = "ZagreusDashNoCollide"
-            UnblockedBlinkFx = "DashCrack"
-            ChargeTime = 0
-            SelfVelocity = 0
-            SelfVelocityCap = 0
-            BlinkDuration = 0.21
-            BlinkEaseIn = 0
-            BlinkEaseOut = 0.8
-            WeaponRange = 1200
-            Projectile = "DarkSpearRush"
-            Cooldown = 0.05
-            ChargeFx = "null"
-            ArsenalCooldown = 0.0
-            CancelMovement = false
-            Enabled = false
-            FullyAutomatic = false
-            AutoLock = false
-            UseTargetAngle = true
-            BlockMoveInput = true
-            IgnoreForceCooldown = true
-            ForceReleaseAllOnFire = true
-            CanCancelDisables = true
-            SetTargetAngleOnRequest = false
-            SetCompleteAngleOnFire = true
-            SetCompleteAngleOnCharge = true
-            Effects =
-            [{
-                Name = "SpearRushBonus"
-                Duration = 1000.0
-                CanAffectInvulnerable = true
-                FrontFx = "GrenadeSelfDamageOutputFx"
-                FlashFrontFxWhenExpiring = true
-                OnlyAffectName = "_PlayerUnit"
-            },
-            {
-                Name = "SpearRushWeaponDisable"
-                Duration = 0.21
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                RequestTriggerLock = true
-                }]
-            }
+        // {
+        //     Name = "DarkGuanYuSpearThrowInvisibleReturn"
+        //     InheritFrom = "1_BaseMagicWeapon"
+        //     FireGraphic = "null"
+        //     FireFromObstacle = "SpearReturnPoint"
+        //     DestroyTargetedObstacle = true
+        //     //   SwapOnFire = "SpearWeaponThrow"
+        //     //   AddControlOnFire = "DarkSpear"
+        //     //   AddControlOnFire2 = "DarkSpearSpin"
+        // }
     ]
 }

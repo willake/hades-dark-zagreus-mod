@@ -36,14 +36,14 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- SetWeaponProperty({ WeaponName = "EnemySwordWeapon", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireGraphic", Value = "ZagreusSwordArthurAttack1_Fire", ValueChangeType = "Absolute" })
 
             -- spear template
-            enemy.PrimaryWeapon = "DarkHadesSpear";
+            enemy.PrimaryWeapon = "DarkGuanYuSpear";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkHadesSpearThrow";
-            enemy.SpecialAttackWeaponReturn = "DarkHadesSpearThrowReturn";
+            enemy.SpecialAttackWeapon = "DarkGuanYuSpearThrow";
+            -- enemy.SpecialAttackWeaponReturn = "DarkGuanYuSpearThrowReturn";
             -- enemy.SpecialAttackWeaponInvisibleReturn = "DarkAchillesSpearThrowInvisibleReturn";
             -- enemy.SpecialAttackWeaponRush = "DarkAchillesSpearRush";
-            enemy.DashAttackWeapon = "DarkHadesSpearDash";
-            enemy.ShouldReturnSpearAfterThrow = true;
+            enemy.DashAttackWeapon = "DarkGuanYuSpearDash";
+            enemy.ShouldReturnSpearAfterThrow = false;
         end
     end
     
