@@ -436,6 +436,17 @@
         }
       ]
     }
+    {
+      Name = "DarkConsecrationField"
+      InheritFrom = "1_BaseTrapWeapon"
+      Type = "GUN"
+      Projectile = "DarkConsecrationField"
+      FullyAutomatic = true
+      AutoLock = true
+      FireFx = "null"
+      IgnoreOwnerAttackDisabled = true
+      ActiveProjectileCap = 1
+    }
   ]
 }
 

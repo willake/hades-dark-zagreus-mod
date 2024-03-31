@@ -228,6 +228,7 @@ WeaponData.DarkArthurSwordParry =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        PostFireWeapon = "DarkConsecrationField",
     },
 
     Sounds =
@@ -261,4 +262,21 @@ WeaponData.DarkArthurSwordParry =
     },
 
     Upgrades = {},
+}
+
+WeaponData.DarkConsecrationField =
+{
+    Name = "DarkConsecrationField",
+    StartingWeapon = false,
+
+    AIData =
+    {
+        -- PreFireDuration = 0.3, -- should be 0.5, but it looks weird
+        FireDuration = 0.2,
+        AIAttackDistance = 9999,
+        AIBufferDistance = 9999,
+    },
+
+    OnFiredFunctionName = "DisableTraps",
+    OnFiredFunctionArgs = { Range = 450, Duration = 8 },
 }
