@@ -34,28 +34,16 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
 			-- ApplyEnemyTrait( CurrentRun, TraitData.ZeusRushTrait , enemy )
             -- SetWeaponProperty({ WeaponName = "EnemySwordWeapon", DestinationId = enemy.ObjectId, Property = "FireGraphic", Value = "ZagreusSwordArthurAttack1_Fire", ValueChangeType = "Absolute" })
             -- SetWeaponProperty({ WeaponName = "EnemySwordWeapon", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireGraphic", Value = "ZagreusSwordArthurAttack1_Fire", ValueChangeType = "Absolute" })
-            -- table.insert(enemy.WeaponOptions, "DarkSpear")
-            -- EquipWeapon({ Name = "DarkSpear", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpear2")
-            -- EquipWeapon({ Name = "DarkSpear2", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpear3")
-            -- EquipWeapon({ Name = "DarkSpear3", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpearDash")
-            -- EquipWeapon({ Name = "DarkSpearDash", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpearSpin")
-            -- EquipWeapon({ Name = "DarkSpearSpin", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpearSpin2")
-            -- EquipWeapon({ Name = "DarkSpearSpin2", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpearSpin3")
-            -- EquipWeapon({ Name = "DarkSpearSpin3", DestinationId = enemy.ObjectId })
-            enemy.PrimaryWeapon = "DarkRamaBow";
+
+            -- spear template
+            enemy.PrimaryWeapon = "DarkGuanYuSpear";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkRamaBowSplitShot";
-            enemy.DashAttackWeapon = "DarkRamaBowDash";
-            -- table.insert(enemy.WeaponOptions, "DarkSpearThrow")
-            -- EquipWeapon({ Name = "DarkSpearThrow", DestinationId = enemy.ObjectId })
-            -- table.insert(enemy.WeaponOptions, "DarkSpearThrowReturn")
-            -- EquipWeapon({ Name = "DarkSpearThrowReturn", DestinationId = enemy.ObjectId })
+            enemy.SpecialAttackWeapon = "DarkGuanYuSpearThrow";
+            -- enemy.SpecialAttackWeaponReturn = "DarkGuanYuSpearThrowReturn";
+            -- enemy.SpecialAttackWeaponInvisibleReturn = "DarkAchillesSpearThrowInvisibleReturn";
+            -- enemy.SpecialAttackWeaponRush = "DarkAchillesSpearRush";
+            enemy.DashAttackWeapon = "DarkGuanYuSpearDash";
+            enemy.ShouldReturnSpearAfterThrow = false;
         end
     end
     

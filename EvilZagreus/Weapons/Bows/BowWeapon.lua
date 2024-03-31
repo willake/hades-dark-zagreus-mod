@@ -9,7 +9,7 @@ WeaponData.DarkBow =
     {
         AIAttackDistance = 800,
         -- AIBufferDistance = 100,
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,

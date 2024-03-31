@@ -181,6 +181,22 @@
             ]
         }
         {
+            Name = "DarkSpearSpin2"
+            InheritFrom = "DarkSpearSpin"
+            DamageLow = 15 // 50
+            DamageHigh = 15 // 50
+            DamageRadius = 350
+            DeflectProjectiles = false
+        }
+        {
+            Name = "DarkSpearSpin3"
+            InheritFrom = "DarkSpearSpin"
+            DamageLow = 20 // 100
+            DamageHigh = 20 // 100
+            DamageRadius = 500
+            DeflectProjectiles = false
+            }
+        {
             Name = "DarkSpearThrow"
             // InheritFrom = "1_BaseDamagingProjectile"
             DetonateGraphic = "null"

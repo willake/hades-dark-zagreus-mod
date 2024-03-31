@@ -3,24 +3,25 @@ DebugPrint({ Text = "Load DarkHadesSpear" })
 WeaponData.DarkHadesSpear =
 	{
 		Name = "DarkHadesSpear",
-		-- DashSwaps = { "SpearWeapon", "SpearWeapon2", "SpearWeapon3", },
-		-- ExpireDashWeaponOnDash = true,
-		-- SecondaryWeapon = "SpearWeaponThrow",
-		-- ResourceName = "LockKeys",
 		UnlockCost = 4,
 		LockKeyTextOffsetY = -125,
 		--DashWeaponWindow = 0.6,
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			ChainedWeapon = "DarkHadesSpear2",
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.15 },
+				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.30 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -64,14 +65,18 @@ WeaponData.DarkHadesSpear2 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			SkipMovement = true,
+			ChainedWeapon = "DarkHadesSpear3",
+			FireDuration = 0.3,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.15 },
+				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.30 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -104,14 +109,18 @@ WeaponData.DarkHadesSpear3 =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.4,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.15 },
+				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.30 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -144,14 +153,13 @@ WeaponData.DarkHadesSpearDash =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.425,
 		},
 
 		Sounds =
@@ -184,22 +192,13 @@ WeaponData.DarkHadesSpearThrow =
 
 		AIData =
 		{
-			FireAnimation = "ZagreusSpearThrowFireReturn",
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 300,
+			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.2,
+			WillThrowSpear = true,
 		},
 
 		Sounds =
@@ -246,25 +245,14 @@ WeaponData.DarkHadesSpearThrowReturn =
 
 		AIData =
 		{
-			PreAttackAnimation = "ZagreusSpearThrowCharge",
-			FireAnimation = "ZagreusSpearThrowFire",
-			PreAttackDuration = 0.4,
-			PreAttackWaitForAnimation = true,
-			FireDuration = 0.6,
-			-- PostAttackDuration = 2.0,
-			AIAttackDistance = 500,
-			AIBufferDistance = 100,
-			AIChargeTargetMarker = true,
+			AIAttackDistance = 9999,
+			AIBufferDistance = 9999,
+			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 2.5,
-	
-			AIFireTicksMin = 1,
-			AIFireTicksMax = 1,
-			AIFireTicksCooldown = 0.6,
-	
-			-- MinAttacksBetweenUse = 2,
-	
+			AIMoveWithinRangeTimeout = 1.0,
+			FireDuration = 0.425,
+			WillReturnSpear = true
 		},
 
 		Sounds =
@@ -295,66 +283,6 @@ WeaponData.DarkHadesSpearThrowReturn =
 		Upgrades = { },
 	}
 
-WeaponData.DarkHadesSpearThrowInvisibleReturn =
-	{
-		Name = "DarkHadesSpearThrowInvisibleReturn",
-		InheritFrom = { "DarkHadesSpearThrowReturn" },
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 600,
-			AIBufferDistance = 600,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		CompleteObjectivesOnFire = {},
-	}
-
-WeaponData.DarkHadesSpearThrowImmolation =
-	{
-		Name = "DarkHadesSpearThrowImmolation",
-		InheritFrom = { "DarkSpearSpin" },
-
-		AIData =
-		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
-			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-		},
-
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/SFX/Player Sounds/ZagreusSpearSwipe" },
-				{ Name = "/SFX/Enemy Sounds/Megaera/MegaeraRapidEnergyBlastFire" }
-			},
-			ImpactSounds =
-			{
-				Invulnerable = "/SFX/SwordWallHitClank",
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/MetalBoneSmash",
-				Brick = "/SFX/MetalStoneClang",
-				Stone = "/SFX/MetalStoneClang",
-				Organic = "/SFX/StabSplatterSmall",
-				StoneObstacle = "/SFX/SwordWallHitClank",
-				BrickObstacle = "/SFX/SwordWallHitClank",
-				MetalObstacle = "/SFX/SwordWallHitClank",
-				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
-			}
-		}
-	}
-
 WeaponData.DarkHadesSpearSpin =
 	{
 		Name = "DarkHadesSpearSpin",
@@ -365,14 +293,15 @@ WeaponData.DarkHadesSpearSpin =
 
 		AIData =
 		{
-			PreAttackDuration = 0,
-			FireDuration = 0.8,
-			PostAttackDuration = 0,
-			AIAttackDistance = 175,
-			AIBufferDistance = 175,
+			FireDuration = 0.4,
+			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
+			PreFireDuration = 0.26,
+			PreFireAnimation = "ZagreusSpearAlt02SpinStart",
+            PreFireCancelAnimation = "ZagreusSpearAlt02SpinStartChargeCancel",
+            FireAnimation = "ZagreusSpearAlt02SpinAttack",
 		},
 
 		Sounds =
@@ -412,49 +341,12 @@ WeaponData.DarkHadesSpearSpin =
 		Upgrades = { },
 	}
 
-WeaponData.DarkHadesSpearRush =
+WeaponData.DarkHadesSpearSpin2 =
 	{
-		Name = "DarkHadesSpearRush",
-		-- FailToFireFunctionName = "SetSpearTeleportBuffer",
+		InheritFrom = { "DarkHadesSpearSpin" }
+	}
 
-		SimSlowBlur =
-		{
-			Strength = 0.3,
-			Distance = 1.6,
-			FXInTime = 0.06,
-			FXHoldTime = 0.4,
-			FXOutTime = 0.4,
-		},
-
-		SkipAttackNotReadySounds = true,
-		Sounds =
-		{
-			FireSounds =
-			{
-				{ Name = "/VO/ZagreusEmotes/EmoteEvading" },
-				{ Name = "/SFX/Player Sounds/ZagreusDash" },
-			},
-
-			ImpactSounds =
-			{
-				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-				Bone = "/SFX/FistImpactMedium",
-				Brick = "/SFX/FistImpactMedium",
-				Stone = "/SFX/FistImpactMedium",
-				Organic = "/SFX/FistImpactMedium",
-			},
-
-			CancelEffectSounds =
-			{
-			},
-
-			NearbyEnemyFireSounds =
-			{
-				{ Name = "/Leftovers/Menu Sounds/TitanToggleShort" },
-			},
-		},
-
-		NoExpressiveAnim = true,
-
-		Upgrades = { },
+WeaponData.DarkHadesSpearSpin3 =
+	{
+		InheritFrom = { "DarkHadesSpearSpin" }
 	}

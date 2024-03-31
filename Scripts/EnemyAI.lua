@@ -59,8 +59,8 @@ function DoDarkZagreusAILoop(enemy, currentRun, targetId)
         -- Attack
 		local attackSuccess = false
 		while not attackSuccess do
-			attackSuccess = DoDarkZagreusAttackOnce( enemy, currentRun, targetId, weaponAIData )
-			FinishTargetMarker( enemy )
+			attackSuccess = DoDarkZagreusAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+			-- FinishTargetMarker( enemy )
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
@@ -77,7 +77,7 @@ function DoDarkZagreusMove(enemy, currentRun, targetId, weaponAIData, actionData
         weaponAIData = enemy
     end
 
-    local attackDistance = actionData.AttackDistance
+    local attackDistance = weaponAIData.AttackDistance or 175
 
     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
@@ -136,18 +136,6 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
 		currentRun.Hero.KillStealVictimId = targetId
 	end
 
-    if weaponAIData.PreAttackAnimation ~= nil then
-        SetAnimation({ Name = weaponAIData.PreAttackAnimation, DestinationId = enemy.ObjectId })
-    end
-
-    if weaponAIData.PreAttackFx ~= nil then
-        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreAttackFx })
-    end
-
-    if weaponAIData.PreAttackSound ~= nil then
-        PlaySound({ Name = weaponAIData.PreAttackSound, Id = enemy.ObjectId })
-    end
-
     if weaponAIData.SkipAngleTowardTarget then
 		--DebugPrint({ Text = "Skipping default AngleTowardTarget" })
 	else
@@ -160,19 +148,7 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
 		end
 	end
 
-    if weaponAIData.AITrackTargetDuringCharge then
-		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
-	end
-
-    if weaponAIData.PreAttackDuration ~= nil then
-        wait( CalcEnemyWait( enemy, weaponAIData.PreAttackDuration), enemy.AIThreadName ) 
-    end
-
     -- PRE ATTACK END
-
-    if weaponAIData.PreAttackFx then
-		StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreAttackFx })
-	end
 
     -- ATTACK
 
@@ -189,7 +165,7 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
         --         enemy.WeaponName = enemy.ComboWeapon
         --     end
         -- end
-		if not FireDarkWeapon( enemy, weaponAIData, currentRun, targetId ) then
+		if not FireDarkWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
 			return false
 		end
         enemy.AIState.LastActionTime = _worldTime
@@ -201,8 +177,12 @@ function DoDarkZagreusAttackOnce(enemy, currentRun, targetId, weaponAIData, acti
     return true
 end
 
-function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
-    local fireTicks = weaponAIData.FireTicks or 1
+function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+    local chargeTime = 0.0
+
+    if weaponAIData.IsChargable then
+        chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
+    end
 	-- if weaponAIData.AIFireTicksMin ~= nil and weaponAIData.AIFireTicksMax ~= nil then
 	-- 	fireTicks = RandomInt( weaponAIData.AIFireTicksMin, weaponAIData.AIFireTicksMax )
 	-- end
@@ -216,17 +196,13 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         return false
     end
 
-    -- if weaponAIData.AIChargeTargetMarker then
-    --     FinishTargetMarker( enemy )
-    -- end
-
     if weaponAIData.AIAngleTowardsPlayerWhileFiring then
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
     end
 
     -- Prefire Related
-    -- While there is preattack for actions like aiming
-    -- , prefire is for actions like charging weapons
+    -- pre fire means the animation that plays before attack,
+    -- which you can clearly see that the character is going to attack
 
     if weaponAIData.PreFireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
@@ -240,13 +216,13 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         PlaySound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     end
 
-    if weaponAIData.AIChargeTargetMarker then
-		CreateTargetMarker( enemy, targetId, weaponAIData )
+    if weaponAIData.AITrackTargetDuringPreFire then
+		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
 	end
 
     -- wait for charging
     if weaponAIData.PreFireDuration then
-        wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
+        wait(weaponAIData.PreFireAnimation, enemy.AIThreadName)
     end
 
     if weaponAIData.PreFireFx then
@@ -257,11 +233,7 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
         StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     end
 
-    if weaponAIData.AIChargeTargetMarker then
-		FinishTargetMarker( enemy )
-	end
-
-    -- Prefire End
+    -- PreFire End
 
     if not CanAttack({ Id = enemy.ObjectId }) then
         return false
@@ -305,6 +277,11 @@ function FireDarkWeapon(enemy, weaponAIData, currentRun, targetId)
 
     -- Fire end
 
+    -- PostFireCharge, only spear weapon has it
+    
+
+    -- PostFireCharge End
+
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true
 		return true
@@ -328,13 +305,20 @@ function GetAIState()
 end
 
 function GetAIActionData(state)
+    local r = math.random()
+    local chargeTime = 0.0
+
+    if r > 0.5 then
+        chargeTime = 0.1 + (math.random() * 0.9)
+    end
     return 
     {
         AttackDistance = 175,    
         IsCombo = true,
-        AttackProb = 0.9,
-        SpectialAttackProb = 0.05,
-        DashProb = 0.05
+        AttackProb = 0.7,
+        SpectialAttackProb = 0.2,
+        DashProb = 0.1,
+        ChargeTime = chargeTime
     }
 end
 
@@ -355,6 +339,13 @@ function SelectDarkWeapon(enemy, actionData)
         end
 
         enemy.LastAction = "Attack"
+
+        -- if character has primary attack that is chargable
+        -- if enemy.PrimaryChargeWeapon ~= nil and actionData.ChargeTime > 0.2 then
+        --     enemy.WeaponName = enemy.PrimaryChargeWeapon
+        --     return enemy.WeaponName
+        -- end
+
         -- if the last action is also attack, do weapon combo
         if enemy.AIState.IsLastActionAttack > 0 then
             if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
@@ -387,6 +378,113 @@ function SelectDarkWeapon(enemy, actionData)
     return nil
 end
 
+-- Prefire
+-- pre-fire means the animation that plays before attack,
+-- which you can clearly see that the character is going to attack
+function DoPreFire(enemy, weaponAIData)
+
+    if weaponAIData.PreFireAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
+    end
+
+    if weaponAIData.PreFireFx then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
+    end
+
+    if weaponAIData.PreFireSound then
+        PlaySound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
+    end
+
+    if weaponAIData.AITrackTargetDuringCharge then
+		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
+	end
+
+    -- wait for charging
+    if weaponAIData.PreFireDuration then
+        wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
+    end
+
+    if weaponAIData.PreFireFx then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
+    end
+
+    -- if weaponAIData.PreFireSound then
+    --     StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
+    -- end
+end
+
+function DoRegularFire(enemy, weaponAIData)
+    if weaponAIData.FireAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
+    end
+
+    if weaponAIData.FireFxOnSelf then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+
+    if weaponAIData.FireFxAtTarget then
+        CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    if weaponAIData.FireSound then
+        PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
+    end
+
+    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    
+    if weaponAIData.WaitUntilProjectileDeath ~= nil then
+		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		waitUntil( enemy.AINotifyName )
+	else
+		wait( weaponAIData.FireDuration, enemy.AIThreadName )
+	end
+
+    if weaponAIData.FireFxOnSelf then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+end
+
+-- Do fire that distance will vary by how much player charged
+function DoChargeDistanceFire(enemy, weaponAIData, percentageCharged)
+    local chargeTime = percentageCharged * weaponAIData.MaxChargeTime
+    if weaponAIData.FireAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
+    end
+
+    if weaponAIData.FireFxOnSelf then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+
+    if weaponAIData.FireFxAtTarget then
+        CreateAnimation({ DestinationId = targetId, Name = weaponAIData.FireFxAtTarget })
+    end
+
+    if weaponAIData.FireSound then
+        PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
+    end
+
+    -- need to think of a way to modify the distance of the projectile
+    -- local selfLocation = GetLocation({ Id = enemy.ObjectId })
+    -- local targetLocation = GetLocation({ Id = targetId })
+    -- local chargedTarget = 
+    --     SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY })
+
+    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    
+    if weaponAIData.WaitUntilProjectileDeath ~= nil then
+		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		waitUntil( enemy.AINotifyName )
+	else
+		wait( weaponAIData.FireDuration, enemy.AIThreadName )
+	end
+
+    if weaponAIData.FireFxOnSelf then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
+    end
+end
+
 function SetLastActionOnAIState(enemy)
     enemy.AIState.IsLastActionAttack = 0
     enemy.AIState.IsLastActionSpectialAttack = 0
@@ -404,4 +502,31 @@ function SetLastActionOnAIState(enemy)
     elseif enemy.LastAction == "Cast" then
         enemy.AIState.IsLastActionCast = 1
     end
+end
+
+function DZGetWeaponAIData(enemy, weaponName)
+	-- local weaponAIData = ShallowCopyTable(enemy.DefaultAIData) or enemy
+	local weaponAIData = {}
+    if WeaponData[weaponName] ~= nil and WeaponData[weaponName].AIData ~= nil then
+		-- local weaponData = ShallowCopyTable(WeaponData[weaponName].AIData)
+
+		-- if WeaponData[enemy.WeaponName].ShrineAIDataOverwrites ~= nil and GetNumMetaUpgrades(WeaponData[enemy.WeaponName].ShrineMetaUpgradeName) >= WeaponData[enemy.WeaponName].ShrineMetaUpgradeRequiredLevel then
+		-- 	OverwriteTableKeys( weaponData, WeaponData[enemy.WeaponName].ShrineAIDataOverwrites)
+		-- end
+
+		OverwriteTableKeys(weaponAIData, WeaponData[weaponName].AIData)
+	end
+	weaponAIData.WeaponName = weaponName
+
+    -- DebugPrintTable("WeaponData", weaponAIData, 3)
+
+	-- if enemy.SwapAnimations ~= nil then
+	-- 	for k, v in pairs(weaponAIData) do
+	-- 		if enemy.SwapAnimations[v] ~= nil then
+	-- 			weaponAIData[k] = enemy.SwapAnimations[v]
+	-- 		end
+	-- 	end
+	-- end
+
+	return weaponAIData
 end
