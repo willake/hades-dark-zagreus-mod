@@ -8,20 +8,24 @@ WeaponData.DarkBow =
     AIData =
     {
         AIAttackDistance = 800,
-        -- AIBufferDistance = 100,
+        MoveSuccessDistance = 600,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 2.5,
-        FireDuration = 0.425,
-        PreFireDuration = 0.6,
+        AIMoveWithinRangeTimeout = 1.0,
+        PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowDashStart",
         PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
         FireAnimation = "ZagreusBowDashFire",
         PreFireCancelAnimation = "ZagreusBowDashStartCancel",
         MinChargeStartFx = "BowCharge",
-        MinChargeToFire = 0.2,
+        IsRangeBasedOnCharge = true,
+        MinChargeTime = 0.2,
+        MaxChargeTime = 1,
+        Range = 45,
+        ChargeRangeMultiplier = 20,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -87,20 +91,23 @@ WeaponData.DarkBowDash =
     AIData =
     {
         AIAttackDistance = 800,
-        -- AIBufferDistance = 100,
         AIChargeTargetMarker = true,
-        -- AIAngleTowardsPlayerWhileFiring = true,
+        SkipMovement = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 2.5,
-        FireDuration = 0.45,
-        PreFireDuration = 0.4,
+        AIMoveWithinRangeTimeout = 1.0,
+        PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowStart",
         PreFireFx = "BowChargeFast",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
         FireAnimation = "ZagreusBowFire",
         PreFireCancelAnimation = "ZagreusBowStartCancel",
         MinChargeStartFx = "BowCharge",
-        MinChargeToFire = 0.3,
+        IsRangeBasedOnCharge = true,
+        MinChargeTime = 0.2,
+        MaxChargeTime = 1,
+        Range = 45,
+        ChargeRangeMultiplier = 20,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -161,12 +168,12 @@ WeaponData.DarkBowSplitShot =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
         -- FireDuration = 0.45,
-        PreFireDuration = 0.1,
+        PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRapidFire_Start",
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowRapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = true,
     },
 
     Sounds =
