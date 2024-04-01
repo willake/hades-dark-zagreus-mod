@@ -477,6 +477,12 @@ function DoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
         DebugPrintf({ Text = "Can't find new projectile range" }) 
     end
 
+    -- charge starts
+
+    if weaponAIData.ChargeFx then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.ChargeFx })
+    end
+
     if weaponAIData.AIChargeTargetMarker then
         CreateTargetMarker( enemy, targetId, weaponAIData )
     end
@@ -489,6 +495,12 @@ function DoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
         DebugPrintf({ Text = "Start waiting" .. chargeTime }) 
         wait(chargeTime, enemy.AIThreadName) 
     end
+
+    if weaponAIData.ChargeFx then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.ChargeFx })
+    end
+
+    -- charge ends
 
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
