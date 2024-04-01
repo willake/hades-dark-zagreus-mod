@@ -381,7 +381,7 @@ end
 -- Prefire
 -- pre-fire means the animation that plays before attack,
 -- which you can clearly see that the character is going to attack
-function DoPreFire(enemy, weaponAIData)
+function DoPreFire(enemy, weaponAIData, targetId)
 
     if weaponAIData.PreFireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
@@ -399,7 +399,7 @@ function DoPreFire(enemy, weaponAIData)
 		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
 	end
 
-    -- wait for charging
+    -- wait for pre fire animation
     if weaponAIData.PreFireDuration then
         wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
     end
@@ -413,7 +413,7 @@ function DoPreFire(enemy, weaponAIData)
     -- end
 end
 
-function DoRegularFire(enemy, weaponAIData)
+function DoRegularFire(enemy, weaponAIData, targetId)
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
     end
@@ -446,8 +446,62 @@ function DoRegularFire(enemy, weaponAIData)
 end
 
 -- Do fire that distance will vary by how much player charged
-function DoChargeDistanceFire(enemy, weaponAIData, percentageCharged)
+function DoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
     local chargeTime = percentageCharged * weaponAIData.MaxChargeTime
+    local minChargeTime = weaponAIData.MinChargeTime or 0.0
+    
+    -- if the charge time is smaller than the min charge time, then cancel it
+    if chargeTime < minChargeTime and weaponAIData.PreFireCancelAnimation then
+        SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireCancelAnimation })
+        return false
+    end
+
+    -- calculate distance
+    EquipWeapon({ Name = weaponAIData.WeaponName, DestinationId = enemy.ObjectId })
+    local rangeMultiplier = weaponAIData.ChargeRangeMultiplier or 1
+    local range = weaponAIData.Range or 0.0
+    -- if range ~= nil then
+    --     DebugPrintf({ Text = "Old projectile range: " .. range })
+    -- else
+    --     DebugPrintf({ Text = "Can't find old projectile range" }) 
+    -- end
+    -- set projectile range
+    SetProjectileProperty(
+        { WeaponName = weaponAIData.WeaponName, DestinationId = enemy.ObjectId, Property = "Range", Value = range * percentageCharged * rangeMultiplier })
+
+    -- DEBUG, check new range
+    local newRange = GetProjectileProperty({ Id = enemy.ObjectId, WeaponName = "DarkBow", Property = "Range" })
+    if newRange ~= nil then
+        DebugPrintf({ Text = "New projectile range: " .. newRange })
+    else
+        DebugPrintf({ Text = "Can't find new projectile range" }) 
+    end
+
+    -- charge starts
+
+    if weaponAIData.ChargeFx then
+        CreateAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.ChargeFx })
+    end
+
+    if weaponAIData.AIChargeTargetMarker then
+        CreateTargetMarker( enemy, targetId, weaponAIData )
+    end
+
+    if weaponAIData.AITrackTargetDuringCharge then
+		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
+	end
+
+    if chargeTime > 0.0 then
+        DebugPrintf({ Text = "Start waiting" .. chargeTime }) 
+        wait(chargeTime, enemy.AIThreadName) 
+    end
+
+    if weaponAIData.ChargeFx then
+        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.ChargeFx })
+    end
+
+    -- charge ends
+
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
     end
@@ -464,14 +518,12 @@ function DoChargeDistanceFire(enemy, weaponAIData, percentageCharged)
         PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
     end
 
-    -- need to think of a way to modify the distance of the projectile
-    -- local selfLocation = GetLocation({ Id = enemy.ObjectId })
-    -- local targetLocation = GetLocation({ Id = targetId })
-    -- local chargedTarget = 
-    --     SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY })
-
     FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
     
+    if weaponAIData.AIChargeTargetMarker then
+		FinishTargetMarker( enemy )
+	end
+
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
 		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
@@ -483,6 +535,8 @@ function DoChargeDistanceFire(enemy, weaponAIData, percentageCharged)
     if weaponAIData.FireFxOnSelf then
         StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
     end
+
+    return true
 end
 
 function SetLastActionOnAIState(enemy)

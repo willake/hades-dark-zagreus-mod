@@ -8,20 +8,24 @@ WeaponData.DarkRamaBow =
     AIData =
     {
         AIAttackDistance = 800,
-        -- AIBufferDistance = 100,
-        AIChargeTargetMarker = true,
-        -- AIAngleTowardsPlayerWhileFiring = true,
+        -- MoveSuccessDistance = 600,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 2.5,
-        FireDuration = 0.425,
-        PreFireDuration = 2.1,
+        AIMoveWithinRangeTimeout = 1.0,
+        PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRamaHeavyShotStart",
-        PreFireFx = "BowChargeRama",
+        PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
         FireAnimation = "ZagreusBowRamaHeavyShotFire",
         PreFireCancelAnimation = "ZagreusBowRamaHeavyShotStartCancel",
         MinChargeStartFx = "BowCharge",
-        MinChargeToFire = 0.2,
+        -- ChargeFx = "BowCharge",
+        IsRangeBasedOnCharge = true,
+        MinChargeTime = 0.2,
+        MaxChargeTime = 1,
+        Range = 45,
+        ChargeRangeMultiplier = 20,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -89,21 +93,24 @@ WeaponData.DarkRamaBowDash =
 
     AIData =
     {
-        AIAttackDistance = 800,
-        -- AIBufferDistance = 100,
         AIChargeTargetMarker = true,
-        -- AIAngleTowardsPlayerWhileFiring = true,
+        SkipMovement = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 2.5,
-        FireDuration = 0.45,
-        PreFireDuration = 2.1,
+        AIMoveWithinRangeTimeout = 1.0,
+        PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRamaDashShot_Start",
         PreFireFx = "BowChargeRamaDash",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
         FireAnimation = "ZagreusBowRamaDashShot_Fire",
         PreFireCancelAnimation = "ZagreusBowRamaDashShot_Cancel",
-        MinChargeStartFx = "BowCharge",
-        MinChargeToFire = 0.3,
+        -- MinChargeStartFx = "BowCharge",
+        IsRangeBasedOnCharge = true,
+        ChargeFx = "BowChargeFast",
+        MinChargeTime = 0.2,
+        MaxChargeTime = 1,
+        Range = 45,
+        ChargeRangeMultiplier = 20,
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -159,12 +166,9 @@ WeaponData.DarkRamaBowSplitShot =
     AIData =
     {
         AIAttackDistance = 800,
-        -- AIBufferDistance = 100,
         AIChargeTargetMarker = true,
-        -- AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-        -- FireDuration = 0.45,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusBowRamaRapidLoop_Start",
         PreFireFx = "BowChargeFast",

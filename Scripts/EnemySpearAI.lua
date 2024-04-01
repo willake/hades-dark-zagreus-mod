@@ -163,7 +163,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Prefire
 
-    DoPreFire(enemy, weaponAIData)
+    DoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -174,9 +174,9 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- Fire
     
     if weaponAIData.IsRangeBasedOnCharge then
-        DoChargeDistanceFire(enemy, weaponAIData, actionData.ChargeTime)
+        DoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
-        DoRegularFire(enemy, weaponAIData)
+        DoRegularFire(enemy, weaponAIData, targetId)
     end
 
     -- Fire end
@@ -200,7 +200,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
         
-        DoPreFire(enemy, chargeWeaponAIData)
+        DoPreFire(enemy, chargeWeaponAIData, targetId)
 
         -- if the charge time is larger than the threshold, at least play the first stage
         if chargeTime > weaponAIData.PostFireChargeStages[1].Threshold then
@@ -229,7 +229,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
             wait(remainChargeTime, enemy.AIThreadName)
 
-            DoRegularFire(enemy, chargeWeaponAIData) 
+            DoRegularFire(enemy, chargeWeaponAIData, targetId) 
         -- otherwise, play charge cancel animation
         else
             wait(chargeTime, enemy.AIThreadName)
@@ -246,7 +246,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         local postFireWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DoRegularFire(enemy, postFireWeaponAIData)
+        DoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     if weaponAIData.WillThrowSpear then
