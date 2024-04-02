@@ -47,11 +47,11 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- enemy.ShouldReturnSpearAfterThrow = false;
 
             -- shield template
-            enemy.PrimaryWeapon = "DarkZeusShield";
+            enemy.PrimaryWeapon = "DarkBeowulfShield";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkZeusShieldThrow";
+            enemy.SpecialAttackWeapon = "DarkBeowulfShieldThrow";
             -- enemy.SpecialAttackBonusWeapon = "DarkChaosShieldThrowBonus";
-            enemy.DashAttackWeapon = "DarkZeusShieldDash";
+            enemy.DashAttackWeapon = "DarkBeowulfShieldDash";
             -- EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
         end
     end

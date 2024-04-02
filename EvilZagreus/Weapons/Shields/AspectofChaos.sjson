@@ -9,7 +9,7 @@
         }
         {
             Name = "DarkChaosShieldDash"
-            InheritFrom = "DarkShieldDash"
+            InheritFrom = "DarkChaosShield"
             Projectile = "DarkChaosShieldDash"
             FireGraphic = "ZagreusShieldAlt01PunchFast"
         }

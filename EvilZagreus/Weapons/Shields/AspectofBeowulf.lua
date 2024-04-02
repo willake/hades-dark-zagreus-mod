@@ -1,5 +1,8 @@
 DebugPrint({ Text = "Load DarkBeowulfShield" })
 
+-- for this weapon, I don't know how to activate the
+-- speical rush, which is powered by the ranged weapon
+
 WeaponData.DarkBeowulfShield = {
     Name = "DarkBeowulfShield",
     -- DashWeapon ="ShieldWeaponDash",
@@ -13,15 +16,24 @@ WeaponData.DarkBeowulfShield = {
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.3,
-        PostFireChargeWeapon = "DarkShieldRush",
+        PostFireChargeWeapon = "DarkBeowulfShieldRush",
     },
 
     Sounds =
     {
+        ChargeSounds =
+        {
+            {
+                Name = "/VO/ZagreusEmotes/EmoteCharging_Bow",
+                StoppedBy = { "ChargeCancel", "Fired" }
+            }
+        },
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Shield" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyShieldAttack" },
             { Name = "/SFX/Player Sounds/ZagreusShieldSwipe" },
+            { Name = "" },
+
         },
         ImpactSounds =
         {
@@ -42,15 +54,16 @@ WeaponData.DarkBeowulfShield = {
 
     WeaponBinks =
     {
-        "ZagreusShieldThrowReceive_Bink",
-        "ZagreusShieldQuickAttack_Bink",
-        "ZagreusShieldAttack_Bink",
-        "ZagreusShieldDashAttack_Bink",
-        "ZagreusShieldRun_Bink",
-        "ZagreusShieldRunStop_Bink",
-        "ZagreusShieldWalk_Bink",
-        "ZagreusShieldIdle_Bink",
-        "ZagreusShieldHeavyThrow_Bink",
+        "ZagreusShieldBeowulfQuickAttack_Bink",
+        "ZagreusShieldBeowulfDashAttack_Bink",
+        "ZagreusShieldBeowulfAttack_Bink",
+        "ZagreusShieldBeowulfHeavyBullRush_Bink",
+        "ZagreusShieldBeowulfHeavyThrow_Bink",
+        "ZagreusShieldBeowulfThrowReceive_Bink",
+        "ZagreusShieldBeowulfIdle_Bink",
+        "ZagreusShieldBeowulfRun_Bink",
+        "ZagreusShieldBeowulfRunStop_Bink",
+        "ZagreusShieldHeavyPound_Bink",
         "ZagreusShieldHeavyThrowNoCatch_Bink",
     },
 }
@@ -76,7 +89,7 @@ WeaponData.DarkBeowulfShieldDash =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Shield" },
+            { Name = "/VO/ZagreusEmotes/EmoteAttacking_ShieldThrow" },
             { Name = "/SFX/Player Sounds/ZagreusShieldSwipe" },
         },
         ImpactSounds =
@@ -115,11 +128,24 @@ WeaponData.DarkBeowulfShieldThrow =
 		
     Sounds =
     {
+        ChargeSounds =
+        {
+            {
+                Name = "/Leftovers/SFX/AuraCharge",
+                Key = "ShieldThrowElectiveCharge",
+                StoppedBy = { "ChargeCancel", "TriggerRelease", "Fired" },
+                SetPitchToPropertyValue = "ChargeTime",
+            },
+            {
+                Name = "/VO/ZagreusEmotes/EmoteHeavyShieldCharge",
+                StoppedBy = { "ChargeCancel", "TriggerRelease", "Fired" },
+            }
+        },
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteRanged" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyShieldThrow" },
             { Name = "/SFX/Player Sounds/ZagreusBowFire" },
-            { Name = "/SFX/Player Sounds/ZagreusSpearThrow" },
+            { Name = "/SFX/Enemy Sounds/Minotaur/HugeAxeSwing" },
         },
         ImpactSounds =
         {
@@ -158,16 +184,16 @@ WeaponData.DarkBeowulfShieldRush =
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         PreFireDuration = 0.2,
-        PreFireAnimation = "ZagreusShieldAttackCharge",
+        PreFireAnimation = "ZagreusShieldBeowulfHeavyBullRush_Charge",
         PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
-        FireAnimation = "ZagreusShieldAttackFire",
-        PreFireCancelAnimation = "ZagreusShieldAttackChargeCancel",
+        FireAnimation = "ZagreusShieldBeowulfHeavyBullRush_Fire",
+        PreFireCancelAnimation = "ZagreusShieldBeowulfAttackChargeCancel",
         MinChargeStartFx = "ShieldCharge",
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
-        MinChargeTime = 0.2,
-        MaxChargeTime = 1,
+        MinChargeTime = 0.12, -- 0.2 * 0.6
+        MaxChargeTime = 1.5, -- 1 * 1.5
         -- Range = 45,
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
@@ -182,24 +208,20 @@ WeaponData.DarkBeowulfShieldRush =
             PerfectChargeSounds =
             {
                 { Name = "/SFX/Player Sounds/ZagreusCriticalFire" },
-                { Name = "/VO/ZagreusEmotes/EmoteAttacking_BowPowerShot" },
                 { Name = "/SFX/Player Sounds/ZagreusBowFire" },
             },
-            { Name = "/VO/ZagreusEmotes/EmoteParrying" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyShieldRush" },
             { Name = "/SFX/Player Sounds/ZagreusShieldRush" },
         },
         ChargeSounds =
         {
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyShieldBlock" },
+            { Name = "/SFX/Player Sounds/ZagreusHeavyShieldStomp" },
             {
                 Name = "/SFX/Player Sounds/ZagreusWeaponChargeup",
                 Key = "ShieldWeaponRush",
                 StoppedBy = { "ChargeCancel", "TriggerRelease", "Fired" },
-                SetPitchToPropertyValue = "ChargeTime",
             },
-            {
-                Name = "/VO/ZagreusEmotes/EmoteRangedCharging",
-                StoppedBy = { "ChargeCancel", "TriggerRelease", "Fired" },
-            }
         },
         ImpactSounds =
         {
@@ -218,3 +240,6 @@ WeaponData.DarkBeowulfShieldRush =
 
     Upgrades = { },
 }
+
+-- this weapon also changes the behavior of ranged weapon (red crystal)
+-- but i can't intergate ranged weapon with this mod, so I ignore all of the related actions
