@@ -13,7 +13,7 @@ WeaponData.DarkChaosShield = {
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.3,
-        PostFireChargeWeapon = "DarkShieldRush",
+        PostFireChargeWeapon = "DarkChaosShieldRush",
     },
 
     Sounds =
@@ -42,15 +42,14 @@ WeaponData.DarkChaosShield = {
 
     WeaponBinks =
     {
-        "ZagreusShieldThrowReceive_Bink",
-        "ZagreusShieldQuickAttack_Bink",
-        "ZagreusShieldAttack_Bink",
-        "ZagreusShieldDashAttack_Bink",
-        "ZagreusShieldRun_Bink",
-        "ZagreusShieldRunStop_Bink",
-        "ZagreusShieldWalk_Bink",
-        "ZagreusShieldIdle_Bink",
-        "ZagreusShieldHeavyThrow_Bink",
+        "ZagreusShield01QuickAttack_Bink",
+        "ZagreusShield01DashAttack_Bink",
+        "ZagreusShield01Attack_Bink",
+        "ZagreusShield01ThrowReceive_Bink",
+        "ZagreusShield01Idle_Bink",
+        "ZagreusShield01Run_Bink",
+        "ZagreusShield01RunStop_Bink",
+        "ZagreusShield01HeavyThrow_Bink",
         "ZagreusShieldHeavyThrowNoCatch_Bink",
     },
 }
@@ -97,6 +96,8 @@ WeaponData.DarkChaosShieldDash =
     Upgrades = { },
 }
 
+-- originally, there are ShieldThrow and ChaosShieldThrow
+-- for this mod will be DarkShieldThrow and DarkShieldThrowBonus
 WeaponData.DarkChaosShieldThrow = 
 {
     Name = "DarkChaosShieldThrow",
@@ -106,12 +107,54 @@ WeaponData.DarkChaosShieldThrow =
     AIData =
     {
         AIAttackDistance = 800,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-        PreFireDuration = 0.2,
-        FireAnimation = "ZagreusShieldThrow",
         WaitUntilProjectileDeath = true,
+        PostFireBonusWeapon = "DarkChaosShieldThrowBonus"
+    },
+		
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmoteRanged" },
+            { Name = "/SFX/Player Sounds/ZagreusBowFire" },
+            { Name = "/SFX/Player Sounds/ZagreusSpearThrow" },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Brick = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Stone = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Organic = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            StoneObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            BrickObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            MetalObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            BushObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+        },
+    },
+
+    Upgrades =
+    {
+
+    },
+    SelfMultiplier = 0,
+}
+
+WeaponData.DarkChaosShieldThrowBonus = 
+{
+    Name = "DarkChaosShieldThrowBonus",
+    StartingWeapon = false,
+    OnHitFunctionNames = { "IncrementHitByShield" },
+
+    AIData =
+    {
+        SkipMovement = true,
+        AITrackTargetDuringCharge = true,
+        FireDuration = 0.2,
+        WillConsumeBonus = true
     },
 		
     Sounds =
@@ -159,11 +202,11 @@ WeaponData.DarkChaosShieldRush =
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         PreFireDuration = 0.2,
-        PreFireAnimation = "ZagreusShieldAttackCharge",
+        PreFireAnimation = "ZagreusShieldAlt01AttackCharge",
         PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
-        FireAnimation = "ZagreusShieldAttackFire",
-        PreFireCancelAnimation = "ZagreusShieldAttackChargeCancel",
+        FireAnimation = "ZagreusShieldAlt01AttackFire",
+        PreFireCancelAnimation = "ZagreusShieldAlt01AttackChargeCancel",
         MinChargeStartFx = "ShieldCharge",
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
@@ -173,7 +216,8 @@ WeaponData.DarkChaosShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = true,
+        WillEnableBonus = true -- spectically for chaos shield
     },
 
     Sounds =

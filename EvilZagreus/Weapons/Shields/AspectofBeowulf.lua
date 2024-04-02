@@ -106,7 +106,6 @@ WeaponData.DarkBeowulfShieldThrow =
     AIData =
     {
         AIAttackDistance = 800,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
         PreFireDuration = 0.2,

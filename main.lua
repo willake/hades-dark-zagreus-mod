@@ -45,6 +45,14 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             enemy.DashAttackWeapon = "DarkShieldDash";
             EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
             -- enemy.ShouldReturnSpearAfterThrow = false;
+
+            -- shield template
+            enemy.PrimaryWeapon = "DarkChaosShield";
+            enemy.DashWeapon = "DarkRush";
+            enemy.SpecialAttackWeapon = "DarkChaosShieldThrow";
+            enemy.SpecialAttackBonusWeapon = "DarkChaosShieldThrowBonus";
+            enemy.DashAttackWeapon = "DarkChaosShieldDash";
+            -- EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
         end
     end
     

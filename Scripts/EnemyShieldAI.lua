@@ -11,6 +11,7 @@ function DarkZagreusShieldAI( enemy, currentRun )
         LastActionTime = 0
     }
     enemy.LastAction = ""
+    enemy.HasBonus = false -- for chaos shield
     while IsAIActive( enemy, currentRun ) do
 		local continue = DoShieldAILoop( enemy, currentRun )
 		if not continue then
@@ -175,7 +176,7 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Stop({ Id = enemy.ObjectId })
 
-    -- AspectofArthur will fire an area after special attack
+    -- shield will fire a rush weapon after primary attack
     if weaponAIData.PostFireChargeWeapon ~= nil then
         local postFireWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeWeapon)
@@ -183,6 +184,23 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         DoPreFire(enemy, postFireWeaponAIData, targetId)
 
         DoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
+        
+        if postFireWeaponAIData.WillEnableBonus then
+            enemy.HasBonus = true
+        end
+    end
+
+    if weaponAIData.PostFireBonusWeapon ~= nil and enemy.HasBonus then
+        local bonusWeaponAIData = 
+            DZGetWeaponAIData(enemy, weaponAIData.PostFireBonusWeapon)
+
+        DoPreFire(enemy, bonusWeaponAIData, targetId)
+
+        DoRegularFire(enemy, bonusWeaponAIData, targetId)
+
+        if bonusWeaponAIData.WillConsumeBonus then
+            enemy.HasBonus = false
+        end
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -229,6 +247,7 @@ function SelectShieldWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
+
         enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
