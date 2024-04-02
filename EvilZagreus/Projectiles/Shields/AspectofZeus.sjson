@@ -1,0 +1,21 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkZeusShield"
+        InheritFrom = "DarkShield"
+    }
+    {
+        Name = "DarkZeusShieldDash"
+        InheritFrom = "DarkShieldDash"
+    }
+    {
+        Name = "DarkZeusShieldThrow"
+        InheritFrom = "DarkShieldThrow"
+    }
+    {
+        Name = "DarkZeusShieldRush"
+        InheritFrom = "DarkShieldRush"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkBeowulfShield"
+            InheritFrom = "DarkShield"
+        }
+        {
+            Name = "DarkBeowulfShieldDash"
+            InheritFrom = "DarkShieldDash"
+        }
+        {
+            Name = "DarkBeowulfShieldThrow"
+            InheritFrom = "DarkShieldThrow"
+        }
+        {
+            Name = "DarkBeowulfShieldRush"
+            InheritFrom = "DarkShieldRush"
+        }
+    ]
+}
