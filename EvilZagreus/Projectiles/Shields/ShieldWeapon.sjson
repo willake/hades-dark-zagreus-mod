@@ -169,22 +169,22 @@
             AttachedAnim = "ShieldProjectileShadow"
             Grip = 999999
             Points = [
-            {
-                X = 36
-                Y = 32
-            }
-            {
-                X = 36
-                Y = -32
-            }
-            {
-                X = -36
-                Y = -32
-            }
-            {
-                X = -36
-                Y = 32
-            }
+                {
+                    X = 36
+                    Y = 32
+                }
+                {
+                    X = 36
+                    Y = -32
+                }
+                {
+                    X = -36
+                    Y = -32
+                }
+                {
+                    X = -36
+                    Y = 32
+                }
             ]
         }
         Effect = {

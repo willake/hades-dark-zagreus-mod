@@ -21,13 +21,14 @@ WeaponData.DarkRush =
         --PreAttackEndDuration = 0.5,
         --PreAttackEndShake = true,
         --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        FireDuration = 0.6,
+        -- FireDuration = 0.6,
         PostAttackDuration = 0,
         AIAttackDistance = 500,
         AIBufferDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
+        WaitUntilProjectileDeath = true
     },
 
     SimSlowBlur =

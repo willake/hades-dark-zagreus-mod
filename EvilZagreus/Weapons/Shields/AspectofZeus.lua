@@ -13,7 +13,7 @@ WeaponData.DarkZeusShield = {
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.3,
-        PostFireChargeWeapon = "DarkShieldRush",
+        PostFireChargeWeapon = "DarkZeusShieldRush",
     },
 
     Sounds =
@@ -102,6 +102,8 @@ WeaponData.DarkZeusShieldThrow =
     Name = "DarkZeusShieldThrow",
     StartingWeapon = false,
     OnHitFunctionNames = { "IncrementHitByShield" },
+    -- RecallOnFailToFire = "ShieldThrow",
+    -- NotReadySound = "/SFX/Player Sounds/ZagreusShieldReturn",
 
     AIData =
     {
@@ -110,7 +112,10 @@ WeaponData.DarkZeusShieldThrow =
         AIMoveWithinRangeTimeout = 2.5,
         PreFireDuration = 0.2,
         FireAnimation = "ZagreusShieldThrow",
-        WaitUntilProjectileDeath = true,
+        FireDuration = 0.2,
+        -- WaitUntilProjectileDeath = true,
+        IsZeusShieldThrow = true 
+        -- while equiping zeus shield, players can throw it and hit it again to make it turn back
     },
 		
     Sounds =
@@ -125,14 +130,14 @@ WeaponData.DarkZeusShieldThrow =
         {
             Invulnerable = "/SFX/SwordWallHitClank",
             Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Bone = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Brick = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Stone = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Organic = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            StoneObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            BrickObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            MetalObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            BushObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/Player Sounds/ElectricZapSmall",
+            Brick = "/SFX/Player Sounds/ElectricZapSmall",
+            Stone = "/SFX/Player Sounds/ElectricZapSmall",
+            Organic = "/SFX/Player Sounds/ElectricZapSmall",
+            StoneObstacle = "/SFX/Player Sounds/ElectricZapSmall",
+            BrickObstacle = "/SFX/Player Sounds/ElectricZapSmall",
+            MetalObstacle = "/SFX/Player Sounds/ElectricZapSmall",
+            BushObstacle = "/SFX/Player Sounds/ElectricZapSmall",
         },
     },
 
@@ -158,11 +163,11 @@ WeaponData.DarkZeusShieldRush =
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         PreFireDuration = 0.2,
-        PreFireAnimation = "ZagreusShieldAttackCharge",
+        PreFireAnimation = "ZagreusShieldAlt02AttackCharge",
         PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
-        FireAnimation = "ZagreusShieldAttackFire",
-        PreFireCancelAnimation = "ZagreusShieldAttackChargeCancel",
+        FireAnimation = "ZagreusShieldAlt02AttackFire",
+        PreFireCancelAnimation = "ZagreusShieldAlt02AttackChargeCancel",
         MinChargeStartFx = "ShieldCharge",
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,

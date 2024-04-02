@@ -12,6 +12,10 @@ function DarkZagreusShieldAI( enemy, currentRun )
     }
     enemy.LastAction = ""
     enemy.HasBonus = false -- for chaos shield
+    enemy.IsShieldThrown = false -- for zeus shield
+    -- times that AI call return shield function, 
+    -- preventing from calling return function multiple times
+    enemy.LastReturnShieldTime = 0 
     while IsAIActive( enemy, currentRun ) do
 		local continue = DoShieldAILoop( enemy, currentRun )
 		if not continue then
@@ -25,7 +29,12 @@ function DoShieldAILoop(enemy, currentRun, targetId)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = SelectShieldWeapon(enemy, actionData)
-    DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+
+    if enemy.WeaponName == nil then
+        return false
+    end
+
+    -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
@@ -51,10 +60,6 @@ function DoShieldAILoop(enemy, currentRun, targetId)
 				return true
 			end
 		end
-
-        if enemy.WeaponName == nil then
-            return true
-        end
 
         -- Attack
 		local attackSuccess = false
@@ -82,6 +87,17 @@ function DoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
     if weaponAIData == nil then
         weaponAIData = enemy
     end
+
+    -- if the last time the AI call return shield is less than 2 sec
+    -- then block the action, preventing from calling return multiple times
+    -- maybe there is a way to know if the shield is return, i don't know
+    -- so I set a fixed time, which is 3 sec to wait for the shield returns. 
+    if weaponAIData.IsZeusShieldThrow and _worldTime - enemy.LastReturnShieldTime < 3 then
+        DebugPrintf({ Text = "Try return the shield but it is called already."})
+        return false
+    else
+        enemy.IsShieldThrown = false
+    end 
 
     -- PRE ATTACK
 
@@ -123,8 +139,6 @@ function DoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
     enemy.AIState.LastActionTime = _worldTime
     SetLastActionOnAIState(enemy)
 
-    local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
-    
     return true
 end
 
@@ -161,7 +175,14 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire
     
-    DoRegularFire(enemy, weaponAIData, targetId)
+    if weaponAIData.IsZeusShieldThrow and enemy.IsShieldThrown then
+        -- try return the shield
+        RunWeaponMethod(
+            { Id = enemy.ObjectId, Weapon = weaponAIData.WeaponName, Method = "RecallProjectiles" })
+        enemy.LastReturnShieldTime = _worldTime
+    else
+        DoRegularFire(enemy, weaponAIData, targetId)
+    end
 
     -- Fire end
 
@@ -173,8 +194,6 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 	-- 	weaponAIData.ForcedEarlyExit = true
 	-- 	return true
 	-- end
-
-    -- Stop({ Id = enemy.ObjectId })
 
     -- shield will fire a rush weapon after primary attack
     if weaponAIData.PostFireChargeWeapon ~= nil then
@@ -201,6 +220,10 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         if bonusWeaponAIData.WillConsumeBonus then
             enemy.HasBonus = false
         end
+    end
+
+    if weaponAIData.IsZeusShieldThrow and enemy.IsShieldThrown == false then
+        enemy.IsShieldThrown = true
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -230,15 +253,6 @@ function SelectShieldWeapon(enemy, actionData)
 
         enemy.LastAction = "Attack"
 
-        -- if the last action is also attack, do weapon combo
-        -- if enemy.AIState.IsLastActionAttack > 0 then
-        --     if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-        --         enemy.WeaponName = enemy.ChainedWeapon
-        --         enemy.ChainedWeapon = nil
-        --         return enemy.WeaponName
-        --     end
-        -- end
-
         -- or just do a regular attack
         enemy.WeaponName = enemy.PrimaryWeapon
         enemy.ChainedWeapon = nil
@@ -247,7 +261,6 @@ function SelectShieldWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
-
         enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
