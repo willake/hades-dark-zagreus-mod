@@ -456,25 +456,46 @@ function DoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
         return false
     end
 
-    -- calculate distance
+    -- equip weapon so that SetProperty can work, otherwise it won't changed
     EquipWeapon({ Name = weaponAIData.WeaponName, DestinationId = enemy.ObjectId })
-    local rangeMultiplier = weaponAIData.ChargeRangeMultiplier or 1
-    local range = weaponAIData.Range or 0.0
-    -- if range ~= nil then
-    --     DebugPrintf({ Text = "Old projectile range: " .. range })
-    -- else
-    --     DebugPrintf({ Text = "Can't find old projectile range" }) 
-    -- end
-    -- set projectile range
-    SetProjectileProperty(
-        { WeaponName = weaponAIData.WeaponName, DestinationId = enemy.ObjectId, Property = "Range", Value = range * percentageCharged * rangeMultiplier })
+    -- set projectile range based on charge time
+    if weaponAIData.ChargeRangeMultiplier then
+        local rangeMultiplier = weaponAIData.ChargeRangeMultiplier or 1
+        local range = weaponAIData.Range or 0.0
+        -- if range ~= nil then
+        --     DebugPrintf({ Text = "Old projectile range: " .. range })
+        -- else
+        --     DebugPrintf({ Text = "Can't find old projectile range" }) 
+        -- end
+        -- set projectile range
+        SetProjectileProperty(
+            { WeaponName = weaponAIData.WeaponName, DestinationId = enemy.ObjectId, Property = "Range", Value = range * percentageCharged * rangeMultiplier })
+    
+        -- DEBUG, check new range
+        local newRange = GetProjectileProperty({ Id = enemy.ObjectId, WeaponName = "DarkBow", Property = "Range" })
+        if newRange ~= nil then
+            DebugPrintf({ Text = "New projectile range: " .. newRange })
+        else
+            DebugPrintf({ Text = "Can't find new projectile range" }) 
+        end 
+    end
 
-    -- DEBUG, check new range
-    local newRange = GetProjectileProperty({ Id = enemy.ObjectId, WeaponName = "DarkBow", Property = "Range" })
-    if newRange ~= nil then
-        DebugPrintf({ Text = "New projectile range: " .. newRange })
-    else
-        DebugPrintf({ Text = "Can't find new projectile range" }) 
+    -- set weapon velocity based on charge time, e.g. DarkShieldRush
+    if weaponAIData.ChargeVelocityMultiplier then
+        local velocityMultiplier = weaponAIData.ChargeVelocityMultiplier or 1
+        local velocity = weaponAIData.Velocity or 0.0
+
+        -- set weapon velocity
+        SetWeaponProperty(
+            { WeaponName = weaponAIData.WeaponName, DestinationId = enemy.ObjectId, Property = "SelfVelocity", Value = velocity * percentageCharged * velocityMultiplier })
+        -- DEBUG, check new range
+        local newVelocity = GetWeaponDataValue({ Id = enemy.ObjectId, WeaponName = weaponAIData.WeaponName, Property = "SelfVelocity" })
+        if newVelocity ~= nil then
+            -- DebugPrintTable("New velocity", newVelocity, 3)
+            DebugPrintf({ Text = "New weapon velocity: " .. newVelocity })
+        else
+            DebugPrintf({ Text = "Can't find new weapon velocity" }) 
+        end 
     end
 
     -- charge starts

@@ -176,11 +176,13 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- Stop({ Id = enemy.ObjectId })
 
     -- AspectofArthur will fire an area after special attack
-    if weaponAIData.PostFireWeapon ~= nil then
+    if weaponAIData.PostFireChargeWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+            DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeWeapon)
 
-        DoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DoPreFire(enemy, postFireWeaponAIData, targetId)
+
+        DoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then

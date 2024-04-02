@@ -1,0 +1,358 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkShield"
+            InheritFrom = "1_BaseTrapWeapon"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkShield"
+            TreatProjectilesAsUniqueVolleys = true
+            ChargeSoundFadeTime = 0.25
+            RootOwnerWhileFiring = false
+            BarrelLength = 150
+            FireFx = "null"
+            ShowFreeAimLine = false
+            AimLineAnimation = "null"
+            ChargeStartAnimation = "null"
+            FireGraphic = "ZagreusShieldPunch"
+            ChargeCancelGraphic = "null"
+            ChargeStartFx = "null"
+            ChargeFinishFx = "null"
+            NumProjectiles = 1
+            MinChargeToFire = 0
+            ChargeTime = 0
+            DisableOwnerForDurationFrames = 0
+            CanCancelDisables = false
+            // TriggersStoredAmmoVulnerability = true
+            // CancelMovement = false
+            // ChargeCancelMovement = false
+            // BlockMoveInput = false
+            // FullyAutomatic = true
+            // AutoLock = false
+            // AutoLockRange = 1000
+            // LockTriggerForCharge = false
+            // RequestTriggerLockDuringReload = true
+            // FireOnRelease = false
+            // ReloadOnRelease = true
+            // ReloadTime = 0.4
+            // SwapOnFire = "ShieldWeaponRush"
+            // SetCompleteAngleOnFire = true
+            // SetCompleteAngleOnCharge = true
+            Effects = [
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldAttackReflect"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 0.19
+                    Range = 180
+                    Deflect = false
+                    AngleCoverage = 90
+                    Active = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDisableAttack"
+                    DurationFrames = 10
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDisableAttackFast"
+                    DurationFrames = 7
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldSelfSlowFire"
+                    Type = "SPEED"
+                    DurationFrames = 25
+                    Modifier = 0.1
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+            ]
+        }
+        {
+            Name = "DarkShieldDash"
+            InheritFrom = "DarkShield"
+            Projectile = "DarkShieldDash"
+            Control = "Attack2"
+            Cooldown = 0.02
+            DisableOwnerForDurationFrames = 0
+            ControlWindow = 0.45
+            AutoLockArcDistance = 90
+            SelfVelocity = 400
+            FireGraphic = "ZagreusShieldPunchFast"
+            ChargeTimeFrames = 0
+            ChargeStartAnimation = "null"
+            Enabled = true
+            CanCancelDisables = true
+            CanCancelOwnDisables = true
+            // LockTriggerTransferFromOnSwap = false
+            // AllowExternalForceRelease = false
+            // MinChargeToFire = 0
+            // ChargeTime = 0
+            Effects = [
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDashReflect"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 0.22
+                    Range = 180
+                    Deflect = false
+                    AngleCoverage = 60
+                    Active = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDisableAttack"
+                    DurationFrames = 12
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldSelfSlowFire"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.1
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+
+                {
+                    Trigger = "Charging"
+                    Name = "ShieldSelfSlowFireBeowulf"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.15
+                    Active = false
+                    DisableRotate = true
+                    CanAffectInvulnerable = true
+                    ClearOnAttack = false
+                }
+            ]
+        }
+        {
+            Name = "DarkShieldRush"
+            InheritFrom = "1_BaseTrapWeapon"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkShieldRush"
+            ClipSize = 1
+            ChargeSoundFadeTime = 0.25
+            FullyAutomatic = true
+            ChargeCancelMovement = true
+            CancelMovement = true
+            RootOwnerWhileFiring = true
+            BarrelLength = 0
+            AutoLock = false
+            ChargeStartAnimation = "null"
+            ChargeCancelGraphic = "null"
+            ChargeStartFx = "ShieldCharge"
+            FireGraphic = "null"
+            // FireOnRelease = true
+            Cooldown = 0
+            MinChargeToFire = 0.2
+            ChargeTime = 0.8
+            // ShowFreeAimLine = true
+            // AimLineAnimation = "AuraAimLineShield"
+            SelfVelocity = 600
+            SelfVelocityCap = 3000
+            ChargeRangeMultiplier = 5.0
+            ChargeVelocityMultiplier = 5.0
+            ChargeDamageMultiplier = 10.0
+            ControlWindow = 0.22
+            CanCancelDisables = true
+            LoseControlOnRelease = true
+            AllowExternalForceRelease = false
+            TriggersStoredAmmoVulnerability = true
+            Effects = [
+                {
+                    Trigger = "Charging"
+                    Name = "ShieldSelfSpeed"
+                    Type = "SPEED"
+                    HaltOnStart = true
+                    Duration = 0.02
+                    Modifier = 0.2
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    ClearOnAttack = true
+                    Name = "ShieldSelfInvulnerableRush"
+                    Type = "INVULNERABLE"
+                    Duration = 9999
+                    Modifier = 1.0
+                    Active = true
+                    AngleCoverage = 125
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    ClearOnAttack = true
+                    Name = "ShieldSelfReflectRush"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 9999
+                    Range = 75
+                    Deflect = false
+                    AngleCoverage = 125
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldSelfSpeed"
+                    DisableMove = true
+                    Duration = 0.3
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldWeaponHalt"
+                    Type = "GRIP"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    HaltOnEnd = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireSelfReflection"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = true
+                    CanAffectInvulnerable = true
+                    Range = 125
+                    Deflect = false
+                    AngleCoverage = 105
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireSelfInvulnerable"
+                    Type = "INVULNERABLE"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = true
+                    CanAffectInvulnerable = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableAttack"
+                    DurationFrames = 18
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableMove"
+                    DurationFrames = 18
+                    DisableMove = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireRequestTriggerLock"
+                    DurationFrames = 25
+                    RequestTriggerLock = true
+                    TimeModifierFraction = 0
+                }
+
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableAttackPunch"
+                    DurationFrames = 20
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableMovePunch"
+                    DurationFrames = 20
+                    DisableMove = true
+                    Cancelable = true
+                    Active = false
+                }
+            ]
+        }
+        {
+            Name = "DarkShieldThrow"
+            InheritFrom = "1_BaseTrapWeapon"
+            // InheritFrom = "1_BaseMagicWeapon"
+            Control = "Attack3"
+            Type = "GUN"
+            Projectile = "DarkShieldThrow"
+            // ForceReleaseAllOnFire = true
+            RootOwnerWhileFiring = true
+            // BlockMoveInput = true
+            // CancelMovement = true
+            // ChargeCancelMovement = true
+            FullyAutomatic = false
+            BarrelLength = 80
+            BarrelRequiresLoS = true
+            // AutoLock = true
+            // AutoLockRange = 900
+            // AutoLockArcDistance = 90
+            UseTargetAngle = true
+            // ShowFreeAimLine = true
+            // AimLineAnimation = "AuraAimLine"
+            ChargeStartAnimation = "null"
+            FireGraphic = "ZagreusShieldThrow"
+            LockTriggerForCharge = false
+            FireOnRelease = false
+            ChargeRangeMultiplier = 1.0
+            ChargeSpeedMultiplier = 1
+            ChargeCancelGraphic = "null"
+            ChargeFinishFx = "null"
+            DisableOwnerForDuration = 0.3
+            NumProjectiles = 1
+            MinChargeToFire = 0
+            ChargeTime = 0.0
+            BelowMinChargeCooldown = 0
+            ClipSize = 1
+            // ReloadTime = 0.55
+            UseReloadGraphic = false
+            ReloadGraphic = "null"
+            ReloadGraphicFinish = "null"
+            // RemoveControlOnFire = "ShieldWeapon"
+            // RemoveControlOnFire2 = "ShieldThrow"
+            // RemoveControlOnFire3 = "ShieldWeaponDash"
+            // RemoveControlOnFire4 = "ShieldThrowDash"
+            // RemoveAllControlSwaps = "ShieldWeapon"
+            // TriggersStoredAmmoVulnerability = true
+            // SetCompleteAngleOnFire = true
+            // SetCompleteAngleOnCharge = true
+            IgnoreOwnerAttackDisabled = false
+            // AllowMultiFireRequest = false
+            Effects = [
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldThrowDisable"
+                    DurationFrames = 13
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+            ]
+        }
+    ]
+}

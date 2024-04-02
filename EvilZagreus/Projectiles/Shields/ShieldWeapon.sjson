@@ -1,0 +1,204 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkShield"
+        InheritFrom = "1_BaseTrapProjectile"
+        // InheritFrom = "1_BaseDamagingProjectile"
+        DetonateGraphic = "ShieldSwipe"
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        NumPenetrations = 0
+        Range = 1.0
+        Speed = 3000.0
+        DamageRadius = 160
+        Fuse = 0.0
+        BlastDuration = 0.1
+        AttachToOwner = true
+        RequireHitCenter = false
+        DamageLow = 5 // 25
+        DamageHigh = 5 // 25
+        // ImpactVelocity = 2500
+        // ImpactVelocityCap = 2500
+        InvulnerableImpactOwnerVelocity = 350
+        UseRadialImpact = false
+        DamageRadiusScaleX = 1.0
+        DamageRadiusScaleY = 0.7
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        DetonateLineOfSightFromOwner = true
+        Effects = [
+            {
+                Name = "RushGrip"
+                Type = "GRIP"
+                Duration = 0.35
+                Modifier = 0.7
+                HaltOnEnd = true
+                Active = false
+            }
+            {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        ]
+    }
+    {
+        Name = "DarkShieldDash"
+        InheritFrom = "DarkShield"
+        DetonateGraphic = "ShieldSwipeDash"
+        DamageRadius = 190
+        ImpactVelocity = 500
+        ImpactVelocityCap = 500
+    }
+    {
+        Name = "DarkShieldRush"
+        InheritFrom = "1_BaseTrapProjectile"
+        AttachedPowershotAnimation = "ShieldWeaponPowerShot"
+        DetonateGraphic = "null"
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        UnlimitedUnitPenetration = true
+        NumPenetrations = 9999
+        AttachToOwner = true
+        Fuse = 0.3
+        DamageLow = 4
+        DamageHigh = 4
+        // ImpactVelocity = 2200
+        // ImpactVelocityCap = 2200
+        UseRadialImpact = false
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        DissipateGraphic = "ShieldRush3D-Out"
+        GroupName = "FX_Standing_Add"
+        ClearOnAttackEffects = true
+        Thing = {
+            Graphic = "ShieldRush3D"
+            RotateGeometry = true
+            Grip = 999999
+            Points = [
+            {
+                X = 130
+                Y = 100
+            }
+            {
+                X = 130
+                Y = -100
+            }
+            {
+                X = -10
+                Y = -100
+            }
+            {
+                X = -10
+                Y = 100
+            }
+            ]
+        }
+        Effect = {
+            Name = "OnHitStun"
+            Duration = 0.5
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+        }
+    }
+    {
+        Name = "DarkShieldThrow"
+        InheritFrom = "1_BaseTrapProjectile"
+        DetonateGraphic = "DoorCloseDust"
+        InvincibleImpactSound = "/SFX/Player Sounds/ZagreusShieldRicochet"
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = true
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        Range = 9999
+        Speed = 2000
+        DamageRadius = 0
+        DamageLow = 15
+        DamageHigh = 15
+        NumJumps = 2
+        JumpSpeedMultiplier = 1.3
+        ProjectileDefenseRadius = 100
+        CanBeReflected = false
+        Fuse = 9.0
+        FinalJumpToOwner = true
+        ReturnToOwnerAfterInactiveSeconds = 0.55
+        OnDeathImpactForce = 0
+        OnDeathFiredByAnimation = "ZagreusShieldCatch"
+        // AddControlOnDeath = "ShieldWeapon"
+        // AddControlOnDeath2 = "ShieldThrow"
+        NoJumpTargetRandomSpread = 10
+        UnlimitedObstaclePenetration = true
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        JumpRequiresLos = true
+        BounceWhenOutOfJumpTargets = true
+        SpawnType = "PROJECTILE"
+        SpawnOnDeath = "ShieldCatchBlast"
+        SpawnCount = 0
+        DangerDistance = 0
+        Thing = {
+            Graphic = "ProjectileShield"
+            OffsetZ = 70
+            RotateGeometry = true
+            AttachedAnim = "ShieldProjectileShadow"
+            Grip = 999999
+            Points = [
+            {
+                X = 36
+                Y = 32
+            }
+            {
+                X = 36
+                Y = -32
+            }
+            {
+                X = -36
+                Y = -32
+            }
+            {
+                X = -36
+                Y = 32
+            }
+            ]
+        }
+        Effect = {
+            Name = "OnHitStun"
+            Duration = 0
+            // IgnoreName = "_PlayerUnit"
+            OnlyAffectName = "_PlayerUnit"
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+        }
+    }
+  ]
+}
