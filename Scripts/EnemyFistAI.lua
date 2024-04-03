@@ -62,6 +62,7 @@ function DoFistAILoop(enemy, currentRun, targetId)
             attackSuccess = DoFistAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
+                DebugPrintf({ Text = "Attack failed. Gonna try again."})
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
 				waitUntil( enemy.AINotifyName )
@@ -128,59 +129,81 @@ function DoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDat
 end
 
 function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local chargeTime = 0.0
+    local fireTicks = 1
 
-    if weaponAIData.PostFireChargeStages ~= nil then
-        chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
-        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
-    end
+    -- use the chargeTime to interpolate the combo counts
+    -- chargeTime in this situation is how long the player hold the button
+    -- it can high than 1
+    if weaponAIData.CanDoCombo and actionData.ChargeTime > 0.0 then
+ 
+        -- calculate how many times will this action finish a combo 
+        -- the purpose of this calculation is to consider the cooldown time after DarkFist5
+        -- i know it's kinda dumb but this is the only way i can think of now
+        local remainTime = actionData.ChargeTime
+        local finishComboTimes = 0
+        if weaponAIData.IsStartFromFistDash and remainTime > 1.2 then
+            remainTime = remainTime - 1.2
+            finishComboTimes = 1
+            -- if start with DarkFistDash, the first combo takes 1.2 sec to finish whole combo
+            -- from DarkFistDash to DarkFist5, 0.2 attack duration per action
+            -- following by normal combos
+        else
+            -- if start with DarkFist, it takes 1 sec to finish whole combo
+            -- from DarkFist to DarkFist5, 0.2 attack duration per action
+            remainTime = remainTime - 1
+            finishComboTimes = 1
+        end
 
-    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-        weaponAIData.ForcedEarlyExit = true
-        return true
-    end
+        local finishComboTimes = finishComboTimes + math.floor(remainTime / 1)
+        local totalCooldownTime = finishComboTimes * 0.5 -- cooldown time is 0.5
+        DebugPrintf({ Text = "Will finish combo " .. finishComboTimes .. " times"})
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+        fireTicks = math.ceil((actionData.ChargeTime - totalCooldownTime) / 0.2)
+        DebugPrintf({ Text = "Total hold time is " .. actionData.ChargeTime .. ", set fire ticks to " .. fireTicks})
+    end 
 
-    if weaponAIData.AIAngleTowardsPlayerWhileFiring then
-        AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
-    end
+    local aiData = DZGetWeaponAIData(enemy, weaponAIData.WeaponName)
 
-    -- Prefire
-
-    DoPreFire(enemy, weaponAIData, targetId)
-
-    -- Prefire End
-
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
-
-    -- Fire
+    for fireTick = 1, fireTicks, 1 do
+        -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+        --     weaponAIData.ForcedEarlyExit = true
+        --     return true
+        -- end
     
-    DoRegularFire(enemy, weaponAIData, targetId)
+        -- if not CanAttack({ Id = enemy.ObjectId }) then
+        --     return false
+        -- end
 
-    -- Fire end
+        -- TODO: CanAttack is not working here, I dont know why
+        -- It will keep failing and repeat the same attack
+    
+        -- TODO: this is not working as well
+        if aiData.AIAngleTowardsPlayerWhileFiring then
+            AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
+        end
+        
+        -- Prefire
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
+        DoPreFire(enemy, aiData, targetId)
 
-    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-	-- 	weaponAIData.ForcedEarlyExit = true
-	-- 	return true
-	-- end
+        -- Prefire End
 
-    -- Stop({ Id = enemy.ObjectId })
+        -- if not CanAttack({ Id = enemy.ObjectId }) then
+        --     return false
+        -- end
 
-    -- AspectofArthur will fire an area after special attack
-    if weaponAIData.PostFireWeapon ~= nil then
-        local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+        -- Fire
+        
+        DoRegularFire(enemy, aiData, targetId)
+        -- Fire end
 
-        DoRegularFire(enemy, postFireWeaponAIData, targetId)
+        if aiData.Cooldown then
+            wait(aiData.Cooldown, enemy.AIThreadName)
+        end
+
+        if aiData.ChainedWeapon then
+            aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)
+        end
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -208,18 +231,8 @@ function SelectFistWeapon(enemy, actionData)
             return enemy.WeaponName
         end
 
-        enemy.LastAction = "Attack"
-
-        -- if the last action is also attack, do weapon combo
-        if enemy.AIState.IsLastActionAttack > 0 then
-            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-                enemy.WeaponName = enemy.ChainedWeapon
-                enemy.ChainedWeapon = nil
-                return enemy.WeaponName
-            end
-        end
-
         -- or just do a regular attack
+        enemy.LastAction = "Attack"
         enemy.WeaponName = enemy.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
@@ -228,6 +241,14 @@ function SelectFistWeapon(enemy, actionData)
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
         enemy.LastAction = "SpecialAttack"
+
+        -- fist weapon special has dash attack version
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+            enemy.WeaponName = enemy.SpecialDashAttackWeapon
+            enemy.ChainedWeapon = nil
+            return enemy.WeaponName
+        end
+
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
