@@ -36,15 +36,23 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- SetWeaponProperty({ WeaponName = "EnemySwordWeapon", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireGraphic", Value = "ZagreusSwordArthurAttack1_Fire", ValueChangeType = "Absolute" })
 
             -- spear template
-            enemy.PrimaryWeapon = "DarkBow";
+            enemy.PrimaryWeapon = "DarkShield";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkBowSplitShot";
+            enemy.SpecialAttackWeapon = "DarkShieldThrow";
             -- enemy.SpecialAttackWeaponReturn = "DarkGuanYuSpearThrowReturn";
             -- enemy.SpecialAttackWeaponInvisibleReturn = "DarkAchillesSpearThrowInvisibleReturn";
             -- enemy.SpecialAttackWeaponRush = "DarkAchillesSpearRush";
-            enemy.DashAttackWeapon = "DarkBowDash";
+            enemy.DashAttackWeapon = "DarkShieldDash";
             EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
             -- enemy.ShouldReturnSpearAfterThrow = false;
+
+            -- shield template
+            enemy.PrimaryWeapon = "DarkBeowulfShield";
+            enemy.DashWeapon = "DarkRush";
+            enemy.SpecialAttackWeapon = "DarkBeowulfShieldThrow";
+            -- enemy.SpecialAttackBonusWeapon = "DarkChaosShieldThrowBonus";
+            enemy.DashAttackWeapon = "DarkBeowulfShieldDash";
+            -- EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
         end
     end
     
