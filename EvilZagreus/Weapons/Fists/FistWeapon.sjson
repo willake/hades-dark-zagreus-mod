@@ -1,0 +1,765 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkFist"
+            InheritFrom = "1_BaseTrapWeapon"
+            // InheritFrom = "1_BaseDamagingWeapon"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkFist"
+            ClipSize = 1
+            RootOwnerWhileFiring = false
+            ChargeStartAnimation = "ZagreusFistFlurryPunch_Start"
+            FireGraphic = "ZagreusFistFlurryPunch_Fire1"
+            FireFx = "null"
+            NumProjectiles = 1
+            ChargeTime = 0.16
+            FireOnRelease = false
+            ChargeFx = "null"
+            SelfVelocity = 0
+            BarrelLength = 0
+            // LockTrigger = true
+            // CancelChargeOnRelease = false
+            // ForceReleaseOnSwap = false
+            // SwapOnFire = "FistWeapon2"
+            // BlockMoveInput = false
+            // CancelMovement = false
+            // ChargeCancelMovement = false
+            // FullyAutomatic = true
+            // AllowExternalForceRelease = false
+            // AutoLock = true
+            // AutoLockRange = 360
+            // AutoLockArcDistance = 220
+            // CanCancelDisables = false
+            // CanCancelRotateDisables = true
+            // TriggersStoredAmmoVulnerability = true
+            // IgnoreTriggerLockDuringCooldown = true
+            Effects = [
+                {
+                    Name = "FistDisable"
+                    DurationFrames = 3
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "FistDisableAndLockTrigger"
+                    DurationFrames = 5
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "FistSelfSlowCharge"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.4
+                    RotationMultiplier = 0.01
+                    Active = true
+                    Cancelable = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "FistSelfSelfSlowFire"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.4
+                    RotationMultiplier = 0.002
+                    Active = true
+                    Cancelable = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "FistFlurrySelfSlowCharge"
+                    Type = "SPEED"
+                    DurationFrames = 1
+                    Modifier = 0.0001
+                    RotationMultiplier = 0.01
+                    Active = false
+                    Cancelable = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Name = "FistFlurryHalt"
+                    Trigger = "Fire"
+                    DurationFrames = 28
+                    HaltOnEnd = true
+                    Active = false
+                }
+                {
+                    Name = "FistFlurryDisable"
+                    DurationFrames = 30
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "FistFlurryDisableAndLockTrigger"
+                    DurationFrames = 32
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                    Active = false
+                }
+
+                {
+                    Name = "FistChargeDisable"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "FistChargeDisableAndLockTrigger"
+                    DurationFrames = 9
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                    Active = false
+                }
+
+                {
+                    Name = "FistHeavyAttackTraitDefense"
+                    Type = "DAMAGE_TAKEN"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = false
+                    ImmuneToForce = true
+                    ClearOnAttack = false
+                    ExtendDurationOnReapply = true
+                }
+
+                {
+                    Name = "FistDetonateMoveDisable"
+                    DurationFrames = 18
+                    DisableMove = true
+                    Cancelable = true
+                    Active = false
+                }
+            ]
+        }
+        {
+            Name = "DarkFist2"
+            InheritFrom = "DarkFist"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkFist"
+            ClipSize = 1
+            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge2"
+            FireGraphic = "ZagreusFistFlurryPunch_Fire2"
+            FireFx = "null"
+            NumProjectiles = 1
+            ChargeTime = 0.08
+            FireOnRelease = false
+            ChargeFx = "null"
+            SelfVelocity = 0
+            BarrelLength = 0
+            ControlWindow = 0.3
+            // LockTrigger = true
+            // LockTriggerForCharge = true
+            // CancelChargeOnRelease = false
+            // FullyAutomatic = true
+            // SwapOnFire = "FistWeapon3"
+            // CanCancelDisables = false
+            // CanCancelRotateDisables = true
+            // TriggersStoredAmmoVulnerability = true
+            Effects = [
+                {
+                    Name = "FistDisable2"
+                    DurationFrames = 3
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "FistDisableAndLockTrigger2"
+                    DurationFrames = 5
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "FistSelfSlowCharge2"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.4
+                    RotationMultiplier = 0.01
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "FistSwordSelfSlowFire2"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    RotationMultiplier = 0.002
+                    Modifier = 0.4
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+
+                {
+                    Name = "FistChargeDisable2"
+                    DurationFrames = 4
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "FistChargeDisableAndLockTrigger2"
+                    DurationFrames = 9
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                    Active = false
+                }
+
+                {
+                    Name = "FistHeavyAttackTraitDefense"
+                    Type = "DAMAGE_TAKEN"
+                    Duration = 0.3
+                    Modifier = 0.5
+                    Active = false
+                    ImmuneToForce = true
+                    ClearOnAttack = false
+                    ExtendDurationOnReapply = true
+                }
+                {
+                    Name = "FistDetonateMoveDisable"
+                    DurationFrames = 18
+                    DisableMove = true
+                    Cancelable = true
+                    Active = false
+                    ClearOnAttack = false
+                }
+            ]
+            }
+
+        {
+            Name = "DarkFist3"
+            InheritFrom = "DarkFist2"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkFist"
+            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge3"
+            FireGraphic = "ZagreusFistFlurryPunch_Fire3"
+            FireFx = "null"
+            ChargeTime = 0.08
+            ControlWindow = 0.3
+            // SwapOnFire = "FistWeapon4"
+            Effects = [
+                {
+                Name = "FistDisable3"
+                DurationFrames = 3
+                DisableMove = false
+                DisableRotate = false
+                DisableAttack = true
+                RequestTriggerLock = true
+                }
+                {
+                Name = "FistDisableAndLockTrigger3"
+                DurationFrames = 5
+                DisableMove = false
+                DisableRotate = false
+                DisableAttack = true
+                RequestTriggerLock = true
+                Cancelable = true
+                }
+                {
+                Trigger = "Charging"
+                Name = "FistSelfSlowCharge3"
+                Type = "SPEED"
+                DurationFrames = 10
+                Modifier = 0.4
+                RotationMultiplier = 0.01
+                Active = true
+                Cancelable = true
+                CanAffectInvulnerable = true
+                }
+                {
+                Trigger = "Fire"
+                Name = "FistSwordSelfSlowFire3"
+                Type = "SPEED"
+                DurationFrames = 10
+                Modifier = 0.4
+                RotationMultiplier = 0.002
+                Active = true
+                Cancelable = true
+                CanAffectInvulnerable = true
+                }
+
+                {
+                Name = "FistHeavyAttackTraitDefense"
+                Type = "DAMAGE_TAKEN"
+                Duration = 0.3
+                Modifier = 0.5
+                Active = false
+                ImmuneToForce = true
+                ClearOnAttack = false
+                ExtendDurationOnReapply = true
+                }
+
+                {
+                Name = "FistChargeDisable3"
+                DurationFrames = 5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                RequestTriggerLock = true
+                Active = false
+                }
+                {
+                Name = "FistChargeDisableAndLockTrigger3"
+                DurationFrames = 9
+                DisableMove = true
+                DisableRotate = false
+                DisableAttack = true
+                RequestTriggerLock = true
+                Cancelable = true
+                Active = false
+                }
+                {
+                Name = "FistDetonateMoveDisable"
+                DurationFrames = 18
+                DisableMove = true
+                Cancelable = true
+                Active = false
+                ClearOnAttack = false
+                }
+            ]
+        }
+        {
+            Name = "DarkFist4"
+            InheritFrom = "DarkFist2"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkFist"
+            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge4"
+            FireGraphic = "ZagreusFistFlurryPunch_Fire4"
+            FireFx = "null"
+            ChargeTime = 0.08
+            ControlWindow = 0.3
+            // SwapOnFire = "FistWeapon5"
+            Effects = [
+                {
+                Name = "FistDisable4"
+                DurationFrames = 3
+                DisableMove = false
+                DisableRotate = false
+                DisableAttack = true
+                RequestTriggerLock = true
+                }
+                {
+                Name = "FistDisableAndLockTrigger4"
+                DurationFrames = 5
+                DisableMove = false
+                DisableRotate = false
+                DisableAttack = true
+                RequestTriggerLock = true
+                Cancelable = true
+                }
+                {
+                Trigger = "Charging"
+                Name = "FistSelfSlowCharge4"
+                Type = "SPEED"
+                DurationFrames = 10
+                Modifier = 0.4
+                RotationMultiplier = 0.01
+                Active = true
+                Cancelable = true
+                CanAffectInvulnerable = true
+                }
+                {
+                Trigger = "Fire"
+                Name = "FistSwordSelfSlowFire4"
+                Type = "SPEED"
+                DurationFrames = 10
+                Modifier = 0.4
+                RotationMultiplier = 0.002
+                Active = true
+                Cancelable = true
+                CanAffectInvulnerable = true
+                }
+
+                {
+                Name = "FistHeavyAttackTraitDefense"
+                Type = "DAMAGE_TAKEN"
+                Duration = 0.3
+                Modifier = 0.5
+                Active = false
+                ImmuneToForce = true
+                ClearOnAttack = false
+                ExtendDurationOnReapply = true
+                }
+                {
+                Name = "FistDetonateMoveDisable"
+                DurationFrames = 18
+                DisableMove = true
+                Cancelable = true
+                Active = false
+                ClearOnAttack = false
+                }
+            ]
+        }
+        {
+            Name = "DarkFist5"
+            InheritFrom = "DarkFist2"
+            Control = "Attack2"
+            Type = "GUN"
+            Projectile = "DarkFist"
+            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge5"
+            FireGraphic = "ZagreusFistFlurryPunch_Fire5"
+            FireFx = "null"
+            ChargeTime = 0.08
+            ControlWindow = 0.3
+            // SwapOnFire = "FistWeapon"
+            CooldownWeaponSlotThree = 0.5
+            Effects = [
+                {
+                    Name = "FistDisable5"
+                    DurationFrames = 6
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "FistSelfSlowCharge5"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.4
+                    RotationMultiplier = 0.01
+                    Active = true
+                    Cancelable = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "FistSwordSelfSlowFire5"
+                    Type = "SPEED"
+                    DurationFrames = 15
+                    Modifier = 0.4
+                    RotationMultiplier = 0.01
+                    Active = true
+                    Cancelable = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Name = "FistHeavyAttackTraitDefense"
+                    Type = "DAMAGE_TAKEN"
+                    Duration = 0.3
+                    Modifier = 0.5
+                    Active = false
+                    ImmuneToForce = true
+                    ClearOnAttack = false
+                    ExtendDurationOnReapply = true
+                }
+                {
+                    Name = "FistDetonateMoveDisable"
+                    DurationFrames = 25
+                    DisableMove = true
+                    Cancelable = true
+                    Active = false
+                    ClearOnAttack = false
+                }
+            ]
+        }
+        {
+            Name = "DarkFistDash"
+            InheritFrom = "DarkFist"
+            Control = "Attack2"
+            Projectile = "DarkFistDash"
+            BarrelLength = 0
+            ChargeTime = 0.08
+            LockTriggerForCharge = true
+            ChargeStartAnimation = "ZagreusFistDashHayMaker_Charge"
+            FireGraphic = "ZagreusFistDashHayMaker_Fire"
+            FireFx = "null"
+            Enabled = true
+            ForceReleaseOnSwap = false
+            ControlWindow = 0.3
+            SelfVelocity = 0
+            // SwapOnFire = "FistWeapon"
+            // AutoLockArcDistance = 360
+            // AutoLockRange = 200
+            // CanCancelDisables = true
+            // CanCancelOwnDisables = true
+            // LockTriggerTransferFromOnSwap = false
+            // AllowExternalForceRelease = false
+            // LockTrigger = false
+            // SetCompleteAngleOnFire = false
+            // SetCompleteAngleOnCharge = false
+            // TriggerTapIgnoresCooldown = true
+            // IgnoreTriggerLockDuringCooldown = false
+            Effects = [
+                {
+                    Name = "FistDashDisable"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    Cancelable = false
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "FistDashDisable3"
+                    DurationFrames = 12
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = true
+                }
+                {
+                    Name = "FistDashSelfSlow"
+                    Type = "SPEED"
+                    Trigger = "Charging"
+                    DurationFrames = 11
+                    Modifier = 0.25
+                    Cancelable = true
+                }
+                {
+                    Name = "FistWeaponSelfGrip"
+                    Type = "GRIP"
+                    DurationFrames = 11
+                    Modifier = 1.5
+                    HaltOnEnd = true
+                    Cancelable = false
+                }
+            ]
+        }
+        {
+            Name = "DarkFistSpecial"
+            InheritFrom = "1_BaseTrapWeapon"
+            Control = "Attack3"
+            UseTargetAngle = true
+            Type = "GUN"
+            Projectile = "DarkFistSpecial"
+            ChargeSoundFadeTime = 0.25
+            RootOwnerWhileFiring = false
+            BarrelLength = 0
+            FireFx = "FistFxUppercutDirectional"
+            ShowFreeAimLine = false
+            AimLineAnimation = "null"
+            ChargeStartAnimation = "ZagreusFistAerialUpperCut_Start"
+            FireGraphic = "ZagreusFistAerialUpperCut_Fire"
+            LockTriggerForCharge = true
+            FireOnRelease = false
+            ChargeCancelGraphic = "null"
+            ChargeStartFx = "null"
+            ChargeFinishFx = "null"
+            NumProjectiles = 2
+            ProjectileInterval = 0.13
+            MinChargeToFire = 1
+            ChargeTime = 0.18
+            Cooldown = 0.5
+            // ReloadOnRelease = true
+            // AllowExternalForceRelease = false
+            // PriorityFireRequest = true
+            // CancelMovement = false
+            // CanCancelDisables = true
+            // CanCancelOwnDisables = false
+            // ChargeCancelMovement = false
+            // FullyAutomatic = false
+            // AutoLock = false
+            // AutoLockRange = 1000
+            // IgnoreTriggerLockDuringCooldown = true
+            // TriggersStoredAmmoVulnerability = true
+            // SetCompleteAngleOnFire = false
+            // SetCompleteAngleOnCharge = false
+            Effects = [
+                {
+                    Name = "FistSpecialInvulnerable"
+                    Type = "INVULNERABLE"
+                    DurationFrames = 27
+                    Modifier = 1.0
+                    Active = false
+                    CanAffectInvulnerable = true
+                    FrontFx = "HermesRushSpeedTrailZ"
+                    BackFx = "null"
+                }
+                {
+                    Name = "FistSpecialDisable"
+                    DurationFrames = 26
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = false
+                }
+                {
+                    Name = "FistSpecialDisableCancelable"
+                    DurationFrames = 33
+                    DisableMove = false
+                    DisableRotate = false
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "FistSpecialChargeSelfSlow"
+                    Type = "SPEED"
+                    Modifier = 0.01
+                    Duration = 0.18
+                    Active = true
+                    HaltOnEnd = false
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "FistSpecialFireSelfSlow"
+                    Type = "SPEED"
+                    Modifier = 0.5
+                    Duration = 0.1
+                    RotationMultiplier = 0.01
+                    Active = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "FistSpecialFireHalt"
+                    Type = "SPEED"
+                    Modifier = 1.0
+                    DurationFrames = 26
+                    Active = false
+                    HaltOnEnd = true
+                }
+                {
+                    Name = "FistSpecialFireDisable"
+                    DurationFrames = 8
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = false
+                    Active = false
+                }
+                {
+                    Name = "FistSpecialFireMoveCancel"
+                    DurationFrames = 18
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Cancelable = true
+                    Active = false
+                }
+                {
+                    Name = "FistHeavyAttackTraitDefense"
+                    Type = "DAMAGE_TAKEN"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = false
+                    ImmuneToForce = true
+                    ClearOnAttack = false
+                    ExtendDurationOnReapply = true
+                }
+            ]
+        }
+        {
+            Name = "DarkFistSpecialDash"
+            InheritFrom = "DarkFist"
+            Control = "Attack3"
+            Projectile = "DarkFistSpecialDash"
+            BarrelLength = 0
+            ChargeTime = 0.11
+            NumProjectiles = 1
+            FullyAutomatic = false
+            ChargeStartAnimation = "ZagreusFistDashUpperCut_Start"
+            FireGraphic = "ZagreusFistDashUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
+            Enabled = true
+            ControlWindow = 0.3
+            SelfVelocity = 0
+            // LockTriggerForCharge = true
+            // SwapOnFire = "FistWeaponSpecial"
+            // ForceReleaseOnSwap = true
+            // AutoLockArcDistance = 360
+            // AutoLockRange = 200
+            // CanCancelDisables = true
+            // CanCancelOwnDisables = true
+            // LockTriggerTransferFromOnSwap = false
+            // AllowExternalForceRelease = false
+            // LockTrigger = false
+            // SetCompleteAngleOnFire = true
+            // SetCompleteAngleOnCharge = true
+            Effects = [
+                {
+                    Name = "FistSpecialDashDisable"
+                    DurationFrames = 8
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    Cancelable = false
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "FistSpecialDashDisable2"
+                    DurationFrames = 12
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    Cancelable = false
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "FistSpecialDashDisable3"
+                    DurationFrames = 18
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = false
+                    Cancelable = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "FistDashSelfSlow"
+                    Type = "SPEED"
+                    Trigger = "Charging"
+                    DurationFrames = 14
+                    Modifier = 0.25
+                    Cancelable = true
+                }
+                {
+                    Name = "FistWeaponSelfGrip"
+                    Type = "GRIP"
+                    DurationFrames = 14
+                    Modifier = 1.5
+                    HaltOnEnd = true
+                    Cancelable = false
+                }
+                {
+                    Name = "FistHeavyAttackTraitDefense"
+                    Type = "DAMAGE_TAKEN"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = false
+                    ImmuneToForce = true
+                    ClearOnAttack = false
+                    ExtendDurationOnReapply = true
+                }
+            ]
+            }
+    ]
+}

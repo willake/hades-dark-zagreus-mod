@@ -1,0 +1,272 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkFist"
+        // InheritFrom = "1_BaseDamagingProjectile"
+        InheritFrom = "1_BaseTrapProjectile"
+        AttachedPowershotAnimation = "FistFxPowerShot"
+        DetonateGraphic = null
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        UnlimitedUnitPenetration = true
+        DamageLow = 15
+        DamageHigh = 15
+        Speed = 0
+        Range = 0
+        StartDelay = 0.02
+        Fuse = 0.10
+        NumPenetrations = 99999
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        AttachToOwner = true
+        AttachToMarker = "null"
+        AngleFromMarker = "null"
+        InvulnerableImpactOwnerVelocity = 300
+        StartFx = null
+        SetAnimRadialOffset = true
+        UseRadialImpact = false
+        ImpactLineOfSightFromOwner = true
+        ProjectileDefenseAngle = 65
+        ProjectileDefenseRadius = 215
+        DeflectProjectiles = false
+        GroupName = "FX_Standing_Add"
+        Thing = 
+        {
+            Graphic = "FistFxBase"
+            OffsetZ = 70
+            RotateGeometry = true
+            Grip = 999999
+            SortBoundsScale = 0.15
+            UseBoundsForSortDrawArea = true
+            Tallness = 2
+            Points = [
+            {
+                X = 0
+                Y = -25
+            }
+            {
+                X = 200
+                Y = -100
+            }
+            {
+                X = 200
+                Y = 100
+            }
+            {
+                X = 0
+                Y = 25
+            }
+            ]
+        }
+        Effects = [
+            {
+            Name = "OnHitStun"
+            Duration = 0.5
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+            }
+        ]
+    }
+	{
+        Name = "DarkFistDash"
+        InheritFrom = "DarkFist"
+        DamageLow = 25
+        DamageHigh = 25
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+        DetonateGraphic = null
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        UnlimitedUnitPenetration = true
+        Speed = 2700
+        Range = 260
+        Fuse = 0.1
+        NumPenetrations = 99999
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        AttachToMarker = "null"
+        AngleFromMarker = "null"
+        StartFx = "FistFxSwipe"
+        UseRadialImpact = false
+        ImpactLineOfSightFromOwner = true
+        ProjectileDefenseAngle = 90
+        ProjectileDefenseRadius = 260
+        DeflectProjectiles = false
+        Thing = {
+            Graphic = null
+            OffsetZ = 70
+            RotateGeometry = true
+            Grip = 999999
+            Points = [
+                {
+                    X = 0
+                    Y = 110
+                }
+                {
+                    X = 0
+                    Y = -110
+                }
+                {
+                    X = 280
+                    Y = -200
+                }
+                {
+                    X = 280
+                    Y = 200
+                }
+            ]
+        }
+        Effects = [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        ]
+    }
+	{
+        Name = "DarkFistSpecial"
+        // InheritFrom = "1_BaseDamagingProjectile"
+        InheritFrom = "1_BaseTrapProjectile"
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        UnlimitedUnitPenetration = true
+        NumPenetrations = 99999
+        StartDelay = 0.0
+        Fuse = 0.25
+        DamageLow = 30
+        DamageHigh = 30
+        AttachToOwner = true
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+        UseRadialImpact = true
+        ProjectileDefenseAngle = 90
+        ProjectileDefenseRadius = 325
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        ImpactLineOfSightFromOwner = true
+        Thing = 
+        {
+            Graphic = null
+            OffsetZ = 70
+            RotateGeometry = true
+            Grip = 999999
+            Points = [
+            {
+                X = 0
+                Y = 80
+            }
+            {
+                X = 0
+                Y = -80
+            }
+            {
+                X = 300
+                Y = -140
+            }
+            {
+                X = 300
+                Y = 140
+            }
+            ]
+        }
+        Effects = [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+            {
+                Name = "MarkTargetFist"
+                Duration = 5.0
+                Modifier = 1
+                Active = false
+                TimeModifierFraction = 0
+                FrontFx = "MarkTargetPrimary"
+                BackFx = "null"
+            }
+        ]
+    }
+	{
+        Name = "DarkFistSpecialDash"
+        InheritFrom = "DarkFistSpecial"
+        DamageLow = 40
+        DamageHigh = 40
+        Effects = [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+            {
+                Name = "StunSpeed"
+                // IgnoreName = "_PlayerUnit"
+                OnlyAffectName = "_PlayerUnit"
+                Duration = 0.0
+                DisableMove = true
+                Active = false
+                CanAffectInvulnerable = true
+                FrontFx = "StunnedFrontAphrodite"
+                BackFx = "StunnedBackAphrodite"
+            }
+            {
+                Name = "StunDisarm"
+                // IgnoreName = "_PlayerUnit"
+                OnlyAffectName = "_PlayerUnit"
+                DisableAttack = true
+                Duration = 0.0
+                Active = false
+                CanAffectInvulnerable = true
+                FrontFx = "null"
+                FlashFrontFxWhenExpiring = true
+            }
+            {
+                Name = "MarkTargetFist"
+                Duration = 5.0
+                Modifier = 1
+                Active = false
+                TimeModifierFraction = 0
+                FrontFx = "MarkTargetPrimary"
+                BackFx = "null"
+            }
+        ]
+    }
+    ]
+}
