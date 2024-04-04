@@ -154,7 +154,7 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
             finishComboTimes = 1
         end
 
-        local finishComboTimes = finishComboTimes + math.floor(remainTime / 1)
+        finishComboTimes = finishComboTimes + math.floor(remainTime / 1)
         local totalCooldownTime = finishComboTimes * 0.5 -- cooldown time is 0.5
         DebugPrintf({ Text = "Will finish combo " .. finishComboTimes .. " times"})
 

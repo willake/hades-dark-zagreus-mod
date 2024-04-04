@@ -1,0 +1,21 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkTalosFist"
+        InheritFrom = "DarkFist"
+    }
+    {
+        Name = "DarkTalosFistDash"
+        InheritFrom = "DarkFistDash"
+    }
+        {
+        Name = "DarkTalosFistSpecial"
+        InheritFrom = "DarkFistSpecial"
+    }
+        {
+        Name = "DarkTalosFistSpecialDash"
+        InheritFrom = "DarkFistSpecialDash"
+    }
+  ]
+}
