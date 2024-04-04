@@ -1,5 +1,9 @@
 DebugPrint({ Text = "Load DarkTalosFist" })
 
+-- This weapon will trigger VacuumRush function
+-- I will make a replicated version of this function
+-- to attract player
+
 WeaponData.DarkTalosFist = 
 {
     Name = "DarkTalosFist",
@@ -44,14 +48,15 @@ WeaponData.DarkTalosFist =
 
     WeaponBinks =
     {
-        "ZagreusFistIdle_Bink",
-        "ZagreusFistFlurryPunch_Bink",
-        "ZagreusFistDashHayMaker_Bink",
-        "ZagreusFistDashUpperCut_Bink",
-        "ZagreusFistRun_Bink",
-        "ZagreusFistRunStop_Bink",
-        "ZagreusFistAerialUpperCut_Bink",
-        "ZagreusFistGrab_Bink",
+        "ZagreusFistAlt02Idle_Bink",
+        "ZagreusFistAlt02Run_Bink",
+        "ZagreusFistAlt02RunStop_Bink",
+        "ZagreusFistAlt02FlurryPunch_Bink",
+        "ZagreusFistAlt02FlashKick_Bink",
+        "ZagreusFistAlt02Grab_Bink",
+        "ZagreusFistAlt02AerialUpperCut_Bink",
+        "ZagreusFistAlt02DashUpperCut_Bink",
+        "ZagreusFistAlt02DashHayMaker_Bink",
     },
 }
 
@@ -180,6 +185,10 @@ WeaponData.DarkTalosFistSpecial =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
+        PreFireDuration = 0.24,
+        PreFireAnimation = "ZagreusFistAlt02Grab_Start",
+        FireAnimation = "ZagreusFistAlt02AerialUpperCut_Fire",
+        WillTriggerVacuumFunction = true
     },
 
     Sounds =
@@ -212,6 +221,11 @@ WeaponData.DarkTalosFistSpecial =
     Upgrades = { },
 }
 
+WeaponData.DarkTalosFistSpecialVacuum =
+{
+    Name = "DarkTalosFistSpecialVacuum"
+}
+
 WeaponData.DarkTalosFistSpecialDash = 
 {
     Name = "DarkTalosFistSpecialDash",
@@ -227,6 +241,10 @@ WeaponData.DarkTalosFistSpecialDash =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
+        PreFireDuration = 0.24,
+        PreFireAnimation = "ZagreusFistAlt02Grab_Start",
+        FireAnimation = "ZagreusFistAlt02DashUpperCut_Fire",
+        WillTriggerVacuumFunction = true
     },
 
     Sounds =

@@ -55,11 +55,11 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
         
             -- fist template
-            enemy.PrimaryWeapon = "DarkFist";
+            enemy.PrimaryWeapon = "DarkTalosFist";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkFistSpecial";
-            enemy.SpecialDashAttackWeapon = "DarkFistSpecialDash";
-            enemy.DashAttackWeapon = "DarkFistDash";
+            enemy.SpecialAttackWeapon = "DarkTalosFistSpecial";
+            enemy.SpecialDashAttackWeapon = "DarkTalosFistSpecialDash";
+            enemy.DashAttackWeapon = "DarkTalosFistDash";
         end
     end
     

@@ -156,10 +156,10 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
         finishComboTimes = finishComboTimes + math.floor(remainTime / 1)
         local totalCooldownTime = finishComboTimes * 0.5 -- cooldown time is 0.5
-        DebugPrintf({ Text = "Will finish combo " .. finishComboTimes .. " times"})
+        -- DebugPrintf({ Text = "Will finish combo " .. finishComboTimes .. " times"})
 
         fireTicks = math.ceil((actionData.ChargeTime - totalCooldownTime) / 0.2)
-        DebugPrintf({ Text = "Total hold time is " .. actionData.ChargeTime .. ", set fire ticks to " .. fireTicks})
+        -- DebugPrintf({ Text = "Total hold time is " .. actionData.ChargeTime .. ", set fire ticks to " .. fireTicks})
     end 
 
     local aiData = DZGetWeaponAIData(enemy, weaponAIData.WeaponName)
@@ -183,6 +183,16 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         end
         
         -- Prefire
+
+        if aiData.WillTriggerVacuumFunction then
+            DZCheckVacuumPlayer(enemy, targetId, 
+            {
+				Range = 800,				-- Vacuum distance
+				DistanceBuffer = 130,		-- Space to leave between player and enemy
+				RushDistanceBuffer = 300,
+				AutoLockArc = 60,
+			})
+        end
 
         DoPreFire(enemy, aiData, targetId)
 
@@ -264,4 +274,34 @@ function SelectFistWeapon(enemy, actionData)
 
     enemy.WeaponName = nil
     return nil
+end
+
+function DZFistVacuumRush(enemy)
+    -- i might do this function later
+    -- because I don't know when is it trigger
+    enemy.VacuumRush = true
+	wait( args.Duration, RoomThreadName )
+	enemy.VacuumRush = false
+end
+
+function DZFistVacuumPullPresentation( attracter, victimId, args )
+	CreateAnimationsBetween({ Animation = "FistVacuumFx", DestinationId = victimId, Id = attracter.ObjectId, Length = args.distanceBuffer, Stretch = true, UseZLocation = false, Group = "FX_Standing_Add" })
+	PlaySound({ Name = "/SFX/Player Sounds/ZagreusFistMagnetismVacuumActivate", Id = victimId })
+end
+
+-- attract player to enemy position
+function DZCheckVacuumPlayer(enemy, targetId, args)
+    -- TODO sometime it's not working, need to know why
+    -- maybe also check if player is dead
+	if targetId ~= 0 then
+		local distanceBuffer = args.DistanceBuffer
+        -- if CurrentRun.Hero.VacuumRush then
+		-- 	distanceBuffer = args.RushDistanceBuffer
+		-- end
+        Stop({ Id = targetId })
+        -- DebugPrintf({ Text = "GetRequiredForceToEnemy: " .. GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer )})
+		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
+		FireWeaponFromUnit({ Weapon = "DarkTalosFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId })
+		DZFistVacuumPullPresentation( enemy, targetId, args )
+	end
 end
