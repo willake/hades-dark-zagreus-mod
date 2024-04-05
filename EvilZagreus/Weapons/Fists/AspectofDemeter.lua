@@ -9,6 +9,8 @@ WeaponData.DarkDemeterFist =
     -- SecondaryWeapon = "FistWeaponSpecial",
     ComboPoints = 1,
     CauseImpactReaction = true,
+    UseComboPower = true,
+    
     AIData =
     {
         AIAttackDistance = 100,
@@ -44,14 +46,15 @@ WeaponData.DarkDemeterFist =
 
     WeaponBinks =
     {
-        "ZagreusFistIdle_Bink",
-        "ZagreusFistFlurryPunch_Bink",
-        "ZagreusFistDashHayMaker_Bink",
-        "ZagreusFistDashUpperCut_Bink",
-        "ZagreusFistRun_Bink",
-        "ZagreusFistRunStop_Bink",
-        "ZagreusFistAerialUpperCut_Bink",
-        "ZagreusFistGrab_Bink",
+        "ZagreusFistAlt01Idle_Bink",
+        "ZagreusFistAlt01Run_Bink",
+        "ZagreusFistAlt01RunStop_Bink",
+        "ZagreusFistAlt01FlurryPunch_Bink",
+        "ZagreusFistAlt01FlashKick_Bink",
+        "ZagreusFistAlt01Grab_Bink",
+        "ZagreusFistAlt01AerialUpperCut_Bink",
+        "ZagreusFistAlt01DashUpperCut_Bink",
+        "ZagreusFistAlt01DashHayMaker_Bink",
     },
 }
 
@@ -125,6 +128,7 @@ WeaponData.DarkDemeterFistDash =
     StartingWeapon = false,
     CauseImpactReaction = true,
     ComboPoints = 1,
+    UseComboPower = true,
 
     AIData =
     {
@@ -173,6 +177,7 @@ WeaponData.DarkDemeterFistSpecial =
     -- OnFiredFunctionName = "CheckComboPowerReset",
     CauseImpactReaction = true,
     ImpactReactionHitsOverride = 2,
+    UseComboPower = true,
 
     AIData =
     {
@@ -180,6 +185,9 @@ WeaponData.DarkDemeterFistSpecial =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
+        PreFireDuration = 0.18,
+        PreFireAnimation = "ZagreusFistAlt01AerialUpperCut_Start",
+        FireAnimation = "ZagreusFistAlt01AerialUpperCut_Fire"
     },
 
     Sounds =
@@ -227,6 +235,9 @@ WeaponData.DarkDemeterFistSpecialDash =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
+        PreFireDuration = 0.18,
+        PreFireAnimation = "ZagreusFistAlt01DashUpperCut_Start",
+        FireAnimation = "ZagreusFistAlt01DashUpperCut_Fire"
     },
 
     Sounds =

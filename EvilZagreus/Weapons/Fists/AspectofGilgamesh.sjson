@@ -5,43 +5,31 @@
             Name = "DarkGilgameshFist"
             InheritFrom = "DarkFist"
             Projectile = "DarkGilgameshFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Start"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire1"
         }
         {
             Name = "DarkGilgameshFist2"
             InheritFrom = "DarkFist2"
             Projectile = "DarkGilgameshFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge2"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire2"
         }
         {
             Name = "DarkGilgameshFist3"
             InheritFrom = "DarkFist3"
             Projectile = "DarkGilgameshFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge3"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire3"
         }
         {
             Name = "DarkGilgameshFist4"
             InheritFrom = "DarkFist4"
             Projectile = "DarkGilgameshFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge4"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire4"
         }
         {
             Name = "DarkGilgameshFist5"
             InheritFrom = "DarkFist5"
             Projectile = "DarkGilgameshFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge5"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire5"
         }
         {
             Name = "DarkGilgameshFistDash"
             InheritFrom = "DarkFistDash"
             Projectile = "DarkGilgameshFistDash"
-            ChargeStartAnimation = "ZagreusFistAlt01DashHayMaker_Charge"
-            FireGraphic = "ZagreusFistAlt01DashHayMaker_Fire"
         }
         {
             Name = "DarkGilgameshFistSpecial"
