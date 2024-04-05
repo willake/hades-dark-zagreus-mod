@@ -276,12 +276,15 @@ function SelectFistWeapon(enemy, actionData)
     return nil
 end
 
+-- these function are replicated version from Power.lua
+-- because the original version is only available for player character
+
 function DZFistVacuumRush(enemy)
     -- i might do this function later
     -- because I don't know when is it trigger
     enemy.VacuumRush = true
 	wait( args.Duration, RoomThreadName )
-	enemy.VacuumRush = false
+	enemy.VacuumRush = false 
 end
 
 function DZFistVacuumPullPresentation( attracter, victimId, args )
@@ -303,5 +306,65 @@ function DZCheckVacuumPlayer(enemy, targetId, args)
 		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
 		FireWeaponFromUnit({ Weapon = "DarkTalosFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId })
 		DZFistVacuumPullPresentation( enemy, targetId, args )
+	end
+end
+
+-- will wrap DamageHero in Combat.lua to call this
+function DZCheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
+
+	if sourceWeaponData == nil or sourceWeaponData.ComboPoints == nil or sourceWeaponData.ComboPoints <= 0 then
+		return
+	end
+
+	if triggerArgs.EffectName ~= nil then
+		-- Effects never generate combo points for now
+		return
+	end
+
+	if victim.NoComboPoints then
+		return
+	end
+
+	-- if not HeroHasTrait( "FistWeaveTrait" ) then
+	-- 	return
+	-- end
+
+	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
+
+	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
+		attacker.ComboReady = true
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 2 + GetTotalHeroTraitValue("BonusSpecialHits") })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		if HeroHasTrait( "FistSpecialFireballTrait" ) then
+			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.08 })
+		else
+			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		end
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 + GetTotalHeroTraitValue("BonusSpecialHits") })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+
+		ComboReadyPresentation( attacker, triggerArgs )
+	end
+
+end
+
+function DZCheckComboPowerReset( attacker, weaponData, args )
+	if weaponData ~= nil and attacker.ComboReady then
+		thread(MarkObjectiveComplete, "FistWeaponFistWeave")
+		attacker.ComboReady = false
+		attacker.ComboCount = 0
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 2 })
+		if HeroHasTrait( "FistSpecialFireballTrait" ) then
+			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 })
+		end
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "null" })
+		if not args or not args.Undelivered then
+			ComboDeliveredPresentation( attacker, triggerArgs )
+		end
 	end
 end

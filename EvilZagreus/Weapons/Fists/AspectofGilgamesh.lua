@@ -44,14 +44,15 @@ WeaponData.DarkGilgameshFist =
 
     WeaponBinks =
     {
-        "ZagreusFistIdle_Bink",
-        "ZagreusFistFlurryPunch_Bink",
-        "ZagreusFistDashHayMaker_Bink",
-        "ZagreusFistDashUpperCut_Bink",
-        "ZagreusFistRun_Bink",
-        "ZagreusFistRunStop_Bink",
-        "ZagreusFistAerialUpperCut_Bink",
-        "ZagreusFistGrab_Bink",
+        "ZagreusFistAlt01Idle_Bink",
+        "ZagreusFistAlt01Run_Bink",
+        "ZagreusFistAlt01RunStop_Bink",
+        "ZagreusFistAlt01FlurryPunch_Bink",
+        "ZagreusFistAlt01FlashKick_Bink",
+        "ZagreusFistAlt01Grab_Bink",
+        "ZagreusFistAlt01AerialUpperCut_Bink",
+        "ZagreusFistAlt01DashUpperCut_Bink",
+        "ZagreusFistAlt01DashHayMaker_Bink",
     },
 }
 
@@ -180,6 +181,9 @@ WeaponData.DarkGilgameshFistSpecial =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
+        PreFireDuration = 0.18,
+        PreFireAnimation = "ZagreusFistAlt01AerialUpperCut_Start",
+        FireAnimation = "ZagreusFistAlt01AerialUpperCut_Fire"
     },
 
     Sounds =
@@ -227,6 +231,9 @@ WeaponData.DarkGilgameshFistSpecialDash =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
+        PreFireDuration = 0.18,
+        PreFireAnimation = "ZagreusFistAlt01DashUpperCut_Start",
+        FireAnimation = "ZagreusFistAlt01DashUpperCut_Fire"
     },
 
     Sounds =
