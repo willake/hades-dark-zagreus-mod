@@ -187,7 +187,8 @@ WeaponData.DarkDemeterFistSpecial =
         FireDuration = 0.4,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistAlt01AerialUpperCut_Start",
-        FireAnimation = "ZagreusFistAlt01AerialUpperCut_Fire"
+        FireAnimation = "ZagreusFistAlt01AerialUpperCut_Fire",
+        CheckComboPowerReset = true, -- equals to OnFiredFunctionName = "CheckComboPowerReset",
     },
 
     Sounds =
@@ -225,6 +226,7 @@ WeaponData.DarkDemeterFistSpecialDash =
     Name = "DarkDemeterFistSpecialDash",
     StartingWeapon = false,
     CauseImpactReaction = true,
+    UseComboPower = true,
     -- DamageNumberGenusName = "FistWeaponSpecial",
     --ComboPoints = 1,
     -- OnFiredFunctionName = "CheckComboPowerReset",
@@ -237,7 +239,8 @@ WeaponData.DarkDemeterFistSpecialDash =
         FireDuration = 0.4,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistAlt01DashUpperCut_Start",
-        FireAnimation = "ZagreusFistAlt01DashUpperCut_Fire"
+        FireAnimation = "ZagreusFistAlt01DashUpperCut_Fire",
+        CheckComboPowerReset = true, -- equals to OnFiredFunctionName = "CheckComboPowerReset",
     },
 
     Sounds =

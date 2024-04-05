@@ -55,12 +55,20 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- EquipWeapon({ Name = enemy.PrimaryWeapon, DestinationId = enemy.ObjectId })
         
             -- fist template
-            enemy.PrimaryWeapon = "DarkTalosFist";
+            enemy.PrimaryWeapon = "DarkDemeterFist";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkTalosFistSpecial";
-            enemy.SpecialDashAttackWeapon = "DarkTalosFistSpecialDash";
-            enemy.DashAttackWeapon = "DarkTalosFistDash";
+            enemy.SpecialAttackWeapon = "DarkDemeterFistSpecial";
+            enemy.SpecialDashAttackWeapon = "DarkDemeterFistSpecialDash";
+            enemy.DashAttackWeapon = "DarkDemeterFistDash";
         end
     end
     
 end }
+
+
+-- for fist weapon
+ModUtil.Path.Context.Wrap("DamageHero", function(victim, triggerArgs)
+    local attacker = triggerArgs.AttackerTable
+    local sourceWeaponData = GetWeaponData( attacker, triggerArgs.SourceWeapon )
+	thread( DZCheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
+end, EvilZagreus)

@@ -11,6 +11,7 @@ function DarkZagreusFistAI( enemy, currentRun )
         LastActionTime = 0
     }
     enemy.LastAction = ""
+    enemy.ComboThreshold = 12 -- for AspectofDemeter
     while IsAIActive( enemy, currentRun ) do
 		local continue = DoFistAILoop( enemy, currentRun )
 		if not continue then
@@ -205,6 +206,15 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         -- Fire
         
         DoRegularFire(enemy, aiData, targetId)
+
+        -- for AspectofDemeter
+        -- the original implementation is only available for player
+        -- so I implement it here
+        if aiData.CheckComboPowerReset then
+            local sourceWeaponData = GetWeaponData( attacker, aiData.WeaponName )
+            DZCheckComboPowerReset(enemy, sourceWeaponData)
+        end
+
         -- Fire end
 
         if aiData.Cooldown then
@@ -315,56 +325,60 @@ function DZCheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 	if sourceWeaponData == nil or sourceWeaponData.ComboPoints == nil or sourceWeaponData.ComboPoints <= 0 then
 		return
 	end
-
-	if triggerArgs.EffectName ~= nil then
-		-- Effects never generate combo points for now
-		return
-	end
-
-	if victim.NoComboPoints then
-		return
-	end
-
-	-- if not HeroHasTrait( "FistWeaveTrait" ) then
-	-- 	return
-	-- end
+    
+    if sourceWeaponData.UseComboPower == nil then
+        return
+    end
 
 	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
 
+    DebugPrintf({ Text = "Combo" .. attacker.ComboCount })
+
 	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
 		attacker.ComboReady = true
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 2 + GetTotalHeroTraitValue("BonusSpecialHits") })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
-		if HeroHasTrait( "FistSpecialFireballTrait" ) then
-			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.08 })
-		else
-			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
-		end
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 + GetTotalHeroTraitValue("BonusSpecialHits") })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		-- if HeroHasTrait( "FistSpecialFireballTrait" ) then
+		-- 	SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.08 })
+		-- else
+        SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		-- end
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
 
-		ComboReadyPresentation( attacker, triggerArgs )
+		DZComboReadyPresentation( attacker, triggerArgs )
 	end
 
 end
 
-function DZCheckComboPowerReset( attacker, weaponData, args )
+function DZComboReadyPresentation( attacker, triggerArgs )
+	CreateAnimation({ Name = "FistComboReadyFx", DestinationId = attacker.ObjectId })
+	CreateAnimation({ Name = "PowerUpComboReady", DestinationId = attacker.ObjectId })
+	CreateAnimation({ Name = "FistComboReadyGlow", DestinationId = attacker.ObjectId })
+	if CheckCooldown( "ComboReadyHint", 1.5 ) then
+		thread( InCombatText, attacker.ObjectId, "Combo_Ready", 0.8 )
+		PlaySound({ Name = "/SFX/Player Sounds/ZagreusFistComboProc", Id = attacker.ObjectId })
+	end
+end
+
+function DZCheckComboPowerReset( attacker, weaponData )
 	if weaponData ~= nil and attacker.ComboReady then
-		thread(MarkObjectiveComplete, "FistWeaponFistWeave")
+        DebugPrintf({ Text = "Reset Combo"})
+		-- thread(MarkObjectiveComplete, "FistWeaponFistWeave")
 		attacker.ComboReady = false
 		attacker.ComboCount = 0
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 2 })
-		if HeroHasTrait( "FistSpecialFireballTrait" ) then
-			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 })
-		end
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "null" })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0 })
-		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 })
+		-- if HeroHasTrait( "FistSpecialFireballTrait" ) then
+		-- 	SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
+		-- end
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
 		if not args or not args.Undelivered then
-			ComboDeliveredPresentation( attacker, triggerArgs )
+			ComboDeliveredPresentation( attacker )
 		end
 	end
 end
