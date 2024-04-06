@@ -256,8 +256,7 @@
                     ClearOnAttack = false
                 }
             ]
-            }
-
+        }
         {
             Name = "DarkFist3"
             InheritFrom = "DarkFist2"
@@ -760,6 +759,6 @@
                     ExtendDurationOnReapply = true
                 }
             ]
-            }
+        }
     ]
 }

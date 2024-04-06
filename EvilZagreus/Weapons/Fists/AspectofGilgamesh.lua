@@ -24,35 +24,38 @@ WeaponData.DarkGilgameshFist =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Fist1" },
-            { Name = "/SFX/Player Sounds/ZagreusFistWhoosh" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyFistDashAttack" },
+            { Name = "/SFX/Player Sounds/ZagreusClawSwipe" },
         },
         ImpactSounds =
         {
             Invulnerable = "/SFX/SwordWallHitClank",
             Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Bone = "/SFX/FistImpactSmall",
-            Brick = "/SFX/FistImpactSmall",
-            Stone = "/SFX/FistImpactSmall",
-            Organic = "/SFX/FistImpactSmall",
-            StoneObstacle = "/SFX/FistImpactSmall",
-            BrickObstacle = "/SFX/FistImpactSmall",
-            MetalObstacle = "/SFX/FistImpactSmall",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
 
     WeaponBinks =
     {
-        "ZagreusFistAlt01Idle_Bink",
-        "ZagreusFistAlt01Run_Bink",
-        "ZagreusFistAlt01RunStop_Bink",
-        "ZagreusFistAlt01FlurryPunch_Bink",
-        "ZagreusFistAlt01FlashKick_Bink",
-        "ZagreusFistAlt01Grab_Bink",
-        "ZagreusFistAlt01AerialUpperCut_Bink",
-        "ZagreusFistAlt01DashUpperCut_Bink",
-        "ZagreusFistAlt01DashHayMaker_Bink",
+        "ZagreusFistAlt03Idle_Bink",
+        "ZagreusFistAlt03ClawL_Bink",
+        "ZagreusFistAlt03ClawR_Bink",
+        "ZagreusFistAlt03AerialUpperCut_Bink",
+        "ZagreusFistAlt03DashAttack_Bink",
+        "ZagreusFistAlt03Dash_Bink",
+        "ZagreusFistAlt03Run_Bink",
+        "ZagreusFistAlt03RunStop_Bink",
+        "ZagreusFistAlt03FlashKick_Bink",
+        "ZagreusFistAlt03Grab_Bink",
+        "ZagreusFistAlt03DashUpperCut_Bink",
+        "ZagreusFistAlt03DashUpperClaw_Bink",
     },
 }
 
@@ -69,7 +72,29 @@ WeaponData.DarkGilgameshFist2 =
         ChainedWeapon = "DarkGilgameshFist3",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
-    }
+    },
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyFistDashAttack" },
+            { Name = "/SFX/Player Sounds/ZagreusClawSwipe" },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
+            BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+        },
+    },
 }
 
 WeaponData.DarkGilgameshFist3 = 
@@ -85,7 +110,29 @@ WeaponData.DarkGilgameshFist3 =
         ChainedWeapon = "DarkGilgameshFist4",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
-    }
+    },
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyFistDashAttack" },
+            { Name = "/SFX/Player Sounds/ZagreusClawSwipe" },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
+            BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+        },
+    },
 }
 
 WeaponData.DarkGilgameshFist4 = 
@@ -101,7 +148,29 @@ WeaponData.DarkGilgameshFist4 =
         ChainedWeapon = "DarkGilgameshFist5",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
-    }
+    },
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyFistDashAttack" },
+            { Name = "/SFX/Player Sounds/ZagreusClawSwipe" },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
+            BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+        },
+    },
 }
 	
 WeaponData.DarkGilgameshFist5 = 
@@ -118,7 +187,30 @@ WeaponData.DarkGilgameshFist5 =
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
         Cooldown = 0.5
-    }
+    },
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmotePowerAttacking_Fist5" },
+            { Name = "/SFX/Player Sounds/ZagreusClawSwipe" },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
+            BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+        },
+
+    },
 }
 
 WeaponData.DarkGilgameshFistDash =
@@ -143,20 +235,20 @@ WeaponData.DarkGilgameshFistDash =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteAttacking_DashPunch" },
-            { Name = "/SFX/Player Sounds/ZagreusFistWhoosh" },
+            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Fist2" },
+            { Name = "/SFX/Player Sounds/ZagreusShieldThrow" },
         },
         ImpactSounds =
         {
             Invulnerable = "/SFX/SwordWallHitClank",
             Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Bone = "/SFX/FistImpactBig",
-            Brick = "/SFX/FistImpactBig",
-            Stone = "/SFX/FistImpactBig",
-            Organic = "/SFX/FistImpactBig",
-            StoneObstacle = "/SFX/FistImpactSmall",
-            BrickObstacle = "/SFX/FistImpactSmall",
-            MetalObstacle = "/SFX/FistImpactSmall",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
@@ -182,27 +274,29 @@ WeaponData.DarkGilgameshFistSpecial =
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.18,
-        PreFireAnimation = "ZagreusFistAlt01AerialUpperCut_Start",
-        FireAnimation = "ZagreusFistAlt01AerialUpperCut_Fire"
+        PreFireAnimation = "ZagreusFistAlt03AerialUpperCut_Start",
+        FireAnimation = "ZagreusFistAlt03AerialUpperCut_Fire",
+        FireFxOnSelf = "ClawSwipeUppercut"
     },
 
     Sounds =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmotePowerAttacking_Fist5" },
-            { Name = "/SFX/Player Sounds/ZagreusFistBigWhoosh" },
+            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Fist2" },
+            { Name = "/SFX/Player Sounds/ZagreusShieldThrow" },
         },
         ImpactSounds =
         {
+            Invulnerable = "/SFX/SwordWallHitClank",
             Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Bone = "/SFX/FistImpactBig",
-            Brick = "/SFX/FistImpactBig",
-            Stone = "/SFX/FistImpactBig",
-            Organic = "/SFX/FistImpactBig",
-            StoneObstacle = "/SFX/FistImpactSmall",
-            BrickObstacle = "/SFX/FistImpactSmall",
-            MetalObstacle = "/SFX/FistImpactSmall",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
@@ -231,32 +325,60 @@ WeaponData.DarkGilgameshFistSpecialDash =
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
-        PreFireDuration = 0.18,
-        PreFireAnimation = "ZagreusFistAlt01DashUpperCut_Start",
-        FireAnimation = "ZagreusFistAlt01DashUpperCut_Fire"
+        PreFireDuration = 0.17,
+        PreFireAnimation = "ZagreusFistAlt03DashUpperCut_Start",
+        FireAnimation = "ZagreusFistAlt03DashUpperCut_Fire",
+        FireFxOnSelf = "ClawSwipeUppercutSpecial"
     },
 
     Sounds =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmotePowerAttacking_Fist2" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyFistDashUpper" },
             { Name = "/SFX/Player Sounds/ZagreusFistBigWhoosh" },
+            { Name = "/SFX/Player Sounds/ZagreusShieldThrow" },
         },
         ImpactSounds =
         {
             Invulnerable = "/SFX/SwordWallHitClank",
             Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Bone = "/SFX/FistImpactBig",
-            Brick = "/SFX/FistImpactBig",
-            Stone = "/SFX/FistImpactBig",
-            Organic = "/SFX/FistImpactBig",
-            StoneObstacle = "/SFX/FistImpactSmall",
-            BrickObstacle = "/SFX/FistImpactSmall",
-            MetalObstacle = "/SFX/FistImpactSmall",
+            Bone = "/SFX/MetalBoneSmash",
+            Brick = "/SFX/MetalStoneClang",
+            Stone = "/SFX/MetalStoneClang",
+            Organic = "/SFX/StabSplatterSmall",
+            StoneObstacle = "/SFX/SwordWallHitClank",
+            BrickObstacle = "/SFX/SwordWallHitClank",
+            MetalObstacle = "/SFX/SwordWallHitClank",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
 
     Upgrades = { },
+}
+
+WeaponData.DarkGilgameshRush = {
+    Name = "DarkGilgameshRush",
+    InheritFrom = { "DarkRush" },
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Fist1" },
+            { Name = "/SFX/Enemy Sounds/Exalted/ExaltedDash" },
+        },
+    },
+}
+
+WeaponData.DarkGilgameshRushRupture = {
+    Name = "DarkGilgameshRushRupture"
+}
+
+WeaponData.DarkGilgameshFistDetonation = {
+    Name = "DarkGilgameshFistDetonation",
+}
+
+WeaponData.DarkGilgameshMarkRuptureApplicator = {
+    Name = "DarkGilgameshMarkRuptureApplicator",
 }

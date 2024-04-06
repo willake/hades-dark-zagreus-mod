@@ -382,3 +382,41 @@ function DZCheckComboPowerReset( attacker, weaponData )
 		end
 	end
 end
+
+-- for aspect of gilgamesh
+function DZCheckFistDetonation( attacker, victim, functionArgs, triggerArgs )
+	if ( not victim.ActiveEffects or not victim.ActiveEffects.MarkRuptureTarget ) and triggerArgs.SourceWeapon == "DarkGilgameshFistSpecialDash" then
+		local delay = 0.1
+		MapState.QueuedDetonations = MapState.QueuedDetonations  or {}
+		while MapState.QueuedDetonations[_worldTime + delay ] and delay < 2 do
+			delay = delay + 0.1
+		end
+		local key = _worldTime + delay
+		MapState.QueuedDetonations[_worldTime + delay] = victim
+		wait( delay, RoomThreadName )
+		FireWeaponFromUnit({ Weapon = "DarkGilgameshFistDetonation", Id = attacker.ObjectId, DestinationId = victim.ObjectId, FireFromTarget = true, AutoEquip = true })
+		MapState.QueuedDetonations[key] = nil
+		victim.LastRuptureTime = _worldTime
+	end
+end
+
+function DZOnRuptureDashHit( args )
+    local attacker = args.AttackerTable
+	local victim = args.TriggeredByTable
+	-- if victim.TriggersOnDamageEffects and victim == CurrentRun.Hero then
+    if victim == CurrentRun.Hero then
+		if not victim.ActiveEffects or not victim.ActiveEffects.MarkRuptureTarget  then
+			ApplyEffectFromWeapon({ WeaponName = "DarkGilgameshMarkRuptureApplicator", EffectName = "MarkRuptureTarget", Id = attacker.ObjectId, DestinationId = victim.ObjectId })
+		end
+	end
+end
+
+function DZOnRuptureWeaponHit( args )
+    local attacker = args.AttackerTable
+	local victim = args.TriggeredByTable
+	if victim == CurrentRun.Hero then
+		if victim.ActiveEffects and victim.ActiveEffects.MarkRuptureTarget  then
+			ApplyEffectFromWeapon({ WeaponName = "DarkGilgameshMarkRuptureApplicator", EffectName = "MarkRuptureTarget", Id = attacker.ObjectId, DestinationId = victim.ObjectId })
+		end
+	end
+end
