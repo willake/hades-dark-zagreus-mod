@@ -382,3 +382,13 @@ WeaponData.DarkGilgameshFistDetonation = {
 WeaponData.DarkGilgameshMarkRuptureApplicator = {
     Name = "DarkGilgameshMarkRuptureApplicator",
 }
+
+EffectData.DarkGilgameshMarkRuptureTargetApplicator =
+{
+    OnApplyFunctionName = "DZOnRuptureDashHit",
+}
+
+EffectData.DarkGilgameshPunchRuptureWeapon =
+{
+    OnApplyFunctionName = "DZOnRuptureWeaponHit",
+}

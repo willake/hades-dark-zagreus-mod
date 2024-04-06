@@ -260,17 +260,17 @@
         }
         Effects = [
           {
-            Name = "MarkRuptureTargetApplicator"
+            Name = "DarkGilgameshMarkRuptureTargetApplicator"
             Duration = 15.0
-                  Type = "DAMAGE_OVER_TIME"
+            Type = "DAMAGE_OVER_TIME"
             Modifier = 0
             Active = true
             TimeModifierFraction = 0
             FrontFx = "null"
             BackFx = "null"
-                  Stacks = true
+            Stacks = true
             MaxStacks = 100
-                  ExtendDurationOnReapply = true
+            ExtendDurationOnReapply = true
           }
         ]
     }

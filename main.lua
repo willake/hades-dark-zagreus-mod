@@ -71,4 +71,5 @@ ModUtil.Path.Context.Wrap("DamageHero", function(victim, triggerArgs)
     local attacker = triggerArgs.AttackerTable
     local sourceWeaponData = GetWeaponData( attacker, triggerArgs.SourceWeapon )
 	thread( DZCheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
+    DZCheckFistDetonation(attacker, victim, triggerArgs) -- for aspect of Gilgamesh
 end, EvilZagreus)

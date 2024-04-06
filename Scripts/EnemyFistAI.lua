@@ -384,7 +384,7 @@ function DZCheckComboPowerReset( attacker, weaponData )
 end
 
 -- for aspect of gilgamesh
-function DZCheckFistDetonation( attacker, victim, functionArgs, triggerArgs )
+function DZCheckFistDetonation( attacker, victim, triggerArgs )
 	if ( not victim.ActiveEffects or not victim.ActiveEffects.MarkRuptureTarget ) and triggerArgs.SourceWeapon == "DarkGilgameshFistSpecialDash" then
 		local delay = 0.1
 		MapState.QueuedDetonations = MapState.QueuedDetonations  or {}
