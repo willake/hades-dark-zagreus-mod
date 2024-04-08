@@ -1,0 +1,62 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkTalosFist"
+        InheritFrom = "DarkFist"
+    }
+    {
+        Name = "DarkTalosFistDash"
+        InheritFrom = "DarkFistDash"
+    }
+    {
+        Name = "DarkTalosFistSpecial"
+        InheritFrom = "DarkFistSpecial"
+    }
+    {
+        Name = "DarkTalosFistSpecialVacuum"
+        // InheritFrom = "1_BaseMagicProjectile"
+        InheritFrom = "1_BaseTrapProjectile"
+        Type = "INSTANT"
+        Fuse = 0.01
+        ImpactFx = "EnemyProjectileImpactSmall"
+        NumPenetrations = 999
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        DamageLow = 2 // 20
+        DamageHigh = 2 // 20
+        IgnoreCoverageAngles = true
+        UseVulnerability = false
+        CanCrit = false
+        Thing =
+        {
+          Graphic = "null"
+        }
+        Effects =
+        [
+          {
+            Name = "FistVacuumSlow"
+            Type = "SPEED"
+            Duration = 1.0
+            Modifier = 0.1
+            Active = true
+            CanAffectInvulnerable = false
+          }
+          {
+            Name = "MarkTargetFist"
+            Duration = 6.0
+            Modifier = 0.10
+            Active = true
+            TimeModifierFraction = 0
+            FrontFx = "MarkTargetTalos"
+            BackFx = "null"
+          }
+        ]
+	  }
+    {
+        Name = "DarkTalosFistSpecialDash"
+        InheritFrom = "DarkFistSpecialDash"
+    }
+  ]
+}
