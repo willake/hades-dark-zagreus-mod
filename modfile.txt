@@ -9,6 +9,7 @@ Import "Scripts/EnemySwordAI.lua"
 Import "Scripts/EnemyBowAI.lua"
 Import "Scripts/EnemyShieldAI.lua"
 Import "Scripts/EnemyFistAI.lua"
+Import "Scripts/EnemyGunAI.lua"
 
 To "Scripts/EnemyData.lua"
 Import "Scripts/EnemyData.lua"

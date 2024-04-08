@@ -61,7 +61,7 @@ function GetAIActionData(state)
     -- end
 
     if r > 0.2 then
-        chargeTime = 0.1 + (math.random() * 1.5)
+        chargeTime = 0.1 + (math.random() * 3)
     end
 
     return 

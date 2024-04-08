@@ -1,3 +1,5 @@
+DebugPrint({ Text = "Load DarkGun" })
+
 WeaponData.DarkGun =
 {
     Name = "DarkGun",
@@ -11,7 +13,9 @@ WeaponData.DarkGun =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true
+        FireDuration = 0.05,
+        CanHold = true
+        -- WaitUntilProjectileDeath = true
     },
     
     CauseImpactReaction = true,
@@ -78,8 +82,10 @@ WeaponData.DarkGunDash =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.1,
-        WaitUntilProjectileDeath = true
+        FireDuration = 0.05,
+        CanHold = true,
+        ChainedWeapon = "DarkGun"
+        -- WaitUntilProjectileDeath = true
     },
 
     Sounds =
