@@ -750,7 +750,7 @@
             // InheritFrom = "1_BaseMagicWeapon"
             InheritFrom = "1_BaseTrapWeapon"
             Type = "GUN"
-            Projectile = "RushRuptureProjectile"
+            Projectile = "DarkGilgameshRushRuptureProjectile"
         }
         {
             Name = "DarkGilgameshFistDetonation"
@@ -758,7 +758,7 @@
             InheritFrom = "1_BaseTrapWeapon"
             Type = "GUN"
             FireSound = "/SFX/StabSplatterSmall"
-            Projectile = "FistDetonationProjectile"
+            Projectile = "DarkGilgameshFistDetonationProjectile"
         }
         {
             Name = "DarkGilgameshMarkRuptureApplicator"

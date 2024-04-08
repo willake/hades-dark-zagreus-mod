@@ -392,3 +392,9 @@ EffectData.DarkGilgameshPunchRuptureWeapon =
 {
     OnApplyFunctionName = "DZOnRuptureWeaponHit",
 }
+
+-- EffectData.DarkGilgameshMarkRuptureTarget =
+-- {
+--     OnApplyFunctionName = "DZMarkRuptureTargetApply",
+--     OnClearFunctionName = "DZMarkRuptureTargetClear",
+-- }
