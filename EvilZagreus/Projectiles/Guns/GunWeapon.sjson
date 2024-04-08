@@ -1,0 +1,160 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkGun"
+        InheritFrom = "1_BaseTrapProjectile"
+        // InheritFrom = "1_BaseDamagingProjectile"
+        DetonateGraphic = "null"
+        DissipateGraphic = "null"
+        ImpactFx = "GunWeaponImpact"
+        Type = "HOMING"
+        StartAtMarker = "weapon_2_TRACKING"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = true
+        CheckObstacleImpact = true
+        NumPenetrations = 0
+        MaxAdjustRate = 0
+        Range = 710.0
+        Speed = 8000.0
+        DamageRadius = 0
+        DamageLow = 1 // 10
+        DamageHigh = 1 // 10
+        CriticalFx = "CriticalHit"
+        HitVulnerabilityFx = "Backstab"
+        UseArmor = true
+        UseVulnerability = true
+        ProjectileDefenseRadius = 40
+        GroupName = "FX_Standing_Add"
+        UseRadialImpact = false
+        Thing = {
+            Graphic = "GunWeaponProjectile"
+            OffsetZ = 70
+            AttachedAnim = "GunProjectileLight"
+            Grip = 999999
+            RotateGeometry = true
+            UseBoundsForSortDrawArea = true
+            SortBoundsScale = 0.33
+            Tallness = 50
+            Points = [
+            {
+                X = 24
+                Y = 24
+            }
+            {
+                X = 24
+                Y = -24
+            }
+            {
+                X = -24
+                Y = -24
+            }
+            {
+                X = -24
+                Y = 24
+            }
+            ]
+        }
+        Effects = [
+            {
+                Name = "BashCombo"
+                Type = "TAG"
+                Duration = 2.0
+                Active = true
+            }
+
+            {
+                Name = "OnHitSlow"
+                Type = "Speed"
+                Modifier = 0.6
+                Duration = 0.1
+                CanAffectInvulnerable = true
+                FrontFx = "null"
+                Active = false
+            }
+            {
+                Name = "OnHitStun"
+                // IgnoreName = "_PlayerUnit"
+                OnlyAffectName = "_PlayerUnit"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = false
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        ]
+    }
+    {
+        Name = "DarkGunGrenadeToss"
+        InheritFrom = "1_BaseTrapProjectile"
+        // InheritFrom = "1_BaseDamagingProjectile"
+        DetonateGraphic = "ZagGrenadeExplosionBase"
+        DetonateSound = "/SFX/PlayerHammerExplosions"
+        ReticleGraphic = "GunGrenadeWarningDecal"
+        Type = "LOB"
+        DamageLow = 6 // 60
+        DamageHigh = 6 // 60
+        DamageRadius = 400.0
+        DamageRadiusScaleY = 0.6
+        AutoAdjustForTarget = true
+        SpinRate = -360
+        Speed = 1000
+        Gravity = 1500
+        MinRange = 0.0
+        Range = 600
+        ImpactVelocity = 0.0
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = false
+        CheckObstacleImpact = true
+        UseVulnerability = false
+        DetonateScreenShakeSpeed = 1000
+        SelfImpactVelocityMultiplier = 0
+        ReflectFx = "GrenadeBounceSpark"
+        SpawnOnDetonate = "GunGrenadeSelfDamage"
+        SpawnType = "PROJECTILE"
+        DangerDistance = 0
+        Effects = [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        ]
+        Thing = {
+                Graphic = "GunGrenade"
+                Scale = 0.1
+                OffsetZ = 101
+                AttachedAnim = "GrenadierShadow"
+                RotateGeometry = true
+                Points = [
+                {
+                    X = 32
+                    Y = 24
+                }
+                {
+                    X = 32
+                    Y = -24
+                }
+                {
+                    X = -32
+                    Y = -24
+                }
+                {
+                    X = -32
+                    Y = 24
+                }
+            ]
+        }
+    }
+  ]
+}

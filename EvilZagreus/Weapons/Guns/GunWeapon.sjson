@@ -1,0 +1,218 @@
+{
+	Weapons = [
+        "_append"
+        {
+            Name = "DarkGun"
+            InheritFrom = "1_BaseTrapWeapon"
+            // InheritFrom = "1_BaseDamagingWeapon"
+            Control = "Attack2"
+            DisallowedControl = "null"
+            Type = "GUN"
+            Projectile = "DarkGun"
+            ChargeSoundFadeTime = 0.25
+            RootOwnerWhileFiring = false
+            FireSound = "null"
+            FireFx = "GunFire"
+            ChargeTimeFrames = 4
+            ChargeStartAnimation = "null"
+            FireGraphic = "ZagreusGunFire"
+            FailedToFireCooldownAnimation = "ZagreusGunFireEmpty"
+            FailedToFireCooldownDuration = 0.15
+            TriggerReleaseGraphic = "null"
+            FireOnRelease = false
+            NumProjectiles = 1
+            Cooldown = 0.1
+            Spread = 0
+            Scatter = 35
+            ScatterSubside = 170
+            ScatterCap = 35
+            TriggerTapIgnoresCooldown = false
+            MaxAmmo = 12
+            // BlockMoveInput = false
+            // CancelMovement = false
+            // ChargeCancelMovement = false
+            // FullyAutomatic = true
+            // AutoLock = true
+            // AutoLockRange = 710
+            // AutoLockArcDistance = 360
+            // LockTriggerForCharge = true
+            // LockTriggerTransferFromOnSwap = false
+            // CanCancelDisables = false
+            // AllowExternalForceRelease = false
+            // TriggersStoredAmmoVulnerability = true
+            // SetCompleteAngleOnFire = true
+            // SetCompleteAngleOnCharge = false
+            // ClearFireRequestOnChargeCancel = false
+            Effects = [
+                {
+                    Name = "GunDisable"
+                    DurationFrames = 4
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = false
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "GunDisableCancellable"
+                    DurationFrames = 8
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "GunSelfSpeed"
+                    Duration = 0.02
+                    DisableMove = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "GunSelfHalt"
+                    Type = "GRIP"
+                    Duration = 0.02
+                    Modifier = 1.0
+                    HaltOnEnd = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+
+                {
+                    Name = "GunDisableLucifer"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = false
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "GunDisableCancellableLucifer"
+                    DurationFrames = 12
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+            ]
+        }
+        {
+            Name = "DarkGunDash"
+            InheritFrom = "DarkGun"
+            Control = "Attack2"
+            ControlWindow = 0.45
+            SelfVelocity = 0
+            CanCancelDisables = true
+            CanCancelOwnDisables = false
+            FailedToFireCooldownAnimation = "null"
+            LockTriggerTransferFromOnSwap = false
+            AllowExternalForceRelease = false
+            ClearFireRequestOnChargeCancel = false
+            PreFireAnimation = null
+            FireGraphic = null
+            NumProjectiles = 1
+            ProjectileAngleOffset = 0
+            Scatter = 0
+            ScatterCap = 0
+            ProjectileInterval = 0.0
+            // TriggerTapIgnoresCooldown = true
+            // TriggersStoredAmmoVulnerability = true
+            // SwapOnFire = "GunWeapon"
+            // ShareAmmoWeapon = "GunWeapon"
+            // AutoLockArcDistance = 360
+        }
+        {
+            Name = "DarkGunGrenadeToss"
+            Projectile = "DarkGunGrenadeToss"
+            Control = "Attack3"
+            DisallowedControl = "null"
+            RootOwnerWhileFiring = true
+            ClipSize = 1
+            ReloadTime = 1.5
+            ReloadOnCreation = false
+            ChargeStartAnimation = "ZagreusGunGrenadeTossCharge"
+            FireGraphic = "ZagreusGunGrenadeTossFire"
+            ChargeTime = 0.1
+            MinChargeToFire = 0
+            FireOnRelease = true
+            TargetReticleAnimation = "GunGrenadeWarningDecal_Static"
+            FireFx = "GunGrenadeFireFx"
+            // BlockMoveInput = true
+            // CancelMovement = true
+            // ChargeCancelMovement = true
+            // LockTriggerForCharge = false
+            // LockTriggerTransferFromOnSwap = false
+            // CanCancelDisables = true
+            // TriggersStoredAmmoVulnerability = true
+            // AcceptTriggerLockRequests = false
+            // AllowExternalForceRelease = true
+            // PriorityFireRequest = true
+            // SetCompleteAngleOnFire = true
+            // SetCompleteAngleOnCharge = true
+            // DestroySpawnsOnUnequip = false
+            // ShowFreeAimLine = true
+            // AimLineAnimation = "null"
+            // ManualAiming = true
+            // ManualAimingInitialOffset = 420
+            // AutoLockRange = 1200
+            // AutoLock = false
+            // FullyAutomatic = true
+            // AutoLockIgnore = "GunBombUnit"
+            Effects =
+            [
+                {
+                    Name = "GrenadeDisable"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "GrenadeDisableCancelable"
+                    DurationFrames = 23
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    Cancelable = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Name = "GrenadeDisableFast"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "GrenadeDisableCancelableFast"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    Cancelable = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "GrenadeClusterDisable"
+                    DurationFrames = 14
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+            ]
+        }
+    ]
+}

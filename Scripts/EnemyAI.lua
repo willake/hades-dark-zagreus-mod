@@ -68,9 +68,9 @@ function GetAIActionData(state)
     {
         AttackDistance = 175,    
         IsCombo = true,
-        AttackProb = 0.1, -- 0.7
-        SpectialAttackProb = 0.5, -- 0.2
-        DashProb = 0.4,
+        AttackProb = 0.7, -- 0.7
+        SpectialAttackProb = 0.2, -- 0.2
+        DashProb = 0.1,
         ChargeTime = chargeTime
     }
 end
