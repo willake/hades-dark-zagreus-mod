@@ -264,5 +264,112 @@
             ]
         }
     }
+    {
+        Name = "GunBombWeapon"
+        InheritFrom = "1_BaseTrapProjectile"
+        // InheritFrom = "1_BaseDamagingProjectile"
+        DetonateGraphic = "ZagGrenadeExplosionBase"
+        DetonateSound = "/SFX/PlayerHammerExplosions"
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        CheckUnitImpact = false
+        CheckObstacleImpact = false
+        Fuse = 0.01
+        Range = 50
+        DamageRadius = 490
+        DamageLow = 0
+        DamageHigh = 0
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+        ClearOnAttackEffects = false
+        DamageRadiusScaleY = 0.6
+        DamageRadiusScaleX = 1.0
+        Thing = {
+            Graphic = "null"
+            OffsetZ = 70
+            Grip = 999999
+        }
+        Effects =
+        [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        ]
+    }
+	{
+        Name = "GunBombImmolation"
+        InheritFrom = "1_BaseTrapProjectile"
+        //   InheritFrom = "1_BaseDamagingProjectile"
+        DetonateGraphic = "LuciferOrbAoE"
+        Type = "STRAIGHT"
+        AffectsEnemies = true
+        AffectsFriends = false
+        AffectsSelf = false
+        DoesNotAffectName = "GunBombUnit"
+        CheckUnitImpact = false
+        CheckObstacleImpact = false
+        Fuse = 0.01
+        Range = 50
+        DamageRadius = 225
+        DamageLow = 0
+        DamageHigh = 0
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+        ClearOnAttackEffects = false
+        DamageRadiusScaleY = 0.6
+        DamageRadiusScaleX = 1.0
+        ImpactSound = "/SFX/BurnDamage"
+        Thing =
+        {
+            Graphic = "null"
+            OffsetZ = 70
+            Grip = 999999
+        }
+        Effects =
+        [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+            {
+                Name = "ReduceDamageOutput"
+                // IgnoreName = "_PlayerUnit"
+                OnlyAffectName = "_PlayerUnit"
+                Type = "DAMAGE_OUTPUT"
+                Duration = 4
+                Modifier = 0.7
+                Active = false
+                TimeModifierFraction = 0
+                BackFx = "AphroditeDebuffB"
+                FlashFrontFxWhenExpiring = true
+                IsVulnerabilityEffect = true
+            }
+            {
+                Name = "IncreaseDamageTaken"
+                // IgnoreName = "_PlayerUnit"
+                OnlyAffectName = "_PlayerUnit"
+                Type = "DAMAGE_TAKEN"
+                Duration = 4
+                Modifier = 1
+                Active = false
+                TimeModifierFraction = 0
+            }
+        ]
+	}
   ]
 }

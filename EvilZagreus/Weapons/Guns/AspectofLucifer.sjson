@@ -16,5 +16,15 @@
             InheritFrom = "DarkGunGrenadeToss"
             Projectile = "DarkLuciferGunGrenadeToss"
         }
+        {
+            Name = "DarkLuciferGunBomb"
+            InheritFrom = "DarkGunBomb"
+            Projectile = "DarkLuciferGunBomb"
+        }
+        {
+            Name = "DarkLuciferGunBombImmolation"
+            InheritFrom = "DarkGunBombImmolation"
+            Projectile = "DarkLuciferGunBombImmolation"
+        }
     ]
 }

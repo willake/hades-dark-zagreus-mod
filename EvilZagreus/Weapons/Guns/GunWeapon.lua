@@ -175,3 +175,14 @@ WeaponData.DarkSniperGunDash = {
     InheritFrom = { "DarkSniperGun" },
     -- DashWeapon = SniperGunWeaponDash,
 }
+
+-- for aspect of lucifer
+WeaponData.DarkGunBomb = 
+{
+    InheritFrom = { "DarkGunGrenadeToss" },
+}
+
+WeaponData.DarkGunBombImmolation = 
+{
+
+}

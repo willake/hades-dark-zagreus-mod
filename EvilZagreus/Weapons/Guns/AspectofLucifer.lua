@@ -163,3 +163,11 @@ WeaponData.DarkLuciferGunGrenadeToss =
     },
     SelfMultiplier = 0.01,
 }
+
+WeaponData.DarkLuciferGunBomb = {
+    InheritFrom = { "DarkLuciferGunBomb" }
+}
+
+WeaponData.DarkLuciferGunBombImmolation = {
+    InheritFrom = { "DarkLuciferGunBombImmolation" }
+}

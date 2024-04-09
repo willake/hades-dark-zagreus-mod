@@ -309,5 +309,27 @@
             NumProjectiles = 1
             Enabled = false
         }
+        {
+            Name = "DarkGunBomb"
+            InheritFrom = "1_BaseMagicWeapon"
+            Type = "GUN"
+            Projectile = "DarkGunBomb"
+            ClearFireRequestOnChargeCancel = false
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+        }
+        {
+            Name = "DarkGunBombImmolation"
+            InheritFrom = "1_BaseMagicWeapon"
+            Type = "GUN"
+            Projectile = "DarkGunBombImmolation"
+            ClearFireRequestOnChargeCancel = false
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+        }
     ]
 }
