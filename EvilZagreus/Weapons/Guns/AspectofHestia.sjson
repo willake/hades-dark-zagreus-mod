@@ -16,5 +16,35 @@
             InheritFrom = "DarkGunGrenadeToss"
             Projectile = "DarkHestiaGunGrenadeToss"
         }
+        {
+            Name = "DarkManualReloadEffectApplicator"
+            InheritFrom = "1_BaseTrapWeapon"
+            // InheritFrom = "1_BaseMagicWeapon"
+            Type = "GUN"
+            Projectile = "null"
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+            Effect = {
+                Name = "DarkManualReloadBonus"
+                Duration = 1000.0
+                CanAffectInvulnerable = true
+                FrontFx = "GunManualReloadTraitFx"
+                FlashFrontFxWhenExpiring = true
+                IgnoreName = "_PlayerUnit"
+                // OnlyAffectName = "_PlayerUnit"
+            }
+        }
+        {
+            Name = "DarkHestiaSniperGun"
+            InheritFrom = "DarkSniperGun"
+            Projectile = "DarkHestiaSniperGun"
+        }
+        {
+            Name = "DarkHestiaSniperGunDash"
+            InheritFrom = "DarkHestiaSniperGun"
+            Projectile = "DarkHestiaSniperGun"
+        }
     ]
 }

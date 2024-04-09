@@ -214,5 +214,100 @@
                 }
             ]
         }
+        {
+            Name = "DarkSniperGun"
+            InheritFrom = "DarkGun"
+            Control = "Attack2"
+            DefaultControl = false
+            TriggerTapIgnoresCooldown = true
+            TriggersStoredAmmoVulnerability = true
+            FireSound = "/Leftovers/SFX/AuraPerfectThrow"
+            Projectile = "DarkSniperGun"
+            // SwapOnFire = "null"
+            AutoLockRange = 1050
+            ChargeTimeFrames = 0
+            SelfVelocity = 0
+            CanCancelDisables = true
+            CanCancelOwnDisables = true
+            PreFireAnimation = "null"
+            FireGraphic = "null"
+            FailedToFireCooldownAnimation = "null"
+            // LockTriggerTransferFromOnSwap = false
+            ForceReleaseOnFire = true
+            // LockTriggerForCharge = false
+            MinChargeToFire = 0
+            // ChargeCancelMovement = false
+            // AllowExternalForceRelease = false
+            // ClearFireRequestOnChargeCancel = false
+            ShareAmmoWeapon = "DarkGun"
+            Enabled = false
+            Effects = [
+                {
+                    Name = "SniperGunDisable"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = true
+                    Cancelable = false
+                    RequestTriggerLock = false
+                }
+                {
+                    Name = "SniperGunDisableCancellable"
+                    DurationFrames = 9
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = true
+                    Cancelable = true
+                    RequestTriggerLock = false
+                }
+                {
+                    Name = "SniperGunDisableMoveCancellable"
+                    DurationFrames = 12
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = true
+                    RequestTriggerLock = false
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "SniperGunSelfSpeed"
+                    Type = "SPEED"
+                    Duration = 0.02
+                    Modifier = 0
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "SniperGunSelfHalt"
+                    Type = "GRIP"
+                    Duration = 0.02
+                    Modifier = 1.0
+                    HaltOnEnd = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+            ]
+        }
+        {
+            Name = "DarkSniperGunDash"
+            InheritFrom = "DarkSniperGun"
+            Control = "Attack2"
+            TriggerTapIgnoresCooldown = true
+            TriggersStoredAmmoVulnerability = true
+            SwapOnFire = "null"
+            ControlWindow = 0.45
+            SelfVelocity = 0
+            // CanCancelDisables = true
+            // CanCancelOwnDisables = true
+            FailedToFireCooldownAnimation = "null"
+            // LockTriggerTransferFromOnSwap = false
+            // AllowExternalForceRelease = false
+            // ClearFireRequestOnChargeCancel = false
+            ShareAmmoWeapon = "DarkGun"
+            NumProjectiles = 1
+            Enabled = false
+        }
     ]
 }

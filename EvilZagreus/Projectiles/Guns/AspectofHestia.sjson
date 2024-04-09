@@ -9,5 +9,9 @@
             Name = "DarkHestiaGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
         }
+                {
+            Name = "DarkHestiaSniperGun"
+            InheritFrom = "DarkSniperGun"
+        }
     ]
 }

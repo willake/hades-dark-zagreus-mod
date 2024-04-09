@@ -229,5 +229,38 @@
             ]
         }
     }
+    {
+        Name = "DarkSniperGun"
+        InheritFrom = "DarkGun"
+        Range = 1050
+        Thing = {
+            Graphic = "GunWeaponProjectile_Sniper"
+            OffsetZ = 70
+            AttachedAnim = "SniperPowerShot"
+            Grip = 999999
+            RotateGeometry = true
+            UseBoundsForSortDrawArea = true
+            SortBoundsScale = 0.33
+            Tallness = 50
+            Points = [
+            {
+                X = 24
+                Y = 24
+            }
+            {
+                X = 24
+                Y = -24
+            }
+            {
+                X = -24
+                Y = -24
+            }
+            {
+                X = -24
+                Y = 24
+            }
+            ]
+        }
+    }
   ]
 }

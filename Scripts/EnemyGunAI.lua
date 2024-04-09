@@ -206,7 +206,7 @@ function SelectGunWeapon(enemy, actionData)
     if r < actionData.AttackProb then
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.45 then
             enemy.LastAction = "DashAttack"
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
@@ -239,3 +239,10 @@ function SelectGunWeapon(enemy, actionData)
     enemy.WeaponName = nil
     return nil
 end
+
+-- for aspect of hestia
+function DZManualReloadBonusApply( triggerArgs )
+	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
+	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
+end
+

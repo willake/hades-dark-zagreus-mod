@@ -23,8 +23,8 @@ WeaponData.DarkHestiaGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunReloadStart",
-    MovingReloadAnimation = "ZagreusGunRunReload",
+    IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
+    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
@@ -61,11 +61,11 @@ WeaponData.DarkHestiaGun =
 
     WeaponBinks =
     {
-        "ZagreusGun_Bink",
-        "ZagreusGunGrenadeToss_Bink",
-        "ZagreusGunFireEmpty_Bink",
-        "ZagreusGunRun_Bink",
-        "ZagreusGunStop_Bink",
+        "ZagreusGun01_Bink",
+        "ZagreusGun01Run_Bink",
+        "ZagreusGun01GrenadeToss_Bink",
+        "ZagreusGun01Stop_Bink",
+        "ZagreusGun01FireEmpty_Bink",
     },
 }
 
@@ -74,6 +74,9 @@ WeaponData.DarkHestiaGunDash =
     Name = "DarkHestiaGunDash",
     InheritFrom = { "DarkHestiaGun" },
     DashWeapon = nil,
+
+    IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
+				MovingReloadAnimation = "ZagreusGunAlt01RunReload",
 
     AIData =
     {
@@ -162,4 +165,26 @@ WeaponData.DarkHestiaGunGrenadeToss =
         },
     },
     SelfMultiplier = 0.01,
+}
+
+WeaponData.DarkHestiaSniperGun = {
+    InheritFrom = { "DarkHestiaGun" },
+    DashWeapon = nil,
+    OnFiredFunctionName = "ClearManualReloadVFX",
+}
+
+WeaponData.DarkHestiaSniperGunDash = {
+    InheritFrom = { "DarkHestiaSniperGun" },
+    -- DashWeapon = SniperGunWeaponDash,
+}
+
+WeaponData.DarkManualReloadEffectApplicator =
+{
+    -- CompleteObjectivesOnFire = { "ManualReload" },
+}
+
+EffectData.DarkManualReloadBonus =
+{
+    OnApplyFunctionName = "DZManualReloadBonusApply",
+    OnClearFunctionName = "DZManualReloadBonusClear",
 }

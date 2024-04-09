@@ -163,3 +163,15 @@ WeaponData.DarkGunGrenadeToss =
     },
     SelfMultiplier = 0.01,
 }
+
+-- for aspect of hestia to inherits
+WeaponData.DarkSniperGun = {
+    InheritFrom = { "DarkGun" },
+    DashWeapon = nil,
+    OnFiredFunctionName = "ClearManualReloadVFX",
+}
+
+WeaponData.DarkSniperGunDash = {
+    InheritFrom = { "DarkSniperGun" },
+    -- DashWeapon = SniperGunWeaponDash,
+}
