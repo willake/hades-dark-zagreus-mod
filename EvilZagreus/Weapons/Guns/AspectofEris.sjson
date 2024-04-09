@@ -11,7 +11,7 @@
         {
             Name = "DarkErisGunDash"
             InheritFrom = "DarkGunDash"
-            Projectile = "DarkErisGunDash"
+            Projectile = "DarkErisGun"
             FireGraphic = "ZagreusGunAlt02Fire"
             FailedToFireCooldownAnimation = "ZagreusGunAlt02FireEmpty"
         }

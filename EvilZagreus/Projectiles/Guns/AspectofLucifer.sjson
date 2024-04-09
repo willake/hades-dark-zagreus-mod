@@ -6,10 +6,6 @@
             InheritFrom = "DarkGun"
         }
         {
-            Name = "DarkLuciferGunDash"
-            InheritFrom = "DarkGunDash"
-        }
-        {
             Name = "DarkLuciferGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
         }

@@ -62,10 +62,10 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- enemy.DashAttackWeapon = "DarkGilgameshFistDash";
 
             -- gun template
-            enemy.PrimaryWeapon = "DarkGun";
+            enemy.PrimaryWeapon = "DarkErisGun";
             enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkGunGrenadeToss";
-            enemy.DashAttackWeapon = "DarkGunDash";
+            enemy.SpecialAttackWeapon = "DarkErisGunGrenadeToss";
+            enemy.DashAttackWeapon = "DarkErisGunDash";
         end
     end
     

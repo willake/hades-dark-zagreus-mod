@@ -9,7 +9,7 @@
         {
             Name = "DarkLuciferGunDash"
             InheritFrom = "DarkGunDash"
-            Projectile = "DarkLuciferGunDash"
+            Projectile = "DarkLuciferGun"
         }
         {
             Name = "DarkLuciferGunGrenadeToss"

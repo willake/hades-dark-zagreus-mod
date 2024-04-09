@@ -6,10 +6,6 @@
             InheritFrom = "DarkGun"
         }
         {
-            Name = "DarkErisGunDash"
-            InheritFrom = "DarkGunDash"
-        }
-        {
             Name = "DarkErisGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
             SpawnOnDetonate = "DarkErisGunGrenadeSelfDamage"
