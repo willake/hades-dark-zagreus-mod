@@ -12,6 +12,37 @@
         {
             Name = "DarkErisGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
+            SpawnOnDetonate = "DarkErisGunGrenadeSelfDamage"
+        }
+        {
+            Name = "DarkErisGunGrenadeSelfDamage"
+            InheritFrom = "DarkGunGrenadeSelfDamage"
+            Effects = [
+                {
+                    Name = "ZagreusOnHitStun"
+                    Duration = 0.2
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = false
+                    Active = false
+                    CanAffectInvulnerable = true
+                    Cancelable = true
+                    IgnoreName = "_PlayerUnit"
+                    // OnlyAffectName = "_PlayerUnit"
+                }
+                {
+                    Name = "GrenadeSelfDamageOutput"
+                    Type = "DAMAGE_OUTPUT"
+                    Duration = 4.0
+                    Modifier = 1.15 // 1.0 + 0.15
+                    CanAffectInvulnerable = true
+                    FrontFx = "ErisPowerUpFx"
+                    FlashFrontFxWhenExpiring = true
+                    IgnoreName = "_PlayerUnit"
+                    // OnlyAffectName = "_PlayerUnit"
+                    Active = true
+                }
+            ]
         }
     ]
 }

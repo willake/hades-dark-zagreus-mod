@@ -23,8 +23,8 @@ WeaponData.DarkErisGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunReloadStart",
-    MovingReloadAnimation = "ZagreusGunRunReload",
+    IdleReloadAnimation = "ZagreusGunAlt02ReloadStart",
+				MovingReloadAnimation = "ZagreusGunAlt02RunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
@@ -61,11 +61,11 @@ WeaponData.DarkErisGun =
 
     WeaponBinks =
     {
-        "ZagreusGun_Bink",
-        "ZagreusGunGrenadeToss_Bink",
-        "ZagreusGunFireEmpty_Bink",
-        "ZagreusGunRun_Bink",
-        "ZagreusGunStop_Bink",
+        "ZagreusGun02_Bink",
+        "ZagreusGun02Run_Bink",
+        "ZagreusGun02GrenadeToss_Bink",
+        "ZagreusGun02Stop_Bink",
+        "ZagreusGun02FireEmpty_Bink",
     },
 }
 
@@ -74,6 +74,9 @@ WeaponData.DarkErisGunDash =
     Name = "DarkErisGunDash",
     InheritFrom = { "DarkErisGun" },
     DashWeapon = nil,
+
+    IdleReloadAnimation = "ZagreusGunAlt02ReloadStart",
+				MovingReloadAnimation = "ZagreusGunAlt02RunReload",
 
     AIData =
     {

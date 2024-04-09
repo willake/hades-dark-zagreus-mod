@@ -115,7 +115,7 @@
         DetonateScreenShakeSpeed = 1000
         SelfImpactVelocityMultiplier = 0
         ReflectFx = "GrenadeBounceSpark"
-        SpawnOnDetonate = "GunGrenadeSelfDamage"
+        SpawnOnDetonate = "DarkGunGrenadeSelfDamage"
         SpawnType = "PROJECTILE"
         DangerDistance = 0
         Effects = [
@@ -152,6 +152,79 @@
                 {
                     X = -32
                     Y = 24
+                }
+            ]
+        }
+    }
+    {
+        Name = "DarkGunGrenadeSelfDamage"
+        AutoAdjustForTarget = false
+        AffectsEnemies = false
+        AffectsFriends = false
+        AffectsSelf = true
+        IgnoreNoCollisionAnimData = true
+        CheckObstacleImpact = false
+        UnlimitedUnitPenetration = true
+        GaussianSpawnDistribution = true
+        Type = "INSTANT"
+        SpawnRadius = 0
+        DamageRadius = 400
+        DamageLow = 0
+        DamageHigh = 0
+        ImpactVelocity = 0
+        Range = 0
+        UseVulnerability = false
+        SilentImpactOnInvulnerable = true
+        GroupName = "FX_Standing_Top"
+        DamageRadiusScaleY = 0.6
+        CanBeReflected = false
+        IgnoreDodge = true
+        Effects = [
+            {
+                Name = "ZagreusOnHitStun"
+                Duration = 0.2
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = false
+                Active = true
+                CanAffectInvulnerable = true
+                Cancelable = true
+                IgnoreName = "_PlayerUnit"
+                // OnlyAffectName = "_PlayerUnit"
+            }
+            {
+                Name = "GrenadeSelfDamageOutput"
+                Type = "DAMAGE_OUTPUT"
+                Duration = 4.0
+                Modifier = 1.0
+                CanAffectInvulnerable = true
+                FrontFx = "ErisPowerUpFx"
+                FlashFrontFxWhenExpiring = true
+                IgnoreName = "_PlayerUnit"
+                // OnlyAffectName = "_PlayerUnit"
+                Active = false
+            }
+        ]
+        Thing = {
+            Graphic = "ErisPowerUpStart"
+            OffsetZ = 0
+            Grip = 999999
+            Points = [
+                {
+                    X = 90
+                    Y = 0
+                }
+                {
+                    X = 0
+                    Y = -45
+                }
+                {
+                    X = -90
+                    Y = 0
+                }
+                {
+                    X = 0
+                    Y = 45
                 }
             ]
         }
