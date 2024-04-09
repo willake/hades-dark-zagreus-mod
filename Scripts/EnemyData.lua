@@ -46,3 +46,40 @@ UnitSetData.Enemies.Hades.DefaultAIData =
     -- PreAttackDash = "HadesSideDash",
     DashIfOverDistance = 500,
 }
+
+
+-- for aspect of lucifer
+UnitSetData.Enemies.DarkGunBombUnit =
+{
+    InheritFrom = { "BaseTrap" },
+
+    MaxHealth = 9999,
+    FlashOnFuse = true,
+    FuseDuration = 0.2,
+    OnDamagedFunctionName = "ActivateLuciferFuse",
+    FuseActivationSound = "/Leftovers/SFX/CurSprint",
+    --FuseAnimation = "BlastCubeLit",
+    CanStoreAmmo = false,
+    OnHitShake = { Distance = 3, Speed = 600, Duration = 0.15 },
+
+
+    OnDeathShakeScreenSpeed = 150,
+    OnDeathShakeScreenDistance = 4,
+    OnDeathShakeScreenDuration = 0.25,
+    OnDeathShakeScreenFalloff = 1500,
+
+    AlwaysTraitor = true,
+    OnDeathFunctionName = "GunBombDetonate",
+
+    AdditionalEnemySetupFunctionName = "SetUpGunBombImmolation",
+    ImmolationInterval = 1.0,
+    IncomingDamageModifiers =
+    {
+        {
+            Name = "ImmolationImmunity",
+            ValidWeapons = {"GunBombImmolation"},
+            ValidWeaponMultiplier = 0,
+            Multiplicative = true,
+        },
+    },
+}

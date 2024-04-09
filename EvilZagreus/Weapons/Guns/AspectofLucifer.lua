@@ -6,6 +6,7 @@ WeaponData.DarkLuciferGun =
     -- DashWeapon = "GunWeaponDash",
     -- SecondaryWeapon = "GunGrenadeToss",
     -- NoAmmoFireSound = "/EmptyCue",
+
     AIData =
     {
         AIAttackDistance = 900,
@@ -23,8 +24,14 @@ WeaponData.DarkLuciferGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunReloadStart",
-    MovingReloadAnimation = "ZagreusGunRunReload",
+    CancelUnitHitFlash = true,
+    RapidDamageType = true,
+    CancelUnitShake = true,
+    CancelArmorUnitShake = true,
+    CancelArmorSpark = true,
+    DashWeapon = nil,
+    IdleReloadAnimation = "ZagreusGunLuciferReload_Start",
+    MovingReloadAnimation = "ZagreusGunLuciferRunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
@@ -36,36 +43,37 @@ WeaponData.DarkLuciferGun =
     {
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteCharging_Bow" },
-            { Name = "/SFX/Player Sounds/ZagreusGunFire" },
+        --	{ Name = "/VO/ZagreusEmotes/EmoteHeavyGunFire" },
+        --	{ Name = "/SFX/Player Sounds/ZagreusGunFire" },
         },
         LowAmmoFireSounds =
         {
-            { Name = "/SFX/Player Sounds/ZagreusGunFire" },
-            { Name = "/SFX/Player Sounds/ZagreusGunReloadCompleteFlash" },
+        --	{ Name = "/SFX/Player Sounds/ZagreusGunFire" },
+        --	{ Name = "/SFX/Player Sounds/ZagreusGunReloadCompleteFlash" },
         },
         ImpactSounds =
         {
-            Invulnerable = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
-            Bone = "/SFX/ArrowMetalBoneSmash",
-            Brick = "/SFX/ArrowMetalStoneClang",
-            Stone = "/SFX/ArrowMetalStoneClang",
-            Organic = "/SFX/GunBulletOrganicImpact",
-            StoneObstacle = "/SFX/ArrowWallHitClankSmall",
-            BrickObstacle = "/SFX/ArrowWallHitClankSmall",
-            MetalObstacle = "/SFX/ArrowWallHitClankSmall",
+            Invulnerable = "/SFX/BurnDamage",
+            Armored = "/SFX/BurnDamage",
+            Bone = "/SFX/BurnDamage",
+            Brick = "/SFX/BurnDamage",
+            Stone = "/SFX/BurnDamage",
+            Organic = "/SFX/BurnDamage",
+            StoneObstacle = "/SFX/BurnDamage",
+            BrickObstacle = "/SFX/BurnDamage",
+            MetalObstacle = "/SFX/BurnDamage",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
 
     WeaponBinks =
     {
-        "ZagreusGun_Bink",
-        "ZagreusGunGrenadeToss_Bink",
-        "ZagreusGunFireEmpty_Bink",
-        "ZagreusGunRun_Bink",
-        "ZagreusGunStop_Bink",
+        "ZagreusGunLucifer_Bink",
+        "ZagreusGunLuciferIdle_Bink",
+        "ZagreusGunLuciferRun_Bink",
+        "ZagreusGunLuciferStop_Bink",
+        "ZagreusGunLuciferFireEmpty_Bink",
+        "ZagreusGunLuciferGrenadeToss_Bink",
     },
 }
 
@@ -140,12 +148,11 @@ WeaponData.DarkLuciferGunGrenadeToss =
     {
         ChargeSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteCharging_Bow" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyGunCharge" },
         },
         FireSounds =
         {
-            { Name = "/VO/ZagreusEmotes/EmoteAttacking_Bow" },
-            { Name = "/SFX/Player Sounds/ZagreusGunGrenadeLaunchFire" },
+            { Name = "/VO/ZagreusEmotes/EmoteHeavyGunLob" },
         },
         ImpactSounds =
         {
@@ -161,13 +168,32 @@ WeaponData.DarkLuciferGunGrenadeToss =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
+
     SelfMultiplier = 0.01,
 }
 
 WeaponData.DarkLuciferGunBomb = {
-    InheritFrom = { "DarkLuciferGunBomb" }
+    InheritFrom = { "DarkGunBomb" }
 }
 
 WeaponData.DarkLuciferGunBombImmolation = {
-    InheritFrom = { "DarkLuciferGunBombImmolation" }
+    InheritFrom = { "DarkGunBombImmolation" }
 }
+
+-- {
+--     WeaponName = "RushWeapon",
+--     EffectName = "RushWeaponInvulnerable",
+--     EffectProperty = "ClearOnAttack",
+--     ChangeValue = true,
+--     ChangeType = "Absolute",
+--     ExcludeLinked = true,
+-- }
+
+-- {
+--     WeaponName = "RushWeapon",
+--     EffectName = "RushWeaponInvulnerable",
+--     EffectProperty = "ClearOnAttack",
+--     ChangeValue = true,
+--     ChangeType = "Absolute",
+--     ExcludeLinked = true,
+-- },

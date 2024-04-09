@@ -265,7 +265,7 @@
         }
     }
     {
-        Name = "GunBombWeapon"
+        Name = "DarkGunBomb"
         InheritFrom = "1_BaseTrapProjectile"
         // InheritFrom = "1_BaseDamagingProjectile"
         DetonateGraphic = "ZagGrenadeExplosionBase"
@@ -306,7 +306,7 @@
         ]
     }
 	{
-        Name = "GunBombImmolation"
+        Name = "DarkGunBombImmolation"
         InheritFrom = "1_BaseTrapProjectile"
         //   InheritFrom = "1_BaseDamagingProjectile"
         DetonateGraphic = "LuciferOrbAoE"
