@@ -1,8 +1,8 @@
-DebugPrint({ Text = "Load DarkGun" })
+DebugPrint({ Text = "Load DarkLuciferGun" })
 
-WeaponData.DarkGun =
+WeaponData.DarkLuciferGun =
 {
-    Name = "DarkGun",
+    Name = "DarkLuciferGun",
     -- DashWeapon = "GunWeaponDash",
     -- SecondaryWeapon = "GunGrenadeToss",
     -- NoAmmoFireSound = "/EmptyCue",
@@ -69,10 +69,10 @@ WeaponData.DarkGun =
     },
 }
 
-WeaponData.DarkGunDash =
+WeaponData.DarkLuciferGunDash =
 {
-    Name = "DarkGunDash",
-    InheritFrom = { "DarkGun" },
+    Name = "DarkLuciferGunDash",
+    InheritFrom = { "DarkLuciferGun" },
     DashWeapon = nil,
 
     AIData =
@@ -117,9 +117,9 @@ WeaponData.DarkGunDash =
 
 }
 
-WeaponData.DarkGunGrenadeToss =
+WeaponData.DarkLuciferGunGrenadeToss =
 {
-    Name = "DarkGunGrenadeToss",
+    Name = "DarkLuciferGunGrenadeToss",
     NotReadyText = "GunReloadingStart",
 
     CauseImpactReaction = true,
