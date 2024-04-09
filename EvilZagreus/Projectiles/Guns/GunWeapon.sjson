@@ -233,6 +233,8 @@
         Name = "DarkSniperGun"
         InheritFrom = "DarkGun"
         Range = 1050
+        DamageLow = 10 // 50
+        DamageHigh = 10 // 50
         Thing = {
             Graphic = "GunWeaponProjectile_Sniper"
             OffsetZ = 70

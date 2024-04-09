@@ -5,16 +5,22 @@
             Name = "DarkHestiaGun"
             InheritFrom = "DarkGun"
             Projectile = "DarkHestiaGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
         }
         {
             Name = "DarkHestiaGunDash"
             InheritFrom = "DarkGunDash"
             Projectile = "DarkHestiaGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
         }
         {
             Name = "DarkHestiaGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
             Projectile = "DarkHestiaGunGrenadeToss"
+            ChargeStartAnimation = "ZagreusGunAlt01GrenadeTossCharge"
+            FireGraphic = "ZagreusGunAlt01GrenadeTossFire"
         }
         {
             Name = "DarkManualReloadEffectApplicator"
@@ -40,11 +46,17 @@
             Name = "DarkHestiaSniperGun"
             InheritFrom = "DarkSniperGun"
             Projectile = "DarkHestiaSniperGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            Enabled = true
         }
         {
             Name = "DarkHestiaSniperGunDash"
             InheritFrom = "DarkHestiaSniperGun"
             Projectile = "DarkHestiaSniperGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            Enabled = true
         }
     ]
 }
