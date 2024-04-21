@@ -1,0 +1,26 @@
+{
+	Weapons = [
+        "_append"
+        {
+            Name = "DarkErisGun"
+            InheritFrom = "DarkGun"
+            Projectile = "DarkErisGun"
+            FireGraphic = "ZagreusGunAlt02Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt02FireEmpty"
+        }
+        {
+            Name = "DarkErisGunDash"
+            InheritFrom = "DarkGunDash"
+            Projectile = "DarkErisGun"
+            FireGraphic = "ZagreusGunAlt02Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt02FireEmpty"
+        }
+        {
+            Name = "DarkErisGunGrenadeToss"
+            InheritFrom = "DarkGunGrenadeToss"
+            Projectile = "DarkErisGunGrenadeToss"
+            ChargeStartAnimation = "ZagreusGunAlt02GrenadeTossCharge"
+            FireGraphic = "ZagreusGunAlt02GrenadeTossFire"
+        }
+    ]
+}

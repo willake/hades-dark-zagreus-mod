@@ -1,0 +1,17 @@
+{
+	Projectiles = [
+        "_append"
+        {
+            Name = "DarkHestiaGun"
+            InheritFrom = "DarkGun"
+        }
+        {
+            Name = "DarkHestiaGunGrenadeToss"
+            InheritFrom = "DarkGunGrenadeToss"
+        }
+                {
+            Name = "DarkHestiaSniperGun"
+            InheritFrom = "DarkSniperGun"
+        }
+    ]
+}

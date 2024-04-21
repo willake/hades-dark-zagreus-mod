@@ -304,8 +304,8 @@
       BlastDuration = 0.1
       BlastSpeed = 2200
       AttachToOwner = true
-      ImpactVelocity = 1500
-      ImpactVelocityCap = 1500
+      ImpactVelocity = 500 // 1500
+      ImpactVelocityCap = 500 // 1500
       UseRadialImpact = true
       DamageRadiusScaleX = 1.175
       DamageRadiusScaleY = 0.56

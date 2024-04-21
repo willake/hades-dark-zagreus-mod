@@ -1,0 +1,62 @@
+{
+	Weapons = [
+        "_append"
+        {
+            Name = "DarkHestiaGun"
+            InheritFrom = "DarkGun"
+            Projectile = "DarkHestiaGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+        }
+        {
+            Name = "DarkHestiaGunDash"
+            InheritFrom = "DarkGunDash"
+            Projectile = "DarkHestiaGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+        }
+        {
+            Name = "DarkHestiaGunGrenadeToss"
+            InheritFrom = "DarkGunGrenadeToss"
+            Projectile = "DarkHestiaGunGrenadeToss"
+            ChargeStartAnimation = "ZagreusGunAlt01GrenadeTossCharge"
+            FireGraphic = "ZagreusGunAlt01GrenadeTossFire"
+        }
+        {
+            Name = "DarkManualReloadEffectApplicator"
+            InheritFrom = "1_BaseTrapWeapon"
+            // InheritFrom = "1_BaseMagicWeapon"
+            Type = "GUN"
+            Projectile = "null"
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+            Effect = {
+                Name = "DarkManualReloadBonus"
+                Duration = 1000.0
+                CanAffectInvulnerable = true
+                FrontFx = "GunManualReloadTraitFx"
+                FlashFrontFxWhenExpiring = true
+                IgnoreName = "_PlayerUnit"
+                // OnlyAffectName = "_PlayerUnit"
+            }
+        }
+        {
+            Name = "DarkHestiaSniperGun"
+            InheritFrom = "DarkSniperGun"
+            Projectile = "DarkHestiaSniperGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            Enabled = true
+        }
+        {
+            Name = "DarkHestiaSniperGunDash"
+            InheritFrom = "DarkHestiaSniperGun"
+            Projectile = "DarkHestiaSniperGun"
+            FireGraphic = "ZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            Enabled = true
+        }
+    ]
+}
