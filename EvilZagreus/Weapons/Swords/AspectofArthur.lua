@@ -275,6 +275,7 @@ WeaponData.DarkConsecrationField =
         FireDuration = 0.2,
         AIAttackDistance = 9999,
         AIBufferDistance = 9999,
+        FireOnSelf = true
     },
 
     OnFiredFunctionName = "DisableTraps",

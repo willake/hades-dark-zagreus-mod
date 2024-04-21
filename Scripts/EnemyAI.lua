@@ -61,12 +61,12 @@ function GetAIActionData(state)
     -- end
 
     if r > 0.2 then
-        chargeTime = 0.1 + (math.random() * 3)
+        chargeTime = 0.1 + (math.random() * 1)
     end
 
     return 
     {
-        AttackDistance = 175,    
+        Distance = 800,    
         IsCombo = true,
         AttackProb = 0.7, -- 0.7
         SpectialAttackProb = 0.2, -- 0.2
@@ -127,7 +127,11 @@ function DoRegularFire(enemy, weaponAIData, targetId)
         PlaySound({ Name = weaponAIData.FireSound, Id = enemy.ObjectId })
     end
 
-    FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    if weaponAIData.FireOnSelf then
+        FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId, AutoEquip = true })
+    else
+        FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+    end
     
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
