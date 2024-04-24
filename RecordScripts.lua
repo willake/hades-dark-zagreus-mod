@@ -10,7 +10,7 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         end
 
         DebugPrintf({ Text = "Attack" })
-        WriteRecord(DZGetCurrentState(), 1)        
+        LogRecord(DZGetCurrentState(), 1)        
         DZ.LastAction = 1
     end
 }
@@ -22,7 +22,7 @@ OnWeaponFired{ "SwordParry",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        WriteRecord(DZGetCurrentState(), 2)
+        LogRecord(DZGetCurrentState(), 2)
         DZ.LastAction = 2
     end
 }
@@ -35,7 +35,7 @@ OnWeaponFired{ "RushWeapon",
         end
 
         DebugPrintf({ Text = "Rush" })
-        WriteRecord(DZGetCurrentState(), 0)
+        LogRecord(DZGetCurrentState(), 0)
         DZ.LastAction = 0
     end
 } 
@@ -84,13 +84,6 @@ function DZGetCurrentState()
     }
 end
 
-function WriteRecord(state, action)
-    DebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
-        action))    
-end
-
 
 -- I don't know how to detect give up and die
 -- wrapping EndRun() is not working, so better terminate the recording whenever the character
@@ -102,6 +95,7 @@ end}
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
     DZ.IsRecording = true
+    CreateNewRecord()
     return base(prevRun, args)
 end, DarkZagreus)
 
@@ -119,3 +113,34 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     DZ.IsRecording = false
     return base(currentRun)
 end, DarkZagreus)
+
+-- if io module is not avilable then just print record out
+CreateNewRecord = function() DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) end
+LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+    state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+    state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
+    action)})
+end
+
+-- if io module is avilable, create a new record file then start logging
+if io then
+    local recordFilePath = "DZrecord" .. ".log"
+
+    CreateNewRecord = function()
+        io.open(recordFilePath, "w+"):close()
+        DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
+    end
+
+    LogRecord = function(state, action)
+        local file = io.open(recordFilePath, "a")
+
+        local out = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
+        action)
+
+        file:write(out)
+        DebugPrintf({ Text = out })
+        file:close()  
+    end
+end
