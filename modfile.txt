@@ -1,6 +1,7 @@
 Top Import "config.lua"
 Import "helper.lua"
 Import "main.lua"
+Import "RecordScripts.lua"
 
 To "Scripts/EnemyAI.lua"
 Import "Scripts/EnemyAI.lua"
