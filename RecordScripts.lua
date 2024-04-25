@@ -1,6 +1,7 @@
 DZ = {}
 DZ.IsRecording = false
 DZ.LastAction = 0
+DZ.StartChargingTime = 0.0
 
 -- sword weapon
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
@@ -10,7 +11,7 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         end
 
         DebugPrintf({ Text = "Attack" })
-        LogRecord(DZGetCurrentState(), 1)        
+        LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))        
         DZ.LastAction = 1
     end
 }
@@ -22,7 +23,39 @@ OnWeaponFired{ "SwordParry",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        LogRecord(DZGetCurrentState(), 2)
+        LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZ.LastAction = 2
+    end
+}
+
+-- bow
+OnWeaponCharging { "BowWeapon BowWeaponDash",
+    function(triggerArgs)
+        DZ.StartChargingTime = _worldTime
+    end 
+}
+
+OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        local duration = _worldTime - DZ.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrint({ Text = "Attack" })
+        LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))     
+    end 
+}
+
+OnWeaponFired{ "BowSplitShot",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrintf({ Text = "SpecialAttack" })
+        LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZ.LastAction = 2
     end
 }
@@ -35,7 +68,7 @@ OnWeaponFired{ "RushWeapon",
         end
 
         DebugPrintf({ Text = "Rush" })
-        LogRecord(DZGetCurrentState(), 0)
+        LogRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
         DZ.LastAction = 0
     end
 } 
@@ -54,6 +87,22 @@ function DZCheckCanRecord()
     end
 
     return true
+end
+
+function DZMakeActionData(action, chargeTime, maxChargeTime)
+    local dash = (action == 0) and 1.0 or 0.0
+    local attack = (action == 1) and 1.0 or 0.0
+    local special = (action == 2) and 1.0 or 0.0
+
+    local time = chargeTime / maxChargeTime
+    time = (time > 1.0) and 1.0 or time -- if exceed 1 then normalize to 1
+
+    return {    
+        Dash = dash,
+        Attack = attack,
+        SpecialAttack = special,
+        ChargeTime = time
+    }
 end
 
 function DZGetCurrentState()
@@ -84,13 +133,10 @@ function DZGetCurrentState()
     }
 end
 
-
+--- Managing Start/End recording
 -- I don't know how to detect give up and die
 -- wrapping EndRun() is not working, so better terminate the recording whenever the character
 -- enters the DeathArea
-OnAnyLoad { "DeathArea", function(triggerArgs)
-    DZ.IsRecording = false
-end}
 
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
@@ -104,6 +150,10 @@ ModUtil.Path.Wrap("EndRun", function(base, currentRun)
     return base(currentRun)
 end, DarkZagreus)
 
+OnAnyLoad { "DeathArea", function(triggerArgs)
+    DZ.IsRecording = false
+end}
+
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if currentRun.Cleared ~= nil then
         DebugPrintf({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
@@ -114,12 +164,14 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     return base(currentRun)
 end, DarkZagreus)
 
+--- Managing Start/End recording end
+
 -- if io module is not avilable then just print record out
 CreateNewRecord = function() DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) end
-LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
     state.OwnHP, state.ClosestEnemyHP, state.Distance, 
     state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
-    action)})
+    action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
 end
 
 -- if io module is avilable, create a new record file then start logging
@@ -134,10 +186,10 @@ if io then
     LogRecord = function(state, action)
         local file = io.open(recordFilePath, "a")
 
-        local out = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", 
+        local out = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
         state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
-        action)
+        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
 
         file:write(out)
         DebugPrintf({ Text = out })
