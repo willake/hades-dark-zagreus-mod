@@ -1,8 +1,7 @@
 DZ = {}
 DZ.IsRecording = false
 DZ.LastAction = 0
-DZ.StartChargingTime = 0.0
-
+  
 -- sword weapon
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
     function( triggerArgs )
@@ -44,7 +43,8 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
         local duration = _worldTime - DZ.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))     
+        LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
+        DZ.LastAction = 1  
     end 
 }
 
@@ -59,6 +59,83 @@ OnWeaponFired{ "BowSplitShot",
         DZ.LastAction = 2
     end
 }
+
+-- spear
+
+-- OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3",
+--     function(triggerArgs)
+--         DebugPrintf({ Text = "StartCharging" })
+--         DZ.StartChargingTime = _worldTime
+--         DZ.IsSpearSpinCharging = false
+--     end 
+-- }
+
+-- OnWeaponTriggerRelease { "SpearWeapon SpearWeapon2 SpearWeapon3",
+--     function(triggerArgs)
+--         -- if not DZCheckCanRecord() then
+--         --     return false
+--         -- end
+
+--         if IsControlDown({ Name = "Attack2" }) then
+--             return
+--         end
+--         DebugPrint({ Text = "ShortAttack" })
+--         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+--         DZ.LastAction = 1
+--     end 
+-- }
+
+-- OnWeaponTriggerRelease { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
+--     function(triggerArgs)
+--         -- if not DZCheckCanRecord() then
+--         --     return false
+--         -- end
+
+--         local duration = _worldTime - DZ.StartChargingTime
+--         DebugPrint({ Text = "ChargeDuration: " .. duration })
+--         DebugPrint({ Text = "Attack" })
+--         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
+--         DZ.LastAction = 1
+--     end 
+-- }
+
+-- OnWeaponFired{ "SpearWeaponThrowReturn",
+--     function( triggerArgs )
+--         -- if not DZCheckCanRecord() then
+--         --     return false
+--         -- end
+
+--         DebugPrintf({ Text = "SpecialAttack" })
+--         -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+--         DZ.LastAction = 2
+--     end
+-- }
+
+-- -- SpearThrowImmolation
+-- OnWeaponCharging { "SpearWeaponThrow SpearWeaponThrowReturn SpearWeaponThrowInvisibleReturn",
+--     function(triggerArgs)
+--         -- if not DZCheckCanRecord() then
+--         --     return false
+--         -- end
+
+--         DebugPrint({ Text = "StartCharging" })
+--         DZ.StartChargingTime = _worldTime
+--     end 
+-- }
+
+-- OnWeaponTriggerRelease { "SpearWeaponThrow SpearWeaponThrowReturn SpearWeaponThrowInvisibleReturn",
+--     function(triggerArgs)
+--         -- if not DZCheckCanRecord() then
+--         --     return false
+--         -- end
+        
+--         local duration = _worldTime - DZ.StartChargingTime
+--         DebugPrint({ Text = "ChargeDuration: " .. duration })
+--         DebugPrint({ Text = "SpecialAttack" })
+--         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+--         DZ.LastAction = 2
+--     end 
+-- }
 
 -- rush
 OnWeaponFired{ "RushWeapon",
@@ -161,6 +238,22 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
         DebugPrintf({ Text = "EndRun " .. "false" })
     end
     DZ.IsRecording = false
+
+    -- training
+
+    local learningRate = 50 -- set between 1, 100
+    local attempts = 100 -- number of times to do backpropagation
+    local threshold = 1 -- steepness of the sigmoid curve
+
+    local network = Luann:new({6, 5, 5, 4}, learningRate, threshold)
+    local trainingData = LoadTrainingData("DZrecord" .. ".log")
+
+    for i = 1, attempts do
+        for _, data in ipairs(trainingData) do
+            network:bp(data[1], data[2])
+        end
+    end
+
     return base(currentRun)
 end, DarkZagreus)
 
@@ -186,17 +279,18 @@ if io then
     LogRecord = function(state, action)
         local file = io.open(recordFilePath, "a")
 
-        local out = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f\n", 
+        local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
+        local output = string.format("%.2f %.2f %.2f %.2f\n", 
         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
 
-        file:write(out)
+        file:write(input)
+        file:write(output)
         DebugPrintf({ Text = out })
         file:close()  
     end
 end
-
 -- local learningRate = 50 -- set between 1, 100
 -- local attempts = 10000 -- number of times to do backpropagation
 -- local threshold = 1 -- steepness of the sigmoid curve

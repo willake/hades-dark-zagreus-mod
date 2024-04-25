@@ -1,167 +1,168 @@
---[[
-The MIT License (MIT)
+-- --[[
+-- The MIT License (MIT)
 
-Copyright (c) <2013> <Josh Rowe>
+-- Copyright (c) <2013> <Josh Rowe>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+-- Permission is hereby granted, free of charge, to any person obtaining a copy
+-- of this software and associated documentation files (the "Software"), to deal
+-- in the Software without restriction, including without limitation the rights
+-- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+-- copies of the Software, and to permit persons to whom the Software is
+-- furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+-- The above copyright notice and this permission notice shall be included in
+-- all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+-- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+-- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+-- THE SOFTWARE.
 
-]]--
+-- ]]--
 
---Borrowed table Persistence from http://lua-users.org/wiki/TablePersistence, MIT license.
---comments removed, condensed code to oneliners where possible.
--- Persistence =
--- {
--- 	store = function (path, ...)
--- 		local file, e = io.open(path, "w")
--- 		if not file then return error(e)	end
--- 		local n = select("#", ...)
--- 		local objRefCount = {} -- Stores reference that will be exported
--- 		for i = 1, n do refCount(objRefCount, (select(i,...))) end
--- 		local objRefNames = {}
--- 		local objRefIdx = 0;
--- 		file:write("-- Persistent Data\n");
--- 		file:write("local multiRefObjects = {\n");
--- 		for obj, count in pairs(objRefCount) do
--- 			if count > 1 then
--- 				objRefIdx = objRefIdx + 1;
--- 				objRefNames[obj] = objRefIdx;
--- 				file:write("{};"); -- table objRefIdx
--- 			end;
--- 		end;
--- 		file:write("\n} -- multiRefObjects\n");
--- 		for obj, idx in pairs(objRefNames) do
--- 			for k, v in pairs(obj) do
--- 				file:write("multiRefObjects["..idx.."][");
--- 				write(file, k, 0, objRefNames);
--- 				file:write("] = ");
--- 				write(file, v, 0, objRefNames);
--- 				file:write(";\n");
--- 			end;
--- 		end;
--- 		for i = 1, n do
--- 			file:write("local ".."obj"..i.." = ");
--- 			write(file, (select(i,...)), 0, objRefNames);
--- 			file:write("\n");
--- 		end
--- 		if n > 0 then
--- 			file:write("return obj1");
--- 			for i = 2, n do
--- 				file:write(" ,obj"..i);
--- 			end;
--- 			file:write("\n");
--- 		else
--- 			file:write("return\n");
--- 		end;
--- 		file:close();
--- 	end;
--- 	load = function (path)
--- 		local f, e = loadfile(path);
--- 		if f then
--- 			return f();
--- 		else
--- 			return nil, e;
--- 		end;
--- 	end;
--- }
+-- --Borrowed table Persistence from http://lua-users.org/wiki/TablePersistence, MIT license.
+-- --comments removed, condensed code to oneliners where possible.
+-- -- Persistence =
+-- -- {
+-- -- 	store = function (path, ...)
+-- -- 		local file, e = io.open(path, "w")
+-- -- 		if not file then return error(e)	end
+-- -- 		local n = select("#", ...)
+-- -- 		local objRefCount = {} -- Stores reference that will be exported
+-- -- 		for i = 1, n do refCount(objRefCount, (select(i,...))) end
+-- -- 		local objRefNames = {}
+-- -- 		local objRefIdx = 0;
+-- -- 		file:write("-- Persistent Data\n");
+-- -- 		file:write("local multiRefObjects = {\n");
+-- -- 		for obj, count in pairs(objRefCount) do
+-- -- 			if count > 1 then
+-- -- 				objRefIdx = objRefIdx + 1;
+-- -- 				objRefNames[obj] = objRefIdx;
+-- -- 				file:write("{};"); -- table objRefIdx
+-- -- 			end;
+-- -- 		end;
+-- -- 		file:write("\n} -- multiRefObjects\n");
+-- -- 		for obj, idx in pairs(objRefNames) do
+-- -- 			for k, v in pairs(obj) do
+-- -- 				file:write("multiRefObjects["..idx.."][");
+-- -- 				write(file, k, 0, objRefNames);
+-- -- 				file:write("] = ");
+-- -- 				write(file, v, 0, objRefNames);
+-- -- 				file:write(";\n");
+-- -- 			end;
+-- -- 		end;
+-- -- 		for i = 1, n do
+-- -- 			file:write("local ".."obj"..i.." = ");
+-- -- 			write(file, (select(i,...)), 0, objRefNames);
+-- -- 			file:write("\n");
+-- -- 		end
+-- -- 		if n > 0 then
+-- -- 			file:write("return obj1");
+-- -- 			for i = 2, n do
+-- -- 				file:write(" ,obj"..i);
+-- -- 			end;
+-- -- 			file:write("\n");
+-- -- 		else
+-- -- 			file:write("return\n");
+-- -- 		end;
+-- -- 		file:close();
+-- -- 	end;
+-- -- 	load = function (path)
+-- -- 		local f, e = loadfile(path);
+-- -- 		if f then
+-- -- 			return f();
+-- -- 		else
+-- -- 			return nil, e;
+-- -- 		end;
+-- -- 	end;
+-- -- }
 
-LuannHelpers = {
-	Write = function (file, item, level, objRefNames)
-		LuannHelpers.Writers[type(item)](file, item, level, objRefNames);
-	end,
-	WriteIndent = function (file, level)
-		for i = 1, level do
-			file:write("\t");
-		end
-	end,
-	RefCount = function (objRefCount, item)
-		if type(item) == "table" then
-			if objRefCount[item] then
-				objRefCount[item] = objRefCount[item] + 1
-			else
-				objRefCount[item] = 1
-				for k, v in pairs(item) do
-					LuannHelpers.RefCount(objRefCount, k)
-					LuannHelpers.RefCount(objRefCount, v)
-				end
+local write = function (file, item, level, objRefNames)
+	writers[type(item)](file, item, level, objRefNames);
+end
+	
+local writeIndent = function (file, level)
+	for i = 1, level do
+		file:write("\t");
+	end
+end
+	
+local refCount = function (objRefCount, item)
+	if type(item) == "table" then
+		if objRefCount[item] then
+			objRefCount[item] = objRefCount[item] + 1
+		else
+			objRefCount[item] = 1
+			for k, v in pairs(item) do
+				refCount(objRefCount, k)
+				refCount(objRefCount, v)
 			end
 		end
-	end,
-	Writers = {
-		["nil"] = function (file, item) file:write("nil") end;
-		["number"] = function (file, item)
-				file:write(tostring(item));
-			end;
-		["string"] = function (file, item)
-				file:write(string.format("%q", item));
-			end;
-		["boolean"] = function (file, item)
-				if item then
-					file:write("true");
-				else
-					file:write("false");
+	end
+end
+
+local writers = {
+	["nil"] = function (file, item) file:write("nil") end;
+	["number"] = function (file, item)
+			file:write(tostring(item));
+		end;
+	["string"] = function (file, item)
+			file:write(string.format("%q", item));
+		end;
+	["boolean"] = function (file, item)
+			if item then
+				file:write("true");
+			else
+				file:write("false");
+			end
+		end;
+	["table"] = function (file, item, level, objRefNames)
+			local refIdx = objRefNames[item];
+			if refIdx then
+				file:write("multiRefObjects["..refIdx.."]");
+			else
+				file:write("{\n");
+				for k, v in pairs(item) do
+					writeIndent(file, level+1);
+					file:write("[");
+					write(file, k, level+1, objRefNames);
+					file:write("] = ");
+					write(file, v, level+1, objRefNames);
+					file:write(";\n");
 				end
+				writeIndent(file, level);
+				file:write("}");
 			end;
-		["table"] = function (file, item, level, objRefNames)
-				local refIdx = objRefNames[item];
-				if refIdx then
-					file:write("multiRefObjects["..refIdx.."]");
-				else
-					file:write("{\n");
-					for k, v in pairs(item) do
-						LuannHelpers.WriteIndent(file, level+1);
-						file:write("[");
-						LuannHelpers.Write(file, k, level+1, objRefNames);
-						file:write("] = ");
-						LuannHelpers.Write(file, v, level+1, objRefNames);
-						file:write(";\n");
-					end
-					LuannHelpers.WriteIndent(file, level);
-					file:write("}");
-				end;
-			end;
-		["function"] = function (file, item)
-				-- local dInfo = debug.getinfo(item, "uS");
-				-- if dInfo.nups > 0 then
-				-- 	file:write("nil --[[functions with upvalue not supported]]");
-				-- elseif dInfo.what ~= "Lua" then
-				-- 	file:write("nil --[[non-lua function not supported]]");
-				-- else
-				-- 	local r, s = pcall(string.dump,item);
-				-- 	if r then
-				-- 		file:write(string.format("loadstring(%q)", s));
-				-- 	else
-				-- 		file:write("nil --[[function could not be dumped]]");
-				-- 	end
-				-- end
-			end;
-		["thread"] = function (file, item)
-				file:write("nil --[[thread]]\n");
-			end;
-		["userdata"] = function (file, item)
-				file:write("nil --[[userdata]]\n");
-			end;
-	}
+		end;
+	["function"] = function (file, item)
+			-- local dInfo = debug.getinfo(item, "uS");
+			-- if dInfo.nups > 0 then
+			-- 	file:write("nil --[[functions with upvalue not supported]]");
+			-- elseif dInfo.what ~= "Lua" then
+			-- 	file:write("nil --[[non-lua function not supported]]");
+			-- else
+			-- 	local r, s = pcall(string.dump,item);
+			-- 	if r then
+			-- 		file:write(string.format("loadstring(%q)", s));
+			-- 	else
+			-- 		file:write("nil --[[function could not be dumped]]");
+			-- 	end
+			-- end
+		end;
+	["thread"] = function (file, item)
+			file:write("nil --[[thread]]\n");
+		end;
+	["userdata"] = function (file, item)
+			file:write("nil --[[userdata]]\n");
+		end;
 }
 
 Luann = {}
-Layer = {}
-Cell = {}
+local Layer = {}
+local Cell = {}
 
 --We start by creating the cells.
 --The cell has a structure containing weights that modify the input from the previous layer.
@@ -289,45 +290,50 @@ function Luann:bp(inputs, outputs)
 	end
 end
 
--- function luann:saveNetwork(network, savefile)
--- 	print(savefile)
--- 	Persistence.store(savefile, network)
--- end
+-- -- function luann:saveNetwork(network, savefile)
+-- -- 	print(savefile)
+-- -- 	Persistence.store(savefile, network)
+-- -- end
 
--- function luann:loadNetwork(savefile)
--- 	local ann = Persistence.load(savefile)
--- 	if ann then
--- 		ann.bp = luann.bp
--- 		ann.activate = luann.activate
--- 		for i = 1, #ann do
--- 			for j = 1, #ann[i].cells do
--- 				ann[i].cells[j].activate = Cell.activate
--- 			end
--- 		end
--- 		return(ann)
--- 	end
--- 	return(nil)
--- end
+-- -- function luann:loadNetwork(savefile)
+-- -- 	local ann = Persistence.load(savefile)
+-- -- 	if ann then
+-- -- 		ann.bp = luann.bp
+-- -- 		ann.activate = luann.activate
+-- -- 		for i = 1, #ann do
+-- -- 			for j = 1, #ann[i].cells do
+-- -- 				ann[i].cells[j].activate = Cell.activate
+-- -- 			end
+-- -- 		end
+-- -- 		return(ann)
+-- -- 	end
+-- -- 	return(nil)
+-- -- end
 
--- function luann:loadTrainingDataFromFile(fileName)
--- local trainingData = {}
--- local fileLines = {}
---     local f = io.open(fileName, "rb")
+-- -- function luann:loadTrainingDataFromFile(fileName)
+-- -- local trainingData = {}
+-- -- local fileLines = {}
+-- --     local f = io.open(fileName, "rb")
 	
--- 	for line in f:lines() do
--- 	table.insert (fileLines, line);
--- 	end
+-- -- 	for line in f:lines() do
+-- -- 	table.insert (fileLines, line);
+-- -- 	end
 
--- 	f:close()
+-- -- 	f:close()
 
--- 	for i = 1, #fileLines do
--- 		if i%2 == 0 then
--- 				local tempInputs = {}
--- 				for input in fileLines[i]:gmatch("%S+") do table.insert(tempInputs, tonumber(input)) end
--- 				local tempOutputs = {}
--- 				for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempOutputs, tonumber(input)) end
--- 			table.insert(trainingData, {tempInputs, tempOutputs})
--- 		end
--- 	end
--- return(trainingData)
--- end
+-- -- 	for i = 1, #fileLines do
+-- -- 		if i%2 == 0 then
+-- -- 				local tempInputs = {}
+-- -- 				for input in fileLines[i]:gmatch("%S+") do table.insert(tempInputs, tonumber(input)) end
+-- -- 				local tempOutputs = {}
+-- -- 				for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempOutputs, tonumber(input)) end
+-- -- 			table.insert(trainingData, {tempInputs, tempOutputs})
+-- -- 		end
+-- -- 	end
+-- -- return(trainingData)
+-- -- end
+
+-- SaveIgnores["LuannHelpers"] = false
+SaveIgnores["Luann"] = true
+-- SaveIgnores["Layer"] = false
+-- SaveIgnores["Cell"] = false
