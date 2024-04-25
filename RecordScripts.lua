@@ -144,3 +144,29 @@ if io then
         file:close()  
     end
 end
+
+-- local learningRate = 50 -- set between 1, 100
+-- local attempts = 10000 -- number of times to do backpropagation
+-- local threshold = 1 -- steepness of the sigmoid curve
+
+-- --create a network with 2 inputs, 3 hidden cells, and 1 output
+-- local myNetwork = Luann:new({2, 3, 3, 1}, learningRate, threshold)
+
+-- --run backpropagation (bp)
+-- for i = 1,attempts do
+-- 	myNetwork:bp({0,0},{0})
+-- 	myNetwork:bp({1,0},{1})
+-- 	myNetwork:bp({0,1},{1})
+-- 	myNetwork:bp({1,1},{0})
+-- end
+
+-- --print the signal of the single output cell when :activated with different inputs
+-- DebugPrint({ Text = "Results:"})
+-- myNetwork:activate({0,0})
+-- DebugPrint({ Text = "0 0 | " .. myNetwork[3].cells[1].signal })
+-- myNetwork:activate({0,1})
+-- DebugPrint({ Text = "0 1 | " .. myNetwork[3].cells[1].signal })
+-- myNetwork:activate({1,0})
+-- DebugPrint({ Text = "1 0 | " .. myNetwork[3].cells[1].signal })
+-- myNetwork:activate({1,1})
+-- DebugPrint({ Text = "1 1 | " .. myNetwork[3].cells[1].signal })
