@@ -38,21 +38,30 @@ function DoDarkZagreusMove(enemy, currentRun, targetId, weaponAIData, actionData
     return didTimeout
 end
 
-function GetAIState()
-    return
-    {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0
+function DZGetCurrentAIState(enemy)
+    local hero = CurrentRun.Hero
+    local distance = 0.00
+    distance = GetDistance({ Id = enemy.Health, DestinationId = currentRun.Hero.ObjectId })
+
+    if distance > 1000 then
+        distance = 1000
+    end
+
+    local isLastActionDash = (enemy.LastAction == 0) and 1 or 0
+    local isLastActionAttack = (enemy.LastAction == 1) and 1 or 0
+    local isLastActionSpectialAttack = (enemy.LastActionn == 2) and 1 or 0
+    
+    return {
+        OwnHP = enemy.Health / enemy.MaxHealth,
+        ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
+        Distance = distance / 1000,
+        IsLastActionDash = isLastActionDash,
+        IsLastActionAttack = isLastActionAttack,
+        IsLastActionSpecialAttack = isLastActionSpectialAttack,
     }
 end
 
-function GetAIActionData(state)
+function DZMakeAIActionData(state)
     local r = math.random()
     local chargeTime = 0.0
 
@@ -64,14 +73,11 @@ function GetAIActionData(state)
         chargeTime = 0.1 + (math.random() * 1)
     end
 
-    return 
-    {
-        Distance = 800,    
-        IsCombo = true,
-        AttackProb = 0.7, -- 0.7
-        SpectialAttackProb = 0.2, -- 0.2
-        DashProb = 0.1,
-        ChargeTime = chargeTime
+    return {    
+        Dash = dash,
+        Attack = attack,
+        SpecialAttack = special,
+        ChargeTime = time
     }
 end
 

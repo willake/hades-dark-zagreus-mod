@@ -2,25 +2,25 @@ if not EvilZagreus.Config.Enabled then return end
 
 DebugPrintf({ Text = "Setup Events" })
 
-OnAnyLoad { "RoomOpening", function(triggerArgs)
-    DebugPrintf({ Text = "Enter RoomOpening, Force next room to Hades boss room" })
-    -- do stuff here
-    ForceNextRoom = "D_Boss01"
+-- OnAnyLoad { "RoomOpening", function(triggerArgs)
+--     DebugPrintf({ Text = "Enter RoomOpening, Force next room to Hades boss room" })
+--     -- do stuff here
+--     ForceNextRoom = "D_Boss01"
 
-    -- Stomp any rooms already assigned to doors
-    for doorId, door in pairs(OfferedExitDoors) do
-        local room = door.Room
-        if room ~= nil then
-            if ForceNextRoom ~= nil then
-                DebugPrint({ Text = "ForceNextRoom = " .. tostring(ForceNextRoom) })
-            end
+--     -- Stomp any rooms already assigned to doors
+--     for doorId, door in pairs(OfferedExitDoors) do
+--         local room = door.Room
+--         if room ~= nil then
+--             if ForceNextRoom ~= nil then
+--                 DebugPrint({ Text = "ForceNextRoom = " .. tostring(ForceNextRoom) })
+--             end
 
-            local forcedRoomData = RoomData[ForceNextRoom]
-            local forcedRoom = CreateRoom(forcedRoomData)
-            AssignRoomToExitDoor(door, forcedRoom)
-        end
-    end
-end }
+--             local forcedRoomData = RoomData[ForceNextRoom]
+--             local forcedRoom = CreateRoom(forcedRoomData)
+--             AssignRoomToExitDoor(door, forcedRoom)
+--         end
+--     end
+-- end }
 
 -- ZeusRushTrait
 OnAnyLoad { "D_Boss01", function(triggerArgs)
@@ -36,16 +36,16 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- SetWeaponProperty({ WeaponName = "EnemySwordWeapon", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireGraphic", Value = "ZagreusSwordArthurAttack1_Fire", ValueChangeType = "Absolute" })
 
             -- sword template
-            -- enemy.PrimaryWeapon = "DarkArthurSword";
-            -- enemy.DashWeapon = "DarkRush";
-            -- enemy.SpecialAttackWeapon = "DarkArthurSwordParry";
-            -- enemy.DashAttackWeapon = "DarkArthurSwordDash";
+            enemy.PrimaryWeapon = "DarkArthurSword";
+            enemy.DashWeapon = "DarkRush";
+            enemy.SpecialAttackWeapon = "DarkArthurSwordParry";
+            enemy.DashAttackWeapon = "DarkArthurSwordDash";
 
             -- bow template
-            enemy.PrimaryWeapon = "DarkBow";
-            enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkBowSplitShot";
-            enemy.DashAttackWeapon = "DarkBowDash";
+            -- enemy.PrimaryWeapon = "DarkBow";
+            -- enemy.DashWeapon = "DarkRush";
+            -- enemy.SpecialAttackWeapon = "DarkBowSplitShot";
+            -- enemy.DashAttackWeapon = "DarkBowDash";
 
             -- spear template
             -- enemy.PrimaryWeapon = "DarkShield";
