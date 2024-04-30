@@ -39,7 +39,6 @@ function DoDarkZagreusMove(enemy, currentRun, targetId, weaponAIData, actionData
 end
 
 function DZGetCurrentAIState(enemy)
-    local hero = CurrentRun.Hero
     local distance = 0.00
     distance = GetDistance({ Id = enemy.Health, DestinationId = currentRun.Hero.ObjectId })
 
@@ -49,7 +48,7 @@ function DZGetCurrentAIState(enemy)
 
     local isLastActionDash = (enemy.LastAction == 0) and 1 or 0
     local isLastActionAttack = (enemy.LastAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.LastActionn == 2) and 1 or 0
+    local isLastActionSpectialAttack = (enemy.LastAction == 2) and 1 or 0
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
@@ -57,27 +56,38 @@ function DZGetCurrentAIState(enemy)
         Distance = distance / 1000,
         IsLastActionDash = isLastActionDash,
         IsLastActionAttack = isLastActionAttack,
-        IsLastActionSpecialAttack = isLastActionSpectialAttack,
+        IsLastActionSpecialAttack = isLastActionSpectialAttack
     }
 end
 
-function DZMakeAIActionData(state)
-    local r = math.random()
-    local chargeTime = 0.0
+function DZMakeAIActionData(state, maxChargeTime)
+
+    DebugPrintTable("AIState", state, 3)
+    -- local r = math.random()
+    -- local chargeTime = 0.0
 
     -- if r > 0.5 then
     --     chargeTime = 0.1 + (math.random() * 0.9)
     -- end
 
-    if r > 0.2 then
-        chargeTime = 0.1 + (math.random() * 1)
-    end
+    DZ.Model:activate({state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+    state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack})
+
+    local dashProb = DZ.Model[4].cells[1].signal
+    local attackProb = DZ.Model[4].cells[2].signal
+    local specialProb = DZ.Model[4].cells[3].signal
+    local chargeTime = DZ.Model[4].cells[4].signal
+
+    DebugPrint({ Text = "dashProb | " .. tostring(dashProb) })
+    DebugPrint({ Text = "attackProb | " .. tostring(attackProb) })
+    DebugPrint({ Text = "specialProb | " .. tostring(specialProb) })
+    DebugPrint({ Text = "chargeTime | " .. tostring(chargeTime) })
 
     return {    
-        Dash = dash,
-        Attack = attack,
-        SpecialAttack = special,
-        ChargeTime = time
+        Dash = dashProb,
+        Attack = attackProb,
+        SpecialAttack = specialProb,
+        ChargeTime = chargeTime
     }
 end
 
@@ -279,16 +289,12 @@ function SetLastActionOnAIState(enemy)
     enemy.AIState.IsLastActionDash = 0
     enemy.AIState.IsLastActionDashAttack = 0
     enemy.AIState.IsLastActionCast = 0
-    if enemy.LastAction == "Attack" then
+    if enemy.LastAction == 1 then
         enemy.AIState.IsLastActionAttack = 1
-    elseif enemy.LastAction == "SpecialAttack" then
+    elseif enemy.LastAction == 2 then
         enemy.AIState.IsLastActionSpectialAttack = 1
-    elseif enemy.LastAction == "Dash" then
+    elseif enemy.LastAction == 0 then
         enemy.AIState.IsLastActionDash = 1
-    elseif enemy.LastAction == "DashAttack" then
-        enemy.AIState.IsLastActionDashAttack = 1
-    elseif enemy.LastAction == "Cast" then
-        enemy.AIState.IsLastActionCast = 1
     end
 end
 
