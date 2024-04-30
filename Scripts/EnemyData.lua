@@ -5,7 +5,7 @@ UnitSetData.Enemies.Hades.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 1000
 
-UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
+-- UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
 
 -- remove all stages, leaving only 1
 UnitSetData.Enemies.Hades.AIStages = 
