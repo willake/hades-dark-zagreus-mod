@@ -232,31 +232,6 @@ function Luann:activate(inputs)
 	end
 end
 
-function Luann:decode(hiddenSignal)
-
-	--iterate over the hidden layer and set their signals to hiddenInputs
-	for i = 1, #self[2].cells do
-		self[2].cells[i].signal = hiddenSignal[i]
-	end
-
-	local threshold = self.threshold
-
-	for i = 3, #self do
-		local passInputs = {}
-		local cells = self[i].cells
-		local prevCells = self[i-1].cells
-		for m = 1, #prevCells do
-			passInputs[m] = prevCells[m].signal
-		end
-		local passBias = self[i].bias
-		for j = 1, #cells do
-			--activate each cell
-			cells[j]:activate(passInputs, passBias, threshold)
-		end
-	end
-
-end
-
 function Luann:bp(inputs, outputs)
 	self:activate(inputs) --update the internal inputs and outputs
 	local numSelf = #self
@@ -288,6 +263,10 @@ function Luann:bp(inputs, outputs)
 			end
 		end
 	end
+end
+
+function Luann:test()
+	
 end
 
 -- -- function luann:saveNetwork(network, savefile)
