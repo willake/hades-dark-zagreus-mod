@@ -216,13 +216,16 @@ end
 
 function DZForceTraining()
     local learningRate = 50 -- set between 1, 100
-    local attempts = 50 -- number of times to do backpropagation
+    local attempts = 10 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
 
-    local network = Luann:new({6, 5, 5, 4}, learningRate, threshold)
-    local trainingData = LoadTrainingData("DZrecord" .. ".log")
-
+    local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
+    local data = LoadTrainingData("DZrecord" .. ".log")
+    local weaponData = data.WeaponData
+    local trainingData = data.TrainingData
     DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
+
+    DebugPrintTable("WeaponData", weaponData, 3)
 
     for i = 1, attempts do
         for _, data in ipairs(trainingData) do
@@ -235,6 +238,8 @@ end
 
 OnControlPressed { "Reload",
 function(triggerArgs)
+    -- local prevRun = GameState.LastInteractedWeaponUpgrade
+    -- DebugPrintTable("PrevRun", prevRun, 5)
     DZForceTraining()
 end
 }
@@ -297,29 +302,37 @@ LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.
 end
 
 -- if io module is avilable, create a new record file then start logging
-if io then
-    local recordFilePath = "DZrecord" .. ".log"
+-- if io then
+--     local recordFilePath = "DZrecord" .. ".log"
 
-    CreateNewRecord = function()
-        io.open(recordFilePath, "w+"):close()
-        DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
-    end
+--     CreateNewRecord = function()
+--         local file = io.open(recordFilePath, "w+")
+        
+--         local weapon = GameState.LastInteractedWeaponUpgrade
 
-    LogRecord = function(state, action)
-        local file = io.open(recordFilePath, "a")
+--         -- write what weapon player's holding into the file
+--         file:write(string.format("%s\n", weapon.WeaponName))
+--         file:write(string.format("%d\n", weapon.ItemIndex))
 
-        local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
-        local output = string.format("%.2f %.2f %.2f %.2f\n", 
-        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
+--         file:close()
+--         DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
+--     end
 
-        file:write(input)
-        file:write(output)
-        DebugPrintf({ Text = out })
-        file:close()  
-    end
-end
+--     LogRecord = function(state, action)
+--         local file = io.open(recordFilePath, "a")
+
+--         local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
+--         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+--         state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
+--         local output = string.format("%.2f %.2f %.2f %.2f\n", 
+--         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
+
+--         file:write(input)
+--         file:write(output)
+--         DebugPrintf({ Text = out })
+--         file:close()  
+--     end
+-- end
 -- local learningRate = 50 -- set between 1, 100
 -- local attempts = 10000 -- number of times to do backpropagation
 -- local threshold = 1 -- steepness of the sigmoid curve

@@ -265,7 +265,20 @@ function Luann:bp(inputs, outputs)
 	end
 end
 
-function Luann:test()
+-- Function to calculate Mean Absolute Error (MAE)
+local function meanAbsoluteError(predicted, actual)
+    local sumError = 0
+    local n = #predicted
+
+    for i = 1, n do
+        sumError = sumError + math.abs(predicted[i] - actual[i])
+    end
+
+    return sumError / n
+end
+
+
+function Luann:test(predictedOutputs, groundTruth, threshold)
 	
 end
 

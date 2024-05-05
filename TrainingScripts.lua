@@ -1,5 +1,7 @@
 function LoadTrainingData(fileName)
-    local trainingData = {}
+    local data = {}
+    data.WeaponData = {}
+    data.TrainingData = {}
     local fileLines = {}
     local file = io.open(fileName, "rb")
         
@@ -9,14 +11,24 @@ function LoadTrainingData(fileName)
 
     file:close()
 
-    for i = 1, #fileLines do
+    for input in fileLines[1]:gmatch("%S+") do
+        data.WeaponData.WeaponName = input
+        break
+    end
+
+    for input in fileLines[2]:gmatch("%S+") do
+        data.WeaponData.ItemIndex = tonumber(input)
+        break
+    end
+
+    for i = 3, #fileLines do
         if i%2 == 1 then
                 local tempInputs = {}
                 for input in fileLines[i]:gmatch("%S+") do table.insert(tempInputs, tonumber(input)) end
                 local tempOutputs = {}
                 for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempOutputs, tonumber(output)) end
-            table.insert(trainingData, {tempInputs, tempOutputs})
+            table.insert(data.TrainingData, {tempInputs, tempOutputs})
         end
     end
-    return(trainingData)
+    return (data)
 end
