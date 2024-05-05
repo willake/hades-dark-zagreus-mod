@@ -1,3 +1,5 @@
+if not EvilZagreus.Config.Enabled then return end
+
 DZ = {}
 DZ.Model = {}
 DZ.IsRecording = false
@@ -222,6 +224,9 @@ function DZForceTraining()
     local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
     local data = LoadTrainingData("DZrecord" .. ".log")
     local weaponData = data.WeaponData
+
+    DZ.Weapon = weaponData
+    
     local trainingData = data.TrainingData
     DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
 

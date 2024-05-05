@@ -1,3 +1,5 @@
+if not EvilZagreus.Config.Enabled then return end
+
 function LoadTrainingData(fileName)
     local data = {}
     data.WeaponData = {}
