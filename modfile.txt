@@ -1,6 +1,11 @@
 Top Import "config.lua"
 Import "helper.lua"
-Import "main.lua"
+Import "Libraries/luann/luann.lua"
+Import "Scripts/Main.lua"
+Import "Scripts/WeaponData.lua"
+Import "Scripts/DebugScripts.lua"
+Import "Scripts/TrainingScripts.lua"
+Import "Scripts/RecordScripts.lua"
 
 To "Scripts/EnemyAI.lua"
 Import "Scripts/EnemyAI.lua"

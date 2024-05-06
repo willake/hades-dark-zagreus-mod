@@ -58,5 +58,6 @@ function DebugPrintTable(tableName, table, depth)
 end
 
 function DebugPrintString(text)
+    DebugPrint({ Text = text })
     Print(text)
 end

@@ -1,16 +1,7 @@
 function DarkZagreusSwordAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
+    enemy.AIState = { }
+    enemy.LastActionTime = 0
+    enemy.LastAction = 0
     while IsAIActive( enemy, currentRun ) do
 		local continue = DoSwordAILoop( enemy, currentRun )
 		if not continue then
@@ -20,7 +11,9 @@ function DarkZagreusSwordAI( enemy, currentRun )
 end
 
 function DoSwordAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState, 1.0)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = SelectSwordWeapon(enemy, actionData)
@@ -119,8 +112,8 @@ function DoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     if not FireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.AIState.LastActionTime = _worldTime
-    SetLastActionOnAIState(enemy)
+    enemy.LastActionTime = _worldTime
+    -- SetLastActionOnAIState(enemy)
 
     local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
     
@@ -192,27 +185,29 @@ function FireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 end
 
 function SelectSwordWeapon(enemy, actionData)
-    local r = math.random()
+    local total = actionData.Attack + actionData.SpecialAttack + actionData.Dash
+    local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 0
+    local lastActionTime = _worldTime
+    DebugPrint({ Text = tostring(lastActionTime) })
 
     -- use attack weapon
-    if r < actionData.AttackProb then
+    if r < actionData.Attack then
+
+        enemy.LastAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - lastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
-        enemy.LastAction = "Attack"
-
         -- if the last action is also attack, do weapon combo
         if enemy.AIState.IsLastActionAttack > 0 then
-            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+            if enemy.ChainedWeapon ~= nil and _worldTime - lastActionTime < 0.3 then
                 enemy.WeaponName = enemy.ChainedWeapon
                 enemy.ChainedWeapon = nil
                 return enemy.WeaponName
@@ -226,16 +221,16 @@ function SelectSwordWeapon(enemy, actionData)
     end
 
     -- use special attack
-    if r < actionData.AttackProb + actionData.SpectialAttackProb then
-        enemy.LastAction = "SpecialAttack"
+    if r < actionData.Attack + actionData.SpecialAttack then
+        enemy.LastAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName

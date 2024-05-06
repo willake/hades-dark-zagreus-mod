@@ -36,16 +36,16 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             -- SetWeaponProperty({ WeaponName = "EnemySwordWeapon", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireGraphic", Value = "ZagreusSwordArthurAttack1_Fire", ValueChangeType = "Absolute" })
 
             -- sword template
-            -- enemy.PrimaryWeapon = "DarkArthurSword";
-            -- enemy.DashWeapon = "DarkRush";
-            -- enemy.SpecialAttackWeapon = "DarkArthurSwordParry";
-            -- enemy.DashAttackWeapon = "DarkArthurSwordDash";
+            enemy.PrimaryWeapon = "DarkArthurSword";
+            enemy.DashWeapon = "DarkRush";
+            enemy.SpecialAttackWeapon = "DarkArthurSwordParry";
+            enemy.DashAttackWeapon = "DarkArthurSwordDash";
 
             -- bow template
-            enemy.PrimaryWeapon = "DarkBow";
-            enemy.DashWeapon = "DarkRush";
-            enemy.SpecialAttackWeapon = "DarkBowSplitShot";
-            enemy.DashAttackWeapon = "DarkBowDash";
+            -- enemy.PrimaryWeapon = "DarkBow";
+            -- enemy.DashWeapon = "DarkRush";
+            -- enemy.SpecialAttackWeapon = "DarkBowSplitShot";
+            -- enemy.DashAttackWeapon = "DarkBowDash";
 
             -- spear template
             -- enemy.PrimaryWeapon = "DarkShield";

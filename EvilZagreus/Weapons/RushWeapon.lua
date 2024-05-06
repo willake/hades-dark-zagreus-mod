@@ -25,6 +25,7 @@ WeaponData.DarkRush =
         PostAttackDuration = 0,
         AIAttackDistance = 500,
         AIBufferDistance = 500,
+        SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
