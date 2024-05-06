@@ -228,6 +228,11 @@ function DZForceTraining()
     DZ.Weapon = weaponData
     
     local trainingData = data.TrainingData
+
+    if #trainingData == 0 then
+        return
+    end
+    
     DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
 
     DebugPrintTable("WeaponData", weaponData, 3)
@@ -254,47 +259,47 @@ end
 -- wrapping EndRun() is not working, so better terminate the recording whenever the character
 -- enters the DeathArea
 
--- ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
---     DebugPrintf({ Text = "StartNewRun" })
---     DZ.IsRecording = true
---     CreateNewRecord()
---     return base(prevRun, args)
--- end, DarkZagreus)
+ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
+    DebugPrintf({ Text = "StartNewRun" })
+    DZ.IsRecording = true
+    CreateNewRecord()
+    return base(prevRun, args)
+end, DarkZagreus)
 
--- ModUtil.Path.Wrap("EndRun", function(base, currentRun)
---     DZ.IsRecording = false
---     return base(currentRun)
--- end, DarkZagreus)
+ModUtil.Path.Wrap("EndRun", function(base, currentRun)
+    DZ.IsRecording = false
+    return base(currentRun)
+end, DarkZagreus)
 
--- OnAnyLoad { "DeathArea", function(triggerArgs)
---     DZ.IsRecording = false
--- end}
+OnAnyLoad { "DeathArea", function(triggerArgs)
+    DZ.IsRecording = false
+end}
 
--- ModUtil.Path.Wrap("RecordRunCleared", function(base)
---     if currentRun.Cleared ~= nil then
---         DebugPrintf({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
---     else
---         DebugPrintf({ Text = "EndRun " .. "false" })
---     end
---     DZ.IsRecording = false
+ModUtil.Path.Wrap("RecordRunCleared", function(base)
+    if currentRun.Cleared ~= nil then
+        DebugPrintf({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
+    else
+        DebugPrintf({ Text = "EndRun " .. "false" })
+    end
+    DZ.IsRecording = false
 
---     -- training
+    -- training
 
---     local learningRate = 50 -- set between 1, 100
---     local attempts = 100 -- number of times to do backpropagation
---     local threshold = 1 -- steepness of the sigmoid curve
+    local learningRate = 50 -- set between 1, 100
+    local attempts = 100 -- number of times to do backpropagation
+    local threshold = 1 -- steepness of the sigmoid curve
 
---     local network = Luann:new({6, 5, 5, 4}, learningRate, threshold)
---     local trainingData = LoadTrainingData("DZrecord" .. ".log")
+    local network = Luann:new({6, 5, 5, 4}, learningRate, threshold)
+    local trainingData = LoadTrainingData("DZrecord" .. ".log")
 
---     for i = 1, attempts do
---         for _, data in ipairs(trainingData) do
---             network:bp(data[1], data[2])
---         end
---     end
+    for i = 1, attempts do
+        for _, data in ipairs(trainingData) do
+            network:bp(data[1], data[2])
+        end
+    end
 
---     return base(currentRun)
--- end, DarkZagreus)
+    return base(currentRun)
+end, DarkZagreus)
 
 --- Managing Start/End recording end
 
