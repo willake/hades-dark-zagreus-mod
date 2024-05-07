@@ -6,8 +6,6 @@ DZPersistent.LastAction = 0
 DZPersistent.PendingRecord = {}
 
 DZTemp.Model = {}
-
-SaveIgnores["DZ"] = true
   
 -- sword weapon
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
@@ -311,11 +309,15 @@ end, DarkZagreus)
 --- Managing Start/End recording end
 
 -- if io module is not avilable then just print record out
-DZCreateNewRecord = function() DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) end
-DZLogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-    state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-    state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
-    action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
+DZCreateNewRecord = function() 
+    DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) 
+    DZPersistent.PendingRecord = {}
+end
+DZLogRecord = function (state, action) 
+    DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
+        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
 end
 
 -- Pending record system
@@ -326,22 +328,16 @@ end
 -- therefore I make a pending record, which push spear attack to pending 
 -- this allows spear spin to override spear attack record, so holding a button will not double counting actions
 DZPushPendingRecord = function(state, action)
-    if DZPersistent.PendingRecord then
-        DZLogRecord(DZPersistent.State, DZPersistent.Action) 
+    if DZPersistent.PendingRecord.State and DZPersistent.PendingRecord.Action then
+        DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
     end
-    DZPersistent.PendingRecord = 
-    {
-        State = state,
-        Action = action
-    }
+    DZPersistent.PendingRecord.State = state
+    DZPersistent.PendingRecord.Action = action
 end
 
 DZOverridePendingRecord = function(state, action)
-    DZPersistent.PendingRecord = 
-    {
-        State = state,
-        Action = action
-    }
+    DZPersistent.PendingRecord.State = state
+    DZPersistent.PendingRecord.Action = action
 end
 
 -- if io module is avilable, create a new record file then start logging
@@ -352,6 +348,8 @@ if io then
         local file = io.open(recordFilePath, "w+")
         
         local weapon = GameState.LastInteractedWeaponUpgrade
+
+        DZPersistent.PendingRecord = {}
 
         -- write what weapon player's holding into the file
         file:write(string.format("%s\n", weapon.WeaponName))
