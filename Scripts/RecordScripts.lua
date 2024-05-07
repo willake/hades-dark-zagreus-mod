@@ -82,6 +82,7 @@ OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     end 
 }
 
+-- TODO: not sure if i can catch Flurry Jab
 OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
@@ -142,11 +143,13 @@ OnWeaponFired { "SpearWeaponThrow",
         DebugPrint({ Text = "SpearWeaponThrow" })
         
         -- if the weapon is aspect of achilles, which is chargable
-        if GameState.LastInteractedWeaponUpgrade.ItemIndex == 2 then
-            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
-        else
-            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        end      
+        -- if GameState.LastInteractedWeaponUpgrade.ItemIndex == 2 then
+        --     DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
+        -- else
+        --     DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        -- end  
+        
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
 
         DZPersistent.LastAction = 2
     end 
