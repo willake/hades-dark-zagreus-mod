@@ -71,7 +71,7 @@ OnWeaponFired{ "BowSplitShot",
 
 -- spear
 
-OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3",
+OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
@@ -82,7 +82,7 @@ OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3",
     end 
 }
 
-OnWeaponTriggerRelease { "SpearWeapon SpearWeapon2 SpearWeapon3",
+OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
@@ -108,43 +108,62 @@ OnWeaponTriggerRelease { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
     end 
 }
 
--- OnWeaponFired{ "SpearWeaponThrowReturn",
---     function( triggerArgs )
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+OnWeaponFired { "SpearWeaponThrowReturn",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
 
---         DebugPrintf({ Text = "SpecialAttack" })
---         -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
---         DZ.LastAction = 2
---     end
--- }
+        DebugPrintf({ Text = "SpearWeaponThrowReturn" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
+    end
+}
 
--- -- SpearThrowImmolation
--- OnWeaponCharging { "SpearWeaponThrow SpearWeaponThrowReturn SpearWeaponThrowInvisibleReturn",
---     function(triggerArgs)
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+OnWeaponCharging { "SpearWeaponThrow",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
 
---         DebugPrint({ Text = "StartCharging" })
---         DZ.StartChargingTime = _worldTime
---     end 
--- }
+        DebugPrint({ Text = "StartCharging" })
+        DZPersistent.StartChargingTime = _worldTime
+    end 
+}
 
--- OnWeaponTriggerRelease { "SpearWeaponThrow SpearWeaponThrowReturn SpearWeaponThrowInvisibleReturn",
---     function(triggerArgs)
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+OnWeaponFired { "SpearWeaponThrow",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
         
---         local duration = _worldTime - DZ.StartChargingTime
---         DebugPrint({ Text = "ChargeDuration: " .. duration })
---         DebugPrint({ Text = "SpecialAttack" })
---         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
---         DZ.LastAction = 2
---     end 
--- }
+        local duration = _worldTime - DZPersistent.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrint({ Text = "SpearWeaponThrow" })
+        
+        -- if the weapon is aspect of achilles, which is chargable
+        if GameState.LastInteractedWeaponUpgrade.ItemIndex == 2 then
+            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
+        else
+            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        end      
+
+        DZPersistent.LastAction = 2
+    end 
+}
+
+OnWeaponFired{ "SpearRushWeapon",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrintf({ Text = "SpearRushWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
+    end
+}
 
 -- rush
 OnWeaponFired{ "RushWeapon",
