@@ -2,7 +2,7 @@ if not EvilZagreus.Config.Enabled then return end
 
 DZPersistent = {}
 DZPersistent.IsRecording = false
-DZPersistent.LastAction = 0
+DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
 DZPersistent.PendingRecord = {}
 
 DZTemp.Model = {}
@@ -48,7 +48,7 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
         local duration = _worldTime - DZPersistent.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
-        DZLogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
         DZPersistent.LastAction = 1  
     end 
 }
@@ -60,7 +60,7 @@ OnWeaponFired{ "BowSplitShot",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        DZLogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
 }
