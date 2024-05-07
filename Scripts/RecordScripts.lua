@@ -14,7 +14,7 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
             return false
         end
 
-        DebugPrintf({ Text = "Attack" })
+        DebugPrint({ Text = "Attack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1)) 
         DZPersistent.LastAction = 1
     end
@@ -26,7 +26,7 @@ OnWeaponFired{ "SwordParry",
             return false
         end
 
-        DebugPrintf({ Text = "SpecialAttack" })
+        DebugPrint({ Text = "SpecialAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
@@ -39,7 +39,7 @@ OnWeaponCharging { "BowWeapon BowWeaponDash",
             return false
         end
 
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -49,7 +49,7 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
             return false
         end
 
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
@@ -63,7 +63,7 @@ OnWeaponFired{ "BowSplitShot",
             return false
         end
 
-        DebugPrintf({ Text = "SpecialAttack" })
+        DebugPrint({ Text = "SpecialAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
@@ -77,8 +77,8 @@ OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
             return false
         end
 
-        DebugPrintf({ Text = "StartCharging" })
-        DZPersistent.StartChargingTime = _worldTime
+        DebugPrint({ Text = "StartCharging" })
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -95,13 +95,13 @@ OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     end 
 }
 
-OnWeaponTriggerRelease { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
+OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
         end
 
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
@@ -115,7 +115,7 @@ OnWeaponFired { "SpearWeaponThrowReturn",
             return false
         end
 
-        DebugPrintf({ Text = "SpearWeaponThrowReturn" })
+        DebugPrint({ Text = "SpearWeaponThrowReturn" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
@@ -128,7 +128,7 @@ OnWeaponCharging { "SpearWeaponThrow",
         end
 
         DebugPrint({ Text = "StartCharging" })
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -138,7 +138,7 @@ OnWeaponFired { "SpearWeaponThrow",
             return false
         end
         
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "SpearWeaponThrow" })
         
@@ -161,10 +161,103 @@ OnWeaponFired{ "SpearRushWeapon",
             return false
         end
 
-        DebugPrintf({ Text = "SpearRushWeapon" })
+        DebugPrint({ Text = "SpearRushWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
+    end
+}
+
+-- shield
+-- TODO: handle Pulverizing Blow
+OnWeaponCharging { "ShieldWeapon ShieldWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrint({ Text = "StartCharging" })
+        DZTemp.StartChargingTime = _worldTime
+    end 
+}
+
+OnWeaponFired { "ShieldWeapon ShieldWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrint({ Text = "ShieldWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZPersistent.LastAction = 1
+    end 
+}
+
+OnWeaponFired { "ShieldWeaponRush",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        local duration = _worldTime - DZTemp.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrint({ Text = "ShieldWeaponRush" })
+        DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
+        DZPersistent.LastAction = 1
+    end 
+}
+
+DZTemp.ShieldThrowed = false
+OnWeaponCharging { "ShieldThrow ShieldThrowDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrint({ Text = "StartCharging" })
+        DZTemp.StartChargingTime = _worldTime
+    end 
+}
+
+OnWeaponFired { "ShieldThrow ShieldThrowDash",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        local duration = _worldTime - DZTemp.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+
+        DebugPrint({ Text = "ShieldThrow" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))
+        DZPersistent.LastAction = 2
+
+        if DZTemp.ShieldThrowed == false then
+            DZTemp.ShieldThrowed = true 
+        end
+    end
+}
+
+OnWeaponFailedToFire { "ShieldThrow",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        if DZTemp.ShieldThrowed == false then
+            return
+        end
+
+        local attacker = triggerArgs.TriggeredByTable
+		local weaponData = GetWeaponData( attacker, triggerArgs.name )
+
+        if weaponData.RecallOnFailToFire then
+            DebugPrint({ Text = "ShieldThrow" })
+            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+            DZPersistent.LastAction = 2
+
+            DZTemp.ShieldThrowed = false
+        end
     end
 }
 
@@ -175,7 +268,7 @@ OnWeaponFired{ "RushWeapon",
             return false
         end
 
-        DebugPrintf({ Text = "Rush" })
+        DebugPrint({ Text = "Rush" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
         DZPersistent.LastAction = 0
     end
@@ -204,6 +297,7 @@ function DZMakeActionData(action, chargeTime, maxChargeTime)
 
     local time = chargeTime / maxChargeTime
     time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
+    time = (time < 0.0) and 0.0 or time -- if less than 1 clamp to 1, usually not happens
 
     return {    
         Dash = dash,
@@ -287,7 +381,7 @@ end
 
 -- create a new record when a run starts
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
-    DebugPrintf({ Text = "StartNewRun" })
+    DebugPrint({ Text = "StartNewRun" })
     DZPersistent.IsRecording = true
     DZCreateNewRecord()
     return base(prevRun, args)
@@ -309,9 +403,9 @@ end}
 -- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if currentRun.Cleared ~= nil then
-        DebugPrintf({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
+        DebugPrint({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
     else
-        DebugPrintf({ Text = "EndRun " .. "false" })
+        DebugPrint({ Text = "EndRun " .. "false" })
     end
     DZPersistent.IsRecording = false
 
@@ -342,11 +436,11 @@ end, DarkZagreus)
 
 -- if io module is not avilable then just print record out
 DZCreateNewRecord = function() 
-    DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) 
+    DebugPrint({ Text = "Create new record file, enable isRecording to true" }) 
     DZPersistent.PendingRecord = {}
 end
 DZLogRecord = function (state, action) 
-    DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+    DebugPrint({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
         state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
@@ -388,7 +482,7 @@ if io then
         file:write(string.format("%d\n", weapon.ItemIndex))
 
         file:close()
-        DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
+        DebugPrint({ Text = "Create new record file, enable isRecording to true" })
     end
 
     DZLogRecord = function(state, action)
@@ -402,7 +496,7 @@ if io then
 
         file:write(input)
         file:write(output)
-        DebugPrintf({ Text = out })
+        DebugPrint({ Text = out })
         file:close()  
     end
 end
