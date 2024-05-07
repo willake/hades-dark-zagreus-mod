@@ -70,13 +70,13 @@ function DZMakeAIActionData(state, maxChargeTime)
     --     chargeTime = 0.1 + (math.random() * 0.9)
     -- end
 
-    DZ.Model:activate({state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+    DZTemp.Model:activate({state.OwnHP, state.ClosestEnemyHP, state.Distance, 
     state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack})
 
-    local dashProb = DZ.Model[4].cells[1].signal
-    local attackProb = DZ.Model[4].cells[2].signal
-    local specialProb = DZ.Model[4].cells[3].signal
-    local chargeTime = DZ.Model[4].cells[4].signal
+    local dashProb = DZTemp.Model[4].cells[1].signal
+    local attackProb = DZTemp.Model[4].cells[2].signal
+    local specialProb = DZTemp.Model[4].cells[3].signal
+    local chargeTime = DZTemp.Model[4].cells[4].signal
 
     DebugPrint({ Text = "dashProb | " .. tostring(dashProb) })
     DebugPrint({ Text = "attackProb | " .. tostring(attackProb) })

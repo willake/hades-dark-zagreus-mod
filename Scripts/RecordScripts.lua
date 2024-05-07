@@ -1,10 +1,11 @@
 if not EvilZagreus.Config.Enabled then return end
 
-DZ = {}
-DZ.Model = {}
-DZ.IsRecording = false
-DZ.LastAction = 0
-DZ.PendingRecord = {}
+DZPersistent = {}
+DZPersistent.IsRecording = false
+DZPersistent.LastAction = 0
+DZPersistent.PendingRecord = {}
+
+DZTemp.Model = {}
 
 SaveIgnores["DZ"] = true
   
@@ -16,8 +17,8 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         end
 
         DebugPrintf({ Text = "Attack" })
-        DZLogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))        
-        DZ.LastAction = 1
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1)) 
+        DZPersistent.LastAction = 1
     end
 }
 
@@ -28,15 +29,15 @@ OnWeaponFired{ "SwordParry",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        DZLogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZ.LastAction = 2
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
     end
 }
 
 -- bow
 OnWeaponCharging { "BowWeapon BowWeaponDash",
     function(triggerArgs)
-        DZ.StartChargingTime = _worldTime
+        DZPersistent.StartChargingTime = _worldTime
     end 
 }
 
@@ -46,11 +47,11 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
             return false
         end
 
-        local duration = _worldTime - DZ.StartChargingTime
+        local duration = _worldTime - DZPersistent.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
         DZLogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
-        DZ.LastAction = 1  
+        DZPersistent.LastAction = 1  
     end 
 }
 
@@ -62,7 +63,7 @@ OnWeaponFired{ "BowSplitShot",
 
         DebugPrintf({ Text = "SpecialAttack" })
         DZLogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZ.LastAction = 2
+        DZPersistent.LastAction = 2
     end
 }
 
@@ -151,13 +152,13 @@ OnWeaponFired{ "RushWeapon",
         end
 
         DebugPrintf({ Text = "Rush" })
-        DZLogRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
-        DZ.LastAction = 0
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
+        DZPersistent.LastAction = 0
     end
 } 
 
 function DZCheckCanRecord()
-    if not DZ.IsRecording then
+    if not DZPersistent.IsRecording then
         return false
     end
 
@@ -202,9 +203,9 @@ function DZGetCurrentState()
         distance = 1000
     end
 
-    local isLastActionDash = (DZ.LastAction == 0) and 1 or 0
-    local isLastActionAttack = (DZ.LastAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (DZ.LastActionn == 2) and 1 or 0
+    local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
+    local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
+    local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
@@ -226,7 +227,7 @@ function DZForceTraining()
     local data = LoadTrainingData("DZrecord" .. ".log")
     local weaponData = data.WeaponData
 
-    DZ.Weapon = weaponData
+    DZPersistent.Weapon = weaponData
     
     local trainingData = data.TrainingData
 
@@ -244,7 +245,7 @@ function DZForceTraining()
         end
     end
 
-    DZ.Model = network
+    DZTemp.Model = network
 end
 
 OnControlPressed { "Reload",
@@ -262,18 +263,18 @@ end
 
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
-    DZ.IsRecording = true
+    DZPersistent.IsRecording = true
     DZCreateNewRecord()
     return base(prevRun, args)
 end, DarkZagreus)
 
 ModUtil.Path.Wrap("EndRun", function(base, currentRun)
-    DZ.IsRecording = false
+    DZPersistent.IsRecording = false
     return base(currentRun)
 end, DarkZagreus)
 
 OnAnyLoad { "DeathArea", function(triggerArgs)
-    DZ.IsRecording = false
+    DZPersistent.IsRecording = false
 end}
 
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
@@ -282,11 +283,11 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     else
         DebugPrintf({ Text = "EndRun " .. "false" })
     end
-    DZ.IsRecording = false
+    DZPersistent.IsRecording = false
 
     -- log the last pending record because the last one hasn't been logged
-    if DZ.PendingRecord then
-        DZLogRecord(DZ.PendingRecord.State, DZ.PendingRecord.Action) 
+    if DZPersistent.PendingRecord then
+        DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
     end
 
     -- training
@@ -324,11 +325,11 @@ end
 -- player is intending to fire spear attack or spear spin
 -- therefore I make a pending record, which push spear attack to pending 
 -- this allows spear spin to override spear attack record, so holding a button will not double counting actions
-DZAddPendingRecord = function(state, action)
-    if DZ.PendingRecord then
-        DZLogRecord(DZ.State, DZ.Action) 
+DZPushPendingRecord = function(state, action)
+    if DZPersistent.PendingRecord then
+        DZLogRecord(DZPersistent.State, DZPersistent.Action) 
     end
-    DZ.PendingRecord = 
+    DZPersistent.PendingRecord = 
     {
         State = state,
         Action = action
@@ -336,7 +337,7 @@ DZAddPendingRecord = function(state, action)
 end
 
 DZOverridePendingRecord = function(state, action)
-    DZ.PendingRecord = 
+    DZPersistent.PendingRecord = 
     {
         State = state,
         Action = action
