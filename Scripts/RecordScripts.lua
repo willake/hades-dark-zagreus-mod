@@ -16,7 +16,7 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         end
 
         DebugPrintf({ Text = "Attack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))        
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))        
         DZ.LastAction = 1
     end
 }
@@ -28,7 +28,7 @@ OnWeaponFired{ "SwordParry",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZ.LastAction = 2
     end
 }
@@ -49,7 +49,7 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
         local duration = _worldTime - DZ.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
         DZ.LastAction = 1  
     end 
 }
@@ -61,7 +61,7 @@ OnWeaponFired{ "BowSplitShot",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZ.LastAction = 2
     end
 }
@@ -151,7 +151,7 @@ OnWeaponFired{ "RushWeapon",
         end
 
         DebugPrintf({ Text = "Rush" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
         DZ.LastAction = 0
     end
 } 
@@ -263,7 +263,7 @@ end
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
     DZ.IsRecording = true
-    CreateNewRecord()
+    DZCreateNewRecord()
     return base(prevRun, args)
 end, DarkZagreus)
 
@@ -286,7 +286,7 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     -- log the last pending record because the last one hasn't been logged
     if DZ.PendingRecord then
-        LogRecord(DZ.PendingRecord.State, DZ.PendingRecord.Action) 
+        DZLogRecord(DZ.PendingRecord.State, DZ.PendingRecord.Action) 
     end
 
     -- training
@@ -310,8 +310,8 @@ end, DarkZagreus)
 --- Managing Start/End recording end
 
 -- if io module is not avilable then just print record out
-CreateNewRecord = function() DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) end
-LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+DZCreateNewRecord = function() DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) end
+DZLogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
     state.OwnHP, state.ClosestEnemyHP, state.Distance, 
     state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
     action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
@@ -324,9 +324,9 @@ end
 -- player is intending to fire spear attack or spear spin
 -- therefore I make a pending record, which push spear attack to pending 
 -- this allows spear spin to override spear attack record, so holding a button will not double counting actions
-AddPendingRecord = function(state, action)
+DZAddPendingRecord = function(state, action)
     if DZ.PendingRecord then
-        LogRecord(DZ.State, DZ.Action) 
+        DZLogRecord(DZ.State, DZ.Action) 
     end
     DZ.PendingRecord = 
     {
@@ -335,7 +335,7 @@ AddPendingRecord = function(state, action)
     }
 end
 
-OverridePendingRecord = function(state, action)
+DZOverridePendingRecord = function(state, action)
     DZ.PendingRecord = 
     {
         State = state,
@@ -347,7 +347,7 @@ end
 if io then
     local recordFilePath = "DZrecord" .. ".log"
 
-    CreateNewRecord = function()
+    DZCreateNewRecord = function()
         local file = io.open(recordFilePath, "w+")
         
         local weapon = GameState.LastInteractedWeaponUpgrade
@@ -360,7 +360,7 @@ if io then
         DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
     end
 
-    LogRecord = function(state, action)
+    DZLogRecord = function(state, action)
         local file = io.open(recordFilePath, "a")
 
         local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
