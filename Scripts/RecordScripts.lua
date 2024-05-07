@@ -263,6 +263,7 @@ end
 -- wrapping EndRun() is not working, so better terminate the recording whenever the character
 -- enters the DeathArea
 
+-- create a new record when a run starts
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
     DZPersistent.IsRecording = true
@@ -270,15 +271,20 @@ ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     return base(prevRun, args)
 end, DarkZagreus)
 
+-- stop recording when run ends
+-- this function only runs when the player dies
 ModUtil.Path.Wrap("EndRun", function(base, currentRun)
     DZPersistent.IsRecording = false
     return base(currentRun)
 end, DarkZagreus)
 
+-- just in case, preventing recording from still being activated
+-- stop recording when zegreus back to the hades lobby
 OnAnyLoad { "DeathArea", function(triggerArgs)
     DZPersistent.IsRecording = false
 end}
 
+-- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if currentRun.Cleared ~= nil then
         DebugPrintf({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
