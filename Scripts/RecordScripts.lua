@@ -4,6 +4,7 @@ DZ = {}
 DZ.Model = {}
 DZ.IsRecording = false
 DZ.LastAction = 0
+DZ.PendingRecord = {}
 
 SaveIgnores["DZ"] = true
   
@@ -232,7 +233,7 @@ function DZForceTraining()
     if #trainingData == 0 then
         return
     end
-    
+
     DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
 
     DebugPrintTable("WeaponData", weaponData, 3)
@@ -283,6 +284,11 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     end
     DZ.IsRecording = false
 
+    -- log the last pending record because the last one hasn't been logged
+    if DZ.PendingRecord then
+        LogRecord(DZ.PendingRecord.State, DZ.PendingRecord.Action) 
+    end
+
     -- training
 
     local learningRate = 50 -- set between 1, 100
@@ -311,38 +317,64 @@ LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.
     action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
 end
 
+-- Pending record system
+-- Here comes a situation: when player try to use spear spin, he/she holds the button,
+-- then the character fires the spear attack first then start charging
+-- Since we detect player action by FireWeapon, it is difficult to intuitively check whether
+-- player is intending to fire spear attack or spear spin
+-- therefore I make a pending record, which push spear attack to pending 
+-- this allows spear spin to override spear attack record, so holding a button will not double counting actions
+AddPendingRecord = function(state, action)
+    if DZ.PendingRecord then
+        LogRecord(DZ.State, DZ.Action) 
+    end
+    DZ.PendingRecord = 
+    {
+        State = state,
+        Action = action
+    }
+end
+
+OverridePendingRecord = function(state, action)
+    DZ.PendingRecord = 
+    {
+        State = state,
+        Action = action
+    }
+end
+
 -- if io module is avilable, create a new record file then start logging
--- if io then
---     local recordFilePath = "DZrecord" .. ".log"
+if io then
+    local recordFilePath = "DZrecord" .. ".log"
 
---     CreateNewRecord = function()
---         local file = io.open(recordFilePath, "w+")
+    CreateNewRecord = function()
+        local file = io.open(recordFilePath, "w+")
         
---         local weapon = GameState.LastInteractedWeaponUpgrade
+        local weapon = GameState.LastInteractedWeaponUpgrade
 
---         -- write what weapon player's holding into the file
---         file:write(string.format("%s\n", weapon.WeaponName))
---         file:write(string.format("%d\n", weapon.ItemIndex))
+        -- write what weapon player's holding into the file
+        file:write(string.format("%s\n", weapon.WeaponName))
+        file:write(string.format("%d\n", weapon.ItemIndex))
 
---         file:close()
---         DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
---     end
+        file:close()
+        DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
+    end
 
---     LogRecord = function(state, action)
---         local file = io.open(recordFilePath, "a")
+    LogRecord = function(state, action)
+        local file = io.open(recordFilePath, "a")
 
---         local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
---         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
---         state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
---         local output = string.format("%.2f %.2f %.2f %.2f\n", 
---         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
+        local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
+        local output = string.format("%.2f %.2f %.2f %.2f\n", 
+        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
 
---         file:write(input)
---         file:write(output)
---         DebugPrintf({ Text = out })
---         file:close()  
---     end
--- end
+        file:write(input)
+        file:write(output)
+        DebugPrintf({ Text = out })
+        file:close()  
+    end
+end
 -- local learningRate = 50 -- set between 1, 100
 -- local attempts = 10000 -- number of times to do backpropagation
 -- local threshold = 1 -- steepness of the sigmoid curve
