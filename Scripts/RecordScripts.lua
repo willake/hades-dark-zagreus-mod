@@ -39,7 +39,7 @@ OnWeaponCharging { "BowWeapon BowWeaponDash",
             return false
         end
 
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -49,7 +49,7 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
             return false
         end
 
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
@@ -78,7 +78,7 @@ OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
         end
 
         DebugPrint({ Text = "StartCharging" })
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -101,7 +101,7 @@ OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
             return false
         end
 
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
@@ -128,7 +128,7 @@ OnWeaponCharging { "SpearWeaponThrow",
         end
 
         DebugPrint({ Text = "StartCharging" })
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -138,7 +138,7 @@ OnWeaponFired { "SpearWeaponThrow",
             return false
         end
         
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "SpearWeaponThrow" })
         
@@ -176,7 +176,7 @@ OnWeaponCharging { "ShieldWeapon ShieldWeaponDash",
         end
 
         DebugPrint({ Text = "StartCharging" })
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -198,7 +198,7 @@ OnWeaponFired { "ShieldWeaponRush",
             return false
         end
 
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "ShieldWeaponRush" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
@@ -214,7 +214,7 @@ OnWeaponCharging { "ShieldThrow ShieldThrowDash",
         end
 
         DebugPrint({ Text = "StartCharging" })
-        DZPersistent.StartChargingTime = _worldTime
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -224,7 +224,7 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
             return false
         end
 
-        local duration = _worldTime - DZPersistent.StartChargingTime
+        local duration = _worldTime - DZTemp.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
 
         DebugPrint({ Text = "ShieldThrow" })
@@ -259,7 +259,6 @@ OnWeaponFailedToFire { "ShieldThrow",
         end
     end
 }
-
 
 -- rush
 OnWeaponFired{ "RushWeapon",
