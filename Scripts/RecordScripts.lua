@@ -95,7 +95,7 @@ OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     end 
 }
 
-OnWeaponTriggerRelease { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
+OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
@@ -168,6 +168,86 @@ OnWeaponFired{ "SpearRushWeapon",
     end
 }
 
+-- shield
+OnWeaponCharging { "ShieldWeapon ShieldWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrintf({ Text = "StartCharging" })
+        DZPersistent.StartChargingTime = _worldTime
+    end 
+}
+
+OnWeaponFired { "ShieldWeapon ShieldWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrint({ Text = "ShieldWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZPersistent.LastAction = 1
+    end 
+}
+
+OnWeaponFired { "ShieldWeaponRush",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        local duration = _worldTime - DZPersistent.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrint({ Text = "ShieldWeaponRush" })
+        DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
+        DZPersistent.LastAction = 1
+    end 
+}
+
+DZTemp.ShieldThrowed = false
+
+OnWeaponFired { "ShieldThrow",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrintf({ Text = "ShieldThrow" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
+
+        if DZTemp.ShieldThrowed == false then
+            DZTemp.ShieldThrowed = true 
+        end
+    end
+}
+
+OnWeaponFailedToFire { "ShieldThrow",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        if DZTemp.ShieldThrowed == false then
+            return
+        end
+
+        local attacker = triggerArgs.TriggeredByTable
+		local weaponData = GetWeaponData( attacker, triggerArgs.name )
+
+        if weaponData.RecallOnFailToFire then
+            DebugPrintf({ Text = "ShieldThrow" })
+            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+            DZPersistent.LastAction = 2
+
+            DZTemp.ShieldThrowed = false
+        end
+    end
+}
+
+
 -- rush
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
@@ -204,6 +284,7 @@ function DZMakeActionData(action, chargeTime, maxChargeTime)
 
     local time = chargeTime / maxChargeTime
     time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
+    time = (time < 0.0) and 0.0 or time -- if less than 1 clamp to 1, usually not happens
 
     return {    
         Dash = dash,
