@@ -169,6 +169,7 @@ OnWeaponFired{ "SpearRushWeapon",
 }
 
 -- shield
+-- TODO: handle Pulverizing Blow
 OnWeaponCharging { "ShieldWeapon ShieldWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
