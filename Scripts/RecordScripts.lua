@@ -1,11 +1,11 @@
 if not EvilZagreus.Config.Enabled then return end
 
-DZ = {}
-DZ.Model = {}
-DZ.IsRecording = false
-DZ.LastAction = 0
+DZPersistent = {}
+DZPersistent.IsRecording = false
+DZPersistent.LastAction = 0
+DZPersistent.PendingRecord = {}
 
-SaveIgnores["DZ"] = true
+DZTemp.Model = {}
   
 -- sword weapon
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
@@ -15,8 +15,8 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         end
 
         DebugPrintf({ Text = "Attack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))        
-        DZ.LastAction = 1
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1)) 
+        DZPersistent.LastAction = 1
     end
 }
 
@@ -27,15 +27,15 @@ OnWeaponFired{ "SwordParry",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZ.LastAction = 2
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
     end
 }
 
 -- bow
 OnWeaponCharging { "BowWeapon BowWeaponDash",
     function(triggerArgs)
-        DZ.StartChargingTime = _worldTime
+        DZPersistent.StartChargingTime = _worldTime
     end 
 }
 
@@ -45,11 +45,11 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
             return false
         end
 
-        local duration = _worldTime - DZ.StartChargingTime
+        local duration = _worldTime - DZPersistent.StartChargingTime
         DebugPrint({ Text = "ChargeDuration: " .. duration })
         DebugPrint({ Text = "Attack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
-        DZ.LastAction = 1  
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
+        DZPersistent.LastAction = 1  
     end 
 }
 
@@ -60,8 +60,8 @@ OnWeaponFired{ "BowSplitShot",
         end
 
         DebugPrintf({ Text = "SpecialAttack" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZ.LastAction = 2
+        DZLogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
     end
 }
 
@@ -150,13 +150,13 @@ OnWeaponFired{ "RushWeapon",
         end
 
         DebugPrintf({ Text = "Rush" })
-        LogRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
-        DZ.LastAction = 0
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
+        DZPersistent.LastAction = 0
     end
 } 
 
 function DZCheckCanRecord()
-    if not DZ.IsRecording then
+    if not DZPersistent.IsRecording then
         return false
     end
 
@@ -201,9 +201,9 @@ function DZGetCurrentState()
         distance = 1000
     end
 
-    local isLastActionDash = (DZ.LastAction == 0) and 1 or 0
-    local isLastActionAttack = (DZ.LastAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (DZ.LastActionn == 2) and 1 or 0
+    local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
+    local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
+    local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
@@ -225,14 +225,14 @@ function DZForceTraining()
     local data = LoadTrainingData("DZrecord" .. ".log")
     local weaponData = data.WeaponData
 
-    DZ.Weapon = weaponData
+    DZPersistent.Weapon = weaponData
     
     local trainingData = data.TrainingData
 
     if #trainingData == 0 then
         return
     end
-    
+
     DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
 
     DebugPrintTable("WeaponData", weaponData, 3)
@@ -243,7 +243,7 @@ function DZForceTraining()
         end
     end
 
-    DZ.Model = network
+    DZTemp.Model = network
 end
 
 OnControlPressed { "Reload",
@@ -261,18 +261,18 @@ end
 
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
-    DZ.IsRecording = true
-    CreateNewRecord()
+    DZPersistent.IsRecording = true
+    DZCreateNewRecord()
     return base(prevRun, args)
 end, DarkZagreus)
 
 ModUtil.Path.Wrap("EndRun", function(base, currentRun)
-    DZ.IsRecording = false
+    DZPersistent.IsRecording = false
     return base(currentRun)
 end, DarkZagreus)
 
 OnAnyLoad { "DeathArea", function(triggerArgs)
-    DZ.IsRecording = false
+    DZPersistent.IsRecording = false
 end}
 
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
@@ -281,7 +281,12 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     else
         DebugPrintf({ Text = "EndRun " .. "false" })
     end
-    DZ.IsRecording = false
+    DZPersistent.IsRecording = false
+
+    -- log the last pending record because the last one hasn't been logged
+    if DZPersistent.PendingRecord then
+        DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
+    end
 
     -- training
 
@@ -304,45 +309,71 @@ end, DarkZagreus)
 --- Managing Start/End recording end
 
 -- if io module is not avilable then just print record out
-CreateNewRecord = function() DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) end
-LogRecord = function (state, action) DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-    state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-    state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
-    action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
+DZCreateNewRecord = function() 
+    DebugPrintf({ Text = "Create new record file, enable isRecording to true" }) 
+    DZPersistent.PendingRecord = {}
+end
+DZLogRecord = function (state, action) 
+    DebugPrintf({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
+        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
+end
+
+-- Pending record system
+-- Here comes a situation: when player try to use spear spin, he/she holds the button,
+-- then the character fires the spear attack first then start charging
+-- Since we detect player action by FireWeapon, it is difficult to intuitively check whether
+-- player is intending to fire spear attack or spear spin
+-- therefore I make a pending record, which push spear attack to pending 
+-- this allows spear spin to override spear attack record, so holding a button will not double counting actions
+DZPushPendingRecord = function(state, action)
+    if DZPersistent.PendingRecord.State and DZPersistent.PendingRecord.Action then
+        DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
+    end
+    DZPersistent.PendingRecord.State = state
+    DZPersistent.PendingRecord.Action = action
+end
+
+DZOverridePendingRecord = function(state, action)
+    DZPersistent.PendingRecord.State = state
+    DZPersistent.PendingRecord.Action = action
 end
 
 -- if io module is avilable, create a new record file then start logging
--- if io then
---     local recordFilePath = "DZrecord" .. ".log"
+if io then
+    local recordFilePath = "DZrecord" .. ".log"
 
---     CreateNewRecord = function()
---         local file = io.open(recordFilePath, "w+")
+    DZCreateNewRecord = function()
+        local file = io.open(recordFilePath, "w+")
         
---         local weapon = GameState.LastInteractedWeaponUpgrade
+        local weapon = GameState.LastInteractedWeaponUpgrade
 
---         -- write what weapon player's holding into the file
---         file:write(string.format("%s\n", weapon.WeaponName))
---         file:write(string.format("%d\n", weapon.ItemIndex))
+        DZPersistent.PendingRecord = {}
 
---         file:close()
---         DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
---     end
+        -- write what weapon player's holding into the file
+        file:write(string.format("%s\n", weapon.WeaponName))
+        file:write(string.format("%d\n", weapon.ItemIndex))
 
---     LogRecord = function(state, action)
---         local file = io.open(recordFilePath, "a")
+        file:close()
+        DebugPrintf({ Text = "Create new record file, enable isRecording to true" })
+    end
 
---         local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
---         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
---         state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
---         local output = string.format("%.2f %.2f %.2f %.2f\n", 
---         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
+    DZLogRecord = function(state, action)
+        local file = io.open(recordFilePath, "a")
 
---         file:write(input)
---         file:write(output)
---         DebugPrintf({ Text = out })
---         file:close()  
---     end
--- end
+        local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
+        local output = string.format("%.2f %.2f %.2f %.2f\n", 
+        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
+
+        file:write(input)
+        file:write(output)
+        DebugPrintf({ Text = out })
+        file:close()  
+    end
+end
 -- local learningRate = 50 -- set between 1, 100
 -- local attempts = 10000 -- number of times to do backpropagation
 -- local threshold = 1 -- steepness of the sigmoid curve
