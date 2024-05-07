@@ -35,6 +35,10 @@ OnWeaponFired{ "SwordParry",
 -- bow
 OnWeaponCharging { "BowWeapon BowWeaponDash",
     function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
         DZPersistent.StartChargingTime = _worldTime
     end 
 }
@@ -67,80 +71,102 @@ OnWeaponFired{ "BowSplitShot",
 
 -- spear
 
--- OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3",
---     function(triggerArgs)
---         DebugPrintf({ Text = "StartCharging" })
---         DZ.StartChargingTime = _worldTime
---         DZ.IsSpearSpinCharging = false
---     end 
--- }
+OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
 
--- OnWeaponTriggerRelease { "SpearWeapon SpearWeapon2 SpearWeapon3",
---     function(triggerArgs)
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+        DebugPrintf({ Text = "StartCharging" })
+        DZPersistent.StartChargingTime = _worldTime
+    end 
+}
 
---         if IsControlDown({ Name = "Attack2" }) then
---             return
---         end
---         DebugPrint({ Text = "ShortAttack" })
---         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
---         DZ.LastAction = 1
---     end 
--- }
+-- TODO: not sure if i can catch Flurry Jab
+OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
 
--- OnWeaponTriggerRelease { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
---     function(triggerArgs)
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+        DebugPrint({ Text = "ShortAttack" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZPersistent.LastAction = 1
+    end 
+}
 
---         local duration = _worldTime - DZ.StartChargingTime
---         DebugPrint({ Text = "ChargeDuration: " .. duration })
---         DebugPrint({ Text = "Attack" })
---         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
---         DZ.LastAction = 1
---     end 
--- }
+OnWeaponTriggerRelease { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
 
--- OnWeaponFired{ "SpearWeaponThrowReturn",
---     function( triggerArgs )
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+        local duration = _worldTime - DZPersistent.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrint({ Text = "Attack" })
+        DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
+        DZPersistent.LastAction = 1
+    end 
+}
 
---         DebugPrintf({ Text = "SpecialAttack" })
---         -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
---         DZ.LastAction = 2
---     end
--- }
+OnWeaponFired { "SpearWeaponThrowReturn",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
 
--- -- SpearThrowImmolation
--- OnWeaponCharging { "SpearWeaponThrow SpearWeaponThrowReturn SpearWeaponThrowInvisibleReturn",
---     function(triggerArgs)
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+        DebugPrintf({ Text = "SpearWeaponThrowReturn" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
+    end
+}
 
---         DebugPrint({ Text = "StartCharging" })
---         DZ.StartChargingTime = _worldTime
---     end 
--- }
+OnWeaponCharging { "SpearWeaponThrow",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
 
--- OnWeaponTriggerRelease { "SpearWeaponThrow SpearWeaponThrowReturn SpearWeaponThrowInvisibleReturn",
---     function(triggerArgs)
---         -- if not DZCheckCanRecord() then
---         --     return false
---         -- end
+        DebugPrint({ Text = "StartCharging" })
+        DZPersistent.StartChargingTime = _worldTime
+    end 
+}
+
+OnWeaponFired { "SpearWeaponThrow",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
         
---         local duration = _worldTime - DZ.StartChargingTime
---         DebugPrint({ Text = "ChargeDuration: " .. duration })
---         DebugPrint({ Text = "SpecialAttack" })
---         -- LogRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
---         DZ.LastAction = 2
---     end 
--- }
+        local duration = _worldTime - DZPersistent.StartChargingTime
+        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        DebugPrint({ Text = "SpearWeaponThrow" })
+        
+        -- if the weapon is aspect of achilles, which is chargable
+        -- if GameState.LastInteractedWeaponUpgrade.ItemIndex == 2 then
+        --     DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
+        -- else
+        --     DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        -- end  
+        
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
+
+        DZPersistent.LastAction = 2
+    end 
+}
+
+OnWeaponFired{ "SpearRushWeapon",
+    function( triggerArgs )
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrintf({ Text = "SpearRushWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPersistent.LastAction = 2
+    end
+}
 
 -- rush
 OnWeaponFired{ "RushWeapon",
@@ -177,7 +203,7 @@ function DZMakeActionData(action, chargeTime, maxChargeTime)
     local special = (action == 2) and 1.0 or 0.0
 
     local time = chargeTime / maxChargeTime
-    time = (time > 1.0) and 1.0 or time -- if exceed 1 then normalize to 1
+    time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
 
     return {    
         Dash = dash,
@@ -259,6 +285,7 @@ end
 -- wrapping EndRun() is not working, so better terminate the recording whenever the character
 -- enters the DeathArea
 
+-- create a new record when a run starts
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DebugPrintf({ Text = "StartNewRun" })
     DZPersistent.IsRecording = true
@@ -266,15 +293,20 @@ ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     return base(prevRun, args)
 end, DarkZagreus)
 
+-- stop recording when run ends
+-- this function only runs when the player dies
 ModUtil.Path.Wrap("EndRun", function(base, currentRun)
     DZPersistent.IsRecording = false
     return base(currentRun)
 end, DarkZagreus)
 
+-- just in case, preventing recording from still being activated
+-- stop recording when zegreus back to the hades lobby
 OnAnyLoad { "DeathArea", function(triggerArgs)
     DZPersistent.IsRecording = false
 end}
 
+-- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if currentRun.Cleared ~= nil then
         DebugPrintf({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
