@@ -353,8 +353,6 @@ function DZCheckCanRecord()
         return false
     end
 
-    DebugPrint({ Text = "Is Empty: " .. tostring(IsEmpty(RequiredKillEnemies))})
-
     -- only actions towards enemies should be recorded
     if IsEmpty(RequiredKillEnemies) then
         return false
@@ -454,7 +452,6 @@ end
 
 -- create a new record when a run starts
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
-    DebugPrint({ Text = "StartNewRun" })
     DZPersistent.IsRecording = true
     DZCreateNewRecord()
     return base(prevRun, args)
@@ -569,7 +566,6 @@ if io then
 
         file:write(input)
         file:write(output)
-        DebugPrint({ Text = out })
         file:close()  
     end
 end
