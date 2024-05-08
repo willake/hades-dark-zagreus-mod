@@ -83,7 +83,7 @@ function DZMakeAIActionData(state, maxChargeTime)
         return DZMakeRandomAIActionData(state, maxChargeTime)
     end
 
-    DebugPrintTable("AIState", state, 3)
+    DZDebugPrintTable("AIState", state, 3)
     -- local r = math.random()
     -- local chargeTime = 0.0
 

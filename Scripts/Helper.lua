@@ -1,12 +1,13 @@
 if not DarkZagreus.Config.Enabled then return end
 
 local modName = "DarkZagreus" -- put your unique mod codename here
-local Print = function(...) print(modName .. ":", ...) end
+-- DZPrint actually write text to files
+local DZPrint = function(...) print(modName .. ":", ...) end
 if io then
     local logFilePath = modName .. ".log"
     io.open(logFilePath, "w"):close()
 
-    Print = function(...)
+    DZPrint = function(...)
         local file = io.open(logFilePath, "a")
 
         local out = {}
@@ -24,10 +25,10 @@ if io then
     end
 end
 
-function DebugPrintTable(tableName, table, depth)
+function DZDebugPrintTable(tableName, table, depth)
     if table == nil then
         DebugPrint({ Text = tableName .. " is nil" })
-        Print(tableName .. " is nil")
+        DZPrint(tableName .. " is nil")
         return
     end
     if depth == nil then
@@ -46,20 +47,20 @@ function DebugPrintTable(tableName, table, depth)
         newDepth = depth + 1
     end
     DebugPrint({ Text = whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={" })
-    Print(whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={")
+    DZPrint(whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={")
     for k, v in pairs(table) do
         if type(v) == "table" then
-            DebugPrintTable(tostring(k), v, newDepth)
+            DZDebugPrintTable(tostring(k), v, newDepth)
         else
             DebugPrint({ Text = whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v) })
-            Print(whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v))
+            DZPrint(whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v))
         end
     end
     DebugPrint({ Text = whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}" })
-    Print(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
+    DZPrint(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
 end
 
-function DebugPrintString(text)
+function DZDebugPrintString(text)
     DebugPrint({ Text = text })
-    Print(text)
+    DZPrint(text)
 end

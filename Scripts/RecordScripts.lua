@@ -426,7 +426,7 @@ function DZForceTraining()
 
     DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
 
-    DebugPrintTable("WeaponData", weaponData, 3)
+    DZDebugPrintTable("WeaponData", weaponData, 3)
 
     for i = 1, attempts do
         for _, data in ipairs(trainingData) do
