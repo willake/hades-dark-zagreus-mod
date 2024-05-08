@@ -1,4 +1,4 @@
-if not EvilZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end
 
 DebugPrintf({ Text = "Setup Events" })
 
@@ -82,12 +82,3 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
     end
     
 end }
-
-
--- for fist weapon
-ModUtil.Path.Context.Wrap("DamageHero", function(victim, triggerArgs)
-    local attacker = triggerArgs.AttackerTable
-    local sourceWeaponData = GetWeaponData( attacker, triggerArgs.SourceWeapon )
-	thread( DZCheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
-    DZCheckFistDetonation(attacker, victim, triggerArgs) -- for aspect of Gilgamesh
-end, EvilZagreus)

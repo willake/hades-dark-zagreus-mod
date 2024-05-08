@@ -1,4 +1,4 @@
-local modName = "EvilZagreus" -- put your unique mod codename here
+local modName = "DarkZagreus" -- put your unique mod codename here
 local Print = function(...) print(modName .. ":", ...) end
 if io then
     local logFilePath = modName .. ".log"
