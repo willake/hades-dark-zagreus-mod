@@ -560,7 +560,7 @@
             ChargeSoundFadeTime = 0.25
             RootOwnerWhileFiring = false
             BarrelLength = 0
-            FireFx = "FistFxUppercutDirectional"
+            FireFx = "null"
             ShowFreeAimLine = false
             AimLineAnimation = "null"
             ChargeStartAnimation = "null"

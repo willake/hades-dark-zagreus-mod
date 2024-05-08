@@ -5,6 +5,7 @@ DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
 DZPersistent.PendingRecord = {}
 
+DZTemp.Weapon = {}
 DZTemp.Model = {}
   
 -- sword weapon
@@ -352,8 +353,6 @@ function DZCheckCanRecord()
         return false
     end
 
-    DebugPrint({ Text = "Is Empty: " .. tostring(IsEmpty(RequiredKillEnemies))})
-
     -- only actions towards enemies should be recorded
     if IsEmpty(RequiredKillEnemies) then
         return false
@@ -417,7 +416,7 @@ function DZForceTraining()
     local data = LoadTrainingData("DZrecord" .. ".log")
     local weaponData = data.WeaponData
 
-    DZPersistent.Weapon = weaponData
+    DZTemp.Weapon = weaponData
     
     local trainingData = data.TrainingData
 
@@ -453,7 +452,6 @@ end
 
 -- create a new record when a run starts
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
-    DebugPrint({ Text = "StartNewRun" })
     DZPersistent.IsRecording = true
     DZCreateNewRecord()
     return base(prevRun, args)
@@ -568,7 +566,6 @@ if io then
 
         file:write(input)
         file:write(output)
-        DebugPrint({ Text = out })
         file:close()  
     end
 end

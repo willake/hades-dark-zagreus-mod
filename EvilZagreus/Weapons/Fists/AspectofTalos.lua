@@ -188,6 +188,7 @@ WeaponData.DarkTalosFistSpecial =
         PreFireDuration = 0.24,
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
         FireAnimation = "ZagreusFistAlt02AerialUpperCut_Fire",
+        FireFxOnSelf = "FistFxUppercutDirectional",
         WillTriggerVacuumFunction = true
     },
 
@@ -244,6 +245,7 @@ WeaponData.DarkTalosFistSpecialDash =
         PreFireDuration = 0.24,
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
         FireAnimation = "ZagreusFistAlt02DashUpperCut_Fire",
+        FireFxOnSelf = "FistFxUppercutDirectional",
         WillTriggerVacuumFunction = true
     },
 
