@@ -1,4 +1,4 @@
-if not EvilZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end
 
 -- OnAnyLoad { "RoomOpening", function(triggerArgs)
 --     DebugPrintf({ Text = "Enter RoomOpening, Force next room to Hades boss room" })

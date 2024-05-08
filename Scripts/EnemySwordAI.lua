@@ -37,7 +37,7 @@ function DoSwordAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData, actionData )
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -143,7 +143,7 @@ function FireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Prefire
 
-    DoPreFire(enemy, weaponAIData, targetId)
+    DZDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -153,7 +153,7 @@ function FireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire
     
-    DoRegularFire(enemy, weaponAIData, targetId)
+    DZDoRegularFire(enemy, weaponAIData, targetId)
 
     -- Fire end
 
@@ -173,7 +173,7 @@ function FireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         local postFireWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
