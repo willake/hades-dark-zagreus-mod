@@ -124,100 +124,56 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 end
 
 function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local fireTicks = 1
-
-    -- use the chargeTime to interpolate the combo counts
-    -- chargeTime in this situation is how long the player hold the button
-    -- it can high than 1
-    if weaponAIData.CanDoCombo and actionData.ChargeTime > 0.0 then
- 
-        -- calculate how many times will this action finish a combo 
-        -- the purpose of this calculation is to consider the cooldown time after DarkFist5
-        -- i know it's kinda dumb but this is the only way i can think of now
-        local remainTime = actionData.ChargeTime
-        local finishComboTimes = 0
-        if weaponAIData.IsStartFromFistDash and remainTime > 1.2 then
-            remainTime = remainTime - 1.2
-            finishComboTimes = 1
-            -- if start with DarkFistDash, the first combo takes 1.2 sec to finish whole combo
-            -- from DarkFistDash to DarkFist5, 0.2 attack duration per action
-            -- following by normal combos
-        else
-            -- if start with DarkFist, it takes 1 sec to finish whole combo
-            -- from DarkFist to DarkFist5, 0.2 attack duration per action
-            remainTime = remainTime - 1
-            finishComboTimes = 1
-        end
-
-        finishComboTimes = finishComboTimes + math.floor(remainTime / 1)
-        local totalCooldownTime = finishComboTimes * 0.5 -- cooldown time is 0.5
-        -- DebugPrintf({ Text = "Will finish combo " .. finishComboTimes .. " times"})
-
-        fireTicks = math.ceil((actionData.ChargeTime - totalCooldownTime) / 0.2)
-        -- DebugPrintf({ Text = "Total hold time is " .. actionData.ChargeTime .. ", set fire ticks to " .. fireTicks})
-    end 
-
     local aiData = DZGetWeaponAIData(enemy, weaponAIData.WeaponName)
 
-    for fireTick = 1, fireTicks, 1 do
-        -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-        --     weaponAIData.ForcedEarlyExit = true
-        --     return true
-        -- end
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
+
+    if aiData.AIAngleTowardsPlayerWhileFiring then
+        AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
+    end
     
-        -- if not CanAttack({ Id = enemy.ObjectId }) then
-        --     return false
-        -- end
+    -- Prefire
 
-        -- TODO: CanAttack is not working here, I dont know why
-        -- It will keep failing and repeat the same attack
+    if aiData.WillTriggerVacuumFunction then
+        DZCheckVacuumPlayer(enemy, targetId, 
+        {
+            Range = 800,				-- Vacuum distance
+            DistanceBuffer = 130,		-- Space to leave between player and enemy
+            RushDistanceBuffer = 300,
+            AutoLockArc = 60,
+        })
+    end
+
+    DZDoPreFire(enemy, aiData, targetId)
+
+    -- Prefire End
+
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
+
+    -- Fire
     
-        -- TODO: this is not working as well
-        if aiData.AIAngleTowardsPlayerWhileFiring then
-            AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
-        end
-        
-        -- Prefire
+    DZDoRegularFire(enemy, aiData, targetId)
 
-        if aiData.WillTriggerVacuumFunction then
-            DZCheckVacuumPlayer(enemy, targetId, 
-            {
-				Range = 800,				-- Vacuum distance
-				DistanceBuffer = 130,		-- Space to leave between player and enemy
-				RushDistanceBuffer = 300,
-				AutoLockArc = 60,
-			})
-        end
+    -- for AspectofDemeter
+    -- the original implementation is only available for player
+    -- so I implement it here
+    if aiData.CheckComboPowerReset then
+        local sourceWeaponData = GetWeaponData( attacker, aiData.WeaponName )
+        DZCheckComboPowerReset(enemy, sourceWeaponData)
+    end
 
-        DZDoPreFire(enemy, aiData, targetId)
+    -- Fire end
 
-        -- Prefire End
+    if aiData.Cooldown then
+        wait(aiData.Cooldown, enemy.AIThreadName)
+    end
 
-        -- if not CanAttack({ Id = enemy.ObjectId }) then
-        --     return false
-        -- end
-
-        -- Fire
-        
-        DZDoRegularFire(enemy, aiData, targetId)
-
-        -- for AspectofDemeter
-        -- the original implementation is only available for player
-        -- so I implement it here
-        if aiData.CheckComboPowerReset then
-            local sourceWeaponData = GetWeaponData( attacker, aiData.WeaponName )
-            DZCheckComboPowerReset(enemy, sourceWeaponData)
-        end
-
-        -- Fire end
-
-        if aiData.Cooldown then
-            wait(aiData.Cooldown, enemy.AIThreadName)
-        end
-
-        if aiData.ChainedWeapon then
-            aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)
-        end
+    if aiData.ChainedWeapon then
+        aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
