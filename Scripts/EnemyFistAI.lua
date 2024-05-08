@@ -13,18 +13,18 @@ function DarkZagreusFistAI( enemy, currentRun )
     enemy.LastAction = ""
     enemy.ComboThreshold = 12 -- for AspectofDemeter
     while IsAIActive( enemy, currentRun ) do
-		local continue = DoFistAILoop( enemy, currentRun )
+		local continue = DZDoFistAILoop( enemy, currentRun )
 		if not continue then
 			return
 		end
 	end
 end
 
-function DoFistAILoop(enemy, currentRun, targetId)
+function DZDoFistAILoop(enemy, currentRun, targetId)
     local actionData = GetAIActionData(enemy.AIState)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = SelectFistWeapon(enemy, actionData)
+    enemy.WeaponName = DZSelectFistWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -45,7 +45,7 @@ function DoFistAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -56,7 +56,7 @@ function DoFistAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DoFistAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZDoFistAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
                 DebugPrintf({ Text = "Attack failed. Gonna try again."})
@@ -70,7 +70,7 @@ function DoFistAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -114,16 +114,16 @@ function DoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDat
 		return false
 	end
 
-    if not FireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZFireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
     enemy.AIState.LastActionTime = _worldTime
-    SetLastActionOnAIState(enemy)
+    DZSetLastActionOnAIState(enemy)
     
     return true
 end
 
-function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local fireTicks = 1
 
     -- use the chargeTime to interpolate the combo counts
@@ -189,7 +189,7 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 			})
         end
 
-        DoPreFire(enemy, aiData, targetId)
+        DZDoPreFire(enemy, aiData, targetId)
 
         -- Prefire End
 
@@ -199,7 +199,7 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
         -- Fire
         
-        DoRegularFire(enemy, aiData, targetId)
+        DZDoRegularFire(enemy, aiData, targetId)
 
         -- for AspectofDemeter
         -- the original implementation is only available for player
@@ -228,7 +228,7 @@ function FireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function SelectFistWeapon(enemy, actionData)
+function DZSelectFistWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil

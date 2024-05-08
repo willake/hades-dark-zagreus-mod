@@ -54,7 +54,7 @@ function DoShieldAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -137,7 +137,7 @@ function DoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
         return false
     end
     enemy.AIState.LastActionTime = _worldTime
-    SetLastActionOnAIState(enemy)
+    DZSetLastActionOnAIState(enemy)
 
     return true
 end
@@ -165,7 +165,7 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Prefire
 
-    DoPreFire(enemy, weaponAIData, targetId)
+    DZDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -181,7 +181,7 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
             { Id = enemy.ObjectId, Weapon = weaponAIData.WeaponName, Method = "RecallProjectiles" })
         enemy.LastReturnShieldTime = _worldTime
     else
-        DoRegularFire(enemy, weaponAIData, targetId)
+        DZDoRegularFire(enemy, weaponAIData, targetId)
     end
 
     -- Fire end
@@ -200,9 +200,9 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         local postFireWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeWeapon)
 
-        DoPreFire(enemy, postFireWeaponAIData, targetId)
+        DZDoPreFire(enemy, postFireWeaponAIData, targetId)
 
-        DoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
+        DZDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
         
         if postFireWeaponAIData.WillEnableBonus then
             enemy.HasBonus = true
@@ -213,9 +213,9 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         local bonusWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireBonusWeapon)
 
-        DoPreFire(enemy, bonusWeaponAIData, targetId)
+        DZDoPreFire(enemy, bonusWeaponAIData, targetId)
 
-        DoRegularFire(enemy, bonusWeaponAIData, targetId)
+        DZDoRegularFire(enemy, bonusWeaponAIData, targetId)
 
         if bonusWeaponAIData.WillConsumeBonus then
             enemy.HasBonus = false

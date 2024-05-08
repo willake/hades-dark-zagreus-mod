@@ -47,7 +47,7 @@ function DoGunAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -123,7 +123,7 @@ function DoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData
         return false
     end
     enemy.AIState.LastActionTime = _worldTime
-    SetLastActionOnAIState(enemy)
+    DZSetLastActionOnAIState(enemy)
 
     local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
     
@@ -159,7 +159,7 @@ function FireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
         -- Prefire
 
-        DoPreFire(enemy, weaponAIData, targetId)
+        DZDoPreFire(enemy, weaponAIData, targetId)
 
         -- Prefire End
 
@@ -169,7 +169,7 @@ function FireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
         -- Fire
         
-        DoRegularFire(enemy, weaponAIData, targetId)
+        DZDoRegularFire(enemy, weaponAIData, targetId)
 
         if aiData.ChainedWeapon then
             aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)

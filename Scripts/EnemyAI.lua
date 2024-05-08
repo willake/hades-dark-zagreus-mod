@@ -1,4 +1,4 @@
-function DoDarkZagreusMove(enemy, currentRun, targetId, weaponAIData)
+function DZDoMove(enemy, currentRun, targetId, weaponAIData)
     if weaponAIData == nil then
         weaponAIData = enemy
     end
@@ -94,7 +94,7 @@ end
 -- Prefire
 -- pre-fire means the animation that plays before attack,
 -- which you can clearly see that the character is going to attack
-function DoPreFire(enemy, weaponAIData, targetId)
+function DZDoPreFire(enemy, weaponAIData, targetId)
 
     if weaponAIData.PreFireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
@@ -126,7 +126,7 @@ function DoPreFire(enemy, weaponAIData, targetId)
     -- end
 end
 
-function DoRegularFire(enemy, weaponAIData, targetId)
+function DZDoRegularFire(enemy, weaponAIData, targetId)
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
     end
@@ -163,7 +163,7 @@ function DoRegularFire(enemy, weaponAIData, targetId)
 end
 
 -- Do fire that distance will vary by how much player charged
-function DoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
+function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
     local chargeTime = percentageCharged * weaponAIData.MaxChargeTime
     local minChargeTime = weaponAIData.MinChargeTime or 0.0
     
@@ -277,13 +277,7 @@ function DoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
     return true
 end
 
--- simulate player holding fire button to attack
--- e.g. fist
-function DoFistFire(enemy, weaponAIData, targetId, holdTimeInPercentage)
-    
-end
-
-function SetLastActionOnAIState(enemy)
+function DZSetLastActionOnAIState(enemy)
     enemy.AIState.IsLastActionAttack = 0
     enemy.AIState.IsLastActionSpectialAttack = 0
     enemy.AIState.IsLastActionDash = 0

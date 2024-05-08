@@ -48,7 +48,7 @@ function DoSpearAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -133,7 +133,7 @@ function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
         return false
     end
     enemy.AIState.LastActionTime = _worldTime
-    SetLastActionOnAIState(enemy)
+    DZSetLastActionOnAIState(enemy)
 
     local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
     
@@ -163,7 +163,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Prefire
 
-    DoPreFire(enemy, weaponAIData, targetId)
+    DZDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -174,9 +174,9 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- Fire
     
     if weaponAIData.IsRangeBasedOnCharge then
-        DoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
+        DZDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
-        DoRegularFire(enemy, weaponAIData, targetId)
+        DZDoRegularFire(enemy, weaponAIData, targetId)
     end
 
     -- Fire end
@@ -200,7 +200,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
         
-        DoPreFire(enemy, chargeWeaponAIData, targetId)
+        DZDoPreFire(enemy, chargeWeaponAIData, targetId)
 
         -- if the charge time is larger than the threshold, at least play the first stage
         if chargeTime > weaponAIData.PostFireChargeStages[1].Threshold then
@@ -229,7 +229,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
             wait(remainChargeTime, enemy.AIThreadName)
 
-            DoRegularFire(enemy, chargeWeaponAIData, targetId) 
+            DZDoRegularFire(enemy, chargeWeaponAIData, targetId) 
         -- otherwise, play charge cancel animation
         else
             wait(chargeTime, enemy.AIThreadName)
@@ -246,7 +246,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         local postFireWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     if weaponAIData.WillThrowSpear then
