@@ -7,10 +7,15 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
         for enemyId, enemy in pairs( ActiveEnemies ) do
             DebugPrintf({ Text = "Hades Object ID " .. enemy.ObjectId })
             -- equip weapon
-            local weaponName = DZPersistent.Weapon.WeaponName
-            local itemIndex = DZPersistent.Weapon.ItemIndex
-            DZWeaponData[weaponName][itemIndex].Equip(enemy)
-            UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI[weaponName]
+            if DZPersistent.Weapon.WeaponName and DZPersistent.Weapon.ItemIndex then
+                local weaponName = DZPersistent.Weapon.WeaponName
+                local itemIndex = DZPersistent.Weapon.ItemIndex
+                DZWeaponData[weaponName][itemIndex].Equip(enemy)
+                UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI[weaponName]
+            else
+                DZWeaponData["SwordWeapon"][1].Equip(enemy)
+                UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI["SwordWeapon"]
+            end 
         end
     end
 end }

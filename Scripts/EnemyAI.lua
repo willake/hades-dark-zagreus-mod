@@ -79,6 +79,10 @@ end
 
 function DZMakeAIActionData(state, maxChargeTime)
 
+    if DZTemp.Model == nil or #DZTemp.Model == 0 then
+        return DZMakeRandomAIActionData(state, maxChargeTime)
+    end
+
     DebugPrintTable("AIState", state, 3)
     -- local r = math.random()
     -- local chargeTime = 0.0
