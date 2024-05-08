@@ -1,4 +1,4 @@
-function DoDarkZagreusMove(enemy, currentRun, targetId, weaponAIData, actionData)
+function DoDarkZagreusMove(enemy, currentRun, targetId, weaponAIData)
     if weaponAIData == nil then
         weaponAIData = enemy
     end

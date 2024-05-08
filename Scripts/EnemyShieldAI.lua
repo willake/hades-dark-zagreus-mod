@@ -54,7 +54,7 @@ function DoShieldAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData, actionData )
+			local didTimeout = DoDarkZagreusMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
