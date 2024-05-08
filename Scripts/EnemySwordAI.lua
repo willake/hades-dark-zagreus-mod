@@ -44,10 +44,6 @@ function DZDoSwordAILoop(enemy, currentRun, targetId)
 			end
 		end
 
-        if enemy.WeaponName == nil then
-            return true
-        end
-
         -- Attack
 		local attackSuccess = false
 
@@ -114,8 +110,6 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
     end
     enemy.LastActionTime = _worldTime
     -- SetLastActionOnAIState(enemy)
-
-    local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
     
     return true
 end
