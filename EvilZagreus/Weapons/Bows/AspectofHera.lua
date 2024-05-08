@@ -8,10 +8,11 @@ WeaponData.DarkHeraBow =
     AIData =
     {
         AIAttackDistance = 800,
-        -- MoveSuccessDistance = 600,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
+        AIMoveWithinRangeTimeoutMin = 1.0,
+        AIMoveWithinRangeTimeoutMax = 3.0,
+        SkipAttackAfterMoveTimeout = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowAlt02DashStart",
         PreFireFx = "BowCharge",
@@ -79,9 +80,7 @@ WeaponData.DarkHeraBow =
         "ZagreusBow02Run_Bink",
         "ZagreusBow02RunStop_Bink",
         "ZagreusBow02RapidFire_Bink"
-    },
-
-    Upgrades = {},
+    }
 }
 
 WeaponData.DarkHeraBowDash =
@@ -94,7 +93,6 @@ WeaponData.DarkHeraBowDash =
         AIChargeTargetMarker = true,
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowAlt02Start",
         PreFireFx = "BowChargeRamaDash",
@@ -148,12 +146,7 @@ WeaponData.DarkHeraBowDash =
             MetalObstacle = "/SFX/ArrowWallHitClankSmall",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
-    },
-
-    Upgrades =
-    {
-
-    },
+    }
 }
 
 WeaponData.DarkHeraBowSplitShot =
@@ -196,12 +189,7 @@ WeaponData.DarkHeraBowSplitShot =
             MetalObstacle = "/SFX/ArrowWallHitClankSmall",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
-    },
-
-    Upgrades =
-    {
-
-    },
+    }
 }
 
 -- this upgrade also change the cast action, but I don't know how to apply it
