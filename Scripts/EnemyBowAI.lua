@@ -1,16 +1,7 @@
 function DarkZagreusBowAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
+    enemy.AIState = { }
+    enemy.LastActionTime = 0
+    enemy.LastAction = 0
     while IsAIActive( enemy, currentRun ) do
 		local continue = DoBowAILoop( enemy, currentRun )
 		if not continue then
@@ -20,7 +11,9 @@ function DarkZagreusBowAI( enemy, currentRun )
 end
 
 function DoBowAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState, 1.0)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = SelectBowWeapon(enemy, actionData)
@@ -133,11 +126,6 @@ end
 function FireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
-    if weaponAIData.PostFireChargeStages ~= nil then
-        chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
-        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
-    end
-
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
         return true
@@ -146,10 +134,6 @@ function FireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     if not CanAttack({ Id = enemy.ObjectId }) then
         return false
     end
-
-    -- if weaponAIData.AIAngleTowardsPlayerWhileFiring then
-    --     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
-    -- end
 
     -- Prefire
 
@@ -170,25 +154,6 @@ function FireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire end
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
-
-    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-	-- 	weaponAIData.ForcedEarlyExit = true
-	-- 	return true
-	-- end
-
-    -- Stop({ Id = enemy.ObjectId })
-
-    -- AspectofArthur will fire an area after special attack
-    if weaponAIData.PostFireWeapon ~= nil then
-        local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
-
-        DZDoRegularFire(enemy, postFireWeaponAIData)
-    end
-
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true
 		return true
@@ -201,20 +166,20 @@ function SelectBowWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 0
 
     -- use attack weapon
     if r < actionData.AttackProb then
 
         -- if the last action is dash, do dash attack
         if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
+            enemy.LastAction = 1
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
-        enemy.LastAction = "Attack"
+        enemy.LastAction = 1
 
         -- do a regular attack
         enemy.WeaponName = enemy.PrimaryWeapon
@@ -224,7 +189,7 @@ function SelectBowWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
-        enemy.LastAction = "SpecialAttack"
+        enemy.LastAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
@@ -232,7 +197,7 @@ function SelectBowWeapon(enemy, actionData)
 
     -- use dash
     if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
