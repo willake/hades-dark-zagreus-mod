@@ -261,6 +261,40 @@ OnWeaponFailedToFire { "ShieldThrow",
     end
 }
 
+-- fist
+-- originally, I record fist weapon like how player behaves:
+-- holding the attack button to execute the combo
+-- so as the AI, the attack action was like: do attack with 1 seconds
+-- however, I found that it's impossible, or say, too difficult, to record this behavior
+-- if I just record the action with OnControlPressed and OnControlReleased,
+-- it is not secured that the weapon is fired, sometimes it will wrongly add redundant data into the record
+-- so I decide to just record it with OnWeaponFired, which is easier 
+OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 FistWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrint({ Text = "FistWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZPersistent.LastAction = 1
+    end 
+}
+
+-- ignore Flying Cutter and Kinetic Launcher, which is chargable special
+-- just treat it as normal special
+OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DebugPrint({ Text = "FistWeaponSpecial" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))     
+        DZPersistent.LastAction = 2
+    end 
+}
+
 -- rush
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
@@ -284,6 +318,13 @@ function DZCheckCanRecord()
     end
 
     if CurrentRun.Hero.Health == nil then
+        return false
+    end
+
+    DebugPrint({ Text = "Is Empty: " .. tostring(IsEmpty(RequiredKillEnemies))})
+
+    -- only actions towards enemies should be recorded
+    if IsEmpty(RequiredKillEnemies) then
         return false
     end
 
