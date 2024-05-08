@@ -281,6 +281,9 @@ OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 Fist
     end 
 }
 
+
+-- ignore Flying Cutter and Kinetic Launcher, which is chargable special
+-- just treat it as normal special
 OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
