@@ -3,20 +3,20 @@ function DarkZagreusSwordAI( enemy, currentRun )
     enemy.LastActionTime = 0
     enemy.LastAction = 0
     while IsAIActive( enemy, currentRun ) do
-		local continue = DoSwordAILoop( enemy, currentRun )
+		local continue = DZDoSwordAILoop( enemy, currentRun )
 		if not continue then
 			return
 		end
 	end
 end
 
-function DoSwordAILoop(enemy, currentRun, targetId)
+function DZDoSwordAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     enemy.AIState = aiState
     local actionData = DZMakeAIActionData(aiState, 1.0)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = SelectSwordWeapon(enemy, actionData)
+    enemy.WeaponName = DZSelectSwordWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -52,7 +52,7 @@ function DoSwordAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DoSwordAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZDoSwordAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -65,7 +65,7 @@ function DoSwordAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -109,7 +109,7 @@ function DoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 		return false
 	end
 
-    if not FireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZFireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
     enemy.LastActionTime = _worldTime
@@ -120,7 +120,7 @@ function DoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     return true
 end
 
-function FireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
@@ -184,7 +184,7 @@ function FireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function SelectSwordWeapon(enemy, actionData)
+function DZSelectSwordWeapon(enemy, actionData)
     local total = actionData.Attack + actionData.SpecialAttack + actionData.Dash
     local r = math.random() * total
     -- init combo weapon to nil
