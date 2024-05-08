@@ -319,6 +319,13 @@ function DZCheckCanRecord()
         return false
     end
 
+    DebugPrint({ Text = "Is Empty: " .. tostring(IsEmpty(RequiredKillEnemies))})
+
+    -- only actions towards enemies should be recorded
+    if IsEmpty(RequiredKillEnemies) then
+        return false
+    end
+
     return true
 end
 
