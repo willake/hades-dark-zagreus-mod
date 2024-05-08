@@ -52,10 +52,6 @@ function DoFistAILoop(enemy, currentRun, targetId)
 			end
 		end
 
-        if enemy.WeaponName == nil then
-            return true
-        end
-
         -- Attack
 		local attackSuccess = false
 
@@ -123,8 +119,6 @@ function DoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDat
     end
     enemy.AIState.LastActionTime = _worldTime
     SetLastActionOnAIState(enemy)
-
-    local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
     
     return true
 end
