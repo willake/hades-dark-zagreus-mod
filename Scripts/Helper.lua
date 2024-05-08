@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 local modName = "DarkZagreus" -- put your unique mod codename here
 local Print = function(...) print(modName .. ":", ...) end
 if io then

@@ -1,5 +1,5 @@
 Top Import "config.lua"
-Import "helper.lua"
+Import "Scripts/Helper.lua"
 Import "Libraries/luann/luann.lua"
 Import "Scripts/Main.lua"
 Import "Scripts/WeaponData.lua"
