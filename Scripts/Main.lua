@@ -1,4 +1,4 @@
-if not EvilZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end
 
 OnAnyLoad { "D_Boss01", function(triggerArgs)
     DebugPrintf({ Text = "Enter D_Boss01, equipWeapon and setup the AI " })

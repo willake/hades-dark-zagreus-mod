@@ -1,4 +1,4 @@
-if not EvilZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end
 
 function LoadTrainingData(fileName)
     local data = {}

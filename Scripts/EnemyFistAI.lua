@@ -414,3 +414,12 @@ function DZOnRuptureWeaponHit( args )
 		end
 	end
 end
+
+-- for aspect of Gilgamesh
+ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
+    local attacker = triggerArgs.AttackerTable
+    local sourceWeaponData = GetWeaponData( attacker, triggerArgs.SourceWeapon )
+	thread( DZCheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
+    DZCheckFistDetonation(attacker, victim, triggerArgs) -- for aspect of Gilgamesh
+    return base(victim, triggerArgs)
+end, DarkZagreus)
