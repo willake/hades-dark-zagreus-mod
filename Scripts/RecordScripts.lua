@@ -5,6 +5,7 @@ DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
 DZPersistent.PendingRecord = {}
 
+DZTemp.Weapon = {}
 DZTemp.Model = {}
   
 -- sword weapon
@@ -417,7 +418,7 @@ function DZForceTraining()
     local data = LoadTrainingData("DZrecord" .. ".log")
     local weaponData = data.WeaponData
 
-    DZPersistent.Weapon = weaponData
+    DZTemp.Weapon = weaponData
     
     local trainingData = data.TrainingData
 
