@@ -295,6 +295,34 @@ OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
     end 
 }
 
+-- gun
+-- same as fist weapon
+
+-- ignore the bias affected by Delta Chamber, let it be
+OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
+    function(triggerArgs)
+        -- if not DZCheckCanRecord() then
+        --     return false
+        -- end
+
+        DebugPrint({ Text = "GunWeapon" })
+        -- DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        -- DZPersistent.LastAction = 1
+    end 
+}
+
+OnWeaponFired { "GunGrenadeToss",
+    function(triggerArgs)
+        -- if not DZCheckCanRecord() then
+        --     return false
+        -- end
+
+        DebugPrint({ Text = "GunGrenadeToss" })
+        -- DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        -- DZPersistent.LastAction = 1
+    end 
+}
+
 -- rush
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
@@ -307,6 +335,9 @@ OnWeaponFired{ "RushWeapon",
         DZPersistent.LastAction = 0
     end
 } 
+
+-- gun
+
 
 function DZCheckCanRecord()
     if not DZPersistent.IsRecording then
