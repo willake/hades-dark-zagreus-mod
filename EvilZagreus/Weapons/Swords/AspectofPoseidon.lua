@@ -6,8 +6,6 @@ WeaponData.DarkPoseidonSword =
 
     AIData =
     {
-        AIAttackDistance = 300,
-        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -66,8 +64,6 @@ WeaponData.DarkPoseidonSword2 =
 
     AIData =
     {
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
@@ -98,9 +94,7 @@ WeaponData.DarkPoseidonSword2 =
             MetalObstacle = "/SFX/SwordWallHitClank",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
-    },
-
-    Upgrades = {},
+    }
 }
 
 WeaponData.DarkPoseidonSword3 =
@@ -111,8 +105,6 @@ WeaponData.DarkPoseidonSword3 =
 
     AIData =
     {
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
@@ -151,8 +143,6 @@ WeaponData.DarkPoseidonSword3 =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = {},
 }
 
 WeaponData.DarkPoseidonSwordDash =
@@ -164,8 +154,6 @@ WeaponData.DarkPoseidonSwordDash =
     AIData =
     {
         FireDuration = 0.3,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -202,8 +190,6 @@ WeaponData.DarkPoseidonSwordDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = {},
 }
 
 WeaponData.DarkPoseidonSwordParry =
@@ -217,8 +203,6 @@ WeaponData.DarkPoseidonSwordParry =
     AIData =
     {
         FireDuration = 0.5,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0
@@ -253,6 +237,4 @@ WeaponData.DarkPoseidonSwordParry =
     {
         "ZagreusSwordParry_Bink",
     },
-
-    Upgrades = {},
 }

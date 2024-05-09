@@ -4,27 +4,12 @@ WeaponData.DarkRush =
 {
     Name = "DarkRush",
     IgnoreCancelSimOnEffects = { "RushWeaponDisable", "RushWeaponDisableCancelable" },
-    --[[
-    CancelEffectSimSlowParameters =
-    {
-        { ScreenPreWait = 0.0, Fraction = 0.01, LerpTime = 0 },
-        { ScreenPreWait = 0.02, Fraction = 0.1, LerpTime = 0.07 },
-        { ScreenPreWait = 0.04, Fraction = 1.0, LerpTime = 0.1 },
-    },
-    ]]
+
     AIData =
     {
-        --PreAttackAnimation = "EnemyHydraBite_Charge",
-        --FireAnimation = "EnemyHydraBite_Attack",
-        --PostAttackAnimation = "EnemyHydraIdle",
         PreAttackDuration = 0,
-        --PreAttackEndDuration = 0.5,
-        --PreAttackEndShake = true,
-        --PreAttackVelocityWeapon = "HydraBiteSelfVelocity",
-        -- FireDuration = 0.6,
         PostAttackDuration = 0,
-        AIAttackDistance = 500,
-        AIBufferDistance = 500,
+        AttackDistance = 800,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
@@ -70,6 +55,4 @@ WeaponData.DarkRush =
     },
 
     NoExpressiveAnim = true,
-
-    Upgrades = { },
 }

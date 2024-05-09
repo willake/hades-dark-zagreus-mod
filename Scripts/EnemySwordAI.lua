@@ -1,10 +1,5 @@
 function DarkZagreusSwordAI( enemy, currentRun )
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DZDoSwordAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DZDoSwordAILoop( enemy, currentRun )
 end
 
 function DZDoSwordAILoop(enemy, currentRun, targetId)
@@ -34,7 +29,7 @@ function DZDoSwordAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
