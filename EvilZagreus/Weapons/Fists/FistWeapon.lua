@@ -11,7 +11,6 @@ WeaponData.DarkFist =
     CauseImpactReaction = true,
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist2",
@@ -176,7 +175,6 @@ WeaponData.DarkFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,

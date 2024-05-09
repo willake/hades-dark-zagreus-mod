@@ -1,27 +1,12 @@
 function DarkZagreusFistAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
     enemy.ComboThreshold = 12 -- for AspectofDemeter
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DZDoFistAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DZDoFistAILoop( enemy, currentRun )
 end
 
 function DZDoFistAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectFistWeapon(enemy, actionData)
@@ -117,8 +102,7 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
     if not DZFireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.AIState.LastActionTime = _worldTime
-    DZSetLastActionOnAIState(enemy)
+    enemy.LastActionTime = _worldTime
     
     return true
 end
@@ -188,32 +172,32 @@ function DZSelectFistWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 0
 
     -- use attack weapon
-    if r < actionData.AttackProb then
+    if r < actionData.Attack then
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
+            enemy.LastAction = 1
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         -- or just do a regular attack
-        enemy.LastAction = "Attack"
+        enemy.LastAction = 1
         enemy.WeaponName = enemy.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use special attack
-    if r < actionData.AttackProb + actionData.SpectialAttackProb then
-        enemy.LastAction = "SpecialAttack"
+    if r < actionData.Attack + actionData.SpecialAttack then
+        enemy.LastAction = 2
 
         -- fist weapon special has dash attack version
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.SpecialDashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
@@ -225,8 +209,8 @@ function DZSelectFistWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName

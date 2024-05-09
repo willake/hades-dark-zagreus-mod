@@ -11,7 +11,6 @@ WeaponData.DarkGilgameshFist =
     CauseImpactReaction = true,
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist2",
@@ -269,7 +268,6 @@ WeaponData.DarkGilgameshFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,

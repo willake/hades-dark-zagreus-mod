@@ -13,7 +13,6 @@ WeaponData.DarkDemeterFist =
     
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist2",
@@ -181,7 +180,6 @@ WeaponData.DarkDemeterFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
