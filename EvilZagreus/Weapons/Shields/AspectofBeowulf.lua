@@ -10,8 +10,6 @@ WeaponData.DarkBeowulfShield = {
 
     AIData =
     {
-        AIAttackDistance = 300,
-        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -76,8 +74,6 @@ WeaponData.DarkBeowulfShieldDash =
     AIData =
     {
         FireDuration = 0.45,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -118,7 +114,8 @@ WeaponData.DarkBeowulfShieldThrow =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        AttackDistanceMin = 800,
+        AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
         PreFireDuration = 0.2,
@@ -179,7 +176,6 @@ WeaponData.DarkBeowulfShieldRush =
 
     AIData =
     {
-        AIAttackDistance = 9999,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,

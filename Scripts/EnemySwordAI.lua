@@ -101,7 +101,6 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
         return false
     end
     enemy.LastActionTime = _worldTime
-    -- SetLastActionOnAIState(enemy)
     
     return true
 end

@@ -7,8 +7,6 @@ WeaponData.DarkChaosShield = {
 
     AIData =
     {
-        AIAttackDistance = 300,
-        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -62,8 +60,6 @@ WeaponData.DarkChaosShieldDash =
     AIData =
     {
         FireDuration = 0.45,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -106,7 +102,8 @@ WeaponData.DarkChaosShieldThrow =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        AttackDistanceMin = 800,
+        AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
         WaitUntilProjectileDeath = true,
@@ -197,7 +194,6 @@ WeaponData.DarkChaosShieldRush =
 
     AIData =
     {
-        AIAttackDistance = 9999,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
