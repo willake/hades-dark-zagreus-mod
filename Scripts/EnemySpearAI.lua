@@ -113,7 +113,6 @@ function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
         return false
     end
     enemy.LastActionTime = _worldTime
-    DZSetLastActionOnAIState(enemy)
     return true
 end
 

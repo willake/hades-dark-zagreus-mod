@@ -4,7 +4,7 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.LastAction = 0
 
     while IsAIActive( enemy, currentRun ) do
-        local ailoop = _G[DZWeaponAI["SpearWeapon"]]
+        local ailoop = _G[DZWeaponAI["ShieldWeapon"]]
         if DZTemp.Weapon.WeaponName then
             ailoop = _G[DZWeaponAI[DZTemp.Weapon.WeaponName]] 
         end
@@ -322,21 +322,6 @@ function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged
     end
 
     return true
-end
-
-function DZSetLastActionOnAIState(enemy)
-    enemy.AIState.IsLastActionAttack = 0
-    enemy.AIState.IsLastActionSpectialAttack = 0
-    enemy.AIState.IsLastActionDash = 0
-    enemy.AIState.IsLastActionDashAttack = 0
-    enemy.AIState.IsLastActionCast = 0
-    if enemy.LastAction == 1 then
-        enemy.AIState.IsLastActionAttack = 1
-    elseif enemy.LastAction == 2 then
-        enemy.AIState.IsLastActionSpectialAttack = 1
-    elseif enemy.LastAction == 0 then
-        enemy.AIState.IsLastActionDash = 1
-    end
 end
 
 function DZGetWeaponAIData(enemy, weaponName)

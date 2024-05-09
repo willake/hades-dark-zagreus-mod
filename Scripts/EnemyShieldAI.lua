@@ -122,7 +122,6 @@ function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
         return false
     end
     enemy.LastActionTime = _worldTime
-    DZSetLastActionOnAIState(enemy)
 
     return true
 end
@@ -231,7 +230,7 @@ function DZSelectShieldWeapon(enemy, actionData)
         enemy.LastAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName

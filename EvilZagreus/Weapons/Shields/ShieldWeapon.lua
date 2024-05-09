@@ -7,8 +7,6 @@ WeaponData.DarkShield = {
 
     AIData =
     {
-        AIAttackDistance = 300,
-        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -62,13 +60,11 @@ WeaponData.DarkShieldDash =
 
     AIData =
     {
+        SkipMovement = true,
         FireDuration = 0.45,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        SkipMovement = true,
         SkipAngleTowardTarget = true,
     },
 
@@ -105,7 +101,8 @@ WeaponData.DarkShieldThrow =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        AttackDistanceMin = 800,
+        AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
         WaitUntilProjectileDeath = true,
@@ -151,10 +148,9 @@ WeaponData.DarkShieldRush =
 
     AIData =
     {
-        AIAttackDistance = 9999,
+        SkipMovement = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        SkipMovement = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusShieldAttackCharge",
         PreFireFx = "BowCharge",
