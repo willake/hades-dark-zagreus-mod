@@ -435,7 +435,7 @@
             ChargeTime = 0.08
             ControlWindow = 0.3
             // SwapOnFire = "FistWeapon"
-            CooldownWeaponSlotThree = 0.5
+            // CooldownWeaponSlotThree = 0.5
             Effects = [
                 {
                     Name = "FistDisable5"

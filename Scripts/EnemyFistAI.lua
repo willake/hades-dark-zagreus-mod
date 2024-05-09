@@ -67,9 +67,9 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 
     -- PRE ATTACK
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-		return false
-	end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+	-- 	return false
+	-- end
 
     Stop({ Id = enemy.ObjectId })
 
@@ -95,9 +95,9 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 
     -- ATTACK
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-		return false
-	end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+	-- 	return false
+	-- end
 
     if not DZFireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
@@ -108,19 +108,23 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 end
 
 function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local aiData = DZGetWeaponAIData(enemy, weaponAIData.WeaponName)
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
+    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+        weaponAIData.ForcedEarlyExit = true
+        return true
     end
 
-    if aiData.AIAngleTowardsPlayerWhileFiring then
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
+
+    if weaponAIData.AIAngleTowardsPlayerWhileFiring then
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
     end
     
     -- Prefire
 
-    if aiData.WillTriggerVacuumFunction then
+    if weaponAIData.WillTriggerVacuumFunction then
         DZCheckVacuumPlayer(enemy, targetId, 
         {
             Range = 800,				-- Vacuum distance
@@ -130,34 +134,30 @@ function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         })
     end
 
-    DZDoPreFire(enemy, aiData, targetId)
+    DZDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     -- Fire
     
-    DZDoRegularFire(enemy, aiData, targetId)
+    DZDoRegularFire(enemy, weaponAIData, targetId)
 
     -- for AspectofDemeter
     -- the original implementation is only available for player
     -- so I implement it here
-    if aiData.CheckComboPowerReset then
-        local sourceWeaponData = GetWeaponData( attacker, aiData.WeaponName )
-        DZCheckComboPowerReset(enemy, sourceWeaponData)
+    if weaponAIData.CheckComboPowerReset then
+        -- local sourceWeaponData = GetWeaponData( attacker, weaponAIData.WeaponName )
+        DZCheckComboPowerReset(enemy, weaponAIData)
     end
 
     -- Fire end
 
-    if aiData.Cooldown then
-        wait(aiData.Cooldown, enemy.AIThreadName)
-    end
-
-    if aiData.ChainedWeapon then
-        aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)
+    if weaponAIData.Cooldown then
+        wait(weaponAIData.Cooldown, enemy.AIThreadName)
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -176,17 +176,25 @@ function DZSelectFistWeapon(enemy, actionData)
 
     -- use attack weapon
     if r < actionData.Attack then
+        enemy.LastAction = 1
 
         -- if the last action is dash, do dash attack
         if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
-            enemy.LastAction = 1
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
+        -- if the last action is also attack, do weapon combo
+        if enemy.AIState.IsLastActionAttack > 0 then
+            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.LastActionTime < 0.3 then
+                enemy.WeaponName = enemy.ChainedWeapon
+                enemy.ChainedWeapon = nil
+                return enemy.WeaponName
+            end
+        end
+
         -- or just do a regular attack
-        enemy.LastAction = 1
         enemy.WeaponName = enemy.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName

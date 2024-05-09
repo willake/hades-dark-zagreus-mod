@@ -106,12 +106,6 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 end
 
 function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local chargeTime = 0.0
-
-    if weaponAIData.PostFireChargeStages ~= nil then
-        chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
-        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
-    end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -175,7 +169,7 @@ function DZSelectSwordWeapon(enemy, actionData)
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
     enemy.LastAction = 0
-    local lastActionTime = _worldTime
+    local lastActionTime = enemy.LastActionTime
     DebugPrint({ Text = tostring(lastActionTime) })
 
     -- use attack weapon

@@ -15,9 +15,7 @@ WeaponData.DarkTalosFist =
     CauseImpactReaction = true,
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkTalosFist2",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -69,7 +67,6 @@ WeaponData.DarkTalosFist2 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkTalosFist3",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -85,7 +82,6 @@ WeaponData.DarkTalosFist3 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkTalosFist4",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -101,7 +97,6 @@ WeaponData.DarkTalosFist4 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkTalosFist5",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -117,7 +112,6 @@ WeaponData.DarkTalosFist5 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkTalosFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -135,7 +129,6 @@ WeaponData.DarkTalosFistDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkTalosFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -164,8 +157,6 @@ WeaponData.DarkTalosFistDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkTalosFistSpecial = 
@@ -181,9 +172,7 @@ WeaponData.DarkTalosFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.24,
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
@@ -218,8 +207,6 @@ WeaponData.DarkTalosFistSpecial =
         "ZagreusFistFlashKick_Bink",
 
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkTalosFistSpecialVacuum =
@@ -240,7 +227,6 @@ WeaponData.DarkTalosFistSpecialDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.24,
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
@@ -270,6 +256,4 @@ WeaponData.DarkTalosFistSpecialDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }
