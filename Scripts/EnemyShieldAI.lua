@@ -1,34 +1,19 @@
 function DarkZagreusShieldAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
     enemy.HasBonus = false -- for chaos shield
     enemy.IsShieldThrown = false -- for zeus shield
     -- times that AI call return shield function, 
     -- preventing from calling return function multiple times
     enemy.LastReturnShieldTime = 0 
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DoShieldAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DZDoShieldAILoop( enemy, currentRun )
 end
 
-function DoShieldAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+function DZDoShieldAILoop(enemy, currentRun, targetId)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = SelectShieldWeapon(enemy, actionData)
+    enemy.WeaponName = DZSelectShieldWeapon(enemy, actionData)
 
     if enemy.WeaponName == nil then
         return false
@@ -65,7 +50,7 @@ function DoShieldAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DoShieldAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZDoShieldAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -78,7 +63,7 @@ function DoShieldAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -133,16 +118,16 @@ function DoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 		return false
 	end
 
-    if not FireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZFireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.AIState.LastActionTime = _worldTime
+    enemy.LastActionTime = _worldTime
     DZSetLastActionOnAIState(enemy)
 
     return true
 end
 
-function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
@@ -234,24 +219,23 @@ function FireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function SelectShieldWeapon(enemy, actionData)
+function DZSelectShieldWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
     enemy.LastAction = ""
 
     -- use attack weapon
-    if r < actionData.AttackProb then
+    if r < actionData.Attack then
+
+        enemy.LastAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
+        if enemy.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
-
-        enemy.LastAction = "Attack"
 
         -- or just do a regular attack
         enemy.WeaponName = enemy.PrimaryWeapon
@@ -260,16 +244,16 @@ function SelectShieldWeapon(enemy, actionData)
     end
 
     -- use special attack
-    if r < actionData.AttackProb + actionData.SpectialAttackProb then
-        enemy.LastAction = "SpecialAttack"
+    if r < actionData.Attack + actionData.SpecialAttack then
+        enemy.LastAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
