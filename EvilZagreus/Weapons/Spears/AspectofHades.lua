@@ -9,8 +9,7 @@ WeaponData.DarkHadesSpear =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,

@@ -7,8 +7,7 @@ WeaponData.DarkSpear =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -64,7 +63,6 @@ WeaponData.DarkSpear2 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
@@ -109,8 +107,6 @@ WeaponData.DarkSpear3 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -154,8 +150,6 @@ WeaponData.DarkSpearDash =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -193,8 +187,8 @@ WeaponData.DarkSpearThrow =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistanceMin = 400,
+			AttackDistanceMax = 880,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -246,8 +240,6 @@ WeaponData.DarkSpearThrowReturn =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -295,7 +287,6 @@ WeaponData.DarkSpearSpin =
 		AIData =
 		{
 			FireDuration = 0.4,
-			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,

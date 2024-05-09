@@ -6,7 +6,9 @@ end
 -- not sure how to handle it yet
 
 function DZDoSpearAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectSpearWeapon(enemy, actionData)
@@ -245,26 +247,26 @@ function DZSelectSpearWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 1
 
     -- use attack weapon
     if r < actionData.AttackProb then
-
+        
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+            enemy.LastAction = 2
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
+        enemy.LastAction = 1
+
         -- if the last action is dash, do dash attack
         if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
-
-        enemy.LastAction = "Attack"
 
         -- if the last action is also attack, do weapon combo
         if enemy.AIState.IsLastActionAttack > 0 then
@@ -283,6 +285,7 @@ function DZSelectSpearWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.AttackProb + actionData.SpectialAttackProb then
+        enemy.LastAction = 2
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
 
             if enemy.SpecialAttackWeaponRush then
@@ -296,7 +299,6 @@ function DZSelectSpearWeapon(enemy, actionData)
             return enemy.WeaponName
         end
 
-        enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
@@ -304,7 +306,7 @@ function DZSelectSpearWeapon(enemy, actionData)
 
     -- use dash
     if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
