@@ -7,7 +7,7 @@ WeaponData.DarkSpear =
 
 		AIData =
 		{
-			AttackDistance = 300,
+			AttackDistance = 200,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -15,11 +15,11 @@ WeaponData.DarkSpear =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -70,11 +70,11 @@ WeaponData.DarkSpear2 =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -113,11 +113,11 @@ WeaponData.DarkSpear3 =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -187,7 +187,7 @@ WeaponData.DarkSpearThrow =
 
 		AIData =
 		{
-			AttackDistanceMin = 400,
+			AttackDistanceMin = 600,
 			AttackDistanceMax = 880,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,

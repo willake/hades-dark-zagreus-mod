@@ -17,8 +17,8 @@ WeaponData.DarkHadesSpear =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.15 },
-				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.30 },
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1
 		},
@@ -64,7 +64,6 @@ WeaponData.DarkHadesSpear2 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
@@ -72,8 +71,8 @@ WeaponData.DarkHadesSpear2 =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.15 },
-				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.30 },
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1
 		},
@@ -108,16 +107,14 @@ WeaponData.DarkHadesSpear3 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			FireDuration = 0.4,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.15 },
-				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.30 },
+				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1
 		},
@@ -152,8 +149,6 @@ WeaponData.DarkHadesSpearDash =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -191,8 +186,8 @@ WeaponData.DarkHadesSpearThrow =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistanceMin = 600,
+			AttackDistanceMax = 880,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -244,8 +239,6 @@ WeaponData.DarkHadesSpearThrowReturn =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -293,7 +286,6 @@ WeaponData.DarkHadesSpearSpin =
 		AIData =
 		{
 			FireDuration = 0.4,
-			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,

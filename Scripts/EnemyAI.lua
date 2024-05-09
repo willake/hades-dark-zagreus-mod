@@ -4,7 +4,7 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.LastAction = 0
 
     while IsAIActive( enemy, currentRun ) do
-        local ailoop = _G[DZWeaponAI["BowWeapon"]]
+        local ailoop = _G[DZWeaponAI["SpearWeapon"]]
         if DZTemp.Weapon.WeaponName then
             ailoop = _G[DZWeaponAI[DZTemp.Weapon.WeaponName]] 
         end
@@ -93,7 +93,7 @@ function DZMakeRandomAIActionData(state)
     local r = math.random()
     local chargeTime = 0.0
 
-    chargeTime = 0.1 + (r * 0.9)
+    chargeTime = r
 
     return {
         Dash = 0.2,

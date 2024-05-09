@@ -11,10 +11,8 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 local weaponName = DZTemp.Weapon.WeaponName
                 local itemIndex = DZTemp.Weapon.ItemIndex
                 DZWeaponData[weaponName][itemIndex].Equip(enemy)
-                -- UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI[weaponName]
             else
-                DZWeaponData["BowWeapon"][1].Equip(enemy)
-                -- UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI["BowWeapon"]
+                DZWeaponData["SpearWeapon"][2].Equip(enemy)
             end 
         end
     end

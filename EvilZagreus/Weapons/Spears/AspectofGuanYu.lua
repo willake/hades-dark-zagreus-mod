@@ -9,8 +9,7 @@ WeaponData.DarkGuanYuSpear =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -18,11 +17,11 @@ WeaponData.DarkGuanYuSpear =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -69,7 +68,6 @@ WeaponData.DarkGuanYuSpear2 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
@@ -77,11 +75,11 @@ WeaponData.DarkGuanYuSpear2 =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -113,19 +111,17 @@ WeaponData.DarkGuanYuSpear3 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -157,8 +153,6 @@ WeaponData.DarkGuanYuSpearDash =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -196,8 +190,8 @@ WeaponData.DarkGuanYuSpearThrow =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistanceMin = 600,
+			AttackDistanceMax = 880,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -254,7 +248,6 @@ WeaponData.DarkGuanYuSpearSpin =
 		AIData =
 		{
 			FireDuration = 0.4,
-			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
