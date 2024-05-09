@@ -11,9 +11,8 @@ WeaponData.DarkFist =
     CauseImpactReaction = true,
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
+        -- AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist2",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -64,7 +63,6 @@ WeaponData.DarkFist2 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist3",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -80,7 +78,6 @@ WeaponData.DarkFist3 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist4",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -96,7 +93,6 @@ WeaponData.DarkFist4 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist5",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -112,7 +108,6 @@ WeaponData.DarkFist5 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -130,7 +125,6 @@ WeaponData.DarkFistDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -159,8 +153,6 @@ WeaponData.DarkFistDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkFistSpecial = 
@@ -176,9 +168,7 @@ WeaponData.DarkFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.11,
         PreFireAnimation = "ZagreusFistAerialUpperCut_Start",
@@ -212,8 +202,6 @@ WeaponData.DarkFistSpecial =
         "ZagreusFistFlashKick_Bink",
 
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkFistSpecialDash = 
@@ -229,7 +217,6 @@ WeaponData.DarkFistSpecialDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistDashUpperCut_Start",
@@ -258,6 +245,4 @@ WeaponData.DarkFistSpecialDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }

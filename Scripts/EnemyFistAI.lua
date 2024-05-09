@@ -1,27 +1,12 @@
 function DarkZagreusFistAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
     enemy.ComboThreshold = 12 -- for AspectofDemeter
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DZDoFistAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DZDoFistAILoop( enemy, currentRun )
 end
 
 function DZDoFistAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectFistWeapon(enemy, actionData)
@@ -82,9 +67,9 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 
     -- PRE ATTACK
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-		return false
-	end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+	-- 	return false
+	-- end
 
     Stop({ Id = enemy.ObjectId })
 
@@ -110,33 +95,36 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 
     -- ATTACK
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-		return false
-	end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+	-- 	return false
+	-- end
 
     if not DZFireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.AIState.LastActionTime = _worldTime
-    DZSetLastActionOnAIState(enemy)
+    enemy.LastActionTime = _worldTime
     
     return true
 end
 
 function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local aiData = DZGetWeaponAIData(enemy, weaponAIData.WeaponName)
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
+    if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
+        weaponAIData.ForcedEarlyExit = true
+        return true
     end
 
-    if aiData.AIAngleTowardsPlayerWhileFiring then
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
+
+    if weaponAIData.AIAngleTowardsPlayerWhileFiring then
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
     end
     
     -- Prefire
 
-    if aiData.WillTriggerVacuumFunction then
+    if weaponAIData.WillTriggerVacuumFunction then
         DZCheckVacuumPlayer(enemy, targetId, 
         {
             Range = 800,				-- Vacuum distance
@@ -146,34 +134,30 @@ function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         })
     end
 
-    DZDoPreFire(enemy, aiData, targetId)
+    DZDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     -- Fire
     
-    DZDoRegularFire(enemy, aiData, targetId)
+    DZDoRegularFire(enemy, weaponAIData, targetId)
 
     -- for AspectofDemeter
     -- the original implementation is only available for player
     -- so I implement it here
-    if aiData.CheckComboPowerReset then
-        local sourceWeaponData = GetWeaponData( attacker, aiData.WeaponName )
-        DZCheckComboPowerReset(enemy, sourceWeaponData)
+    if weaponAIData.CheckComboPowerReset then
+        -- local sourceWeaponData = GetWeaponData( attacker, weaponAIData.WeaponName )
+        DZCheckComboPowerReset(enemy, weaponAIData)
     end
 
     -- Fire end
 
-    if aiData.Cooldown then
-        wait(aiData.Cooldown, enemy.AIThreadName)
-    end
-
-    if aiData.ChainedWeapon then
-        aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)
+    if weaponAIData.Cooldown then
+        wait(weaponAIData.Cooldown, enemy.AIThreadName)
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -188,32 +172,40 @@ function DZSelectFistWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 0
 
     -- use attack weapon
-    if r < actionData.AttackProb then
+    if r < actionData.Attack then
+        enemy.LastAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
+        -- if the last action is also attack, do weapon combo
+        if enemy.AIState.IsLastActionAttack > 0 then
+            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.LastActionTime < 0.3 then
+                enemy.WeaponName = enemy.ChainedWeapon
+                enemy.ChainedWeapon = nil
+                return enemy.WeaponName
+            end
+        end
+
         -- or just do a regular attack
-        enemy.LastAction = "Attack"
         enemy.WeaponName = enemy.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use special attack
-    if r < actionData.AttackProb + actionData.SpectialAttackProb then
-        enemy.LastAction = "SpecialAttack"
+    if r < actionData.Attack + actionData.SpecialAttack then
+        enemy.LastAction = 2
 
         -- fist weapon special has dash attack version
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.SpecialDashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
@@ -225,8 +217,8 @@ function DZSelectFistWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName

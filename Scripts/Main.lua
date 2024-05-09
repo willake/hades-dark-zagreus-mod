@@ -12,7 +12,7 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 local itemIndex = DZTemp.Weapon.ItemIndex
                 DZWeaponData[weaponName][itemIndex].Equip(enemy)
             else
-                DZWeaponData["ShieldWeapon"][3].Equip(enemy)
+                DZWeaponData["FistWeapon"][1].Equip(enemy)
             end 
         end
     end

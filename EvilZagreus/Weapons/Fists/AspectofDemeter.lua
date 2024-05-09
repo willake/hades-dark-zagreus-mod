@@ -13,9 +13,7 @@ WeaponData.DarkDemeterFist =
     
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist2",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -67,7 +65,6 @@ WeaponData.DarkDemeterFist2 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist3",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -83,7 +80,6 @@ WeaponData.DarkDemeterFist3 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist4",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -99,7 +95,6 @@ WeaponData.DarkDemeterFist4 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist5",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -115,7 +110,6 @@ WeaponData.DarkDemeterFist5 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -134,7 +128,6 @@ WeaponData.DarkDemeterFistDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkDemeterFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -163,8 +156,6 @@ WeaponData.DarkDemeterFistDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkDemeterFistSpecial = 
@@ -181,9 +172,7 @@ WeaponData.DarkDemeterFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistAlt01AerialUpperCut_Start",
@@ -217,9 +206,7 @@ WeaponData.DarkDemeterFistSpecial =
     {
         "ZagreusFistFlashKick_Bink",
 
-    },
-
-    Upgrades = { },
+    }
 }
 
 WeaponData.DarkDemeterFistSpecialDash = 
@@ -236,7 +223,6 @@ WeaponData.DarkDemeterFistSpecialDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistAlt01DashUpperCut_Start",
@@ -266,6 +252,4 @@ WeaponData.DarkDemeterFistSpecialDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }

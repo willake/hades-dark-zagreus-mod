@@ -11,9 +11,7 @@ WeaponData.DarkGilgameshFist =
     CauseImpactReaction = true,
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist2",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -68,7 +66,6 @@ WeaponData.DarkGilgameshFist2 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist3",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -106,7 +103,6 @@ WeaponData.DarkGilgameshFist3 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist4",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -144,7 +140,6 @@ WeaponData.DarkGilgameshFist4 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist5",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -182,7 +177,6 @@ WeaponData.DarkGilgameshFist5 =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -223,7 +217,6 @@ WeaponData.DarkGilgameshFistDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkGilgameshFist",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
@@ -252,8 +245,6 @@ WeaponData.DarkGilgameshFistDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkGilgameshFistSpecial = 
@@ -269,9 +260,7 @@ WeaponData.DarkGilgameshFistSpecial =
 
     AIData =
     {
-        AIAttackDistance = 100,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistAlt03AerialUpperCut_Start",
@@ -306,8 +295,6 @@ WeaponData.DarkGilgameshFistSpecial =
         "ZagreusFistFlashKick_Bink",
 
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkGilgameshFistSpecialDash = 
@@ -323,7 +310,6 @@ WeaponData.DarkGilgameshFistSpecialDash =
     {
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.4,
         PreFireDuration = 0.17,
         PreFireAnimation = "ZagreusFistAlt03DashUpperCut_Start",
@@ -353,8 +339,6 @@ WeaponData.DarkGilgameshFistSpecialDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = { },
 }
 
 WeaponData.DarkGilgameshRush = {
