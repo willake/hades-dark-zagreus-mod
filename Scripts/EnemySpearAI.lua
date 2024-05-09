@@ -1,23 +1,5 @@
  function DarkZagreusSpearAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
-	enemy.IsSpearThrown = false
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DoSpearAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DoSpearAILoop( enemy, currentRun )
 end
 
 -- SpearWeaponThrowInvisibleReturn will be trrigger when player touch the dropped spear
@@ -48,16 +30,12 @@ function DoSpearAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
 			end
 		end
-
-        if enemy.WeaponName == nil then
-            return true
-        end
 
         -- Attack
 		local attackSuccess = false
@@ -134,9 +112,6 @@ function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     end
     enemy.AIState.LastActionTime = _worldTime
     DZSetLastActionOnAIState(enemy)
-
-    local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
-    
     return true
 end
 
