@@ -1,9 +1,5 @@
 function DarkZagreusShieldAI( enemy, currentRun )
     enemy.HasBonus = false -- for chaos shield
-    enemy.IsShieldThrown = false -- for zeus shield
-    -- times that AI call return shield function, 
-    -- preventing from calling return function multiple times
-    enemy.LastReturnShieldTime = 0 
     return DZDoShieldAILoop( enemy, currentRun )
 end
 
@@ -72,22 +68,6 @@ function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
     if weaponAIData == nil then
         weaponAIData = enemy
     end
-
-    -- if the last time the AI call return shield is less than 2 sec
-    -- then block the action, preventing from calling return multiple times
-    -- maybe there is a way to know if the shield is return, i don't know
-    -- so I set a fixed time, which is 3 sec to wait for the shield returns. 
-    -- if weaponAIData.IsZeusShieldThrow and ProjectileExists({ Names = { "DarkZeusShieldThrow" }}) then
-    --     DebugPrintf({ Text = "Try return the shield but it is called already."})
-    --     return false
-    -- end
-    
-    -- if weaponAIData.IsZeusShieldThrow and _worldTime - enemy.LastReturnShieldTime < 3 then
-    --     DebugPrintf({ Text = "Try return the shield but it is called already."})
-    --     return false
-    -- else
-    --     enemy.IsShieldThrown = false
-    -- end 
 
     -- PRE ATTACK
 
@@ -168,7 +148,6 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
         -- try return the shield
         RunWeaponMethod(
             { Id = enemy.ObjectId, Weapon = weaponAIData.WeaponName, Method = "RecallProjectiles" })
-        enemy.LastReturnShieldTime = _worldTime
     else
         DZDoRegularFire(enemy, weaponAIData, targetId)
     end
@@ -209,10 +188,6 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
         if bonusWeaponAIData.WillConsumeBonus then
             enemy.HasBonus = false
         end
-    end
-
-    if weaponAIData.IsZeusShieldThrow and enemy.IsShieldThrown == false then
-        enemy.IsShieldThrown = true
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
