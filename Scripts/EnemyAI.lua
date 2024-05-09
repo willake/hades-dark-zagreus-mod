@@ -60,27 +60,26 @@ function DZGetCurrentAIState(enemy)
     }
 end
 
-function DZMakeRandomAIActionData(state, maxChargeTime)
+function DZMakeRandomAIActionData(state)
     local r = math.random()
     local chargeTime = 0.0
 
     if r > 0.5 then
         chargeTime = 0.1 + (math.random() * 0.9)
     end
-    local max = maxChargeTime or 1.0
 
     return {
         Dash = 0.2,
         Attack = 0.5,
-        SpecialAttack = 0.7,
-        ChargeTime = chargeTime * max
+        SpecialAttack = 0.3,
+        ChargeTime = chargeTime
     }
 end
 
-function DZMakeAIActionData(state, maxChargeTime)
+function DZMakeAIActionData(state)
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 then
-        return DZMakeRandomAIActionData(state, maxChargeTime)
+        return DZMakeRandomAIActionData(state)
     end
 
     DZDebugPrintTable("AIState", state, 3)
@@ -98,7 +97,6 @@ function DZMakeAIActionData(state, maxChargeTime)
     local attackProb = DZTemp.Model[4].cells[2].signal
     local specialProb = DZTemp.Model[4].cells[3].signal
     local chargeTime = DZTemp.Model[4].cells[4].signal
-    local max = maxChargeTime or 1.0
 
     DebugPrint({ Text = "dashProb | " .. tostring(dashProb) })
     DebugPrint({ Text = "attackProb | " .. tostring(attackProb) })
@@ -109,7 +107,7 @@ function DZMakeAIActionData(state, maxChargeTime)
         Dash = dashProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
-        ChargeTime = chargeTime * max
+        ChargeTime = chargeTime
     }
 end
 

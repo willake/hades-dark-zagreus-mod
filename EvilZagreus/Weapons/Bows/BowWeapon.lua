@@ -7,7 +7,8 @@ WeaponData.DarkBow =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        AIAttackDistance = 900,
+        MoveSuccessDistance = 200,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 1.0,
@@ -161,7 +162,8 @@ WeaponData.DarkBowSplitShot =
 
     AIData =
     {
-        AIAttackDistance = 600,
+        AIAttackDistance = 900,
+        MoveSuccessDistance = 200,
         AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
