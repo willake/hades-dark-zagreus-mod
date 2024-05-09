@@ -1,7 +1,4 @@
 function DarkZagreusSwordAI( enemy, currentRun )
-    enemy.AIState = { }
-    enemy.LastActionTime = 0
-    enemy.LastAction = 0
     while IsAIActive( enemy, currentRun ) do
 		local continue = DZDoSwordAILoop( enemy, currentRun )
 		if not continue then
@@ -13,7 +10,7 @@ end
 function DZDoSwordAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     enemy.AIState = aiState
-    local actionData = DZMakeAIActionData(aiState, 1.0)
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectSwordWeapon(enemy, actionData)

@@ -7,11 +7,11 @@ WeaponData.DarkRamaBow =
 
     AIData =
     {
-        AIAttackDistance = 800,
-        -- MoveSuccessDistance = 600,
+        IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
+        AIMoveWithinRangeTimeoutMin = 1.0,
+        AIMoveWithinRangeTimeoutMax = 1.5,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRamaHeavyShotStart",
         PreFireFx = "BowCharge",
@@ -81,9 +81,7 @@ WeaponData.DarkRamaBow =
         "ZagreusBowRamaRapidLoop_Bink",
         "ZagreusBowRamaHeavyShot_Bink",
         "ZagreusBowRamaDashShot_Bink",
-    },
-
-    Upgrades = {},
+    }
 }
 
 WeaponData.DarkRamaBowDash =
@@ -96,7 +94,6 @@ WeaponData.DarkRamaBowDash =
         AIChargeTargetMarker = true,
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRamaDashShot_Start",
         PreFireFx = "BowChargeRamaDash",
@@ -151,11 +148,6 @@ WeaponData.DarkRamaBowDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades =
-    {
-
-    },
 }
 
 WeaponData.DarkRamaBowSplitShot =
@@ -165,7 +157,8 @@ WeaponData.DarkRamaBowSplitShot =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        AttackDistanceMin = 300,
+        AttackDistanceMax = 900,
         AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
@@ -197,10 +190,5 @@ WeaponData.DarkRamaBowSplitShot =
             MetalObstacle = "/SFX/ArrowWallHitClankSmall",
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
-    },
-
-    Upgrades =
-    {
-
     },
 }

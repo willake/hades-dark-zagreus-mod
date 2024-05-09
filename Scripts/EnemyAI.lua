@@ -1,9 +1,38 @@
-function DZDoMove(enemy, currentRun, targetId, weaponAIData)
+function DarkZagreusAI( enemy, currentRun )
+    enemy.AIState = { }
+    enemy.LastActionTime = 0
+    enemy.LastAction = 0
+
+    while IsAIActive( enemy, currentRun ) do
+        local ailoop = _G[DZWeaponAI["BowWeapon"]]
+        if DZTemp.Weapon.WeaponName then
+            ailoop = _G[DZWeaponAI[DZTemp.Weapon.WeaponName]] 
+        end
+		local continue = ailoop( enemy, currentRun )
+		if not continue then
+			return
+		end
+	end
+end
+
+function DZDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
     if weaponAIData == nil then
         weaponAIData = enemy
     end
 
     local attackDistance = weaponAIData.AttackDistance or 175
+
+    if weaponAIData.AttackDistanceMin and weaponAIData.AttackDistanceMax then
+        local r = math.random()
+        local range = weaponAIData.AttackDistanceMax - weaponAIData.AttackDistanceMin
+        attackDistance = weaponAIData.AttackDistanceMin + r * range
+    end
+
+    if weaponAIData.IsAttackDistanceBasedOnCharge then
+        local chargeTime = actionData.ChargeTime
+        local rangeMax = weaponAIData.Range * weaponAIData.ChargeRangeMultiplier
+        attackDistance = chargeTime * rangeMax
+    end
 
     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
@@ -60,27 +89,24 @@ function DZGetCurrentAIState(enemy)
     }
 end
 
-function DZMakeRandomAIActionData(state, maxChargeTime)
+function DZMakeRandomAIActionData(state)
     local r = math.random()
     local chargeTime = 0.0
 
-    if r > 0.5 then
-        chargeTime = 0.1 + (math.random() * 0.9)
-    end
-    local max = maxChargeTime or 1.0
+    chargeTime = 0.1 + (r * 0.9)
 
     return {
         Dash = 0.2,
-        Attack = 0.5,
-        SpecialAttack = 0.7,
-        ChargeTime = chargeTime * max
+        Attack = 0.6,
+        SpecialAttack = 0.2,
+        ChargeTime = chargeTime
     }
 end
 
-function DZMakeAIActionData(state, maxChargeTime)
+function DZMakeAIActionData(state)
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 then
-        return DZMakeRandomAIActionData(state, maxChargeTime)
+        return DZMakeRandomAIActionData(state)
     end
 
     DZDebugPrintTable("AIState", state, 3)
@@ -98,7 +124,6 @@ function DZMakeAIActionData(state, maxChargeTime)
     local attackProb = DZTemp.Model[4].cells[2].signal
     local specialProb = DZTemp.Model[4].cells[3].signal
     local chargeTime = DZTemp.Model[4].cells[4].signal
-    local max = maxChargeTime or 1.0
 
     DebugPrint({ Text = "dashProb | " .. tostring(dashProb) })
     DebugPrint({ Text = "attackProb | " .. tostring(attackProb) })
@@ -109,7 +134,7 @@ function DZMakeAIActionData(state, maxChargeTime)
         Dash = dashProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
-        ChargeTime = chargeTime * max
+        ChargeTime = chargeTime
     }
 end
 

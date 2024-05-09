@@ -11,7 +11,7 @@ UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 1000
 UnitSetData.Enemies.Hades.AIStages = 
 {
     {
-        RandomAIFunctionNames = { "DarkZagreusSwordAI" },
+        RandomAIFunctionNames = { "DarkZagreusAI" },
         SelectPactLevelAIStage = "PactDataStage0",
         AIData =
         {
