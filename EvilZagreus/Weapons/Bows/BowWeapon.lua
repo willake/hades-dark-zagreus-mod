@@ -7,13 +7,11 @@ WeaponData.DarkBow =
 
     AIData =
     {
-        AIAttackDistance = 900,
-        MoveSuccessDistance = 200,
+        IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 1.0,
-        AIMoveWithinRangeTimeoutMax = 3.0,
-        SkipAttackAfterMoveTimeout = true,
+        AIMoveWithinRangeTimeoutMax = 1.5,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowDashStart",
         PreFireFx = "BowCharge",
@@ -24,7 +22,7 @@ WeaponData.DarkBow =
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
         MinChargeTime = 0.2,
-        MaxChargeTime = 1,
+        MaxChargeTime = 0.6,
         Range = 45,
         ChargeRangeMultiplier = 20,
         WaitUntilProjectileDeath = true
@@ -105,7 +103,7 @@ WeaponData.DarkBowDash =
         IsRangeBasedOnCharge = true,
         ChargeFx = "BowChargeFast",
         MinChargeTime = 0.2,
-        MaxChargeTime = 1,
+        MaxChargeTime = 0.6,
         Range = 45,
         ChargeRangeMultiplier = 20,
         WaitUntilProjectileDeath = true
@@ -162,8 +160,8 @@ WeaponData.DarkBowSplitShot =
 
     AIData =
     {
-        AIAttackDistance = 900,
-        MoveSuccessDistance = 200,
+        AttackDistanceMin = 300,
+        AttackDistanceMax = 900,
         AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,

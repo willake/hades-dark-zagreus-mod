@@ -7,7 +7,7 @@ WeaponData.DarkChironBow =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 1.0,
@@ -163,7 +163,8 @@ WeaponData.DarkChironBowSplitShot =
 
     AIData =
     {
-        AIAttackDistance = 800,
+        AttackDistanceMin = 300,
+        AttackDistanceMax = 900,
         AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,

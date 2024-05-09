@@ -1,7 +1,7 @@
 if not DarkZagreus.Config.Enabled then return end
 
 OnAnyLoad { "D_Boss01", function(triggerArgs)
-    DebugPrintf({ Text = "Enter D_Boss01, equipWeapon and setup the AI " })
+    DebugPrintf({ Text = "Enter D_Boss01, equipWeapon" })
     -- active enmies should only contain hades
     if ActiveEnemies ~= nil then
         for enemyId, enemy in pairs( ActiveEnemies ) do
@@ -11,10 +11,10 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 local weaponName = DZTemp.Weapon.WeaponName
                 local itemIndex = DZTemp.Weapon.ItemIndex
                 DZWeaponData[weaponName][itemIndex].Equip(enemy)
-                UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI[weaponName]
+                -- UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI[weaponName]
             else
-                DZWeaponData["SwordWeapon"][1].Equip(enemy)
-                UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI["SwordWeapon"]
+                DZWeaponData["BowWeapon"][1].Equip(enemy)
+                -- UnitSetData.Enemies.Hades.AIStages.RandomAIFunctionNames = DZWeaponAI["BowWeapon"]
             end 
         end
     end
