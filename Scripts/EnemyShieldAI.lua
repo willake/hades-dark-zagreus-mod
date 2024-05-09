@@ -202,7 +202,7 @@ function DZSelectShieldWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 0
 
     -- use attack weapon
     if r < actionData.Attack then
