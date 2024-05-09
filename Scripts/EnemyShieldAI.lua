@@ -77,12 +77,17 @@ function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
     -- then block the action, preventing from calling return multiple times
     -- maybe there is a way to know if the shield is return, i don't know
     -- so I set a fixed time, which is 3 sec to wait for the shield returns. 
-    if weaponAIData.IsZeusShieldThrow and _worldTime - enemy.LastReturnShieldTime < 3 then
-        DebugPrintf({ Text = "Try return the shield but it is called already."})
-        return false
-    else
-        enemy.IsShieldThrown = false
-    end 
+    -- if weaponAIData.IsZeusShieldThrow and ProjectileExists({ Names = { "DarkZeusShieldThrow" }}) then
+    --     DebugPrintf({ Text = "Try return the shield but it is called already."})
+    --     return false
+    -- end
+    
+    -- if weaponAIData.IsZeusShieldThrow and _worldTime - enemy.LastReturnShieldTime < 3 then
+    --     DebugPrintf({ Text = "Try return the shield but it is called already."})
+    --     return false
+    -- else
+    --     enemy.IsShieldThrown = false
+    -- end 
 
     -- PRE ATTACK
 
@@ -159,7 +164,7 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
 
     -- Fire
     
-    if weaponAIData.IsZeusShieldThrow and enemy.IsShieldThrown then
+    if weaponAIData.IsZeusShieldThrow and ProjectileExists({ Names = { "DarkZeusShieldThrow" }}) then
         -- try return the shield
         RunWeaponMethod(
             { Id = enemy.ObjectId, Weapon = weaponAIData.WeaponName, Method = "RecallProjectiles" })
