@@ -5,8 +5,6 @@ WeaponData.DarkSword =
     Name = "DarkSword",
     AIData =
     {
-        AIAttackDistance = 300,
-        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -58,8 +56,6 @@ WeaponData.DarkSword2 =
 
     AIData =
     {
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
@@ -103,8 +99,6 @@ WeaponData.DarkSword3 =
 
     AIData =
     {
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
@@ -156,8 +150,6 @@ WeaponData.DarkSwordDash =
     AIData =
     {
         FireDuration = 0.3,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -209,8 +201,6 @@ WeaponData.DarkSwordParry =
     AIData =
     {
         FireDuration = 0.5,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0

@@ -7,8 +7,6 @@ WeaponData.DarkArthurSword =
 
     AIData =
     {
-        AIAttackDistance = 300,
-        AIBufferDistance = 300,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -63,8 +61,6 @@ WeaponData.DarkArthurSword2 =
     AIData =
     {
         FireDuration = 0.435,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
         ChainedWeapon = "DarkArthurSword3",
@@ -105,8 +101,6 @@ WeaponData.DarkArthurSword2 =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = {},
 }
 
 WeaponData.DarkArthurSword3 =
@@ -118,8 +112,6 @@ WeaponData.DarkArthurSword3 =
     AIData =
     {
         FireDuration = 0.425,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -162,8 +154,6 @@ WeaponData.DarkArthurSword3 =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = {},
 }
 
 WeaponData.DarkArthurSwordDash =
@@ -175,8 +165,6 @@ WeaponData.DarkArthurSwordDash =
     AIData =
     {
         FireDuration = 0.3,
-        AIAttackDistance = 9999,
-        AIBufferDistance = 9999,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -207,8 +195,6 @@ WeaponData.DarkArthurSwordDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
-
-    Upgrades = {},
 }
 
 WeaponData.DarkArthurSwordParry =
@@ -223,8 +209,6 @@ WeaponData.DarkArthurSwordParry =
     {
         -- PreFireDuration = 0.3, -- should be 0.5, but it looks weird
         FireDuration = 0.5,
-        AIAttackDistance = 175,
-        AIBufferDistance = 175,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
@@ -260,8 +244,6 @@ WeaponData.DarkArthurSwordParry =
     {
         "ZagreusSwordParry_Bink",
     },
-
-    Upgrades = {},
 }
 
 WeaponData.DarkConsecrationField =
