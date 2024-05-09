@@ -57,7 +57,7 @@
             // ChargeTime = 0.07
             // RemoveControlOnCharge = "SpearWeaponSpin"
             // MinChargeToFire = 0.04
-            ChargeRangeMultiplier = 3.34
+            // ChargeRangeMultiplier = 3.34
             // AllowExternalForceRelease = false
             // AllowExternalForceReleaseIfAnyCharged = true
             ChargeStartFx = "null"

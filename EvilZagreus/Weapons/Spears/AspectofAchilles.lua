@@ -6,8 +6,7 @@ WeaponData.DarkAchillesSpear =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
+			AttackDistance = 250,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -15,11 +14,11 @@ WeaponData.DarkAchillesSpear =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -63,7 +62,6 @@ WeaponData.DarkAchillesSpear2 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
@@ -71,11 +69,11 @@ WeaponData.DarkAchillesSpear2 =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -108,19 +106,17 @@ WeaponData.DarkAchillesSpear3 =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.0 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.33 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 0.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -153,8 +149,6 @@ WeaponData.DarkAchillesSpearDash =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -192,15 +186,15 @@ WeaponData.DarkAchillesSpearThrow =
 
 		AIData =
 		{
-			AIAttackDistance = 300,
-			AIBufferDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.5,
 			IsRangeBasedOnCharge = true,
 			MinChargeTime = 0.04,
-			MaxChargeTime = 0.07,
+			MaxChargeTime = 0.12,
+			Range = 264,
+			ChargeRangeMultiplier = 3.34,
 			WillThrowSpear = true,
 			PreFireDuration = 0.04,
 			PreFireFx = "SpearChargeThrowTrait",
@@ -239,8 +233,6 @@ WeaponData.DarkAchillesSpearThrowReturn =
 
 		AIData =
 		{
-			AIAttackDistance = 9999,
-			AIBufferDistance = 9999,
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
@@ -295,7 +287,6 @@ WeaponData.DarkAchillesSpearSpin =
 		AIData =
 		{
 			FireDuration = 0.4,
-			AIAttackDistance = 500,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -371,7 +362,6 @@ WeaponData.DarkAchillesSpearRush =
 		AIData =
 		{
 			FireDuration = 0.4,
-			AIAttackDistance = 1200,
 			SkipMovement = true,
 			-- AIAngleTowardsPlayerWhileFiring = true,
 			-- AITrackTargetDuringCharge = true,
@@ -409,6 +399,4 @@ WeaponData.DarkAchillesSpearRush =
 		},
 
 		NoExpressiveAnim = true,
-
-		Upgrades = { },
 	}

@@ -1,33 +1,17 @@
  function DarkZagreusSpearAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
-	enemy.IsSpearThrown = false
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DoSpearAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DZDoSpearAILoop( enemy, currentRun )
 end
 
 -- SpearWeaponThrowInvisibleReturn will be trrigger when player touch the dropped spear
 -- not sure how to handle it yet
 
-function DoSpearAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+function DZDoSpearAILoop(enemy, currentRun, targetId)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = SelectSpearWeapon(enemy, actionData)
+    enemy.WeaponName = DZSelectSpearWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -48,22 +32,18 @@ function DoSpearAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
 			end
 		end
 
-        if enemy.WeaponName == nil then
-            return true
-        end
-
         -- Attack
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZDoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -76,7 +56,7 @@ function DoSpearAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -129,18 +109,15 @@ function DoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     --     end
     -- end
 
-    if not FireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.AIState.LastActionTime = _worldTime
+    enemy.LastActionTime = _worldTime
     DZSetLastActionOnAIState(enemy)
-
-    local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
-    
     return true
 end
 
-function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
@@ -195,7 +172,7 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- PostAttackCharge
     -- Only spear weapons have this
     -- Spear will charge after attack if player still holding the button
-    if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.0 then
+    if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.3 then
         local chargeWeaponAIData = 
             DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
@@ -230,6 +207,9 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
             wait(remainChargeTime, enemy.AIThreadName)
 
             DZDoRegularFire(enemy, chargeWeaponAIData, targetId) 
+
+            -- after doing spin, combo should be canceled
+            enemy.ChainedWeapon = nil
         -- otherwise, play charge cancel animation
         else
             wait(chargeTime, enemy.AIThreadName)
@@ -266,34 +246,34 @@ function FireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function SelectSpearWeapon(enemy, actionData)
+function DZSelectSpearWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 1
 
     -- use attack weapon
-    if r < actionData.AttackProb then
-
+    if r < actionData.Attack then
+        
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+            enemy.LastAction = 2
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
+        enemy.LastAction = 1
+
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.3 then
-            enemy.LastAction = "DashAttack"
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
-        enemy.LastAction = "Attack"
-
         -- if the last action is also attack, do weapon combo
         if enemy.AIState.IsLastActionAttack > 0 then
-            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.AIState.LastActionTime < 0.3 then
+            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.LastActionTime < 0.3 then
                 enemy.WeaponName = enemy.ChainedWeapon
                 enemy.ChainedWeapon = nil
                 return enemy.WeaponName
@@ -307,7 +287,8 @@ function SelectSpearWeapon(enemy, actionData)
     end
 
     -- use special attack
-    if r < actionData.AttackProb + actionData.SpectialAttackProb then
+    if r < actionData.Attack + actionData.SpecialAttack then
+        enemy.LastAction = 2
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
 
             if enemy.SpecialAttackWeaponRush then
@@ -321,15 +302,14 @@ function SelectSpearWeapon(enemy, actionData)
             return enemy.WeaponName
         end
 
-        enemy.LastAction = "SpecialAttack"
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
