@@ -265,7 +265,7 @@ OnWeaponFailedToFire { "ShieldThrow",
 -- fist
 -- originally, I record fist weapon like how player behaves:
 -- holding the attack button to execute the combo
--- so as the AI, the attack action was like: do attack with 1 seconds
+-- so as the AI, the attack action was like: keep doing attack within 1 seconds
 -- however, I found that it's impossible, or say, too difficult, to record this behavior
 -- if I just record the action with OnControlPressed and OnControlReleased,
 -- it is not secured that the weapon is fired, sometimes it will wrongly add redundant data into the record
@@ -336,9 +336,6 @@ OnWeaponFired{ "RushWeapon",
         DZPersistent.LastAction = 0
     end
 } 
-
--- gun
-
 
 function DZCheckCanRecord()
     if not DZPersistent.IsRecording then
