@@ -9,6 +9,8 @@
             Type = "BEAM"
             ArcSize = 100
             AutoAdjustForTarget = false
+            AffectsEnemies = true
+            AffectsFriends = false
             AttachToOwner = true
             Speed = 0
             TotalFuse = 0.2
