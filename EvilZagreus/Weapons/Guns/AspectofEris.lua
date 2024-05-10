@@ -8,14 +8,12 @@ WeaponData.DarkErisGun =
     -- NoAmmoFireSound = "/EmptyCue",
     AIData =
     {
-        AIAttackDistance = 900,
-        MoveSuccessDistance = 900,
+        AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.05,
-        CanHold = true
-        -- WaitUntilProjectileDeath = true
+        -- FireDuration = 0.05,
+        -- CanHold = true
+        WaitUntilProjectileDeath = true
     },
     
     CauseImpactReaction = true,
@@ -81,14 +79,12 @@ WeaponData.DarkErisGunDash =
     AIData =
     {
         SkipMovement = true,
-        AIAttackDistance = 900,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.05,
-        CanHold = true,
-        ChainedWeapon = "DarkGun"
-        -- WaitUntilProjectileDeath = true
+        -- FireDuration = 0.05,
+        -- CanHold = true,
+        -- ChainedWeapon = "DarkGun"
+        WaitUntilProjectileDeath = true
     },
 
     Sounds =
@@ -130,9 +126,7 @@ WeaponData.DarkErisGunGrenadeToss =
 
     AIData =
     {
-        AIAttackDistance = 1000,
-        MoveSuccessDistance = 900,
-        AIBufferDistance = 1000,
+        AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,

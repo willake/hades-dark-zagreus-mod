@@ -1,32 +1,17 @@
 function DarkZagreusGunAI( enemy, currentRun )
-    enemy.AIState = {
-        OwnHP = 100,
-        ClosestEnemyHP = 100,
-        Distance = 0.5,
-        IsLastActionAttack = 0,
-        IsLastActionSpectialAttack = 0,
-        IsLastActionDash = 0,
-        IsLastActionDashAttack = 0,
-        IsLastActionCast = 0,
-        LastActionTime = 0
-    }
-    enemy.LastAction = ""
-    while IsAIActive( enemy, currentRun ) do
-		local continue = DoGunAILoop( enemy, currentRun )
-		if not continue then
-			return
-		end
-	end
+    return DZDoGunAILoop( enemy, currentRun )
 end
 
 -- The engine code covers ammo management already, i don't wanna mess it up
 -- so maybe no manual reload in this code 
 
-function DoGunAILoop(enemy, currentRun, targetId)
-    local actionData = GetAIActionData(enemy.AIState)
+function DZDoGunAILoop(enemy, currentRun, targetId)
+    local aiState = DZGetCurrentAIState(enemy)
+    enemy.AIState = aiState
+    local actionData = DZMakeAIActionData(aiState)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = SelectGunWeapon(enemy, actionData)
+    enemy.WeaponName = DZSelectGunWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -47,7 +32,7 @@ function DoGunAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -62,7 +47,7 @@ function DoGunAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DoGunAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZDoGunAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -75,7 +60,7 @@ function DoGunAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZDoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -119,24 +104,15 @@ function DoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData
 		return false
 	end
 
-    if not FireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZFireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.AIState.LastActionTime = _worldTime
-    DZSetLastActionOnAIState(enemy)
+    enemy.LastActionTime = _worldTime
 
-    local distanceToTarget = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
-    
     return true
 end
 
-function FireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-    local holdTime = 0.01 -- 0.01 to make action at least play once
-
-    if weaponAIData.CanHold then
-        holdTime = actionData.ChargeTime
-        DebugPrintf({ Text = "Set holdTime to " .. holdTime})
-    end
+function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -147,34 +123,24 @@ function FireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         return false
     end
 
-    -- Get ai data again, temp code, just want to be able to switch from DarkGunDash to DarkGun
-    local aiData = DZGetWeaponAIData(enemy, weaponAIData.WeaponName)
-
-    local startTime = _worldTime
-    while _worldTime - startTime < holdTime do
-
-        if weaponAIData.AIAngleTowardsPlayerWhileFiring then
-            AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
-        end
-
-        -- Prefire
-
-        DZDoPreFire(enemy, weaponAIData, targetId)
-
-        -- Prefire End
-
-        if not CanAttack({ Id = enemy.ObjectId }) then
-            return false
-        end
-
-        -- Fire
-        
-        DZDoRegularFire(enemy, weaponAIData, targetId)
-
-        if aiData.ChainedWeapon then
-            aiData = DZGetWeaponAIData(enemy, aiData.ChainedWeapon)
-        end
+    if weaponAIData.AIAngleTowardsPlayerWhileFiring then
+        AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
     end
+
+    -- Prefire
+
+    DZDoPreFire(enemy, weaponAIData, targetId)
+
+    -- Prefire End
+
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
+
+    -- Fire
+    
+    DZDoRegularFire(enemy, weaponAIData, targetId)
+    
     -- Fire end
 
     -- if not CanAttack({ Id = enemy.ObjectId }) then
@@ -196,41 +162,41 @@ function FireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function SelectGunWeapon(enemy, actionData)
+function DZSelectGunWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = ""
+    enemy.LastAction = 0
 
     -- use attack weapon
-    if r < actionData.AttackProb then
+    if r < actionData.Attack then
+
+        enemy.LastAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.AIState.LastActionTime < 0.45 then
-            enemy.LastAction = "DashAttack"
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.45 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         -- or just do a regular attack
-        enemy.LastAction = "Attack"
         enemy.WeaponName = enemy.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use special attack
-    if r < actionData.AttackProb + actionData.SpectialAttackProb then
-        enemy.LastAction = "SpecialAttack"
+    if r < actionData.Attack + actionData.SpecialAttack then
+        enemy.LastAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.AttackProb + actionData.SpectialAttackProb + actionData.DashProb then
-        enemy.LastAction = "Dash"
+    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+        enemy.LastAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
