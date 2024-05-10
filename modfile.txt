@@ -21,6 +21,7 @@ Import "Scripts/EnemyData.lua"
 
 To "Game/Units/Enemies.sjson"
 SJSON "Game/Units/Hades.sjson"
+SJSON "EvilZagreus/Units/Guns/AspectofLucifer.sjson"
 
 To "Scripts/WeaponData.lua"
 Import "EvilZagreus/Weapons/RushWeapon.lua"

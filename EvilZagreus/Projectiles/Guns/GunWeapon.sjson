@@ -314,7 +314,7 @@
         AffectsEnemies = true
         AffectsFriends = false
         AffectsSelf = false
-        DoesNotAffectName = "GunBombUnit"
+        DoesNotAffectName = "DarkGunBombUnit"
         CheckUnitImpact = false
         CheckObstacleImpact = false
         Fuse = 0.01

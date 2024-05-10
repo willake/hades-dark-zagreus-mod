@@ -1,0 +1,42 @@
+{
+  Units = [
+    "_append"
+    {
+        Name = "DarkGunBombUnit"
+        InheritFrom = "Trap"
+        CollisionDamagePerVelocity = 0.01
+        CollisionWeapon = "BaseCollisionWeapon"
+        CollisionWeaponRequiredVelocity = 1000.0
+        DisplayInEditor = true
+        ImmuneToDoTs = true
+        ImmuneToStun = true
+        NoAllegiance = true
+        CollideWithUnits = false
+        Life = 
+        {
+            DeathSound = "/SFX/LuciferBombExplosion"
+            HitSound = "/SFX/Player Sounds/ZagreusLuciferBombPulse"
+        }
+        Thing = 
+        {
+            ActivateGraphic = "BlastCubeOnSpawn"
+            AttachedAnim = "LootShadow"
+            EditorOutlineDrawBounds = false
+            Graphic = "Blank"
+            Grip = 99999.0
+            OffsetZ = 45.0
+            SelectionHeight = 300.0
+            SelectionShiftY = 110.0
+            SelectionWidth = 400.0
+            Tallness = 72.0
+            UseBoundsForSortDrawArea = true
+            Points = [
+            { X = 0 Y = 52 }
+            { X = 100 Y = 0 }
+            { X = 0 Y = -52 }
+            { X = -100 Y = 0 }
+            ]
+        }
+    }
+  ]
+}
