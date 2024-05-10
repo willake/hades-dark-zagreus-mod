@@ -3,8 +3,7 @@
         "_append"
         {
             Name = "DarkGun"
-            InheritFrom = "1_BaseTrapWeapon"
-            // InheritFrom = "1_BaseDamagingWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack2"
             DisallowedControl = "null"
             Type = "GUN"
@@ -311,7 +310,7 @@
         }
         {
             Name = "DarkGunBomb"
-            InheritFrom = "1_BaseMagicWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "DarkGunBomb"
             ClearFireRequestOnChargeCancel = false
@@ -322,7 +321,7 @@
         }
         {
             Name = "DarkGunBombImmolation"
-            InheritFrom = "1_BaseMagicWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "DarkGunBombImmolation"
             ClearFireRequestOnChargeCancel = false

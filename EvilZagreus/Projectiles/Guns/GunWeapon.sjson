@@ -3,8 +3,7 @@
     "_append"
     {
         Name = "DarkGun"
-        InheritFrom = "1_BaseTrapProjectile"
-        // InheritFrom = "1_BaseDamagingProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         DetonateGraphic = "null"
         DissipateGraphic = "null"
         ImpactFx = "GunWeaponImpact"
@@ -90,8 +89,7 @@
     }
     {
         Name = "DarkGunGrenadeToss"
-        InheritFrom = "1_BaseTrapProjectile"
-        // InheritFrom = "1_BaseDamagingProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         DetonateGraphic = "ZagGrenadeExplosionBase"
         DetonateSound = "/SFX/PlayerHammerExplosions"
         ReticleGraphic = "GunGrenadeWarningDecal"
@@ -266,8 +264,7 @@
     }
     {
         Name = "DarkGunBomb"
-        InheritFrom = "1_BaseTrapProjectile"
-        // InheritFrom = "1_BaseDamagingProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         DetonateGraphic = "ZagGrenadeExplosionBase"
         DetonateSound = "/SFX/PlayerHammerExplosions"
         Type = "STRAIGHT"
@@ -307,8 +304,7 @@
     }
 	{
         Name = "DarkGunBombImmolation"
-        InheritFrom = "1_BaseTrapProjectile"
-        //   InheritFrom = "1_BaseDamagingProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         DetonateGraphic = "LuciferOrbAoE"
         Type = "STRAIGHT"
         AffectsEnemies = true
