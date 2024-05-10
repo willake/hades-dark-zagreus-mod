@@ -3,7 +3,7 @@
     "_append"
     {
         Name = "DarkShield"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         // InheritFrom = "1_BaseDamagingProjectile"
         DetonateGraphic = "ShieldSwipe"
         Type = "STRAIGHT"
@@ -64,7 +64,7 @@
     }
     {
         Name = "DarkShieldRush"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         AttachedPowershotAnimation = "ShieldWeaponPowerShot"
         DetonateGraphic = "null"
         Type = "STRAIGHT"
@@ -125,7 +125,7 @@
     }
     {
         Name = "DarkShieldThrow"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         DetonateGraphic = "DoorCloseDust"
         InvincibleImpactSound = "/SFX/Player Sounds/ZagreusShieldRicochet"
         Type = "STRAIGHT"

@@ -3,7 +3,7 @@
 		"_append"
         {
             Name = "DarkShield"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkShield"
@@ -145,7 +145,7 @@
         }
         {
             Name = "DarkShieldRush"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkShieldRush"
@@ -294,7 +294,7 @@
         }
         {
             Name = "DarkShieldThrow"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             // InheritFrom = "1_BaseMagicWeapon"
             Control = "Attack3"
             Type = "GUN"
