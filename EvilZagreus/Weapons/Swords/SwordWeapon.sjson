@@ -3,7 +3,7 @@
 		"_append"
     {
       Name = "DarkSword"
-      InheritFrom = "1_BaseTrapWeapon"
+      InheritFrom = "1_BaseDZDamagingWeapon"
       Control = "Attack2"
       Type = "GUN"
       Projectile = "DarkSword"
@@ -128,7 +128,7 @@
     }
     {
       Name = "DarkSword2"
-      InheritFrom = "1_BaseTrapWeapon"
+      InheritFrom = "1_BaseDZDamagingWeapon"
       Type = "GUN"
       Control = "Attack2"
       Projectile = "DarkSword2"
@@ -251,7 +251,7 @@
     }
     {
       Name = "DarkSword3"
-      InheritFrom = "1_BaseTrapWeapon"
+      InheritFrom = "1_BaseDZDamagingWeapon"
       Control = "Attack2"
       Type = "GUN"
       Projectile = "DarkSword3"
@@ -451,7 +451,7 @@
     }
     {
       Name = "DarkSwordParry"
-      InheritFrom = "1_BaseTrapWeapon"
+      InheritFrom = "1_BaseDZDamagingWeapon"
       Control = "Attack3"
       Cooldown = 0.5
       UseTargetAngle = true

@@ -58,7 +58,7 @@
         {
             Name = "DarkTalosFistSpecialVacuum"
             // InheritFrom = "1_BaseMagicWeapon"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "DarkTalosFistSpecialVacuum"
             FireFx = "null"

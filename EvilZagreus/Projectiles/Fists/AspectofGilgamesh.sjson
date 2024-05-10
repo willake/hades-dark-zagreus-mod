@@ -170,8 +170,7 @@
     }
     {
         Name = "DarkGilgameshFistDetonationProjectile"
-        // InheritFrom = "1_BaseMagicProjectile"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZMagicProjectile"
         GroupName = "FX_Standing_Add"
         Type = "INSTANT"
         AffectsEnemies = true
@@ -243,8 +242,7 @@
     }
     {
         Name = "DarkGilgameshRushRuptureProjectile"
-        // InheritFrom = "1_BaseMagicProjectile"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZMagicProjectile"
         UseStartLocation = true
         Type = "INSTANT"
         ImmunityDuration = 0.15
@@ -279,8 +277,7 @@
 	  }
     {
         Name = "DarkGilgameshMarkRuptureApplicator"
-        InheritFrom = "1_BaseTrapProjectile"
-        // InheritFrom = "1_BaseMagicProjectile"
+        InheritFrom = "1_BaseDZMagicProjectile"
         UseStartLocation = true
         Type = "INSTANT"
         ImmunityDuration = 0.15

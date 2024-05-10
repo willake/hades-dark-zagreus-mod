@@ -3,8 +3,7 @@
     "_append"
     {
         Name = "DarkFist"
-        // InheritFrom = "1_BaseDamagingProjectile"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         AttachedPowershotAnimation = "FistFxPowerShot"
         DetonateGraphic = null
         Type = "STRAIGHT"
@@ -147,8 +146,7 @@
     }
 	{
         Name = "DarkFistSpecial"
-        // InheritFrom = "1_BaseDamagingProjectile"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZDamagingProjectile"
         Type = "STRAIGHT"
         AffectsEnemies = true
         AffectsFriends = false

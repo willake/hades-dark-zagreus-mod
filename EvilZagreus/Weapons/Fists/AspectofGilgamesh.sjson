@@ -748,14 +748,14 @@
         {
             Name = "DarkGilgameshRushRupture"
             // InheritFrom = "1_BaseMagicWeapon"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "DarkGilgameshRushRuptureProjectile"
         }
         {
             Name = "DarkGilgameshFistDetonation"
             // InheritFrom = "1_BaseMagicWeapon"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             FireSound = "/SFX/StabSplatterSmall"
             Projectile = "DarkGilgameshFistDetonationProjectile"
@@ -763,7 +763,7 @@
         {
             Name = "DarkGilgameshMarkRuptureApplicator"
             // InheritFrom = "1_BaseMagicWeapon"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "null"
             FullyAutomatic = true

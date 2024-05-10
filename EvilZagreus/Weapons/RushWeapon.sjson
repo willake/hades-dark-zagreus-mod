@@ -3,7 +3,7 @@
 	"_append"
     {
         Name = "DarkRush"
-        InheritFrom = "1_BaseTrapWeapon"
+        InheritFrom = "1_BaseDZSlowWeapon"
         Type = "BLINK"
         Control = "Rush"
         FireGraphic = "ZagreusDashNoCollide"

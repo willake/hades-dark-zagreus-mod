@@ -3,8 +3,7 @@
 		"_append"
         {
             Name = "DarkFist"
-            InheritFrom = "1_BaseTrapWeapon"
-            // InheritFrom = "1_BaseDamagingWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkFist"
@@ -552,7 +551,7 @@
         }
         {
             Name = "DarkFistSpecial"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack3"
             UseTargetAngle = true
             Type = "GUN"

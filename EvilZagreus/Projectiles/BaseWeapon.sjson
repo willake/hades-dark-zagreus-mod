@@ -1,0 +1,24 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "1_BaseDZDamagingProjectile"
+        ImpactFxInterval = 0.0
+        InvincibleImpactSound = "null"
+        UseArmor = false
+        UseVulnerability = false
+        CriticalHitMultiplier = 3
+        IgnoreDodge = true
+        // ignore effects
+    }
+    {
+        Name = "1_BaseDZMagicProjectile"
+        ImpactFxInterval = 0.0
+        InvincibleImpactSound = "null"
+        UseArmor = false
+        UseVulnerability = false
+        CriticalHitMultiplier = 3
+        ClearOnAttackEffects = false
+    }
+  ]
+}

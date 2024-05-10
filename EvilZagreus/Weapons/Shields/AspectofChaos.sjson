@@ -20,7 +20,7 @@
         }
         {
             Name = "DarkChaosShieldThrowBonus"
-            InheritFrom = "1_BaseTrapWeapon"
+            InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "DarkChaosShieldThrowBonus"
             // FullyAutomatic = true

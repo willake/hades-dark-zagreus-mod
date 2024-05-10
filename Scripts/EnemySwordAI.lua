@@ -170,7 +170,6 @@ function DZSelectSwordWeapon(enemy, actionData)
     -- enemy.PostAttackChargeWeapon = nil
     enemy.LastAction = 0
     local lastActionTime = enemy.LastActionTime
-    DebugPrint({ Text = tostring(lastActionTime) })
 
     -- use attack weapon
     if r < actionData.Attack then

@@ -15,8 +15,7 @@
     }
     {
         Name = "DarkTalosFistSpecialVacuum"
-        // InheritFrom = "1_BaseMagicProjectile"
-        InheritFrom = "1_BaseTrapProjectile"
+        InheritFrom = "1_BaseDZMagicProjectile"
         Type = "INSTANT"
         Fuse = 0.01
         ImpactFx = "EnemyProjectileImpactSmall"

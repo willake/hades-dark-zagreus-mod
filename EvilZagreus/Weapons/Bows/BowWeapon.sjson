@@ -3,7 +3,7 @@
     "_append"
     {
       Name = "DarkBow"
-      InheritFrom = "1_BaseTrapWeapon"
+      InheritFrom = "1_BaseDZDamagingWeapon"
       Type = "GUN"
       Projectile = "DarkBow"
       ClipSize = 1
