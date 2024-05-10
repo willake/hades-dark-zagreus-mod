@@ -13,6 +13,9 @@ WeaponData.DarkLuciferGun =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         WaitUntilProjectileDeath = true,
+        NeedPreWarm = true,
+        PreWarmDuration = 0.3,
+        PreWarmAnimation = "ZagreusGunLucifer_Start"
     },
     
     CauseImpactReaction = true,
@@ -87,7 +90,10 @@ WeaponData.DarkLuciferGunDash =
         -- FireDuration = 0.05,
         -- CanHold = true,
         -- ChainedWeapon = "DarkGun",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = true,
+        NeedPreWarm = true,
+        PreWarmDuration = 0.3,
+        PreWarmAnimation = "ZagreusGunLucifer_Start"
     },
 
     Sounds =

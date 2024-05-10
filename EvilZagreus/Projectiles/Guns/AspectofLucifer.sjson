@@ -16,8 +16,8 @@
             ImmunityDuration = 0.05
             MultiDetonate = true
             DrawAsBeam = true
-            DamageLow = 1 // 10
-            DamageHigh = 1 // 10
+            DamageLow = 5 // 10
+            DamageHigh = 5 // 10
             ConsecutiveHitWindow = 0.6
             DamagePerConsecutiveHit = 0.75
             Range = 692.25 // 710.0 * 0.975
@@ -64,7 +64,7 @@
             FizzleOldSpawnsOnDetonate = true
             SpawnGroup = "Standing"
             SpawnType = "UNIT"
-            SpawnOnDetonate = "GunBombUnit" // GunBombUnit
+            SpawnOnDetonate = "DarkGunBombUnit" // GunBombUnit
             Speed = 1550
             Gravity = 3150
             DamageLow = 0
