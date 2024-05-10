@@ -1,0 +1,34 @@
+{
+	Weapons = [
+        "_append"
+        {
+            Name = "1_BaseDZWeapon" // originally from 1_BasePlayerWeapon
+            InheritFrom = "1_BaseWeapon"
+            LockTriggerForCharge = true
+            AutoLock = true
+            AutoLockRange = 650
+            AutoLockArcDistance = 100
+            ReloadOnCreation = false
+        }
+        {
+            Name = "1_BaseDZSlowWeapon"
+            InheritFrom = "1_BaseDZWeapon"
+        }
+        {
+            Name = "1_BaseDZDamagingWeapon"
+        }
+        {
+            Name = "1_BaseDZMagicWeapon"
+            InheritFrom = "1_BaseWeapon"
+            LockTriggerForCharge = true
+            AutoLock = true
+            AutoLockRange = 650
+            AutoLockArcDistance = 90
+            ReloadOnCreation = false
+            FullyAutomatic = true
+            IgnoreOwnerAttackDisabled = true
+            IgnoreForceCooldown = true
+            AllowMultiFireRequest = true
+        }
+    ]
+}

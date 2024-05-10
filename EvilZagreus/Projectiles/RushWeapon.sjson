@@ -3,7 +3,6 @@
     "_append"
     {
       Name = "DarkRush"
-      InheritFrom = "1_BaseTrapProjectile"
       DetonateSound = "null"
       Type = "STRAIGHT"
       Fuse = 0.0

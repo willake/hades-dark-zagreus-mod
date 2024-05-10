@@ -3,7 +3,7 @@
 		"_append"
         {
             Name = "DarkSpear"
-            InheritFrom = "1_BaseDamagingWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkSpear"
@@ -245,7 +245,7 @@
         }
         {
             Name = "DarkSpearThrow"
-            InheritFrom = "1_BaseDamagingWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack3"
             Type = "GUN"
             Projectile = "DarkSpearThrow"
@@ -371,7 +371,7 @@
         }
         {
             Name = "DarkSpearSpin"
-            InheritFrom = "1_BaseDamagingWeapon"
+            InheritFrom = "1_BaseDZDamagingWeapon"
             Type = "GUN"
             Control = "Attack2"
             DisallowedControl = "null"
@@ -501,7 +501,7 @@
         }
         {
             Name = "DarkSpearRush"
-            InheritFrom = "1_BasePlayerSlowWeapon"
+            InheritFrom = "1_BaseDZSlowWeapon"
             Type = "BLINK"
             Control = "Attack3"
             //SwapOnFire = "SpearWeaponThrow"

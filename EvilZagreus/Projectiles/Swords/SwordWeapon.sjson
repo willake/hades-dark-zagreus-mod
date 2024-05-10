@@ -3,7 +3,7 @@
     "_append"
     {
       Name = "DarkSword"
-      InheritFrom = "1_BaseTrapProjectile"
+      InheritFrom = "1_BaseDZDamagingProjectile"
       DetonateGraphic = "null"
       Type = "ARC"
       ArcStart = -75
@@ -82,7 +82,7 @@
     }
     {
       Name = "DarkSword2"
-      InheritFrom = "1_BaseTrapProjectile"
+      InheritFrom = "1_BaseDZDamagingProjectile"
       AffectsEnemies = true
       AffectsFriends = false
       AffectsSelf = false
@@ -167,7 +167,7 @@
     }
     {
       Name = "DarkSword3"
-      InheritFrom = "1_BaseTrapProjectile"
+      InheritFrom = "1_BaseDZDamagingProjectile"
       AffectsEnemies = true
       AffectsFriends = false
       AffectsSelf = false
@@ -287,7 +287,7 @@
     }
     {
       Name = "DarkSwordParry"
-      InheritFrom = "1_BaseTrapProjectile"
+      InheritFrom = "1_BaseDZDamagingProjectile"
       DetonateGraphic = "RadialNovaSwordParry"
       Type = "STRAIGHT"
       AffectsEnemies = true

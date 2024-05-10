@@ -3,7 +3,7 @@
 		"_append"
         {
             Name = "DarkSpear"
-            // InheritFrom = "1_BaseDamagingProjectile"
+            InheritFrom = "1_BaseDZDamagingProjectile"
             DetonateGraphic = "null"
             Type = "STRAIGHT"
             AffectsEnemies = true
@@ -125,7 +125,7 @@
         }
         {
             Name = "DarkSpearSpin"
-            // InheritFrom = "1_BaseDamagingProjectile"
+            InheritFrom = "1_BaseDZDamagingProjectile"
             DetonateGraphic = "SpearSwipe360"
             Type = "STRAIGHT"
             DetonateSound = "null"
@@ -198,7 +198,7 @@
             }
         {
             Name = "DarkSpearThrow"
-            // InheritFrom = "1_BaseDamagingProjectile"
+            InheritFrom = "1_BaseDZDamagingProjectile"
             DetonateGraphic = "null"
             Type = "STRAIGHT"
             AffectsEnemies = true
@@ -274,7 +274,7 @@
         }
         {
             Name = "DarkSpearRush"
-            // InheritFrom = "1_BaseDamagingProjectile"
+            InheritFrom = "1_BaseDZDamagingProjectile"
             DetonateGraphic = "SpearRushTrailFx"
             AutoAdjustForTarget = true
             AttachToOwner = true

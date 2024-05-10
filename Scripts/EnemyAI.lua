@@ -4,7 +4,7 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.LastAction = 0
 
     while IsAIActive( enemy, currentRun ) do
-        local ailoop = _G[DZWeaponAI["GunWeapon"]]
+        local ailoop = _G[DZWeaponAI["SpearWeapon"]]
         if DZTemp.Weapon.WeaponName then
             ailoop = _G[DZWeaponAI[DZTemp.Weapon.WeaponName]] 
         end
