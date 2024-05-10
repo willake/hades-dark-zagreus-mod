@@ -3,7 +3,7 @@
 		"_append"
 		{
 			Name = "DarkBow"
-			InheritFrom = "1_BaseTrapProjectile"
+			InheritFrom = "1_BaseDZDamagingProjectile"
 			DetonateGraphic = "null"
 			Type = "HOMING"
 			HomingAllegiance = "ENEMIES"
@@ -85,7 +85,7 @@
     	}
 		{
 			Name = "DarkBowSplitShot"
-			InheritFrom = "1_BaseTrapProjectile"
+			InheritFrom = "1_BaseDZDamagingProjectile"
 			DetonateGraphic = "null"
 			Type = "HOMING"
 			AffectsEnemies = true
