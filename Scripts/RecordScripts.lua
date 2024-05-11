@@ -3,7 +3,9 @@ if not DarkZagreus.Config.Enabled then return end
 DZPersistent = {}
 DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
-DZPersistent.PendingRecord = {}
+DZPersistent.PendingRecord = {} 
+DZPersistent.PrevRunRecord = {}
+DZPersistent.CurRunRecord = {}
 
 DZTemp.Weapon = {}
 DZTemp.Model = {}
@@ -410,12 +412,8 @@ function DZForceTraining()
     local threshold = 1 -- steepness of the sigmoid curve
 
     local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
-    local data = LoadTrainingData("DZrecord" .. ".log")
-    local weaponData = data.WeaponData
-
-    DZTemp.Weapon = weaponData
-    
-    local trainingData = data.TrainingData
+    local weaponData = DZPersistent.PrevRunRecord.Weapon
+    local trainingData = DZPersistent.PrevRunRecord.History
 
     if #trainingData == 0 then
         return
@@ -481,6 +479,9 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
         DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
     end
 
+    -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
+    DZSaveCurRunRecordInMemory()
+
     -- training
 
     local learningRate = 50 -- set between 1, 100
@@ -488,10 +489,9 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     local threshold = 1 -- steepness of the sigmoid curve
 
     local network = Luann:new({6, 5, 5, 4}, learningRate, threshold)
-    local trainingData = LoadTrainingData("DZrecord" .. ".log")
 
     for i = 1, attempts do
-        for _, data in ipairs(trainingData) do
+        for _, data in ipairs(DZPersistent.PrevRunRecord.History) do
             network:bp(data[1], data[2])
         end
     end
@@ -504,13 +504,35 @@ end, DarkZagreus)
 -- if io module is not avilable then just print record out
 DZCreateNewRecord = function() 
     DebugPrint({ Text = "Create new record file, enable isRecording to true" }) 
+    local weapon = GameState.LastInteractedWeaponUpgrade
+
+    DZPersistent.CurRunRecord = 
+    {
+        Weapon = 
+        {
+            WeaponName = weapon.WeaponName,
+            ItemIndex =  weapon.ItemIndex
+        },
+        History = 
+        {
+        }
+    }
+  
     DZPersistent.PendingRecord = {}
 end
+
 DZLogRecord = function (state, action) 
     DebugPrint({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
         state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
+
+    table.insert(DZPersistent.CurRunRecord.History, 
+    {
+      { state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack },
+      { action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime }
+    })
 end
 
 -- Pending record system
@@ -533,11 +555,28 @@ DZOverridePendingRecord = function(state, action)
     DZPersistent.PendingRecord.Action = action
 end
 
+DZSaveCurRunRecordInMemory = function ()
+    DebugPrint({ Text = {"DZSaveCurRunRecordInMemory"} })
+    DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
+end
+
+DZSaveCurRunRecordToFile = function ()
+    DebugPrint({ Text = {"DZSaveCurRunRecordToFile"} })
+end
+
+DZClearAllRecord = function ()
+    DebugPrint({ Text = {"DZClearAllRecord"} })
+    DZPersistent.PendingRecord = {}
+    DZPersistent.PrevRunRecord = {}
+    DZPersistent.CurRunRecord = {}
+end
+
 -- if io module is avilable, create a new record file then start logging
 if io then
     local recordFilePath = "DZrecord" .. ".log"
 
-    DZCreateNewRecord = function()
+    DZSaveCurRunRecordToFile = function ()
+        DebugPrint({ Text = {"DZSaveCurRecordToFile"} })
         local file = io.open(recordFilePath, "w+")
         
         local weapon = GameState.LastInteractedWeaponUpgrade
@@ -548,46 +587,42 @@ if io then
         file:write(string.format("%s\n", weapon.WeaponName))
         file:write(string.format("%d\n", weapon.ItemIndex))
 
+        for i = 1, #DZPersistent.CurRunRecord.History do
+            local record = DZPersistent.CurRunRecord.History[i]
+            
+            local state = ""
+            -- format state
+            for i, v in ipairs(record[1]) do
+                -- Format the float to 2 decimal places and concatenate it to the string
+                state = state .. string.format("%.2f", v)
+
+                -- Add a space after each float except the last one
+                if i < #record[1] then
+                    state = state .. " "
+                end
+            end
+
+            state = state .. "\n"
+
+            -- format action
+            local action = ""
+            -- format state
+            for i, v in ipairs(record[2]) do
+                -- Format the float to 2 decimal places and concatenate it to the string
+                action = action .. string.format("%.2f", v)
+
+                -- Add a space after each float except the last one
+                if i < #record[2] then
+                    action = action .. " "
+                end
+            end
+
+            action = action .. "\n"
+    
+            file:write(state)
+            file:write(action)
+        end
+
         file:close()
-        DebugPrint({ Text = "Create new record file, enable isRecording to true" })
-    end
-
-    DZLogRecord = function(state, action)
-        local file = io.open(recordFilePath, "a")
-
-        local input = string.format("%.2f %.2f %.2f %.2f %.2f %.2f\n", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack)
-        local output = string.format("%.2f %.2f %.2f %.2f\n", 
-        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)
-
-        file:write(input)
-        file:write(output)
-        file:close()  
     end
 end
--- local learningRate = 50 -- set between 1, 100
--- local attempts = 10000 -- number of times to do backpropagation
--- local threshold = 1 -- steepness of the sigmoid curve
-
--- --create a network with 2 inputs, 3 hidden cells, and 1 output
--- local myNetwork = Luann:new({2, 3, 3, 1}, learningRate, threshold)
-
--- --run backpropagation (bp)
--- for i = 1,attempts do
--- 	myNetwork:bp({0,0},{0})
--- 	myNetwork:bp({1,0},{1})
--- 	myNetwork:bp({0,1},{1})
--- 	myNetwork:bp({1,1},{0})
--- end
-
--- --print the signal of the single output cell when :activated with different inputs
--- DebugPrint({ Text = "Results:"})
--- myNetwork:activate({0,0})
--- DebugPrint({ Text = "0 0 | " .. myNetwork[3].cells[1].signal })
--- myNetwork:activate({0,1})
--- DebugPrint({ Text = "0 1 | " .. myNetwork[3].cells[1].signal })
--- myNetwork:activate({1,0})
--- DebugPrint({ Text = "1 0 | " .. myNetwork[3].cells[1].signal })
--- myNetwork:activate({1,1})
--- DebugPrint({ Text = "1 1 | " .. myNetwork[3].cells[1].signal })

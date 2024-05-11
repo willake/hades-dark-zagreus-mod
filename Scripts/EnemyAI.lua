@@ -5,8 +5,9 @@ function DarkZagreusAI( enemy, currentRun )
 
     while IsAIActive( enemy, currentRun ) do
         local ailoop = _G[DZWeaponAI["ShieldWeapon"]]
-        if DZTemp.Weapon.WeaponName then
-            ailoop = _G[DZWeaponAI[DZTemp.Weapon.WeaponName]] 
+        local weapon = DZPersistent.PrevRunRecord.Weapon
+        if weapon.WeaponName then
+            ailoop = _G[DZWeaponAI[weapon.WeaponName]] 
         end
 		local continue = ailoop( enemy, currentRun )
 		if not continue then
