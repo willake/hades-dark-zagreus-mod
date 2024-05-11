@@ -412,6 +412,11 @@ function DZForceTraining()
     local threshold = 1 -- steepness of the sigmoid curve
 
     local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
+
+    if DZPersistent.PrevRunRecord == nil then
+        DebugPrint({ Text = "DZForceTraining() - PrevRunRecord is missing"})
+        return
+    end
     local weaponData = DZPersistent.PrevRunRecord.Weapon
     local trainingData = DZPersistent.PrevRunRecord.History
 
@@ -419,9 +424,9 @@ function DZForceTraining()
         return
     end
 
-    DebugPrint({ Text = "Start trainning... Data count: " .. tostring(#trainingData)})
+    DebugPrint({ Text = "DZForceTraining() - PrevRunRecord is missing" .. tostring(#trainingData)})
 
-    DZDebugPrintTable("WeaponData", weaponData, 3)
+    DZDebugPrintTable("DZForceTraining() - WeaponData", weaponData, 3)
 
     for i = 1, attempts do
         for _, data in ipairs(trainingData) do
@@ -468,9 +473,9 @@ end}
 -- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if currentRun.Cleared ~= nil then
-        DebugPrint({ Text = "EndRun " .. tostring(currentRun.Cleared) }) 
+        DebugPrint({ Text = "RecordRunCleared() - EndRun " .. tostring(currentRun.Cleared) }) 
     else
-        DebugPrint({ Text = "EndRun " .. "false" })
+        DebugPrint({ Text = "RecordRunCleared() - EndRun " .. "false" })
     end
     DZPersistent.IsRecording = false
 
@@ -503,7 +508,7 @@ end, DarkZagreus)
 
 -- if io module is not avilable then just print record out
 DZCreateNewRecord = function() 
-    DebugPrint({ Text = "Create new record file, enable isRecording to true" }) 
+    DebugPrint({ Text = "DZCreateNewRecord() - Create new record file, enable isRecording to true" }) 
     local weapon = GameState.LastInteractedWeaponUpgrade
 
     DZPersistent.CurRunRecord = 
@@ -556,19 +561,19 @@ DZOverridePendingRecord = function(state, action)
 end
 
 DZSaveCurRunRecordInMemory = function ()
-    DebugPrint({ Text = {"DZSaveCurRunRecordInMemory"} })
+    DebugPrint({ Text = {"DZSaveCurRunRecordInMemory() - DZSaveCurRunRecordInMemory"} })
     DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
 end
 
-DZSaveCurRunRecordToFile = function ()
-    DebugPrint({ Text = {"DZSaveCurRunRecordToFile"} })
-end
-
-DZClearAllRecord = function ()
-    DebugPrint({ Text = {"DZClearAllRecord"} })
+DZClearAllRecordInMemory = function ()
+    DebugPrint({ Text = {"DZClearAllRecord() - DZClearAllRecord"} })
     DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
     DZPersistent.CurRunRecord = {}
+end
+
+DZSaveCurRunRecordToFile = function ()
+    DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - DZSaveCurRunRecordToFile"} })
 end
 
 -- if io module is avilable, create a new record file then start logging
@@ -576,7 +581,7 @@ if io then
     local recordFilePath = "DZrecord" .. ".log"
 
     DZSaveCurRunRecordToFile = function ()
-        DebugPrint({ Text = {"DZSaveCurRecordToFile"} })
+        DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - DZSaveCurRunRecordToFile"} })
         local file = io.open(recordFilePath, "w+")
         
         local weapon = GameState.LastInteractedWeaponUpgrade

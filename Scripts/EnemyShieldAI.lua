@@ -116,7 +116,7 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
 
     if weaponAIData.PostFireChargeStages ~= nil then
         chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
-        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
+        -- DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then

@@ -134,7 +134,7 @@ function DZFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire
     if weaponAIData.IsRangeBasedOnCharge then
-        DebugPrint({ Text = "Charge: " .. tostring(actionData.ChargeTime)})
+        -- DebugPrint({ Text = "Charge: " .. tostring(actionData.ChargeTime)})
         DZDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
         DZDoRegularFire(enemy, weaponAIData, targetId)

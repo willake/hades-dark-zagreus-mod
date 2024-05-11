@@ -140,7 +140,6 @@ function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Aspect of Lucifer has a prewarm when first fire the weapon
     if weaponAIData.NeedPreWarm and enemy.ShouldPreWarm then
-        DebugPrint({ Text = "Prewarm Starts"})
         if weaponAIData.PreWarmAnimation then
             SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreWarmAnimation })
         end
@@ -148,8 +147,6 @@ function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
         if weaponAIData.PreWarmDuration then
             wait( weaponAIData.PreWarmDuration, enemy.AIThreadName )
         end
-
-        DebugPrint({ Text = "Prewarm Ends"})
 
         enemy.ShouldPreWarm = false
     end
