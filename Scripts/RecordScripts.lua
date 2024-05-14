@@ -76,46 +76,6 @@ function DZGetCurrentState()
     }
 end
 
-
-function DZForceTraining()
-    local learningRate = 50 -- set between 1, 100
-    local attempts = 10 -- number of times to do backpropagation
-    local threshold = 1 -- steepness of the sigmoid curve
-
-    local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
-
-    if DZPersistent.PrevRunRecord == nil then
-        DebugPrint({ Text = "DZForceTraining() - PrevRunRecord is missing"})
-        return
-    end
-    local weaponData = DZPersistent.PrevRunRecord.Weapon
-    local trainingData = DZPersistent.PrevRunRecord.History
-
-    if #trainingData == 0 then
-        return
-    end
-
-    DebugPrint({ Text = "DZForceTraining() - PrevRunRecord is missing" .. tostring(#trainingData)})
-
-    DZDebugPrintTable("DZForceTraining() - WeaponData", weaponData, 3)
-
-    for i = 1, attempts do
-        for _, data in ipairs(trainingData) do
-            network:bp(data[1], data[2])
-        end
-    end
-
-    DZTemp.Model = network
-end
-
-OnControlPressed { "Reload",
-function(triggerArgs)
-    -- local prevRun = GameState.LastInteractedWeaponUpgrade
-    -- DebugPrintTable("PrevRun", prevRun, 5)
-    DZForceTraining()
-end
-}
-
 --- Managing Start/End recording
 -- I don't know how to detect give up and die
 -- wrapping EndRun() is not working, so better terminate the recording whenever the character
@@ -247,6 +207,13 @@ DZSaveCurRunRecordToFile = function ()
     DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - DZSaveCurRunRecordToFile"} })
 end
 
+-- clean up data if the version is not matched
+OnAnyLoad { "DeathArea", function(triggerArgs)
+    if DZPersistent.PrevRunRecord.Version ~= DZVersion then
+        DZClearAllRecordInMemory()
+    end 
+end}
+
 -- if io module is avilable, create a new record file then start logging
 if io then
     local recordFilePath = "DZrecord" .. ".log"
@@ -302,11 +269,3 @@ if io then
         file:close()
     end
 end
-
--- clean up data if the version is not matched
-
-OnAnyLoad { "DeathArea", function(triggerArgs)
-    if DZPersistent.PrevRunRecord.Version ~= DZVersion then
-        DZClearAllRecordInMemory()
-    end 
-end}
