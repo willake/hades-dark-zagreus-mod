@@ -144,6 +144,7 @@ DZCreateNewRecord = function()
 
     DZPersistent.CurRunRecord = 
     {
+        Version = DZVersion,
         Weapon = 
         {
             WeaponName = weapon.WeaponName,
