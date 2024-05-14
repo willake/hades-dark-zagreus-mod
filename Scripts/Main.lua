@@ -22,5 +22,7 @@ DZPersistent = {}
 
 -- DZTemp for data should be deleted after leaving the game
 DZTemp = {}
+DZVersion = "alpha1"
 
 SaveIgnores["DZTemp"] = true
+SaveIgnores["DZVersion"] = true

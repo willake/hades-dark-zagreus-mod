@@ -631,3 +631,11 @@ if io then
         file:close()
     end
 end
+
+-- clean up data if the version is not matched
+
+OnAnyLoad { "DeathArea", function(triggerArgs)
+    if DZPersistent.PrevRunRecord.Version ~= DZVersion then
+        DZClearAllRecordInMemory()
+    end 
+end}
