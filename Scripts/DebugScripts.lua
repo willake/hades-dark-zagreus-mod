@@ -24,6 +24,6 @@ end }
 OnControlPressed { "Reload",
 function(triggerArgs)
     -- DZTrainAI()
-    DZDebugPrintTable("DZPrevRunRecord", DZPersistent.PrevRunRecord)
+    DZClearPrevRecordInMemory()
 end
 }

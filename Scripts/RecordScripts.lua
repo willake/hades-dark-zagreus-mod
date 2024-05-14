@@ -187,8 +187,13 @@ DZSaveCurRunRecordInMemory = function ()
     DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
 end
 
+DZClearPrevRecordInMemory = function ()
+    DebugPrint({ Text = {"DZClearPrevRecordInMemory() - Clear previous record"} })
+    DZPersistent.PrevRunRecord = {}
+end
+
 DZClearAllRecordInMemory = function ()
-    DebugPrint({ Text = {"DZClearAllRecord() - DZClearAllRecord"} })
+    DebugPrint({ Text = {"DZClearAllRecord() - Clear all records"} })
     DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
     DZPersistent.CurRunRecord = {}
@@ -200,7 +205,7 @@ end
 
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
-    if DZPersistent.PrevRunRecord.Version ~= DZVersion then
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DZVersion then
         DebugPrint({ Text = {"DZVersion is not matched, clear all previous data"} })
         DZClearAllRecordInMemory()
     end 
