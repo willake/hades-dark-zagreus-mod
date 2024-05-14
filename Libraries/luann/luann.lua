@@ -23,6 +23,8 @@
 
 -- ]]--
 
+if not DarkZagreus.Config.Enabled then return end
+
 -- --Borrowed table Persistence from http://lua-users.org/wiki/TablePersistence, MIT license.
 -- --comments removed, condensed code to oneliners where possible.
 -- -- Persistence =

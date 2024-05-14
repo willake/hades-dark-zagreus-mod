@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 function DarkZagreusShieldAI( enemy, currentRun )
     enemy.HasBonus = false -- for chaos shield
     return DZDoShieldAILoop( enemy, currentRun )

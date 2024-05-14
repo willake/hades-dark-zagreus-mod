@@ -1,4 +1,6 @@
- function DarkZagreusSpearAI( enemy, currentRun )
+if not DarkZagreus.Config.Enabled then return end
+ 
+function DarkZagreusSpearAI( enemy, currentRun )
     return DZDoSpearAILoop( enemy, currentRun )
 end
 

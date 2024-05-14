@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 function DarkZagreusAI( enemy, currentRun )
     enemy.AIState = { }
     enemy.LastActionTime = 0
