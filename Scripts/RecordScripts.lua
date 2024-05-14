@@ -3,11 +3,11 @@ if not DarkZagreus.Config.Enabled then return end
 DZPersistent = {}
 DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
-DZPersistent.PendingRecord = {} 
-DZPersistent.PrevRunRecord = {}
-DZPersistent.CurRunRecord = {}
+-- DZPersistent.PendingRecord = {} 
+-- DZPersistent.PrevRunRecord = {}
+-- DZPersistent.CurRunRecord = {}
 
-DZTemp.Weapon = {}
+-- DZTemp.Weapon = {}
 DZTemp.Model = {}
 
 function DZCheckCanRecord()
@@ -99,6 +99,7 @@ end, DarkZagreus)
 -- stop recording when zegreus back to the hades lobby
 OnAnyLoad { "DeathArea", function(triggerArgs)
     DZPersistent.IsRecording = false
+    DZPersistent.PendingRecord = {}
 end}
 
 -- stop recording and train a new model when the run is cleared
@@ -117,20 +118,9 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
     DZSaveCurRunRecordInMemory()
+    DZSaveCurRunRecordToFile() -- only working on x86
 
-    -- training
-
-    local learningRate = 50 -- set between 1, 100
-    local attempts = 100 -- number of times to do backpropagation
-    local threshold = 1 -- steepness of the sigmoid curve
-
-    local network = Luann:new({6, 5, 5, 4}, learningRate, threshold)
-
-    for i = 1, attempts do
-        for _, data in ipairs(DZPersistent.PrevRunRecord.History) do
-            network:bp(data[1], data[2])
-        end
-    end
+    DZPersistent.CurRunRecord = {}
 
     return base(currentRun)
 end, DarkZagreus)
@@ -211,6 +201,7 @@ end
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
     if DZPersistent.PrevRunRecord.Version ~= DZVersion then
+        DebugPrint({ Text = {"DZVersion is not matched, clear all previous data"} })
         DZClearAllRecordInMemory()
     end 
 end}
