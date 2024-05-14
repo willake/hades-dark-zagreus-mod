@@ -1,13 +1,23 @@
+if not DarkZagreus.Config.Enabled then return end
+
 function DarkZagreusAI( enemy, currentRun )
     enemy.AIState = { }
     enemy.LastActionTime = 0
     enemy.LastAction = 0
 
+    local ailoop = _G[DZWeaponAI["ShieldWeapon"]]
+    local weapon = {}
+        
+    if DZPersistent.PrevRunRecord then
+        weapon = DZPersistent.PrevRunRecord.Weapon
+    end 
+    
+    if weapon and weapon.WeaponName then
+        ailoop = _G[DZWeaponAI[weapon.WeaponName]] 
+    end
+
     while IsAIActive( enemy, currentRun ) do
-        local ailoop = _G[DZWeaponAI["ShieldWeapon"]]
-        if DZTemp.Weapon.WeaponName then
-            ailoop = _G[DZWeaponAI[DZTemp.Weapon.WeaponName]] 
-        end
+        
 		local continue = ailoop( enemy, currentRun )
 		if not continue then
 			return
@@ -109,7 +119,7 @@ function DZMakeAIActionData(state)
         return DZMakeRandomAIActionData(state)
     end
 
-    DZDebugPrintTable("AIState", state, 3)
+    -- DZDebugPrintTable("AIState", state, 3)
     -- local r = math.random()
     -- local chargeTime = 0.0
 
@@ -237,11 +247,11 @@ function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged
     
         -- DEBUG, check new range
         local newRange = GetProjectileProperty({ Id = enemy.ObjectId, WeaponName = "DarkBow", Property = "Range" })
-        if newRange ~= nil then
-            DebugPrintf({ Text = "New projectile range: " .. newRange })
-        else
-            DebugPrintf({ Text = "Can't find new projectile range" }) 
-        end 
+        -- if newRange ~= nil then
+        --     DebugPrintf({ Text = "New projectile range: " .. newRange })
+        -- else
+        --     DebugPrintf({ Text = "Can't find new projectile range" }) 
+        -- end 
     end
 
     -- set weapon velocity based on charge time, e.g. DarkShieldRush
@@ -254,12 +264,12 @@ function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged
             { WeaponName = weaponAIData.WeaponName, DestinationId = enemy.ObjectId, Property = "SelfVelocity", Value = velocity * percentageCharged * velocityMultiplier })
         -- DEBUG, check new range
         local newVelocity = GetWeaponDataValue({ Id = enemy.ObjectId, WeaponName = weaponAIData.WeaponName, Property = "SelfVelocity" })
-        if newVelocity ~= nil then
-            -- DebugPrintTable("New velocity", newVelocity, 3)
-            DebugPrintf({ Text = "New weapon velocity: " .. newVelocity })
-        else
-            DebugPrintf({ Text = "Can't find new weapon velocity" }) 
-        end 
+        -- if newVelocity ~= nil then
+        --     -- DebugPrintTable("New velocity", newVelocity, 3)
+        --     DebugPrintf({ Text = "New weapon velocity: " .. newVelocity })
+        -- else
+        --     DebugPrintf({ Text = "Can't find new weapon velocity" }) 
+        -- end 
     end
 
     -- charge starts
@@ -277,7 +287,7 @@ function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged
 	end
 
     if chargeTime > 0.0 then
-        DebugPrintf({ Text = "Start waiting" .. chargeTime }) 
+        -- DebugPrintf({ Text = "Start waiting" .. chargeTime }) 
         wait(chargeTime, enemy.AIThreadName) 
     end
 

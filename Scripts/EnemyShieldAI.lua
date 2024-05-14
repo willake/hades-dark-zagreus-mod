@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 function DarkZagreusShieldAI( enemy, currentRun )
     enemy.HasBonus = false -- for chaos shield
     return DZDoShieldAILoop( enemy, currentRun )
@@ -116,7 +118,7 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
 
     if weaponAIData.PostFireChargeStages ~= nil then
         chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
-        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
+        -- DebugPrint({ Text = "Set chargeTime to " .. chargeTime})
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then

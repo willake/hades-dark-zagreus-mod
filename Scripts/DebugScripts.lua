@@ -19,3 +19,11 @@ OnAnyLoad { "RoomOpening", function(triggerArgs)
         end
     end
 end }
+
+-- force training a model with reload key
+OnControlPressed { "Reload",
+function(triggerArgs)
+    -- DZTrainAI()
+    DZDebugPrintTable("DZPrevRunRecord", DZPersistent.PrevRunRecord)
+end
+}

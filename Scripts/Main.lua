@@ -1,19 +1,30 @@
 if not DarkZagreus.Config.Enabled then return end
 
+-- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
-    DebugPrintf({ Text = "Enter D_Boss01, equipWeapon" })
+    DebugPrint({ Text = "Enter D_Boss01" })
     -- active enmies should only contain hades
     if ActiveEnemies ~= nil then
         for enemyId, enemy in pairs( ActiveEnemies ) do
-            DebugPrintf({ Text = "Hades Object ID " .. enemy.ObjectId })
+            DebugPrint({ Text = "Hades Object ID " .. enemy.ObjectId })
             -- equip weapon
-            if DZTemp.Weapon.WeaponName and DZTemp.Weapon.ItemIndex then
-                local weaponName = DZTemp.Weapon.WeaponName
-                local itemIndex = DZTemp.Weapon.ItemIndex
-                DZWeaponData[weaponName][itemIndex].Equip(enemy)
+            local weaponData = {}
+            
+            if DZPersistent.PrevRunRecord then
+                weaponData = DZPersistent.PrevRunRecord.Weapon
+                
+                if weaponData and DZPersistent.PrevRunRecord.History then
+                    DZTrainAI()
+                end
+            end
+
+            if weaponData and weaponData.WeaponName and weaponData.ItemIndex then
+                DZWeaponData[weaponData.WeaponName][weaponData.ItemIndex].Equip(enemy)
             else
-                DZWeaponData["ShieldWeapon"][1].Equip(enemy)
+                DZWeaponData["SwordWeapon"][1].Equip(enemy)
             end 
+
+            DZDebugPrintTable("DZ Weapon Equipped", weaponData, 3)
         end
     end
 end }
@@ -23,5 +34,7 @@ DZPersistent = {}
 
 -- DZTemp for data should be deleted after leaving the game
 DZTemp = {}
+DZVersion = "alpha1"
 
 SaveIgnores["DZTemp"] = true
+SaveIgnores["DZVersion"] = true
