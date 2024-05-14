@@ -5,7 +5,7 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.LastActionTime = 0
     enemy.LastAction = 0
 
-    local ailoop = _G[DZWeaponAI["ShieldWeapon"]]
+    local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
         
     if DZPersistent.PrevRunRecord then
