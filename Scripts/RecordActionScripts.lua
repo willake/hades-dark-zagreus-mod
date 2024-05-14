@@ -7,7 +7,7 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
             return false
         end
 
-        DebugPrint({ Text = "Attack" })
+        -- DebugPrint({ Text = "Attack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1)) 
         DZPersistent.LastAction = 1
     end
@@ -19,7 +19,7 @@ OnWeaponFired{ "SwordParry",
             return false
         end
 
-        DebugPrint({ Text = "SpecialAttack" })
+        -- DebugPrint({ Text = "SpecialAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
@@ -43,8 +43,8 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
         end
 
         local duration = _worldTime - DZTemp.StartChargingTime
-        DebugPrint({ Text = "ChargeDuration: " .. duration })
-        DebugPrint({ Text = "Attack" })
+        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
+        -- DebugPrint({ Text = "Attack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
         DZPersistent.LastAction = 1  
     end 
@@ -56,7 +56,7 @@ OnWeaponFired{ "BowSplitShot",
             return false
         end
 
-        DebugPrint({ Text = "SpecialAttack" })
+        -- DebugPrint({ Text = "SpecialAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
@@ -70,7 +70,7 @@ OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
             return false
         end
 
-        DebugPrint({ Text = "StartCharging" })
+        -- DebugPrint({ Text = "StartCharging" })
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -82,7 +82,7 @@ OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
             return false
         end
 
-        DebugPrint({ Text = "ShortAttack" })
+        -- DebugPrint({ Text = "ShortAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
         DZPersistent.LastAction = 1
     end 
@@ -95,8 +95,8 @@ OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
         end
 
         local duration = _worldTime - DZTemp.StartChargingTime
-        DebugPrint({ Text = "ChargeDuration: " .. duration })
-        DebugPrint({ Text = "Attack" })
+        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
+        -- DebugPrint({ Text = "Attack" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
         DZPersistent.LastAction = 1
     end 
@@ -108,7 +108,7 @@ OnWeaponFired { "SpearWeaponThrowReturn",
             return false
         end
 
-        DebugPrint({ Text = "SpearWeaponThrowReturn" })
+        -- DebugPrint({ Text = "SpearWeaponThrowReturn" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
     end
@@ -120,7 +120,7 @@ OnWeaponCharging { "SpearWeaponThrow",
             return false
         end
 
-        DebugPrint({ Text = "StartCharging" })
+        -- DebugPrint({ Text = "StartCharging" })
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -132,8 +132,8 @@ OnWeaponFired { "SpearWeaponThrow",
         end
         
         local duration = _worldTime - DZTemp.StartChargingTime
-        DebugPrint({ Text = "ChargeDuration: " .. duration })
-        DebugPrint({ Text = "SpearWeaponThrow" })
+        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
+        -- DebugPrint({ Text = "SpearWeaponThrow" })
         
         -- if the weapon is aspect of achilles, which is chargable
         -- if GameState.LastInteractedWeaponUpgrade.ItemIndex == 2 then
@@ -154,7 +154,7 @@ OnWeaponFired{ "SpearRushWeapon",
             return false
         end
 
-        DebugPrint({ Text = "SpearRushWeapon" })
+        -- DebugPrint({ Text = "SpearRushWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         DZPersistent.LastAction = 2
@@ -169,7 +169,7 @@ OnWeaponCharging { "ShieldWeapon ShieldWeaponDash",
             return false
         end
 
-        DebugPrint({ Text = "StartCharging" })
+        -- DebugPrint({ Text = "StartCharging" })
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -180,7 +180,7 @@ OnWeaponFired { "ShieldWeapon ShieldWeaponDash",
             return false
         end
 
-        DebugPrint({ Text = "ShieldWeapon" })
+        -- DebugPrint({ Text = "ShieldWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
         DZPersistent.LastAction = 1
     end 
@@ -193,8 +193,8 @@ OnWeaponFired { "ShieldWeaponRush",
         end
 
         local duration = _worldTime - DZTemp.StartChargingTime
-        DebugPrint({ Text = "ChargeDuration: " .. duration })
-        DebugPrint({ Text = "ShieldWeaponRush" })
+        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
+        -- DebugPrint({ Text = "ShieldWeaponRush" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
         DZPersistent.LastAction = 1
     end 
@@ -207,7 +207,7 @@ OnWeaponCharging { "ShieldThrow ShieldThrowDash",
             return false
         end
 
-        DebugPrint({ Text = "StartCharging" })
+        -- DebugPrint({ Text = "StartCharging" })
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -219,9 +219,9 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
         end
 
         local duration = _worldTime - DZTemp.StartChargingTime
-        DebugPrint({ Text = "ChargeDuration: " .. duration })
+        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
 
-        DebugPrint({ Text = "ShieldThrow" })
+        -- DebugPrint({ Text = "ShieldThrow" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))
         DZPersistent.LastAction = 2
 
@@ -245,7 +245,7 @@ OnWeaponFailedToFire { "ShieldThrow",
 		local weaponData = GetWeaponData( attacker, triggerArgs.name )
 
         if weaponData.RecallOnFailToFire then
-            DebugPrint({ Text = "ShieldThrow" })
+            -- DebugPrint({ Text = "ShieldThrow" })
             DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
             DZPersistent.LastAction = 2
 
@@ -268,7 +268,7 @@ OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 Fist
             return false
         end
 
-        DebugPrint({ Text = "FistWeapon" })
+        -- DebugPrint({ Text = "FistWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
         DZPersistent.LastAction = 1
     end 
@@ -282,7 +282,7 @@ OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
             return false
         end
 
-        DebugPrint({ Text = "FistWeaponSpecial" })
+        -- DebugPrint({ Text = "FistWeaponSpecial" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))     
         DZPersistent.LastAction = 2
     end 
@@ -294,25 +294,25 @@ OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
 -- ignore the bias affected by Delta Chamber, let it be
 OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
     function(triggerArgs)
-        -- if not DZCheckCanRecord() then
-        --     return false
-        -- end
+        if not DZCheckCanRecord() then
+            return false
+        end
 
-        DebugPrint({ Text = "GunWeapon" })
-        -- DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        -- DZPersistent.LastAction = 1
+        -- DebugPrint({ Text = "GunWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZPersistent.LastAction = 1
     end 
 }
 
 OnWeaponFired { "GunGrenadeToss",
     function(triggerArgs)
-        -- if not DZCheckCanRecord() then
-        --     return false
-        -- end
+        if not DZCheckCanRecord() then
+            return false
+        end
 
-        DebugPrint({ Text = "GunGrenadeToss" })
-        -- DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        -- DZPersistent.LastAction = 1
+        -- DebugPrint({ Text = "GunGrenadeToss" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZPersistent.LastAction = 1
     end 
 }
 
@@ -323,7 +323,7 @@ OnWeaponFired{ "RushWeapon",
             return false
         end
 
-        DebugPrint({ Text = "Rush" })
+        -- DebugPrint({ Text = "Rush" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
         DZPersistent.LastAction = 0
     end
