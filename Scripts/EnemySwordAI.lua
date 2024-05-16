@@ -6,7 +6,6 @@ end
 
 function DZDoSwordAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
-    enemy.AIState = aiState
     local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
@@ -178,7 +177,7 @@ function DZSelectSwordWeapon(enemy, actionData)
         end
 
         -- if the last action is also attack, do weapon combo
-        if enemy.AIState.IsLastActionAttack > 0 then
+        if lastAction.Action == 1 then
             DebugPrintf({ Text = "Previous is attack"})
             if enemy.ChainedWeapon ~= nil and _worldTime - lastActionTime < 0.3 then
                 DebugPrintf({ Text = "Do combo"})

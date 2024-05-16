@@ -9,7 +9,6 @@ end
 
 function DZDoSpearAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
-    enemy.AIState = aiState
     local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
@@ -101,15 +100,6 @@ function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
     if not CanAttack({ Id = enemy.ObjectId }) then
 		return false
 	end
-
-    -- if the next attack is within combo threshold, 
-    -- then replace the weapon to combo weapon
-    -- the threshold is 0.3
-    -- if _worldTime - enemy.AIState.LastActionTime < 0.3 then
-    --     if enemy.ComboWeapon ~= nil then
-    --         enemy.WeaponName = enemy.ComboWeapon
-    --     end
-    -- end
 
     if not DZFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
