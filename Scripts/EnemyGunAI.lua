@@ -2,18 +2,18 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusGunAI( enemy, currentRun )
     enemy.ShouldPreWarm = false
-    return DZDoGunAILoop( enemy, currentRun )
+    return DZAIDoGunAILoop( enemy, currentRun )
 end
 
 -- The engine code covers ammo management already, i don't wanna mess it up
 -- so maybe no manual reload in this code 
 
-function DZDoGunAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+function DZAIDoGunAILoop(enemy, currentRun, targetId)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectGunWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectGunWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -34,7 +34,7 @@ function DZDoGunAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -49,7 +49,7 @@ function DZDoGunAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoGunAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoGunAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -62,7 +62,7 @@ function DZDoGunAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -106,14 +106,14 @@ function DZDoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 		return false
 	end
 
-    if not DZFireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
 
     return true
 end
 
-function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -130,7 +130,7 @@ function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -153,7 +153,7 @@ function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Fire
     
-    DZDoRegularFire(enemy, weaponAIData, targetId)
+    DZAIDoRegularFire(enemy, weaponAIData, targetId)
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
@@ -180,7 +180,7 @@ function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function DZSelectGunWeapon(enemy, actionData)
+function DZAISelectGunWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -230,13 +230,13 @@ function DZSelectGunWeapon(enemy, actionData)
 end
 
 -- for aspect of hestia
-function DZManualReloadBonusApply( triggerArgs )
+function DZAIManualReloadBonusApply( triggerArgs )
 	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 end
 
 -- TODO: complete these functions
-function DZActivateLuciferFuse( enemy )
+function DZAIActivateLuciferFuse( enemy )
 	if enemy.FuseActivated or enemy.IsDead then
 		return
 	end
@@ -255,12 +255,12 @@ function DZActivateLuciferFuse( enemy )
 	CurrentRun.CurrentRoom.FusedBombs[key] = nil
 end
 
-function DZGunBombDetonate( bomb )
+function DZAIGunBombDetonate( bomb )
 	FireWeaponFromUnit({ Weapon = "GunBombWeapon", Id = CurrentRun.Hero.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
 	thread(MarkObjectiveComplete, "GunGrenadeLuciferBlast")
 end
 
-function DZSetUpGunBombImmolation( enemy, currentRun, args )
+function DZAISetUpGunBombImmolation( enemy, currentRun, args )
 	local hasGodGraphic = false
 	for i, traitData in pairs( CurrentRun.Hero.Traits ) do
 		if traitData.Slot == "Secondary" then

@@ -1,15 +1,15 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusSwordAI( enemy, currentRun )
-    return DZDoSwordAILoop( enemy, currentRun )
+    return DZAIDoSwordAILoop( enemy, currentRun )
 end
 
-function DZDoSwordAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+function DZAIDoSwordAILoop(enemy, currentRun, targetId)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectSwordWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectSwordWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -30,7 +30,7 @@ function DZDoSwordAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -41,7 +41,7 @@ function DZDoSwordAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoSwordAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoSwordAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -54,7 +54,7 @@ function DZDoSwordAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoSwordAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -98,14 +98,14 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 		return false
 	end
 
-    if not DZFireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
     
     return true
 end
 
-function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -122,7 +122,7 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -132,16 +132,16 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Fire
     
-    DZDoRegularFire(enemy, weaponAIData, targetId)
+    DZAIDoRegularFire(enemy, weaponAIData, targetId)
 
     -- Fire end
 
     -- AspectofArthur will fire an area after special attack
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DZAIDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     enemy.DZ.LastActionTime = _worldTime
@@ -156,7 +156,7 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     return true
 end
 
-function DZSelectSwordWeapon(enemy, actionData)
+function DZAISelectSwordWeapon(enemy, actionData)
     local total = actionData.Attack + actionData.SpecialAttack + actionData.Dash
     local r = math.random() * total
 

@@ -178,6 +178,6 @@ WeaponData.DarkManualReloadEffectApplicator =
 
 EffectData.DarkManualReloadBonus =
 {
-    OnApplyFunctionName = "DZManualReloadBonusApply",
-    OnClearFunctionName = "DZManualReloadBonusClear",
+    OnApplyFunctionName = "DZAIManualReloadBonusApply",
+    OnClearFunctionName = "DZAIManualReloadBonusClear",
 }

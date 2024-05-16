@@ -1,18 +1,18 @@
 if not DarkZagreus.Config.Enabled then return end
  
 function DarkZagreusSpearAI( enemy, currentRun )
-    return DZDoSpearAILoop( enemy, currentRun )
+    return DZAIDoSpearAILoop( enemy, currentRun )
 end
 
 -- SpearWeaponThrowInvisibleReturn will be trrigger when player touch the dropped spear
 -- not sure how to handle it yet
 
-function DZDoSpearAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+function DZAIDoSpearAILoop(enemy, currentRun, targetId)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectSpearWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectSpearWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -33,7 +33,7 @@ function DZDoSpearAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -44,7 +44,7 @@ function DZDoSpearAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoSpearAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -57,7 +57,7 @@ function DZDoSpearAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoSpearAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -101,14 +101,14 @@ function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 		return false
 	end
 
-    if not DZFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
 
     return true
 end
 
-function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
@@ -131,7 +131,7 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -142,9 +142,9 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     -- Fire
     
     if weaponAIData.IsRangeBasedOnCharge then
-        DZDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
+        DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
-        DZDoRegularFire(enemy, weaponAIData, targetId)
+        DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
 
     -- PostAttackCharge
@@ -152,10 +152,10 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     -- Spear will charge after attack if player still holding the button
     if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.3 then
         local chargeWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
         
-        DZDoPreFire(enemy, chargeWeaponAIData, targetId)
+        DZAIDoPreFire(enemy, chargeWeaponAIData, targetId)
 
         -- if the charge time is larger than the threshold, at least play the first stage
         if chargeTime > weaponAIData.PostFireChargeStages[1].Threshold then
@@ -179,12 +179,12 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
                 wait(stageData.Threshold, enemy.AIThreadName)
                 PlaySound({ Name = "/Leftovers/SFX/AuraOnLoud" })
                 Flash({ Id = enemy.ObjectId, Speed = 4, MinFraction = 0.5, MaxFraction = 0.6, Color = Color.White, Duration = 0.3 })
-                chargeWeaponAIData = DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[stage].ChargeWeapon)
+                chargeWeaponAIData = DZAIGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[stage].ChargeWeapon)
             end
 
             wait(remainChargeTime, enemy.AIThreadName)
 
-            DZDoRegularFire(enemy, chargeWeaponAIData, targetId) 
+            DZAIDoRegularFire(enemy, chargeWeaponAIData, targetId) 
 
             -- after doing spin, combo should be canceled
             enemy.ChainedWeapon = nil
@@ -202,9 +202,9 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     -- while equiping Aspect of Achilles
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DZAIDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     enemy.DZ.LastActionTime = _worldTime
@@ -230,7 +230,7 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     return true
 end
 
-function DZSelectSpearWeapon(enemy, actionData)
+function DZAISelectSpearWeapon(enemy, actionData)
     local r = math.random()
 
     enemy.DZ.TempAction = 0

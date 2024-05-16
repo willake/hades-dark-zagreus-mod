@@ -5,7 +5,6 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
     enemy.DZ.LastActionTime = 0
-    enemy.AIState = { }
 
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
@@ -27,7 +26,7 @@ function DarkZagreusAI( enemy, currentRun )
 	end
 end
 
-function DZDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
     if weaponAIData == nil then
         weaponAIData = enemy
     end
@@ -100,7 +99,7 @@ function DZAIGetLastAction(enemy)
     end
 end
 
-function DZGetCurrentAIState(enemy)
+function DZAIGetCurrentState(enemy)
     local distance = 0.00
     distance = GetDistance({ Id = enemy.ObjectId, DestinationId = currentRun.Hero.ObjectId })
 
@@ -119,7 +118,7 @@ function DZGetCurrentAIState(enemy)
     }
 end
 
-function DZMakeRandomAIActionData(state)
+function DZAIMakeRandomActionData(state)
     local r = math.random()
     local chargeTime = 0.0
 
@@ -133,10 +132,10 @@ function DZMakeRandomAIActionData(state)
     }
 end
 
-function DZMakeAIActionData(state, lastActions)
+function DZAIMakeActionData(state, lastActions)
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 then
-        return DZMakeRandomAIActionData(state)
+        return DZAIMakeRandomActionData(state)
     end
 
     local lastAction = lastActions[#lastActions]
@@ -162,10 +161,10 @@ function DZMakeAIActionData(state, lastActions)
     local specialProb = DZTemp.Model[4].cells[3].signal
     local chargeTime = DZTemp.Model[4].cells[4].signal
 
-    DebugPrint({ Text = "dashProb | " .. tostring(dashProb) })
-    DebugPrint({ Text = "attackProb | " .. tostring(attackProb) })
-    DebugPrint({ Text = "specialProb | " .. tostring(specialProb) })
-    DebugPrint({ Text = "chargeTime | " .. tostring(chargeTime) })
+    DebugPrint({ Text = string.format("dash prob | %.3f", dashProb) })
+    DebugPrint({ Text = string.format("attack prob | %.3f", attackProb) })
+    DebugPrint({ Text = string.format("special prob | %.3f", specialProb) })
+    DebugPrint({ Text = string.format("charge time | %.3f", chargeTime) })
 
     return {    
         Dash = dashProb,
@@ -178,7 +177,7 @@ end
 -- Prefire
 -- pre-fire means the animation that plays before attack,
 -- which you can clearly see that the character is going to attack
-function DZDoPreFire(enemy, weaponAIData, targetId)
+function DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     if weaponAIData.PreFireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireAnimation })
@@ -210,7 +209,7 @@ function DZDoPreFire(enemy, weaponAIData, targetId)
     -- end
 end
 
-function DZDoRegularFire(enemy, weaponAIData, targetId)
+function DZAIDoRegularFire(enemy, weaponAIData, targetId)
     if weaponAIData.FireAnimation then
         SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireAnimation })
     end
@@ -247,7 +246,7 @@ function DZDoRegularFire(enemy, weaponAIData, targetId)
 end
 
 -- Do fire that distance will vary by how much player charged
-function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
+function DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
     local chargeTime = percentageCharged * weaponAIData.MaxChargeTime
     local minChargeTime = weaponAIData.MinChargeTime or 0.0
     
@@ -361,7 +360,7 @@ function DZDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged
     return true
 end
 
-function DZGetWeaponAIData(enemy, weaponName)
+function DZAIGetWeaponAIData(enemy, weaponName)
 	-- local weaponAIData = ShallowCopyTable(enemy.DefaultAIData) or enemy
 	local weaponAIData = {}
     if WeaponData[weaponName] ~= nil and WeaponData[weaponName].AIData ~= nil then
