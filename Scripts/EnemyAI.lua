@@ -90,7 +90,14 @@ function DZAIEnqueueLastAction(enemy, action)
 end
 
 function DZAIGetLastAction(enemy)
-    return enemy.DZ.LastActions[#enemy.DZ.LastActions]
+    if #enemy.DZ.LastActions == 0 then
+        return {
+            Action = 0,
+            ChargeTime = 0.0
+        }
+    else
+        return enemy.DZ.LastActions[#enemy.DZ.LastActions]
+    end
 end
 
 function DZGetCurrentAIState(enemy)
