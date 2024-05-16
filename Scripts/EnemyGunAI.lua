@@ -11,7 +11,7 @@ end
 function DZDoGunAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     enemy.AIState = aiState
-    local actionData = DZMakeAIActionData(aiState)
+    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectGunWeapon(enemy, actionData)
@@ -184,6 +184,9 @@ function DZSelectGunWeapon(enemy, actionData)
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
     -- use attack weapon
+
+    local lastAction = DZAIGetLastAction(enemy)
+    
     if r < actionData.Attack then
 
         if enemy.DZ.TempAction ~= 1 then
@@ -193,7 +196,7 @@ function DZSelectGunWeapon(enemy, actionData)
         enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.DZ.LastActionTime < 0.45 then
+        if lastAction.Action == 0 and _worldTime - enemy.DZ.LastActionTime < 0.45 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName

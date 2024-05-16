@@ -7,7 +7,7 @@ end
 function DZDoSwordAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     enemy.AIState = aiState
-    local actionData = DZMakeAIActionData(aiState)
+    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectSwordWeapon(enemy, actionData)
@@ -169,9 +169,9 @@ end
 function DZSelectSwordWeapon(enemy, actionData)
     local total = actionData.Attack + actionData.SpecialAttack + actionData.Dash
     local r = math.random() * total
-    -- init combo weapon to nil
-    -- enemy.PostAttackChargeWeapon = nil
+
     enemy.DZ.TempAction = 0
+    local lastAction = DZAIGetLastAction(enemy)
     local lastActionTime = enemy.DZ.LastActionTime
 
     -- use attack weapon
@@ -180,7 +180,7 @@ function DZSelectSwordWeapon(enemy, actionData)
         enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - lastActionTime < 0.3 then
+        if lastAction.Action == 0 and _worldTime - lastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName

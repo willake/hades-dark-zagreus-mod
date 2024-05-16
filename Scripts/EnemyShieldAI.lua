@@ -8,7 +8,7 @@ end
 function DZDoShieldAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     enemy.AIState = aiState
-    local actionData = DZMakeAIActionData(aiState)
+    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectShieldWeapon(enemy, actionData)
@@ -207,13 +207,15 @@ function DZSelectShieldWeapon(enemy, actionData)
     -- enemy.PostAttackChargeWeapon = nil
     enemy.DZ.TempAction = 0
 
+    local lastAction = DZAIGetLastAction(enemy)
+
     -- use attack weapon
     if r < actionData.Attack then
 
         enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+        if lastAction.Action == 0 and _worldTime - enemy.DZ.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName

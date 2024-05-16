@@ -10,7 +10,7 @@ end
 function DZDoSpearAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     enemy.AIState = aiState
-    local actionData = DZMakeAIActionData(aiState)
+    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectSpearWeapon(enemy, actionData)
@@ -250,9 +250,9 @@ end
 
 function DZSelectSpearWeapon(enemy, actionData)
     local r = math.random()
-    -- init combo weapon to nil
-    -- enemy.PostAttackChargeWeapon = nil
-    enemy.DZ.TempAction = 1
+
+    enemy.DZ.TempAction = 0
+    local lastAction = DZAIGetLastAction(enemy)
 
     -- use attack weapon
     if r < actionData.Attack then
@@ -267,14 +267,14 @@ function DZSelectSpearWeapon(enemy, actionData)
         enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+        if lastAction.Action == 0 and _worldTime - enemy.DZ.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         -- if the last action is also attack, do weapon combo
-        if enemy.AIState.IsLastActionAttack > 0 then
+        if lastAction.Action == 1 then
             if enemy.ChainedWeapon ~= nil and _worldTime - enemy.DZ.LastActionTime < 0.3 then
                 enemy.WeaponName = enemy.ChainedWeapon
                 enemy.ChainedWeapon = nil

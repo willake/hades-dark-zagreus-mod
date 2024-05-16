@@ -93,14 +93,6 @@ function DZAIGetLastAction(enemy)
     return enemy.DZ.LastActions[#enemy.DZ.LastActions]
 end
 
-function DZAIGetLastActions(enemy)
-    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
-    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
-
-
-end
-
 function DZGetCurrentAIState(enemy)
     local distance = 0.00
     distance = GetDistance({ Id = enemy.ObjectId, DestinationId = currentRun.Hero.ObjectId })
@@ -134,7 +126,7 @@ function DZMakeRandomAIActionData(state)
     }
 end
 
-function DZMakeAIActionData(state)
+function DZMakeAIActionData(state, lastActions)
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 then
         return DZMakeRandomAIActionData(state)
@@ -148,8 +140,13 @@ function DZMakeAIActionData(state)
     --     chargeTime = 0.1 + (math.random() * 0.9)
     -- end
 
-    DZTemp.Model:activate({state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-    state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack})
+    local lastAction = lastActions[#lastActions]
+
+    DZTemp.Model:activate({
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        (lastAction == 0) and 1 or 0, -- if last action is dash 
+        (lastAction == 1) and 1 or 0, -- if last action is attack
+        (lastAction == 2) and 1 or 0}) -- if last action is special attack
 
     local dashProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal
