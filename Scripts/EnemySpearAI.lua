@@ -115,6 +115,7 @@ function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
         return false
     end
     enemy.LastActionTime = _worldTime
+    DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
     return true
 end
 
