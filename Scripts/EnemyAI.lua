@@ -4,8 +4,8 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.DZ = {} -- for storing data related to this mod
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
+    enemy.DZ.LastActionTime = 0
     enemy.AIState = { }
-    enemy.LastActionTime = 0
 
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}

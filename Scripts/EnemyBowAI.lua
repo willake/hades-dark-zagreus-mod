@@ -106,7 +106,7 @@ function DZDoBowAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     if not DZFireBowWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.LastActionTime = _worldTime
+    enemy.DZ.LastActionTime = _worldTime
     DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
     
     return true
@@ -163,7 +163,7 @@ function DZSelectBowWeapon(enemy, actionData)
     if r < actionData.Attack then
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
+        if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.DZ.LastActionTime < 0.3 then
             enemy.DZ.TempAction = 1
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil

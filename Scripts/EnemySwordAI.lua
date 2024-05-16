@@ -102,7 +102,7 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
     if not DZFireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.LastActionTime = _worldTime
+    enemy.DZ.LastActionTime = _worldTime
     DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
     
     return true
@@ -172,7 +172,7 @@ function DZSelectSwordWeapon(enemy, actionData)
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
     enemy.DZ.TempAction = 0
-    local lastActionTime = enemy.LastActionTime
+    local lastActionTime = enemy.DZ.LastActionTime
 
     -- use attack weapon
     if r < actionData.Attack then
