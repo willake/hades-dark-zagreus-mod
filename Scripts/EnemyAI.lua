@@ -1,9 +1,11 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusAI( enemy, currentRun )
+    enemy.DZ = {} -- for storing data related to this mod
+    enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
+    enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
     enemy.AIState = { }
     enemy.LastActionTime = 0
-    enemy.LastAction = 0
 
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
@@ -77,6 +79,28 @@ function DZDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
     return didTimeout
 end
 
+function DZAIEnqueueLastAction(enemy, action)
+    table.insert(enemy.DZ.LastActions, action)
+
+    -- max size of last action queue is 1 now, will be 2 in the future
+    -- depends on how many information we wanna storing for the model prediction
+    if #enemy.DZ.LastActions > 1 then
+        table.remove(enemy.DZ.LastActions, 1) 
+    end
+end
+
+function DZAIGetLastAction(enemy)
+    return enemy.DZ.LastActions[#enemy.DZ.LastActions]
+end
+
+function DZAIGetLastActions(enemy)
+    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
+    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
+    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
+
+
+end
+
 function DZGetCurrentAIState(enemy)
     local distance = 0.00
     distance = GetDistance({ Id = enemy.ObjectId, DestinationId = currentRun.Hero.ObjectId })
@@ -85,17 +109,14 @@ function DZGetCurrentAIState(enemy)
         distance = 1000
     end
 
-    local isLastActionDash = (enemy.LastAction == 0) and 1 or 0
-    local isLastActionAttack = (enemy.LastAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.LastAction == 2) and 1 or 0
+    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
+    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
+    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
         ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
-        Distance = distance / 1000,
-        IsLastActionDash = isLastActionDash,
-        IsLastActionAttack = isLastActionAttack,
-        IsLastActionSpecialAttack = isLastActionSpectialAttack
+        Distance = distance / 1000
     }
 end
 

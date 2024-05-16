@@ -251,19 +251,19 @@ function DZSelectSpearWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = 1
+    enemy.DZ.TempAction = 1
 
     -- use attack weapon
     if r < actionData.Attack then
         
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
-            enemy.LastAction = 2
+            enemy.DZ.TempAction = 2
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
-        enemy.LastAction = 1
+        enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
         if enemy.AIState.IsLastActionDash > 0 and _worldTime - enemy.LastActionTime < 0.3 then
@@ -289,7 +289,7 @@ function DZSelectSpearWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.Attack + actionData.SpecialAttack then
-        enemy.LastAction = 2
+        enemy.DZ.TempAction = 2
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
 
             if enemy.SpecialAttackWeaponRush then
@@ -310,7 +310,7 @@ function DZSelectSpearWeapon(enemy, actionData)
 
     -- use dash
     if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
-        enemy.LastAction = 0
+        enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
