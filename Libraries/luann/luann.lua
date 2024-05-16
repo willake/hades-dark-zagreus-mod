@@ -25,6 +25,9 @@
 
 if not DarkZagreus.Config.Enabled then return end
 
+----- READ THIS ----
+-- Huiun: Persistence was for saving the model to file, but I don't need it so I comment it out.
+--------------------
 -- --Borrowed table Persistence from http://lua-users.org/wiki/TablePersistence, MIT license.
 -- --comments removed, condensed code to oneliners where possible.
 -- -- Persistence =

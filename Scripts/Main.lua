@@ -1,5 +1,8 @@
 if not DarkZagreus.Config.Enabled then return end
 
+DZVersion = "alpha1"
+DebugPrint({ Text = "DarkZagreus Mod loaded. Version: " .. DZVersion})
+
 -- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
     DebugPrint({ Text = "Enter D_Boss01" })
@@ -34,7 +37,6 @@ DZPersistent = {}
 
 -- DZTemp for data should be deleted after leaving the game
 DZTemp = {}
-DZVersion = "alpha1"
 
 SaveIgnores["DZTemp"] = true
 SaveIgnores["DZVersion"] = true

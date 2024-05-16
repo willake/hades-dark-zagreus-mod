@@ -200,7 +200,8 @@ DZClearAllRecordInMemory = function ()
 end
 
 DZSaveCurRunRecordToFile = function ()
-    DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - DZSaveCurRunRecordToFile"} })
+    DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
+    DZSaveTrainingData(DZPersistent.CurRunRecord)
 end
 
 -- clean up data if the version is not matched
@@ -210,59 +211,3 @@ OnAnyLoad { "DeathArea", function(triggerArgs)
         DZClearAllRecordInMemory()
     end 
 end}
-
--- if io module is avilable, create a new record file then start logging
-if io then
-    local recordFilePath = "DZrecord" .. ".log"
-
-    DZSaveCurRunRecordToFile = function ()
-        DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - DZSaveCurRunRecordToFile"} })
-        local file = io.open(recordFilePath, "w+")
-        
-        local weapon = GameState.LastInteractedWeaponUpgrade
-
-        DZPersistent.PendingRecord = {}
-
-        -- write what weapon player's holding into the file
-        file:write(string.format("%s\n", weapon.WeaponName))
-        file:write(string.format("%d\n", weapon.ItemIndex))
-
-        for i = 1, #DZPersistent.CurRunRecord.History do
-            local record = DZPersistent.CurRunRecord.History[i]
-            
-            local state = ""
-            -- format state
-            for i, v in ipairs(record[1]) do
-                -- Format the float to 2 decimal places and concatenate it to the string
-                state = state .. string.format("%.2f", v)
-
-                -- Add a space after each float except the last one
-                if i < #record[1] then
-                    state = state .. " "
-                end
-            end
-
-            state = state .. "\n"
-
-            -- format action
-            local action = ""
-            -- format state
-            for i, v in ipairs(record[2]) do
-                -- Format the float to 2 decimal places and concatenate it to the string
-                action = action .. string.format("%.2f", v)
-
-                -- Add a space after each float except the last one
-                if i < #record[2] then
-                    action = action .. " "
-                end
-            end
-
-            action = action .. "\n"
-    
-            file:write(state)
-            file:write(action)
-        end
-
-        file:close()
-    end
-end

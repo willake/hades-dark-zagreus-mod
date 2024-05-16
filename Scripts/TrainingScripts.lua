@@ -1,8 +1,8 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DZTrainAI()
-    local learningRate = 50 -- set between 1, 100
-    local attempts = 10 -- number of times to do backpropagation
+    local learningRate = 1 -- set between 1, 100
+    local attempts = 1 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
 
     local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
@@ -29,8 +29,64 @@ function DZTrainAI()
     DZTemp.Model = network
 end
 
+function DZSaveTrainingData(CurRunRecord)
+    DebugPrint({ Text = "DZSaveTrainingData() - Not really save the file because it is x64 version."})
+end
 
-function LoadTrainingData(fileName)
+-- if io module is avilable, create a new record file then start logging
+if io then
+    local recordFilePath = "DZrecord" .. ".log"
+
+    DZSaveTrainingData = function (CurRunRecord)
+        local file = io.open(recordFilePath, "w+")
+        
+        local weapon = CurRunRecord.Weapon
+
+        -- write what weapon player's holding into the file
+        file:write(string.format("%s\n", weapon.WeaponName))
+        file:write(string.format("%d\n", weapon.ItemIndex))
+
+        for i = 1, #CurRunRecord.History do
+            local record = DZPersistent.CurRunRecord.History[i]
+            
+            local state = ""
+            -- format state
+            for i, v in ipairs(record[1]) do
+                -- Format the float to 2 decimal places and concatenate it to the string
+                state = state .. string.format("%.2f", v)
+
+                -- Add a space after each float except the last one
+                if i < #record[1] then
+                    state = state .. " "
+                end
+            end
+
+            state = state .. "\n"
+
+            -- format action
+            local action = ""
+            -- format state
+            for i, v in ipairs(record[2]) do
+                -- Format the float to 2 decimal places and concatenate it to the string
+                action = action .. string.format("%.2f", v)
+
+                -- Add a space after each float except the last one
+                if i < #record[2] then
+                    action = action .. " "
+                end
+            end
+
+            action = action .. "\n"
+    
+            file:write(state)
+            file:write(action)
+        end
+
+        file:close()
+    end
+end
+
+function DZLoadTrainingData(fileName)
     local data = {}
     data.WeaponData = {}
     data.TrainingData = {}
