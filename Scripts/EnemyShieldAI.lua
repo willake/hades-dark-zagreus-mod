@@ -2,15 +2,15 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusShieldAI( enemy, currentRun )
     enemy.HasBonus = false -- for chaos shield
-    return DZDoShieldAILoop( enemy, currentRun )
+    return DZAIDoShieldAILoop( enemy, currentRun )
 end
 
-function DZDoShieldAILoop(enemy, currentRun, targetId)
+function DZAIDoShieldAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectShieldWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectShieldWeapon(enemy, actionData)
 
     if enemy.WeaponName == nil then
         return false
@@ -47,7 +47,7 @@ function DZDoShieldAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoShieldAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoShieldAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -60,7 +60,7 @@ function DZDoShieldAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoShieldAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -104,14 +104,14 @@ function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
 		return false
 	end
 
-    if not DZFireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
 
     return true
 end
 
-function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
@@ -193,7 +193,7 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
     return true
 end
 
-function DZSelectShieldWeapon(enemy, actionData)
+function DZAISelectShieldWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil

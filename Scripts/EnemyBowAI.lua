@@ -1,15 +1,15 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusBowAI( enemy, currentRun )
-    return DZDoBowAILoop( enemy, currentRun )
+    return DZAIDoBowAILoop( enemy, currentRun )
 end
 
-function DZDoBowAILoop(enemy, currentRun, targetId)
+function DZAIDoBowAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectBowWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectBowWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -45,7 +45,7 @@ function DZDoBowAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoBowAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoBowAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -58,7 +58,7 @@ function DZDoBowAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoBowAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoBowAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -102,7 +102,7 @@ function DZDoBowAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 		return false
 	end
 
-    if not DZFireBowWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireBowWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
     
@@ -111,7 +111,7 @@ end
 
 
 -- not sure how to best handle the bow charge, the changes of speed & velocity confused me
-function DZFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -150,7 +150,7 @@ function DZFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function DZSelectBowWeapon(enemy, actionData)
+function DZAISelectBowWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil

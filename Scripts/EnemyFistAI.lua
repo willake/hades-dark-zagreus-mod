@@ -2,15 +2,15 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusFistAI( enemy, currentRun )
     enemy.ComboThreshold = 12 -- for AspectofDemeter
-    return DZDoFistAILoop( enemy, currentRun )
+    return DZAIDoFistAILoop( enemy, currentRun )
 end
 
-function DZDoFistAILoop(enemy, currentRun, targetId)
+function DZAIDoFistAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectFistWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectFistWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -42,7 +42,7 @@ function DZDoFistAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoFistAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoFistAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
                 DebugPrint({ Text = "Attack failed. Gonna try again."})
@@ -56,7 +56,7 @@ function DZDoFistAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoFistAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -100,14 +100,14 @@ function DZDoFistAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 	-- 	return false
 	-- end
 
-    if not DZFireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireFistWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
     
     return true
 end
 
-function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -125,7 +125,7 @@ function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- Prefire
 
     if weaponAIData.WillTriggerVacuumFunction then
-        DZCheckVacuumPlayer(enemy, targetId, 
+        DZAICheckVacuumPlayer(enemy, targetId, 
         {
             Range = 800,				-- Vacuum distance
             DistanceBuffer = 130,		-- Space to leave between player and enemy
@@ -155,7 +155,7 @@ function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- so I implement it here
     if weaponAIData.CheckComboPowerReset then
         -- local sourceWeaponData = GetWeaponData( attacker, weaponAIData.WeaponName )
-        DZCheckComboPowerReset(enemy, weaponAIData)
+        DZAICheckComboPowerReset(enemy, weaponAIData)
     end
 
     -- Fire end
@@ -172,7 +172,7 @@ function DZFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     return true
 end
 
-function DZSelectFistWeapon(enemy, actionData)
+function DZAISelectFistWeapon(enemy, actionData)
     local r = math.random()
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -236,8 +236,8 @@ end
 
 -- these function are replicated version from Power.lua
 -- because the original version is only available for player character
-
-function DZFistVacuumRush(enemy)
+-- TODO: deal with this function when rush weapon is fired
+function DZAIFistVacuumRush(enemy)
     -- i might do this function later
     -- because I don't know when is it trigger
     enemy.VacuumRush = true
@@ -245,13 +245,13 @@ function DZFistVacuumRush(enemy)
 	enemy.VacuumRush = false 
 end
 
-function DZFistVacuumPullPresentation( attracter, victimId, args )
+function DZAIFistVacuumPullPresentation( attracter, victimId, args )
 	CreateAnimationsBetween({ Animation = "FistVacuumFx", DestinationId = victimId, Id = attracter.ObjectId, Length = args.distanceBuffer, Stretch = true, UseZLocation = false, Group = "FX_Standing_Add" })
 	PlaySound({ Name = "/SFX/Player Sounds/ZagreusFistMagnetismVacuumActivate", Id = victimId })
 end
 
 -- attract player to enemy position
-function DZCheckVacuumPlayer(enemy, targetId, args)
+function DZAICheckVacuumPlayer(enemy, targetId, args)
     -- TODO sometime it's not working, need to know why
     -- maybe also check if player is dead
 	if targetId ~= 0 then
@@ -263,12 +263,12 @@ function DZCheckVacuumPlayer(enemy, targetId, args)
         -- DebugPrintf({ Text = "GetRequiredForceToEnemy: " .. GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer )})
 		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
 		FireWeaponFromUnit({ Weapon = "DarkTalosFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId })
-		DZFistVacuumPullPresentation( enemy, targetId, args )
+		DZAIFistVacuumPullPresentation( enemy, targetId, args )
 	end
 end
 
 -- will wrap DamageHero in Combat.lua to call this
-function DZCheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
+function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 
 	if sourceWeaponData == nil or sourceWeaponData.ComboPoints == nil or sourceWeaponData.ComboPoints <= 0 then
 		return
@@ -295,12 +295,12 @@ function DZCheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
 
-		DZComboReadyPresentation( attacker, triggerArgs )
+		DZAIComboReadyPresentation( attacker, triggerArgs )
 	end
 
 end
 
-function DZComboReadyPresentation( attacker, triggerArgs )
+function DZAIComboReadyPresentation( attacker, triggerArgs )
 	CreateAnimation({ Name = "FistComboReadyFx", DestinationId = attacker.ObjectId })
 	CreateAnimation({ Name = "PowerUpComboReady", DestinationId = attacker.ObjectId })
 	CreateAnimation({ Name = "FistComboReadyGlow", DestinationId = attacker.ObjectId })
@@ -310,7 +310,7 @@ function DZComboReadyPresentation( attacker, triggerArgs )
 	end
 end
 
-function DZCheckComboPowerReset( attacker, weaponData )
+function DZAICheckComboPowerReset( attacker, weaponData )
 	if weaponData ~= nil and attacker.ComboReady then
         DebugPrintf({ Text = "Reset Combo"})
 		-- thread(MarkObjectiveComplete, "FistWeaponFistWeave")
@@ -332,7 +332,7 @@ function DZCheckComboPowerReset( attacker, weaponData )
 end
 
 -- for aspect of gilgamesh
-function DZCheckFistDetonation( attacker, victim, triggerArgs )
+function DZAICheckFistDetonation( attacker, victim, triggerArgs )
 	if ( not victim.ActiveEffects or not victim.ActiveEffects.MarkRuptureTarget ) and triggerArgs.SourceWeapon == "DarkGilgameshFistSpecialDash" then
 		local delay = 0.1
 		MapState.QueuedDetonations = MapState.QueuedDetonations  or {}
@@ -348,7 +348,7 @@ function DZCheckFistDetonation( attacker, victim, triggerArgs )
 	end
 end
 
-function DZOnRuptureDashHit( args )
+function DZAIOnRuptureDashHit( args )
     local attacker = args.AttackerTable
 	local victim = args.TriggeredByTable
 	-- if victim.TriggersOnDamageEffects and victim == CurrentRun.Hero then
@@ -359,7 +359,7 @@ function DZOnRuptureDashHit( args )
 	end
 end
 
-function DZOnRuptureWeaponHit( args )
+function DZAIOnRuptureWeaponHit( args )
     local attacker = args.AttackerTable
 	local victim = args.TriggeredByTable
 	if victim == CurrentRun.Hero then
@@ -373,7 +373,7 @@ end
 ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
     local attacker = triggerArgs.AttackerTable
     local sourceWeaponData = GetWeaponData( attacker, triggerArgs.SourceWeapon )
-	thread( DZCheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
-    DZCheckFistDetonation(attacker, victim, triggerArgs) -- for aspect of Gilgamesh
+	thread( DZAICheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
+    DZAICheckFistDetonation(attacker, victim, triggerArgs) -- for aspect of Gilgamesh
     return base(victim, triggerArgs)
 end, DarkZagreus)

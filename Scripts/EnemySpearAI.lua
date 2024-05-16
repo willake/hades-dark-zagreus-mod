@@ -1,18 +1,18 @@
 if not DarkZagreus.Config.Enabled then return end
  
 function DarkZagreusSpearAI( enemy, currentRun )
-    return DZDoSpearAILoop( enemy, currentRun )
+    return DZAIDoSpearAILoop( enemy, currentRun )
 end
 
 -- SpearWeaponThrowInvisibleReturn will be trrigger when player touch the dropped spear
 -- not sure how to handle it yet
 
-function DZDoSpearAILoop(enemy, currentRun, targetId)
+function DZAIDoSpearAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
     local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
-    enemy.WeaponName = DZSelectSpearWeapon(enemy, actionData)
+    enemy.WeaponName = DZAISelectSpearWeapon(enemy, actionData)
     DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
@@ -44,7 +44,7 @@ function DZDoSpearAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZDoSpearAIAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoSpearAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -57,7 +57,7 @@ function DZDoSpearAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoSpearAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -101,14 +101,14 @@ function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 		return false
 	end
 
-    if not DZFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
 
     return true
 end
 
-function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
@@ -230,7 +230,7 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     return true
 end
 
-function DZSelectSpearWeapon(enemy, actionData)
+function DZAISelectSpearWeapon(enemy, actionData)
     local r = math.random()
 
     enemy.DZ.TempAction = 0
