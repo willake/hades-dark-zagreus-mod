@@ -1,6 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end
 
-DZVersion = "alpha1"
+DZVersion = "alpha2"
 DebugPrint({ Text = "DarkZagreus Mod loaded. Version: " .. DZVersion})
 
 -- entering hades boss room
