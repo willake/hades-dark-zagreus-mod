@@ -102,8 +102,6 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
     if not DZFireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.DZ.LastActionTime = _worldTime
-    DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
     
     return true
 end
@@ -139,17 +137,6 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Fire end
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
-
-    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-	-- 	weaponAIData.ForcedEarlyExit = true
-	-- 	return true
-	-- end
-
-    -- Stop({ Id = enemy.ObjectId })
-
     -- AspectofArthur will fire an area after special attack
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
@@ -157,6 +144,10 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
         DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
+
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true

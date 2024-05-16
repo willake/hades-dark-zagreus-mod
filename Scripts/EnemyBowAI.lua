@@ -106,8 +106,6 @@ function DZDoBowAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     if not DZFireBowWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.DZ.LastActionTime = _worldTime
-    DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
     
     return true
 end
@@ -131,10 +129,6 @@ function DZFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
     -- Prefire End
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
-
     -- Fire
     if weaponAIData.IsRangeBasedOnCharge then
         -- DebugPrint({ Text = "Charge: " .. tostring(actionData.ChargeTime)})
@@ -142,6 +136,10 @@ function DZFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     else
         DZDoRegularFire(enemy, weaponAIData, targetId)
     end
+
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
 
     -- Fire end
 

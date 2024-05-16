@@ -114,8 +114,7 @@ function DZDoSpearAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
     if not DZFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.DZ.LastActionTime = _worldTime
-    DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
+
     return true
 end
 
@@ -157,19 +156,6 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     else
         DZDoRegularFire(enemy, weaponAIData, targetId)
     end
-
-    -- Fire end
-
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
-
-    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-	-- 	weaponAIData.ForcedEarlyExit = true
-	-- 	return true
-	-- end
-
-    -- Stop({ Id = enemy.ObjectId })
 
     -- PostAttackCharge
     -- Only spear weapons have this
@@ -230,6 +216,12 @@ function DZFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
         DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
+
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
+
+    -- Fire weapon end
 
     if weaponAIData.WillThrowSpear then
         enemy.IsSpearThrown = true

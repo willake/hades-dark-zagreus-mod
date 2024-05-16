@@ -132,21 +132,15 @@ function DZMakeAIActionData(state, lastActions)
         return DZMakeRandomAIActionData(state)
     end
 
-    -- DZDebugPrintTable("AIState", state, 3)
-    -- local r = math.random()
-    -- local chargeTime = 0.0
-
-    -- if r > 0.5 then
-    --     chargeTime = 0.1 + (math.random() * 0.9)
-    -- end
-
     local lastAction = lastActions[#lastActions]
 
     DZTemp.Model:activate({
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        (lastAction == 0) and 1 or 0, -- if last action is dash 
-        (lastAction == 1) and 1 or 0, -- if last action is attack
-        (lastAction == 2) and 1 or 0}) -- if last action is special attack
+        (lastAction.Action == 0) and 1 or 0, -- if last action is dash 
+        (lastAction.Action == 1) and 1 or 0, -- if last action is attack
+        (lastAction.Action == 2) and 1 or 0, -- if last action is special attack
+        lastAction.ChargeTime }
+    )
 
     local dashProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal

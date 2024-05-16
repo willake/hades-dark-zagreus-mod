@@ -110,8 +110,6 @@ function DZDoGunAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
     if not DZFireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.DZ.LastActionTime = _worldTime
-    DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
 
     return true
 end
@@ -157,6 +155,10 @@ function DZFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
     -- Fire
     
     DZDoRegularFire(enemy, weaponAIData, targetId)
+
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
 
     -- Fire end
 

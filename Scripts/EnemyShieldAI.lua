@@ -108,8 +108,6 @@ function DZDoShieldAIAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
     if not DZFireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.DZ.LastActionTime = _worldTime
-    DZAIEnqueueLastAction(enemy, enemy.DZ.TempAction)
 
     return true
 end
@@ -155,16 +153,11 @@ function DZFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
         DZDoRegularFire(enemy, weaponAIData, targetId)
     end
 
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
+
     -- Fire end
-
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
-
-    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-	-- 	weaponAIData.ForcedEarlyExit = true
-	-- 	return true
-	-- end
 
     -- shield will fire a rush weapon after primary attack
     if weaponAIData.PostFireChargeWeapon ~= nil then
