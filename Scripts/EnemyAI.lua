@@ -1,14 +1,16 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusAI( enemy, currentRun )
+    enemy.DZ = {} -- for storing data related to this mod
+    enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
+    enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
+    enemy.DZ.LastActionTime = 0
     enemy.AIState = { }
-    enemy.LastActionTime = 0
-    enemy.LastAction = 0
 
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
         
-    if DZPersistent.PrevRunRecord then
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DZVersion then
         weapon = DZPersistent.PrevRunRecord.Weapon
     end 
     
@@ -77,6 +79,27 @@ function DZDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
     return didTimeout
 end
 
+function DZAIEnqueueLastAction(enemy, action)
+    table.insert(enemy.DZ.LastActions, action)
+
+    -- max size of last action queue is 1 now, will be 2 in the future
+    -- depends on how many information we wanna storing for the model prediction
+    if #enemy.DZ.LastActions > 1 then
+        table.remove(enemy.DZ.LastActions, 1) 
+    end
+end
+
+function DZAIGetLastAction(enemy)
+    if #enemy.DZ.LastActions == 0 then
+        return {
+            Action = 0,
+            ChargeTime = 0.0
+        }
+    else
+        return enemy.DZ.LastActions[#enemy.DZ.LastActions]
+    end
+end
+
 function DZGetCurrentAIState(enemy)
     local distance = 0.00
     distance = GetDistance({ Id = enemy.ObjectId, DestinationId = currentRun.Hero.ObjectId })
@@ -85,17 +108,14 @@ function DZGetCurrentAIState(enemy)
         distance = 1000
     end
 
-    local isLastActionDash = (enemy.LastAction == 0) and 1 or 0
-    local isLastActionAttack = (enemy.LastAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.LastAction == 2) and 1 or 0
+    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
+    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
+    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
         ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
-        Distance = distance / 1000,
-        IsLastActionDash = isLastActionDash,
-        IsLastActionAttack = isLastActionAttack,
-        IsLastActionSpecialAttack = isLastActionSpectialAttack
+        Distance = distance / 1000
     }
 end
 
@@ -113,22 +133,29 @@ function DZMakeRandomAIActionData(state)
     }
 end
 
-function DZMakeAIActionData(state)
+function DZMakeAIActionData(state, lastActions)
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 then
         return DZMakeRandomAIActionData(state)
     end
 
-    -- DZDebugPrintTable("AIState", state, 3)
-    -- local r = math.random()
-    -- local chargeTime = 0.0
+    local lastAction = lastActions[#lastActions]
 
-    -- if r > 0.5 then
-    --     chargeTime = 0.1 + (math.random() * 0.9)
-    -- end
+    if lastAction == nil then
+       lastAction = 
+       {
+        Action = 0,
+        ChargeTime = 0.0
+       } 
+    end
 
-    DZTemp.Model:activate({state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-    state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack})
+    DZTemp.Model:activate({
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        (lastAction.Action == 0) and 1 or 0, -- if last action is dash 
+        (lastAction.Action == 1) and 1 or 0, -- if last action is attack
+        (lastAction.Action == 2) and 1 or 0, -- if last action is special attack
+        lastAction.ChargeTime }
+    )
 
     local dashProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal

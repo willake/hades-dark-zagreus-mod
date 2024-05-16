@@ -1,6 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end
 
-DZVersion = "alpha1"
+DZVersion = "alpha2"
 DebugPrint({ Text = "DarkZagreus Mod loaded. Version: " .. DZVersion})
 
 -- entering hades boss room
@@ -21,13 +21,20 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 end
             end
 
-            if weaponData and weaponData.WeaponName and weaponData.ItemIndex then
+            if DZPersistent.PrevRunRecord.Version == DZVersion 
+                and weaponData 
+                and weaponData.WeaponName 
+                and weaponData.ItemIndex then
                 DZWeaponData[weaponData.WeaponName][weaponData.ItemIndex].Equip(enemy)
+                DZDebugPrintTable("DZ Weapon Equipped", weaponData, 3)
             else
                 DZWeaponData["SwordWeapon"][1].Equip(enemy)
+                DZDebugPrintTable("DZ Weapon Equipped", 
+                {
+                    WeaponName = "SwordWeapon",
+                    ItemIndex = 1
+                }, 3)
             end 
-
-            DZDebugPrintTable("DZ Weapon Equipped", weaponData, 3)
         end
     end
 end }

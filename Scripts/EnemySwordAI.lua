@@ -6,8 +6,7 @@ end
 
 function DZDoSwordAILoop(enemy, currentRun, targetId)
     local aiState = DZGetCurrentAIState(enemy)
-    enemy.AIState = aiState
-    local actionData = DZMakeAIActionData(aiState)
+    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZSelectSwordWeapon(enemy, actionData)
@@ -102,7 +101,6 @@ function DZDoSwordAIAttackOnce(enemy, currentRun, targetId, weaponAIData, action
     if not DZFireSwordWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
     end
-    enemy.LastActionTime = _worldTime
     
     return true
 end
@@ -138,17 +136,6 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Fire end
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
-
-    -- if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
-	-- 	weaponAIData.ForcedEarlyExit = true
-	-- 	return true
-	-- end
-
-    -- Stop({ Id = enemy.ObjectId })
-
     -- AspectofArthur will fire an area after special attack
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
@@ -156,6 +143,10 @@ function DZFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
         DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
+
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true
@@ -168,25 +159,25 @@ end
 function DZSelectSwordWeapon(enemy, actionData)
     local total = actionData.Attack + actionData.SpecialAttack + actionData.Dash
     local r = math.random() * total
-    -- init combo weapon to nil
-    -- enemy.PostAttackChargeWeapon = nil
-    enemy.LastAction = 0
-    local lastActionTime = enemy.LastActionTime
+
+    enemy.DZ.TempAction = 0
+    local lastAction = DZAIGetLastAction(enemy)
+    local lastActionTime = enemy.DZ.LastActionTime
 
     -- use attack weapon
     if r < actionData.Attack then
 
-        enemy.LastAction = 1
+        enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
-        if enemy.AIState.IsLastActionDash > 0 and _worldTime - lastActionTime < 0.3 then
+        if lastAction.Action == 0 and _worldTime - lastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         -- if the last action is also attack, do weapon combo
-        if enemy.AIState.IsLastActionAttack > 0 then
+        if lastAction.Action == 1 then
             DebugPrintf({ Text = "Previous is attack"})
             if enemy.ChainedWeapon ~= nil and _worldTime - lastActionTime < 0.3 then
                 DebugPrintf({ Text = "Do combo"})
@@ -204,7 +195,7 @@ function DZSelectSwordWeapon(enemy, actionData)
 
     -- use special attack
     if r < actionData.Attack + actionData.SpecialAttack then
-        enemy.LastAction = 2
+        enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
@@ -212,7 +203,7 @@ function DZSelectSwordWeapon(enemy, actionData)
 
     -- use dash
     if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
-        enemy.LastAction = 0
+        enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName

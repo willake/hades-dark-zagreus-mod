@@ -62,17 +62,17 @@ function DZGetCurrentState()
         distance = 1000
     end
 
-    local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
-    local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
+    -- local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
+    -- local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
+    -- local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
         ClosestEnemyHP = enemyHealth,
         Distance = distance / 1000,
-        IsLastActionDash = isLastActionDash,
-        IsLastActionAttack = isLastActionAttack,
-        IsLastActionSpecialAttack = isLastActionSpectialAttack,
+        -- IsLastActionDash = isLastActionDash,
+        -- IsLastActionAttack = isLastActionAttack,
+        -- IsLastActionSpecialAttack = isLastActionSpectialAttack,
     }
 end
 
@@ -149,15 +149,13 @@ DZCreateNewRecord = function()
 end
 
 DZLogRecord = function (state, action) 
-    DebugPrint({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack,
+    DebugPrint({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance,
         action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
-      { state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.IsLastActionDash, state.IsLastActionAttack, state.IsLastActionSpecialAttack },
+      { state.OwnHP, state.ClosestEnemyHP, state.Distance },
       { action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime }
     })
 end
