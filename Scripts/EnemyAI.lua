@@ -10,7 +10,7 @@ function DarkZagreusAI( enemy, currentRun )
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
         
-    if DZPersistent.PrevRunRecord then
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DZVersion then
         weapon = DZPersistent.PrevRunRecord.Weapon
     end 
     
@@ -133,6 +133,14 @@ function DZMakeAIActionData(state, lastActions)
     end
 
     local lastAction = lastActions[#lastActions]
+
+    if lastAction == nil then
+       lastAction = 
+       {
+        Action = 0,
+        ChargeTime = 0.0
+       } 
+    end
 
     DZTemp.Model:activate({
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
