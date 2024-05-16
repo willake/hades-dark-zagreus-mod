@@ -5,6 +5,8 @@ function DZTrainAI()
     local epoch = 1 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
 
+    -- Input: PlayerHP, ClosetEnemyHP, ClosetEnemyDistance, IsLastActionDash, IsLastActionAttack, IsLastActionSpecialAttack
+    -- Output: DashProb, AttackProb, SpecialAttackProb, ChargeTime
     local network = Luann:new({7, 6, 6, 4}, learningRate, threshold)
 
     if DZPersistent.PrevRunRecord == nil then
