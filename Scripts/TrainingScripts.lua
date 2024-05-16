@@ -1,6 +1,12 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DZTrainAI()
+
+    if DZPersistent.PrevRunRecord.Version ~= DZVersion then
+        DebugPrint({ Text = "DZTrainAI() - Mod version does not match with the current one"})
+        return
+    end
+
     local learningRate = 1 -- set between 1, 100
     local epoch = 1 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
@@ -36,10 +42,10 @@ function DZTrainAI()
     -- improve generalizability
     DZShuffleDataset(dataset)
 
-    DebugPrint({ Text = "DZTrainAI() - Start training, data count: " .. tostring(#trainingData)})
+    DebugPrint({ Text = "DZTrainAI() - Start training, data count: " .. tostring(#dataset)})
 
     for i = 1, epoch do
-        for _, data in ipairs(trainingData) do
+        for _, data in ipairs(dataset) do
             network:bp(data[1], data[2])
         end
     end
