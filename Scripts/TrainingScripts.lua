@@ -1,8 +1,8 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DZTrainAI()
-    local learningRate = 50 -- set between 1, 100
-    local attempts = 10 -- number of times to do backpropagation
+    local learningRate = 1 -- set between 1, 100
+    local attempts = 1 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
 
     local network = Luann:new({6, 6, 6, 4}, learningRate, threshold)
@@ -30,7 +30,7 @@ function DZTrainAI()
 end
 
 
-function LoadTrainingData(fileName)
+function DZLoadTrainingData(fileName)
     local data = {}
     data.WeaponData = {}
     data.TrainingData = {}
