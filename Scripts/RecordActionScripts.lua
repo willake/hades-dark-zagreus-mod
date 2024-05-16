@@ -319,6 +319,11 @@ OnWeaponFired { "GunGrenadeToss",
 -- rush
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
+        -- DebugPrint({ Text = GetAngle({ Id = CurrentRun.Hero.ObjectId })})
+        -- local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
+        -- local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam"})
+        -- local angleBetween = GetAngleBetween({ Id = CurrentRun.Hero.ObjectId, DestinationId = closestId })
+        -- DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
         if not DZCheckCanRecord() then
             return false
         end
