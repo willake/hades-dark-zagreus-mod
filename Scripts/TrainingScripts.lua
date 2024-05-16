@@ -2,7 +2,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DZTrainAI()
     local learningRate = 1 -- set between 1, 100
-    local attempts = 1 -- number of times to do backpropagation
+    local epoch = 1 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
 
     local network = Luann:new({7, 6, 6, 4}, learningRate, threshold)
@@ -12,15 +12,31 @@ function DZTrainAI()
         return
     end
 
-    local trainingData = DZPersistent.PrevRunRecord.History
-
-    if #trainingData == 0 then
+    if DZPersistent.PrevRunRecord.History == nil or #DZPersistent.PrevRunRecord.History == 0 then
+        DebugPrint({ Text = "DZTrainAI() - History is missing"})
         return
     end
 
+    local dataset = DeepCopyTable(DZPersistent.PrevRunRecord.History)
+
+    -- insert last actions to each data, this provides more information for training the model
+    for i = 2, #dataset do
+        local prev = dataset[i - 1][2]
+
+        for j = 1, 4 do
+            table.insert(dataset[i][1], prev[j])
+        end
+    end
+
+    -- remove first data since it has not last action, it's fine 
+    table.remove(dataset, 1)
+
+    -- improve generalizability
+    DZShuffleDataset(dataset)
+
     DebugPrint({ Text = "DZTrainAI() - Start training, data count: " .. tostring(#trainingData)})
 
-    for i = 1, attempts do
+    for i = 1, epoch do
         for _, data in ipairs(trainingData) do
             network:bp(data[1], data[2])
         end
@@ -29,7 +45,7 @@ function DZTrainAI()
     DZTemp.Model = network
 end
 
-function DZSaveTrainingData(CurRunRecord)
+function DZSaveTrainingData(curRunRecord)
     DebugPrint({ Text = "DZSaveTrainingData() - Not really save the file because it is x64 version."})
 end
 
@@ -37,17 +53,17 @@ end
 if io then
     local recordFilePath = "DZrecord" .. ".log"
 
-    DZSaveTrainingData = function (CurRunRecord)
+    DZSaveTrainingData = function (curRunRecord)
         local file = io.open(recordFilePath, "w+")
         
-        local weapon = CurRunRecord.Weapon
+        local weapon = curRunRecord.Weapon
 
         -- write what weapon player's holding into the file
         file:write(string.format("%s\n", weapon.WeaponName))
         file:write(string.format("%d\n", weapon.ItemIndex))
 
-        for i = 1, #CurRunRecord.History do
-            local record = DZPersistent.CurRunRecord.History[i]
+        for i = 1, #curRunRecord.History do
+            local record = curRunRecord.History[i]
             
             local state = ""
             -- format state
@@ -119,4 +135,14 @@ function DZLoadTrainingData(fileName)
         end
     end
     return (data)
+end
+
+function DZShuffleDataset(dataset)
+    -- Fisher–Yates shuffle
+    for i = #dataset, 1, -1 do
+        local r = math.random(1, i)
+        local temp = dataset[r]
+        dataset[r] = dataset[i]
+        dataset[i] = temp
+    end
 end
