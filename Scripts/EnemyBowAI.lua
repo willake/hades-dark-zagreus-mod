@@ -5,8 +5,8 @@ function DarkZagreusBowAI( enemy, currentRun )
 end
 
 function DZAIDoBowAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectBowWeapon(enemy, actionData)
@@ -30,7 +30,7 @@ function DZAIDoBowAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -124,16 +124,16 @@ function DZAIFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
     -- Fire
     if weaponAIData.IsRangeBasedOnCharge then
         -- DebugPrint({ Text = "Charge: " .. tostring(actionData.ChargeTime)})
-        DZDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
+        DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
-        DZDoRegularFire(enemy, weaponAIData, targetId)
+        DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
 
     enemy.DZ.LastActionTime = _worldTime

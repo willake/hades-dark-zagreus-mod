@@ -8,8 +8,8 @@ end
 -- not sure how to handle it yet
 
 function DZAIDoSpearAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectSpearWeapon(enemy, actionData)
@@ -33,7 +33,7 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -131,7 +131,7 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -142,9 +142,9 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
     -- Fire
     
     if weaponAIData.IsRangeBasedOnCharge then
-        DZDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
+        DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
-        DZDoRegularFire(enemy, weaponAIData, targetId)
+        DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
 
     -- PostAttackCharge
@@ -152,10 +152,10 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
     -- Spear will charge after attack if player still holding the button
     if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.3 then
         local chargeWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
         
-        DZDoPreFire(enemy, chargeWeaponAIData, targetId)
+        DZAIDoPreFire(enemy, chargeWeaponAIData, targetId)
 
         -- if the charge time is larger than the threshold, at least play the first stage
         if chargeTime > weaponAIData.PostFireChargeStages[1].Threshold then
@@ -179,12 +179,12 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
                 wait(stageData.Threshold, enemy.AIThreadName)
                 PlaySound({ Name = "/Leftovers/SFX/AuraOnLoud" })
                 Flash({ Id = enemy.ObjectId, Speed = 4, MinFraction = 0.5, MaxFraction = 0.6, Color = Color.White, Duration = 0.3 })
-                chargeWeaponAIData = DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[stage].ChargeWeapon)
+                chargeWeaponAIData = DZAIGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[stage].ChargeWeapon)
             end
 
             wait(remainChargeTime, enemy.AIThreadName)
 
-            DZDoRegularFire(enemy, chargeWeaponAIData, targetId) 
+            DZAIDoRegularFire(enemy, chargeWeaponAIData, targetId) 
 
             -- after doing spin, combo should be canceled
             enemy.ChainedWeapon = nil
@@ -202,9 +202,9 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
     -- while equiping Aspect of Achilles
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DZAIDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     enemy.DZ.LastActionTime = _worldTime

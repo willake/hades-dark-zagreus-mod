@@ -6,8 +6,8 @@ function DarkZagreusShieldAI( enemy, currentRun )
 end
 
 function DZAIDoShieldAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectShieldWeapon(enemy, actionData)
@@ -36,7 +36,7 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -134,7 +134,7 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -149,7 +149,7 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
         RunWeaponMethod(
             { Id = enemy.ObjectId, Weapon = weaponAIData.WeaponName, Method = "RecallProjectiles" })
     else
-        DZDoRegularFire(enemy, weaponAIData, targetId)
+        DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
 
     enemy.DZ.LastActionTime = _worldTime
@@ -161,11 +161,11 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
     -- shield will fire a rush weapon after primary attack
     if weaponAIData.PostFireChargeWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireChargeWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireChargeWeapon)
 
-        DZDoPreFire(enemy, postFireWeaponAIData, targetId)
+        DZAIDoPreFire(enemy, postFireWeaponAIData, targetId)
 
-        DZDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
+        DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
         
         if postFireWeaponAIData.WillEnableBonus then
             enemy.HasBonus = true
@@ -174,11 +174,11 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 
     if weaponAIData.PostFireBonusWeapon ~= nil and enemy.HasBonus then
         local bonusWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireBonusWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireBonusWeapon)
 
-        DZDoPreFire(enemy, bonusWeaponAIData, targetId)
+        DZAIDoPreFire(enemy, bonusWeaponAIData, targetId)
 
-        DZDoRegularFire(enemy, bonusWeaponAIData, targetId)
+        DZAIDoRegularFire(enemy, bonusWeaponAIData, targetId)
 
         if bonusWeaponAIData.WillConsumeBonus then
             enemy.HasBonus = false

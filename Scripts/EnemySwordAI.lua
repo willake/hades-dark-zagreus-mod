@@ -5,8 +5,8 @@ function DarkZagreusSwordAI( enemy, currentRun )
 end
 
 function DZAIDoSwordAILoop(enemy, currentRun, targetId)
-    local aiState = DZGetCurrentAIState(enemy)
-    local actionData = DZMakeAIActionData(aiState, enemy.DZ.LastActions)
+    local aiState = DZAIGetCurrentState(enemy)
+    local actionData = DZAIMakeActionData(aiState, enemy.DZ.LastActions)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectSwordWeapon(enemy, actionData)
@@ -30,7 +30,7 @@ function DZAIDoSwordAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -122,7 +122,7 @@ function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     -- Prefire
 
-    DZDoPreFire(enemy, weaponAIData, targetId)
+    DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
 
@@ -132,16 +132,16 @@ function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     -- Fire
     
-    DZDoRegularFire(enemy, weaponAIData, targetId)
+    DZAIDoRegularFire(enemy, weaponAIData, targetId)
 
     -- Fire end
 
     -- AspectofArthur will fire an area after special attack
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
 
-        DZDoRegularFire(enemy, postFireWeaponAIData, targetId)
+        DZAIDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
 
     enemy.DZ.LastActionTime = _worldTime
