@@ -1,0 +1,34 @@
+{
+	Weapons = [
+		"_append"
+    {
+      Name = "DarkPoseidonSword"
+      InheritFrom = "DarkSword"
+      ChargeStartAnimation = "ZagreusSwordAlt02Charge1"
+      FireGraphic = "ZagreusSwordAlt02Attack1"
+    }
+    {
+      Name = "DarkPoseidonSword2"
+      InheritFrom = "DarkSword2"
+      // ChargeStartAnimation = "ZagreusSwordAlt02Charge2"
+      // FireGraphic = "ZagreusSwordAlt02Attack2"
+    }
+    {
+      Name = "DarkPoseidonSword3"
+      InheritFrom = "DarkSword3"
+      // ChargeStartAnimation = "ZagreusSwordAlt02Charge3"
+      // FireGraphic = "ZagreusSwordAlt02Attack3"
+    }
+    {
+      Name = "DarkPoseidonSwordDash"
+      InheritFrom = "DarkSwordDash"
+      FireGraphic = "ZagreusSwordAlt02DashAttack"
+    }
+    {
+      Name = "DarkPoseidonSwordParry"
+      InheritFrom = "DarkSwordParry"
+      ChargeStartAnimation = "ZagreusSwordAlt02ParryCharge"
+      FireGraphic = "ZagreusSwordAlt02ParryFire"
+    }
+  ]
+}

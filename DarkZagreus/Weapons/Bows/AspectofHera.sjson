@@ -1,0 +1,28 @@
+{
+  Weapons = [
+    "_append"
+    {
+      Name = "DarkHeraBow"
+      InheritFrom = "DarkBow"
+      Projectile = "DarkHeraBow"
+      ChargeCancelGraphic = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+    }
+    {
+      Name = "DarkHeraBowDash"
+      InheritFrom = "DarkBowDash"
+      Projectile = "DarkHeraBowDash"
+      ChargeCancelGraphic = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+    }
+    {
+      Name = "DarkHeraBowSplitShot"
+      InheritFrom = "DarkBowSplitShot"
+      Projectile = "DarkHeraBowSplitShot"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+    }
+  ]
+}

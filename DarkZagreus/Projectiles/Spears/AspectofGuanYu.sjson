@@ -1,0 +1,291 @@
+{
+	Projectiles = [
+		"_append"
+        {
+            Name = "DarkGuanYuSpear"
+            InheritFrom = "DarkSpear"
+            DamageLow = 4 // 40
+            DamageHigh = 4 // 40
+            Thing =
+            {
+                Graphic = "SpearThrustProjectile"
+                OffsetZ = 40
+                RotateGeometry = true
+                Grip = 999999
+                UseBoundsForSortDrawArea = true
+                SortBoundsScale = 0.33
+                Tallness = 10
+                AttachedAnim = "GuanYuThrust"
+                Points =
+                [
+                {
+                    X = 130
+                    Y = 50
+                }
+                {
+                    X = 130
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = 50
+                }
+                ]
+            }
+            Effects = [
+                {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+                }
+                {
+                Name = "RushGrip"
+                Type = "GRIP"
+                Duration = 0.35
+                Modifier = 0.1
+                HaltOnEnd = true
+                Active = false
+                }
+            ]
+        }
+        {
+            Name = "DarkGuanYuSpear2"
+            InheritFrom = "DarkGuanYuSpear"
+            DamageLow = 4 // 60
+            DamageHigh = 4 // 60
+            Thing =
+            {
+                Graphic = "SpearThrustProjectile"
+                OffsetZ = 40
+                RotateGeometry = true
+                Grip = 999999
+                UseBoundsForSortDrawArea = true
+                SortBoundsScale = 0.33
+                Tallness = 10
+                AttachedAnim = "GuanYuThrust_Flip"
+                Points =
+                [
+                {
+                    X = 130
+                    Y = 50
+                }
+                {
+                    X = 130
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = 50
+                }
+                ]
+            }
+        }
+        {
+            Name = "DarkGuanYuSpear3"
+            InheritFrom = "DarkGuanYuSpear"
+            DamageLow = 4 // 100
+            DamageHigh = 4 // 100
+            Thing =
+            {
+                Graphic = "SpearThrustProjectile"
+                OffsetZ = 40
+                RotateGeometry = true
+                Grip = 999999
+                UseBoundsForSortDrawArea = true
+                SortBoundsScale = 0.33
+                Tallness = 10
+                AttachedAnim = "GuanYuThrust"
+                Points =
+                [
+                {
+                    X = 130
+                    Y = 50
+                }
+                {
+                    X = 130
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = -50
+                }
+                {
+                    X = -25
+                    Y = 50
+                }
+                ]
+            }
+        }
+        {
+            Name = "DarkGuanYuSpearDash"
+            InheritFrom = "DarkGuanYuSpear"
+            DetonateGraphic = "SpearDashSwipe"
+            ProjectileDefenseAngle = 100
+            ProjectileDefenseRadius = 240
+            DamageLow = 3 // 30
+            DamageHigh = 3 // 30
+            Thing =
+                {
+                Graphic = "SpearDashSwipe"
+                    Points =
+                    [
+                    {
+                        X = 200
+                        Y = 100
+                }
+                    {
+                        X = 200
+                        Y = -100
+            }
+            {
+                        X = -10
+                        Y = -150
+                    }
+                    {
+                        X = -10
+                        Y = 150
+                    }
+                    ]
+            }
+        }
+        {
+            Name = "DarkGuanYuSpearSpin"
+            InheritFrom = "DarkSpearSpin"
+            MultiDetonate = true
+            Range = 1001 // 1 + 1000
+            Speed = 400
+            Fuse = 0.25 // 0 + 0.25
+            TotalFuse = 0.75 // 0 + 0.75 
+            UnlimitedUnitPenetration = true
+            AttachToOwner = false
+            MultipleObstacleCollisions = false
+            CheckObstacleImpact = true
+            NumBounces = 99999
+            DamageRadius = 105 // 210 * 0.50
+            // ProjectileDefenseRadius = 275, original SpearSpin do not have this...
+            DamageLow = 2 // 20
+            DamageHigh = 2 // 20
+            Thing = {
+                Graphic = "null"
+                OffsetZ = 70
+                Grip = 999999
+                AttachedAnim = "GuanYuSpin"
+            }
+            Effects = [
+                {
+                Name = "RushGrip"
+                Type = "GRIP"
+                Duration = 0.35
+                Modifier = 0.1
+                HaltOnEnd = true
+                Active = false
+                }
+                {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+                }
+            ]
+        }
+        {
+            Name = "DarkGuanYuSpearSpin2"
+            InheritFrom = "DarkGuanYuSpearSpin"
+            DamageLow = 5 // 30
+            DamageHigh = 5 // 30
+            DamageRadius = 175 // 350 * 0.5
+            DeflectProjectiles = false
+            TotalFuse = 1.00 // 0 + 1.00 
+        }
+        {
+            Name = "DarkGuanYuSpearSpin3"
+            InheritFrom = "DarkGuanYuSpearSpin"
+            DamageLow = 10 // 50
+            DamageHigh = 10 // 50
+            DamageRadius = 250 // 500 * 0.5
+            DeflectProjectiles = false
+            TotalFuse = 1.25 // 0 + 1.25
+        }
+        {
+            Name = "DarkGuanYuSpearThrow"
+            InheritFrom = "DarkSpearThrow"
+            SpawnType = "PROJECTILE"
+            SpawnOnDetonate = "null"
+            SpawnOnDeath = "null"
+            SpawnCount = 0
+            MultiDetonate = true
+            Fuse = 0.08
+            ImmunityDuration = 0.5
+            UseVulnerability = true
+            DamageLow = 4 // 45
+            DamageHigh = 4 // 45
+            DamageRadius = 250
+            DamageRadiusScaleX = 1.1
+            DamageRadiusScaleY = 0.67
+            Speed = 2500
+            DetonateGraphic = "GuanYuFirecrackers"
+            DetonateSound = "null"
+            CheckUnitImpact = false
+            CheckObstacleImpact = true
+            Thing = {
+                Graphic = "SpearThrowProjectile"
+                OffsetZ = 70
+                Grip = 999999
+                RotateGeometry = true
+                SortBoundsScale = 0.33
+                UseBoundsForSortDrawArea = true
+                Tallness = 10
+                Points = [
+                {
+                    X = 96
+                    Y = 32
+                }
+                {
+                    X = 96
+                    Y = -32
+                }
+                {
+                    X = -96
+                    Y = -32
+                }
+                {
+                    X = -96
+                    Y = 32
+                }
+                ]
+            }
+            Effect = {
+                Name = "OnHitStun"
+                Duration = 0.5
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+        }
+        {
+            Name = "DarkGuanYuSpearThrowReturn"
+            InheritFrom = "DarkGuanYuSpearThrow"
+            Speed = 2500
+        }
+	]
+}

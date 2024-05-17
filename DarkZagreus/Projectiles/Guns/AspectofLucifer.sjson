@@ -1,0 +1,115 @@
+{
+	Projectiles = [
+        "_append"
+        {
+            Name = "DarkLuciferGun"
+            InheritFrom = "DarkGun"
+            ClearWeaponBonusesOnHit = true
+            ProjectileDefenseRadius = 0
+            Type = "BEAM"
+            ArcSize = 100
+            AutoAdjustForTarget = false
+            AffectsEnemies = true
+            AffectsFriends = false
+            AttachToOwner = true
+            Speed = 0
+            TotalFuse = 0.2
+            Fuse = 0.13
+            ImmunityDuration = 0.05
+            MultiDetonate = true
+            DrawAsBeam = true
+            DamageLow = 5 // 10
+            DamageHigh = 5 // 10
+            ConsecutiveHitWindow = 0.6
+            DamagePerConsecutiveHit = 0.75
+            Range = 692.25 // 710.0 * 0.975
+            DissipateGraphic = "GunLaserEnd"
+            Thing = {
+                Graphic = "GunLaser"
+                OffsetZ = 70
+                BeamStartAnimSkipsImpact = false
+                AttachedAnim = "GunLaserOriginFlare"
+                TipFx = "GunLaserTipFlare"
+                Grip = 999999
+                RotateGeometry = true
+                UseBoundsForSortDrawArea = true
+                SortBoundsScale = 0.33
+                Tallness = 50
+                Points = [
+                    {
+                        X = 24
+                        Y = 24
+                    }
+                    {
+                        X = 24
+                        Y = -24
+                    }
+                    {
+                        X = -24
+                        Y = -24
+                    }
+                    {
+                        X = -24
+                        Y = 24
+                    }
+                ]
+            }
+        }
+        {
+            Name = "DarkLuciferGunGrenadeToss"
+            InheritFrom = "DarkGunGrenadeToss"
+            HideDetonateGraphic = true
+            DetonateSound = "null"
+            SpawnsInheritGroups = false
+            SkipSpawnsIfBlocked = false
+            SpawnCap = 3
+            FizzleOldSpawnsOnDetonate = true
+            SpawnGroup = "Standing"
+            SpawnType = "UNIT"
+            SpawnOnDetonate = "DarkGunBombUnit" // GunBombUnit
+            Speed = 1550
+            Gravity = 3150
+            DamageLow = 0
+            DamageHigh = 0
+            DamageRadius = 0
+            GroupName = "FX_Standing_Add"
+            Thing = {
+                Graphic = "GunGrenadeLuciferOrb"
+                Scale = 0.1
+                OffsetZ = 101
+                AttachedAnim = "GrenadierShadow"
+                RotateGeometry = true
+                Points = [
+                    {
+                        X = 32
+                        Y = 24
+                    }
+                    {
+                        X = 32
+                        Y = -24
+                    }
+                    {
+                        X = -32
+                        Y = -24
+                    }
+                    {
+                        X = -32
+                        Y = 24
+                    }
+                ]
+            }
+        }
+        {
+            Name = "DarkLuciferGunBomb"
+            InheritFrom = "DarkGunBomb"
+            DamageLow = 5 // 50
+            DamageHigh = 5 // 50
+        }
+        {
+            Name = "DarkLuciferGunBombImmolation"
+            InheritFrom = "DarkGunBombImmolation"
+            DamageLow = 2 // 20
+            DamageHigh = 2 // 20
+        }
+    ]
+}

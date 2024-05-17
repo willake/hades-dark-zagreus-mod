@@ -1,0 +1,264 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkBeowulfShield"
+            InheritFrom = "DarkShield"
+            Projectile = "DarkBeowulfShield"
+            ChargeTime = 0.16
+            MinChargeToFire = 1.0
+            // BlockMoveInput = true
+            DamageLow = 4 // 40
+            DamageHigh = 4 // 40
+            ImpactVelocity = 1800
+            ImpactVelocityCap = 1800
+            ChargeStartAnimation = "ZagreusShieldHeavyPound_Charge"
+            FireGraphic = "ZagreusShieldHeavyPound_Fire"
+            Effects = [
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldAttackReflect"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 0.19
+                    Range = 180
+                    Deflect = false
+                    AngleCoverage = 90
+                    Active = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDisableAttack"
+                    DurationFrames = 14.5 // 10 * 1.45
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDisableAttackFast"
+                    DurationFrames = 7
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldSelfSlowFire"
+                    Type = "SPEED"
+                    DurationFrames = 12 // 25 * 0.5
+                    Modifier = 0.1
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+            ]
+        }
+        {
+            Name = "DarkBeowulfShieldDash"
+            InheritFrom = "DarkBeowulfShield"
+            Projectile = "DarkBeowulfShieldDash"
+            ChargeTime = 0.12
+            MinChargeToFire = 1.0
+            ChargeStartAnimation = "ZagreusShieldBeowulfPunchFast_Charge"
+            FireGraphic = "ZagreusShieldBeowulfPunchFast"
+            Effects = [
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDashReflect"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 0.22
+                    Range = 180
+                    Deflect = false
+                    AngleCoverage = 60
+                    Active = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldDisableAttack"
+                    DurationFrames = 12
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldSelfSlowFire"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.1
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+
+                {
+                    Trigger = "Charging"
+                    Name = "ShieldSelfSlowFireBeowulf"
+                    Type = "SPEED"
+                    DurationFrames = 10
+                    Modifier = 0.15
+                    Active = true
+                    DisableRotate = true
+                    CanAffectInvulnerable = true
+                    ClearOnAttack = false
+                }
+            ]
+
+        }
+        {
+            Name = "DarkBeowulfShieldThrow"
+            InheritFrom = "DarkShieldThrow"
+            Projectile = "DarkBeowulfShieldThrow"
+            ChargeTime = 0.3
+            ShowFreeAimLine = false
+            MinChargeToFire = 1.0
+            StartDelay = 0.12
+            MinChargeStartFx = "ShieldChargeThrowTrait"
+            // LockTriggerForCharge = true
+            ChargeStartAnimation = "ZagreusShieldBeowulfHeavyThrow_Charge"
+            FireGraphic = "ZagreusShieldBeowulfHeavyThrow_Fire"
+            Effects = [
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldThrowDisable"
+                    DurationFrames = 13
+                    DisableMove = false
+                    DisableRotate = true
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = true
+                }
+            ]
+        }
+        {
+            Name = "DarkBeowulfShieldRush"
+            InheritFrom = "DarkShieldRush"
+            Projectile = "DarkBeowulfShieldRush"
+            // ChargeDamageMultiplier = 1.0
+            // ChargeVelocityMultiplier = 4.0
+            ImpactVelocity = 0 // 0 * 0.65
+            ImpactVelocityCap = 0 // 0 * 0.65
+            //MinChargeToFire = 0.12 // 0.2 * 0.6
+            //ChargeTime = 1.5 // 1 * 1.5
+            ControlWindow = 0.319 // 0.22 * 1.45
+            Effects = [
+                {
+                    Trigger = "Charging"
+                    Name = "ShieldSelfSpeed"
+                    Type = "SPEED"
+                    HaltOnStart = true
+                    Duration = 0.02
+                    Modifier = 0.2
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    ClearOnAttack = true
+                    Name = "ShieldSelfInvulnerableRush"
+                    Type = "INVULNERABLE"
+                    Duration = 9999
+                    Modifier = 1.0
+                    Active = true
+                    AngleCoverage = 3.92699 // math.rad(225)
+                    AngleCoverageOffset = -0.785398 // -math.rad(45)
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    ClearOnAttack = true
+                    Name = "ShieldSelfReflectRush"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 9999
+                    Range = 75
+                    Deflect = false
+                    AngleCoverage = 3.92699 // math.rad(225)
+                    AngleCoverageOffset = -0.785398 // -math.rad(45)
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldSelfSpeed"
+                    DisableMove = true
+                    Duration = 0.3
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldWeaponHalt"
+                    Type = "GRIP"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    HaltOnEnd = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireSelfReflection"
+                    Type = "PROJECTILE_DEFENSE"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = true
+                    CanAffectInvulnerable = true
+                    Range = 125
+                    Deflect = false
+                    AngleCoverage = 105
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireSelfInvulnerable"
+                    Type = "INVULNERABLE"
+                    Duration = 0.3
+                    Modifier = 1.0
+                    Active = true
+                    CanAffectInvulnerable = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableAttack"
+                    DurationFrames = 18
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableMove"
+                    DurationFrames = 18
+                    DisableMove = true
+                    Cancelable = true
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireRequestTriggerLock"
+                    DurationFrames = 25
+                    RequestTriggerLock = true
+                    TimeModifierFraction = 0
+                }
+
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableAttackPunch"
+                    DurationFrames = 20
+                    DisableAttack = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Trigger = "Fire"
+                    Name = "ShieldFireDisableMovePunch"
+                    DurationFrames = 20
+                    DisableMove = true
+                    Cancelable = true
+                    Active = false
+                }
+            ]
+        }
+    ]
+}

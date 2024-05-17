@@ -1,0 +1,84 @@
+{
+	Projectiles = [
+		"_append"
+		{
+			Name = "DarkRamaBow"
+			InheritFrom = "DarkBow"
+            Thing = {
+				Graphic = "BowWeaponArrow"
+				OffsetZ = 70
+				Scale = 3.0
+				ExtentScale = 2.0
+				AttachedAnim = "RamaWideShot"
+				RotateGeometry = true
+				Grip = 999999
+				Points = [
+				{
+						X = 24
+						Y = 36
+				}
+				{
+						X = 24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = 36
+				}
+				]
+			}
+		}
+		{
+			Name = "DarkRamaBowDash"
+			InheritFrom = "DarkBowDash"
+			Thing = 
+			{
+				Graphic = "BowWeaponArrow"
+				OffsetZ = 70
+				Scale = 3.0
+				ExtentScale = 2.0
+				AttachedAnim = "RamaWideShot"
+				RotateGeometry = true
+				Grip = 999999
+				Points = [
+				{
+						X = 24
+						Y = 36
+				}
+				{
+						X = 24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = -36
+				}
+				{
+						X = -24
+						Y = 36
+				}
+				]
+			}
+    	}
+		{
+            Name = "DarkRamaBowSplitShot"
+            InheritFrom = "DarkBowSplitShot"
+            DamageLow = 5
+            DamageHigh = 5
+            NoJumpTargetRandomSpread = 90
+            NumJumps = 1
+            BounceWhenOutOfJumpTargets = true
+            JumpRange = 500
+            Fuse = 0.75
+        }
+	]
+}
+// {
+//     WeaponNames = { "BowSplitShot" },
+//     ProjectileProperty = "DamageHigh",
+//     DeriveValueFrom = "SplitShotDamageSource",
+// },

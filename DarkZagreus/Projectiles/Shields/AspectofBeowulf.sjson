@@ -1,0 +1,96 @@
+{
+  Projectiles = [
+    "_append"
+    {
+        Name = "DarkBeowulfShield"
+        InheritFrom = "DarkShield"
+        DetonateGraphic = "BeowulfShieldSlam"
+        DamageRadius = 220
+        Fuse = 0.11
+    }
+    {
+        Name = "DarkBeowulfShieldDash"
+        InheritFrom = "DarkShieldDash"
+    }
+    {
+        Name = "DarkBeowulfShieldThrow"
+        InheritFrom = "DarkShieldThrow"
+        ImpactVelocity = 900 // 0 + 900
+        ImpactVelocityCap = 900 // 0 + 900
+        Speed = 2900
+        ReturnToOwnerAfterInactiveSeconds = 0.4
+        ReturnToOwnerSpeed = 2500
+        DamageLow = 4 // 45
+        DamageHigh = 4 // 45
+        // OnDeathFiredByAnimation = "ZagreusShieldBeowulfHeavyThrow_ReturnToIdle"
+        OnDeathFiredByAnimation = "ZagreusShieldBeowulfCatch"
+        Thing = {
+            Graphic = "ProjectileShieldAlt03"
+            OffsetZ = 70
+            RotateGeometry = true
+            AttachedAnim = "ShieldProjectileShadow"
+            Grip = 999999
+            Points = [
+                {
+                    X = 36
+                    Y = 32
+                }
+                {
+                    X = 36
+                    Y = -32
+                }
+                {
+                    X = -36
+                    Y = -32
+                }
+                {
+                    X = -36
+                    Y = 32
+                }
+            ]
+        }
+        Effect = {
+            Name = "OnHitStun"
+            Duration = 0.7
+            // IgnoreName = "_PlayerUnit"
+            OnlyAffectName = "_PlayerUnit"
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+        }
+    }
+    {
+        Name = "DarkBeowulfShieldRush"
+        InheritFrom = "DarkShieldRush"
+        DamageLow = 5 // 50
+        DamageHigh = 5 // 50
+        DissipateGraphic = "ShieldRush3DBeowulf-Out"
+        Thing = {
+            Graphic = "ShieldRush3DBeowulf"
+            RotateGeometry = true
+            Grip = 999999
+            Points = [
+            {
+                X = 130
+                Y = 100
+            }
+            {
+                X = 130
+                Y = -100
+            }
+            {
+                X = -10
+                Y = -100
+            }
+            {
+                X = -10
+                Y = 100
+            }
+            ]
+        }
+    }
+  ]
+}

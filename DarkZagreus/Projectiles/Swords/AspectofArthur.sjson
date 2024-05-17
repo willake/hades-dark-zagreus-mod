@@ -1,0 +1,278 @@
+{
+  Projectiles = [
+    "_append"
+    {
+		Name = "DarkArthurSword"
+		InheritFrom = "DarkSword3"
+		DamageLow = 10
+		DamageHigh = 10
+		ProjectileDefenseAngle = 40
+		ProjectileDefenseRadius = 420
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+		Fuse = 0.26
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 450
+				Y = 70
+			  }
+			  {
+				X = 450
+				Y = -120
+			  }
+			  {
+				X = 0
+				Y = -120
+			  }
+			  {
+				X = 0
+				Y = 70
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+    {
+		Name = "DarkArthurSword2"
+		InheritFrom = "DarkSword"
+		DamageLow = 10
+		DamageHigh = 10
+		ArcStart = 90
+		ArcEnd = -130
+		Speed = 2000
+		AttachToOwner = true
+        ImpactVelocity = 0
+        ImpactVelocityCap = 0
+        StartDelay = 0.03
+        ProjectileDefenseAngle = 40
+        ProjectileDefenseRadius = 420
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 0
+				Y = 0
+			  }
+			  {
+				X = 430
+				Y = 190
+			  }
+			  {
+				X = 430
+				Y = -190
+			  }
+			]
+      Effects = [
+        {
+          Name = "OnHitStun"
+          Duration = 0.7
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = true
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+      ]
+		}
+	}
+	{
+		Name = "DarkArthurSword3"
+		InheritFrom = "DarkSword"
+		DamageLow = 10 // 200
+		DamageHigh = 10 // 200
+		ArcStart = -110
+		ArcEnd = 130
+		Speed = 2400
+		AttachToOwner = true
+        StartDelay = 0.02
+        ProjectileDefenseAngle = 40
+        ProjectileDefenseRadius = 420
+		Thing =
+		{
+			Points =
+			[
+			  {
+				X = 0
+				Y = 0
+			  }
+			  {
+				X = 430
+				Y = 110
+			  }
+			  {
+				X = 430
+				Y = -110
+			  }
+			]
+        Effects = [
+            {
+                Name = "OnHitStun"
+                Duration = 0.7
+                DisableMove = true
+                DisableRotate = true
+                DisableAttack = true
+                Active = true
+                CanAffectInvulnerable = false
+                FrontFx = "null"
+            }
+            ]
+		}
+	}
+	{
+		Name = "DarkArthurSwordParry"
+		InheritFrom = "DarkSwordParry"
+		DamageLow = 10 // 70
+		DamageHigh = 10 // 70
+		DetonateGraphic = "RadialNovaSwordParry-Arthur"
+	}
+	{
+		Name = "DarkConsecrationField"
+		AutoAdjustForTarget = false
+		AffectsEnemies = true
+		AffectsFriends = false
+		AffectsSelf = true
+		CheckObstacleImpact = false
+		UnlimitedUnitPenetration = true
+		GaussianSpawnDistribution = true
+		Type = "INSTANT"
+		SpawnRadius = 0
+		DamageRadius = 400
+		UseDetonationForProjectileDefense = false
+		DamageLow = 0
+		DamageHigh = 0
+		ImpactVelocity = 0
+		MultiDetonate = true
+		TotalFuse = 8
+		Fuse = 0.2
+		Range = 0
+		StartDelay = 0.06
+		UseVulnerability = false
+		SilentImpactOnInvulnerable = true
+		DamageRadiusScaleY = 0.6
+		DamageRadiusScaleX = 1.0
+		DoesNotAffectName = "HadesCerberusAssist"
+		IncreaseAdjustRateOfFriendlyProjectilesInside = 180
+		SpeedMultiplierOfEnemyProjectilesInside = 0.20
+		FlashBeforeExpireDuration = 1.0
+		FlashBeforeExpireMax = 0.2
+		DissipateGraphic = "ConsecrationAoE_End"
+		GroupName = "FX_Terrain"
+		TriggerHitSound = false
+		DangerDistance = 0
+		Effects = [
+			{
+				Name = "DodgeBonus"
+				IgnoreName = "_PlayerUnit"
+				ExtendDurationOnReapply = true
+				Duration = 0.25
+				DodgeChance = 0
+				Active = false
+				FrontFx = "ConsecrationBuffedFront"
+				BackFx = "ConsecrationBuffedBack"
+			}
+			{
+				Name = "ConsecrationDamageReduction"
+				IgnoreName = "_PlayerUnit"
+				Type = "DAMAGE_TAKEN"
+				Duration = 0.25
+				Modifier = 1.0
+				OverheadFx = "ConsecrationBuffedFront"
+				BackFx = "ConsecrationBuffedBack"
+				Sound = "/Leftovers/SFX/ConsecrationLoopSFX2"
+				StopSoundOnFinishFade = 0.3
+				Active = true
+			}
+			{
+				Name = "ConsecrationDamage"
+				IgnoreName = "_PlayerUnit"
+				Type = "DAMAGE_OUTPUT"
+				ExtendDurationOnReapply = true
+				Duration = 0.25
+				Modifier = 1
+				Active = true
+			}
+			{
+				Name = "ConsecrationSlow"
+				OnlyAffectName = "_PlayerUnit"
+				ExtendDurationOnReapply = true
+				Type = "SPEED"
+				Duration = 1.0
+				Modifier = 1
+				Active = true
+				CanAffectInvulnerable = false
+				FrontFx = null
+				BackFx = "ConsecrationSlowed"
+			}
+			{
+				Name = "ConsecrationHalt"
+				OnlyAffectName = "_PlayerUnit"
+				ExtendDurationOnReapply = true
+				Type = "GRIP"
+				Duration = 1.0
+				Modifier = 2
+				Active = true
+				CanAffectInvulnerable = false
+				FrontFx = null
+				HaltOnEnd = false
+				BackFx = "null"
+			}
+			{
+				Name = "ConsecrationDamageOverTime"
+				OnlyAffectName = "_PlayerUnit"
+				Type = "DAMAGE_OVER_TIME"
+				ExtendDurationOnReapply = true
+				Duration = 0.25
+				Modifier = 1
+				Active = false
+				Amount = 10
+				Cooldown = 1.0
+				Stacks = true
+				MaxStacks = 1
+				FrontFx = "null"
+				TimeModifierFraction = 0
+				IndependentStackCooldown = true
+				IsVulnerabilityEffect = false
+			}
+      ]
+      Thing = {
+		Graphic = "ConsecrationAoE"
+		OffsetZ = 0
+		Grip = 999999
+		Points = [
+			{
+				X = 90
+				Y = 0
+			}
+			{
+				X = 0
+				Y = -45
+			}
+			{
+				X = -90
+				Y = 0
+			}
+			{
+				X = 0
+				Y = 45
+			}
+		]
+      }
+    }
+  ]
+}

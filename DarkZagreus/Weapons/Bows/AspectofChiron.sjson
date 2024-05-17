@@ -1,0 +1,36 @@
+{
+  Weapons = [
+    "_append"
+    {
+      Name = "DarkChironBow"
+      InheritFrom = "DarkBow"
+      Projectile = "DarkChironBow"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+      ChargeCancelGraphic = "null"
+    }
+    {
+      Name = "DarkChironBowDash"
+      InheritFrom = "DarkBowDash"
+      Projectile = "DarkChironBowDash"
+      ChargeCancelGraphic = "null"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+    }
+    {
+      Name = "DarkChironBowSplitShot"
+      InheritFrom = "DarkBowSplitShot"
+      Projectile = "DarkChironBowSplitShot"
+      NumProjectiles = 4 // 9 - 5
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
+    }
+  ]
+}
+// not found
+// {
+// 	WeaponNames = { "BowWeapon", "BowWeaponDash" },
+// 	EffectName = "MarkTarget",
+// 	EffectProperty = "Active",
+// 	ChangeValue = true,
+// },

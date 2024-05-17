@@ -1,0 +1,43 @@
+{
+	Weapons = [
+		"_append"
+        {
+            Name = "DarkChaosShield"
+            InheritFrom = "DarkShield"
+            Projectile = "DarkChaosShield"
+            FireGraphic = "ZagreusShieldAlt01Punch"
+        }
+        {
+            Name = "DarkChaosShieldDash"
+            InheritFrom = "DarkChaosShield"
+            Projectile = "DarkChaosShieldDash"
+            FireGraphic = "ZagreusShieldAlt01PunchFast"
+        }
+        {
+            Name = "DarkChaosShieldThrow"
+            InheritFrom = "DarkShieldThrow"
+            Projectile = "DarkChaosShieldThrow"
+        }
+        {
+            Name = "DarkChaosShieldThrowBonus"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "DarkChaosShieldThrowBonus"
+            // FullyAutomatic = true
+            // AutoLock = true
+            IgnoreOwnerAttackDisabled = true
+            ProjectileAngleStartOffset = 10
+            ProjectileAngleOffset = 20
+            ProjectileOffsetStart = "CENTER"
+            NumProjectiles = 2 // vary by level
+            BarrelLength = 30
+            DefaultControl = false
+            FireGraphic = "ZagreusShieldAlt01Throw"
+        }
+        {
+            Name = "DarkChaosShieldRush"
+            InheritFrom = "DarkShieldRush"
+            Projectile = "DarkChaosShieldRush"
+        }
+    ]
+}

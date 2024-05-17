@@ -1,0 +1,121 @@
+{
+	Weapons = [
+        "_append"
+        {
+            Name = "DarkLuciferGun"
+            InheritFrom = "DarkGun"
+            Projectile = "DarkLuciferGun"
+            RefreshProjectileOnFire = true
+            SkipFireCancelIfFiring = true
+            Cooldown = 0.13
+            Scatter = 0
+            ScatterCap = 0
+            BarrelLength = 50
+            ChargeTime = 0.3
+            // ChargeStartAnimation = "ZagreusGunLucifer_Start"
+            FireGraphic = "ZagreusGunLucifer_Fire"
+            FireEndGraphic = "ZagreusGunLucifer_ReturnToIdle"
+            FailedToFireCooldownAnimation = "ZagreusGunLuciferFireEmpty"
+            OnlyChargeOnce = true
+            FireFx = "null"
+            MaxAmmo = 20
+            ChargeStartFx = "GunCharge"
+            // AutoLockRange = 692.25 // 710 * 0.975
+            Effects = [
+                {
+                    Name = "GunDisable"
+                    DurationFrames = 4
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = false
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Name = "GunDisableCancellable"
+                    DurationFrames = 8
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "GunSelfSpeed"
+                    Duration = 0.02
+                    DisableMove = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+                {
+                    Trigger = "Charging"
+                    Name = "GunSelfHalt"
+                    Type = "GRIP"
+                    Duration = 0.02
+                    Modifier = 1.0
+                    HaltOnEnd = true
+                    Active = true
+                    CanAffectInvulnerable = true
+                }
+
+                {
+                    Name = "GunDisableLucifer"
+                    DurationFrames = 5
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = false
+                    RequestTriggerLock = true
+                    Active = true
+                }
+                {
+                    Name = "GunDisableCancellableLucifer"
+                    DurationFrames = 12
+                    DisableMove = true
+                    DisableRotate = false
+                    DisableAttack = false
+                    Cancelable = true
+                    RequestTriggerLock = true
+                    Active = false
+                }
+            ]
+        }
+        {
+            Name = "DarkLuciferGunDash"
+            InheritFrom = "DarkLuciferGun"
+            Projectile = "DarkLuciferGun"
+            // ControlWindow = 0.45
+            SelfVelocity = 0
+            // CanCancelDisables = true
+            // CanCancelOwnDisables = false
+            FailedToFireCooldownAnimation = "null"
+            // LockTriggerTransferFromOnSwap = false
+            // AllowExternalForceRelease = false
+            NumProjectiles = 1
+            ProjectileAngleOffset = 0
+            Scatter = 0
+            ScatterCap = 0
+            ProjectileInterval = 0.0
+        }
+        {
+            Name = "DarkLuciferGunGrenadeToss"
+            InheritFrom = "DarkGunGrenadeToss"
+            Projectile = "DarkLuciferGunGrenadeToss"
+            ChargeStartAnimation = "ZagreusGunLuciferGrenadeTossCharge"
+            FireGraphic = "ZagreusGunLuciferGrenadeTossFire"
+        }
+        {
+            Name = "DarkLuciferGunBomb"
+            InheritFrom = "DarkGunBomb"
+            Projectile = "DarkLuciferGunBomb"
+        }
+        {
+            Name = "DarkLuciferGunBombImmolation"
+            InheritFrom = "DarkGunBombImmolation"
+            Projectile = "DarkLuciferGunBombImmolation"
+        }
+    ]
+}

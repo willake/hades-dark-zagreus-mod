@@ -1,0 +1,99 @@
+{
+  Projectiles = [
+    "_append"
+    {
+      Name = "DarkRush"
+      DetonateSound = "null"
+      Type = "STRAIGHT"
+      Fuse = 0.0
+      Range = 250
+      DamageLow = 0
+      DamageHigh = 0
+      DamageRadius = 220.0
+      DamageRadiusScaleY = 0.6
+      DamageRadiusScaleX = 1.1
+      UseRadialImpact = true
+      AutoAdjustForTarget = false
+      UseVulnerability = false
+      NumPenetrations = 999
+      SilentImpactOnInvulnerable = true
+	  ClearOnAttackEffects = false
+      Thing = {
+        Graphic = "null"
+        OffsetZ = 70
+        AttachedAnim = "null"
+        RotateGeometry = true
+        Grip = 999999
+        Points = [
+          {
+            X = 48
+            Y = 48
+          }
+          {
+            X = 48
+            Y = -48
+          }
+          {
+            X = -48
+            Y = -48
+          }
+          {
+            X = -48
+            Y = 48
+          }
+        ]
+      }
+      Effects = [
+        {
+          Name = "ReduceDamageOutput"
+          Type = "DAMAGE_OUTPUT"
+          Duration = 4
+          Modifier = 0.7
+          Active = false
+          TimeModifierFraction = 0
+          BackFx = "AphroditeDebuffB"
+          FlashFrontFxWhenExpiring = true
+          IsVulnerabilityEffect = true
+        }
+        {
+          Name = "IncreaseDamageTaken"
+          Type = "DAMAGE_TAKEN"
+          Duration = 4
+          Modifier = 1
+          Active = false
+          TimeModifierFraction = 0
+        }
+        /* For Poseidon Rush */
+        {
+          Name = "OnHitStun"
+          Duration = 0.5
+          DisableMove = true
+          DisableRotate = true
+          DisableAttack = true
+          Active = false
+          CanAffectInvulnerable = false
+          FrontFx = "null"
+        }
+
+        {
+          Name = "SwordParryBonusMark"
+          Duration = 10.0
+          Modifier = 1
+          Active = false
+          TimeModifierFraction = 0
+          FrontFx = "MarkTargetPrimary"
+          BackFx = "null"
+        }
+        {
+          Name = "ClearSwordParryBonusMark"
+          Duration = 0
+          Modifier = 1
+          Active = false
+          TimeModifierFraction = 0
+          FrontFx = "MarkTargetSecondary"
+          BackFx = "null"
+        }
+      ]
+    }
+  ]
+}
