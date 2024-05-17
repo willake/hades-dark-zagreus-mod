@@ -21,7 +21,8 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 end
             end
 
-            if DZPersistent.PrevRunRecord.Version == DZVersion 
+            if DZPersistent.PrevRunRecord 
+                and DZPersistent.PrevRunRecord.Version == DZVersion 
                 and weaponData 
                 and weaponData.WeaponName 
                 and weaponData.ItemIndex then

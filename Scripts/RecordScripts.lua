@@ -3,9 +3,18 @@ if not DarkZagreus.Config.Enabled then return end
 DZPersistent = {}
 DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
--- DZPersistent.PendingRecord = {} 
--- DZPersistent.PrevRunRecord = {}
--- DZPersistent.CurRunRecord = {}
+
+if DZPersistent.PendingRecord == nil then
+    DZPersistent.PendingRecord = {} 
+end 
+
+if DZPersistent.CurRunRecord == nil then
+    DZPersistent.CurRunRecord = {}
+end 
+
+if DZPersistent.PrevRunRecord == nil then
+    DZPersistent.PrevRunRecord = {}
+end 
 
 -- DZTemp.Weapon = {}
 DZTemp.Model = {}
