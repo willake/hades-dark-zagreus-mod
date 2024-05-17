@@ -38,17 +38,6 @@ UnitSetData.Enemies.Hades.PactDataStage0 =
 
 UnitSetData.Enemies.Hades.DefaultAIData =
 {
-    -- PreAttackEndFunctionName = "EnemyHandleInvisibleAttack",
-    -- PreAttackEndFunctionArgs = { Animation = "HadesReappear" },
-    -- InvisibilityFadeOutDuration = 1.0,
-    -- InvisibilityFadeInDuration = 0.3,
-    -- PostTeleportWaitDurationMin = 1.0,
-    -- PostTeleportWaitDurationMax = 2.0,
-    -- PostInvisibilityFunction = "HadesTeleport",
-
-    DashWeapon = "EnemyRushWeapon",
-    -- PreAttackDash = "HadesSideDash",
-    DashIfOverDistance = 500,
 }
 
 
