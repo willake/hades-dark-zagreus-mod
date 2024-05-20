@@ -12,7 +12,9 @@ WeaponData.DarkGun =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         -- FireDuration = 0.05
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
     
     CauseImpactReaction = true,

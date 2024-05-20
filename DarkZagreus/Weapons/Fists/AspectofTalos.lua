@@ -20,6 +20,8 @@ WeaponData.DarkTalosFist =
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -178,7 +180,9 @@ WeaponData.DarkTalosFistSpecial =
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
         FireAnimation = "ZagreusFistAlt02AerialUpperCut_Fire",
         FireFxOnSelf = "FistFxUppercutDirectional",
-        WillTriggerVacuumFunction = true
+        WillTriggerVacuumFunction = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =

@@ -9,7 +9,7 @@ function DarkZagreusAI( enemy, currentRun )
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
         
-    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DZVersion then
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DZDataVersion then
         weapon = DZPersistent.PrevRunRecord.Weapon
     end 
     

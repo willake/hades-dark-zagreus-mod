@@ -9,13 +9,15 @@ WeaponData.DarkArthurSword =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkArthurSword2",
         PreFireDuration = 0.3,
         PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
         FireDuration = 0.2,
         FireAnimation = "ZagreusSwordArthurAttack1_Fire",
-        FireFxOnSelf = "SwordSwipeC-Arthur"
+        FireFxOnSelf = "SwordSwipeC-Arthur",
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -167,7 +169,6 @@ WeaponData.DarkArthurSwordDash =
         FireDuration = 0.3,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.3,
         PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
         SkipMovement = true,
@@ -211,8 +212,10 @@ WeaponData.DarkArthurSwordParry =
         FireDuration = 0.5,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         PostFireWeapon = "DarkConsecrationField",
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =

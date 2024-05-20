@@ -3,9 +3,18 @@ if not DarkZagreus.Config.Enabled then return end
 DZPersistent = {}
 DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
--- DZPersistent.PendingRecord = {} 
--- DZPersistent.PrevRunRecord = {}
--- DZPersistent.CurRunRecord = {}
+
+if DZPersistent.PendingRecord == nil then
+    DZPersistent.PendingRecord = {} 
+end 
+
+if DZPersistent.CurRunRecord == nil then
+    DZPersistent.CurRunRecord = {}
+end 
+
+if DZPersistent.PrevRunRecord == nil then
+    DZPersistent.PrevRunRecord = {}
+end 
 
 -- DZTemp.Weapon = {}
 DZTemp.Model = {}
@@ -134,7 +143,7 @@ DZCreateNewRecord = function()
 
     DZPersistent.CurRunRecord = 
     {
-        Version = DZVersion,
+        Version = DZDataVersion,
         Weapon = 
         {
             WeaponName = weapon.WeaponName,
@@ -204,8 +213,8 @@ end
 
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
-    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DZVersion then
-        DebugPrint({ Text = {"DZVersion is not matched, clear all previous data"} })
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DZDataVersion then
+        DebugPrint({ Text = {"DZDataVersion is not matched, clear all previous data"} })
         DZClearAllRecordInMemory()
     end 
 end}

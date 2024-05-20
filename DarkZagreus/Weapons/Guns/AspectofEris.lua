@@ -13,7 +13,9 @@ WeaponData.DarkErisGun =
         AITrackTargetDuringCharge = true,
         -- FireDuration = 0.05,
         -- CanHold = true
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
     
     CauseImpactReaction = true,

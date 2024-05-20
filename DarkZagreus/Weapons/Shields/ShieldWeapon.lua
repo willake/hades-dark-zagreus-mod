@@ -9,9 +9,10 @@ WeaponData.DarkShield = {
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.3,
         PostFireChargeWeapon = "DarkShieldRush",
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -104,7 +105,7 @@ WeaponData.DarkShieldThrow =
         AttackDistanceMin = 800,
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 2.5,
+        AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = true,
     },
 		

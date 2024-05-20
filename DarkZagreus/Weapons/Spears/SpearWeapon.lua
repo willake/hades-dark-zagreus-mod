@@ -10,7 +10,6 @@ WeaponData.DarkSpear =
 			AttackDistance = 200,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
 			ChainedWeapon = "DarkSpear2",
 			FireDuration = 0.3,
 			PostFireChargeStages = 
@@ -19,7 +18,10 @@ WeaponData.DarkSpear =
 				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
 				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.7,
+			AIMoveWithinRangeTimeoutMin = 0.3,
+			AIMoveWithinRangeTimeoutMax = 0.6,
+			SkipAttackAfterMoveTimeout = true,
 		},
 
 		Sounds =
@@ -153,8 +155,7 @@ WeaponData.DarkSpearDash =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.425,
+			FireDuration = 0.425
 		},
 
 		Sounds =

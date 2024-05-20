@@ -1,7 +1,8 @@
 if not DarkZagreus.Config.Enabled then return end
 
-DZVersion = "alpha2"
-DebugPrint({ Text = "DarkZagreus Mod loaded. Version: " .. DZVersion})
+DZVersion = "beta1.0"
+DZDataVersion = "v1" -- for training data, when the data structure chages, the version increases
+DebugPrint({ Text = string.format("DarkZagreus Mod loaded. Version: %s Data version: %s", DZVersion, DZDataVersion)})
 
 -- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
@@ -21,7 +22,8 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 end
             end
 
-            if DZPersistent.PrevRunRecord.Version == DZVersion 
+            if DZPersistent.PrevRunRecord 
+                and DZPersistent.PrevRunRecord.Version == DZDataVersion 
                 and weaponData 
                 and weaponData.WeaponName 
                 and weaponData.ItemIndex then
@@ -47,3 +49,4 @@ DZTemp = {}
 
 SaveIgnores["DZTemp"] = true
 SaveIgnores["DZVersion"] = true
+SaveIgnores["DZDataVersion"] = true
