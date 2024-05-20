@@ -1,5 +1,7 @@
 if not DarkZagreus.Config.Enabled then return end
 
+-- Function Skip to final boss level
+-- ===================================
 -- OnAnyLoad { "RoomOpening", function(triggerArgs)
 --     DebugPrintf({ Text = "Enter RoomOpening, Force next room to Hades boss room" })
 --     -- do stuff here
@@ -19,11 +21,15 @@ if not DarkZagreus.Config.Enabled then return end
 --         end
 --     end
 -- end }
+-- ===================================
 
--- -- force training a model with reload key
+-- Force clear previous run data
+-- Enter a run, press R, or other reload button you use
+-- ===================================
 -- OnControlPressed { "Reload",
 -- function(triggerArgs)
 --     -- DZTrainAI()
 --     DZClearPrevRecordInMemory()
 -- end
 -- }
+-- ===================================
