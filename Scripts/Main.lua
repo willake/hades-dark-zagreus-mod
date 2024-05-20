@@ -1,6 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end
 
-DZVersion = "alpha2"
+DZVersion = "beta1.0"
 DZDataVersion = "v1" -- for training data, when the data structure chages, the version increases
 DebugPrint({ Text = string.format("DarkZagreus Mod loaded. Version: %s Data version: %s", DZVersion, DZDataVersion)})
 
