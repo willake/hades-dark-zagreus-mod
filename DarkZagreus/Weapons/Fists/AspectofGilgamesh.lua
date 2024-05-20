@@ -16,6 +16,8 @@ WeaponData.DarkGilgameshFist =
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -265,7 +267,9 @@ WeaponData.DarkGilgameshFistSpecial =
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusFistAlt03AerialUpperCut_Start",
         FireAnimation = "ZagreusFistAlt03AerialUpperCut_Fire",
-        FireFxOnSelf = "ClawSwipeUppercut"
+        FireFxOnSelf = "ClawSwipeUppercut",
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -314,7 +318,7 @@ WeaponData.DarkGilgameshFistSpecialDash =
         PreFireDuration = 0.17,
         PreFireAnimation = "ZagreusFistAlt03DashUpperCut_Start",
         FireAnimation = "ZagreusFistAlt03DashUpperCut_Fire",
-        FireFxOnSelf = "ClawSwipeUppercutSpecial"
+        FireFxOnSelf = "ClawSwipeUppercutSpecial",
     },
 
     Sounds =

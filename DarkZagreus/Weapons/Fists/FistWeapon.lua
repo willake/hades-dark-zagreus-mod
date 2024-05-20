@@ -12,11 +12,12 @@ WeaponData.DarkFist =
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        -- AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkFist2",
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -173,7 +174,9 @@ WeaponData.DarkFistSpecial =
         PreFireDuration = 0.11,
         PreFireAnimation = "ZagreusFistAerialUpperCut_Start",
         FireAnimation = "ZagreusFistAerialUpperCut_Fire",
-        FireFxOnSelf = "FistFxUppercutDirectional"
+        FireFxOnSelf = "FistFxUppercutDirectional",
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =

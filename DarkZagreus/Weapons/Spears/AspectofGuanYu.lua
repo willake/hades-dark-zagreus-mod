@@ -21,7 +21,10 @@ WeaponData.DarkGuanYuSpear =
 				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
 				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.7,
+			AIMoveWithinRangeTimeoutMin = 0.3,
+			AIMoveWithinRangeTimeoutMax = 0.6,
+			SkipAttackAfterMoveTimeout = true,
 		},
 
 		Sounds =

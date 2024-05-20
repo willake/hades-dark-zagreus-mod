@@ -9,9 +9,11 @@ WeaponData.DarkNemesisSword =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkNemesisSword2",
         FireDuration = 0.2,
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -147,7 +149,6 @@ WeaponData.DarkNemesisSwordDash =
         FireDuration = 0.3,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
     },
@@ -198,7 +199,9 @@ WeaponData.DarkNemesisSwordParry =
         FireDuration = 0.8,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
     Sounds =
     {

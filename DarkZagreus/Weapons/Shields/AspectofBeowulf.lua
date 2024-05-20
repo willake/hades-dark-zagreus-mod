@@ -12,9 +12,10 @@ WeaponData.DarkBeowulfShield = {
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         FireDuration = 0.3,
         PostFireChargeWeapon = "DarkBeowulfShieldRush",
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =

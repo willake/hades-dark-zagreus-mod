@@ -8,9 +8,11 @@ WeaponData.DarkPoseidonSword =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         ChainedWeapon = "DarkPoseidonSword2",
         FireDuration = 0.2,
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     CauseImpactReaction = true,
@@ -156,7 +158,6 @@ WeaponData.DarkPoseidonSwordDash =
         FireDuration = 0.3,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
     },
@@ -205,7 +206,9 @@ WeaponData.DarkPoseidonSwordParry =
         FireDuration = 0.5,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
