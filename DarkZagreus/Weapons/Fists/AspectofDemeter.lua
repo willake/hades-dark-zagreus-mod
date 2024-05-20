@@ -18,6 +18,8 @@ WeaponData.DarkDemeterFist =
         FireDuration = 0.2,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =
@@ -179,6 +181,8 @@ WeaponData.DarkDemeterFistSpecial =
         FireAnimation = "ZagreusFistAlt01AerialUpperCut_Fire",
         FireFxOnSelf = "FistFxUppercutDirectional",
         CheckComboPowerReset = true, -- equals to OnFiredFunctionName = "CheckComboPowerReset",
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAttackAfterMoveTimeout = true,
     },
 
     Sounds =

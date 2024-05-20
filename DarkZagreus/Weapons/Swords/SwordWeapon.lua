@@ -7,7 +7,9 @@ WeaponData.DarkSword =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
         ChainedWeapon = "DarkSword2",
         FireDuration = 0.2,
     },
@@ -60,7 +62,7 @@ WeaponData.DarkSword2 =
         SkipMovement = true,
         SkipAngleTowardTarget = true,
         ChainedWeapon = "DarkSword3",
-        PreFireDuration = 0.2, -- 0.3
+        PreFireDuration = 0.2, -- 0.3 
         PreFireAnimation = "ZagreusSwordCharge2",
         FireAnimation = "ZagreusSwordAttack2",
         FireFxOnSelf = "SwordSwipeB"
@@ -203,7 +205,9 @@ WeaponData.DarkSwordParry =
         FireDuration = 0.5,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0
+        AIMoveWithinRangeTimeoutMin = 0.3,
+        AIMoveWithinRangeTimeoutMax = 0.6,
+        SkipAttackAfterMoveTimeout = true,
     },
     
     Sounds =
