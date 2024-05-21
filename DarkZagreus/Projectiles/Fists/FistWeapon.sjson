@@ -71,7 +71,7 @@
             DisableMove = true
             DisableRotate = true
             DisableAttack = true
-            Active = true
+            Active = false // true
             CanAffectInvulnerable = false
             FrontFx = "null"
             }
@@ -138,7 +138,7 @@
                 DisableMove = true
                 DisableRotate = true
                 DisableAttack = true
-                Active = true
+                Active = false // true
                 CanAffectInvulnerable = false
                 FrontFx = "null"
             }
@@ -202,7 +202,7 @@
                 DisableMove = true
                 DisableRotate = true
                 DisableAttack = true
-                Active = true
+                Active = false // true
                 CanAffectInvulnerable = false
                 FrontFx = "null"
             }
@@ -229,7 +229,7 @@
                 DisableMove = true
                 DisableRotate = true
                 DisableAttack = true
-                Active = true
+                Active = false // true
                 CanAffectInvulnerable = false
                 FrontFx = "null"
             }
