@@ -1,0 +1,14 @@
+{
+    Texts = [
+        "_append"
+        {
+            Id = "DarkZagreus_Full"
+            DisplayName = "Dark Zagreus"
+        }
+        {
+            Id = "NPC_DarkZag_01"
+            DisplayName = "???"
+            Description = "Your dark side"
+        }
+    ]
+}

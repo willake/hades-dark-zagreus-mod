@@ -1,0 +1,20 @@
+{
+  Animations = [
+    "_append"
+    {
+      Name = "Portrait_DarkZag_Serious_01"
+      InheritFrom = "Portrait_Base_01"
+      FilePath = "DarkZagreus\Portraits_DarkZagreus_Serious01"
+      EndFrame = 1
+      StartFrame = 1
+    }
+
+    {
+      Name = "Portrait_DarkZag_Serious_01_Exit"
+      InheritFrom = "Portrait_Base_01_Exit"
+      FilePath = "DarkZagreus\Portraits_DarkZagreus_Serious01"
+      EndFrame = 1
+      StartFrame = 1
+    }
+  ]
+}
