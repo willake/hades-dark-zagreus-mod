@@ -50,3 +50,11 @@ DZTemp = {}
 SaveIgnores["DZTemp"] = true
 SaveIgnores["DZVersion"] = true
 SaveIgnores["DZDataVersion"] = true
+
+-- Load Dark Zagreus's portrait
+local package = "DarkZagreus"
+ModUtil.WrapBaseFunction( "SetupMap", function(baseFunc)
+    DebugPrint({Text = "@DarkZagreus Trying to load package "..package..".pkg"})
+    LoadPackages({Name = package})
+    return baseFunc()
+end)
