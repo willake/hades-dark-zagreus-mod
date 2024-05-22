@@ -48,14 +48,15 @@ UnitSetData.Enemies.Hades.HealthBarTextId = "DarkZagreus_Full"
 UnitSetData.Enemies.Hades.BossPresentationIntroTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
 {
-    LordHadesAboutPersephoneMeeting01 =
+    MeetDarkZagreus01 =
     {
         { Cue = nil, Portrait = "Portrait_Zag_Empathetic_01", Speaker = "CharProtag",
             PreLineAnim = "ZagreusTalkDenialStart", PreLineAnimTarget = "Hero",
             PostLineAnim = "ZagreusTalkDenialReturnToIdle", PostLineAnimTarget = "Hero",
             Text = "Who... who are you?" },
         { Cue = nil,
-            PostLineAnim = "ZagreusIdle", Portrait = "Portrait_DarkZag_Serious_01", AngleTowardTargetId = 40000,
+            PostLineAnim = "ZagreusIdle", Portrait = "Portrait_DarkZag_Serious_01", Speaker = "NPC_DarkZag_01",
+            AngleTowardTargetId = 40000,
             PreLineFunctionName = "StartFinalBossRoomIntroMusic",
             PostLineFunctionName = "StartFinalBossRoomMusic",
             PreContentSound = "/Leftovers/Menu Sounds/TextReveal3",
