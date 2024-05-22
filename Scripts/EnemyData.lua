@@ -43,6 +43,8 @@ UnitSetData.Enemies.Hades.DefaultAIData =
 {
 }
 
+UnitSetData.Enemies.Hades.HealthBarTextId = "DarkZagreus_Full"
+
 UnitSetData.Enemies.Hades.BossPresentationIntroTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
 {

@@ -1,0 +1,9 @@
+{
+    Texts = [
+        "_append"
+        {
+            Id = "DarkZagreus_Full"
+            DisplayName = "Dark Zagreus"
+        }
+    ]
+}

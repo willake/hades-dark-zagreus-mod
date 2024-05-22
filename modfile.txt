@@ -30,6 +30,9 @@ SJSON "DarkZagreus/Units/Guns/AspectofLucifer.sjson"
 To "Game/Animations/PortraitAnimations.sjson"
 SJSON "Game/Animations/PortraitAnimations.sjson
 
+To "Game/Text/en/HelpText.en.sjson"
+SJSON "Game/Text/HelpText.en.sjson"
+
 To Win/Packages/DarkZagreus.pkg_manifest
 Replace "Packages/DarkZagreus.pkg_manifest"
 
