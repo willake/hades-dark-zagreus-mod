@@ -36,10 +36,33 @@ UnitSetData.Enemies.Hades.PactDataStage0 =
     },
 }
 
+UnitSetData.Enemies.Hades.SpawnAnimation = "ZagreusIdle"
+UnitSetData.Enemies.Hades.AISetupDelay = 2.5
+
 UnitSetData.Enemies.Hades.DefaultAIData =
 {
 }
 
+UnitSetData.Enemies.Hades.BossPresentationIntroTextLineSets = nil
+UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
+{
+    LordHadesAboutPersephoneMeeting01 =
+    {
+        { Cue = nil, Portrait = "Portrait_Zag_Defiant_01", Speaker = "CharProtag",
+            PreLineAnim = "ZagreusTalkDenialStart", PreLineAnimTarget = "Hero",
+            PostLineAnim = "ZagreusTalkDenialReturnToIdle", PostLineAnimTarget = "Hero",
+            Text = "Who... who are you?" },
+        { Cue = nil,
+            PostLineAnim = "ZagreusIdle", Portrait = "Portrait_Zag_Defiant_01", AngleTowardTargetId = 40000,
+            PreLineFunctionName = "StartFinalBossRoomIntroMusic",
+            PostLineFunctionName = "StartFinalBossRoomMusic",
+            PreContentSound = "/Leftovers/Menu Sounds/TextReveal3",
+            Text = "..." },
+    },
+}
+UnitSetData.Enemies.Hades.BossPresentationPriorityIntroTextLineSets = nil
+UnitSetData.Enemies.Hades.BossPresentationTextLineSets = nil
+UnitSetData.Enemies.Hades.BossPresentationRepeatableTextLineSets = nil
 
 -- for aspect of lucifer
 UnitSetData.Enemies.DarkGunBombUnit =
