@@ -45,6 +45,9 @@ Replace "Packages/DarkZagreus.pkg"
 To Win/Packages/720p/DarkZagreus.pkg
 Replace "Packages/DarkZagreus.pkg"
 
+To "Scripts/CodexScripts.lua"
+Import "Scripts/CodexScripts.lua"
+
 To "Scripts/WeaponData.lua"
 Import "DarkZagreus/Weapons/RushWeapon.lua"
 Import "DarkZagreus/Weapons/Swords/SwordWeapon.lua"

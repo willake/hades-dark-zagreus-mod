@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 DZVersion = "beta1.0"
 DZDataVersion = "v1" -- for training data, when the data structure chages, the version increases

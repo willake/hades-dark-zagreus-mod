@@ -1,5 +1,5 @@
 if not DarkZagreus.Config.Enabled then return end
-
+ 
 DZPersistent = {}
 DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack

@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 -- Function Skip to final boss level
 -- ===================================

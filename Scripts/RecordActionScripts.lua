@@ -1,5 +1,5 @@
 if not DarkZagreus.Config.Enabled then return end
-
+ 
 -- sword weapon
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
     function( triggerArgs )

@@ -1,5 +1,5 @@
-local mod = ModUtil.Mod.Register("DarkZagreus")
+local DarkZagreus = ModUtil.Mod.Register("DarkZagreus")
 
-mod.Config = {
+DarkZagreus.Config = {
     Enabled = true
 }

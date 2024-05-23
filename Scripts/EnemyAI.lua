@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusAI( enemy, currentRun )
     enemy.DZ = {} -- for storing data related to this mod

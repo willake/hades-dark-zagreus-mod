@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 local modName = "DarkZagreus" -- put your unique mod codename here
 -- DZPrint actually write text to files

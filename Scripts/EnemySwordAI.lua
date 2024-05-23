@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end  
 
 function DarkZagreusSwordAI( enemy, currentRun )
     return DZAIDoSwordAILoop( enemy, currentRun )

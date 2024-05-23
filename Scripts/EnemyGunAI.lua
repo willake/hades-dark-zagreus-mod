@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusGunAI( enemy, currentRun )
     enemy.ShouldPreWarm = false
