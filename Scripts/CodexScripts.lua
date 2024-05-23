@@ -6,9 +6,9 @@ if not DarkZagreus.Config.Enabled then return end
 -- add a new section in codex
 local DZCommands = {
 	Order = {
-		"ExportTrainingData",
-		"LoadTrainingData",
-        "ClearTrainingData",
+		"ExportRecordToFile",
+		"LoadRecordFromFile",
+        "ClearRecord",
         "ForceNextRoomBossRoom"
 	}
 }
@@ -20,21 +20,21 @@ DZCommands = {
 	UnlockType = CodexUnlockTypes.Mystery,
 	TitleText = "Dark Zagreus",
 	Entries = {
-		ExportTrainingData = {
+		ExportRecordToFile = {
 			Entries = {
 				{
 					Text = "Export training data to a file. Only works on x86(32 bit) version. It will save a file to the x86 folder of the root folder with the name of DZRecord.log"
 				}
 			}
 		},
-		LoadTrainingData = {
+		LoadRecordFromFile = {
 			Entries = {
 				{
 					Text = "Load trainign data from a file. Only works on x86(32 bit) version. It will load a file in the x86 folder of the root folder with the name of DZRecord.log"
 				}
 			}
 		},
-		ClearTrainingData = {
+		ClearRecord = {
 			Entries = {
 				{
 					Text = "Clear the training data in the save file. Will reset the AI to random behavior with regular weapon."
@@ -83,29 +83,31 @@ function DZUIMain(triggerArgs)
 end
 
 -- x86 only
-function DZUIHandleExportTrainingData()
+function DZUIHandleExportRecordToFile()
 	if io == nil then
-		DebugPrint({Text = "Can't export file"})	
+		ModUtil.Hades.PrintDisplay("Can't export record. This feature only works on x86(32 bits) version", 3, {255, 0, 0, 255})
+	else
+		DZSavePrevRunRecordToFile()	
+		ModUtil.Hades.PrintDisplay("Successfully export record. The file name is DZRecord.log", 3, {0, 255, 255, 255})
 	end
-	DebugPrint({Text = "DZUIHandleExportTrainingData"})
-	DZSavePrevRunRecordToFile()
 end
 
 -- x86 only
-function DZUIHandleLoadTrainingData()
+function DZUIHandleLoadRecordFromFile()
 	if io == nil then
-		DebugPrint({Text = "Can't export file"})	
+		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32 bits) version", 3, {255, 0, 0, 255})
+	else
+		DZLoadPreRunRecordFromFile()
+		ModUtil.Hades.PrintDisplay("Successfully load record", 3, {0, 255, 255, 255})
 	end
-	DebugPrint({Text = "DZUIHandleLoadTrainingData"})
-	DZLoadPreRunRecordFromFile()
 end
 
-function DZUIHandleClearTrainingData()
-	DebugPrint({Text = "DZUIHandleClearTrainingData"})
+function DZUIHandleClearRecord()
 	DZClearAllRecordInMemory()
+	ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
 end
 
 function DZUIHandleForceNextRoomBossRoom()
-	DebugPrint({Text = "DZUIHandleForceNextRoomBossRoom"})
 	DZDebugForceNextRoomBossRoom()
+	ModUtil.Hades.PrintDisplay("Successfully set next room to boss room", 3, {0, 255, 255, 255})
 end
