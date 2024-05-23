@@ -126,8 +126,8 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     end
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
-    DZSaveCurRunRecordInMemory()
-    DZSaveCurRunRecordToFile() -- only working on x86
+    DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
+    DZSavePrevRunRecordToFile() -- only working on x86
 
     DZPersistent.CurRunRecord = {}
 
@@ -189,7 +189,7 @@ DZOverridePendingRecord = function(state, action)
     DZPersistent.PendingRecord.Action = action
 end
 
-DZSaveCurRunRecordInMemory = function ()
+DZSaveCurRunRecordAsPrevRunRecord = function ()
     DebugPrint({ Text = {"DZSaveCurRunRecordInMemory() - DZSaveCurRunRecordInMemory"} })
     DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
 end
@@ -206,14 +206,14 @@ DZClearAllRecordInMemory = function ()
     DZPersistent.CurRunRecord = {}
 end
 
-DZSaveCurRunRecordToFile = function ()
+DZSavePrevRunRecordToFile = function ()
     DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
-    DZSaveTrainingData(DZPersistent.CurRunRecord, "DarkZagreus/DZRecord.log")
+    DZSaveTrainingData(DZPersistent.PrevRunRecord, "DZRecord.log")
 end
 
 DZLoadPreRunRecordFromFile = function ()
     DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
-    local record = DZLoadTrainingData("DarkZagreus/DZRecord.log")
+    local record = DZLoadTrainingData("DZRecord.log")
     if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
         DZPersistent.PrevRunRecord = record
     end

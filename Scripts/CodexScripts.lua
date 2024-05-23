@@ -88,7 +88,7 @@ function DZUIHandleExportTrainingData()
 		DebugPrint({Text = "Can't export file"})	
 	end
 	DebugPrint({Text = "DZUIHandleExportTrainingData"})
-	DZSaveCurRunRecordToFile()
+	DZSavePrevRunRecordToFile()
 end
 
 -- x86 only
