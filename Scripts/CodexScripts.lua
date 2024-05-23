@@ -108,6 +108,10 @@ function DZUIHandleClearRecord()
 end
 
 function DZUIHandleForceNextRoomBossRoom()
-	DZDebugForceNextRoomBossRoom()
-	ModUtil.Hades.PrintDisplay("Successfully set next room to boss room", 3, {0, 255, 255, 255})
+	if CurrentRun.CurrentRoom == nil or CurrentRun.CurrentRoom.Name == nil or CurrentRun.CurrentRoom.Name == "D_Boss01" then
+		ModUtil.Hades.PrintDisplay("Can't set next room to boss room. Either you haven't started a run or you're already in boss room", 3, {255, 0, 0, 255})
+	else
+		DZDebugForceNextRoomBossRoom()
+		ModUtil.Hades.PrintDisplay("Successfully set next room to boss room", 3, {0, 255, 255, 255})
+	end
 end
