@@ -208,12 +208,12 @@ end
 
 DZSaveCurRunRecordToFile = function ()
     DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
-    DZSaveTrainingData(DZPersistent.CurRunRecord)
+    DZSaveTrainingData(DZPersistent.CurRunRecord, "DarkZagreus/DZRecord.log")
 end
 
 DZLoadPreRunRecordFromFile = function ()
     DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
-    local record = DZLoadTrainingData("DZRecord.log")
+    local record = DZLoadTrainingData("DarkZagreus/DZRecord.log")
     if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
         DZPersistent.PrevRunRecord = record
     end

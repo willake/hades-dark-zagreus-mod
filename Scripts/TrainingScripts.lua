@@ -53,11 +53,11 @@ function DZTrainAI()
     DZTemp.Model = network
 end
 
-function DZSaveTrainingData(curRunRecord)
+function DZSaveTrainingData(curRunRecord, filePath)
     DebugPrint({ Text = "DZSaveTrainingData() - Not really save the file because it is x64 version."})
 end
 
-function DZLoadTrainingData(fileName)
+function DZLoadTrainingData(filePath)
     DebugPrint({ Text = "DZLoadTrainingData() - Not really load a file because it is x64 version."})
     return nil
 end
@@ -65,10 +65,8 @@ end
 
 -- if io module is avilable, create a new record file then start logging
 if io then
-    local recordFilePath = "DZrecord" .. ".log"
-
-    DZSaveTrainingData = function(curRunRecord)
-        local file = io.open(recordFilePath, "w+")
+    DZSaveTrainingData = function(curRunRecord, filePath)
+        local file = io.open(filePath, "w+")
         
         local weapon = curRunRecord.Weapon
 
@@ -114,13 +112,13 @@ if io then
         file:close()
     end
 
-    DZLoadTrainingData = function(fileName)
+    DZLoadTrainingData = function(filePath)
         local data = {
             Weapon = {},
             History = {}
         }
         local fileLines = {}
-        local file = io.open(fileName, "rb")
+        local file = io.open(filePath, "rb")
             
         for line in file:lines() do
             table.insert (fileLines, line);
