@@ -13,8 +13,8 @@ local DZCommands = {
 	}
 }
 
-table.insert(CodexOrdering.Order, "DZSettings")
-CodexOrdering.DZSettings = DZCommands
+table.insert(CodexOrdering.Order, "DZCommands")
+CodexOrdering.DZCommands = DZCommands
 
 DZCommands = {
 	UnlockType = CodexUnlockTypes.Mystery,
@@ -51,17 +51,17 @@ DZCommands = {
 	}
 }
 
-Codex.DZSettings = DZCommands
+Codex.DZCommands = DZCommands
 
 -- handle confirm
 OnControlPressed{ "Confirm",
 	function( triggerArgs )
-		DZUI.Main(triggerArgs)
+		DZUIMain(triggerArgs)
 	end
 }
 
-function DZUI.UseCommend(commandName, triggerArgs)
-    local command = "DZ" .. commandName
+function DZUIUseCommand(commandName, triggerArgs)
+    local command = "DZUIHandle" .. commandName
 	local commandFunction = _G[command]
 	if commandFunction ~= nil then
 		CloseCodexScreen()
@@ -69,15 +69,42 @@ function DZUI.UseCommend(commandName, triggerArgs)
 	end
 end
 
-function DZUI.Main(triggerArgs)
+function DZUIMain(triggerArgs)
     if CodexUI.Screen == nil or not IsScreenOpen("Codex") or IsScreenOpen("BoonInfoScreen") then
 		return
 	end
 
     local selection = CodexStatus.SelectedEntryNames[CodexStatus.SelectedChapterName]
 
-    if Codex.Commands.Entries[selection] ~= nil then
+    if Codex.DZCommands.Entries[selection] ~= nil then
 		DebugPrint({Text = "@DarkZagreus Trying to execute command : "..selection})
-		DZUIUseCommend(selection, triggerArgs)
+		DZUIUseCommand(selection, triggerArgs)
     end
+end
+
+-- x86 only
+function DZUIHandleExportTrainingData()
+	if io == nil then
+		DebugPrint({Text = "Can't export file"})	
+	end
+	DebugPrint({Text = "DZUIHandleExportTrainingData"})
+	DZSaveCurRunRecordToFile()
+end
+
+-- x86 only
+function DZUIHandleLoadTrainingData()
+	if io == nil then
+		DebugPrint({Text = "Can't export file"})	
+	end
+	DebugPrint({Text = "DZUIHandleLoadTrainingData"})
+end
+
+function DZUIHandleClearTrainingData()
+	DebugPrint({Text = "DZUIHandleClearTrainingData"})
+	DZClearAllRecordInMemory()
+end
+
+function DZUIHandleForceNextRoomBossRoom()
+	DebugPrint({Text = "DZUIHandleForceNextRoomBossRoom"})
+	DZDebugForceNextRoomBossRoom()
 end
