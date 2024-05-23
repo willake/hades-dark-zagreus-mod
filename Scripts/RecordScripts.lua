@@ -211,6 +211,14 @@ DZSaveCurRunRecordToFile = function ()
     DZSaveTrainingData(DZPersistent.CurRunRecord)
 end
 
+DZLoadPreRunRecordFromFile = function ()
+    DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
+    local record = DZLoadTrainingData("DZRecord.log")
+    if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
+        DZPersistent.PrevRunRecord = record
+    end
+end
+
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
     if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DZDataVersion then

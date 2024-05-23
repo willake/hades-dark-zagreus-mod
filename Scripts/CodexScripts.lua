@@ -97,6 +97,7 @@ function DZUIHandleLoadTrainingData()
 		DebugPrint({Text = "Can't export file"})	
 	end
 	DebugPrint({Text = "DZUIHandleLoadTrainingData"})
+	DZLoadPreRunRecordFromFile()
 end
 
 function DZUIHandleClearTrainingData()

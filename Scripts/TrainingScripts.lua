@@ -57,11 +57,17 @@ function DZSaveTrainingData(curRunRecord)
     DebugPrint({ Text = "DZSaveTrainingData() - Not really save the file because it is x64 version."})
 end
 
+function DZLoadTrainingData(fileName)
+    DebugPrint({ Text = "DZLoadTrainingData() - Not really load a file because it is x64 version."})
+    return nil
+end
+
+
 -- if io module is avilable, create a new record file then start logging
 if io then
     local recordFilePath = "DZrecord" .. ".log"
 
-    DZSaveTrainingData = function (curRunRecord)
+    DZSaveTrainingData = function(curRunRecord)
         local file = io.open(recordFilePath, "w+")
         
         local weapon = curRunRecord.Weapon
@@ -87,9 +93,8 @@ if io then
 
             state = state .. "\n"
 
-            -- format action
             local action = ""
-            -- format state
+            -- format action
             for i, v in ipairs(record[2]) do
                 -- Format the float to 2 decimal places and concatenate it to the string
                 action = action .. string.format("%.2f", v)
@@ -108,41 +113,39 @@ if io then
 
         file:close()
     end
-end
 
-function DZLoadTrainingData(fileName)
-    local data = {}
-    data.WeaponData = {}
-    data.TrainingData = {}
-    local fileLines = {}
-    local file = io.open(fileName, "rb")
-        
-    for line in file:lines() do
-        table.insert (fileLines, line);
-    end
-
-    file:close()
-
-    for input in fileLines[1]:gmatch("%S+") do
-        data.WeaponData.WeaponName = input
-        break
-    end
-
-    for input in fileLines[2]:gmatch("%S+") do
-        data.WeaponData.ItemIndex = tonumber(input)
-        break
-    end
-
-    for i = 3, #fileLines do
-        if i%2 == 1 then
-                local tempInputs = {}
-                for input in fileLines[i]:gmatch("%S+") do table.insert(tempInputs, tonumber(input)) end
-                local tempOutputs = {}
-                for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempOutputs, tonumber(output)) end
-            table.insert(data.TrainingData, {tempInputs, tempOutputs})
+    DZLoadTrainingData = function(fileName)
+        local data = {
+            Weapon = {},
+            History = {}
+        }
+        local fileLines = {}
+        local file = io.open(fileName, "rb")
+            
+        for line in file:lines() do
+            table.insert (fileLines, line);
         end
+
+        file:close()
+
+        if #fileLines < 3 then
+            return nil
+        end
+
+        data.Weapon.WeaponName = fileLines[1]:gmatch("%S+")[1]
+        data.Weapon.ItemIndex = tonumber(fileLines[2]:gmatch("%S+")[1])
+
+        for i = 3, #fileLines do
+            if i%2 == 1 then
+                    local tempState = {}
+                    for input in fileLines[i]:gmatch("%S+") do table.insert(tempState, tonumber(input)) end
+                    local tempAction = {}
+                    for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempAction, tonumber(output)) end
+                table.insert(data.History, {tempState, tempAction})
+            end
+        end
+        return data
     end
-    return (data)
 end
 
 function DZShuffleDataset(dataset)
