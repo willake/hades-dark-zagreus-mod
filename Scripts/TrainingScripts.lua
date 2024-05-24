@@ -53,20 +53,30 @@ function DZTrainAI()
     DZTemp.Model = network
 end
 
-function DZSaveTrainingData(curRunRecord)
+function DZSaveTrainingData(curRunRecord, filePath)
     DebugPrint({ Text = "DZSaveTrainingData() - Not really save the file because it is x64 version."})
 end
 
+function DZLoadTrainingData(filePath)
+    DebugPrint({ Text = "DZLoadTrainingData() - Not really load a file because it is x64 version."})
+    return nil
+end
+
+
 -- if io module is avilable, create a new record file then start logging
 if io then
-    local recordFilePath = "DZrecord" .. ".log"
+    DZSaveTrainingData = function(curRunRecord, filePath)
+        local file = io.open(filePath, "w+")
 
-    DZSaveTrainingData = function (curRunRecord)
-        local file = io.open(recordFilePath, "w+")
+        if curRunRecord == nil or curRunRecord.Weapon == nil or curRunRecord.History == nil then
+            DebugPrint({ Text = "@DarkZagreus DZSaveTrainingData(), curRunRecord is nil"})
+            return
+        end
         
         local weapon = curRunRecord.Weapon
 
         -- write what weapon player's holding into the file
+        file:write(string.format("%s\n", curRunRecord.Version))
         file:write(string.format("%s\n", weapon.WeaponName))
         file:write(string.format("%d\n", weapon.ItemIndex))
 
@@ -87,9 +97,8 @@ if io then
 
             state = state .. "\n"
 
-            -- format action
             local action = ""
-            -- format state
+            -- format action
             for i, v in ipairs(record[2]) do
                 -- Format the float to 2 decimal places and concatenate it to the string
                 action = action .. string.format("%.2f", v)
@@ -108,41 +117,52 @@ if io then
 
         file:close()
     end
-end
 
-function DZLoadTrainingData(fileName)
-    local data = {}
-    data.WeaponData = {}
-    data.TrainingData = {}
-    local fileLines = {}
-    local file = io.open(fileName, "rb")
-        
-    for line in file:lines() do
-        table.insert (fileLines, line);
-    end
-
-    file:close()
-
-    for input in fileLines[1]:gmatch("%S+") do
-        data.WeaponData.WeaponName = input
-        break
-    end
-
-    for input in fileLines[2]:gmatch("%S+") do
-        data.WeaponData.ItemIndex = tonumber(input)
-        break
-    end
-
-    for i = 3, #fileLines do
-        if i%2 == 1 then
-                local tempInputs = {}
-                for input in fileLines[i]:gmatch("%S+") do table.insert(tempInputs, tonumber(input)) end
-                local tempOutputs = {}
-                for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempOutputs, tonumber(output)) end
-            table.insert(data.TrainingData, {tempInputs, tempOutputs})
+    DZLoadTrainingData = function(filePath)
+        local data = {
+            Version = "",
+            Weapon = {},
+            History = {}
+        }
+        local fileLines = {}
+        local file = io.open(filePath, "rb")
+            
+        for line in file:lines() do
+            table.insert (fileLines, line);
         end
+
+        file:close()
+
+        if #fileLines < 3 then
+            return nil
+        end
+
+        for input in fileLines[1]:gmatch("%S+") do
+            data.Version = input
+            break
+        end
+
+        for input in fileLines[2]:gmatch("%S+") do
+            data.Weapon.WeaponName = input
+            break
+        end
+
+        for input in fileLines[3]:gmatch("%S+") do
+            data.Weapon.ItemIndex = tonumber(input)
+            break
+        end
+
+        for i = 4, #fileLines do
+            if i%2 == 0 then
+                    local tempState = {}
+                    for input in fileLines[i]:gmatch("%S+") do table.insert(tempState, tonumber(input)) end
+                    local tempAction = {}
+                    for output in fileLines[i+1]:gmatch("%S+") do table.insert(tempAction, tonumber(output)) end
+                table.insert(data.History, {tempState, tempAction})
+            end
+        end
+        return data
     end
-    return (data)
 end
 
 function DZShuffleDataset(dataset)
