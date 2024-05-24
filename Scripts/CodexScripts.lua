@@ -23,28 +23,28 @@ DZCommands = {
 		ExportRecordToFile = {
 			Entries = {
 				{
-					Text = "Export training data to a file. Only works on x86(32 bit) version. It will save a file to the x86 folder of the root folder with the name of DZRecord.log"
+					Text = "This function exports the record to a file. It only works on the x86 (32-bit) version. The file will be saved in the x86 folder of the root directory with the name DZRecord.log."
 				}
 			}
 		},
 		LoadRecordFromFile = {
 			Entries = {
 				{
-					Text = "Load trainign data from a file. Only works on x86(32 bit) version. It will load a file in the x86 folder of the root folder with the name of DZRecord.log"
+					Text = "This function loads record from a file. It only works on the x86 (32-bit) version. The file must be located in the x86 folder of the root directory and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record."
 				}
 			}
 		},
 		ClearRecord = {
 			Entries = {
 				{
-					Text = "Clear the training data in the save file. Will reset the AI to random behavior with regular weapon."
+					Text = "This function clears the previous run data, resetting Dark Zagreus's AI to its default state, which is driven by random probabilities."
 				}
 			}
 		},
 		ForceNextRoomBossRoom = {
 			Entries = {
 				{
-					Text = "Use this function while you have started a run. It will force the next room to Hades boss room."
+					Text = "This function skips directly to the final boss level, which is useful if you have a successful previous run and want to quickly test fighting Dark Zagreus. It changes your next room to the boss room."
 				}
 			}
 		},
