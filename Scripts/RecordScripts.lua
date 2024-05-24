@@ -143,7 +143,7 @@ DZCreateNewRecord = function()
 
     DZPersistent.CurRunRecord = 
     {
-        Version = DZDataVersion,
+        Version = DarkZagreus.DataVersion,
         Weapon = 
         {
             WeaponName = weapon.WeaponName,
@@ -221,8 +221,8 @@ end
 
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
-    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DZDataVersion then
-        DZDebugPrintString("DZDataVersion is not matched, clear all previous data")
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DarkZagreus.DataVersion then
+        DZDebugPrintString("DataVersion is not matched, clear all previous data")
         DZClearAllRecordInMemory()
     end 
 end}

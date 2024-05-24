@@ -2,7 +2,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DZTrainAI()
 
-    if DZPersistent.PrevRunRecord.Version ~= DZDataVersion then
+    if DZPersistent.PrevRunRecord.Version ~= DarkZagreus.DataVersion then
         DZDebugPrintString("DZTrainAI() - Mod version does not match with the current one")
         return
     end
