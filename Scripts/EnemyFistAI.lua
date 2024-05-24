@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusFistAI( enemy, currentRun )
     enemy.ComboThreshold = 12 -- for AspectofDemeter
@@ -45,7 +45,7 @@ function DZAIDoFistAILoop(enemy, currentRun, targetId)
             attackSuccess = DZAIDoFistAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
-                DebugPrint({ Text = "Attack failed. Gonna try again."})
+                DZDebugPrintString("Attack failed. Gonna try again.")
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
 				waitUntil( enemy.AINotifyName )
@@ -81,7 +81,7 @@ function DZAIDoFistAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 	end
 
     if weaponAIData.SkipAngleTowardTarget then
-		--DebugPrint({ Text = "Skipping default AngleTowardTarget" })
+		--DZDebugPrintString("Skipping default AngleTowardTarget")
 	else
 		AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 

@@ -1,4 +1,4 @@
-if not DarkZagreus.Config.Enabled then return end
+if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusBowAI( enemy, currentRun )
     return DZAIDoBowAILoop( enemy, currentRun )
@@ -83,7 +83,7 @@ function DZAIDoBowAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 	end
 
     if weaponAIData.SkipAngleTowardTarget then
-		--DebugPrint({ Text = "Skipping default AngleTowardTarget" })
+		--DZDebugPrintString("Skipping default AngleTowardTarget")
 	else
 		AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
@@ -130,7 +130,7 @@ function DZAIFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Fire
     if weaponAIData.IsRangeBasedOnCharge then
-        -- DebugPrint({ Text = "Charge: " .. tostring(actionData.ChargeTime)})
+        -- DZDebugPrintString("Charge: " .. tostring(actionData.ChargeTime))
         DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
     else
         DZAIDoRegularFire(enemy, weaponAIData, targetId)

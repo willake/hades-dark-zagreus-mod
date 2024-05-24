@@ -1,5 +1,5 @@
 if not DarkZagreus.Config.Enabled then return end
-
+ 
 DZPersistent = {}
 DZPersistent.IsRecording = false
 DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
@@ -114,9 +114,9 @@ end}
 -- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if currentRun.Cleared ~= nil then
-        DebugPrint({ Text = "RecordRunCleared() - EndRun " .. tostring(currentRun.Cleared) }) 
+        DZDebugPrintString("RecordRunCleared() - EndRun " .. tostring(currentRun.Cleared)) 
     else
-        DebugPrint({ Text = "RecordRunCleared() - EndRun " .. "false" })
+        DZDebugPrintString("RecordRunCleared() - EndRun " .. "false")
     end
     DZPersistent.IsRecording = false
 
@@ -126,8 +126,8 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
     end
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
-    DZSaveCurRunRecordInMemory()
-    DZSaveCurRunRecordToFile() -- only working on x86
+    DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
+    DZSavePrevRunRecordToFile() -- only working on x86
 
     DZPersistent.CurRunRecord = {}
 
@@ -138,12 +138,12 @@ end, DarkZagreus)
 
 -- if io module is not avilable then just print record out
 DZCreateNewRecord = function() 
-    DebugPrint({ Text = "DZCreateNewRecord() - Create new record file, enable isRecording to true" }) 
+    DZDebugPrintString("DZCreateNewRecord() - Create new record file, enable isRecording to true") 
     local weapon = GameState.LastInteractedWeaponUpgrade
 
     DZPersistent.CurRunRecord = 
     {
-        Version = DZDataVersion,
+        Version = DarkZagreus.DataVersion,
         Weapon = 
         {
             WeaponName = weapon.WeaponName,
@@ -158,9 +158,9 @@ DZCreateNewRecord = function()
 end
 
 DZLogRecord = function (state, action) 
-    DebugPrint({ Text = string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance,
-        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime)})
+        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
@@ -189,32 +189,40 @@ DZOverridePendingRecord = function(state, action)
     DZPersistent.PendingRecord.Action = action
 end
 
-DZSaveCurRunRecordInMemory = function ()
-    DebugPrint({ Text = {"DZSaveCurRunRecordInMemory() - DZSaveCurRunRecordInMemory"} })
+DZSaveCurRunRecordAsPrevRunRecord = function ()
+    DZDebugPrintString("DZSaveCurRunRecordInMemory()")
     DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
 end
 
 DZClearPrevRecordInMemory = function ()
-    DebugPrint({ Text = {"DZClearPrevRecordInMemory() - Clear previous record"} })
+    DZDebugPrintString("DZClearPrevRecordInMemory() - Clear previous record")
     DZPersistent.PrevRunRecord = {}
 end
 
 DZClearAllRecordInMemory = function ()
-    DebugPrint({ Text = {"DZClearAllRecord() - Clear all records"} })
+    DZDebugPrintString("DZClearAllRecord() - Clear all records")
     DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
     DZPersistent.CurRunRecord = {}
 end
 
-DZSaveCurRunRecordToFile = function ()
-    DebugPrint({ Text = {"DZSaveCurRunRecordToFile() - Save CurRunRecord to file"} })
-    DZSaveTrainingData(DZPersistent.CurRunRecord)
+DZSavePrevRunRecordToFile = function ()
+    DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
+    DZSaveTrainingData(DZPersistent.PrevRunRecord, "DZRecord.log")
+end
+
+DZLoadPreRunRecordFromFile = function ()
+    DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
+    local record = DZLoadTrainingData("DZRecord.log")
+    if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
+        DZPersistent.PrevRunRecord = record
+    end
 end
 
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
-    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DZDataVersion then
-        DebugPrint({ Text = {"DZDataVersion is not matched, clear all previous data"} })
+    if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DarkZagreus.DataVersion then
+        DZDebugPrintString("DataVersion is not matched, clear all previous data")
         DZClearAllRecordInMemory()
     end 
 end}
