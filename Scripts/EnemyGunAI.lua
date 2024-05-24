@@ -87,7 +87,7 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 	end
 
     if weaponAIData.SkipAngleTowardTarget then
-		--DebugPrint({ Text = "Skipping default AngleTowardTarget" })
+		--DZDebugPrintString("Skipping default AngleTowardTarget")
 	else
 		AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
