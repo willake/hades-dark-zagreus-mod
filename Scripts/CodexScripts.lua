@@ -85,7 +85,7 @@ end
 -- x86 only
 function DZUIHandleExportRecordToFile()
 	if io == nil then
-		ModUtil.Hades.PrintDisplay("Can't export record. This feature only works on x86(32 bits) version", 3, {255, 0, 0, 255})
+		ModUtil.Hades.PrintDisplay("Can't export record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
 	else
 		DZSavePrevRunRecordToFile()	
 		ModUtil.Hades.PrintDisplay("Successfully export record. The file name is DZRecord.log", 3, {0, 255, 255, 255})
@@ -95,7 +95,7 @@ end
 -- x86 only
 function DZUIHandleLoadRecordFromFile()
 	if io == nil then
-		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32 bits) version", 3, {255, 0, 0, 255})
+		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
 	else
 		DZLoadPreRunRecordFromFile()
 		ModUtil.Hades.PrintDisplay("Successfully load record", 3, {0, 255, 255, 255})
