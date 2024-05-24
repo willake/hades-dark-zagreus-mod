@@ -161,10 +161,10 @@ function DZAIMakeActionData(state, lastActions)
     local specialProb = DZTemp.Model[4].cells[3].signal
     local chargeTime = DZTemp.Model[4].cells[4].signal
 
-    DebugPrint({ Text = string.format("dash prob | %.3f", dashProb) })
-    DebugPrint({ Text = string.format("attack prob | %.3f", attackProb) })
-    DebugPrint({ Text = string.format("special prob | %.3f", specialProb) })
-    DebugPrint({ Text = string.format("charge time | %.3f", chargeTime) })
+    DZDebugPrintString(string.format("dash prob | %.3f", dashProb))
+    DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
+    DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+    DZDebugPrintString(string.format("charge time | %.3f", chargeTime))
 
     return {    
         Dash = dashProb,

@@ -2,15 +2,15 @@ if not DarkZagreus.Config.Enabled then return end
 
 DZVersion = "beta1.0"
 DZDataVersion = "v1" -- for training data, when the data structure chages, the version increases
-DebugPrint({ Text = string.format("DarkZagreus Mod loaded. Version: %s Data version: %s", DZVersion, DZDataVersion)})
+DZDebugPrintString(string.format("Mod is loaded. Version: %s Data version: %s", DZVersion, DZDataVersion))
 
 -- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
-    DebugPrint({ Text = "Enter D_Boss01" })
+    DZDebugPrintString("Enter D_Boss01")
     -- active enmies should only contain hades
     if ActiveEnemies ~= nil then
         for enemyId, enemy in pairs( ActiveEnemies ) do
-            DebugPrint({ Text = "Hades Object ID " .. enemy.ObjectId })
+            DZDebugPrintString("Hades Object ID " .. enemy.ObjectId)
             -- equip weapon
             local weaponData = {}
             
@@ -28,14 +28,14 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 and weaponData.WeaponName 
                 and weaponData.ItemIndex then
                 DZWeaponData[weaponData.WeaponName][weaponData.ItemIndex].Equip(enemy)
-                DZDebugPrintTable("DZ Weapon Equipped", weaponData, 3)
+                DZDebugPrintTable("DZ Weapon Equipped", weaponData)
             else
                 DZWeaponData["SwordWeapon"][1].Equip(enemy)
                 DZDebugPrintTable("DZ Weapon Equipped", 
                 {
                     WeaponName = "SwordWeapon",
                     ItemIndex = 1
-                }, 3)
+                })
             end 
         end
     end
@@ -54,7 +54,7 @@ SaveIgnores["DZDataVersion"] = true
 -- Load Dark Zagreus's portrait
 local package = "DarkZagreus"
 ModUtil.WrapBaseFunction( "SetupMap", function(baseFunc)
-    DebugPrint({Text = "@DarkZagreus Trying to load package "..package..".pkg"})
+    DZDebugPrintString("Trying to load package "..package..".pkg")
     LoadPackages({Name = package})
     return baseFunc()
 end)

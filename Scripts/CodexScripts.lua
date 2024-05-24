@@ -77,7 +77,7 @@ function DZUIMain(triggerArgs)
     local selection = CodexStatus.SelectedEntryNames[CodexStatus.SelectedChapterName]
 
     if Codex.DZCommands.Entries[selection] ~= nil then
-		DebugPrint({Text = "@DarkZagreus Trying to execute command : "..selection})
+		DZDebugPrintString("Trying to execute command : " .. selection)
 		DZUIUseCommand(selection, triggerArgs)
     end
 end

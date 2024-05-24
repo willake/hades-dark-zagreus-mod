@@ -85,7 +85,7 @@ function DZAIDoShieldAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
 	end
 
     if weaponAIData.SkipAngleTowardTarget then
-		--DebugPrint({ Text = "Skipping default AngleTowardTarget" })
+		--DZDebugPrintString("Skipping default AngleTowardTarget")
 	else
 		AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
@@ -116,7 +116,7 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 
     if weaponAIData.PostFireChargeStages ~= nil then
         chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
-        -- DebugPrint({ Text = "Set chargeTime to " .. chargeTime})
+        -- DZDebugPrintString("Set chargeTime to " .. chargeTime)
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
