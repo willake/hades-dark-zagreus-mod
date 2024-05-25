@@ -2,7 +2,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 -- Replace Hades to Zagreus
 -- set phases to only 1
-UnitSetData.Enemies.Hades.MaxHealth = 5000
+UnitSetData.Enemies.Hades.MaxHealth = 100
 UnitSetData.Enemies.Hades.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 10000
@@ -65,10 +65,10 @@ UnitSetData.Enemies.Hades.BossPresentationPriorityIntroTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationRepeatableTextLineSets = nil
 
-UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
+UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeadStartBlood"
 UnitSetData.Enemies.Hades.OnDeathFunctionName = "DZDarkZagreusKillPresentation"
 UnitSetData.Enemies.Hades.OnDeathFunctionArgs = { 
-    Message = "HadesDefeatedMessage", 
+    Message = "DarkZagreusDefeatedMessage", 
     StartPanTime = 1.5, 
     MessageLayer = "ScreenOverlay", 
     MessageDelay = 1.5, 
