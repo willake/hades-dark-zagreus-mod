@@ -47,6 +47,9 @@ Replace "Packages/DarkZagreus.pkg"
 To "Scripts/CodexScripts.lua"
 Import "Scripts/CodexScripts.lua"
 
+To "Scripts/CombatPresentation.lua"
+Import "Scripts/CombatPresentation.lua"
+
 To "Scripts/WeaponData.lua"
 Import "DarkZagreus/Weapons/RushWeapon.lua"
 Import "DarkZagreus/Weapons/Swords/SwordWeapon.lua"
