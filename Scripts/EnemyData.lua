@@ -102,3 +102,5 @@ UnitSetData.Enemies.DarkGunBombUnit =
         },
     },
 }
+
+-- TODO: should handle HadesKillPresentation as well
