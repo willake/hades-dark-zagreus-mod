@@ -42,6 +42,7 @@ After installing the mod, you can start a run. At the end of the run, you will s
 
 ### Commands
 This mod also offers debug features. To see the available commands, press `C` (or the corresponding button for your platform) to open the Codex in the game.
+There are a list of commands. To execute them, select a command and press `Enter` (or the corresponding confirm button).
 
 ![commands](./ReadmeAssets/commands.png)
 
