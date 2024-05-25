@@ -7,8 +7,6 @@ UnitSetData.Enemies.Hades.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 10000
 
--- UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
-
 -- remove all stages, leaving only 1
 UnitSetData.Enemies.Hades.AIStages = 
 {
@@ -66,6 +64,17 @@ UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
 UnitSetData.Enemies.Hades.BossPresentationPriorityIntroTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationRepeatableTextLineSets = nil
+
+UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
+UnitSetData.Enemies.Hades.OnDeathFunctionName = "DZDarkZagreusKillPresentation"
+UnitSetData.Enemies.Hades.OnDeathFunctionArgs = { 
+    Message = "HadesDefeatedMessage", 
+    StartPanTime = 1.5, 
+    MessageLayer = "ScreenOverlay", 
+    MessageDelay = 1.5, 
+    MessageDuration = 3.5, 
+    AddInterBiomeTimerBlock = true }
+
 
 -- for aspect of lucifer
 UnitSetData.Enemies.DarkGunBombUnit =
