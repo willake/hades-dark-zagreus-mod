@@ -64,6 +64,9 @@ UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
 UnitSetData.Enemies.Hades.BossPresentationPriorityIntroTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationRepeatableTextLineSets = nil
+UnitSetData.Enemies.Hades.LowHealthVoiceLines = nil
+UnitSetData.Enemies.Hades.DefeatedVoiceLines = nil
+UnitSetData.Enemies.Hades.BossKillVoiceLines = nil
 
 UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeadStartBlood" -- ZagreusDeathFullScreen is not transparent background so I can't use it
 UnitSetData.Enemies.Hades.OnDeathFunctionName = "DZDarkZagreusKillPresentation"
