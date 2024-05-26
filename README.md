@@ -73,7 +73,6 @@ Cast, call, and summon are complex systems in Hades, requiring considerable time
 Boons and Daedalus Hammer upgrades are driven by the trait system in the game code. The challenge in implementing these for non-player characters is that many mechanics are specifically designed for player use. The functions these upgrades introduce are tailored for manipulating the player character, requiring replication and reimplementation of all traits and their functions for Dark Zagreus. This is a substantial amount of work and may be supported in future versions. Other mod developers are welcome to build upon this mod and extend its capabilities.
 
 ## Known issues
-- Hades animations are not fully changed
 - Bow charging animations are missing
 - Aspect of Lucifer (The 4th gun weapon) attack is not working
 
