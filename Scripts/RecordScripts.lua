@@ -125,7 +125,7 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
     DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
-    DZSavePrevRunRecordToFile() -- only working on x86
+    -- DZSavePrevRunRecordToFile() -- only working on x86
 
     DZPersistent.CurRunRecord = {}
 
