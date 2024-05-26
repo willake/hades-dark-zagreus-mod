@@ -2,7 +2,6 @@ if not DarkZagreus.Config.Enabled then return end
  
 DZPersistent = {}
 DZPersistent.IsRecording = false
-DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
 
 if DZPersistent.PendingRecord == nil then
     DZPersistent.PendingRecord = {} 
@@ -41,16 +40,19 @@ function DZCheckCanRecord()
 end
 
 function DZMakeActionData(action, chargeTime, maxChargeTime)
-    local dash = (action == 0) and 1.0 or 0.0
-    local attack = (action == 1) and 1.0 or 0.0
-    local special = (action == 2) and 1.0 or 0.0
+    local dashToward = (action == 0) and 1.0 or 0.0
+    local attack = (action == 2) and 1.0 or 0.0
+    local special = (action == 3) and 1.0 or 0.0
+    local dashAway = (action == 4) and 1.0 or 0.0 -- added in v2
+    -- 0 DashToward, 1 Attack, 2 Special Attack, 4 DashAway
 
     local time = chargeTime / maxChargeTime
     time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
     time = (time < 0.0) and 0.0 or time -- if less than 1 clamp to 1, usually not happens
 
     return {    
-        Dash = dash,
+        DashToward = dashToward,
+        DashAway = dashAway,
         Attack = attack,
         SpecialAttack = special,
         ChargeTime = time
@@ -70,10 +72,6 @@ function DZGetCurrentState()
     if distance > 1000 then
         distance = 1000
     end
-
-    -- local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
-    -- local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
-    -- local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,

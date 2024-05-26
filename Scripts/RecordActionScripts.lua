@@ -8,8 +8,7 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         end
 
         -- DebugPrint({ Text = "Attack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1)) 
-        DZPersistent.LastAction = 1
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))
     end
 }
 
@@ -21,7 +20,6 @@ OnWeaponFired{ "SwordParry",
 
         -- DebugPrint({ Text = "SpecialAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZPersistent.LastAction = 2
     end
 }
 
@@ -45,8 +43,7 @@ OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
         local duration = _worldTime - DZTemp.StartChargingTime
         -- DebugPrint({ Text = "ChargeDuration: " .. duration })
         -- DebugPrint({ Text = "Attack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))   
-        DZPersistent.LastAction = 1  
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))
     end 
 }
 
@@ -58,7 +55,6 @@ OnWeaponFired{ "BowSplitShot",
 
         -- DebugPrint({ Text = "SpecialAttack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZPersistent.LastAction = 2
     end
 }
 
@@ -83,8 +79,7 @@ OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
         end
 
         -- DebugPrint({ Text = "ShortAttack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        DZPersistent.LastAction = 1
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))
     end 
 }
 
@@ -98,7 +93,6 @@ OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
         -- DebugPrint({ Text = "ChargeDuration: " .. duration })
         -- DebugPrint({ Text = "Attack" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
-        DZPersistent.LastAction = 1
     end 
 }
 
@@ -110,7 +104,6 @@ OnWeaponFired { "SpearWeaponThrowReturn",
 
         -- DebugPrint({ Text = "SpearWeaponThrowReturn" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZPersistent.LastAction = 2
     end
 }
 
@@ -143,8 +136,6 @@ OnWeaponFired { "SpearWeaponThrow",
         -- end  
         
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
-
-        DZPersistent.LastAction = 2
     end 
 }
 
@@ -157,7 +148,6 @@ OnWeaponFired{ "SpearRushWeapon",
         -- DebugPrint({ Text = "SpearRushWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
         -- LogRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        DZPersistent.LastAction = 2
     end
 }
 
@@ -182,7 +172,6 @@ OnWeaponFired { "ShieldWeapon ShieldWeaponDash",
 
         -- DebugPrint({ Text = "ShieldWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        DZPersistent.LastAction = 1
     end 
 }
 
@@ -196,7 +185,6 @@ OnWeaponFired { "ShieldWeaponRush",
         -- DebugPrint({ Text = "ChargeDuration: " .. duration })
         -- DebugPrint({ Text = "ShieldWeaponRush" })
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
-        DZPersistent.LastAction = 1
     end 
 }
 
@@ -223,7 +211,6 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
 
         -- DebugPrint({ Text = "ShieldThrow" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))
-        DZPersistent.LastAction = 2
 
         if DZTemp.ShieldThrowed == false then
             DZTemp.ShieldThrowed = true 
@@ -247,7 +234,6 @@ OnWeaponFailedToFire { "ShieldThrow",
         if weaponData.RecallOnFailToFire then
             -- DebugPrint({ Text = "ShieldThrow" })
             DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-            DZPersistent.LastAction = 2
 
             DZTemp.ShieldThrowed = false
         end
@@ -270,7 +256,6 @@ OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 Fist
 
         -- DebugPrint({ Text = "FistWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        DZPersistent.LastAction = 1
     end 
 }
 
@@ -284,7 +269,6 @@ OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
 
         -- DebugPrint({ Text = "FistWeaponSpecial" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))     
-        DZPersistent.LastAction = 2
     end 
 }
 
@@ -300,7 +284,6 @@ OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
 
         -- DebugPrint({ Text = "GunWeapon" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        DZPersistent.LastAction = 1
     end 
 }
 
@@ -312,7 +295,6 @@ OnWeaponFired { "GunGrenadeToss",
 
         -- DebugPrint({ Text = "GunGrenadeToss" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
-        DZPersistent.LastAction = 1
     end 
 }
 
@@ -320,16 +302,17 @@ OnWeaponFired { "GunGrenadeToss",
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
         -- DebugPrint({ Text = GetAngle({ Id = CurrentRun.Hero.ObjectId })})
-        -- local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
-        -- local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam"})
-        -- local angleBetween = GetAngleBetween({ Id = CurrentRun.Hero.ObjectId, DestinationId = closestId })
-        -- DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
         if not DZCheckCanRecord() then
             return false
         end
 
-        -- DebugPrint({ Text = "Rush" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(0, 0, 1))
-        DZPersistent.LastAction = 0
+        local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
+        local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam"})
+        local angleBetween = GetAngleBetween({ Id = CurrentRun.Hero.ObjectId, DestinationId = closestId })
+        DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
+        local action = (math.abs(angle - angleBetween) > 90) and 4 or 1
+        -- dash away or dash toward
+        
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action, 0, 1))
     end
 } 
