@@ -29,6 +29,19 @@
 					}
 					]
 			}
+			Effects = [
+				{
+					Name = "DZMarkTarget"
+					Duration = 3.0
+					Type = "DAMAGE_TAKEN"
+					Modifier = 1
+					Active = true
+					TimeModifierFraction = 0
+					FrontFx = "MarkTargetPrimary"
+					BackFx = "null"
+					IgnoreName = "HydraTooth"
+				}
+			]
 		}
 		{
 			Name = "DarkChironBowDash"
@@ -58,6 +71,19 @@
 					}
 					]
 			}
+			Effects = [
+				{
+					Name = "DZMarkTarget"
+					Duration = 3.0
+					Type = "DAMAGE_TAKEN"
+					Modifier = 1
+					Active = true
+					TimeModifierFraction = 0
+					FrontFx = "MarkTargetPrimary"
+					BackFx = "null"
+					IgnoreName = "HydraTooth"
+				}
+			]
     	}
 		{
             Name = "DarkChironBowSplitShot"

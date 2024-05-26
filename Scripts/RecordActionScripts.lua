@@ -316,15 +316,3 @@ OnWeaponFired{ "RushWeapon",
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action, 0, 1))
     end
 } 
-
--- check if is damaged
-ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
-    DZPersistent.LastGetDamagedTime = _worldTime
-    return base(victim, triggerArgs)
-end, DarkZagreus)
-
--- check if damaged enemies
-ModUtil.Path.Wrap("DamageEnemy", function(base, victim, triggerArgs)
-    DZPersistent.LastDamageEnemyTime = _worldTime
-    return base(victim, triggerArgs)
-end, DarkZagreus)

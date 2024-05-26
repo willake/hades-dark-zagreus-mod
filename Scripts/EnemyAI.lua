@@ -236,7 +236,7 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
     else
         if enemy.DZ.FireTowardTarget == false then
             local angleToward = GetAngleBetween({ Id = enemy.ObjectId, DestinationId = targetId })
-            local opposite = GetRandomAngleInOppositeDirection(angleToward)
+            local opposite = DZGetRandomAngleInOppositeDirection(angleToward)
             local radians = math.rad(opposite)
             -- SetAngle({ Id = enemy.ObjectId, Angle = opposite, Duration = 0.0 })
             -- local location = GetLocation({ Id = enemy.ObjectId})
@@ -408,7 +408,7 @@ function DZAIGetWeaponAIData(enemy, weaponName)
 	return weaponAIData
 end
 
-function GetRandomAngleInOppositeDirection(angle)
+function DZGetRandomAngleInOppositeDirection(angle)
     local r = math.random(0, 180)
 
     return (angle + 90 + r) % 360

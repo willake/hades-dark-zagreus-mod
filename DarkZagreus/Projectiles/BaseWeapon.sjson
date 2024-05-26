@@ -9,6 +9,19 @@
         UseVulnerability = false
         CriticalHitMultiplier = 3
         IgnoreDodge = true
+        Effects = [
+          {
+            Name = "DZMarkTarget"
+            Duration = 3.0
+            Type = "DAMAGE_TAKEN"
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
+            FrontFx = "MarkTargetPrimary"
+            BackFx = "null"
+            IgnoreName = "HydraTooth"
+          }
+        ]
         // ignore effects
     }
     {
