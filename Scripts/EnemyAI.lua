@@ -125,9 +125,10 @@ function DZAIMakeRandomActionData(state)
     chargeTime = r
 
     return {
-        Dash = 0.2,
-        Attack = 0.6,
-        SpecialAttack = 0.2,
+        DashToward = 0.2, -- 0.2
+        Attack = 0.5, -- 0.5
+        SpecialAttack = 0.2, -- 0.2
+        DashAway = 0.1,
         ChargeTime = chargeTime
     }
 end
@@ -150,26 +151,30 @@ function DZAIMakeActionData(state, lastActions)
 
     DZTemp.Model:activate({
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        (lastAction.Action == 0) and 1 or 0, -- if last action is dash 
+        (lastAction.Action == 0) and 1 or 0, -- if last action is dash toward
         (lastAction.Action == 1) and 1 or 0, -- if last action is attack
-        (lastAction.Action == 2) and 1 or 0, -- if last action is special attack
+        (lastAction.Action == 2) and 1 or 0, -- if last action is special attack,
+        (lastAction.Action == 3) and 1 or 0, -- if last action is dash away
         lastAction.ChargeTime }
     )
 
-    local dashProb = DZTemp.Model[4].cells[1].signal
+    local dashTowardProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal
     local specialProb = DZTemp.Model[4].cells[3].signal
-    local chargeTime = DZTemp.Model[4].cells[4].signal
+    local dashAwayProb = DZTemp.Model[4].cells[4].signal
+    local chargeTime = DZTemp.Model[4].cells[5].signal
 
-    DZDebugPrintString(string.format("dash prob | %.3f", dashProb))
+    DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
     DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
     DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+    DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
     DZDebugPrintString(string.format("charge time | %.3f", chargeTime))
 
     return {    
-        Dash = dashProb,
+        DashToward = dashTowardProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
+        DashAway = dashAwayProb,
         ChargeTime = chargeTime
     }
 end
@@ -229,7 +234,23 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
     if weaponAIData.FireOnSelf then
         FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId, AutoEquip = true })
     else
-        FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        if enemy.DZ.FireTowardTarget == false then
+            local angleToward = GetAngleBetween({ Id = enemy.ObjectId, DestinationId = targetId })
+            local opposite = GetRandomAngleInOppositeDirection(angleToward)
+            local radians = math.rad(opposite)
+            -- SetAngle({ Id = enemy.ObjectId, Angle = opposite, Duration = 0.0 })
+            -- local location = GetLocation({ Id = enemy.ObjectId})
+            -- local tempTarget = SpawnObstacle({ 
+            --     Name = "TempTarget", DestinationId = enemy.ObjectId, OffsetX = location.X + math.cos(radians) * 100, OffsetY = location.Y - math.sin(radians) * 100 })
+            -- AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = tempTarget })  not working
+            -- DZDebugPrintString(string.format("DashAway - Original = %.1f, Opposite = %.1f", angleToward, opposite))
+            Stop({ Id = enemy.ObjectId })
+            SetAngle({ Id = enemy.ObjectId, Angle = opposite, Duration = 0.0 })
+            FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+            Destroy({Id = tempTarget})
+        else
+            FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        end
     end
     
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
@@ -385,4 +406,10 @@ function DZAIGetWeaponAIData(enemy, weaponName)
 	-- end
 
 	return weaponAIData
+end
+
+function GetRandomAngleInOppositeDirection(angle)
+    local r = math.random(0, 180)
+
+    return (angle + 90 + r) % 360
 end

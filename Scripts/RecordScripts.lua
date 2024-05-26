@@ -2,7 +2,6 @@ if not DarkZagreus.Config.Enabled then return end
  
 DZPersistent = {}
 DZPersistent.IsRecording = false
-DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
 
 if DZPersistent.PendingRecord == nil then
     DZPersistent.PendingRecord = {} 
@@ -41,16 +40,19 @@ function DZCheckCanRecord()
 end
 
 function DZMakeActionData(action, chargeTime, maxChargeTime)
-    local dash = (action == 0) and 1.0 or 0.0
+    local dashToward = (action == 0) and 1.0 or 0.0
     local attack = (action == 1) and 1.0 or 0.0
     local special = (action == 2) and 1.0 or 0.0
+    local dashAway = (action == 3) and 1.0 or 0.0 -- added in v2
+    -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway
 
     local time = chargeTime / maxChargeTime
     time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
-    time = (time < 0.0) and 0.0 or time -- if less than 1 clamp to 1, usually not happens
+    time = (time < 0.0) and 0.0 or time -- if less than 0 clamp to 0, usually not happens
 
     return {    
-        Dash = dash,
+        DashToward = dashToward,
+        DashAway = dashAway,
         Attack = attack,
         SpecialAttack = special,
         ChargeTime = time
@@ -70,10 +72,6 @@ function DZGetCurrentState()
     if distance > 1000 then
         distance = 1000
     end
-
-    -- local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
-    -- local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
-    -- local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
@@ -127,7 +125,7 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
     DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
-    DZSavePrevRunRecordToFile() -- only working on x86
+    -- DZSavePrevRunRecordToFile() -- only working on x86
 
     DZPersistent.CurRunRecord = {}
 
@@ -158,14 +156,14 @@ DZCreateNewRecord = function()
 end
 
 DZLogRecord = function (state, action) 
-    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance,
-        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime))
+        action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeTime))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
       { state.OwnHP, state.ClosestEnemyHP, state.Distance },
-      { action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime }
+      { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeTime }
     })
 end
 
