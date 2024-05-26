@@ -301,7 +301,7 @@ OnWeaponFired { "GunGrenadeToss",
 -- rush
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
-        DebugPrint({ Text = GetAngle({ Id = CurrentRun.Hero.ObjectId })})
+        -- DebugPrint({ Text = GetAngle({ Id = CurrentRun.Hero.ObjectId })})
         if not DZCheckCanRecord() then
             return false
         end
@@ -309,10 +309,22 @@ OnWeaponFired{ "RushWeapon",
         local angle = GetAngle({ Id = CurrentRun.Hero.ObjectId })
         local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam"})
         local angleBetween = GetAngleBetween({ Id = CurrentRun.Hero.ObjectId, DestinationId = closestId })
-        DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
+        -- DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
         local action = (math.abs(angle - angleBetween) > 90) and 3 or 0
         -- dash away or dash toward
         
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action, 0, 1))
     end
 } 
+
+-- check if is damaged
+ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
+    DZPersistent.LastGetDamagedTime = _worldTime
+    return base(victim, triggerArgs)
+end, DarkZagreus)
+
+-- check if damaged enemies
+ModUtil.Path.Wrap("DamageEnemy", function(base, victim, triggerArgs)
+    DZPersistent.LastDamageEnemyTime = _worldTime
+    return base(victim, triggerArgs)
+end, DarkZagreus)

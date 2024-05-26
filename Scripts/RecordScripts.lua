@@ -60,10 +60,11 @@ function DZMakeActionData(action, chargeTime, maxChargeTime)
 end
 
 function DZGetCurrentState()
-    local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam"})
+    local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam", IgnoreInvulnerable = true, IgnoreHomingIneligible = true})
     local enemy = ActiveEnemies[closestId]
     local distance = 0.00
     local enemyHealth = 0.00
+
     if enemy ~= nil and enemy.Health ~= nil then
         distance = GetDistance({ Id = closestId, DestinationId = currentRun.Hero.ObjectId })
         enemyHealth = enemy.Health / enemy.MaxHealth
@@ -72,11 +73,18 @@ function DZGetCurrentState()
     if distance > 1000 then
         distance = 1000
     end
+
+    local isGetDamagedRecently = _worldTime - DZPersistent.LastGetDamagedTime < 1.0
+    local isDamageEnemyRecently = _worldTime - DZPersistent.LastDamageEnemyTime < 1.0
+
+    -- DZDebugPrintString(string.format("Get Damage Recently %s, Damage Enemy Recently %s", isGetDamagedRecently, isDamageEnemyRecently))
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
         ClosestEnemyHP = enemyHealth,
         Distance = distance / 1000,
+        GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
+        isDamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0
         -- IsLastActionDash = isLastActionDash,
         -- IsLastActionAttack = isLastActionAttack,
         -- IsLastActionSpecialAttack = isLastActionSpectialAttack,
@@ -153,6 +161,8 @@ DZCreateNewRecord = function()
     }
   
     DZPersistent.PendingRecord = {}
+    DZPersistent.LastGetDamagedTime = 0.0
+    DZPersistent.LastDamageEnemyTime = 0.0
 end
 
 DZLogRecord = function (state, action) 
