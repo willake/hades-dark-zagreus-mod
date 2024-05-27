@@ -84,7 +84,7 @@ function DZGetCurrentState()
         ClosestEnemyHP = enemyHealth,
         Distance = distance / 1000,
         GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
-        isDamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0
         -- IsLastActionDash = isLastActionDash,
         -- IsLastActionAttack = isLastActionAttack,
         -- IsLastActionSpecialAttack = isLastActionSpectialAttack,
@@ -166,13 +166,13 @@ DZCreateNewRecord = function()
 end
 
 DZLogRecord = function (state, action) 
-    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance,
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently,
         action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeTime))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
-      { state.OwnHP, state.ClosestEnemyHP, state.Distance },
+      { state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently },
       { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeTime }
     })
 end
@@ -209,9 +209,9 @@ end
 
 DZClearAllRecordInMemory = function ()
     DZDebugPrintString("DZClearAllRecord() - Clear all records")
-    DZPersistent.PendingRecord = {}
+    -- DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
-    DZPersistent.CurRunRecord = {}
+    -- DZPersistent.CurRunRecord = {}
 end
 
 DZSavePrevRunRecordToFile = function ()
