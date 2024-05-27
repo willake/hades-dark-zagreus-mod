@@ -107,14 +107,15 @@ function DZAIGetCurrentState(enemy)
         distance = 1000
     end
 
-    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
-    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
+    local isGetDamagedRecently = _worldTime - DZPersistent.AI.LastGetDamagedTime < 1.0
+    local isDamageEnemyRecently = _worldTime - DZPersistent.AI.LastDamageEnemyTime < 1.0
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
         ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
-        Distance = distance / 1000
+        Distance = distance / 1000,
+        GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0
     }
 end
 
