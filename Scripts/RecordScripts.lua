@@ -74,8 +74,21 @@ function DZGetCurrentState()
         distance = 1000
     end
 
-    local isGetDamagedRecently = _worldTime - DZPersistent.LastGetDamagedTime < 1.0
-    local isDamageEnemyRecently = _worldTime - DZPersistent.LastDamageEnemyTime < 1.0
+    local isGetDamagedRecently = false
+    local isDamageEnemyRecently = false
+    local isMarkTargetRecently = false
+
+    if DZTemp.LastGetDamagedTime then
+        isGetDamagedRecently = _worldTime - DZTemp.LastGetDamagedTime < 1.0
+    end
+
+    if DZTemp.LastDamageEnemyTime then
+        isDamageEnemyRecently = _worldTime - DZTemp.LastDamageEnemyTime < 1.0
+    end
+
+    if DZTemp.LastMarkedTargetTime and DZTemp.ValidMarkTime then
+        isMarkTargetRecently = _worldTime - DZTemp.LastMarkedTargetTime < DZTemp.ValidMarkTime
+    end 
 
     -- DZDebugPrintString(string.format("Get Damage Recently %s, Damage Enemy Recently %s", isGetDamagedRecently, isDamageEnemyRecently))
     
@@ -84,10 +97,8 @@ function DZGetCurrentState()
         ClosestEnemyHP = enemyHealth,
         Distance = distance / 1000,
         GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
-        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0
-        -- IsLastActionDash = isLastActionDash,
-        -- IsLastActionAttack = isLastActionAttack,
-        -- IsLastActionSpecialAttack = isLastActionSpectialAttack,
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
     }
 end
 

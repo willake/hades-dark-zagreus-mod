@@ -211,10 +211,10 @@ end
 -- for aspect of chiron
 function DZAIMarkTargetApply( triggerArgs )
 	if not triggerArgs.Reapplied then
-        SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZPersistent.DarkZagreusObjectId, Property = "OverrideFireRequestTarget", Value = triggerArgs.triggeredById, DataValue = false})
+        SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = triggerArgs.triggeredById, DataValue = false})
 	end
 end
 
 function DZAIMarkTargetClear( triggerArgs )
-	SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZPersistent.DarkZagreusObjectId, Property = "OverrideFireRequestTarget", Value = -1, DataValue = false})
+	SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = -1, DataValue = false})
 end

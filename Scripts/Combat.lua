@@ -2,9 +2,16 @@
 ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
     if DZCheckCanRecord() then
         -- for record
-        DZPersistent.LastGetDamagedTime = _worldTime
+        DZTemp.LastGetDamagedTime = _worldTime
 
-        DZPersistent.AI.LastDamageEnemyTime = _worldTime
+        if DZTemp.AI then
+            local attacker = triggerArgs.AttackerTable
+            
+            -- id is DarkZagreus's ObjectId
+            if attacker and attacker.ObjectId == DZTemp.AI.ObjectId then
+                DZTemp.AI.LastDamageEnemyTime = _worldTime 
+            end 
+        end
     end 
     
     return base(victim, triggerArgs)
@@ -14,9 +21,13 @@ end, DarkZagreus)
 ModUtil.Path.Wrap("DamageEnemy", function(base, victim, triggerArgs)
 
     if DZCheckCanRecord() then
-        DZPersistent.LastDamageEnemyTime = _worldTime
-    
-        DZPersistent.AI.LastGetDamagedTime = _worldTime    
+        DZTemp.LastDamageEnemyTime = _worldTime
+        
+        if DZTemp.AI then
+            if victim and victim.ObjectId == DZTemp.AI.ObjectId then
+                DZTemp.AI.LastDamageEnemyTime = _worldTime 
+            end  
+        end    
     end
     return base(victim, triggerArgs)
 end, DarkZagreus)

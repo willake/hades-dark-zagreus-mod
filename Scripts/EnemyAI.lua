@@ -5,6 +5,8 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
     enemy.DZ.LastActionTime = 0
+    DZTemp.AI = {}
+    DZTemp.AI.ObjectId = enemy.ObjectId
 
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
@@ -107,15 +109,31 @@ function DZAIGetCurrentState(enemy)
         distance = 1000
     end
 
-    local isGetDamagedRecently = _worldTime - DZPersistent.AI.LastGetDamagedTime < 1.0
-    local isDamageEnemyRecently = _worldTime - DZPersistent.AI.LastDamageEnemyTime < 1.0
+    local isGetDamagedRecently = false
+    local isDamageEnemyRecently = false
+    local isMarkTargetRecently = false
+
+    if DZTemp.AI then
+        if DZTemp.AI.LastGetDamagedTime then
+            isGetDamagedRecently = _worldTime - DZTemp.AI.LastGetDamagedTime < 1.0
+        end
+
+        if DZTemp.AI.LastDamageEnemyTime then
+            isDamageEnemyRecently = _worldTime - DZTemp.AI.LastDamageEnemyTime < 1.0
+        end
+
+        if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
+            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
+        end 
+    end
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
         ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
         Distance = distance / 1000,
         GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
-        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
     }
 end
 
