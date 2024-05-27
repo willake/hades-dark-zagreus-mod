@@ -1,15 +1,43 @@
 if not DarkZagreus.Config.Enabled then return end
  
 -- sword weapon
+OnWeaponCharging { "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+        
+        DZTemp.ChargeWeapon = "Attack"
+        DZTemp.StartChargingTime = _worldTime
+    end 
+}
+
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
     function( triggerArgs )
         if not DZCheckCanRecord() then
             return false
         end
 
+        local duration = 0.0
+        
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
         -- DebugPrint({ Text = "Attack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))
     end
+}
+
+OnWeaponCharging { "SwordParry",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+        
+        DZTemp.ChargeWeapon = "SpecialAttack"
+        DZTemp.StartChargingTime = _worldTime
+    end 
 }
 
 OnWeaponFired{ "SwordParry",
@@ -18,8 +46,14 @@ OnWeaponFired{ "SwordParry",
             return false
         end
 
+        local duration = 0.0
+
+        if DZTemp.ChargeWeapon == "SpecialAttack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
         -- DebugPrint({ Text = "SpecialAttack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))
     end
 }
 
@@ -30,20 +64,36 @@ OnWeaponCharging { "BowWeapon BowWeaponDash",
             return false
         end
 
+        DZTemp.ChargeWeapon = "Attack"
         DZTemp.StartChargingTime = _worldTime
     end 
 }
 
-OnWeaponTriggerRelease { "BowWeapon BowWeaponDash",
+OnWeaponFired { "BowWeapon BowWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
         end
+        
+        local duration = 0.0
 
-        local duration = _worldTime - DZTemp.StartChargingTime
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
         -- DebugPrint({ Text = "ChargeDuration: " .. duration })
         -- DebugPrint({ Text = "Attack" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))
+    end 
+}
+
+OnWeaponCharging { "BowSplitShot",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+        
+        DZTemp.ChargeWeapon = "SpecialAttack"
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
 
@@ -53,8 +103,14 @@ OnWeaponFired{ "BowSplitShot",
             return false
         end
 
+        local duration = 0.0
+
+        if DZTemp.ChargeWeapon == "SpecialAttack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
         -- DebugPrint({ Text = "SpecialAttack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))
     end
 }
 
@@ -66,7 +122,7 @@ OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
             return false
         end
 
-        -- DebugPrint({ Text = "StartCharging" })
+        DZTemp.ChargeWeapon = "Attack"
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -78,8 +134,12 @@ OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
             return false
         end
 
-        -- DebugPrint({ Text = "ShortAttack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))
     end 
 }
 
@@ -90,8 +150,10 @@ OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
         end
 
         local duration = _worldTime - DZTemp.StartChargingTime
-        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
-        -- DebugPrint({ Text = "Attack" })
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
     end 
 }
@@ -113,7 +175,7 @@ OnWeaponCharging { "SpearWeaponThrow",
             return false
         end
 
-        -- DebugPrint({ Text = "StartCharging" })
+        DZTemp.ChargeWeapon = "SpecialAttack"
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -123,17 +185,12 @@ OnWeaponFired { "SpearWeaponThrow",
         if not DZCheckCanRecord() then
             return false
         end
-        
-        local duration = _worldTime - DZTemp.StartChargingTime
-        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
-        -- DebugPrint({ Text = "SpearWeaponThrow" })
-        
-        -- if the weapon is aspect of achilles, which is chargable
-        -- if GameState.LastInteractedWeaponUpgrade.ItemIndex == 2 then
-        --     DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
-        -- else
-        --     DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))
-        -- end  
+
+        local duration = 0.0
+
+        if DZTemp.ChargeWeapon == "SpecialAttack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
         
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 0.3)) 
     end 
@@ -312,7 +369,6 @@ OnWeaponFired{ "RushWeapon",
         -- DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
         local action = (math.abs(angle - angleBetween) > 90) and 3 or 0
         -- dash away or dash toward
-        
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action, 0, 1))
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action, 0.0, 1))
     end
 } 
