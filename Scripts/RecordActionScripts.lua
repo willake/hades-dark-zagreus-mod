@@ -216,7 +216,7 @@ OnWeaponCharging { "ShieldWeapon ShieldWeaponDash",
             return false
         end
 
-        -- DebugPrint({ Text = "StartCharging" })
+        DZTemp.ChargeWeapon = "Attack"
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -227,8 +227,12 @@ OnWeaponFired { "ShieldWeapon ShieldWeaponDash",
             return false
         end
 
-        -- DebugPrint({ Text = "ShieldWeapon" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))     
     end 
 }
 
@@ -238,9 +242,11 @@ OnWeaponFired { "ShieldWeaponRush",
             return false
         end
 
-        local duration = _worldTime - DZTemp.StartChargingTime
-        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
-        -- DebugPrint({ Text = "ShieldWeaponRush" })
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
         DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1.6))     
     end 
 }
@@ -252,7 +258,7 @@ OnWeaponCharging { "ShieldThrow ShieldThrowDash",
             return false
         end
 
-        -- DebugPrint({ Text = "StartCharging" })
+        DZTemp.ChargeWeapon = "SpecialAttack"
         DZTemp.StartChargingTime = _worldTime
     end 
 }
@@ -263,10 +269,11 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
             return false
         end
 
-        local duration = _worldTime - DZTemp.StartChargingTime
-        -- DebugPrint({ Text = "ChargeDuration: " .. duration })
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "SpecialAttack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
 
-        -- DebugPrint({ Text = "ShieldThrow" })
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))
 
         if DZTemp.ShieldThrowed == false then
@@ -305,27 +312,58 @@ OnWeaponFailedToFire { "ShieldThrow",
 -- if I just record the action with OnControlPressed and OnControlReleased,
 -- it is not secured that the weapon is fired, sometimes it will wrongly add redundant data into the record
 -- so I decide to just record it with OnWeaponFired, which is easier 
+OnWeaponCharging { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 FistWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+
+        DZTemp.ChargeWeapon = "Attack"
+        DZTemp.StartChargingTime = _worldTime
+    end 
+}
+
 OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 FistWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
         end
 
-        -- DebugPrint({ Text = "FistWeapon" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))     
     end 
 }
 
 -- ignore Flying Cutter and Kinetic Launcher, which is chargable special
 -- just treat it as normal special
+OnWeaponCharging { "FistWeaponSpecial FistWeaponSpecialDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+        
+        DZTemp.ChargeWeapon = "SpecialAttack"
+        DZTemp.StartChargingTime = _worldTime
+    end 
+}
+
 OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
         end
 
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "SpecialAttack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
         -- DebugPrint({ Text = "FistWeaponSpecial" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, 0, 1))     
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2, duration, 1))     
     end 
 }
 
@@ -333,16 +371,43 @@ OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
 -- same as fist weapon
 
 -- ignore the bias affected by Delta Chamber, let it be
-OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
+OnWeaponCharging { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
     function(triggerArgs)
         if not DZCheckCanRecord() then
             return false
         end
 
-        -- DebugPrint({ Text = "GunWeapon" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        DZTemp.ChargeWeapon = "Attack"
+        DZTemp.StartChargingTime = _worldTime
     end 
 }
+
+OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "Attack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
+        -- DebugPrint({ Text = "GunWeapon" })
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))     
+    end 
+}
+
+OnWeaponCharging { "FistWeaponSpecial FistWeaponSpecialDash",
+    function(triggerArgs)
+        if not DZCheckCanRecord() then
+            return false
+        end
+        
+        DZTemp.ChargeWeapon = "SpecialAttack"
+        DZTemp.StartChargingTime = _worldTime
+    end 
+}
+
 
 OnWeaponFired { "GunGrenadeToss",
     function(triggerArgs)
@@ -350,8 +415,12 @@ OnWeaponFired { "GunGrenadeToss",
             return false
         end
 
-        -- DebugPrint({ Text = "GunGrenadeToss" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, 0, 1))     
+        local duration = 0.0
+        if DZTemp.ChargeWeapon == "SpecialAttack" then
+            duration = _worldTime - DZTemp.StartChargingTime 
+        end
+
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1, duration, 1))     
     end 
 }
 
