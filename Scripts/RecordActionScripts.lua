@@ -437,6 +437,7 @@ OnWeaponFired{ "RushWeapon",
         local angleBetween = GetAngleBetween({ Id = CurrentRun.Hero.ObjectId, DestinationId = closestId })
         -- DebugPrint({ Text = string.format("angle: %f, between: %f, Is dash away: %s", angle, angleBetween, math.abs(angle - angleBetween) > 90)})
         local action = (math.abs(angle - angleBetween) > 90) and 3 or 0
+        -- this way might miss catch back dash(aiming front but dash back, not sure how to solve it)
         -- dash away or dash toward
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action, 0.0, 1))
     end
