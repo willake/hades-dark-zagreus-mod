@@ -50,6 +50,9 @@ Import "Scripts/CodexScripts.lua"
 To "Scripts/Combat.lua"
 Import "Scripts/Combat.lua"
 
+To "Scripts/Powers.lua"
+Import "Scripts/Powers.lua"
+
 To "Scripts/CombatPresentation.lua"
 Import "Scripts/CombatPresentation.lua"
 
