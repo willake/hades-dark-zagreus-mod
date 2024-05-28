@@ -13,10 +13,10 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
     enemy.WeaponName = DZAISelectShieldWeapon(enemy, actionData)
 
     if enemy.WeaponName == nil then
-        return false
+        return true -- continue to next action
     end
-
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+    
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)

@@ -13,7 +13,12 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectSpearWeapon(enemy, actionData)
-    DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+
+        if enemy.WeaponName == nil then
+        return true -- continue to next action
+    end
+    -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+    
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)

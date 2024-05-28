@@ -34,7 +34,7 @@ function DZAIDoSwordAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, 0)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -150,7 +150,7 @@ function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
-    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true
