@@ -88,3 +88,17 @@ The command features is inspired by [CodexMenu](https://www.nexusmods.com/hades/
 Make sure you run the `modimporter.exe`
 ### When I open the game, a screen shows up saying that save files can't be loaded
 Make sure ModUtil and DarkZagreus are imported.
+
+## Change logs
+
+### beta1.4
+
+- upgrade to data v4, which includes MarkTargetRecently
+
+### beta1.3
+
+- upgrade to data v3, which includes GetDamagedRecently and DamageEnemyRecently
+
+### beta1.2
+
+- upgrade to data v2, which split dash to dash toward and dash away

@@ -4,7 +4,7 @@ DarkZagreus.Config = {
 }
 
 DarkZagreus.Version = "beta1.1"
-DarkZagreus.DataVersion = "v3" -- for training data, when the data structure chages, the version increases
+DarkZagreus.DataVersion = "v4" -- for training data, when the data structure chages, the version increases
 
 -- State Scheme
 -- {
