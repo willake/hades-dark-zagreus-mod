@@ -224,8 +224,25 @@ function DZAISelectShieldWeapon(enemy, actionData)
         return enemy.WeaponName
     end
 
+    if r < actionData.Attack + actionData.ChargeAttack then
+
+        enemy.DZ.TempAction = 4
+
+        -- if the last action is dash, do dash attack
+        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+            enemy.WeaponName = enemy.DashAttackWeapon
+            enemy.ChainedWeapon = nil
+            return enemy.WeaponName
+        end
+
+        -- or just do a regular attack
+        enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
     -- use special attack
-    if r < actionData.Attack + actionData.SpecialAttack then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
@@ -233,14 +250,14 @@ function DZAISelectShieldWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
@@ -269,5 +286,5 @@ function DZAIMakeShieldChargeTime(action)
     end
 
     -- else, like charge special attack
-    return math.random(0.3, 1.0)
+    return 0.0
 end
