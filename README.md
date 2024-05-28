@@ -89,16 +89,20 @@ Make sure you run the `modimporter.exe`
 ### When I open the game, a screen shows up saying that save files can't be loaded
 Make sure ModUtil and DarkZagreus are imported.
 
-## Change logs
+## Data Version Change logs
 
-### beta1.4
+### v4
 
-- upgrade to data v4, which includes MarkTargetRecently
+- include MarkTargetRecently, which checks if a target is marked by a special weapon within duration(depends on the weapon)
 
-### beta1.3
+### v3
 
-- upgrade to data v3, which includes GetDamagedRecently and DamageEnemyRecently
+- include GetDamagedRecently and DamageEnemyRecently, which check if self and enemy are damaged within 1 second
 
-### beta1.2
+### v2
 
-- upgrade to data v2, which split dash to dash toward and dash away
+- split dash action to dash toward and dash away, which obviously different in combat tactics
+
+### v1
+
+- initial version
