@@ -10,7 +10,10 @@ DarkZagreus.DataVersion = "v4" -- for training data, when the data structure cha
 -- {
 --     OwnHP,
 --     ClosestEnemyHP,
---     Distance
+--     Distance,
+--     GetDamagedRecently,
+--     DamageEnemyRecently,
+--     MarkTargetRecently
 -- }
 
 -- Action Scheme
