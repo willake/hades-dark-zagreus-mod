@@ -28,7 +28,7 @@ function DarkZagreusAI( enemy, currentRun )
 	end
 end
 
-function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
     if weaponAIData == nil then
         weaponAIData = enemy
     end
@@ -42,9 +42,8 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
     end
 
     if weaponAIData.IsAttackDistanceBasedOnCharge then
-        local chargeTime = actionData.ChargeTime
         local rangeMax = weaponAIData.Range * weaponAIData.ChargeRangeMultiplier
-        attackDistance = chargeTime * rangeMax
+        attackDistance = percentageCharged * rangeMax
     end
 
     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
@@ -138,17 +137,13 @@ function DZAIGetCurrentState(enemy)
 end
 
 function DZAIMakeRandomActionData(state)
-    local r = math.random()
-    local chargeTime = 0.0
-
-    chargeTime = r
 
     return {
         DashToward = 0.2, -- 0.2
         Attack = 0.5, -- 0.5
         SpecialAttack = 0.2, -- 0.2
         DashAway = 0.1,
-        ChargeTime = chargeTime
+        ChargeAttack = 0.0
     }
 end
 
@@ -161,11 +156,9 @@ function DZAIMakeActionData(state, lastActions)
     local lastAction = lastActions[#lastActions]
 
     if lastAction == nil then
-       lastAction = 
-       {
-        Action = 0,
-        ChargeTime = 0.0
-       } 
+       lastAction = {
+        Action = 0
+       }
     end
 
     DZTemp.Model:activate({
@@ -174,27 +167,27 @@ function DZAIMakeActionData(state, lastActions)
         (lastAction.Action == 1) and 1 or 0, -- if last action is attack
         (lastAction.Action == 2) and 1 or 0, -- if last action is special attack,
         (lastAction.Action == 3) and 1 or 0, -- if last action is dash away
-        lastAction.ChargeTime }
-    )
+        (lastAction.Action == 4) and 1 or 0, -- if last action is charged attack, which appears in spear and shield  
+    })
 
     local dashTowardProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal
     local specialProb = DZTemp.Model[4].cells[3].signal
     local dashAwayProb = DZTemp.Model[4].cells[4].signal
-    local chargeTime = DZTemp.Model[4].cells[5].signal
+    local chargeAttackProb = DZTemp.Model[4].cells[5].signal
 
     DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
     DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
     DZDebugPrintString(string.format("special prob | %.3f", specialProb))
     DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
-    DZDebugPrintString(string.format("charge time | %.3f", chargeTime))
+    DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
 
     return {    
         DashToward = dashTowardProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
         DashAway = dashAwayProb,
-        ChargeTime = chargeTime
+        ChargeAttack = chargeAttackProb
     }
 end
 

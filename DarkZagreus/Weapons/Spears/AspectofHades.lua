@@ -9,7 +9,7 @@ WeaponData.DarkHadesSpear =
 
 		AIData =
 		{
-			AttackDistance = 300,
+			AttackDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			ChainedWeapon = "DarkHadesSpear2",
@@ -70,7 +70,7 @@ WeaponData.DarkHadesSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkHadesSpear3",
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
@@ -112,7 +112,7 @@ WeaponData.DarkHadesSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.4,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.75 },

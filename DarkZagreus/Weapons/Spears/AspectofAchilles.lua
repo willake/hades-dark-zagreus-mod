@@ -6,7 +6,7 @@ WeaponData.DarkAchillesSpear =
 
 		AIData =
 		{
-			AttackDistance = 250,
+			AttackDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -69,7 +69,7 @@ WeaponData.DarkAchillesSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkAchillesSpear3",
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
@@ -112,7 +112,7 @@ WeaponData.DarkAchillesSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },

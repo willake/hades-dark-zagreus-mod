@@ -39,23 +39,20 @@ function DZCheckCanRecord()
     return true
 end
 
-function DZMakeActionData(action, chargeTime, maxChargeTime)
+function DZMakeActionData(action)
     local dashToward = (action == 0) and 1.0 or 0.0
     local attack = (action == 1) and 1.0 or 0.0
     local special = (action == 2) and 1.0 or 0.0
     local dashAway = (action == 3) and 1.0 or 0.0 -- added in v2
-    -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway
-
-    local time = chargeTime / maxChargeTime
-    time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
-    time = (time < 0.0) and 0.0 or time -- if less than 0 clamp to 0, usually not happens
+    local chargeAttack = (action == 4) and 1.0 or 0.0 -- added in v5
+    -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway, 4 Charge Attack
 
     return {    
         DashToward = dashToward,
         DashAway = dashAway,
         Attack = attack,
         SpecialAttack = special,
-        ChargeTime = time
+        ChargeAttack = chargeAttack 
     }
 end
 
@@ -180,12 +177,12 @@ end
 DZLogRecord = function (state, action) 
     DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
-        action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeTime))
+        action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
       { state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently },
-      { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeTime }
+      { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeAttack }
     })
 end
 

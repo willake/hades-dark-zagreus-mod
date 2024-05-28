@@ -14,7 +14,12 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectGunWeapon(enemy, actionData)
-    DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+    
+    if enemy.WeaponName == nil then
+        return true -- continue to next action
+    end
+    -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+    
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
@@ -34,7 +39,7 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, 0)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -157,7 +162,7 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
-    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
 
     -- Fire end
 
@@ -182,7 +187,8 @@ end
 
 function DZAISelectGunWeapon(enemy, actionData)
     local total = 
-        actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+        actionData.Attack + actionData.ChargeAttack 
+        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
     local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -192,7 +198,7 @@ function DZAISelectGunWeapon(enemy, actionData)
 
     local lastAction = DZAIGetLastAction(enemy)
     
-    if r < actionData.Attack then
+    if r < actionData.Attack + actionData.ChargeAttack then
 
         if enemy.DZ.TempAction ~= 1 then
             enemy.ShouldPreWarm = true
@@ -214,7 +220,7 @@ function DZAISelectGunWeapon(enemy, actionData)
     end
 
     -- use special attack
-    if r < actionData.Attack + actionData.SpecialAttack then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
@@ -222,14 +228,14 @@ function DZAISelectGunWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil

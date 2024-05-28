@@ -9,7 +9,7 @@ WeaponData.DarkGuanYuSpear =
 
 		AIData =
 		{
-			AttackDistance = 300,
+			AttackDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -75,7 +75,7 @@ WeaponData.DarkGuanYuSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkGuanYuSpear3",
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
@@ -117,7 +117,7 @@ WeaponData.DarkGuanYuSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },

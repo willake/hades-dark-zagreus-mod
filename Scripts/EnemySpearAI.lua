@@ -13,7 +13,12 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectSpearWeapon(enemy, actionData)
-    DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+
+        if enemy.WeaponName == nil then
+        return true -- continue to next action
+    end
+    -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
@@ -30,10 +35,12 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
 
     -- if there is a target
     if targetId ~= nil and targetId ~= 0 then
+
+        local percentageCharged = DZAIMakeSpearChargeTime(enemy.DZ.TempAction)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -44,7 +51,7 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZAIDoSpearAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoSpearAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -57,7 +64,7 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZAIDoSpearAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoSpearAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -101,18 +108,18 @@ function DZAIDoSpearAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 		return false
 	end
 
-    if not DZAIFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireSpearWeapon( enemy, weaponAIData, currentRun, targetId, actionData, percentageCharged) then
         return false
     end
 
     return true
 end
 
-function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionData, percentageCharged)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
-        chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
+        chargeTime = percentageCharged * weaponAIData.MaxChargeTime
         DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
     end
 
@@ -142,7 +149,7 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
     -- Fire
     
     if weaponAIData.IsRangeBasedOnCharge then
-        DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, actionData.ChargeTime)
+        DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharged)
     else
         DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
@@ -273,8 +280,33 @@ function DZAISelectSpearWeapon(enemy, actionData)
         return enemy.WeaponName
     end
 
+    -- use charge attack with primary attack weapon
+    if r < actionData.Attack + actionData.ChargeAttack then
+    
+        if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+            enemy.DZ.TempAction = 2
+            enemy.WeaponName = enemy.SpecialAttackWeaponReturn
+            enemy.ChainedWeapon = nil
+            return enemy.WeaponName
+        end
+
+        enemy.DZ.TempAction = 4
+
+        -- if the last action is dash, do dash attack
+        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+            enemy.WeaponName = enemy.DashAttackWeapon
+            enemy.ChainedWeapon = nil
+            return enemy.WeaponName
+        end
+
+        -- or just do a regular attack
+        enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
     -- use special attack
-    if r < actionData.Attack + actionData.SpecialAttack then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
 
@@ -295,14 +327,14 @@ function DZAISelectSpearWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
@@ -312,4 +344,26 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
     enemy.WeaponName = nil
     return nil
+end
+
+-- logic for deciding the charge time
+function DZAIMakeSpearChargeTime(action)
+
+    if action == 4 then -- charge attack
+        local r = math.random()
+
+        -- higer chance to do small charge, low chance do full charge
+        if r < 0.7 then
+            return 0.33 + math.random() * 0.33
+        elseif r < 0.9 then
+            return 0.66 + math.random() * 0.22
+        else
+            return 0.88 + math.random() * 0.12
+        end
+    elseif action == 2 then -- spcial attack
+        return math.random(0.3, 1.0)
+    end
+
+    -- else, like charge special attack
+    return 0.0
 end
