@@ -203,6 +203,11 @@ WeaponData.DarkChironBowSplitShot =
     },
 }
 
+EffectData.DZMarkTarget =
+{
+    OnApplyFunctionName = "DZAIMarkTargetApply",
+    OnClearFunctionName = "DZAIMarkTargetClear",
+}
 -- {
 --     WeaponNames = { "BowWeapon", "BowWeaponDash" },
 --     WeaponProperty = "ChargeCancelGraphic",

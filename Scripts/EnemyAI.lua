@@ -5,6 +5,8 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
     enemy.DZ.LastActionTime = 0
+    DZTemp.AI = {}
+    DZTemp.AI.ObjectId = enemy.ObjectId
 
     local ailoop = _G[DZWeaponAI["SwordWeapon"]]
     local weapon = {}
@@ -107,14 +109,31 @@ function DZAIGetCurrentState(enemy)
         distance = 1000
     end
 
-    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
-    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
+    local isGetDamagedRecently = false
+    local isDamageEnemyRecently = false
+    local isMarkTargetRecently = false
+
+    if DZTemp.AI then
+        if DZTemp.AI.LastGetDamagedTime then
+            isGetDamagedRecently = _worldTime - DZTemp.AI.LastGetDamagedTime < 1.0
+        end
+
+        if DZTemp.AI.LastDamageEnemyTime then
+            isDamageEnemyRecently = _worldTime - DZTemp.AI.LastDamageEnemyTime < 1.0
+        end
+
+        if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
+            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
+        end 
+    end
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
         ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
-        Distance = distance / 1000
+        Distance = distance / 1000,
+        GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
     }
 end
 
@@ -236,7 +255,7 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
     else
         if enemy.DZ.FireTowardTarget == false then
             local angleToward = GetAngleBetween({ Id = enemy.ObjectId, DestinationId = targetId })
-            local opposite = GetRandomAngleInOppositeDirection(angleToward)
+            local opposite = DZGetRandomAngleInOppositeDirection(angleToward)
             local radians = math.rad(opposite)
             -- SetAngle({ Id = enemy.ObjectId, Angle = opposite, Duration = 0.0 })
             -- local location = GetLocation({ Id = enemy.ObjectId})
@@ -408,7 +427,7 @@ function DZAIGetWeaponAIData(enemy, weaponName)
 	return weaponAIData
 end
 
-function GetRandomAngleInOppositeDirection(angle)
+function DZGetRandomAngleInOppositeDirection(angle)
     local r = math.random(0, 180)
 
     return (angle + 90 + r) % 360
