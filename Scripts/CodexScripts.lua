@@ -56,7 +56,7 @@ Codex.DZCommands = DZCommands
 -- handle confirm
 OnControlPressed{ "Confirm",
 	function( triggerArgs )
-		DZUIMain(triggerArgs)
+		DZUIHandleConfirm(triggerArgs)
 	end
 }
 
@@ -69,7 +69,7 @@ function DZUIUseCommand(commandName, triggerArgs)
 	end
 end
 
-function DZUIMain(triggerArgs)
+function DZUIHandleConfirm(triggerArgs)
     if CodexUI.Screen == nil or not IsScreenOpen("Codex") or IsScreenOpen("BoonInfoScreen") then
 		return
 	end
@@ -103,8 +103,13 @@ function DZUIHandleLoadRecordFromFile()
 end
 
 function DZUIHandleClearRecord()
-	DZClearAllRecordInMemory()
-	ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
+	ModUtil.Hades.NewMenuYesNo("ConfirmClearRecord", nil, nil, function ()
+		DZClearAllRecordInMemory()
+		ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
+	end, nil, 
+	"Sure to clear record?", 
+	"Clearing the record means the record will be not accessible anymore. You can export your record in x86 version before cleaning up. Are you sure to clear it?",
+	"Yes", "No")
 end
 
 function DZUIHandleForceNextRoomBossRoom()
