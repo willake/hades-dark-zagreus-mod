@@ -13,7 +13,7 @@ WeaponData.DarkFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist2",
-        FireDuration = 0.2,
+        FireDuration = 0.15,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
@@ -65,7 +65,7 @@ WeaponData.DarkFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist3",
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         -- WaitUntilProjectileDeath = true,
     }
 }
@@ -80,7 +80,7 @@ WeaponData.DarkFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist4",
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         -- WaitUntilProjectileDeath = true,
     }
 }
@@ -95,7 +95,7 @@ WeaponData.DarkFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist5",
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         -- WaitUntilProjectileDeath = true,
     }
 }
@@ -110,7 +110,7 @@ WeaponData.DarkFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist",
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         -- WaitUntilProjectileDeath = true,
         Cooldown = 0.5
     }
@@ -127,7 +127,7 @@ WeaponData.DarkFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist",
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         IsStartFromFistDash = true
@@ -171,7 +171,7 @@ WeaponData.DarkFistSpecial =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         FireDuration = 0.4,
-        PreFireDuration = 0.11,
+        PreFireDuration = 0.17,
         PreFireAnimation = "ZagreusFistAerialUpperCut_Start",
         FireAnimation = "ZagreusFistAerialUpperCut_Fire",
         FireFxOnSelf = "FistFxUppercutDirectional",
@@ -221,7 +221,7 @@ WeaponData.DarkFistSpecialDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         FireDuration = 0.4,
-        PreFireDuration = 0.18,
+        PreFireDuration = 0.17,
         PreFireAnimation = "ZagreusFistDashUpperCut_Start",
         FireAnimation = "ZagreusFistDashUpperCut_Fire",
         FireFxOnSelf = "FistFxUppercutDirectional"

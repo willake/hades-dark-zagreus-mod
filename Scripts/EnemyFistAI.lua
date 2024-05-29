@@ -129,16 +129,6 @@ function DZAIFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
     
     -- Prefire
 
-    if weaponAIData.WillTriggerVacuumFunction then
-        DZAICheckVacuumPlayer(enemy, targetId, 
-        {
-            Range = 800,				-- Vacuum distance
-            DistanceBuffer = 130,		-- Space to leave between player and enemy
-            RushDistanceBuffer = 300,
-            AutoLockArc = 60,
-        })
-    end
-
     DZAIDoPreFire(enemy, weaponAIData, targetId)
 
     -- Prefire End
@@ -150,6 +140,15 @@ function DZAIFireFistWeapon(enemy, weaponAIData, currentRun, targetId, actionDat
     -- Fire
     
     DZAIDoRegularFire(enemy, weaponAIData, targetId)
+
+    -- aspect of talos has special rush weapon
+    if enemy.DZ.TempAction == 0 and weaponAIData.AddRush then
+        local dashData = weaponAIData.AddRush
+        local dashFunction = _G[dashData.FunctionName]
+        if dashFunction ~= nil then
+            thread( dashFunction, enemy, dashData.FunctionArgs )
+        end
+    end
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
@@ -250,40 +249,6 @@ function DZAISelectFistWeapon(enemy, actionData)
     enemy.WeaponName = nil
     return nil
 end
-
--- these function are replicated version from Power.lua
--- because the original version is only available for player character
--- TODO: deal with this function when rush weapon is fired
-function DZAIFistVacuumRush(enemy)
-    -- i might do this function later
-    -- because I don't know when is it trigger
-    enemy.VacuumRush = true
-	wait( args.Duration, RoomThreadName )
-	enemy.VacuumRush = false 
-end
-
-function DZAIFistVacuumPullPresentation( attracter, victimId, args )
-	CreateAnimationsBetween({ Animation = "FistVacuumFx", DestinationId = victimId, Id = attracter.ObjectId, Length = args.distanceBuffer, Stretch = true, UseZLocation = false, Group = "FX_Standing_Add" })
-	PlaySound({ Name = "/SFX/Player Sounds/ZagreusFistMagnetismVacuumActivate", Id = victimId })
-end
-
--- attract player to enemy position
-function DZAICheckVacuumPlayer(enemy, targetId, args)
-    -- TODO sometime it's not working, need to know why
-    -- maybe also check if player is dead
-	if targetId ~= 0 then
-		local distanceBuffer = args.DistanceBuffer
-        -- if CurrentRun.Hero.VacuumRush then
-		-- 	distanceBuffer = args.RushDistanceBuffer
-		-- end
-        Stop({ Id = targetId })
-        -- DebugPrintf({ Text = "GetRequiredForceToEnemy: " .. GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer )})
-		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
-		FireWeaponFromUnit({ Weapon = "DarkTalosFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId })
-		DZAIFistVacuumPullPresentation( enemy, targetId, args )
-	end
-end
-
 -- will wrap DamageHero in Combat.lua to call this
 function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 

@@ -69,7 +69,7 @@ WeaponData.DarkGilgameshFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist3",
-        FireDuration = 0.2,
+        FireDuration = 0.13,
         -- WaitUntilProjectileDeath = true,
     },
 
@@ -106,7 +106,7 @@ WeaponData.DarkGilgameshFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist4",
-        FireDuration = 0.2,
+        FireDuration = 0.13,
         -- WaitUntilProjectileDeath = true,
     },
 
@@ -143,7 +143,7 @@ WeaponData.DarkGilgameshFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist5",
-        FireDuration = 0.2,
+        FireDuration = 0.12,
         -- WaitUntilProjectileDeath = true,
     },
 
@@ -180,7 +180,7 @@ WeaponData.DarkGilgameshFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
-        FireDuration = 0.2,
+        FireDuration = 0.12,
         -- WaitUntilProjectileDeath = true,
         Cooldown = 0.5
     },
@@ -220,7 +220,7 @@ WeaponData.DarkGilgameshFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         -- WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         IsStartFromFistDash = true

@@ -45,7 +45,7 @@
                 Duration = 0.24
                 Modifier = 1.0
                 NoUnitCollision = true
-                Active = true
+                Active = false
                 CanAffectInvulnerable = true
                 Cancelable = true
             }

@@ -199,7 +199,7 @@ DZWeaponData =
 		{
 			Equip = function (enemy)
                 enemy.PrimaryWeapon = "DarkTalosFist";
-				enemy.DashWeapon = "DarkRush";
+				enemy.DashWeapon = "DarkTalosRush";
 				enemy.SpecialAttackWeapon = "DarkTalosFistSpecial";
 				enemy.SpecialDashAttackWeapon = "DarkTalosFistSpecialDash";
 				enemy.DashAttackWeapon = "DarkTalosFistDash";
