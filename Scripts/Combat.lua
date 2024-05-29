@@ -10,6 +10,11 @@ ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
             -- id is DarkZagreus's ObjectId
             if attacker and attacker.ObjectId == DZTemp.AI.ObjectId then
                 DZTemp.AI.LastDamageEnemyTime = _worldTime 
+
+                -- for aspect of gilgamesh
+                local sourceWeaponData = GetWeaponData( attacker, triggerArgs.SourceWeapon )
+                thread( DZAICheckComboPowers, victim, attacker, triggerArgs, sourceWeaponData )
+                thread( DZAICheckFistDetonation, attacker, victim, triggerArgs)
             end 
         end
     end 

@@ -17,8 +17,8 @@ WeaponData.DarkTalosFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist2",
-        FireDuration = 0.15,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.15,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
@@ -70,8 +70,8 @@ WeaponData.DarkTalosFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist3",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 
@@ -85,8 +85,8 @@ WeaponData.DarkTalosFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist4",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 
@@ -100,8 +100,8 @@ WeaponData.DarkTalosFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist5",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 	
@@ -115,8 +115,8 @@ WeaponData.DarkTalosFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         Cooldown = 0.5
     }
 }
@@ -132,8 +132,8 @@ WeaponData.DarkTalosFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         IsStartFromFistDash = true
     },

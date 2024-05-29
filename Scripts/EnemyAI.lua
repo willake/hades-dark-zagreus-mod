@@ -80,11 +80,12 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
 end
 
 function DZAIEnqueueLastAction(enemy, action)
+    -- DZDebugPrintString(string.format("Action: %d", action.Action))
     table.insert(enemy.DZ.LastActions, action)
 
     -- max size of last action queue is 1 now, will be 2 in the future
     -- depends on how many information we wanna storing for the model prediction
-    if #enemy.DZ.LastActions > 1 then
+    if #enemy.DZ.LastActions > 2 then
         table.remove(enemy.DZ.LastActions, 1) 
     end
 end
@@ -92,8 +93,7 @@ end
 function DZAIGetLastAction(enemy)
     if #enemy.DZ.LastActions == 0 then
         return {
-            Action = 0,
-            ChargeTime = 0.0
+            Action = 0
         }
     else
         return enemy.DZ.LastActions[#enemy.DZ.LastActions]
@@ -136,6 +136,17 @@ function DZAIGetCurrentState(enemy)
     }
 end
 
+-- for model input, given an last action, produce a vector for input
+function DZAIMakeLastActionData(action)
+    return {
+        (action.Action == 0) and 1 or 0, -- if last action is dash toward
+        (action.Action == 1) and 1 or 0, -- if last action is attack
+        (action.Action == 2) and 1 or 0, -- if last action is special attack,
+        (action.Action == 3) and 1 or 0, -- if last action is dash away
+        (action.Action == 4) and 1 or 0, -- if last action is charged attack, which appears in spear and shield  
+    }
+end
+
 function DZAIMakeRandomActionData(state)
 
     return {
@@ -149,26 +160,24 @@ end
 
 function DZAIMakeActionData(state, lastActions)
 
-    if DZTemp.Model == nil or #DZTemp.Model == 0 then
+    local consideration = 2 -- how many last actions need to be considered
+
+    if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
         return DZAIMakeRandomActionData(state)
     end
 
-    local lastAction = lastActions[#lastActions]
+    local input = {
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently }
 
-    if lastAction == nil then
-       lastAction = {
-        Action = 0
-       }
+    for i = 1, consideration do
+        local data = DZAIMakeLastActionData(lastActions[#lastActions + 1 - i])    
+        for j = 1, #data do
+            table.insert(input, data[j])            
+        end
     end
 
-    DZTemp.Model:activate({
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        (lastAction.Action == 0) and 1 or 0, -- if last action is dash toward
-        (lastAction.Action == 1) and 1 or 0, -- if last action is attack
-        (lastAction.Action == 2) and 1 or 0, -- if last action is special attack,
-        (lastAction.Action == 3) and 1 or 0, -- if last action is dash away
-        (lastAction.Action == 4) and 1 or 0, -- if last action is charged attack, which appears in spear and shield  
-    })
+    DZTemp.Model:activate(input)
 
     local dashTowardProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal
@@ -176,11 +185,11 @@ function DZAIMakeActionData(state, lastActions)
     local dashAwayProb = DZTemp.Model[4].cells[4].signal
     local chargeAttackProb = DZTemp.Model[4].cells[5].signal
 
-    DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
-    DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
-    DZDebugPrintString(string.format("special prob | %.3f", specialProb))
-    DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
-    DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+    -- DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
+    -- DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
+    -- DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+    -- DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
+    -- DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
 
     return {    
         DashToward = dashTowardProb,
