@@ -107,3 +107,20 @@ end
 --         DZDebugPrintToFile(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
 --     end    
 -- end
+
+
+-- test weapon charge time
+-- OnWeaponCharging { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 FistWeaponDash FistWeaponSpecial FistWeaponSpecialDash",
+--     function(triggerArgs)        
+--         DZTemp.StartChargingTime = _worldTime
+--     end 
+-- }
+
+-- OnWeaponFired{ "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 FistWeaponDash FistWeaponSpecial FistWeaponSpecialDash",
+--     function( triggerArgs )
+--         local duration = _worldTime - DZTemp.StartChargingTime
+        
+--         -- DebugPrint({ Text = "Attack" })
+--         DZDebugPrintString(string.format("Charge time: %.2f", duration))
+--     end
+-- }
