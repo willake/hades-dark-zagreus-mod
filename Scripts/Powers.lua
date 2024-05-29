@@ -152,10 +152,7 @@ function DZAICheckFistDetonation( attacker, victim, triggerArgs )
 	if victim.ObjectId ~= CurrentRun.Hero.ObjectId then
 		return
 	end
-	DZDebugPrintString("DZAICheckFistDetonation")
-	DZDebugPrintString(string.format("#victim.ActiveEffects: %d", #victim.ActiveEffects))
-	DZDebugPrintString(string.format("DZMarkRuptureTarget: %s", victim.ActiveEffects["DZMarkRuptureTarget"] ~= nil))
-	DZDebugPrintString(string.format("triggerArgs.SourceWeapon: %s", triggerArgs.SourceWeapon))
+
 	if ( not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"] ) and triggerArgs.SourceWeapon == "DarkGilgameshFistSpecialDash" then
 		DZDebugPrintString("Pass")
 		local delay = 0.1
