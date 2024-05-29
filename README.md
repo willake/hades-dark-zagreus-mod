@@ -91,6 +91,11 @@ Make sure ModUtil and DarkZagreus are imported.
 
 ## Data Version Change logs
 
+### v5
+
+- remove charge time, now handle by a random probability within the AI scripts
+- add charge attack (Charged version of regular attack, for spears and shields)
+
 ### v4
 
 - include MarkTargetRecently, which checks if a target is marked by a special weapon within duration(depends on the weapon)
