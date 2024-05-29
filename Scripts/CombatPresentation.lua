@@ -84,3 +84,27 @@ function DZDarkZagreusKillPresentation( unit, args )
 	CurrentRun.CurrentRoom.Encounter.BossKillPresentation = false	
 	thread( CheckQuestStatus, { Silent = true } )
 end
+
+-- for aspect of gilmamesh, mark target
+function DZAIPositionEffectStacks( id )
+	local unit = CurrentRun.Hero
+	
+	-- if not EnemyHealthDisplayAnchors[id] or not unit then
+	-- 	return
+	-- end
+
+	local effects = {}
+	if EnemyHealthDisplayAnchors[ id .. "rupturestatus" ] then
+		table.insert( effects, EnemyHealthDisplayAnchors[ id .. "rupturestatus" ])
+	end
+
+	local spacing = 45
+	-- if unit.UseBossHealthBar then
+	-- 	spacing = 60
+	-- end
+	local width = (TableLength( effects ) - 1) * spacing
+
+	for i, effectId in pairs( effects ) do
+		Attach({ Id = effectId, DestinationId = id, OffsetY = -60, OffsetX = ((i - 1) * spacing - width/2) })
+	end
+end

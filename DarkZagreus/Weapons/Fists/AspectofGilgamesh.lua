@@ -371,18 +371,19 @@ WeaponData.DarkGilgameshMarkRuptureApplicator = {
     Name = "DarkGilgameshMarkRuptureApplicator",
 }
 
-EffectData.DarkGilgameshMarkRuptureTargetApplicator =
+EffectData.DZMarkRuptureTargetApplicator =
 {
     OnApplyFunctionName = "DZAIOnRuptureDashHit",
 }
 
-EffectData.DarkGilgameshPunchRuptureWeapon =
+-- no use
+EffectData.DZPunchRuptureWeapon =
 {
     OnApplyFunctionName = "DZAIOnRuptureWeaponHit",
 }
 
--- EffectData.DarkGilgameshMarkRuptureTarget =
--- {
---     OnApplyFunctionName = "DZMarkRuptureTargetApply",
---     OnClearFunctionName = "DZMarkRuptureTargetClear",
--- }
+EffectData.DZMarkRuptureTarget =
+{
+    OnApplyFunctionName = "DZAIMarkRuptureTargetApply",
+    OnClearFunctionName = "DZAIMarkRuptureTargetClear",
+}

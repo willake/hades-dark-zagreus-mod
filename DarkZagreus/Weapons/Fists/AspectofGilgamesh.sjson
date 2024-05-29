@@ -772,7 +772,7 @@
             IgnoreOwnerAttackDisabled = true
 	        Effects = [
                 {
-                    Name = "MarkRuptureTarget"
+                    Name = "DZMarkRuptureTarget"
                     Duration = 10.0
                     Type = "DAMAGE_OVER_TIME"
                     Modifier = 0

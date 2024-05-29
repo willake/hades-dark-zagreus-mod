@@ -80,7 +80,7 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
 end
 
 function DZAIEnqueueLastAction(enemy, action)
-    DZDebugPrintString(string.format("Action: %d", action.Action))
+    -- DZDebugPrintString(string.format("Action: %d", action.Action))
     table.insert(enemy.DZ.LastActions, action)
 
     -- max size of last action queue is 1 now, will be 2 in the future

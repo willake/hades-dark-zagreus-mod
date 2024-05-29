@@ -80,3 +80,166 @@ function DZAIMarkTargetFistClear( triggerArgs )
 		RemoveIncomingDamageModifier( triggerArgs.TriggeredByTable, triggerArgs.EffectName )
 	end
 end
+
+-- will wrap DamageHero in Combat.lua to call this
+function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
+
+	if sourceWeaponData == nil or sourceWeaponData.ComboPoints == nil or sourceWeaponData.ComboPoints <= 0 then
+		return
+	end
+    
+    if sourceWeaponData.UseComboPower == nil then
+        return
+    end
+
+	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
+
+    DebugPrintf({ Text = "Combo" .. attacker.ComboCount })
+
+	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
+		attacker.ComboReady = true
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		-- if HeroHasTrait( "FistSpecialFireballTrait" ) then
+		-- 	SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.08 })
+		-- else
+        SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		-- end
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+
+		DZAIComboReadyPresentation( attacker, triggerArgs )
+	end
+
+end
+
+function DZAIComboReadyPresentation( attacker, triggerArgs )
+	CreateAnimation({ Name = "FistComboReadyFx", DestinationId = attacker.ObjectId })
+	CreateAnimation({ Name = "PowerUpComboReady", DestinationId = attacker.ObjectId })
+	CreateAnimation({ Name = "FistComboReadyGlow", DestinationId = attacker.ObjectId })
+	if CheckCooldown( "DZComboReadyHint", 1.5 ) then
+		thread( InCombatText, attacker.ObjectId, "Combo_Ready", 0.8 )
+		PlaySound({ Name = "/SFX/Player Sounds/ZagreusFistComboProc", Id = attacker.ObjectId })
+	end
+end
+
+function DZAICheckComboPowerReset( attacker, weaponData )
+	if weaponData ~= nil and attacker.ComboReady then
+        DZDebugPrintString("Reset Combo")
+		attacker.ComboReady = false
+		attacker.ComboCount = 0
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 })
+		-- if HeroHasTrait( "FistSpecialFireballTrait" ) then
+		-- 	SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
+		-- end
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0 })
+		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
+		if not args or not args.Undelivered then
+			ComboDeliveredPresentation( attacker )
+		end
+	end
+end
+
+-- for aspect of gilgamesh
+function DZAICheckFistDetonation( attacker, victim, triggerArgs )
+	if DZTemp.AI == nil then
+		return
+	end
+	if victim.ObjectId ~= CurrentRun.Hero.ObjectId then
+		return
+	end
+	DZDebugPrintString("DZAICheckFistDetonation")
+	DZDebugPrintString(string.format("#victim.ActiveEffects: %d", #victim.ActiveEffects))
+	DZDebugPrintString(string.format("DZMarkRuptureTarget: %s", victim.ActiveEffects["DZMarkRuptureTarget"] ~= nil))
+	DZDebugPrintString(string.format("triggerArgs.SourceWeapon: %s", triggerArgs.SourceWeapon))
+	if ( not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"] ) and triggerArgs.SourceWeapon == "DarkGilgameshFistSpecialDash" then
+		DZDebugPrintString("Pass")
+		local delay = 0.1
+		-- original script use MapState
+		DZTemp.AI.QueuedDetonations = DZTemp.AI.QueuedDetonations or {}
+		while DZTemp.AI.QueuedDetonations[_worldTime + delay ] and delay < 2 do
+			delay = delay + 0.1
+		end
+		local key = _worldTime + delay
+		DZTemp.AI.QueuedDetonations[_worldTime + delay] = victim
+		wait( delay, RoomThreadName )
+		FireWeaponFromUnit({ Weapon = "DarkGilgameshFistDetonation", Id = attacker.ObjectId, DestinationId = victim.ObjectId, FireFromTarget = true, AutoEquip = true })
+		DZTemp.AI.QueuedDetonations[key] = nil
+		victim.LastRuptureTime = _worldTime
+	end
+end
+
+function DZAIMarkRuptureTargetApply( triggerArgs )
+	DZAIUpdateRuptureEffectStacks( triggerArgs )
+end
+
+function DZAIMarkRuptureTargetClear( triggerArgs )
+	local victim = triggerArgs.TriggeredByTable
+	StopAnimation({ Name = "PoseidonAresProjectileGlow", DestinationId = victim.ObjectId })
+	DZAIClearRuptureEffectStacks( triggerArgs )
+end
+
+function DZAIUpdateRuptureEffectStacks( args )
+
+	local unitId = args.triggeredById
+	local unit = args.TriggeredByTable
+	local startIconScale = 1.3
+
+	if not EnemyHealthDisplayAnchors[ unitId .. "rupturestatus" ] then
+
+		local backingId = nil
+		local scale = 1
+		if unit.BarXScale then
+			scale = unit.BarXScale
+		end
+
+		backingId = SpawnObstacle({ Name = "RuptureSmall", Group = "Combat_UI_World", DestinationId = unitId, TriggerOnSpawn = false })
+			CreateTextBox({ Id = backingId, FontSize = 20, OffsetX = 12, OffsetY = 0,
+				Font = "AlegreyaSansSCExtraBold",
+				Justification = "Left",
+				ShadowColor = {0, 0, 0, 240}, ShadowOffset = {0, 2}, ShadowBlur = 0,
+				OutlineThickness = 3, OutlineColor = {0.25, 0.3, 0.5, 1},
+			})
+		EnemyHealthDisplayAnchors[ unitId .. "rupturestatus" ] = backingId
+	end
+	
+	local scaleTarget = 1.0
+	SetScale({ Id = EnemyHealthDisplayAnchors[ unitId .. "rupturestatus" ], Fraction = startIconScale })
+
+	DZAIPositionEffectStacks( unitId )
+end
+
+function DZAIClearRuptureEffectStacks( args )
+	Destroy({ Id = EnemyHealthDisplayAnchors[ args.triggeredById .. "rupturestatus" ] })
+	EnemyHealthDisplayAnchors[ args.triggeredById .. "rupturestatus" ] = nil
+	DZAIPositionEffectStacks( args.triggeredById )
+end
+
+function DZAIOnRuptureDashHit( args )
+	if DZTemp.AI == nil then
+		return
+	end
+	local victim = args.TriggeredByTable
+	-- if victim.TriggersOnDamageEffects and victim == CurrentRun.Hero then
+    if victim == CurrentRun.Hero then
+		if not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"]  then
+			ApplyEffectFromWeapon({ WeaponName = "DarkGilgameshMarkRuptureApplicator", EffectName = "DZMarkRuptureTarget", Id = DZTemp.AI.ObjectId, DestinationId = victim.ObjectId })
+		end
+	end
+end
+
+function DZAIOnRuptureWeaponHit( args )
+	if DZTemp.AI == nil then
+		return
+	end
+	local victim = args.TriggeredByTable
+	if victim == CurrentRun.Hero then
+		if victim.ActiveEffects and victim.ActiveEffects["DZMarkRuptureTarget"]  then
+			ApplyEffectFromWeapon({ WeaponName = "DarkGilgameshMarkRuptureApplicator", EffectName = "DZMarkRuptureTarget", Id = DZTemp.AI.ObjectId, DestinationId = victim.ObjectId })
+		end
+	end
+end

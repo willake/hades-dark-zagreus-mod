@@ -217,10 +217,13 @@ DZWeaponData =
 		{
 			Equip = function (enemy)
 				enemy.PrimaryWeapon = "DarkGilgameshFist";
-				enemy.DashWeapon = "DarkRush";
+				enemy.DashWeapon = "DarkGilgameshRush";
 				enemy.SpecialAttackWeapon = "DarkGilgameshFistSpecial";
 				enemy.SpecialDashAttackWeapon = "DarkGilgameshFistSpecialDash";
 				enemy.DashAttackWeapon = "DarkGilgameshFistDash";
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGilgameshRushRupture" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGilgameshFistDetonation" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGilgameshMarkRuptureApplicator" })
             end
 		}
 	},
