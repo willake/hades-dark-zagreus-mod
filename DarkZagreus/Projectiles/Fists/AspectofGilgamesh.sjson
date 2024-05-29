@@ -199,7 +199,7 @@
             // IgnoreName = "_PlayerUnit"
             OnlyAffectName = "_PlayerUnit"
             Type = "DAMAGE_OVER_TIME"
-            Amount = 100.0
+            Amount = 15.0
             Stacks = false
             ExtendDurationOnReapply = false
             Duration = 3.95
