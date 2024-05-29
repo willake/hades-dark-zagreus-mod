@@ -15,8 +15,8 @@ WeaponData.DarkDemeterFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist2",
-        FireDuration = 0.15,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.15,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
@@ -68,8 +68,8 @@ WeaponData.DarkDemeterFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist3",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 
@@ -83,8 +83,8 @@ WeaponData.DarkDemeterFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist4",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 
@@ -98,8 +98,8 @@ WeaponData.DarkDemeterFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist5",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 	
@@ -113,8 +113,8 @@ WeaponData.DarkDemeterFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         Cooldown = 0.5
     }
 }
@@ -131,8 +131,8 @@ WeaponData.DarkDemeterFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist",
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         IsStartFromFistDash = true
     },

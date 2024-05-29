@@ -14,8 +14,8 @@ WeaponData.DarkRush =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        -- FireDuration = 0.2,
-        WaitUntilProjectileDeath = true
+        FireDuration = 0.07,
+        -- WaitUntilProjectileDeath = true
     },
 
     SimSlowBlur =
