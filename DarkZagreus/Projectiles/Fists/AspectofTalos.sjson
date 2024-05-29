@@ -43,7 +43,7 @@
             CanAffectInvulnerable = false
           }
           {
-            Name = "MarkTargetFist"
+            Name = "DZMarkTargetFist"
             Duration = 6.0
             Modifier = 0.10
             Active = true

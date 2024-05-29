@@ -212,6 +212,14 @@ function DZAIDoPreFire(enemy, weaponAIData, targetId)
 		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
 	end
 
+    if weaponAIData.OnWeaponChargeFunction then
+        local functionData = weaponAIData.OnWeaponChargeFunction
+
+        if _G[functionData.FunctionName] ~= nil then
+            thread(_G[functionData.FunctionName], enemy, targetId, functionData.FunctionArgs) 
+        end
+    end
+
     -- wait for pre fire animation
     if weaponAIData.PreFireDuration then
         wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
@@ -264,6 +272,8 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
             FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
         end
     end
+
+    
     
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
