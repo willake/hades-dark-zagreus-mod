@@ -87,7 +87,7 @@ UnitSetData.Enemies.DarkGunBombUnit =
     MaxHealth = 9999,
     FlashOnFuse = true,
     FuseDuration = 0.2,
-    OnDamagedFunctionName = "ActivateLuciferFuse",
+    OnDamagedFunctionName = "DZAIActivateLuciferFuse",
     FuseActivationSound = "/Leftovers/SFX/CurSprint",
     --FuseAnimation = "BlastCubeLit",
     CanStoreAmmo = false,
@@ -100,19 +100,22 @@ UnitSetData.Enemies.DarkGunBombUnit =
     OnDeathShakeScreenFalloff = 1500,
 
     AlwaysTraitor = true,
-    OnDeathFunctionName = "GunBombDetonate",
+    OnDeathFunctionName = "DZAIGunBombDetonate",
 
-    AdditionalEnemySetupFunctionName = "SetUpGunBombImmolation",
+    AdditionalEnemySetupFunctionName = "DZAISetUpGunBombImmolation",
     ImmolationInterval = 1.0,
-    IncomingDamageModifiers =
-    {
-        {
-            Name = "ImmolationImmunity",
-            ValidWeapons = {"GunBombImmolation"},
-            ValidWeaponMultiplier = 0,
-            Multiplicative = true,
-        },
-    },
+    -- IncomingDamageModifiers =
+    -- {
+    --     {
+    --         Name = "ImmolationImmunity",
+    --         ValidWeapons = {"GunBombImmolation"},
+    --         ValidWeaponMultiplier = 0,
+    --         Multiplicative = true,
+    --     },
+    -- },
 }
+
+EnemyData.Hades = UnitSetData.Enemies.Hades
+EnemyData.DarkGunBombUnit = UnitSetData.Enemies.DarkGunBombUnit 
 
 -- TODO: should handle HadesKillPresentation as well
