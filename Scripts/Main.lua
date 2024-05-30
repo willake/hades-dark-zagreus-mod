@@ -27,11 +27,11 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 DZWeaponData[weaponData.WeaponName][weaponData.ItemIndex].Equip(enemy)
                 DZDebugPrintTable("DZ Weapon Equipped", weaponData)
             else
-                DZWeaponData["SwordWeapon"][1].Equip(enemy)
+                DZWeaponData[DarkZagreus.DefaultAIWeapon.WeaponName][DarkZagreus.DefaultAIWeapon.ItemIndex].Equip(enemy)
                 DZDebugPrintTable("DZ Weapon Equipped", 
                 {
-                    WeaponName = "SwordWeapon",
-                    ItemIndex = 1
+                    WeaponName = DarkZagreus.DefaultAIWeapon.WeaponName,
+                    ItemIndex = DarkZagreus.DefaultAIWeapon.ItemIndex
                 })
             end 
         end

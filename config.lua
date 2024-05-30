@@ -6,6 +6,10 @@ DarkZagreus.Config = {
 DarkZagreus.Version = "beta1.2"
 DarkZagreus.DataVersion = "v5" -- for training data, when the data structure chages, the version increases
 
+DarkZagreus.DefaultAIWeapon = {
+    WeaponName = "GunWeapon",
+    ItemIndex = 4
+}
 -- State Scheme
 -- {
 --     OwnHP,
