@@ -149,13 +149,7 @@ end
 
 function DZAIMakeRandomActionData(state)
 
-    return {
-        DashToward = 0.2, -- 0.2
-        Attack = 0.5, -- 0.5
-        SpecialAttack = 0.2, -- 0.2
-        DashAway = 0.1,
-        ChargeAttack = 0.0
-    }
+    return DarkZagreus.DefaultAIActionData
 end
 
 function DZAIMakeActionData(state, lastActions)
