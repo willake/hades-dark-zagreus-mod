@@ -150,10 +150,10 @@ end
 function DZAIMakeRandomActionData(state)
 
     return {
-        DashToward = 0.1, -- 0.2
-        Attack = 0.9, -- 0.5
-        SpecialAttack = 0.0, -- 0.2
-        DashAway = 0.0,
+        DashToward = 0.2, -- 0.2
+        Attack = 0.5, -- 0.5
+        SpecialAttack = 0.2, -- 0.2
+        DashAway = 0.1,
         ChargeAttack = 0.0
     }
 end
