@@ -243,7 +243,6 @@ end
 
 -- for aspect of lucifer
 function DZAIActivateLuciferFuse( enemy )
-	DZDebugPrintString("DZAIActivateLuciferFuse")
 	if enemy.FuseActivated or enemy.IsDead then
 		return
 	end
@@ -273,6 +272,8 @@ function DZAISetUpGunBombImmolation( enemy, currentRun, args )
 	if not hasGodGraphic then
 		SetAnimation({ Name = "LuciferBomb", DestinationId = enemy.ObjectId })
 	end
+
+	-- let original system handle this, i don't wanna do that :)
 	CurrentRun.Hero.WeaponSpawns = CurrentRun.Hero.WeaponSpawns or {}
 	CurrentRun.Hero.WeaponSpawns[enemy.ObjectId] = enemy
 
