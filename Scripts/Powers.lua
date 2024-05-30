@@ -240,3 +240,49 @@ function DZAIOnRuptureWeaponHit( args )
 		end
 	end
 end
+
+-- for aspect of lucifer
+function DZAIActivateLuciferFuse( enemy )
+	if enemy.FuseActivated or enemy.IsDead then
+		return
+	end
+	enemy.FuseActivated = true
+	ActivateFusePresentation( enemy )
+	local delay = 0
+	CurrentRun.CurrentRoom.FusedBombs = CurrentRun.CurrentRoom.FusedBombs  or {}
+	while CurrentRun.CurrentRoom.FusedBombs[_worldTime + enemy.FuseDuration + delay ] and delay < 2 do
+		delay = delay + 0.1
+	end
+	local key = _worldTime + enemy.FuseDuration + delay
+	CurrentRun.CurrentRoom.FusedBombs[_worldTime + enemy.FuseDuration + delay] = enemy
+	wait( enemy.FuseDuration + delay, RoomThreadName )
+	PostActivatFusePresentation( enemy )
+	Kill( enemy, { SkipDestroy = false } )
+	CurrentRun.CurrentRoom.FusedBombs[key] = nil
+end
+
+function DZAIGunBombDetonate( bomb )
+	if DZTemp.AI then
+		FireWeaponFromUnit({ Weapon = "DarkLuciferGunBomb", Id = DZTemp.AI.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
+	end
+end
+
+function DZAISetUpGunBombImmolation( enemy, currentRun, args )
+	local hasGodGraphic = false
+	if not hasGodGraphic then
+		SetAnimation({ Name = "LuciferBomb", DestinationId = enemy.ObjectId })
+	end
+
+	-- let original system handle this, i don't wanna do that :)
+	CurrentRun.Hero.WeaponSpawns = CurrentRun.Hero.WeaponSpawns or {}
+	CurrentRun.Hero.WeaponSpawns[enemy.ObjectId] = enemy
+
+	while not enemy.IsDead and DZTemp.AI do
+		FireWeaponFromUnit({ Weapon = "DarkLuciferGunBombImmolation", Id = DZTemp.AI.ObjectId, DestinationId = enemy.ObjectId, FireFromTarget = true })
+		if EnemyData[enemy.Name] and EnemyData[enemy.Name].ImmolationInterval then
+			wait( EnemyData[enemy.Name].ImmolationInterval, RoomThreadName )
+		else
+			wait( 0.5, RoomThreadName )
+		end
+	end
+end

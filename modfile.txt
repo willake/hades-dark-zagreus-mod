@@ -29,6 +29,9 @@ SJSON "DarkZagreus/Units/Guns/AspectofLucifer.sjson"
 To "Game/Animations/PortraitAnimations.sjson"
 SJSON "Game/Animations/PortraitAnimations.sjson
 
+To "Game/Animations/Fx.sjson"
+SJSON "Game/Animations/Fx.sjson
+
 To "Game/Text/en/HelpText.en.sjson"
 SJSON "Game/Text/HelpText.en.sjson"
 

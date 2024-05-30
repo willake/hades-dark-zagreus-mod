@@ -4,8 +4,8 @@
         {
             Name = "DarkLuciferGun"
             InheritFrom = "DarkGun"
-            ClearWeaponBonusesOnHit = true
-            ProjectileDefenseRadius = 0
+            // ClearWeaponBonusesOnHit = true
+            // ProjectileDefenseRadius = 0
             Type = "BEAM"
             ArcSize = 100
             AutoAdjustForTarget = false
@@ -18,18 +18,19 @@
             ImmunityDuration = 0.05
             MultiDetonate = true
             DrawAsBeam = true
-            DamageLow = 5 // 10
-            DamageHigh = 5 // 10
+            DamageLow = 1 // 10
+            DamageHigh = 1 // 10
             ConsecutiveHitWindow = 0.6
             DamagePerConsecutiveHit = 0.75
             Range = 692.25 // 710.0 * 0.975
             DissipateGraphic = "GunLaserEnd"
+            GroupName = "Standing"
+            TipFx = "GunLaserTipFlare"
             Thing = {
-                Graphic = "GunLaser"
+                Graphic = "DarkGunLaserPreview"
                 OffsetZ = 70
                 BeamStartAnimSkipsImpact = false
                 AttachedAnim = "GunLaserOriginFlare"
-                TipFx = "GunLaserTipFlare"
                 Grip = 999999
                 RotateGeometry = true
                 UseBoundsForSortDrawArea = true

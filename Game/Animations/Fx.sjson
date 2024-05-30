@@ -1,0 +1,28 @@
+{
+  Animations = [
+    "_append"
+    {
+        Name = "DarkGunLaserPreview"
+        ChainTo = "GunLaser"
+        FilePath = "Fx\EnemyLaserPreview\EnemyLaserPreview"
+        Type = "Book"
+        Sound = null
+        StopSoundOnFinishFade = 0.25
+        AddColor = true
+        EndBlue = 0.9
+        EndRed = 1.0
+        StartBlue = 0.3
+        StartGreen = 0.01
+        EndFrame = 2
+        NumFrames = 60
+        PlaySpeed = 80.0
+        StartFrame = 1
+        OriginY = 64.0
+        ScaleLength = 512.0
+        ScaleY = 0.4
+        Ambient = 0.0
+        OverlayVfx = true
+      TransferCopyBody = false
+    }
+  ]
+}

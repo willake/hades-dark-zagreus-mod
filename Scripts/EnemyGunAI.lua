@@ -1,7 +1,7 @@
 if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusGunAI( enemy, currentRun )
-    enemy.ShouldPreWarm = false
+    enemy.DZ.ShouldPreWarm = false
     return DZAIDoGunAILoop( enemy, currentRun )
 end
 
@@ -83,7 +83,7 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 		return false
 	end
 
-    Stop({ Id = enemy.ObjectId })
+    -- Stop({ Id = enemy.ObjectId })
 
     -- don't know what does it do but better just keep it
     if weaponAIData.TrackKillSteal then
@@ -135,26 +135,27 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire
 
-    DZAIDoPreFire(enemy, weaponAIData, targetId)
+    -- Aspect of Lucifer has a prewarm when first fire the weapon
+    if weaponAIData.NeedPreWarm then
+
+        if enemy.DZ.ShouldPreWarm then
+            if weaponAIData.PreWarmAnimation then
+                SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreWarmAnimation })
+            end
+    
+            if weaponAIData.PreWarmDuration then
+                wait( weaponAIData.PreWarmDuration, enemy.AIThreadName )
+            end 
+        end
+    else
+        DZAIDoPreFire(enemy, weaponAIData, targetId)
+    end
 
     -- Prefire End
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
-
-    -- Aspect of Lucifer has a prewarm when first fire the weapon
-    if weaponAIData.NeedPreWarm and enemy.ShouldPreWarm then
-        if weaponAIData.PreWarmAnimation then
-            SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreWarmAnimation })
-        end
-
-        if weaponAIData.PreWarmDuration then
-            wait( weaponAIData.PreWarmDuration, enemy.AIThreadName )
-        end
-
-        enemy.ShouldPreWarm = false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     -- Fire
     
@@ -195,16 +196,17 @@ function DZAISelectGunWeapon(enemy, actionData)
     -- use attack weapon
     enemy.DZ.TempAction = 0
     enemy.DZ.FireTowardTarget = true
+    enemy.DZ.ShouldPreWarm = false
+    -- enemy.DZ.SkipStop = false
 
     local lastAction = DZAIGetLastAction(enemy)
     
     if r < actionData.Attack + actionData.ChargeAttack then
-
-        if enemy.DZ.TempAction ~= 1 then
-            enemy.ShouldPreWarm = true
-        end
-
         enemy.DZ.TempAction = 1
+
+        if lastAction.Action ~= 1 then
+            enemy.DZ.ShouldPreWarm = true
+        end
 
         -- if the last action is dash, do dash attack
         if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
@@ -251,53 +253,4 @@ end
 function DZAIManualReloadBonusApply( triggerArgs )
 	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
-end
-
--- TODO: complete these functions
-function DZAIActivateLuciferFuse( enemy )
-	if enemy.FuseActivated or enemy.IsDead then
-		return
-	end
-	enemy.FuseActivated = true
-	ActivateFusePresentation( enemy )
-	local delay = 0
-	CurrentRun.CurrentRoom.FusedBombs = CurrentRun.CurrentRoom.FusedBombs  or {}
-	while CurrentRun.CurrentRoom.FusedBombs[_worldTime + enemy.FuseDuration + delay ] and delay < 2 do
-		delay = delay + 0.1
-	end
-	local key = _worldTime + enemy.FuseDuration + delay
-	CurrentRun.CurrentRoom.FusedBombs[_worldTime + enemy.FuseDuration + delay] = enemy
-	wait( enemy.FuseDuration + delay, RoomThreadName )
-	PostActivatFusePresentation( enemy )
-	Kill( enemy, { SkipDestroy = false } )
-	CurrentRun.CurrentRoom.FusedBombs[key] = nil
-end
-
-function DZAIGunBombDetonate( bomb )
-	FireWeaponFromUnit({ Weapon = "GunBombWeapon", Id = CurrentRun.Hero.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
-	thread(MarkObjectiveComplete, "GunGrenadeLuciferBlast")
-end
-
-function DZAISetUpGunBombImmolation( enemy, currentRun, args )
-	local hasGodGraphic = false
-	for i, traitData in pairs( CurrentRun.Hero.Traits ) do
-		if traitData.Slot == "Secondary" then
-			hasGodGraphic = true
-			break
-		end
-	end
-	if not hasGodGraphic then
-		SetAnimation({ Name = "LuciferBomb", DestinationId = enemy.ObjectId })
-	end
-	CurrentRun.Hero.WeaponSpawns = CurrentRun.Hero.WeaponSpawns or {}
-	CurrentRun.Hero.WeaponSpawns[enemy.ObjectId] = enemy
-
-	while not enemy.IsDead do
-		FireWeaponFromUnit({ Weapon = "GunBombImmolation", Id = CurrentRun.Hero.ObjectId, DestinationId = enemy.ObjectId, FireFromTarget = true })
-		if EnemyData[enemy.Name] and EnemyData[enemy.Name].ImmolationInterval then
-			wait( EnemyData[enemy.Name].ImmolationInterval, RoomThreadName )
-		else
-			wait( 0.5, RoomThreadName )
-		end
-	end
 end

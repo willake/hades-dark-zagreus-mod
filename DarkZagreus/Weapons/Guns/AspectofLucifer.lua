@@ -12,10 +12,13 @@ WeaponData.DarkLuciferGun =
         AttackDistance = 650,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        WaitUntilProjectileDeath = true,
+        -- WaitUntilProjectileDeath = true,
         NeedPreWarm = true,
-        PreWarmDuration = 0.3,
+        PreWarmDuration = 0.28,
         PreWarmAnimation = "ZagreusGunLucifer_Start",
+        PreFireDuration = 0.13,
+        PreFireFx = "GunCharge",
+        FireDuration = 0.07,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -30,15 +33,15 @@ WeaponData.DarkLuciferGun =
     CancelUnitShake = true,
     CancelArmorUnitShake = true,
     CancelArmorSpark = true,
-    DashWeapon = nil,
+    -- DashWeapon = nil,
     IdleReloadAnimation = "ZagreusGunLuciferReload_Start",
     MovingReloadAnimation = "ZagreusGunLuciferRunReload",
 
-    OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
-    NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
+    -- OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
+    -- NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
     LowAmmoSoundThreshold = 5,
 
-    NoAmmoText = "GunReloadingStart",
+    -- NoAmmoText = "GunReloadingStart",
 
     Sounds =
     {
