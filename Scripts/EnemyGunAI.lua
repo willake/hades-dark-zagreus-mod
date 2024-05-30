@@ -1,7 +1,7 @@
 if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusGunAI( enemy, currentRun )
-    enemy.ShouldPreWarm = false
+    enemy.DZ.ShouldPreWarm = false
     return DZAIDoGunAILoop( enemy, currentRun )
 end
 
@@ -83,7 +83,7 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 		return false
 	end
 
-    Stop({ Id = enemy.ObjectId })
+    -- Stop({ Id = enemy.ObjectId })
 
     -- don't know what does it do but better just keep it
     if weaponAIData.TrackKillSteal then
@@ -135,26 +135,27 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire
 
-    DZAIDoPreFire(enemy, weaponAIData, targetId)
+    -- Aspect of Lucifer has a prewarm when first fire the weapon
+    if weaponAIData.NeedPreWarm then
+
+        if enemy.DZ.ShouldPreWarm then
+            if weaponAIData.PreWarmAnimation then
+                SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreWarmAnimation })
+            end
+    
+            if weaponAIData.PreWarmDuration then
+                wait( weaponAIData.PreWarmDuration, enemy.AIThreadName )
+            end 
+        end
+    else
+        DZAIDoPreFire(enemy, weaponAIData, targetId)
+    end
 
     -- Prefire End
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
-
-    -- Aspect of Lucifer has a prewarm when first fire the weapon
-    if weaponAIData.NeedPreWarm and enemy.ShouldPreWarm then
-        if weaponAIData.PreWarmAnimation then
-            SetAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreWarmAnimation })
-        end
-
-        if weaponAIData.PreWarmDuration then
-            wait( weaponAIData.PreWarmDuration, enemy.AIThreadName )
-        end
-
-        enemy.ShouldPreWarm = false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     -- Fire
     
@@ -195,16 +196,17 @@ function DZAISelectGunWeapon(enemy, actionData)
     -- use attack weapon
     enemy.DZ.TempAction = 0
     enemy.DZ.FireTowardTarget = true
+    enemy.DZ.ShouldPreWarm = false
+    -- enemy.DZ.SkipStop = false
 
     local lastAction = DZAIGetLastAction(enemy)
     
     if r < actionData.Attack + actionData.ChargeAttack then
-
-        if enemy.DZ.TempAction ~= 1 then
-            enemy.ShouldPreWarm = true
-        end
-
         enemy.DZ.TempAction = 1
+
+        if lastAction.Action ~= 1 then
+            enemy.DZ.ShouldPreWarm = true
+        end
 
         -- if the last action is dash, do dash attack
         if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
