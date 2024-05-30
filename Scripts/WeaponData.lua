@@ -112,8 +112,8 @@ DZWeaponData =
 				enemy.DashWeapon = "DarkRush";
 				enemy.SpecialAttackWeapon = "DarkLuciferGunGrenadeToss";
 				enemy.DashAttackWeapon = "DarkLuciferGunDash";
-				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGunBomb" })
-				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGunBombImmolation" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunBomb" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunBombImmolation" })
             end
 		}
 	},

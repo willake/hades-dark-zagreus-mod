@@ -263,14 +263,12 @@ function DZAIActivateLuciferFuse( enemy )
 end
 
 function DZAIGunBombDetonate( bomb )
-	DZDebugPrintString("DZAIGunBombDetonate")
 	if DZTemp.AI then
-		FireWeaponFromUnit({ Weapon = "DarkGunBomb", Id = DZTemp.AI.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
+		FireWeaponFromUnit({ Weapon = "DarkLuciferGunBomb", Id = DZTemp.AI.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
 	end
 end
 
 function DZAISetUpGunBombImmolation( enemy, currentRun, args )
-	DZDebugPrintString("DZAISetUpGunBombImmolation")
 	local hasGodGraphic = false
 	if not hasGodGraphic then
 		SetAnimation({ Name = "LuciferBomb", DestinationId = enemy.ObjectId })
@@ -279,7 +277,7 @@ function DZAISetUpGunBombImmolation( enemy, currentRun, args )
 	CurrentRun.Hero.WeaponSpawns[enemy.ObjectId] = enemy
 
 	while not enemy.IsDead and DZTemp.AI do
-		FireWeaponFromUnit({ Weapon = "DarkGunBombImmolation", Id = DZTemp.AI.ObjectId, DestinationId = enemy.ObjectId, FireFromTarget = true })
+		FireWeaponFromUnit({ Weapon = "DarkLuciferGunBombImmolation", Id = DZTemp.AI.ObjectId, DestinationId = enemy.ObjectId, FireFromTarget = true })
 		if EnemyData[enemy.Name] and EnemyData[enemy.Name].ImmolationInterval then
 			wait( EnemyData[enemy.Name].ImmolationInterval, RoomThreadName )
 		else
