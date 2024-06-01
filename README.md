@@ -90,9 +90,14 @@ Make sure you run the `modimporter.exe`
 Make sure ModUtil and DarkZagreus are imported.
 
 ## Dependencies
-This mod overrides `ReloadGun` function in `Combat.lua`, which might cause problem with other mods which also override this function.
+This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
 
 ## Data Version Change logs
+
+### v6
+
+-- add IsReloading and Ammo
+-- add ManualReload action
 
 ### v5
 

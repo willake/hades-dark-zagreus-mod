@@ -255,3 +255,5 @@ OnWeaponFired{ "RushWeapon",
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action))
     end
 } 
+
+-- for manual reload, see Combat.lua, because from OnControlPressed, I couldn't know how to verify if relaod is successful

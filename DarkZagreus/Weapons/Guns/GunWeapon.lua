@@ -179,3 +179,11 @@ WeaponData.DarkGunBombImmolation =
 {
 
 }
+
+WeaponData.DarkManualReload =
+{
+    AIData =
+    {
+        AttackDistance = 680,
+    },
+}

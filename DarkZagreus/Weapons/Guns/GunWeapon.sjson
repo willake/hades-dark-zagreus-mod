@@ -330,5 +330,8 @@
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
         }
+        {
+            Name = "DarkManualReload"
+        }
     ]
 }

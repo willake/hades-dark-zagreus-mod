@@ -238,51 +238,54 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 end
 
 function DZAISelectSpearWeapon(enemy, actionData)
-    local total = 
-        actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+    local total = actionData.Attack + actionData.SpecialAttack 
+        + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
 
     enemy.DZ.TempAction = 0
     enemy.DZ.FireTowardTarget = true
     local lastAction = DZAIGetLastAction(enemy)
 
-    -- use attack weapon
-    if r < actionData.Attack then
-        
+    -- use special attack
+    if r < actionData.SpecialAttack then
+        enemy.DZ.TempAction = 2
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
-            enemy.DZ.TempAction = 2
+
+            if enemy.SpecialAttackWeaponRush then
+                enemy.WeaponName = enemy.SpecialAttackWeaponRush
+                enemy.ChainedWeapon = nil
+                return enemy.WeaponName        
+            end
+
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
-        enemy.DZ.TempAction = 1
-
-        -- if the last action is dash, do dash attack
-        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-            enemy.WeaponName = enemy.DashAttackWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
-        end
-
-        -- if the last action is also attack, do weapon combo
-        if lastAction.Action == 1 then
-            if enemy.ChainedWeapon ~= nil and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-                enemy.WeaponName = enemy.ChainedWeapon
-                enemy.ChainedWeapon = nil
-                return enemy.WeaponName
-            end
-        end
-
-        -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
+    -- use dash
+    if r < actionData.SpecialAttack + actionData.DashToward then
+        enemy.DZ.TempAction = 0
+        enemy.WeaponName = enemy.DashWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+        enemy.DZ.TempAction = 3
+        enemy.WeaponName = enemy.DashWeapon
+        enemy.ChainedWeapon = nil
+        enemy.DZ.FireTowardTarget = false
+        return enemy.WeaponName
+    end
+
     -- use charge attack with primary attack weapon
-    if r < actionData.Attack + actionData.ChargeAttack then
-    
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ChargeAttack then
+
         if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
             enemy.DZ.TempAction = 2
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
@@ -305,45 +308,37 @@ function DZAISelectSpearWeapon(enemy, actionData)
         return enemy.WeaponName
     end
 
-    -- use special attack
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
+    -- use attack weapon
+
+    if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
         enemy.DZ.TempAction = 2
-        if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+        enemy.WeaponName = enemy.SpecialAttackWeaponReturn
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
 
-            if enemy.SpecialAttackWeaponRush then
-                enemy.WeaponName = enemy.SpecialAttackWeaponRush
-                enemy.ChainedWeapon = nil
-                return enemy.WeaponName        
-            end
+    enemy.DZ.TempAction = 1
 
-            enemy.WeaponName = enemy.SpecialAttackWeaponReturn
+    -- if the last action is dash, do dash attack
+    if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+        enemy.WeaponName = enemy.DashAttackWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
+    -- if the last action is also attack, do weapon combo
+    if lastAction.Action == 1 then
+        if enemy.ChainedWeapon ~= nil and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+            enemy.WeaponName = enemy.ChainedWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
-
-        enemy.WeaponName = enemy.SpecialAttackWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
     end
 
-    -- use dash
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
-        enemy.DZ.TempAction = 0
-        enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
-    end
-
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
-        enemy.DZ.TempAction = 3
-        enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
-        enemy.DZ.FireTowardTarget = false
-        return enemy.WeaponName
-    end
-
-    enemy.WeaponName = nil
-    return nil
+    -- or just do a regular attack
+    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.ChainedWeapon = nil
+    return enemy.WeaponName
 end
 
 -- logic for deciding the charge time

@@ -18,6 +18,10 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
     if enemy.WeaponName == nil then
         return true -- continue to next action
     end
+
+    if DZTemp.AI.Reloading then
+        return true
+    end
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
@@ -36,7 +40,13 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
     -- if there is a target
     if targetId ~= nil and targetId ~= 0 then
-        
+
+        -- do manual reload here so the AI can reload while walking
+        if enemy.DZ.TempAction == 5 then
+            DZAIManualReload(enemy)
+            return true
+        end
+    
         -- Movement
         if not weaponAIData.SkipMovement then
 			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, 0)
@@ -45,10 +55,6 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 				return true
 			end
 		end
-
-        if enemy.WeaponName == nil then
-            return true
-        end
 
         -- Attack
 		local attackSuccess = false
@@ -120,10 +126,6 @@ end
 
 function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
-    if enemy.Reloading then
-        return false
-    end
-
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
         return true
@@ -191,9 +193,8 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 end
 
 function DZAISelectGunWeapon(enemy, actionData)
-    local total = 
-        actionData.Attack + actionData.ChargeAttack 
-        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+    local total = actionData.Attack + actionData.ChargeAttack 
+        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -201,56 +202,53 @@ function DZAISelectGunWeapon(enemy, actionData)
     enemy.DZ.TempAction = 0
     enemy.DZ.FireTowardTarget = true
     enemy.DZ.ShouldPreWarm = false
-    -- enemy.DZ.SkipStop = false
+    enemy.ChainedWeapon = nil
 
     local lastAction = DZAIGetLastAction(enemy)
-    
-    if r < actionData.Attack + actionData.ChargeAttack then
-        enemy.DZ.TempAction = 1
-
-        if lastAction.Action ~= 1 then
-            enemy.DZ.ShouldPreWarm = true
-        end
-
-        -- if the last action is dash, do dash attack
-        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
-            enemy.WeaponName = enemy.DashAttackWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
-        end
-
-        -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
-    end
 
     -- use special attack
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
+    if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
-        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
         enemy.DZ.FireTowardTarget = false
         return enemy.WeaponName
     end
 
-    enemy.WeaponName = nil
-    return nil
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload then
+        enemy.DZ.TempAction = 5
+        enemy.WeaponName = enemy.ReloadWeapon
+        return enemy.WeaponName
+    end
+
+    -- attack 
+    enemy.DZ.TempAction = 1
+
+    if lastAction.Action ~= 1 then
+        enemy.DZ.ShouldPreWarm = true
+    end
+
+    -- if the last action is dash, do dash attack
+    if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
+        enemy.WeaponName = enemy.DashAttackWeapon
+        return enemy.WeaponName
+    end
+
+    -- or just do a regular attack
+    enemy.WeaponName = enemy.PrimaryWeapon
+    return enemy.WeaponName
 end
 
 -- for aspect of hestia
