@@ -4,7 +4,7 @@ DarkZagreus.Config = {
 }
 
 DarkZagreus.Version = "beta1.2"
-DarkZagreus.DataVersion = "v5" -- for training data, when the data structure chages, the version increases
+DarkZagreus.DataVersion = "v6" -- for training data, when the data structure chages, the version increases
 
 DarkZagreus.DefaultAIWeapon = {
     WeaponName = "GunWeapon",
@@ -16,7 +16,8 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
     Attack = 0.5, -- 0.5
     SpecialAttack = 0.3, -- 0.2
     DashAway = 0.1,
-    ChargeAttack = 0.0
+    ChargeAttack = 0.0,
+    ManualReload = 0.0
 }
 -- State Scheme
 -- {
