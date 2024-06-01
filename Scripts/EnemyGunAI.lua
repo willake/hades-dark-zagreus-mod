@@ -191,8 +191,7 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 end
 
 function DZAISelectGunWeapon(enemy, actionData)
-    local total = 
-        actionData.Attack + actionData.ChargeAttack 
+    local total = actionData.Attack + actionData.ChargeAttack 
         + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
     -- init combo weapon to nil
