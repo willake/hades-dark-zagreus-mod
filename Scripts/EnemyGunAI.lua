@@ -120,6 +120,10 @@ end
 
 function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
 
+    if enemy.Reloading then
+        return false
+    end
+
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
         return true
