@@ -14,6 +14,7 @@
             Projectile = "DarkHestiaGun"
             FireGraphic = "ZagreusGunAlt01Fire"
             FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            ShareAmmoWeapon = "DarkHestiaGun"
         }
         {
             Name = "DarkHestiaGunGrenadeToss"
@@ -23,7 +24,7 @@
             FireGraphic = "ZagreusGunAlt01GrenadeTossFire"
         }
         {
-            Name = "DarkManualReloadEffectApplicator"
+            Name = "DZManualReloadEffectApplicator"
             InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "null"
@@ -47,6 +48,7 @@
             Projectile = "DarkHestiaSniperGun"
             FireGraphic = "ZagreusGunAlt01Fire"
             FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            ShareAmmoWeapon = "DarkHestiaGun"
             Enabled = true
         }
         {
@@ -55,6 +57,7 @@
             Projectile = "DarkHestiaSniperGun"
             FireGraphic = "ZagreusGunAlt01Fire"
             FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            ShareAmmoWeapon = "DarkHestiaGun"
             Enabled = true
         }
     ]

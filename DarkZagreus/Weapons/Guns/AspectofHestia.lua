@@ -75,7 +75,7 @@ WeaponData.DarkHestiaGunDash =
     DashWeapon = nil,
 
     IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
-				MovingReloadAnimation = "ZagreusGunAlt01RunReload",
+    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
 
     AIData =
     {
@@ -165,7 +165,7 @@ WeaponData.DarkHestiaGunGrenadeToss =
 WeaponData.DarkHestiaSniperGun = {
     InheritFrom = { "DarkHestiaGun" },
     DashWeapon = nil,
-    OnFiredFunctionName = "ClearManualReloadVFX",
+    OnFiredFunctionName = "DZAIClearManualReloadVFX",
 }
 
 WeaponData.DarkHestiaSniperGunDash = {

@@ -99,6 +99,7 @@
             Scatter = 0
             ScatterCap = 0
             ProjectileInterval = 0.0
+            ShareAmmoWeapon = "DarkLuciferGun"
         }
         {
             Name = "DarkLuciferGunGrenadeToss"

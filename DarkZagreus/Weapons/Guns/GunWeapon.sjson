@@ -124,7 +124,7 @@
             // TriggerTapIgnoresCooldown = true
             // TriggersStoredAmmoVulnerability = true
             // SwapOnFire = "GunWeapon"
-            // ShareAmmoWeapon = "GunWeapon"
+            ShareAmmoWeapon = "DarkGun"
             // AutoLockArcDistance = 360
         }
         {
