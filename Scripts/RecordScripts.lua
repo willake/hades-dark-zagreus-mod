@@ -45,7 +45,7 @@ function DZMakeActionData(action)
     local special = (action == 2) and 1.0 or 0.0
     local dashAway = (action == 3) and 1.0 or 0.0 -- added in v2
     local chargeAttack = (action == 4) and 1.0 or 0.0 -- added in v5
-    local manualReload = (action == 5) and 1.0 or 0.0 -- added in v5
+    local manualReload = (action == 5) and 1.0 or 0.0 -- added in v6
     -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway, 4 Charge Attack, 5 Manual Reload
 
     return {    
@@ -96,8 +96,8 @@ function DZGetCurrentState()
 	}
 
     if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
-        ammoData.Current = triggerArgs.Ammo or GetWeaponProperty({ Id = CurrentRun.Hero.ObjectId, WeaponName = "GunWeapon", Property = "Ammo" })
-        ammoData.Maximum = triggerArgs.MaxAmmo or GetWeaponMaxAmmo({ Id = CurrentRun.Hero.ObjectId, WeaponName = "GunWeapon" })
+        ammoData.Current = GetWeaponProperty({ Id = CurrentRun.Hero.ObjectId, WeaponName = "GunWeapon", Property = "Ammo" }) or 0
+        ammoData.Maximum = GetWeaponMaxAmmo({ Id = CurrentRun.Hero.ObjectId, WeaponName = "GunWeapon" }) or 1
     end
 
     -- DZDebugPrintString(string.format("Get Damage Recently %s, Damage Enemy Recently %s", isGetDamagedRecently, isDamageEnemyRecently))

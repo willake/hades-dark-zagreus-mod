@@ -127,6 +127,17 @@ function DZAIGetCurrentState(enemy)
             isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
         end 
     end
+
+    local ammoData =
+	{
+		Current = 0,
+		Maximum = 1
+	}
+
+    if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
+        ammoData.Current = GetWeaponProperty({ Id = CurrentRun.Hero.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
+        ammoData.Maximum = GetWeaponMaxAmmo({ Id = CurrentRun.Hero.ObjectId, WeaponName = enemy.PrimaryWeapon }) or 1
+    end
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
@@ -134,7 +145,9 @@ function DZAIGetCurrentState(enemy)
         Distance = distance / 1000,
         GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
         DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
-        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0,
+        IsReloading = enemy.Reloading and 1.0 or 0.0,
+        Ammo = ammoData.Current / ammoData.Maximum
     }
 end
 
@@ -146,6 +159,7 @@ function DZAIMakeLastActionData(action)
         (action.Action == 2) and 1 or 0, -- if last action is special attack,
         (action.Action == 3) and 1 or 0, -- if last action is dash away
         (action.Action == 4) and 1 or 0, -- if last action is charged attack, which appears in spear and shield  
+        (action.Action == 5) and 1 or 0, -- if last action is manual reload
     }
 end
 
@@ -180,19 +194,22 @@ function DZAIMakeActionData(state, lastActions)
     local specialProb = DZTemp.Model[4].cells[3].signal
     local dashAwayProb = DZTemp.Model[4].cells[4].signal
     local chargeAttackProb = DZTemp.Model[4].cells[5].signal
+    local manualReloadProb = DZTemp.Model[4].cells[6].signal
 
     -- DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
     -- DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
     -- DZDebugPrintString(string.format("special prob | %.3f", specialProb))
     -- DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
     -- DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+    -- DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb))
 
     return {    
         DashToward = dashTowardProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
         DashAway = dashAwayProb,
-        ChargeAttack = chargeAttackProb
+        ChargeAttack = chargeAttackProb,
+        ManualReload = manualReloadProb
     }
 end
 
