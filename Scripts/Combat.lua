@@ -76,7 +76,53 @@ ModUtil.Path.Override("ReloadGun", function (attacker, weaponData)
     SetWeaponProperty({ WeaponName = "SniperGunWeaponDash", DestinationId = attacker.ObjectId, Property = "Enabled", Value = true })
     thread( UpdateGunUI )
     attacker.Reloading = false
+
     return true
+end, DarkZagreus)
+
+ModUtil.Path.Override("ManualReload", function ( attacker )
+
+	if not IsInputAllowed({}) then
+		return
+	end
+
+	if attacker.ActiveEffects then
+		for effectName in pairs(attacker.ActiveEffects) do
+			if EffectData[effectName] and EffectData[effectName].BlockReload then
+				return
+			end
+		end
+	end
+
+	if CurrentDeathAreaRoom == nil and CurrentRun and CurrentRun.CurrentRoom and CurrentRun.CurrentRoom.DisableWeaponsExceptDash then
+		return
+	end
+
+	for weaponName, v in pairs( attacker.Weapons ) do
+		local weaponData = GetWeaponData( attacker, weaponName)
+		if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
+			if attacker.Reloading then
+				ReloadFailedMidReloadPresentation( attacker, weaponData )
+				return
+			end
+			if RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) and not HeroHasTrait("GunManualReloadTrait") then
+				ReloadFailedAmmoFullPresentation( attacker, weaponData )
+				return
+			end
+
+			thread( MarkObjectiveComplete, "GunWeaponManualReload" )
+            if ReloadGun( attacker, weaponData ) and DZCheckCanRecord() then
+                -- for training, other codes are the same
+                DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(5))
+            end
+
+			if HeroHasTrait("GunManualReloadTrait") then
+				thread( MarkObjectiveComplete, "ManualReload" )
+				ApplyEffectFromWeapon({ Id = CurrentRun.Hero.ObjectId, DestinationId = CurrentRun.Hero.ObjectId, WeaponName = "ManualReloadEffectApplicator", EffectName = "ManualReloadBonus" })
+			end
+			return
+		end
+	end
 end, DarkZagreus)
 
 function DZAIReloadGun(attacker, weaponData)

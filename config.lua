@@ -26,6 +26,9 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
 --     GetDamagedRecently, -- added in v3
 --     DamageEnemyRecently, -- added in v3
 --     MarkTargetRecently -- added in v4
+--     IsReloading -- added in v6
+--     Ammo -- added in v6
+--     
 -- }
 
 -- Action Scheme
@@ -37,4 +40,5 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
 --     ChargeTime -- deprecated in v5
 --     ChargeAttack, -- added in v5, for weapons like spear or shield,
 --                      whcih have a additional charge attack from the attack action
+--     ManualReload, -- added in v6
 -- }

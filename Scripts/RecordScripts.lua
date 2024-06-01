@@ -45,14 +45,16 @@ function DZMakeActionData(action)
     local special = (action == 2) and 1.0 or 0.0
     local dashAway = (action == 3) and 1.0 or 0.0 -- added in v2
     local chargeAttack = (action == 4) and 1.0 or 0.0 -- added in v5
-    -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway, 4 Charge Attack
+    local manualReload = (action == 5) and 1.0 or 0.0 -- added in v5
+    -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway, 4 Charge Attack, 5 Manual Reload
 
     return {    
         DashToward = dashToward,
         DashAway = dashAway,
         Attack = attack,
         SpecialAttack = special,
-        ChargeAttack = chargeAttack 
+        ChargeAttack = chargeAttack,
+        ManualReload = manualReload
     }
 end
 
@@ -87,6 +89,17 @@ function DZGetCurrentState()
         isMarkTargetRecently = _worldTime - DZTemp.LastMarkedTargetTime < DZTemp.ValidMarkTime
     end 
 
+    local ammoData =
+	{
+		Current = 0,
+		Maximum = 1
+	}
+
+    if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
+        ammoData.Current = triggerArgs.Ammo or GetWeaponProperty({ Id = CurrentRun.Hero.ObjectId, WeaponName = "GunWeapon", Property = "Ammo" })
+        ammoData.Maximum = triggerArgs.MaxAmmo or GetWeaponMaxAmmo({ Id = CurrentRun.Hero.ObjectId, WeaponName = "GunWeapon" })
+    end
+
     -- DZDebugPrintString(string.format("Get Damage Recently %s, Damage Enemy Recently %s", isGetDamagedRecently, isDamageEnemyRecently))
     
     return {
@@ -95,7 +108,9 @@ function DZGetCurrentState()
         Distance = distance / 1000,
         GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
         DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
-        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0,
+        IsReloading = CurrentRun.Hero.Reloading and 1.0 or 0.0,
+        Ammo = ammoData.Current / ammoData.Maximum
     }
 end
 
@@ -155,6 +170,13 @@ DZCreateNewRecord = function()
     DZDebugPrintString("DZCreateNewRecord() - Create new record file, enable isRecording to true") 
     local weapon = GameState.LastInteractedWeaponUpgrade
 
+    if weapon == nil then
+        weapon = {
+            WeaponName = "SwordWeapon",
+            ItemIndex = 1
+        }
+    end
+
     DZPersistent.CurRunRecord = 
     {
         Version = DarkZagreus.DataVersion,
@@ -175,13 +197,14 @@ DZCreateNewRecord = function()
 end
 
 DZLogRecord = function (state, action) 
-    -- DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-    --     state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
-    --     action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack))
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
+        isReloading, Ammo,
+        action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
-      { state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently },
+      { state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently, state.IsReloading, state.Ammo },
       { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeAttack }
     })
 end
