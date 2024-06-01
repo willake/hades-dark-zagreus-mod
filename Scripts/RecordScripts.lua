@@ -2,7 +2,6 @@ if not DarkZagreus.Config.Enabled then return end
  
 DZPersistent = {}
 DZPersistent.IsRecording = false
-DZPersistent.LastAction = 0 -- 0 Dash, 1 Attack, 2 Special Attack
 
 if DZPersistent.PendingRecord == nil then
     DZPersistent.PendingRecord = {} 
@@ -40,28 +39,29 @@ function DZCheckCanRecord()
     return true
 end
 
-function DZMakeActionData(action, chargeTime, maxChargeTime)
-    local dash = (action == 0) and 1.0 or 0.0
+function DZMakeActionData(action)
+    local dashToward = (action == 0) and 1.0 or 0.0
     local attack = (action == 1) and 1.0 or 0.0
     local special = (action == 2) and 1.0 or 0.0
-
-    local time = chargeTime / maxChargeTime
-    time = (time > 1.0) and 1.0 or time -- if exceed 1 then clamp to 1
-    time = (time < 0.0) and 0.0 or time -- if less than 1 clamp to 1, usually not happens
+    local dashAway = (action == 3) and 1.0 or 0.0 -- added in v2
+    local chargeAttack = (action == 4) and 1.0 or 0.0 -- added in v5
+    -- 0 DashToward, 1 Attack, 2 Special Attack, 3 DashAway, 4 Charge Attack
 
     return {    
-        Dash = dash,
+        DashToward = dashToward,
+        DashAway = dashAway,
         Attack = attack,
         SpecialAttack = special,
-        ChargeTime = time
+        ChargeAttack = chargeAttack 
     }
 end
 
 function DZGetCurrentState()
-    local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam"})
+    local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam", IgnoreInvulnerable = true, IgnoreHomingIneligible = true})
     local enemy = ActiveEnemies[closestId]
     local distance = 0.00
     local enemyHealth = 0.00
+
     if enemy ~= nil and enemy.Health ~= nil then
         distance = GetDistance({ Id = closestId, DestinationId = currentRun.Hero.ObjectId })
         enemyHealth = enemy.Health / enemy.MaxHealth
@@ -71,17 +71,31 @@ function DZGetCurrentState()
         distance = 1000
     end
 
-    -- local isLastActionDash = (DZPersistent.LastAction == 0) and 1 or 0
-    -- local isLastActionAttack = (DZPersistent.LastAction == 1) and 1 or 0
-    -- local isLastActionSpectialAttack = (DZPersistent.LastActionn == 2) and 1 or 0
+    local isGetDamagedRecently = false
+    local isDamageEnemyRecently = false
+    local isMarkTargetRecently = false
+
+    if DZTemp.LastGetDamagedTime then
+        isGetDamagedRecently = _worldTime - DZTemp.LastGetDamagedTime < 1.0
+    end
+
+    if DZTemp.LastDamageEnemyTime then
+        isDamageEnemyRecently = _worldTime - DZTemp.LastDamageEnemyTime < 1.0
+    end
+
+    if DZTemp.LastMarkedTargetTime and DZTemp.ValidMarkTime then
+        isMarkTargetRecently = _worldTime - DZTemp.LastMarkedTargetTime < DZTemp.ValidMarkTime
+    end 
+
+    -- DZDebugPrintString(string.format("Get Damage Recently %s, Damage Enemy Recently %s", isGetDamagedRecently, isDamageEnemyRecently))
     
     return {
         OwnHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
         ClosestEnemyHP = enemyHealth,
         Distance = distance / 1000,
-        -- IsLastActionDash = isLastActionDash,
-        -- IsLastActionAttack = isLastActionAttack,
-        -- IsLastActionSpecialAttack = isLastActionSpectialAttack,
+        GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
     }
 end
 
@@ -127,7 +141,7 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
     DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
-    DZSavePrevRunRecordToFile() -- only working on x86
+    -- DZSavePrevRunRecordToFile() -- only working on x86
 
     DZPersistent.CurRunRecord = {}
 
@@ -155,17 +169,20 @@ DZCreateNewRecord = function()
     }
   
     DZPersistent.PendingRecord = {}
+    DZPersistent.LastGetDamagedTime = 0.0
+    DZPersistent.LastDamageEnemyTime = 0.0
+    DZPersistent.AI = {}
 end
 
 DZLogRecord = function (state, action) 
-    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance,
-        action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime))
+    -- DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+    --     state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
+    --     action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
-      { state.OwnHP, state.ClosestEnemyHP, state.Distance },
-      { action.Dash, action.Attack, action.SpecialAttack, action.ChargeTime }
+      { state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently },
+      { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeAttack }
     })
 end
 
@@ -201,9 +218,9 @@ end
 
 DZClearAllRecordInMemory = function ()
     DZDebugPrintString("DZClearAllRecord() - Clear all records")
-    DZPersistent.PendingRecord = {}
+    -- DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
-    DZPersistent.CurRunRecord = {}
+    -- DZPersistent.CurRunRecord = {}
 end
 
 DZSavePrevRunRecordToFile = function ()

@@ -5,8 +5,10 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
     enemy.DZ.LastActionTime = 0
+    DZTemp.AI = {}
+    DZTemp.AI.ObjectId = enemy.ObjectId
 
-    local ailoop = _G[DZWeaponAI["SwordWeapon"]]
+    local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
     local weapon = {}
         
     if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DarkZagreus.DataVersion then
@@ -26,7 +28,7 @@ function DarkZagreusAI( enemy, currentRun )
 	end
 end
 
-function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
     if weaponAIData == nil then
         weaponAIData = enemy
     end
@@ -40,9 +42,8 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
     end
 
     if weaponAIData.IsAttackDistanceBasedOnCharge then
-        local chargeTime = actionData.ChargeTime
         local rangeMax = weaponAIData.Range * weaponAIData.ChargeRangeMultiplier
-        attackDistance = chargeTime * rangeMax
+        attackDistance = percentageCharged * rangeMax
     end
 
     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
@@ -79,11 +80,12 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData)
 end
 
 function DZAIEnqueueLastAction(enemy, action)
+    -- DZDebugPrintString(string.format("Action: %d", action.Action))
     table.insert(enemy.DZ.LastActions, action)
 
     -- max size of last action queue is 1 now, will be 2 in the future
     -- depends on how many information we wanna storing for the model prediction
-    if #enemy.DZ.LastActions > 1 then
+    if #enemy.DZ.LastActions > 2 then
         table.remove(enemy.DZ.LastActions, 1) 
     end
 end
@@ -91,8 +93,7 @@ end
 function DZAIGetLastAction(enemy)
     if #enemy.DZ.LastActions == 0 then
         return {
-            Action = 0,
-            ChargeTime = 0.0
+            Action = 0
         }
     else
         return enemy.DZ.LastActions[#enemy.DZ.LastActions]
@@ -107,70 +108,89 @@ function DZAIGetCurrentState(enemy)
         distance = 1000
     end
 
-    local isLastActionDash = (enemy.DZ.TempAction == 0) and 1 or 0
-    local isLastActionAttack = (enemy.DZ.TempAction == 1) and 1 or 0
-    local isLastActionSpectialAttack = (enemy.DZ.TempAction == 2) and 1 or 0
+    local isGetDamagedRecently = false
+    local isDamageEnemyRecently = false
+    local isMarkTargetRecently = false
+
+    if DZTemp.AI then
+        if DZTemp.AI.LastGetDamagedTime then
+            isGetDamagedRecently = _worldTime - DZTemp.AI.LastGetDamagedTime < 1.0
+        end
+
+        if DZTemp.AI.LastDamageEnemyTime then
+            isDamageEnemyRecently = _worldTime - DZTemp.AI.LastDamageEnemyTime < 1.0
+        end
+
+        if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
+            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
+        end 
+    end
     
     return {
         OwnHP = enemy.Health / enemy.MaxHealth,
         ClosestEnemyHP = CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth,
-        Distance = distance / 1000
+        Distance = distance / 1000,
+        GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
+        DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
+    }
+end
+
+-- for model input, given an last action, produce a vector for input
+function DZAIMakeLastActionData(action)
+    return {
+        (action.Action == 0) and 1 or 0, -- if last action is dash toward
+        (action.Action == 1) and 1 or 0, -- if last action is attack
+        (action.Action == 2) and 1 or 0, -- if last action is special attack,
+        (action.Action == 3) and 1 or 0, -- if last action is dash away
+        (action.Action == 4) and 1 or 0, -- if last action is charged attack, which appears in spear and shield  
     }
 end
 
 function DZAIMakeRandomActionData(state)
-    local r = math.random()
-    local chargeTime = 0.0
 
-    chargeTime = r
-
-    return {
-        Dash = 0.2,
-        Attack = 0.6,
-        SpecialAttack = 0.2,
-        ChargeTime = chargeTime
-    }
+    return DarkZagreus.DefaultAIActionData
 end
 
 function DZAIMakeActionData(state, lastActions)
 
-    if DZTemp.Model == nil or #DZTemp.Model == 0 then
+    local consideration = 2 -- how many last actions need to be considered
+
+    if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
         return DZAIMakeRandomActionData(state)
     end
 
-    local lastAction = lastActions[#lastActions]
+    local input = {
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
+        state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently }
 
-    if lastAction == nil then
-       lastAction = 
-       {
-        Action = 0,
-        ChargeTime = 0.0
-       } 
+    for i = 1, consideration do
+        local data = DZAIMakeLastActionData(lastActions[#lastActions + 1 - i])    
+        for j = 1, #data do
+            table.insert(input, data[j])            
+        end
     end
 
-    DZTemp.Model:activate({
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        (lastAction.Action == 0) and 1 or 0, -- if last action is dash 
-        (lastAction.Action == 1) and 1 or 0, -- if last action is attack
-        (lastAction.Action == 2) and 1 or 0, -- if last action is special attack
-        lastAction.ChargeTime }
-    )
+    DZTemp.Model:activate(input)
 
-    local dashProb = DZTemp.Model[4].cells[1].signal
+    local dashTowardProb = DZTemp.Model[4].cells[1].signal
     local attackProb = DZTemp.Model[4].cells[2].signal
     local specialProb = DZTemp.Model[4].cells[3].signal
-    local chargeTime = DZTemp.Model[4].cells[4].signal
+    local dashAwayProb = DZTemp.Model[4].cells[4].signal
+    local chargeAttackProb = DZTemp.Model[4].cells[5].signal
 
-    DZDebugPrintString(string.format("dash prob | %.3f", dashProb))
-    DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
-    DZDebugPrintString(string.format("special prob | %.3f", specialProb))
-    DZDebugPrintString(string.format("charge time | %.3f", chargeTime))
+    -- DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
+    -- DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
+    -- DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+    -- DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
+    -- DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
 
     return {    
-        Dash = dashProb,
+        DashToward = dashTowardProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
-        ChargeTime = chargeTime
+        DashAway = dashAwayProb,
+        ChargeAttack = chargeAttackProb
     }
 end
 
@@ -194,6 +214,14 @@ function DZAIDoPreFire(enemy, weaponAIData, targetId)
     if weaponAIData.AITrackTargetDuringCharge then
 		Track({ Ids = { enemy.ObjectId }, DestinationIds = { targetId } })
 	end
+
+    if weaponAIData.OnWeaponChargeFunction then
+        local functionData = weaponAIData.OnWeaponChargeFunction
+
+        if _G[functionData.FunctionName] ~= nil then
+            thread(_G[functionData.FunctionName], enemy, targetId, functionData.FunctionArgs) 
+        end
+    end
 
     -- wait for pre fire animation
     if weaponAIData.PreFireDuration then
@@ -229,8 +257,26 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
     if weaponAIData.FireOnSelf then
         FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId, AutoEquip = true })
     else
-        FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        if enemy.DZ.FireTowardTarget == false then
+            local angleToward = GetAngleBetween({ Id = enemy.ObjectId, DestinationId = targetId })
+            local opposite = DZGetRandomAngleInOppositeDirection(angleToward)
+            local radians = math.rad(opposite)
+            -- SetAngle({ Id = enemy.ObjectId, Angle = opposite, Duration = 0.0 })
+            -- local location = GetLocation({ Id = enemy.ObjectId})
+            -- local tempTarget = SpawnObstacle({ 
+            --     Name = "TempTarget", DestinationId = enemy.ObjectId, OffsetX = location.X + math.cos(radians) * 100, OffsetY = location.Y - math.sin(radians) * 100 })
+            -- AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = tempTarget })  not working
+            -- DZDebugPrintString(string.format("DashAway - Original = %.1f, Opposite = %.1f", angleToward, opposite))
+            Stop({ Id = enemy.ObjectId })
+            SetAngle({ Id = enemy.ObjectId, Angle = opposite, Duration = 0.0 })
+            FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+            Destroy({Id = tempTarget})
+        else
+            FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        end
     end
+
+    
     
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
@@ -385,4 +431,10 @@ function DZAIGetWeaponAIData(enemy, weaponName)
 	-- end
 
 	return weaponAIData
+end
+
+function DZGetRandomAngleInOppositeDirection(angle)
+    local r = math.random(0, 180)
+
+    return (angle + 90 + r) % 360
 end

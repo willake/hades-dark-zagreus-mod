@@ -79,5 +79,9 @@
             // AutoLockArcDistance = 220
             // AutoLockRange = 800
         }
+        {
+            Name = "DarkTalosRush"
+            InheritFrom = "DarkRush"
+        }
     ]
 }

@@ -13,10 +13,10 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
     enemy.WeaponName = DZAISelectShieldWeapon(enemy, actionData)
 
     if enemy.WeaponName == nil then
-        return false
+        return true -- continue to next action
     end
-
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
+
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
@@ -33,10 +33,12 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
 
     -- if there is a target
     if targetId ~= nil and targetId ~= 0 then
+
+        local percentageCharged = DZAIMakeShieldChargeTime(enemy.DZ.TempAction)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, percentageCharged)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -47,7 +49,7 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
 		local attackSuccess = false
 
         while not attackSuccess do
-            attackSuccess = DZAIDoShieldAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
+            attackSuccess = DZAIDoShieldAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
@@ -60,7 +62,7 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
     return true
 end
 
-function DZAIDoShieldAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData)
+function DZAIDoShieldAttackOnce(enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
     if targetId == nil then
         targetId = currentRun.Hero.ObjectId
     end
@@ -104,18 +106,18 @@ function DZAIDoShieldAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
 		return false
 	end
 
-    if not DZAIFireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
+    if not DZAIFireShieldWeapon( enemy, weaponAIData, currentRun, targetId, actionData, percentageCharged) then
         return false
     end
 
     return true
 end
 
-function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
+function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionData, percentageCharged)
     local chargeTime = 0.0
 
     if weaponAIData.PostFireChargeStages ~= nil then
-        chargeTime = actionData.ChargeTime * weaponAIData.MaxChargeTime
+        chargeTime = percentageCharged * weaponAIData.MaxChargeTime
         -- DZDebugPrintString("Set chargeTime to " .. chargeTime)
     end
 
@@ -194,10 +196,13 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 end
 
 function DZAISelectShieldWeapon(enemy, actionData)
-    local r = math.random()
+    local total = 
+        actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+    local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
     enemy.DZ.TempAction = 0
+    enemy.DZ.FireTowardTarget = true
 
     local lastAction = DZAIGetLastAction(enemy)
 
@@ -207,7 +212,24 @@ function DZAISelectShieldWeapon(enemy, actionData)
         enemy.DZ.TempAction = 1
 
         -- if the last action is dash, do dash attack
-        if lastAction.Action == 0 and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+            enemy.WeaponName = enemy.DashAttackWeapon
+            enemy.ChainedWeapon = nil
+            return enemy.WeaponName
+        end
+
+        -- or just do a regular attack
+        enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
+    if r < actionData.Attack + actionData.ChargeAttack then
+
+        enemy.DZ.TempAction = 4
+
+        -- if the last action is dash, do dash attack
+        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
             enemy.WeaponName = enemy.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
@@ -220,7 +242,7 @@ function DZAISelectShieldWeapon(enemy, actionData)
     end
 
     -- use special attack
-    if r < actionData.Attack + actionData.SpecialAttack then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
@@ -228,13 +250,41 @@ function DZAISelectShieldWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.SpecialAttack + actionData.Dash then
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
+    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+        enemy.DZ.TempAction = 3
+        enemy.WeaponName = enemy.DashWeapon
+        enemy.ChainedWeapon = nil
+        enemy.DZ.FireTowardTarget = false
+        return enemy.WeaponName
+    end
+
     enemy.WeaponName = nil
     return nil
+end
+
+-- logic for deciding the charge time
+function DZAIMakeShieldChargeTime(action)
+
+    if action == 4 then -- charge attack
+        local r = math.random()
+
+        -- higer chance to do small charge, low chance do full charge
+        if r < 0.7 then
+            return 0.33 + math.random() * 0.33
+        elseif r < 0.9 then
+            return 0.66 + math.random() * 0.22
+        else
+            return 0.88 + math.random() * 0.12
+        end
+    end
+
+    -- else, like charge special attack
+    return 0.0
 end

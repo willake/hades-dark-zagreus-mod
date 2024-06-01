@@ -7,11 +7,11 @@
             Projectile = "DarkLuciferGun"
             RefreshProjectileOnFire = true
             SkipFireCancelIfFiring = true
-            Cooldown = 0.13
+            Cooldown = 0.0 // 0.13
             Scatter = 0
             ScatterCap = 0
             BarrelLength = 50
-            ChargeTime = 0.3
+            ChargeTime = 0.0
             // ChargeStartAnimation = "ZagreusGunLucifer_Start"
             FireGraphic = "ZagreusGunLucifer_Fire"
             FireEndGraphic = "ZagreusGunLucifer_ReturnToIdle"
@@ -19,7 +19,7 @@
             OnlyChargeOnce = true
             FireFx = "null"
             MaxAmmo = 20
-            ChargeStartFx = "GunCharge"
+            ChargeStartFx = "null"
             // AutoLockRange = 692.25 // 710 * 0.975
             Effects = [
                 {

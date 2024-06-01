@@ -199,7 +199,7 @@
             // IgnoreName = "_PlayerUnit"
             OnlyAffectName = "_PlayerUnit"
             Type = "DAMAGE_OVER_TIME"
-            Amount = 100.0
+            Amount = 15.0
             Stacks = false
             ExtendDurationOnReapply = false
             Duration = 3.95
@@ -212,7 +212,7 @@
             DamageOnExpire = true
           }
           {
-            Name = "MarkRuptureTarget"
+            Name = "DZMarkRuptureTarget"
             Type = "DAMAGE_OUTPUT"
             Duration = 4
             Modifier = 1.5
@@ -261,53 +261,19 @@
         Effects = [
 
         {
-          Name = "DarkGilgameshMarkRuptureTargetApplicator"
+          Name = "DZMarkRuptureTargetApplicator"
           Duration = 15.0
-                Type = "DAMAGE_OVER_TIME"
+          Type = "DAMAGE_OVER_TIME"
           Modifier = 0
           Active = true
           TimeModifierFraction = 0
           FrontFx = "null"
           BackFx = "null"
-                Stacks = true
+          Stacks = true
           MaxStacks = 100
-                ExtendDurationOnReapply = true
+          ExtendDurationOnReapply = true
         }
         ]
 	  }
-    {
-        Name = "DarkGilgameshMarkRuptureApplicator"
-        InheritFrom = "1_BaseDZMagicProjectile"
-        UseStartLocation = true
-        Type = "INSTANT"
-        ImmunityDuration = 0.15
-        AttachToOwner = true
-        DamageRadius = 185
-        DamageRadiusScaleY = 0.6
-        DamageLow = 0
-        DamageHigh = 0
-        ImpactVelocity = 0
-        CheckObstacleImpact = false
-        CheckUnitImpact = true
-        AffectsEnemies = true
-        Thing = {
-          Graphic = "null"
-        }
-        Effects = [
-          {
-            Name = "DarkGilgameshMarkRuptureTargetApplicator"
-            Duration = 15.0
-            Type = "DAMAGE_OVER_TIME"
-            Modifier = 0
-            Active = true
-            TimeModifierFraction = 0
-            FrontFx = "null"
-            BackFx = "null"
-            Stacks = true
-            MaxStacks = 100
-            ExtendDurationOnReapply = true
-          }
-        ]
-    }
   ]
 }

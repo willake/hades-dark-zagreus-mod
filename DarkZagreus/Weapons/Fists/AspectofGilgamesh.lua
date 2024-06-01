@@ -13,8 +13,8 @@ WeaponData.DarkGilgameshFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist2",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.2,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
@@ -69,8 +69,8 @@ WeaponData.DarkGilgameshFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist3",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.13,
+        WaitUntilProjectileDeath = true,
     },
 
     Sounds =
@@ -106,8 +106,8 @@ WeaponData.DarkGilgameshFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist4",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.13,
+        WaitUntilProjectileDeath = true,
     },
 
     Sounds =
@@ -143,8 +143,8 @@ WeaponData.DarkGilgameshFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist5",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = true,
     },
 
     Sounds =
@@ -180,8 +180,8 @@ WeaponData.DarkGilgameshFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = true,
         Cooldown = 0.5
     },
 
@@ -220,8 +220,8 @@ WeaponData.DarkGilgameshFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         IsStartFromFistDash = true
     },
@@ -371,18 +371,19 @@ WeaponData.DarkGilgameshMarkRuptureApplicator = {
     Name = "DarkGilgameshMarkRuptureApplicator",
 }
 
-EffectData.DarkGilgameshMarkRuptureTargetApplicator =
+EffectData.DZMarkRuptureTargetApplicator =
 {
     OnApplyFunctionName = "DZAIOnRuptureDashHit",
 }
 
-EffectData.DarkGilgameshPunchRuptureWeapon =
+-- no use
+EffectData.DZPunchRuptureWeapon =
 {
     OnApplyFunctionName = "DZAIOnRuptureWeaponHit",
 }
 
--- EffectData.DarkGilgameshMarkRuptureTarget =
--- {
---     OnApplyFunctionName = "DZMarkRuptureTargetApply",
---     OnClearFunctionName = "DZMarkRuptureTargetClear",
--- }
+EffectData.DZMarkRuptureTarget =
+{
+    OnApplyFunctionName = "DZAIMarkRuptureTargetApply",
+    OnClearFunctionName = "DZAIMarkRuptureTargetClear",
+}

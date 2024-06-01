@@ -7,13 +7,13 @@ function DZTrainAI()
         return
     end
 
-    local learningRate = 1 -- set between 1, 100
-    local epoch = 1 -- number of times to do backpropagation
+    local learningRate = 3 -- set between 1, 100
+    local epoch = 10 -- number of times to do backpropagation
     local threshold = 1 -- steepness of the sigmoid curve
 
     -- Input: PlayerHP, ClosetEnemyHP, ClosetEnemyDistance, IsLastActionDash, IsLastActionAttack, IsLastActionSpecialAttack
     -- Output: DashProb, AttackProb, SpecialAttackProb, ChargeTime
-    local network = Luann:new({7, 6, 6, 4}, learningRate, threshold)
+    local network = Luann:new({16, 11, 11, 5}, learningRate, threshold)
 
     if DZPersistent.PrevRunRecord == nil then
         DZDebugPrintString("DZTrainAI() - PrevRunRecord is missing")
@@ -26,13 +26,15 @@ function DZTrainAI()
     end
 
     local dataset = DeepCopyTable(DZPersistent.PrevRunRecord.History)
-
+    local consideration = 1 -- conside how many past actions, 2 means 2 past actions
     -- insert last actions to each data, this provides more information for training the model
-    for i = 2, #dataset do
-        local prev = dataset[i - 1][2]
-
-        for j = 1, 4 do
-            table.insert(dataset[i][1], prev[j])
+    for i = 1 + consideration, #dataset do
+        for j = 1, consideration do
+            local prev = dataset[i - j][2]    
+            
+            for k = 1, #prev do
+                table.insert(dataset[i][1], prev[k])
+            end
         end
     end
 

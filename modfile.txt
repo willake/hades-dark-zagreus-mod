@@ -29,6 +29,9 @@ SJSON "DarkZagreus/Units/Guns/AspectofLucifer.sjson"
 To "Game/Animations/PortraitAnimations.sjson"
 SJSON "Game/Animations/PortraitAnimations.sjson
 
+To "Game/Animations/Fx.sjson"
+SJSON "Game/Animations/Fx.sjson
+
 To "Game/Text/en/HelpText.en.sjson"
 SJSON "Game/Text/HelpText.en.sjson"
 
@@ -46,6 +49,15 @@ Replace "Packages/DarkZagreus.pkg"
 
 To "Scripts/CodexScripts.lua"
 Import "Scripts/CodexScripts.lua"
+
+To "Scripts/Combat.lua"
+Import "Scripts/Combat.lua"
+
+To "Scripts/Powers.lua"
+Import "Scripts/Powers.lua"
+
+To "Scripts/CombatPresentation.lua"
+Import "Scripts/CombatPresentation.lua"
 
 To "Scripts/WeaponData.lua"
 Import "DarkZagreus/Weapons/RushWeapon.lua"

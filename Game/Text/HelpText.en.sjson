@@ -10,5 +10,9 @@
             DisplayName = "???"
             Description = "Your dark side"
         }
+        {
+            Id = "DarkZagreusDefeatedMessage"
+            DisplayName = "DARK ZAGREUS VANQUISHED"
+        }
     ]
 }

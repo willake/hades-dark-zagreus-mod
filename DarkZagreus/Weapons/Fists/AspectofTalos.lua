@@ -17,8 +17,8 @@ WeaponData.DarkTalosFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist2",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.15,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
@@ -70,8 +70,8 @@ WeaponData.DarkTalosFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist3",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 
@@ -85,8 +85,8 @@ WeaponData.DarkTalosFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist4",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 
@@ -100,8 +100,8 @@ WeaponData.DarkTalosFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist5",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
     }
 }
 	
@@ -115,8 +115,8 @@ WeaponData.DarkTalosFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         Cooldown = 0.5
     }
 }
@@ -132,8 +132,8 @@ WeaponData.DarkTalosFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
-        FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = true,
         CanDoCombo = true,
         IsStartFromFistDash = true
     },
@@ -174,15 +174,26 @@ WeaponData.DarkTalosFistSpecial =
 
     AIData =
     {
+        AttackDistance = 700,
         AIAngleTowardsPlayerWhileFiring = true,
         FireDuration = 0.4,
         PreFireDuration = 0.24,
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
         FireAnimation = "ZagreusFistAlt02AerialUpperCut_Fire",
         FireFxOnSelf = "FistFxUppercutDirectional",
-        WillTriggerVacuumFunction = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
+        OnWeaponChargeFunction =
+		{
+			FunctionName = "DZAICheckVacuumPlayer",
+			FunctionArgs =
+			{
+				Range = 800,				-- Vacuum distance
+				DistanceBuffer = 130,		-- Space to leave between player and enemy
+				RushDistanceBuffer = 300,
+				AutoLockArc = 60,
+			},
+		}
     },
 
     Sounds =
@@ -236,7 +247,17 @@ WeaponData.DarkTalosFistSpecialDash =
         PreFireAnimation = "ZagreusFistAlt02Grab_Start",
         FireAnimation = "ZagreusFistAlt02DashUpperCut_Fire",
         FireFxOnSelf = "FistFxUppercutDirectional",
-        WillTriggerVacuumFunction = true
+        OnWeaponChargeFunction =
+		{
+			FunctionName = "DZAICheckVacuumPlayer",
+			FunctionArgs =
+			{
+				Range = 800,				-- Vacuum distance
+				DistanceBuffer = 130,		-- Space to leave between player and enemy
+				RushDistanceBuffer = 300,
+				AutoLockArc = 60,
+			},
+		}
     },
 
     Sounds =
@@ -260,4 +281,34 @@ WeaponData.DarkTalosFistSpecialDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
+}
+
+WeaponData.DarkTalosRush = 
+{
+    InheritFrom = {"DarkRush"},
+
+    AIData =
+    {
+        PreAttackDuration = 0,
+        PostAttackDuration = 0,
+        SkipMovement = true,
+        AIAngleTowardsPlayerWhileFiring = true,
+        AITrackTargetDuringCharge = true,
+        AIMoveWithinRangeTimeout = 1.0,
+        WaitUntilProjectileDeath = true,
+        AddRush = {
+			FunctionName = "DZAIFistVacuumRush",
+			FunctionArgs =
+			{
+				Duration = 0.2,
+			},
+			RunOnce = true,
+		}
+    }
+}
+
+EffectData.DZMarkTargetFist =
+{
+    OnApplyFunctionName = "DZAIMarkTargetFistApply",
+    OnClearFunctionName = "DZAIMarkTargetFistClear",
 }

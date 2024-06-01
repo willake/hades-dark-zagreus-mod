@@ -7,7 +7,7 @@ WeaponData.DarkSpear =
 
 		AIData =
 		{
-			AttackDistance = 200,
+			AttackDistance = 300,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			ChainedWeapon = "DarkSpear2",
@@ -69,7 +69,7 @@ WeaponData.DarkSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkSpear3",
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
@@ -112,7 +112,7 @@ WeaponData.DarkSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.3,
+			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },

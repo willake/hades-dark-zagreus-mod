@@ -2,12 +2,10 @@ if not DarkZagreus.Config.Enabled then return end
 
 -- Replace Hades to Zagreus
 -- set phases to only 1
-UnitSetData.Enemies.Hades.MaxHealth = 5000
+UnitSetData.Enemies.Hades.MaxHealth = 10000
 UnitSetData.Enemies.Hades.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.Phases = 1
-UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 10000
-
--- UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeathFullscreen"
+UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 20000
 
 -- remove all stages, leaving only 1
 UnitSetData.Enemies.Hades.AIStages = 
@@ -66,6 +64,20 @@ UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
 UnitSetData.Enemies.Hades.BossPresentationPriorityIntroTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationTextLineSets = nil
 UnitSetData.Enemies.Hades.BossPresentationRepeatableTextLineSets = nil
+UnitSetData.Enemies.Hades.LowHealthVoiceLines = nil
+UnitSetData.Enemies.Hades.DefeatedVoiceLines = nil
+UnitSetData.Enemies.Hades.BossKillVoiceLines = nil
+
+UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeadStartBlood" -- ZagreusDeathFullScreen is not transparent background so I can't use it
+UnitSetData.Enemies.Hades.OnDeathFunctionName = "DZDarkZagreusKillPresentation"
+UnitSetData.Enemies.Hades.OnDeathFunctionArgs = { 
+    Message = "DarkZagreusDefeatedMessage", 
+    StartPanTime = 1.5, 
+    MessageLayer = "ScreenOverlay", 
+    MessageDelay = 1.5, 
+    MessageDuration = 3.5, 
+    AddInterBiomeTimerBlock = true }
+
 
 -- for aspect of lucifer
 UnitSetData.Enemies.DarkGunBombUnit =
@@ -75,7 +87,7 @@ UnitSetData.Enemies.DarkGunBombUnit =
     MaxHealth = 9999,
     FlashOnFuse = true,
     FuseDuration = 0.2,
-    OnDamagedFunctionName = "ActivateLuciferFuse",
+    OnDamagedFunctionName = "DZAIActivateLuciferFuse",
     FuseActivationSound = "/Leftovers/SFX/CurSprint",
     --FuseAnimation = "BlastCubeLit",
     CanStoreAmmo = false,
@@ -88,17 +100,22 @@ UnitSetData.Enemies.DarkGunBombUnit =
     OnDeathShakeScreenFalloff = 1500,
 
     AlwaysTraitor = true,
-    OnDeathFunctionName = "GunBombDetonate",
+    OnDeathFunctionName = "DZAIGunBombDetonate",
 
-    AdditionalEnemySetupFunctionName = "SetUpGunBombImmolation",
+    AdditionalEnemySetupFunctionName = "DZAISetUpGunBombImmolation",
     ImmolationInterval = 1.0,
-    IncomingDamageModifiers =
-    {
-        {
-            Name = "ImmolationImmunity",
-            ValidWeapons = {"GunBombImmolation"},
-            ValidWeaponMultiplier = 0,
-            Multiplicative = true,
-        },
-    },
+    -- IncomingDamageModifiers =
+    -- {
+    --     {
+    --         Name = "ImmolationImmunity",
+    --         ValidWeapons = {"GunBombImmolation"},
+    --         ValidWeaponMultiplier = 0,
+    --         Multiplicative = true,
+    --     },
+    -- },
 }
+
+EnemyData.Hades = UnitSetData.Enemies.Hades
+EnemyData.DarkGunBombUnit = UnitSetData.Enemies.DarkGunBombUnit 
+
+-- TODO: should handle HadesKillPresentation as well

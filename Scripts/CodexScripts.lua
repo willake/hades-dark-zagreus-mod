@@ -23,28 +23,28 @@ DZCommands = {
 		ExportRecordToFile = {
 			Entries = {
 				{
-					Text = "This function exports the record to a file. It only works on the x86 (32-bit) version. The file will be saved in the x86 folder of the root directory with the name DZRecord.log."
+					Text = "This function exports the record to a file. It only works on the x86 (32-bit) version. The file will be saved in the x86 folder of the root directory with the name DZRecord.log. Press confirm to execute."
 				}
 			}
 		},
 		LoadRecordFromFile = {
 			Entries = {
 				{
-					Text = "This function loads record from a file. It only works on the x86 (32-bit) version. The file must be located in the x86 folder of the root directory and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record."
+					Text = "This function loads record from a file. It only works on the x86 (32-bit) version. The file must be located in the x86 folder of the root directory and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
 				}
 			}
 		},
 		ClearRecord = {
 			Entries = {
 				{
-					Text = "This function clears the previous run data, resetting Dark Zagreus's AI to its default state, which is driven by random probabilities."
+					Text = "This function clears the previous run data, resetting Dark Zagreus's AI to its default state, which is driven by random probabilities. Press confirm to execute."
 				}
 			}
 		},
 		ForceNextRoomBossRoom = {
 			Entries = {
 				{
-					Text = "This function skips directly to the final boss level, which is useful if you have a successful previous run and want to quickly test fighting Dark Zagreus. It changes your next room to the boss room."
+					Text = "This function skips directly to the final boss level, which is useful if you have a successful previous run and want to quickly test fighting Dark Zagreus. It changes your next room to the boss room. Press confirm to execute."
 				}
 			}
 		},
@@ -56,7 +56,7 @@ Codex.DZCommands = DZCommands
 -- handle confirm
 OnControlPressed{ "Confirm",
 	function( triggerArgs )
-		DZUIMain(triggerArgs)
+		DZUIHandleConfirm(triggerArgs)
 	end
 }
 
@@ -69,7 +69,7 @@ function DZUIUseCommand(commandName, triggerArgs)
 	end
 end
 
-function DZUIMain(triggerArgs)
+function DZUIHandleConfirm(triggerArgs)
     if CodexUI.Screen == nil or not IsScreenOpen("Codex") or IsScreenOpen("BoonInfoScreen") then
 		return
 	end
@@ -103,8 +103,13 @@ function DZUIHandleLoadRecordFromFile()
 end
 
 function DZUIHandleClearRecord()
-	DZClearAllRecordInMemory()
-	ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
+	ModUtil.Hades.NewMenuYesNo("ConfirmClearRecord", nil, nil, function ()
+		DZClearAllRecordInMemory()
+		ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
+	end, nil, 
+	"Sure to clear record?", 
+	"Clearing the record means the record will be not accessible anymore. You can export your record in x86 version before cleaning up. Are you sure to clear it?",
+	"Yes", "No")
 end
 
 function DZUIHandleForceNextRoomBossRoom()
