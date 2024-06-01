@@ -126,7 +126,7 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 end, DarkZagreus)
 
 function DZAIReloadGun(attacker, weaponData)
-    attacker.Reloading = true
+    DZTemp.AI.Reloading = true
 
 	RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
     DZAIReloadPresentationStart( attacker, weaponData, presentationState )
@@ -136,11 +136,11 @@ function DZAIReloadGun(attacker, weaponData)
     end
     DZAIReloadPresentationComplete( attacker, weaponData, presentationState )
     RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
-    attacker.Reloading = false
+    DZTemp.AI.Reloading = false
     return true
 end
 
-function DZAIManualReload( attacker )
+function DZAIManualReload( enemy )
     -- might be useful in the future
 	-- if attacker.ActiveEffects then
 	-- 	for effectName in pairs(attacker.ActiveEffects) do
@@ -154,29 +154,27 @@ function DZAIManualReload( attacker )
 	-- 	return
 	-- end
 
-	for weaponName, v in pairs( attacker.Weapons ) do
-		local weaponData = GetWeaponData( attacker, weaponName)
-		if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
-			if attacker.Reloading then
-				return
-			end
+	local weaponData = GetWeaponData( enemy, enemy.PrimaryWeapon )
+    if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
+        if enemy.Reloading then
+            return
+        end
 
-            local weapon = DZTemp.AI.Weapon
+        local weapon = DZTemp.AI.Weapon
 
-			if RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
-                -- aspect of hestia can reload whenever
-                if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 4) then
-                    return
-                end 
-			end
+        if RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
+            -- aspect of hestia can reload whenever
+            if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
+                return
+            end 
+        end
 
-			DZAIReloadGun( attacker, weaponData )
+        DZAIReloadGun( enemy, weaponData )
 
-			if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 4 then
-				ApplyEffectFromWeapon({ Id = attacker.ObjectId, DestinationId = attacker.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
-			end
+        if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
+            -- ApplyEffectFromWeapon({ Id = enemy.ObjectId, DestinationId = enemy.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
+        end
 
-			return
-		end
-	end
+        return
+    end
 end

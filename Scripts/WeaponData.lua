@@ -88,6 +88,7 @@ DZWeaponData =
 				enemy.DashWeapon = "DarkRush";
 				enemy.SpecialAttackWeapon = "DarkGunGrenadeToss";
 				enemy.DashAttackWeapon = "DarkGunDash";
+				enemy.ReloadWeapon = "DarkManualReload";
             end
 		},
 		{
@@ -96,6 +97,7 @@ DZWeaponData =
 				enemy.DashWeapon = "DarkRush";
 				enemy.SpecialAttackWeapon = "DarkErisGunGrenadeToss";
 				enemy.DashAttackWeapon = "DarkErisGunDash";
+				enemy.ReloadWeapon = "DarkManualReload";
             end
 		},
 		{
@@ -104,6 +106,7 @@ DZWeaponData =
 				enemy.DashWeapon = "DarkRush";
 				enemy.SpecialAttackWeapon = "DarkHestiaGunGrenadeToss";
 				enemy.DashAttackWeapon = "DarkHestiaGunDash";
+				enemy.ReloadWeapon = "DarkManualReload";
             end
 		},
 		{
@@ -112,6 +115,7 @@ DZWeaponData =
 				enemy.DashWeapon = "DarkRush";
 				enemy.SpecialAttackWeapon = "DarkLuciferGunGrenadeToss";
 				enemy.DashAttackWeapon = "DarkLuciferGunDash";
+				enemy.ReloadWeapon = "DarkManualReload";
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunBomb" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunBombImmolation" })
             end

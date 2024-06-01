@@ -31,11 +31,17 @@ function DarkZagreusAI( enemy, currentRun )
 end
 
 function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
+
     if weaponAIData == nil then
         weaponAIData = enemy
     end
 
     local attackDistance = weaponAIData.AttackDistance or 175
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 150)
+
+    if moveSuccessDistance < 32 then
+        moveSuccessDistance = 32
+    end
 
     if weaponAIData.AttackDistanceMin and weaponAIData.AttackDistanceMax then
         local r = math.random()
@@ -54,7 +60,7 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
 	Move({ 
         Id = enemy.ObjectId, 
         DestinationId = targetId, 
-        SuccessDistance = weaponAIData.MoveSuccessDistance or 32, 
+        SuccessDistance = moveSuccessDistance, 
         LookAheadMultiplier = enemy.LookAheadMultiplier })
     
     -- Wait until within attack range

@@ -197,15 +197,15 @@ DZCreateNewRecord = function()
 end
 
 DZLogRecord = function (state, action) 
-    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
-        isReloading, Ammo,
-        action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack))
+        state.IsReloading, state.Ammo,
+        action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack, action.ManualReload))
 
     table.insert(DZPersistent.CurRunRecord.History, 
     {
       { state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently, state.IsReloading, state.Ammo },
-      { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeAttack }
+      { action.DashToward, action.Attack, action.SpecialAttack, action.DashAway ,action.ChargeAttack, action.ManualReload }
     })
 end
 

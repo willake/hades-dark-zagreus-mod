@@ -18,6 +18,10 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
     if enemy.WeaponName == nil then
         return true -- continue to next action
     end
+
+    if DZTemp.AI.Reloading then
+        return true
+    end
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     
     table.insert(enemy.WeaponHistory, enemy.WeaponName)
@@ -36,7 +40,13 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
     -- if there is a target
     if targetId ~= nil and targetId ~= 0 then
-        
+
+        -- do manual reload here so the AI can reload while walking
+        if enemy.DZ.TempAction == 5 then
+            DZAIManualReload(enemy)
+            return true
+        end
+    
         -- Movement
         if not weaponAIData.SkipMovement then
 			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, 0)
@@ -45,10 +55,6 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 				return true
 			end
 		end
-
-        if enemy.WeaponName == nil then
-            return true
-        end
 
         -- Attack
 		local attackSuccess = false
@@ -119,10 +125,6 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 end
 
 function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData)
-
-    if enemy.Reloading then
-        return false
-    end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
         weaponAIData.ForcedEarlyExit = true
@@ -227,7 +229,7 @@ function DZAISelectGunWeapon(enemy, actionData)
 
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload then
         enemy.DZ.TempAction = 5
-        enemy.WeaponName = "Reload"
+        enemy.WeaponName = enemy.ReloadWeapon
         return enemy.WeaponName
     end
 
