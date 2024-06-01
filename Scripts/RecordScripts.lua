@@ -89,6 +89,11 @@ function DZGetCurrentState()
         isMarkTargetRecently = _worldTime - DZTemp.LastMarkedTargetTime < DZTemp.ValidMarkTime
     end 
 
+    -- use mark target as indicator
+    if DZTemp.NextIsPowerShot then
+        isMarkTargetRecently = true
+    end
+
     local ammoData =
 	{
 		Current = 0,

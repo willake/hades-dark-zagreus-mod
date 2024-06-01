@@ -119,6 +119,9 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 			if HeroHasTrait("GunManualReloadTrait") then
 				thread( MarkObjectiveComplete, "ManualReload" )
 				ApplyEffectFromWeapon({ Id = CurrentRun.Hero.ObjectId, DestinationId = CurrentRun.Hero.ObjectId, WeaponName = "ManualReloadEffectApplicator", EffectName = "ManualReloadBonus" })
+                if DZCheckCanRecord() then
+                    DZTemp.NextIsPowerShot = true 
+                end
 			end
 			return
 		end
@@ -172,7 +175,7 @@ function DZAIManualReload( enemy )
         DZAIReloadGun( enemy, weaponData )
 
         if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
-            -- ApplyEffectFromWeapon({ Id = enemy.ObjectId, DestinationId = enemy.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
+            ApplyEffectFromWeapon({ Id = enemy.ObjectId, DestinationId = enemy.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
         end
 
         return

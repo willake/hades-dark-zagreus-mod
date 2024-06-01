@@ -242,17 +242,25 @@ function DZAISelectGunWeapon(enemy, actionData)
 
     -- if the last action is dash, do dash attack
     if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
+
+        if DZTemp.AI.NextIsPowerShot then
+            DZTemp.AI.NextIsPowerShot = false
+            enemy.WeaponName = enemy.DashAttackPowerWeapon
+            return enemy.WeaponName    
+        end
+
         enemy.WeaponName = enemy.DashAttackWeapon
         return enemy.WeaponName
     end
 
     -- or just do a regular attack
+
+    if DZTemp.AI.NextIsPowerShot then
+        DZTemp.AI.NextIsPowerShot = false
+        enemy.WeaponName = enemy.PrimaryPowerWeapon
+        return enemy.WeaponName    
+    end
+
     enemy.WeaponName = enemy.PrimaryWeapon
     return enemy.WeaponName
-end
-
--- for aspect of hestia
-function DZAIManualReloadBonusApply( triggerArgs )
-	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
-	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 end

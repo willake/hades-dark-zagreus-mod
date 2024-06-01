@@ -223,7 +223,11 @@ OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))     
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))  
+        
+        if DZTemp.NextIsPowerShot then
+            DZTemp.NextIsPowerShot = false
+        end
     end 
 }
 

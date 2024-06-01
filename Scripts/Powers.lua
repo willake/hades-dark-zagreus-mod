@@ -286,3 +286,10 @@ function DZAISetUpGunBombImmolation( enemy, currentRun, args )
 		end
 	end
 end
+
+-- for aspect of hestia
+function DZAIManualReloadBonusApply( triggerArgs )
+	DZTemp.AI.NextIsPowerShot = true
+	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
+	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
+end

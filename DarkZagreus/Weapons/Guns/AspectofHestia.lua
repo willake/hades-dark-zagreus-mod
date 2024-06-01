@@ -173,12 +173,12 @@ WeaponData.DarkHestiaSniperGunDash = {
     -- DashWeapon = SniperGunWeaponDash,
 }
 
-WeaponData.DarkManualReloadEffectApplicator =
+WeaponData.DZManualReloadEffectApplicator =
 {
     -- CompleteObjectivesOnFire = { "ManualReload" },
 }
 
-EffectData.DarkManualReloadBonus =
+EffectData.DZManualReloadBonus =
 {
     OnApplyFunctionName = "DZAIManualReloadBonusApply",
     OnClearFunctionName = "DZAIManualReloadBonusClear",

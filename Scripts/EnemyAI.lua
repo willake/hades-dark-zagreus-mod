@@ -132,6 +132,10 @@ function DZAIGetCurrentState(enemy)
         if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
             isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
         end 
+
+        if DZTemp.AI.NextIsPowerShot then
+            isMarkTargetRecently = true
+        end
     end
 
     local ammoData =

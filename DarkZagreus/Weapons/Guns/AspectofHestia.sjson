@@ -32,7 +32,7 @@
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
             Effect = {
-                Name = "DarkManualReloadBonus"
+                Name = "DZManualReloadBonus"
                 Duration = 1000.0
                 CanAffectInvulnerable = true
                 FrontFx = "GunManualReloadTraitFx"
