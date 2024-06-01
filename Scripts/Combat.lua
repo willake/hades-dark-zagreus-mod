@@ -81,30 +81,56 @@ end, DarkZagreus)
 
 function DZAIReloadGun(attacker, weaponData)
     attacker.Reloading = true
-	-- local prevCooldownAnim = GetWeaponDataValue({ Id = attacker.ObjectId, WeaponName = "GunWeapon", Property = "FailedToFireCooldownAnimation" })
-	-- SetWeaponProperty({ WeaponName = "GunWeapon", DestinationId = attacker.ObjectId, Property = "Enabled", Value = false })
-	-- SetWeaponProperty({ WeaponName = "GunWeaponDash", DestinationId = attacker.ObjectId, Property = "Enabled", Value = false })
-	-- SetWeaponProperty({ WeaponName = "SniperGunWeapon", DestinationId = attacker.ObjectId, Property = "Enabled", Value = false })
-	-- SetWeaponProperty({ WeaponName = "SniperGunWeaponDash", DestinationId = attacker.ObjectId, Property = "Enabled", Value = false })
 
 	RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
-    -- thread( UpdateGunUI )
-    -- local presentationState = {}
     DZAIReloadPresentationStart( attacker, weaponData, presentationState )
     wait( weaponData.ActiveReloadTime, RoomThreadName)
     if attacker.HandlingDeath then
         return false
     end
     DZAIReloadPresentationComplete( attacker, weaponData, presentationState )
-    -- if prevCooldownAnim ~= nil then
-    --     SetWeaponProperty({ WeaponName = "GunWeapon", DestinationId = attacker.ObjectId, Property = "FailedToFireCooldownAnimation", Value = prevCooldownAnim })
-    -- end
     RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
-    -- SetWeaponProperty({ WeaponName = "GunWeapon", DestinationId = attacker.ObjectId, Property = "Enabled", Value = true })
-    -- SetWeaponProperty({ WeaponName = "GunWeaponDash", DestinationId = attacker.ObjectId, Property = "Enabled", Value = true })
-    -- SetWeaponProperty({ WeaponName = "SniperGunWeapon", DestinationId = attacker.ObjectId, Property = "Enabled", Value = true })
-    -- SetWeaponProperty({ WeaponName = "SniperGunWeaponDash", DestinationId = attacker.ObjectId, Property = "Enabled", Value = true })
-    -- thread( UpdateGunUI )
     attacker.Reloading = false
     return true
+end
+
+function DZAIManualReload( attacker )
+    -- might be useful in the future
+	-- if attacker.ActiveEffects then
+	-- 	for effectName in pairs(attacker.ActiveEffects) do
+	-- 		if EffectData[effectName] and EffectData[effectName].BlockReload then
+	-- 			return
+	-- 		end
+	-- 	end
+	-- end
+
+	-- if CurrentDeathAreaRoom == nil and CurrentRun and CurrentRun.CurrentRoom and CurrentRun.CurrentRoom.DisableWeaponsExceptDash then
+	-- 	return
+	-- end
+
+	for weaponName, v in pairs( attacker.Weapons ) do
+		local weaponData = GetWeaponData( attacker, weaponName)
+		if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
+			if attacker.Reloading then
+				return
+			end
+
+            local weapon = DZTemp.AI.Weapon
+
+			if RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
+                -- aspect of hestia can reload whenever
+                if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 4) then
+                    return
+                end 
+			end
+
+			ReloadGun( attacker, weaponData )
+
+			if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 4 then
+				ApplyEffectFromWeapon({ Id = attacker.ObjectId, DestinationId = attacker.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
+			end
+
+			return
+		end
+	end
 end
