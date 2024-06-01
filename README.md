@@ -94,6 +94,11 @@ This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, whic
 
 ## Data Version Change logs
 
+### v6
+
+-- add IsReloading and Ammo
+-- add ManualReload action
+
 ### v5
 
 - remove charge time, now handle by a random probability within the AI scripts
