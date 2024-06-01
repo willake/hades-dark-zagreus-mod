@@ -128,17 +128,17 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 	end
 end, DarkZagreus)
 
-function DZAIReloadGun(attacker, weaponData)
+function DZAIReloadGun(enemy, weaponData)
     DZTemp.AI.Reloading = true
 
-	RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
-    DZAIReloadPresentationStart( attacker, weaponData, presentationState )
-    wait( weaponData.ActiveReloadTime, RoomThreadName)
-    if attacker.HandlingDeath then
+	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
+    DZAIReloadPresentationStart( enemy, weaponData, presentationState )
+    wait( weaponData.ActiveReloadTime, enemy.AIThreadName)
+    if enemy.HandlingDeath then
         return false
     end
-    DZAIReloadPresentationComplete( attacker, weaponData, presentationState )
-    RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
+    DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
     DZTemp.AI.Reloading = false
     return true
 end

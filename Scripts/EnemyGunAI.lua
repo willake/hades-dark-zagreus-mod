@@ -14,6 +14,8 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectGunWeapon(enemy, actionData)
+
+    DZDebugPrintString(string.format("Decision is made %d", enemy.DZ.TempAction))
     
     if enemy.WeaponName == nil then
         return true -- continue to next action
@@ -64,8 +66,8 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
-				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
-				waitUntil( enemy.AINotifyName )
+				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 5.0 })
+				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
         end
     end
@@ -113,9 +115,9 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 
     -- ATTACK
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-		return false
-	end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+	-- 	return false
+	-- end
 
     if not DZAIFireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
@@ -131,9 +133,9 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
         return true
     end
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     if weaponAIData.AIAngleTowardsPlayerWhileFiring then
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
@@ -159,17 +161,26 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire End
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
 
     -- Fire
+
+    DZDebugPrintString("FireWeapon")
     
     DZAIDoRegularFire(enemy, weaponAIData, targetId)
+
+    DZDebugPrintString("End")
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
     DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
+
+    if DZTemp.AI.NextIsPowerShot then
+        DZTemp.AI.NextIsPowerShot = false
+        ClearEffect({ Id = enemy.ObjectId, Name = "DZManualReloadBonus" })
+    end
 
     -- Fire end
 
@@ -244,7 +255,6 @@ function DZAISelectGunWeapon(enemy, actionData)
     if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
 
         if DZTemp.AI.NextIsPowerShot then
-            DZTemp.AI.NextIsPowerShot = false
             enemy.WeaponName = enemy.DashAttackPowerWeapon
             return enemy.WeaponName    
         end
@@ -256,7 +266,6 @@ function DZAISelectGunWeapon(enemy, actionData)
     -- or just do a regular attack
 
     if DZTemp.AI.NextIsPowerShot then
-        DZTemp.AI.NextIsPowerShot = false
         enemy.WeaponName = enemy.PrimaryPowerWeapon
         return enemy.WeaponName    
     end

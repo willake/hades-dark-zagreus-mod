@@ -12,12 +12,12 @@ DarkZagreus.DefaultAIWeapon = {
 }
 
 DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
-    DashToward = 0.0, -- 0.2
-    Attack = 0.9, -- 0.5
-    SpecialAttack = 0.0, -- 0.2
-    DashAway = 0.0,
+    DashToward = 0.05, -- 0.2
+    Attack = 0.55, -- 0.5
+    SpecialAttack = 0.1, -- 0.2
+    DashAway = 0.25,
     ChargeAttack = 0.0,
-    ManualReload = 0.1
+    ManualReload = 0.05
 }
 -- State Scheme
 -- {

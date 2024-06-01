@@ -37,7 +37,7 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
     end
 
     local attackDistance = weaponAIData.AttackDistance or 175
-    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 150)
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or 100
 
     if moveSuccessDistance < 32 then
         moveSuccessDistance = 32
@@ -74,11 +74,9 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
 		timeout = timeout / enemy.SpeedMultiplier
 	end
 
-    NotifyWithinDistance({ Id = enemy.ObjectId, DestinationId = targetId, Distance = attackDistance,
-		StopsUnits = weaponAIData.AIRequireUnitLineOfSight, StopsProjectiles = weaponAIData.AIRequireProjectileLineOfSight,
-		LineOfSightBuffer = weaponAIData.AILineOfSightBuffer,
-		LineOfSightEndBuffer = weaponAIData.AILineOfSighEndBuffer,
-		Notify = enemy.AINotifyName, Timeout = timeout or 9.0 })
+    NotifyWithinDistance({ 
+        Id = enemy.ObjectId, DestinationId = targetId, Distance = attackDistance,
+        Notify = enemy.AINotifyName, Timeout = 1.0 }) -- timeout or 9.0
 
 	waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 
@@ -310,7 +308,7 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
 		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
-		waitUntil( enemy.AINotifyName )
+		waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 	else
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
