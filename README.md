@@ -89,6 +89,9 @@ Make sure you run the `modimporter.exe`
 ### When I open the game, a screen shows up saying that save files can't be loaded
 Make sure ModUtil and DarkZagreus are imported.
 
+## Dependencies
+This mod overrides `ReloadGun` function in `Combat.lua`, which might cause problem with other mods which also override this function.
+
 ## Data Version Change logs
 
 ### v5
