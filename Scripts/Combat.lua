@@ -90,12 +90,12 @@ function DZAIReloadGun(attacker, weaponData)
 	RunWeaponMethod({ Id = attacker.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
     -- thread( UpdateGunUI )
     -- local presentationState = {}
-    -- ReloadPresentationStart( attacker, weaponData, presentationState )
+    DZAIReloadPresentationStart( attacker, weaponData, presentationState )
     wait( weaponData.ActiveReloadTime, RoomThreadName)
     if attacker.HandlingDeath then
         return false
     end
-    ReloadPresentationComplete( attacker, weaponData, presentationState )
+    DZAIReloadPresentationComplete( attacker, weaponData, presentationState )
     -- if prevCooldownAnim ~= nil then
     --     SetWeaponProperty({ WeaponName = "GunWeapon", DestinationId = attacker.ObjectId, Property = "FailedToFireCooldownAnimation", Value = prevCooldownAnim })
     -- end
