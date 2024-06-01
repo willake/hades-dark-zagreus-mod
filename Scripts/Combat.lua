@@ -124,7 +124,7 @@ function DZAIManualReload( attacker )
                 end 
 			end
 
-			ReloadGun( attacker, weaponData )
+			DZAIReloadGun( attacker, weaponData )
 
 			if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 4 then
 				ApplyEffectFromWeapon({ Id = attacker.ObjectId, DestinationId = attacker.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
