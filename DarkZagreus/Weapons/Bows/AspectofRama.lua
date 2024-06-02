@@ -9,6 +9,7 @@ WeaponData.DarkRamaBow =
     {
         IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
+        AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 0.5,
         AIMoveWithinRangeTimeoutMax = 1.0,
@@ -92,9 +93,10 @@ WeaponData.DarkRamaBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRamaDashShot_Start",
         PreFireFx = "BowChargeRamaDash",
@@ -160,8 +162,8 @@ WeaponData.DarkRamaBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusBowRamaRapidLoop_Start",

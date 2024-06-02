@@ -10,6 +10,7 @@ WeaponData.DarkHeraBow =
         IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeoutMin = 0.5,
         AIMoveWithinRangeTimeoutMax = 1.0,
         SkipAttackAfterMoveTimeout = true,
@@ -90,9 +91,10 @@ WeaponData.DarkHeraBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowAlt02Start",
         PreFireFx = "BowChargeRamaDash",
@@ -158,8 +160,8 @@ WeaponData.DarkHeraBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.1,
         PreFireAnimation = "ZagreusBowAlt02RapidFire_Start",

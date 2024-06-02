@@ -67,14 +67,16 @@ This function loads record from file, it is useful when you want to load other's
 
 ## Limitation
 ### Cast, call, and summon support
-Cast, call, and summon are complex systems in Hades, requiring considerable time to implement. Therefore, Dark Zagreus will not use these actions. Cast might be supported in the future as it is somewhat easier to implement.
+Cast, call, and summon are complex systems in Hades, requiring considerable time to implement. Therefore, Dark Zagreus will not use these actions. Cast might be supported in the future as it is somewhat easier to implement. This also leads to a problem that upgraded weapon powers related to Cast are all missing right now.
 
 ### Boons and Daedalus Hammer
 Boons and Daedalus Hammer upgrades are driven by the trait system in the game code. The challenge in implementing these for non-player characters is that many mechanics are specifically designed for player use. The functions these upgrades introduce are tailored for manipulating the player character, requiring replication and reimplementation of all traits and their functions for Dark Zagreus. This is a substantial amount of work and may be supported in future versions. Other mod developers are welcome to build upon this mod and extend its capabilities.
 
+### Bow Charge VFX
+It seems like the bow charge VFX is handled internally, I couldn't make it work. Still looking for a way to fix it.
+
 ## Known issues
-- Bow charging animations are missing
-- Aspect of Lucifer (The 4th gun weapon) attack is not working
+
 
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
