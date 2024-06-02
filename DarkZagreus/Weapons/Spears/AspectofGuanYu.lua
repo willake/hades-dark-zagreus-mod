@@ -258,7 +258,7 @@ WeaponData.DarkGuanYuSpearSpin =
 			PreFireAnimation = "ZagreusSpearAlt03SpinStart",
             PreFireCancelAnimation = "ZagreusSpearAlt03SpinStartChargeCancel",
             FireAnimation = "ZagreusSpearAlt03SpinAttack",
-			WaitUntilProjectileDeath = true
+			WaitUntilProjectileDeath = "DarkGuanYuSpearSpin"
 		},
 
 		Sounds =

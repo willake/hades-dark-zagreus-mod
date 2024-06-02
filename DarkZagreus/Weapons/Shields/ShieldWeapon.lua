@@ -106,7 +106,7 @@ WeaponData.DarkShieldThrow =
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkShieldThrow",
     },
 		
     Sounds =
@@ -167,7 +167,7 @@ WeaponData.DarkShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkShieldRush"
     },
 
     Sounds =

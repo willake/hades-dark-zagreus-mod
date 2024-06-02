@@ -106,7 +106,7 @@ WeaponData.DarkChaosShieldThrow =
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkChaosShieldThrow",
         PostFireBonusWeapon = "DarkChaosShieldThrowBonus"
     },
 		
@@ -211,7 +211,7 @@ WeaponData.DarkChaosShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkChaosShieldRush",
         WillEnableBonus = true -- spectically for chaos shield
     },
 
