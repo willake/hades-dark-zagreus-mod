@@ -14,8 +14,6 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
     -- select a weapon to use if not exist
     enemy.WeaponName = DZAISelectGunWeapon(enemy, actionData)
-
-    DZDebugPrintString(string.format("Decision is made %d", enemy.DZ.TempAction))
     
     if enemy.WeaponName == nil then
         return true -- continue to next action

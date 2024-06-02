@@ -37,7 +37,7 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
     end
 
     local attackDistance = weaponAIData.AttackDistance or 175
-    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or 100
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 200)
 
     if moveSuccessDistance < 32 then
         moveSuccessDistance = 32
