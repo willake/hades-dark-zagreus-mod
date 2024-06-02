@@ -174,7 +174,7 @@ function DZAISelectBowWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < aactionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil

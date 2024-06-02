@@ -140,6 +140,8 @@ DZWeaponData =
                 enemy.DashWeapon = "DarkRush"
                 enemy.SpecialAttackWeapon = "DarkChironBowSplitShot"
                 enemy.DashAttackWeapon = "DarkChironBowDash"
+				-- equip in advance because we need to modify it's property while marking target
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkChironBowSplitShot" })
             end
 		},
 		{
