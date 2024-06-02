@@ -135,6 +135,10 @@
 		}
 	}
 	{
+		Name = "DarkArthurSwordDash"
+		InheritFrom = "DarkSwordDash"
+	}
+	{
 		Name = "DarkArthurSwordParry"
 		InheritFrom = "DarkSwordParry"
 		DamageLow = 10 // 70

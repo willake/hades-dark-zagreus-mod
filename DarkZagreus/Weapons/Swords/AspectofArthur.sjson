@@ -301,6 +301,7 @@
     {
       Name = "DarkArthurSwordDash"
       InheritFrom = "DarkSwordDash"
+      Projectile = "DarkArthurSwordDash"
       FireGraphic = "ZagreusSwordArthurAttack1_Fire"
       FireFx = "SwordSwipeC-Arthur"
       RootOwnerWhileFiring = true
