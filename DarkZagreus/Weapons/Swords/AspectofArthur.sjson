@@ -301,6 +301,7 @@
     {
       Name = "DarkArthurSwordDash"
       InheritFrom = "DarkSwordDash"
+      Projectile = "DarkArthurSwordDash"
       FireGraphic = "ZagreusSwordArthurAttack1_Fire"
       FireFx = "SwordSwipeC-Arthur"
       RootOwnerWhileFiring = true
@@ -308,9 +309,10 @@
     {
       Name = "DarkArthurSwordParry"
       InheritFrom = "DarkSwordParry"
-      ChargeStartAnimation = "ZagreusSwordAlt03ParryCharge"
-      FireGraphic = "ZagreusSwordAlt03ParryFire"
+      ChargeStartAnimation = "null"
+      FireGraphic = "null"
       Projectile = "DarkArthurSwordParry"
+      ChargeTime = 0.0
       Effects = [
         {
           Trigger = "Fire"

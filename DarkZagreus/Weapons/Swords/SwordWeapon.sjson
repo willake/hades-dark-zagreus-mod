@@ -9,10 +9,11 @@
       Projectile = "DarkSword"
       ClipSize = 1
       RootOwnerWhileFiring = false
-      ChargeStartAnimation = "ZagreusSwordCharge1"
+      ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordAttack1"
       FireFx = "SwordSwipeAFlipped"
       ChargeFx = "null"
+      ChargeTime = 0.0
       SelfVelocity = 0
       BarrelLength = 0
       NumProjectiles = 1
@@ -140,6 +141,7 @@
       SelfVelocityCap = 0
       BarrelLength = 170
       ChargeTimeFrames = 10
+      ChargeTime = 0.0
       // ChargeStartAnimation = "ZagreusSwordCharge2"
       ChargeStartAnimation = "null"
       ChargeFx = "null"
@@ -266,7 +268,7 @@
       ChargeFx = "null"
       FireGraphic = "null"
       FireFx = "null"
-      // ChargeTime = 0.3
+      ChargeTime = 0.0
       SelfVelocity = 1000 // originally is 600.0, but it does not working
       SelfVelocityCap = 1000 // 600
       BarrelLength = 120
@@ -377,6 +379,7 @@
       BarrelLength = 0
       ChargeTimeFrames = 0
       Cooldown = 0.02
+      ChargeTime = 0.0
       SelfVelocity = 1000 // 400
       ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordDashAttack"
@@ -453,7 +456,7 @@
       Name = "DarkSwordParry"
       InheritFrom = "1_BaseDZDamagingWeapon"
       Control = "Attack3"
-      Cooldown = 0.5
+      Cooldown = 0.0
       UseTargetAngle = true
       Type = "GUN"
       Projectile = "DarkSwordParry"
@@ -461,12 +464,12 @@
       RootOwnerWhileFiring = false
       NumProjectiles = 1
       MinChargeToFire = 1
-      ChargeTime = 0.3
+      ChargeTime = 0.0
       BarrelLength = 80
       ChargeCancelGraphic = "null"
       ChargeStartFx = "null"
       ChargeFinishFx = "null"
-      ChargeStartAnimation = "ZagreusSwordParryCharge"
+      ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordParryFire"
       FireFx = "null"
       // CancelMovement = false
