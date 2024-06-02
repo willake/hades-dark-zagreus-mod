@@ -37,7 +37,7 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
     end
 
     local attackDistance = weaponAIData.AttackDistance or 175
-    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or 100
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 200)
 
     if moveSuccessDistance < 32 then
         moveSuccessDistance = 32
@@ -143,8 +143,8 @@ function DZAIGetCurrentState(enemy)
 	}
 
     if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
-        ammoData.Current = GetWeaponProperty({ Id = CurrentRun.Hero.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
-        ammoData.Maximum = GetWeaponMaxAmmo({ Id = CurrentRun.Hero.ObjectId, WeaponName = enemy.PrimaryWeapon }) or 1
+        ammoData.Current = GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
+        ammoData.Maximum = GetWeaponMaxAmmo({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon }) or 1
     end
     
     return {
@@ -303,12 +303,10 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
         end
     end
 
-    
-    
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
-		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
-		waitUntil( enemy.AINotifyName, enemy.AIThreadName )
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName, Timeout = 1.0 })
+        waitUntil( enemy.AINotifyName, enemy.AIThreadName)
 	else
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
@@ -420,7 +418,7 @@ function DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharg
 
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
-		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName})
 		waitUntil( enemy.AINotifyName )
 	else
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
