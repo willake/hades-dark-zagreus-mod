@@ -91,7 +91,7 @@ WeaponData.DarkChironBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
         PreFireDuration = 0.2,
@@ -165,8 +165,8 @@ WeaponData.DarkChironBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.1,
         PreFireAnimation = "ZagreusBowAlt01RapidFire_Start",

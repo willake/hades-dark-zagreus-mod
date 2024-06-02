@@ -90,7 +90,7 @@ WeaponData.DarkHeraBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
         PreFireDuration = 0.2,
@@ -158,7 +158,6 @@ WeaponData.DarkHeraBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.1,

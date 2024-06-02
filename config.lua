@@ -7,8 +7,8 @@ DarkZagreus.Version = "beta1.3"
 DarkZagreus.DataVersion = "v6" -- for training data, when the data structure chages, the version increases
 
 DarkZagreus.DefaultAIWeapon = {
-    WeaponName = "SwordWeapon",
-    ItemIndex = 1
+    WeaponName = "BowWeapon",
+    ItemIndex = 2
 }
 
 DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
