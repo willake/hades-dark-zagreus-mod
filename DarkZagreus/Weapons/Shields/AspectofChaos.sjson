@@ -17,6 +17,7 @@
             Name = "DarkChaosShieldThrow"
             InheritFrom = "DarkShieldThrow"
             Projectile = "DarkChaosShieldThrow"
+            FireGraphic = "ZagreusShieldAlt01Throw"
         }
         {
             Name = "DarkChaosShieldThrowBonus"
@@ -32,7 +33,7 @@
             NumProjectiles = 2 // vary by level
             BarrelLength = 30
             DefaultControl = false
-            FireGraphic = "ZagreusShieldAlt01Throw"
+            // FireGraphic = "ZagreusShieldAlt01Throw"
         }
         {
             Name = "DarkChaosShieldRush"

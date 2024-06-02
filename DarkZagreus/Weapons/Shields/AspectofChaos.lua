@@ -9,10 +9,11 @@ WeaponData.DarkChaosShield = {
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.3,
+        AttackDistanceForPostCharge = 600,
         PostFireChargeWeapon = "DarkChaosShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
+        PreFireDuration = 0.15,
     },
 
     Sounds =
@@ -60,11 +61,11 @@ WeaponData.DarkChaosShieldDash =
 
     AIData =
     {
-        FireDuration = 0.45,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = "DarkChaosShieldDash",
     },
 
     Sounds =
@@ -107,7 +108,8 @@ WeaponData.DarkChaosShieldThrow =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = "DarkChaosShieldThrow",
-        PostFireBonusWeapon = "DarkChaosShieldThrowBonus"
+        PostFireBonusWeapon = "DarkChaosShieldThrowBonus",
+        PreFireDuration = 0.28,
     },
 		
     Sounds =

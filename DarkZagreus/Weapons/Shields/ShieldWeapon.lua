@@ -8,11 +8,12 @@ WeaponData.DarkShield = {
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        FireDuration = 0.3,
+        AttackDistanceForPostCharge = 600,
         PostFireChargeWeapon = "DarkShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
+        PreFireDuration = 0.15,
+        WaitUntilProjectileDeath = "DarkShield",
     },
 
     Sounds =
@@ -62,11 +63,12 @@ WeaponData.DarkShieldDash =
     AIData =
     {
         SkipMovement = true,
-        FireDuration = 0.45,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipAngleTowardTarget = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = "DarkShieldDash",
     },
 
     Sounds =
@@ -107,6 +109,7 @@ WeaponData.DarkShieldThrow =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = "DarkShieldThrow",
+        PreFireDuration = 0.28,
     },
 		
     Sounds =

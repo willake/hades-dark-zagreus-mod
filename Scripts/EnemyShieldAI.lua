@@ -38,7 +38,7 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, percentageCharged)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -154,10 +154,6 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
         DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
 
-    enemy.DZ.LastActionTime = _worldTime
-    -- save both which action is used and the charge time
-    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
-
     -- Fire end
 
     -- shield will fire a rush weapon after primary attack
@@ -167,7 +163,7 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 
         DZAIDoPreFire(enemy, postFireWeaponAIData, targetId)
 
-        DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
+        DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, percentageCharged)
         
         if postFireWeaponAIData.WillEnableBonus then
             enemy.HasBonus = true
@@ -186,6 +182,10 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
             enemy.HasBonus = false
         end
     end
+
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true

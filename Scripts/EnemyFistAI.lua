@@ -36,7 +36,7 @@ function DZAIDoFistAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, 0)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, 0)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
