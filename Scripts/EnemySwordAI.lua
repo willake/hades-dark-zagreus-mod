@@ -130,9 +130,9 @@ function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     -- Prefire End
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     -- Fire
     
@@ -208,9 +208,7 @@ function DZAISelectSwordWeapon(enemy, actionData)
 
     -- if the last action is also attack, do weapon combo
     if lastAction.Action == 1 then
-        DebugPrintf({ Text = "Previous is attack"})
         if enemy.ChainedWeapon ~= nil and _worldTime - lastActionTime < 0.3 then
-            DebugPrintf({ Text = "Do combo"})
             enemy.WeaponName = enemy.ChainedWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName

@@ -4,7 +4,7 @@
     {
       Name = "DarkNemesisSword"
       InheritFrom = "DarkSword"
-      ChargeStartAnimation = "ZagreusSwordAlt01Charge1"
+      ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordAlt01Attack1"
       Projectile = "DarkNemesisSword"
     }
@@ -31,7 +31,7 @@
     {
       Name = "DarkNemesisSwordParry"
       InheritFrom = "DarkSwordParry"
-      ChargeStartAnimation = "ZagreusSwordAlt01ParryCharge"
+      ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordAlt01ParryFire"
       Effects = [
         {

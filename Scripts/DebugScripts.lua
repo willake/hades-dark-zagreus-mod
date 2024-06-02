@@ -110,13 +110,13 @@ end
 
 
 -- test weapon charge time
--- OnWeaponCharging { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash GunGrenadeToss",
+-- OnWeaponCharging { "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash SwordParry",
 --     function(triggerArgs)        
 --         DZTemp.StartChargingTime = _worldTime
 --     end 
 -- }
 
--- OnWeaponFired{ "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash GunGrenadeToss",
+-- OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash SwordParry",
 --     function( triggerArgs )
 --         local duration = _worldTime - DZTemp.StartChargingTime
         
