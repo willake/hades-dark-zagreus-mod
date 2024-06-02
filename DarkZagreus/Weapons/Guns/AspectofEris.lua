@@ -13,7 +13,7 @@ WeaponData.DarkErisGun =
         AITrackTargetDuringCharge = true,
         -- FireDuration = 0.05,
         -- CanHold = true
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkErisGun",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -86,7 +86,7 @@ WeaponData.DarkErisGunDash =
         -- FireDuration = 0.05,
         -- CanHold = true,
         -- ChainedWeapon = "DarkGun"
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkErisGunDash"
     },
 
     Sounds =

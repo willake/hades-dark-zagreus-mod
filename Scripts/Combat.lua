@@ -43,8 +43,9 @@ ModUtil.Path.Override("ReloadGun", function (attacker, weaponData)
 		return false
 	end
 
+    -- block AI being auto reload, I want to handle it in my AI script
     if DZTemp.AI and attacker.ObjectId == DZTemp.AI.ObjectId then
-        return DZAIReloadGun(attacker, weaponData)
+        return false
     end
 
 	attacker.Reloading = true
@@ -127,57 +128,3 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 		end
 	end
 end, DarkZagreus)
-
-function DZAIReloadGun(enemy, weaponData)
-    DZTemp.AI.Reloading = true
-
-	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
-    DZAIReloadPresentationStart( enemy, weaponData, presentationState )
-    wait( weaponData.ActiveReloadTime, enemy.AIThreadName)
-    if enemy.HandlingDeath then
-        return false
-    end
-    DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
-    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
-    DZTemp.AI.Reloading = false
-    return true
-end
-
-function DZAIManualReload( enemy )
-    -- might be useful in the future
-	-- if attacker.ActiveEffects then
-	-- 	for effectName in pairs(attacker.ActiveEffects) do
-	-- 		if EffectData[effectName] and EffectData[effectName].BlockReload then
-	-- 			return
-	-- 		end
-	-- 	end
-	-- end
-
-	-- if CurrentDeathAreaRoom == nil and CurrentRun and CurrentRun.CurrentRoom and CurrentRun.CurrentRoom.DisableWeaponsExceptDash then
-	-- 	return
-	-- end
-
-	local weaponData = GetWeaponData( enemy, enemy.PrimaryWeapon )
-    if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
-        if enemy.Reloading then
-            return
-        end
-
-        local weapon = DZTemp.AI.Weapon
-
-        if RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
-            -- aspect of hestia can reload whenever
-            if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
-                return
-            end 
-        end
-
-        DZAIReloadGun( enemy, weaponData )
-
-        if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
-            ApplyEffectFromWeapon({ Id = enemy.ObjectId, DestinationId = enemy.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
-        end
-
-        return
-    end
-end

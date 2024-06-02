@@ -63,12 +63,20 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
         while not attackSuccess do
             attackSuccess = DZAIDoGunAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
-
+            
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 5.0 })
 				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
+        end
+
+        local ammo = 
+            GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
+        
+        if ammo <= 0 then
+            DZDebugPrintString("Reload")
+            DZAIReloadGun(enemy, weaponAIData)
         end
     end
 
@@ -166,18 +174,14 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     end
 
     -- Fire
-
-    DZDebugPrintString("FireWeapon")
     
     DZAIDoRegularFire(enemy, weaponAIData, targetId)
-
-    DZDebugPrintString("End")
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
     DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
 
-    if DZTemp.AI.NextIsPowerShot then
+    if enemy.DZ.TempAction == 1 and DZTemp.AI.NextIsPowerShot then
         DZTemp.AI.NextIsPowerShot = false
         ClearEffect({ Id = enemy.ObjectId, Name = "DZManualReloadBonus" })
     end
@@ -272,4 +276,49 @@ function DZAISelectGunWeapon(enemy, actionData)
 
     enemy.WeaponName = enemy.PrimaryWeapon
     return enemy.WeaponName
+end
+
+function DZAIReloadGun(enemy, weaponData)
+    -- if SetThreadWait( "ReloadGun" .. enemy.ObjectId, weaponData.ActiveReloadTime ) then
+	-- 	return
+	-- end
+    -- DZTemp.AI.Reloading = true
+
+	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
+    DZAIReloadPresentationStart( enemy, weaponData, presentationState )
+    wait(weaponData.ActiveReloadTime, enemy.AIThreadName)
+    if enemy.HandlingDeath then
+        return false
+    end
+    DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
+    DZTemp.AI.Reloading = false
+    return true
+end
+
+function DZAIManualReload( enemy )
+	local weaponData = GetWeaponData( enemy, enemy.PrimaryWeapon )
+    if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
+        if enemy.Reloading then
+            return
+        end
+
+        local weapon = DZTemp.AI.Weapon
+
+        if RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
+            -- aspect of hestia can reload whenever
+            if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
+                return
+            end 
+        end
+
+        DZAIReloadGun( enemy, weaponData )
+
+        if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
+            EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DZManualReloadEffectApplicator" })
+            ApplyEffectFromWeapon({ Id = enemy.ObjectId, DestinationId = enemy.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
+        end
+
+        return
+    end
 end
