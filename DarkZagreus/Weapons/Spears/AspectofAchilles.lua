@@ -241,7 +241,7 @@ WeaponData.DarkAchillesSpearThrowReturn =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			-- FireDuration = 0.425,
-			WaitUntilProjectileDeath = true,
+			WaitUntilProjectileDeath = "DarkAchillesSpearThrowReturn",
 			WillReturnSpear = true
 		},
 

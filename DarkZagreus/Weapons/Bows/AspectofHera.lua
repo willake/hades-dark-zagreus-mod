@@ -26,7 +26,7 @@ WeaponData.DarkHeraBow =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkHeraBow"
     },
 
     Sounds =
@@ -106,7 +106,7 @@ WeaponData.DarkHeraBowDash =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkHeraBowDash"
     },
 
     Sounds =
@@ -166,7 +166,7 @@ WeaponData.DarkHeraBowSplitShot =
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowAlt02RapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkHeraBowSplitShot"
     },
 
     Sounds =

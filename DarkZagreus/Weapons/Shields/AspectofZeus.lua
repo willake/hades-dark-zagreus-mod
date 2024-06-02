@@ -111,7 +111,7 @@ WeaponData.DarkZeusShieldThrow =
         PreFireDuration = 0.2,
         FireAnimation = "ZagreusShieldThrow",
         FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        -- WaitUntilProjectileDeath = "DarkZeusShieldThrow",
         IsZeusShieldThrow = true 
         -- while equiping zeus shield, players can throw it and hit it again to make it turn back
     },
@@ -173,7 +173,7 @@ WeaponData.DarkZeusShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkZeusShieldRush"
     },
 
     Sounds =

@@ -121,7 +121,7 @@ WeaponData.DarkBeowulfShieldThrow =
         AIMoveWithinRangeTimeout = 2.5,
         PreFireDuration = 0.2,
         FireAnimation = "ZagreusShieldThrow",
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkBeowulfShieldThrow",
     },
 		
     Sounds =
@@ -195,7 +195,7 @@ WeaponData.DarkBeowulfShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkBeowulfShieldRush"
     },
 
     Sounds =

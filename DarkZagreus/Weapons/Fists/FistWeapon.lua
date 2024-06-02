@@ -14,7 +14,7 @@ WeaponData.DarkFist =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist2",
         PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkFist",
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
@@ -66,7 +66,7 @@ WeaponData.DarkFist2 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist3",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkFist2",
     }
 }
 
@@ -81,7 +81,7 @@ WeaponData.DarkFist3 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist4",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkFist3",
     }
 }
 
@@ -96,7 +96,7 @@ WeaponData.DarkFist4 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist5",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkFist4",
     }
 }
 	
@@ -111,7 +111,7 @@ WeaponData.DarkFist5 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkFist5",
         Cooldown = 0.5
     }
 }
@@ -128,7 +128,7 @@ WeaponData.DarkFistDash =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkFistDash",
         CanDoCombo = true,
         IsStartFromFistDash = true
     },

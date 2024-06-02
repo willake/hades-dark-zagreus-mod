@@ -26,7 +26,7 @@ WeaponData.DarkBow =
         MaxChargeTime = 0.6,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkBow"
     },
 
     Sounds =
@@ -107,7 +107,7 @@ WeaponData.DarkBowDash =
         MaxChargeTime = 0.6,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkBowDash"
     },
 
     Sounds =
@@ -171,7 +171,7 @@ WeaponData.DarkBowSplitShot =
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowRapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkBowSplitShot",
     },
 
     Sounds =

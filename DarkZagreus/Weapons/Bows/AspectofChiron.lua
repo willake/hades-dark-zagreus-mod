@@ -26,7 +26,7 @@ WeaponData.DarkChironBow =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkChironBow"
     },
 
     Sounds =
@@ -107,7 +107,7 @@ WeaponData.DarkChironBowDash =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkChironBowDash"
     },
 
 
@@ -173,7 +173,7 @@ WeaponData.DarkChironBowSplitShot =
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowAlt01RapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkChironBowSplitShot"
     },
 
     Sounds =

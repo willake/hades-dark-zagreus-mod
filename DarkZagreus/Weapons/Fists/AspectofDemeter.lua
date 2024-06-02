@@ -16,7 +16,7 @@ WeaponData.DarkDemeterFist =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist2",
         PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkDemeterFist",
         CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
@@ -69,7 +69,7 @@ WeaponData.DarkDemeterFist2 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist3",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkDemeterFist2",
     }
 }
 
@@ -84,7 +84,7 @@ WeaponData.DarkDemeterFist3 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist4",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkDemeterFist3",
     }
 }
 
@@ -99,7 +99,7 @@ WeaponData.DarkDemeterFist4 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist5",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkDemeterFist4",
     }
 }
 	
@@ -114,7 +114,7 @@ WeaponData.DarkDemeterFist5 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkDemeterFist5",
         Cooldown = 0.5
     }
 }
@@ -132,7 +132,7 @@ WeaponData.DarkDemeterFistDash =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkDemeterFistDash",
         CanDoCombo = true,
         IsStartFromFistDash = true
     },
