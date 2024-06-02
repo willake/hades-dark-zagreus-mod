@@ -37,11 +37,6 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
     end
 
     local attackDistance = weaponAIData.AttackDistance or 175
-    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 200)
-
-    if moveSuccessDistance < 32 then
-        moveSuccessDistance = 32
-    end
 
     if weaponAIData.AttackDistanceMin and weaponAIData.AttackDistanceMax then
         local r = math.random()
@@ -52,6 +47,16 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
     if weaponAIData.IsAttackDistanceBasedOnCharge then
         local rangeMax = weaponAIData.Range * weaponAIData.ChargeRangeMultiplier
         attackDistance = percentageCharged * rangeMax
+    end
+
+    if weaponAIData.AttackDistanceForPostCharge and percentageCharged > 0.05 then
+        attackDistance = weaponAIData.AttackDistanceForPostCharge
+    end
+
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 200)
+
+    if moveSuccessDistance < 32 then
+        moveSuccessDistance = 32
     end
 
     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
