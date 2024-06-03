@@ -162,3 +162,8 @@ WeaponData.DarkErisGunGrenadeToss =
     },
     SelfMultiplier = 0.01,
 }
+
+EffectData.DZGrenadeSelfDamageOutput =
+{
+    OnApplyFunctionName = "DZAIGrenadeSelfDamageOutputApply",
+}

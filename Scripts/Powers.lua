@@ -308,7 +308,7 @@ OnWeaponFired{ "DarkNemesisSwordParry",
 }
 
 -- for aspect of achilles rush
-function DZSpearRushBonusApply()
+function DZAISpearRushBonusApply()
 	if not triggerArgs.Reapplied then
 		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
 		-- local validWeapons = ConcatTableValues( DeepCopyTable( WeaponSets.HeroRangedWeapons ), AddLinkedWeapons( WeaponSets.HeroPhysicalWeapons ))
@@ -329,7 +329,7 @@ ModUtil.Path.Wrap("SpearRushBonusApply", function(base)
 end, DarkZagreus)
 
 -- for aspect of handes for AI
-function DZMarkTargetSpinApply( triggerArgs )
+function DZAIMarkTargetSpinApply( triggerArgs )
 	if not triggerArgs.Reapplied then
 		local validWeapons =
 		{
@@ -353,7 +353,7 @@ function DZMarkTargetSpinApply( triggerArgs )
 	end
 end
 
-function DZMarkTargetSpinClear( triggerArgs )
+function DZAIMarkTargetSpinClear( triggerArgs )
 	if triggerArgs.TriggeredByTable.IncomingDamageModifiers then
 		RemoveIncomingDamageModifier( triggerArgs.TriggeredByTable, triggerArgs.EffectName )
 	end
@@ -385,6 +385,20 @@ ModUtil.Path.Wrap("ShieldThrowProjectileBonusApply", function(base, triggerArgs)
     if not triggerArgs.Reapplied then
         DZTemp.HasShieldBonus = true
     end
+    
+    return base(triggerArgs)
+end, DarkZagreus)
+
+-- for aspect of eris for AI
+function DZAIGrenadeSelfDamageOutputApply(triggerArgs)
+	DZTemp.AI.LastMarkTargetTime = _worldTime
+	DZTemp.AI.ValidMarkTime = 4.0
+end
+
+-- for record aspect of eris power
+ModUtil.Path.Wrap("GrenadeSelfDamageOutputApply", function(base, triggerArgs)
+	DZTemp.LastMarkTargetTime = _worldTime
+	DZTemp.ValidMarkTime = 4.0
     
     return base(triggerArgs)
 end, DarkZagreus)

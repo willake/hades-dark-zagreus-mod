@@ -406,5 +406,5 @@ WeaponData.DarkAchillesSpearRush =
 
 EffectData.DZSpearRushBonus =
 {
-	OnApplyFunctionName = "DZSpearRushBonusApply",
+	OnApplyFunctionName = "DZAISpearRushBonusApply",
 }

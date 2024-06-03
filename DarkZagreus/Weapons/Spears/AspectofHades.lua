@@ -345,6 +345,6 @@ WeaponData.DarkHadesSpearSpin3 =
 
 EffectData.DZMarkTargetSpin = 
 	{
-		OnApplyFunctionName = "DZMarkTargetSpinApply",
-		OnClearFunctionName = "DZMarkTargetSpinClear",
+		OnApplyFunctionName = "DZAIMarkTargetSpinApply",
+		OnClearFunctionName = "DZAIMarkTargetSpinClear",
 	}
