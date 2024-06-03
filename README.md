@@ -101,8 +101,8 @@ Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSp
 
 ### v6
 
--- add IsReloading and Ammo
--- add ManualReload action
+- add IsReloading and Ammo
+- add ManualReload action
 
 ### v5
 
