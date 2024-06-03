@@ -170,7 +170,7 @@ WeaponData.DarkShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = "DarkShieldRush"
+        FireDuration = 0.2,
     },
 
     Sounds =

@@ -173,7 +173,7 @@ WeaponData.DarkZeusShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = "DarkZeusShieldRush"
+        FireDuration = 0.2,
     },
 
     Sounds =
