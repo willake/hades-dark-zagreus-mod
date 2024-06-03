@@ -77,6 +77,7 @@ It seems like the bow charge VFX is handled internally, I couldn't make it work.
 
 ## Known issues
 - Chaos shield is not handled correctly
+- The gun weapon AI sometimes makes the game freezing forever
 
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
