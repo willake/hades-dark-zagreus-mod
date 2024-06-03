@@ -90,7 +90,7 @@ function DZGetCurrentState()
     end 
 
     -- use mark target as indicator
-    if DZTemp.NextIsPowerShot then
+    if DZTemp.HasPowerShot or DZTemp.HasShieldBonus then
         isMarkTargetRecently = true
     end
 

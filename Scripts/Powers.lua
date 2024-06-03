@@ -289,7 +289,7 @@ end
 
 -- for aspect of hestia
 function DZAIManualReloadBonusApply( triggerArgs )
-	DZTemp.AI.NextIsPowerShot = true
+	DZTemp.AI.HasPowerShot = true
 	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 end
@@ -364,6 +364,26 @@ ModUtil.Path.Wrap("MarkTargetSpinApply", function(base, triggerArgs)
     if not triggerArgs.Reapplied then
         DZTemp.LastMarkTargetTime = _worldTime
         DZTemp.ValidMarkTime = 3
+    end
+    
+    return base(triggerArgs)
+end, DarkZagreus)
+
+function DZAIShieldThrowProjectileBonusApply( triggerArgs )
+	if not triggerArgs.Reapplied then
+		DZTemp.AI.HasShieldBonus = true
+	end
+end
+
+function DZAIShieldThrowProjectileBonusClear( triggerArgs )
+	DZTemp.AI.HasShieldBonus = false
+end
+
+-- for record aspect of chaos power
+ModUtil.Path.Wrap("ShieldThrowProjectileBonusApply", function(base, triggerArgs)
+	-- TODO: the power actually has 5 seconds duration, might handle it in the future
+    if not triggerArgs.Reapplied then
+        DZTemp.HasShieldBonus = true
     end
     
     return base(triggerArgs)

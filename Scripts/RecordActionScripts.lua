@@ -165,6 +165,8 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
         if DZTemp.ShieldThrowed == false then
             DZTemp.ShieldThrowed = true 
         end
+
+        DZTemp.HasShieldBonus = false
     end
 }
 
@@ -231,8 +233,8 @@ OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
 
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))  
         
-        if DZTemp.NextIsPowerShot then
-            DZTemp.NextIsPowerShot = false
+        if DZTemp.HasPowerShot then
+            DZTemp.HasPowerShot = false
         end
     end 
 }

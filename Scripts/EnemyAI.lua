@@ -136,7 +136,7 @@ function DZAIGetCurrentState(enemy)
             isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkTargetTime < DZTemp.AI.ValidMarkTime
         end 
 
-        if DZTemp.AI.NextIsPowerShot then
+        if DZTemp.AI.HasPowerShot or DZTemp.AI.HasShieldBonus then
             isMarkTargetRecently = true
         end
     end

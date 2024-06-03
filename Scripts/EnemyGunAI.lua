@@ -179,8 +179,8 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     -- save both which action is used and the charge time
     DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
 
-    if enemy.DZ.TempAction == 1 and DZTemp.AI.NextIsPowerShot then
-        DZTemp.AI.NextIsPowerShot = false
+    if enemy.DZ.TempAction == 1 and DZTemp.AI.HasPowerShot then
+        DZTemp.AI.HasPowerShot = false
         ClearEffect({ Id = enemy.ObjectId, Name = "DZManualReloadBonus" })
     end
 
@@ -256,7 +256,7 @@ function DZAISelectGunWeapon(enemy, actionData)
     -- if the last action is dash, do dash attack
     if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
 
-        if DZTemp.AI.NextIsPowerShot then
+        if DZTemp.AI.HasPowerShot then
             enemy.WeaponName = enemy.DashAttackPowerWeapon
             return enemy.WeaponName    
         end
@@ -267,7 +267,7 @@ function DZAISelectGunWeapon(enemy, actionData)
 
     -- or just do a regular attack
 
-    if DZTemp.AI.NextIsPowerShot then
+    if DZTemp.AI.HasPowerShot then
         enemy.WeaponName = enemy.PrimaryPowerWeapon
         return enemy.WeaponName    
     end
