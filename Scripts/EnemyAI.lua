@@ -185,6 +185,10 @@ function DZAIMakeActionData(state, lastActions)
 
     local consideration = 2 -- how many last actions need to be considered
 
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
+        state.IsReloading, state.Ammo))
+
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
         return DZAIMakeRandomActionData(state)
     end
