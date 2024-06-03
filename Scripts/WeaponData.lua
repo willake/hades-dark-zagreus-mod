@@ -177,6 +177,8 @@ DZWeaponData =
 				enemy.DashWeapon = "DarkRush"
 				enemy.SpecialAttackWeapon = "DarkChaosShieldThrow"
 				enemy.DashAttackWeapon = "DarkChaosShieldDash"
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkChaosShieldThrowProjectileBonusApplicator" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkChaosShieldThrowBonus" })
             end
 		},
 		{

@@ -165,10 +165,6 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
         DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, percentageCharged)
     end
 
-    if DZTemp.AI.HasShieldBonus then
-        FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowBonus", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
-    end
-
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
     DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })

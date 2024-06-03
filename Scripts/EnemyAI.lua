@@ -8,6 +8,8 @@ function DarkZagreusAI( enemy, currentRun )
     DZTemp.AI = {}
     DZTemp.AI.ObjectId = enemy.ObjectId
     DZTemp.AI.Weapon = DarkZagreus.DefaultAIWeapon
+    DZTemp.AI.HasShieldBonus = false
+    DZTemp.AI.HasPowerShot = false
 
     local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
     local weapon = {}
@@ -310,6 +312,13 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
         else
             FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
         end
+    end
+
+    -- for aspect of chaos
+    if enemy.DZ.TempAction == 2 and DZTemp.AI.HasShieldBonus then
+        FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowBonus", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        DZTemp.AI.HasShieldBonus = false
+        ClearEffect({ Id = enemy.ObjectId, Name = "DZThrowProjectileBonus" })
     end
 
     if weaponAIData.WaitUntilProjectileDeath ~= nil then

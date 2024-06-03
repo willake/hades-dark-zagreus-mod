@@ -2,10 +2,12 @@
 -- because the original version is only available for player character
 
 ModUtil.Path.Wrap("MarkTargetApply", function(base, triggerArgs)
-    if not triggerArgs.Reapplied then
-        DZTemp.LastMarkTargetTime = _worldTime
-        DZTemp.ValidMarkTime = 3
-    end
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.LastMarkTargetTime = _worldTime
+			DZTemp.ValidMarkTime = 3
+		end
+	end
     
     return base(triggerArgs)
 end, DarkZagreus)
@@ -322,10 +324,12 @@ end
 
 -- for recording aspect of achilles rush
 ModUtil.Path.Wrap("SpearRushBonusApply", function(base, triggerArgs)
-    if not triggerArgs.Reapplied then
-        DZTemp.LastMarkTargetTime = _worldTime
-        DZTemp.ValidMarkTime = 3 -- it's actually hit 4 times and it cancel, might handle this in the future
-    end
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.LastMarkTargetTime = _worldTime
+			DZTemp.ValidMarkTime = 3 -- it's actually hit 4 times and it cancel, might handle this in the future
+		end
+	end
     
     return base(triggerArgs)
 end, DarkZagreus)
@@ -363,10 +367,12 @@ end
 
 -- for record aspect of hades power
 ModUtil.Path.Wrap("MarkTargetSpinApply", function(base, triggerArgs)
-    if not triggerArgs.Reapplied then
-        DZTemp.LastMarkTargetTime = _worldTime
-        DZTemp.ValidMarkTime = 3
-    end
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.LastMarkTargetTime = _worldTime
+			DZTemp.ValidMarkTime = 3
+		end
+	end
     
     return base(triggerArgs)
 end, DarkZagreus)
@@ -384,7 +390,7 @@ end
 -- for record aspect of chaos power
 ModUtil.Path.Wrap("ShieldThrowProjectileBonusApply", function(base, triggerArgs)
 	-- TODO: the power actually has 5 seconds duration, might handle it in the future
-	if DZCheckCanRecord then
+	if DZCheckCanRecord() then
 		if not triggerArgs.Reapplied then
 			DZTemp.HasShieldBonus = true
 		end
@@ -402,7 +408,7 @@ end
 -- for record aspect of eris power
 ModUtil.Path.Wrap("GrenadeSelfDamageOutputApply", function(base, triggerArgs)
 
-	if DZCheckCanRecord then
+	if DZCheckCanRecord() then
 		DZTemp.LastMarkTargetTime = _worldTime
 		DZTemp.ValidMarkTime = 4.0
 	end

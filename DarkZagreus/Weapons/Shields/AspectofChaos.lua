@@ -263,7 +263,7 @@ WeaponData.DarkChaosShieldThrowProjectileBonusApplicator =
     Name = "DarkChaosShieldThrowProjectileBonusApplicator",
 }
 
-EffectData.DarkChaosShieldThrowProjectileBonus =
+EffectData.DZThrowProjectileBonus =
 {
     OnApplyFunctionName = "DZAIShieldThrowProjectileBonusApply",
     OnClearFunctionName = "DZAIShieldThrowProjectileBonusClear",

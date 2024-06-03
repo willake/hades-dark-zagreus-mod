@@ -199,6 +199,8 @@ DZCreateNewRecord = function()
     DZPersistent.LastGetDamagedTime = 0.0
     DZPersistent.LastDamageEnemyTime = 0.0
     DZPersistent.AI = {}
+    DZTemp.HasPowerShot = false
+    DZTemp.HasShieldBonus = false
 end
 
 DZLogRecord = function (state, action) 

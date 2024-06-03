@@ -50,7 +50,7 @@
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
             Effect = {
-                Name = "DarkChaosShieldThrowProjectileBonus"
+                Name = "DZThrowProjectileBonus"
                 Modifier = 1
                 Duration = 5
                 CanAffectInvulnerable = true
