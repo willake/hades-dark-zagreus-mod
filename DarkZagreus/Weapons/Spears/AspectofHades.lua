@@ -342,3 +342,9 @@ WeaponData.DarkHadesSpearSpin3 =
 	{
 		InheritFrom = { "DarkHadesSpearSpin" }
 	}
+
+EffectData.DZMarkTargetSpin = 
+	{
+		OnApplyFunctionName = "DZMarkTargetSpinApply",
+		OnClearFunctionName = "DZMarkTargetSpinClear",
+	}

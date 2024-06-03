@@ -318,6 +318,7 @@ function DZSpearRushBonusApply()
 	end
 end
 
+-- for recording aspect of achilles rush
 ModUtil.Path.Wrap("SpearRushBonusApply", function(base)
     if not triggerArgs.Reapplied then
         DZTemp.LastMarkTargetTime = _worldTime
@@ -325,4 +326,45 @@ ModUtil.Path.Wrap("SpearRushBonusApply", function(base)
     end
     
     return base()
+end, DarkZagreus)
+
+-- for aspect of handes for AI
+function DZMarkTargetSpinApply( triggerArgs )
+	if not triggerArgs.Reapplied then
+		local validWeapons =
+		{
+			"DarkHadesSpear",
+			"DarkHadesSpear2",
+			"DarkHadesSpear3",
+			"DarkHadesSpearDash",
+			"DarkHadesSpearThrow",
+			"DarkHadesSpearThrowReturn",
+		}
+
+		AddIncomingDamageModifier( triggerArgs.TriggeredByTable,
+		{
+			Name = triggerArgs.EffectName,
+			ValidWeapons =  validWeapons,
+			ValidWeaponMultiplier = triggerArgs.Modifier
+		})
+
+		DZTemp.AI.LastMarkTargetTime = _worldTime
+		DZTemp.AI.ValidMarkTime = 10.0
+	end
+end
+
+function DZMarkTargetSpinClear( triggerArgs )
+	if triggerArgs.TriggeredByTable.IncomingDamageModifiers then
+		RemoveIncomingDamageModifier( triggerArgs.TriggeredByTable, triggerArgs.EffectName )
+	end
+end
+
+-- for record aspect of hades power
+ModUtil.Path.Wrap("MarkTargetSpinApply", function(base, triggerArgs)
+    if not triggerArgs.Reapplied then
+        DZTemp.LastMarkTargetTime = _worldTime
+        DZTemp.ValidMarkTime = 3
+    end
+    
+    return base(triggerArgs)
 end, DarkZagreus)
