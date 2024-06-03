@@ -13,7 +13,7 @@ function DZTrainAI()
 
     -- Input: PlayerHP, ClosetEnemyHP, ClosetEnemyDistance, IsLastActionDash, IsLastActionAttack, IsLastActionSpecialAttack
     -- Output: DashProb, AttackProb, SpecialAttackProb, ChargeTime
-    local network = Luann:new({18, 11, 11, 6}, learningRate, threshold)
+    local network = Luann:new({20, 11, 11, 6}, learningRate, threshold)
 
     if DZPersistent.PrevRunRecord == nil then
         DZDebugPrintString("DZTrainAI() - PrevRunRecord is missing")
