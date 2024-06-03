@@ -3,7 +3,7 @@
 
 ModUtil.Path.Wrap("MarkTargetApply", function(base, triggerArgs)
     if not triggerArgs.Reapplied then
-        DZTemp.LastMarkedTargetTime = _worldTime
+        DZTemp.LastMarkTargetTime = _worldTime
         DZTemp.ValidMarkTime = 3
     end
     
@@ -13,7 +13,7 @@ end, DarkZagreus)
 -- for aspect of chiron
 function DZAIMarkTargetApply( triggerArgs )
 	if not triggerArgs.Reapplied then
-        DZTemp.AI.LastMarkedTargetTime = _worldTime
+        DZTemp.AI.LastMarkTargetTime = _worldTime
         DZTemp.AI.ValidMarkTime = 3
         SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = triggerArgs.triggeredById, DataValue = false})
 	end
@@ -297,3 +297,12 @@ end
 function DZAIClearManualReloadVFX( owner )
 	-- ClearEffect({ Id = owner.ObjectId, Name = "DZManualReloadBonus" })
 end
+
+OnWeaponFired{ "DarkNemesisSwordParry",
+	function( triggerArgs )
+		-- don't know how to apply to player
+		-- AddLimitedWeaponBonus({ AsCrit = true, EffectName = "SwordPostParryCritical", Amount = 100, CritBonus = GetTotalHeroTraitValue("SwordPostParryCriticalAmount")})
+		DZTemp.AI.LastMarkTargetTime = _worldTime
+		DZTemp.AI.ValidMarkTime = 3.0
+	end
+}

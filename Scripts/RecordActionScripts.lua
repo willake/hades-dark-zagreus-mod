@@ -48,6 +48,12 @@ OnWeaponFired{ "SwordParry",
         end
 
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+
+        -- aspect of nemesis mark critical after fire sword parry
+        if HeroHasTrait("SwordCriticalParryTrait") then
+			DZTemp.LastMarkTargetTime = _worldTime
+            DZTemp.ValidMarkTime = 3.0
+		end
     end
 }
 

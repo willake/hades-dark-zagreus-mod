@@ -132,8 +132,8 @@ function DZAIGetCurrentState(enemy)
             isDamageEnemyRecently = _worldTime - DZTemp.AI.LastDamageEnemyTime < 1.0
         end
 
-        if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
-            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
+        if DZTemp.AI.LastMarkTargetTime and DZTemp.AI.ValidMarkTime then
+            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkTargetTime < DZTemp.AI.ValidMarkTime
         end 
 
         if DZTemp.AI.NextIsPowerShot then

@@ -85,8 +85,8 @@ function DZGetCurrentState()
         isDamageEnemyRecently = _worldTime - DZTemp.LastDamageEnemyTime < 1.0
     end
 
-    if DZTemp.LastMarkedTargetTime and DZTemp.ValidMarkTime then
-        isMarkTargetRecently = _worldTime - DZTemp.LastMarkedTargetTime < DZTemp.ValidMarkTime
+    if DZTemp.LastMarkTargetTime and DZTemp.ValidMarkTime then
+        isMarkTargetRecently = _worldTime - DZTemp.LastMarkTargetTime < DZTemp.ValidMarkTime
     end 
 
     -- use mark target as indicator
