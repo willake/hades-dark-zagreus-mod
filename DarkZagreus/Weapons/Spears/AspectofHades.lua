@@ -16,7 +16,7 @@ WeaponData.DarkHadesSpear =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.60 }, -- 0.75
 				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1,
@@ -73,7 +73,7 @@ WeaponData.DarkHadesSpear2 =
 			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.60 },
 				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1
@@ -115,7 +115,7 @@ WeaponData.DarkHadesSpear3 =
 			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.60 },
 				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1

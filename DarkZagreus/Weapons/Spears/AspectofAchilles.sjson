@@ -103,7 +103,7 @@
                 [
                     {
                         Name = "DZSpearRushBonus"
-                        Duration = 1000.0
+                        Duration = 3.0 // 1000.0
                         CanAffectInvulnerable = true
                         FrontFx = "GrenadeSelfDamageOutputFx"
                         FlashFrontFxWhenExpiring = true

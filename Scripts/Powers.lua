@@ -308,9 +308,11 @@ OnWeaponFired{ "DarkNemesisSwordParry",
 }
 
 -- for aspect of achilles rush
-function DZAISpearRushBonusApply()
+function DZAISpearRushBonusApply(triggerArgs)
 	if not triggerArgs.Reapplied then
 		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
+		-- check DZSpearRushBonus
+		
 		-- local validWeapons = ConcatTableValues( DeepCopyTable( WeaponSets.HeroRangedWeapons ), AddLinkedWeapons( WeaponSets.HeroPhysicalWeapons ))
 		-- AddLimitedWeaponBonus({ AsMultiplier = true, EffectName = triggerArgs.EffectName, Amount = 4, DamageBonus = triggerArgs.Modifier, WeaponNames = validWeapons } )
 		DZTemp.AI.LastMarkTargetTime = _worldTime
@@ -319,13 +321,13 @@ function DZAISpearRushBonusApply()
 end
 
 -- for recording aspect of achilles rush
-ModUtil.Path.Wrap("SpearRushBonusApply", function(base)
+ModUtil.Path.Wrap("SpearRushBonusApply", function(base, triggerArgs)
     if not triggerArgs.Reapplied then
         DZTemp.LastMarkTargetTime = _worldTime
         DZTemp.ValidMarkTime = 3 -- it's actually hit 4 times and it cancel, might handle this in the future
     end
     
-    return base()
+    return base(triggerArgs)
 end, DarkZagreus)
 
 -- for aspect of handes for AI
@@ -382,9 +384,11 @@ end
 -- for record aspect of chaos power
 ModUtil.Path.Wrap("ShieldThrowProjectileBonusApply", function(base, triggerArgs)
 	-- TODO: the power actually has 5 seconds duration, might handle it in the future
-    if not triggerArgs.Reapplied then
-        DZTemp.HasShieldBonus = true
-    end
+	if DZCheckCanRecord then
+		if not triggerArgs.Reapplied then
+			DZTemp.HasShieldBonus = true
+		end
+	end
     
     return base(triggerArgs)
 end, DarkZagreus)
@@ -397,8 +401,11 @@ end
 
 -- for record aspect of eris power
 ModUtil.Path.Wrap("GrenadeSelfDamageOutputApply", function(base, triggerArgs)
-	DZTemp.LastMarkTargetTime = _worldTime
-	DZTemp.ValidMarkTime = 4.0
+
+	if DZCheckCanRecord then
+		DZTemp.LastMarkTargetTime = _worldTime
+		DZTemp.ValidMarkTime = 4.0
+	end
     
     return base(triggerArgs)
 end, DarkZagreus)

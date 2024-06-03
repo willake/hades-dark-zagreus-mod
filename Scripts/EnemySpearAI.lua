@@ -157,7 +157,7 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
     -- PostAttackCharge
     -- Only spear weapons have this
     -- Spear will charge after attack if player still holding the button
-    if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.3 then
+    if weaponAIData.PostFireChargeStages ~= nil and chargeTime > 0.2 then
         local chargeWeaponAIData = 
             DZAIGetWeaponAIData(enemy, weaponAIData.PostFireChargeStages[1].ChargeWeapon)
         local maxStage = #weaponAIData.PostFireChargeStages 
@@ -348,12 +348,20 @@ function DZAIMakeSpearChargeTime(action)
         local r = math.random()
 
         -- higer chance to do small charge, low chance do full charge
-        if r < 0.7 then
-            return 0.33 + math.random() * 0.33
-        elseif r < 0.9 then
-            return 0.66 + math.random() * 0.22
+        if DZTemp.AI.Weapon.ItemIndex == 3 then
+            if r < 0.85 then
+                return 0.6 + math.random() * 0.2
+            else
+                return 0.9 + math.random() * 0.05
+            end
         else
-            return 0.88 + math.random() * 0.12
+            if r < 0.85 then
+                return 0.33 + math.random() * 0.33
+            elseif r < 0.95 then
+                return 0.66 + math.random() * 0.22
+            else
+                return 0.88 + math.random() * 0.12
+            end
         end
     elseif action == 2 then -- spcial attack
         return math.random(0.3, 1.0)
