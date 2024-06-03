@@ -179,6 +179,7 @@ WeaponData.DarkBeowulfShieldRush =
     AIData =
     {
         AITrackTargetDuringCharge = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         PreFireDuration = 0.2,

@@ -192,6 +192,7 @@ function DZAIMakeActionData(state, lastActions)
         state.IsReloading, state.Ammo))
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
+        DZDebugPrintString("Model is not available, make random data.")
         return DZAIMakeRandomActionData(state)
     end
 
@@ -215,12 +216,12 @@ function DZAIMakeActionData(state, lastActions)
     local chargeAttackProb = DZTemp.Model[4].cells[5].signal
     local manualReloadProb = DZTemp.Model[4].cells[6].signal
 
-    -- DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
-    -- DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
-    -- DZDebugPrintString(string.format("special prob | %.3f", specialProb))
-    -- DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
-    -- DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
-    -- DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb))
+    DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
+    DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
+    DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+    DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
+    DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+    DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb))
 
     return {    
         DashToward = dashTowardProb,

@@ -157,6 +157,7 @@ WeaponData.DarkZeusShieldRush =
     AIData =
     {
         AITrackTargetDuringCharge = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusShieldAlt02AttackCharge",

@@ -154,6 +154,7 @@ WeaponData.DarkShieldRush =
     {
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusShieldAttackCharge",
