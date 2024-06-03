@@ -8,6 +8,8 @@ function DarkZagreusAI( enemy, currentRun )
     DZTemp.AI = {}
     DZTemp.AI.ObjectId = enemy.ObjectId
     DZTemp.AI.Weapon = DarkZagreus.DefaultAIWeapon
+    DZTemp.AI.HasShieldBonus = false
+    DZTemp.AI.HasPowerShot = false
 
     local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
     local weapon = {}
@@ -132,11 +134,11 @@ function DZAIGetCurrentState(enemy)
             isDamageEnemyRecently = _worldTime - DZTemp.AI.LastDamageEnemyTime < 1.0
         end
 
-        if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
-            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
+        if DZTemp.AI.LastMarkTargetTime and DZTemp.AI.ValidMarkTime then
+            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkTargetTime < DZTemp.AI.ValidMarkTime
         end 
 
-        if DZTemp.AI.NextIsPowerShot then
+        if DZTemp.AI.HasPowerShot or DZTemp.AI.HasShieldBonus then
             isMarkTargetRecently = true
         end
     end
@@ -184,6 +186,10 @@ end
 function DZAIMakeActionData(state, lastActions)
 
     local consideration = 2 -- how many last actions need to be considered
+
+    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
+        state.IsReloading, state.Ammo))
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
         return DZAIMakeRandomActionData(state)
@@ -306,6 +312,13 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
         else
             FireWeaponFromUnit({ Weapon = weaponAIData.WeaponName, Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
         end
+    end
+
+    -- for aspect of chaos
+    if enemy.DZ.TempAction == 2 and DZTemp.AI.HasShieldBonus then
+        FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowBonus", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        DZTemp.AI.HasShieldBonus = false
+        ClearEffect({ Id = enemy.ObjectId, Name = "DZThrowProjectileBonus" })
     end
 
     if weaponAIData.WaitUntilProjectileDeath ~= nil then

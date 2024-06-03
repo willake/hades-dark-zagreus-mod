@@ -85,12 +85,12 @@ function DZGetCurrentState()
         isDamageEnemyRecently = _worldTime - DZTemp.LastDamageEnemyTime < 1.0
     end
 
-    if DZTemp.LastMarkedTargetTime and DZTemp.ValidMarkTime then
-        isMarkTargetRecently = _worldTime - DZTemp.LastMarkedTargetTime < DZTemp.ValidMarkTime
+    if DZTemp.LastMarkTargetTime and DZTemp.ValidMarkTime then
+        isMarkTargetRecently = _worldTime - DZTemp.LastMarkTargetTime < DZTemp.ValidMarkTime
     end 
 
     -- use mark target as indicator
-    if DZTemp.NextIsPowerShot then
+    if DZTemp.HasPowerShot or DZTemp.HasShieldBonus then
         isMarkTargetRecently = true
     end
 
@@ -199,6 +199,8 @@ DZCreateNewRecord = function()
     DZPersistent.LastGetDamagedTime = 0.0
     DZPersistent.LastDamageEnemyTime = 0.0
     DZPersistent.AI = {}
+    DZTemp.HasPowerShot = false
+    DZTemp.HasShieldBonus = false
 end
 
 DZLogRecord = function (state, action) 

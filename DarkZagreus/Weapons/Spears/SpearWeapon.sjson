@@ -536,12 +536,13 @@
             // SetCompleteAngleOnCharge = true
             Effects =
             [{
-                Name = "SpearRushBonus"
-                Duration = 1000.0
+                Name = "DZSpearRushBonus"
+                Duration = 3.0 // 1000.0
                 CanAffectInvulnerable = true
                 FrontFx = "GrenadeSelfDamageOutputFx"
                 FlashFrontFxWhenExpiring = true
-                OnlyAffectName = "_PlayerUnit"
+                // OnlyAffectName = "_PlayerUnit"
+                IgnoreName = "_PlayerUnit"
             },
             {
                 Name = "SpearRushWeaponDisable"

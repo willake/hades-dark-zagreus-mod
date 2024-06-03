@@ -403,3 +403,8 @@ WeaponData.DarkAchillesSpearRush =
 
 		NoExpressiveAnim = true,
 	}
+
+EffectData.DZSpearRushBonus =
+{
+	OnApplyFunctionName = "DZAISpearRushBonusApply",
+}

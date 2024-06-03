@@ -1,7 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusShieldAI( enemy, currentRun )
-    enemy.HasBonus = false -- for chaos shield
     return DZAIDoShieldAILoop( enemy, currentRun )
 end
 
@@ -164,28 +163,17 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
         DZAIDoPreFire(enemy, postFireWeaponAIData, targetId)
 
         DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, percentageCharged)
-        
-        if postFireWeaponAIData.WillEnableBonus then
-            enemy.HasBonus = true
-        end
-    end
-
-    if weaponAIData.PostFireBonusWeapon ~= nil and enemy.HasBonus then
-        local bonusWeaponAIData = 
-            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireBonusWeapon)
-
-        DZAIDoPreFire(enemy, bonusWeaponAIData, targetId)
-
-        DZAIDoRegularFire(enemy, bonusWeaponAIData, targetId)
-
-        if bonusWeaponAIData.WillConsumeBonus then
-            enemy.HasBonus = false
-        end
     end
 
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
     DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
+
+    if enemy.DZ.TempAction == 4 then
+        if DZTemp.AI.Weapon.ItemIndex == 2 then
+			FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowProjectileBonusApplicator", Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+		end
+    end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true

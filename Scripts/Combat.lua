@@ -121,7 +121,7 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 				thread( MarkObjectiveComplete, "ManualReload" )
 				ApplyEffectFromWeapon({ Id = CurrentRun.Hero.ObjectId, DestinationId = CurrentRun.Hero.ObjectId, WeaponName = "ManualReloadEffectApplicator", EffectName = "ManualReloadBonus" })
                 if DZCheckCanRecord() then
-                    DZTemp.NextIsPowerShot = true 
+                    DZTemp.HasPowerShot = true 
                 end
 			end
 			return

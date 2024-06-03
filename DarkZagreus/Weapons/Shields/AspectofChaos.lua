@@ -99,7 +99,7 @@ WeaponData.DarkChaosShieldThrow =
 {
     Name = "DarkChaosShieldThrow",
     StartingWeapon = false,
-    OnHitFunctionNames = { "IncrementHitByShield" },
+    -- OnHitFunctionNames = { "IncrementHitByShield" },
 
     AIData =
     {
@@ -108,7 +108,6 @@ WeaponData.DarkChaosShieldThrow =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = "DarkChaosShieldThrow",
-        PostFireBonusWeapon = "DarkChaosShieldThrowBonus",
         PreFireDuration = 0.28,
     },
 		
@@ -152,8 +151,7 @@ WeaponData.DarkChaosShieldThrowBonus =
     {
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.2,
-        WillConsumeBonus = true
+        FireDuration = 0.2
     },
 		
     Sounds =
@@ -213,8 +211,7 @@ WeaponData.DarkChaosShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = "DarkChaosShieldRush",
-        WillEnableBonus = true -- spectically for chaos shield
+        WaitUntilProjectileDeath = "DarkChaosShieldRush"
     },
 
     Sounds =
@@ -259,4 +256,15 @@ WeaponData.DarkChaosShieldRush =
     },
 
     Upgrades = { },
+}
+
+WeaponData.DarkChaosShieldThrowProjectileBonusApplicator =
+{
+    Name = "DarkChaosShieldThrowProjectileBonusApplicator",
+}
+
+EffectData.DZThrowProjectileBonus =
+{
+    OnApplyFunctionName = "DZAIShieldThrowProjectileBonusApply",
+    OnClearFunctionName = "DZAIShieldThrowProjectileBonusClear",
 }

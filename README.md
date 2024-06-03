@@ -76,7 +76,8 @@ Boons and Daedalus Hammer upgrades are driven by the trait system in the game co
 It seems like the bow charge VFX is handled internally, I couldn't make it work. Still looking for a way to fix it.
 
 ## Known issues
-
+- Chaos shield is not handled correctly
+- The gun weapon AI sometimes makes the game freezing forever
 
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
@@ -93,6 +94,8 @@ Make sure ModUtil and DarkZagreus are imported.
 
 ## Dependencies
 This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
+
+Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`
 
 ## Data Version Change logs
 

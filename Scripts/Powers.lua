@@ -2,10 +2,12 @@
 -- because the original version is only available for player character
 
 ModUtil.Path.Wrap("MarkTargetApply", function(base, triggerArgs)
-    if not triggerArgs.Reapplied then
-        DZTemp.LastMarkedTargetTime = _worldTime
-        DZTemp.ValidMarkTime = 3
-    end
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.LastMarkTargetTime = _worldTime
+			DZTemp.ValidMarkTime = 3
+		end
+	end
     
     return base(triggerArgs)
 end, DarkZagreus)
@@ -13,7 +15,7 @@ end, DarkZagreus)
 -- for aspect of chiron
 function DZAIMarkTargetApply( triggerArgs )
 	if not triggerArgs.Reapplied then
-        DZTemp.AI.LastMarkedTargetTime = _worldTime
+        DZTemp.AI.LastMarkTargetTime = _worldTime
         DZTemp.AI.ValidMarkTime = 3
         SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = triggerArgs.triggeredById, DataValue = false})
 	end
@@ -289,7 +291,7 @@ end
 
 -- for aspect of hestia
 function DZAIManualReloadBonusApply( triggerArgs )
-	DZTemp.AI.NextIsPowerShot = true
+	DZTemp.AI.HasPowerShot = true
 	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
 end
@@ -297,3 +299,119 @@ end
 function DZAIClearManualReloadVFX( owner )
 	-- ClearEffect({ Id = owner.ObjectId, Name = "DZManualReloadBonus" })
 end
+
+OnWeaponFired{ "DarkNemesisSwordParry",
+	function( triggerArgs )
+		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
+		-- AddLimitedWeaponBonus({ AsCrit = true, EffectName = "SwordPostParryCritical", Amount = 100, CritBonus = GetTotalHeroTraitValue("SwordPostParryCriticalAmount")})
+		DZTemp.AI.LastMarkTargetTime = _worldTime
+		DZTemp.AI.ValidMarkTime = 3.0
+	end
+}
+
+-- for aspect of achilles rush
+function DZAISpearRushBonusApply(triggerArgs)
+	if not triggerArgs.Reapplied then
+		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
+		-- check DZSpearRushBonus
+		
+		-- local validWeapons = ConcatTableValues( DeepCopyTable( WeaponSets.HeroRangedWeapons ), AddLinkedWeapons( WeaponSets.HeroPhysicalWeapons ))
+		-- AddLimitedWeaponBonus({ AsMultiplier = true, EffectName = triggerArgs.EffectName, Amount = 4, DamageBonus = triggerArgs.Modifier, WeaponNames = validWeapons } )
+		DZTemp.AI.LastMarkTargetTime = _worldTime
+		DZTemp.AI.ValidMarkTime = 3.0
+	end
+end
+
+-- for recording aspect of achilles rush
+ModUtil.Path.Wrap("SpearRushBonusApply", function(base, triggerArgs)
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.LastMarkTargetTime = _worldTime
+			DZTemp.ValidMarkTime = 3 -- it's actually hit 4 times and it cancel, might handle this in the future
+		end
+	end
+    
+    return base(triggerArgs)
+end, DarkZagreus)
+
+-- for aspect of handes for AI
+function DZAIMarkTargetSpinApply( triggerArgs )
+	if not triggerArgs.Reapplied then
+		local validWeapons =
+		{
+			"DarkHadesSpear",
+			"DarkHadesSpear2",
+			"DarkHadesSpear3",
+			"DarkHadesSpearDash",
+			"DarkHadesSpearThrow",
+			"DarkHadesSpearThrowReturn",
+		}
+
+		AddIncomingDamageModifier( triggerArgs.TriggeredByTable,
+		{
+			Name = triggerArgs.EffectName,
+			ValidWeapons =  validWeapons,
+			ValidWeaponMultiplier = triggerArgs.Modifier
+		})
+
+		DZTemp.AI.LastMarkTargetTime = _worldTime
+		DZTemp.AI.ValidMarkTime = 10.0
+	end
+end
+
+function DZAIMarkTargetSpinClear( triggerArgs )
+	if triggerArgs.TriggeredByTable.IncomingDamageModifiers then
+		RemoveIncomingDamageModifier( triggerArgs.TriggeredByTable, triggerArgs.EffectName )
+	end
+end
+
+-- for record aspect of hades power
+ModUtil.Path.Wrap("MarkTargetSpinApply", function(base, triggerArgs)
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.LastMarkTargetTime = _worldTime
+			DZTemp.ValidMarkTime = 3
+		end
+	end
+    
+    return base(triggerArgs)
+end, DarkZagreus)
+
+function DZAIShieldThrowProjectileBonusApply( triggerArgs )
+	if not triggerArgs.Reapplied then
+		DZTemp.AI.HasShieldBonus = true
+	end
+end
+
+function DZAIShieldThrowProjectileBonusClear( triggerArgs )
+	DZTemp.AI.HasShieldBonus = false
+end
+
+-- for record aspect of chaos power
+ModUtil.Path.Wrap("ShieldThrowProjectileBonusApply", function(base, triggerArgs)
+	-- TODO: the power actually has 5 seconds duration, might handle it in the future
+	if DZCheckCanRecord() then
+		if not triggerArgs.Reapplied then
+			DZTemp.HasShieldBonus = true
+		end
+	end
+    
+    return base(triggerArgs)
+end, DarkZagreus)
+
+-- for aspect of eris for AI
+function DZAIGrenadeSelfDamageOutputApply(triggerArgs)
+	DZTemp.AI.LastMarkTargetTime = _worldTime
+	DZTemp.AI.ValidMarkTime = 4.0
+end
+
+-- for record aspect of eris power
+ModUtil.Path.Wrap("GrenadeSelfDamageOutputApply", function(base, triggerArgs)
+
+	if DZCheckCanRecord() then
+		DZTemp.LastMarkTargetTime = _worldTime
+		DZTemp.ValidMarkTime = 4.0
+	end
+    
+    return base(triggerArgs)
+end, DarkZagreus)
