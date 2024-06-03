@@ -300,9 +300,29 @@ end
 
 OnWeaponFired{ "DarkNemesisSwordParry",
 	function( triggerArgs )
-		-- don't know how to apply to player
+		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
 		-- AddLimitedWeaponBonus({ AsCrit = true, EffectName = "SwordPostParryCritical", Amount = 100, CritBonus = GetTotalHeroTraitValue("SwordPostParryCriticalAmount")})
 		DZTemp.AI.LastMarkTargetTime = _worldTime
 		DZTemp.AI.ValidMarkTime = 3.0
 	end
 }
+
+-- for aspect of achilles rush
+function DZSpearRushBonusApply()
+	if not triggerArgs.Reapplied then
+		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
+		-- local validWeapons = ConcatTableValues( DeepCopyTable( WeaponSets.HeroRangedWeapons ), AddLinkedWeapons( WeaponSets.HeroPhysicalWeapons ))
+		-- AddLimitedWeaponBonus({ AsMultiplier = true, EffectName = triggerArgs.EffectName, Amount = 4, DamageBonus = triggerArgs.Modifier, WeaponNames = validWeapons } )
+		DZTemp.AI.LastMarkTargetTime = _worldTime
+		DZTemp.AI.ValidMarkTime = 3.0
+	end
+end
+
+ModUtil.Path.Wrap("SpearRushBonusApply", function(base)
+    if not triggerArgs.Reapplied then
+        DZTemp.LastMarkTargetTime = _worldTime
+        DZTemp.ValidMarkTime = 3 -- it's actually hit 4 times and it cancel, might handle this in the future
+    end
+    
+    return base()
+end, DarkZagreus)

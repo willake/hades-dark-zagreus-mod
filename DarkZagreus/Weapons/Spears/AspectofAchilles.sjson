@@ -102,7 +102,7 @@
             Effects =
                 [
                     {
-                        Name = "SpearRushBonus"
+                        Name = "DZSpearRushBonus"
                         Duration = 1000.0
                         CanAffectInvulnerable = true
                         FrontFx = "GrenadeSelfDamageOutputFx"
