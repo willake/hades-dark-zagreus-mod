@@ -125,7 +125,7 @@ function DZUIHandleLoadRecordFromFile()
 	if io == nil then
 		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
 	else
-		ModUtil.Hades.NewMenuYesNo("Confirm load record", nil, nil, function ()
+		ModUtil.Hades.NewMenuYesNo("ConfirmLoadRecord", nil, nil, function ()
 			DZLoadPreRunRecordFromFile()
 			ModUtil.Hades.PrintDisplay("Successfully load record", 3, {0, 255, 255, 255})
 		end, nil, 
