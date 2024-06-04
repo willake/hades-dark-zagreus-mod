@@ -6,6 +6,18 @@ DarkZagreus.Config = {
 DarkZagreus.Version = "beta1.3"
 DarkZagreus.DataVersion = "v6" -- for training data, when the data structure chages, the version increases
 
+-- Config
+DarkZagreus.EnablePlayerLog = false
+DarkZagreus.EnableAILog = false
+
+-- Model Settings
+DarkZagreus.ModelSettings = {
+    ModelArchitecture = {20, 13, 13, 6},
+    LearningRate = 3, -- 0 ~ 100
+    Epoches = 10, -- number of times to do backpropagation
+    Consideration = 2, -- how many past actions being considered while training, 2 means 2 past actions
+}
+
 DarkZagreus.DefaultAIWeapon = {
     WeaponName = "SwordWeapon",
     ItemIndex = 1
