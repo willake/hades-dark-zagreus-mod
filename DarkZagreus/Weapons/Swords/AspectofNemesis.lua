@@ -207,7 +207,7 @@ WeaponData.DarkNemesisSwordParry =
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.28,
         PreFireAnimation = "ZagreusSwordAlt01ParryCharge",
-        WaitUntilProjectileDeath = "DarkNemesisSwordParry"
+        FireDuration = 0.2,
     },
     Sounds =
     {

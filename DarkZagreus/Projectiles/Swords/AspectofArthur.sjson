@@ -3,9 +3,9 @@
     "_append"
     {
 		Name = "DarkArthurSword"
-		InheritFrom = "DarkSword3"
-		DamageLow = 10
-		DamageHigh = 10
+		InheritFrom = "DarkSword"
+		DamageLow = 16 // 50 / 3
+		DamageHigh = 16
 		ProjectileDefenseAngle = 40
 		ProjectileDefenseRadius = 420
         ImpactVelocity = 0
@@ -48,9 +48,9 @@
 	}
     {
 		Name = "DarkArthurSword2"
-		InheritFrom = "DarkSword"
-		DamageLow = 10
-		DamageHigh = 10
+		InheritFrom = "DarkSword2"
+		DamageLow = 16 // 50 / 3
+		DamageHigh = 16 // 50 / 3
 		ArcStart = 90
 		ArcEnd = -130
 		Speed = 2000
@@ -93,14 +93,16 @@
 	}
 	{
 		Name = "DarkArthurSword3"
-		InheritFrom = "DarkSword"
-		DamageLow = 10 // 200
-		DamageHigh = 10 // 200
+		InheritFrom = "DarkSword3"
+		DamageLow = 16 // 50
+		DamageHigh = 16 // 50
 		ArcStart = -110
 		ArcEnd = 130
 		Speed = 2400
 		AttachToOwner = true
         StartDelay = 0.02
+		ImpactVelocity = 0
+		ImpactVelocityCap = 0	
         ProjectileDefenseAngle = 40
         ProjectileDefenseRadius = 420
 		Thing =
@@ -141,8 +143,8 @@
 	{
 		Name = "DarkArthurSwordParry"
 		InheritFrom = "DarkSwordParry"
-		DamageLow = 10 // 70
-		DamageHigh = 10 // 70
+		DamageLow = 23 // 70
+		DamageHigh = 23 // 70
 		DetonateGraphic = "RadialNovaSwordParry-Arthur"
 	}
 	{
