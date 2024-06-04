@@ -185,7 +185,8 @@ end
 
 function DZAIMakeActionData(state, lastActions)
 
-    local consideration = 2 -- how many last actions need to be considered
+    local settings = DarkZagreus.ModelSettings
+    local consideration = settings.Consideration -- how many last actions need to be considered
 
     if DarkZagreus.EnableAILog then
         DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
@@ -200,7 +201,7 @@ function DZAIMakeActionData(state, lastActions)
 
     local input = {
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently }
+        state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently, state.IsReloading, state.Ammo }
 
     for i = 1, consideration do
         local data = DZAIMakeLastActionData(lastActions[#lastActions + 1 - i])    
