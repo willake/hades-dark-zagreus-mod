@@ -19,8 +19,8 @@
 			Range = 1000.0 
 			Speed = 3000.0
 			DamageRadius = 0
-			DamageLow = 7
-			DamageHigh = 7
+			DamageLow = 4 // 10
+			DamageHigh = 4 // 10
 			ImpactVelocity = 0
 			CriticalFx = "CriticalHit"
 			HitVulnerabilityFx = "Backstab"
@@ -101,8 +101,8 @@
 			AdjustRateAcceleration = 6000
 			ManuallySetTarget = true
 			DamageRadius = 0
-			DamageLow = 10
-			DamageHigh = 10
+			DamageLow = 4 // 10
+			DamageHigh = 4 // 10
 			ImpactVelocity = 0
 			CriticalFx = "CriticalHit"
 			HitVulnerabilityFx = "Backstab"

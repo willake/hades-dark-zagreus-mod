@@ -19,8 +19,8 @@
         Range = 710.0
         Speed = 8000.0
         DamageRadius = 0
-        DamageLow = 1 // 10
-        DamageHigh = 1 // 10
+        DamageLow = 4 // 10
+        DamageHigh = 4 // 10
         CriticalFx = "CriticalHit"
         HitVulnerabilityFx = "Backstab"
         UseArmor = true
@@ -94,8 +94,8 @@
         DetonateSound = "/SFX/PlayerHammerExplosions"
         ReticleGraphic = "GunGrenadeWarningDecal"
         Type = "LOB"
-        DamageLow = 6 // 60
-        DamageHigh = 6 // 60
+        DamageLow = 20 // 60
+        DamageHigh = 20 // 60
         DamageRadius = 400.0
         DamageRadiusScaleY = 0.6
         AutoAdjustForTarget = true
@@ -231,8 +231,8 @@
         Name = "DarkSniperGun"
         InheritFrom = "DarkGun"
         Range = 1050
-        DamageLow = 10 // 50
-        DamageHigh = 10 // 50
+        DamageLow = 17 // 50
+        DamageHigh = 17 // 50
         Thing = {
             Graphic = "GunWeaponProjectile_Sniper"
             OffsetZ = 70
