@@ -20,8 +20,8 @@
         BlastDuration = 0.1
         AttachToOwner = true
         RequireHitCenter = false
-        DamageLow = 5 // 25
-        DamageHigh = 5 // 25
+        DamageLow = 8 // 25
+        DamageHigh = 8 // 25
         // ImpactVelocity = 2500
         // ImpactVelocityCap = 2500
         InvulnerableImpactOwnerVelocity = 350
@@ -137,8 +137,8 @@
         Range = 9999
         Speed = 2000
         DamageRadius = 0
-        DamageLow = 15
-        DamageHigh = 15
+        DamageLow = 5 // 15 / 3
+        DamageHigh = 5 // 15 / 3
         NumJumps = 2
         JumpSpeedMultiplier = 1.3
         ProjectileDefenseRadius = 100

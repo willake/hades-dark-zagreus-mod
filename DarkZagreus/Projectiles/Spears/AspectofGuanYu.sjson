@@ -4,8 +4,8 @@
         {
             Name = "DarkGuanYuSpear"
             InheritFrom = "DarkSpear"
-            DamageLow = 4 // 40
-            DamageHigh = 4 // 40
+            DamageLow = 14 // 40
+            DamageHigh = 14 // 40
             Thing =
             {
                 Graphic = "SpearThrustProjectile"
@@ -60,8 +60,8 @@
         {
             Name = "DarkGuanYuSpear2"
             InheritFrom = "DarkGuanYuSpear"
-            DamageLow = 4 // 60
-            DamageHigh = 4 // 60
+            DamageLow = 20 // 60
+            DamageHigh = 20 // 60
             Thing =
             {
                 Graphic = "SpearThrustProjectile"
@@ -96,8 +96,8 @@
         {
             Name = "DarkGuanYuSpear3"
             InheritFrom = "DarkGuanYuSpear"
-            DamageLow = 4 // 100
-            DamageHigh = 4 // 100
+            DamageLow = 33 // 100
+            DamageHigh = 33 // 100
             Thing =
             {
                 Graphic = "SpearThrustProjectile"
@@ -135,8 +135,8 @@
             DetonateGraphic = "SpearDashSwipe"
             ProjectileDefenseAngle = 100
             ProjectileDefenseRadius = 240
-            DamageLow = 3 // 30
-            DamageHigh = 3 // 30
+            DamageLow = 10 // 30
+            DamageHigh = 10 // 30
             Thing =
                 {
                 Graphic = "SpearDashSwipe"
@@ -176,8 +176,8 @@
             NumBounces = 99999
             DamageRadius = 105 // 210 * 0.50
             // ProjectileDefenseRadius = 275, original SpearSpin do not have this...
-            DamageLow = 2 // 20
-            DamageHigh = 2 // 20
+            DamageLow = 7 // 20
+            DamageHigh = 7 // 20
             Thing = {
                 Graphic = "null"
                 OffsetZ = 70
@@ -208,8 +208,8 @@
         {
             Name = "DarkGuanYuSpearSpin2"
             InheritFrom = "DarkGuanYuSpearSpin"
-            DamageLow = 5 // 30
-            DamageHigh = 5 // 30
+            DamageLow = 10 // 30
+            DamageHigh = 10 // 30
             DamageRadius = 175 // 350 * 0.5
             DeflectProjectiles = false
             TotalFuse = 1.00 // 0 + 1.00 
@@ -217,8 +217,8 @@
         {
             Name = "DarkGuanYuSpearSpin3"
             InheritFrom = "DarkGuanYuSpearSpin"
-            DamageLow = 10 // 50
-            DamageHigh = 10 // 50
+            DamageLow = 17 // 50
+            DamageHigh = 17 // 50
             DamageRadius = 250 // 500 * 0.5
             DeflectProjectiles = false
             TotalFuse = 1.25 // 0 + 1.25
@@ -234,8 +234,8 @@
             Fuse = 0.08
             ImmunityDuration = 0.5
             UseVulnerability = true
-            DamageLow = 4 // 45
-            DamageHigh = 4 // 45
+            DamageLow = 15 // 45
+            DamageHigh = 15 // 45
             DamageRadius = 250
             DamageRadiusScaleX = 1.1
             DamageRadiusScaleY = 0.67

@@ -180,55 +180,5 @@
             ChargeCancelGraphic = "ZagreusSpearAlt03ThrowFireReturnToIdle"
             FireGraphic = "ZagreusSpearAlt03ThrowFire"
         }
-        // {
-        //     Name = "DarkGuanYuSpearThrowReturn"
-        //     InheritFrom = "DarkGuanYuSpearThrow"
-        //     AlternateControl = "Attack2"
-        //     //   SwapOnFire = "SpearWeaponThrow"
-        //     FireFromObstacle = "SpearReturnPoint"
-        //     DestroyTargetedObstacle = true
-        //     FireGraphic = "null"
-        //     Projectile = "SpearWeaponThrowReturn"
-        //     ShowFreeAimLine = false
-        //     AimLineAnimation = "null"
-        //     //   AddControlOnFire = "SpearWeapon"
-        //     //   AddControlOnFire2 = "SpearWeaponSpin"
-        //     RemoveControlOnFire = "null"
-        //     SelfVelocity = 0.0
-        //     ChargeTimeFrames = 0
-        //     ChargeStartAnimation = "null"
-        //     LockTriggerTransferFromOnSwap = false
-        //     SetCompleteAngleOnFire = false
-        //     OwnerFaceProjectile = true
-        //     Effects = [
-        //         {
-        //         Name = "SpearThrowReturnDisable"
-        //         DurationFrames = 14
-        //         DisableMove = true
-        //         DisableRotate = true
-        //         DisableAttack = true
-        //         RequestTriggerLock = true
-        //         }
-        //         {
-        //         Name = "SpearThrowReturnDisableFast"
-        //         DurationFrames = 10
-        //         DisableMove = true
-        //         DisableRotate = true
-        //         DisableAttack = true
-        //         RequestTriggerLock = true
-        //         Active = false
-        //         }
-        //     ]
-        // }
-        // {
-        //     Name = "DarkGuanYuSpearThrowInvisibleReturn"
-        //     InheritFrom = "1_BaseMagicWeapon"
-        //     FireGraphic = "null"
-        //     FireFromObstacle = "SpearReturnPoint"
-        //     DestroyTargetedObstacle = true
-        //     //   SwapOnFire = "SpearWeaponThrow"
-        //     //   AddControlOnFire = "DarkSpear"
-        //     //   AddControlOnFire2 = "DarkSpearSpin"
-        // }
     ]
 }
