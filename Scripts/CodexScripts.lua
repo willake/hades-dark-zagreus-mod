@@ -6,10 +6,11 @@ if not DarkZagreus.Config.Enabled then return end
 -- add a new section in codex
 local DZCommands = {
 	Order = {
+        "ClearRecord",
+        "ForceNextRoomBossRoom",
 		"ExportRecordToFile",
 		"LoadRecordFromFile",
-        "ClearRecord",
-        "ForceNextRoomBossRoom"
+		"LoadRecordFromFileStyxScribe"
 	}
 }
 
@@ -31,6 +32,13 @@ DZCommands = {
 			Entries = {
 				{
 					Text = "This function loads record from a file. It only works on the x86 (32-bit) version. The file must be located in the x86 folder of the root directory and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
+				}
+			}
+		},
+		LoadRecordFromFileStyxScribe = {
+			Entries = {
+				{
+					Text = "This function loads record from a file. It could work on x64 (64-bit) version but only with StyxScribe installed. The file must be located in the x86 folder of the root directory and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
 				}
 			}
 		},
@@ -119,4 +127,8 @@ function DZUIHandleForceNextRoomBossRoom()
 		DZDebugForceNextRoomBossRoom()
 		ModUtil.Hades.PrintDisplay("Successfully set next room to boss room", 3, {0, 255, 255, 255})
 	end
+end
+
+function DZUIHandleLoadRecordFromFileStyxScribe()
+	DZStyxScribeLoadTrainingData()
 end
