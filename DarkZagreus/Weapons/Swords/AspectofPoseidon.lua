@@ -213,7 +213,7 @@ WeaponData.DarkPoseidonSwordParry =
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.28,
         PreFireAnimation = "ZagreusSwordAlt02ParryCharge",
-        WaitUntilProjectileDeath = "DarkPoseidonSwordParry"
+        FireDuration = 0.2,
     },
 
     Sounds =
