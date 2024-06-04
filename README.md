@@ -65,8 +65,9 @@ If you don't see it. You can also find it by right click the game on Steam -> Pr
 This function saves your previous run record to file, it is useful when you want to share your record data with someone. The save file will be located at `${YourHadesRootFolder}\x86\DZRecord.log`.
 #### Load record from file
 This function loads record from file, it is useful when you want to load other's record data. The file should be placed as `${YourHadesRootFolder}\x86\DZRecord.log`. Inside the game, execute `LoadRecordFromFile` command to load file. Dark Zagreus in your next encounter will be driven by this record.
+### StyxScribe only
 #### Load record from file StyxScribe
-Same as the above one but works with StyxScribe, which means that this feature works on any platform as long as StyxScribe is working.
+Same as `Load record from file` but works with StyxScribe, which means that this feature works on any platform as long as StyxScribe is working.
 
 ## Limitation
 ### Cast, call, and summon support
