@@ -187,9 +187,11 @@ function DZAIMakeActionData(state, lastActions)
 
     local consideration = 2 -- how many last actions need to be considered
 
-    DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
-        state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
-        state.IsReloading, state.Ammo))
+    if DarkZagreus.EnableAILog then
+        DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+            state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
+            state.IsReloading, state.Ammo))
+    end
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
         DZDebugPrintString("Model is not available, make random data.")
@@ -216,12 +218,14 @@ function DZAIMakeActionData(state, lastActions)
     local chargeAttackProb = DZTemp.Model[4].cells[5].signal
     local manualReloadProb = DZTemp.Model[4].cells[6].signal
 
-    DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
-    DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
-    DZDebugPrintString(string.format("special prob | %.3f", specialProb))
-    DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
-    DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
-    DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb))
+    if DarkZagreus.EnableAILog then
+        DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
+        DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
+        DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+        DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
+        DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+        DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb)) 
+    end
 
     return {    
         DashToward = dashTowardProb,
