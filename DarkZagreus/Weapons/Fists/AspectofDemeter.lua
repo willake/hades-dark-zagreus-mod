@@ -127,6 +127,7 @@ WeaponData.DarkDemeterFistDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkDemeterFist",
@@ -223,6 +224,7 @@ WeaponData.DarkDemeterFistSpecialDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         FireDuration = 0.4,

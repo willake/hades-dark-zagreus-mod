@@ -153,6 +153,7 @@ WeaponData.DarkSpearDash =
 		AIData =
 		{
 			SkipMovement = true,
+			GiveupDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			FireDuration = 0.15,
@@ -200,7 +201,6 @@ WeaponData.DarkSpearThrow =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.2,
-			WillThrowSpear = true,
 		},
 
 		Sounds =
@@ -252,7 +252,6 @@ WeaponData.DarkSpearThrowReturn =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.425,
-			WillReturnSpear = true
 		},
 
 		Sounds =

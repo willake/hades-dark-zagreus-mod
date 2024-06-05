@@ -62,10 +62,10 @@ WeaponData.DarkShieldDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.12,
         WaitUntilProjectileDeath = "DarkShieldDash",

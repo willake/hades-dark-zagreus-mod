@@ -12,8 +12,8 @@
         {
             Name = "DarkHadesSpearTwoThree"
             InheritFrom = "DarkHadesSpear"
-            DamageLow = 10 // 30
-            DamageHigh = 10 // 30
+            DamageLow = 15 // 30
+            DamageHigh = 15 // 30
         }
         {
             Name = "DarkHadesSpearSpin"
@@ -46,7 +46,7 @@
             Name = "DarkHadesSpearThrow"
             InheritFrom = "DarkSpearThrow"
             SpawnType = "OBSTACLE"
-            SpawnOnDeath = "SpearReturnPointAlt02"
+            SpawnOnDeath = "DarkSpearReturnPointAlt02"
         }
         {
             Name = "DarkHadesSpearThrowReturn"

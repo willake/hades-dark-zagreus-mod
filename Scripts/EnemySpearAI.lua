@@ -47,6 +47,15 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
 			end
 		end
 
+        if weaponAIData.GiveupDistance then
+            local hasLineOfSight = HasLineOfSight({ Id = enemy.ObjectId, DestinationId = targetId, StopsProjectiles = true, StopsUnits = true, PreferAvoidUnits = false })
+            local distance = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
+            
+            if distance > weaponAIData.GiveupDistance or hasLineOfSight == false then
+                return true
+            end
+        end
+
         -- Attack
 		local attackSuccess = false
 
@@ -219,15 +228,6 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     -- Fire weapon end
 
-    if weaponAIData.WillThrowSpear then
-        enemy.IsSpearThrown = true
-    end
-
-    if weaponAIData.WillReturnSpear then
-        enemy.IsSpearThrown = false
-    end
-    
-
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
 		weaponAIData.ForcedEarlyExit = true
 		return true
@@ -248,7 +248,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
     -- use special attack
     if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
-        if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+        if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
 
             if enemy.SpecialAttackWeaponRush then
                 enemy.WeaponName = enemy.SpecialAttackWeaponRush
@@ -285,7 +285,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
     -- use charge attack with primary attack weapon
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ChargeAttack then
 
-        if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+        if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
             enemy.DZ.TempAction = 2
             enemy.WeaponName = enemy.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
@@ -309,7 +309,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
     -- use attack weapon
 
-    if enemy.ShouldReturnSpearAfterThrow and enemy.IsSpearThrown then
+    if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeaponReturn
         enemy.ChainedWeapon = nil

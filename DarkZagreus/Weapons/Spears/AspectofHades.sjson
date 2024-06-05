@@ -59,7 +59,6 @@
             Name = "DarkHadesSpearThrowReturn"
             InheritFrom = "DarkHadesSpearThrow"
             Projectile = "DarkHadesSpearThrowReturn"
-            FireFromObstacle = "SpearReturnPoint"
             DestroyTargetedObstacle = true
             ShowFreeAimLine = false
             AimLineAnimation = "null"
@@ -67,7 +66,7 @@
             ChargeTimeFrames = 0
             ChargeStartAnimation = "null"
             FireGraphic = "ZagreusSpearAlt02ThrowFireReturn"
-            FireFromObstacle = "SpearReturnPointAlt02"
+            FireFromObstacle = "DarkSpearReturnPointAlt02"
         }
     ]
 }

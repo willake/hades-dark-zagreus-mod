@@ -45,7 +45,7 @@ function DZAICheckVacuumPlayer(enemy, targetId, args)
 		end
         Stop({ Id = targetId })
         -- DebugPrintf({ Text = "GetRequiredForceToEnemy: " .. GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer )})
-		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
+		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer / 2), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
 		FireWeaponFromUnit({ Weapon = "DarkTalosFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
 		DZAIFistVacuumPullPresentation( enemy, targetId, args )
 	end

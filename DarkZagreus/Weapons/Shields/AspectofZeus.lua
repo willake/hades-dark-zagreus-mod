@@ -62,8 +62,8 @@ WeaponData.DarkZeusShieldDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.12,

@@ -80,6 +80,7 @@ WeaponData.DarkErisGunDash =
 
     AIData =
     {
+        GiveupDistance = 680,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,

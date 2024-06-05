@@ -72,14 +72,13 @@
             InheritFrom = "DarkAchillesSpearThrow"
             Projectile = "DarkAchillesSpearThrowReturn"
             AlternateControl = "null"
-            FireFromObstacle = "SpearReturnPoint"
             DestroyTargetedObstacle = true
             ShowFreeAimLine = false
             AimLineAnimation = "null"
             SelfVelocity = 0.0
             ChargeTimeFrames = 0
             ChargeStartAnimation = "null"
-            FireFromObstacle = "SpearReturnPointAlt01"
+            FireFromObstacle = "DarkSpearReturnPointAlt01"
             FireGraphic = "ZagreusSpearAlt01ThrowFireReturn"
             // AllowExternalForceRelease = true
         }
@@ -87,7 +86,7 @@
             Name = "DarkAchillesSpearThrowInvisibleReturn"
             InheritFrom = "DarkAchillesSpearThrowReturn"
             Projectile = "DarkAchillesSpearThrowInvisibleReturn"
-            FireFromObstacle = "SpearReturnPointAlt01"
+            FireFromObstacle = "DarkSpearReturnPointAlt01"
             DestroyTargetedObstacle = true
         }
         {
@@ -98,7 +97,7 @@
             Enabled = true
             BlinkDetonateAtEndpoint = false
             BlinkDetonateOnInterval = 130
-            FireToObstacle = "SpearReturnPointAlt01"
+            FireToObstacle = "DarkSpearReturnPointAlt01"
             Effects =
                 [
                     {

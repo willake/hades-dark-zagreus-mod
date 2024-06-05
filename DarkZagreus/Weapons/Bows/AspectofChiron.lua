@@ -92,6 +92,7 @@ WeaponData.DarkChironBowDash =
 
     AIData =
     {
+        GiveupDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,

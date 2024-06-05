@@ -1,4 +1,4 @@
-﻿# Dark Zagreus (Hades Mod) beta1.3.1
+﻿# Dark Zagreus (Hades Mod) beta1.3.2
 
 A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Hades equips the same weapon as the player's previous successful run. What sets this mod special is the AI of Dark Zagreus is powered by a deep learning model trained on the player's historical gameplay data of previous successful run. This experimental feature creates a dynamic challenge experience for players with the individual's style and strategies.
 
@@ -83,6 +83,7 @@ It seems like the bow charge VFX is handled internally, I couldn't make it work.
 - Chaos shield is not handled correctly
 - The gun weapon AI sometimes makes the game freezing forever
 - Export record for StyxScribe is not working, temporarily removed
+- The shield weapon AI using Aspect of Zeus has awuful behavior, because it doesn't know how long the shield gone. It might aggressively throw and return the shield if the player threw the shield a lot
 
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
@@ -101,6 +102,13 @@ Make sure ModUtil and DarkZagreus are imported.
 This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
 
 Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`, `CheckComboPowerReset`, `CheckComboPowers`
+
+## Discussion
+### Frequency
+The AI can't simulate the frequency(how often player make decision), so Dark Zagreus makes decision frequently. This can be a critical aspect of mimicing the player behavior. I am still thinking a way to address it.
+
+### More factors
+Upgrades like boons and hammers changes a player's behavior significantly, like people might like to use Zeus dash to kill enemies, or have a Ares shield throw which makes player agressively throwing shields. These can not be captured without implementing boon and hammers support. Will be interesting and fun to have it.
 
 ## Future Plans
 - more accurate charge attack prediction

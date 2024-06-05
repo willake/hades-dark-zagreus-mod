@@ -46,6 +46,7 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkSpearThrow"
 				enemy.SpecialAttackWeaponReturn = "DarkSpearThrowReturn"
 				enemy.DashAttackWeapon = "DarkSpearDash"
+				enemy.SpearObstacle = "DarkSpearReturnPoint"
 				enemy.ShouldReturnSpearAfterThrow = true;
             end
 		},
@@ -56,6 +57,7 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkAchillesSpearThrow"
 				enemy.SpecialAttackWeaponRush = "DarkAchillesSpearRush"
 				enemy.DashAttackWeapon = "DarkAchillesSpearDash"
+				enemy.SpearObstacle = "DarkSpearReturnPointAlt01"
 				enemy.ShouldReturnSpearAfterThrow = true;
             end
 		},
@@ -66,6 +68,7 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkHadesSpearThrow"
 				enemy.SpecialAttackWeaponReturn = "DarkHadesSpearThrowReturn"
 				enemy.DashAttackWeapon = "DarkHadesSpearDash"
+				enemy.SpearObstacle = "DarkSpearReturnPointAlt02"
 				enemy.ShouldReturnSpearAfterThrow = true;
             end
 		},

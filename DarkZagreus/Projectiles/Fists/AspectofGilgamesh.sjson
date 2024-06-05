@@ -125,8 +125,8 @@
         InheritFrom = "DarkGilgameshFistClawR"
         Type = "ARC"
         StartFx = "ClawSwipeFlippedDash"
-        DamageLow = 7 // 20
-        DamageHigh = 7 // 20
+        DamageLow = 10 // 20
+        DamageHigh = 10 // 20
         ArcStart = -130
         ArcEnd = 90
         Speed = 3500

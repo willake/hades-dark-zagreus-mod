@@ -157,6 +157,7 @@ WeaponData.DarkGuanYuSpearDash =
 		AIData =
 		{
 			SkipMovement = true,
+			GiveupDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -206,7 +207,6 @@ WeaponData.DarkGuanYuSpearThrow =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.2,
-			WillThrowSpear = true,
 		},
 
 		Sounds =

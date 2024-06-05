@@ -55,7 +55,16 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
         attackDistance = weaponAIData.AttackDistanceForPostCharge
     end
 
-    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 200)
+    -- bad way, hardcoded attack distance
+    -- dash toward
+    if enemy.DZ.TempAction == 0 then
+        attackDistance = 600
+    -- dash away
+    elseif enemy.DZ.TempAction == 3 then
+        attackDistance = 200
+    end 
+
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or 32
 
     if moveSuccessDistance < 32 then
         moveSuccessDistance = 32
@@ -83,6 +92,9 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
 
     NotifyWithinDistance({ 
         Id = enemy.ObjectId, DestinationId = targetId, Distance = attackDistance,
+        StopsUnits = true, StopsProjectiles = true,
+        LineOfSightBuffer = 150,
+        LineOfSightEndBuffer = weaponAIData.AILineOfSighEndBuffer,
         Notify = enemy.AINotifyName, Timeout = 1.0 }) -- timeout or 9.0
 
 	waitUntil( enemy.AINotifyName, enemy.AIThreadName )
