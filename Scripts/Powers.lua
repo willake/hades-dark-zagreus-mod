@@ -96,7 +96,7 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 
 	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
 
-    DZDebugPrintString(string.format("Combo %d" .. attacker.ComboCount))
+    DZDebugPrintString(string.format("Combo %d", attacker.ComboCount))
 
 	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
 		-- for aspect of demeter, 12 combos get power special
@@ -112,7 +112,7 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
 
-		DETemp.AI.HasPowerShot = true
+		DZTemp.AI.HasPowerShot = true
 
 		DZAIComboReadyPresentation( attacker, triggerArgs )
 	end
@@ -418,4 +418,68 @@ ModUtil.Path.Wrap("GrenadeSelfDamageOutputApply", function(base, triggerArgs)
 	end
     
     return base(triggerArgs)
+end, DarkZagreus)
+
+-- im a bad man :(, welcome to give me suggestion about how not to override this
+ModUtil.Path.Override("CheckComboPowers", function (victim, attacker, triggerArgs, sourceWeaponData)
+	if sourceWeaponData == nil or sourceWeaponData.ComboPoints == nil or sourceWeaponData.ComboPoints <= 0 then
+		return
+	end
+
+	if triggerArgs.EffectName ~= nil then
+		-- Effects never generate combo points for now
+		return
+	end
+
+	if victim.NoComboPoints then
+		return
+	end
+
+	if not HeroHasTrait( "FistWeaveTrait" ) then
+		return
+	end
+
+	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
+
+	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
+		-- just for this, for record aspect of demeter power
+		DZTemp.HasPowerShot = true
+		
+		attacker.ComboReady = true
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 2 + GetTotalHeroTraitValue("BonusSpecialHits") })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		if HeroHasTrait( "FistSpecialFireballTrait" ) then
+			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.08 })
+		else
+			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		end
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 + GetTotalHeroTraitValue("BonusSpecialHits") })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+
+		ComboReadyPresentation( attacker, triggerArgs )
+	end
+end, DarkZagreus)
+
+ModUtil.Path.Override("CheckComboPowerReset", function (attacker, weaponData, args)
+	if weaponData ~= nil and attacker.ComboReady then
+		-- just for this, for record aspect of demeter power
+		DZTemp.HasPowerShot = false
+
+		thread(MarkObjectiveComplete, "FistWeaponFistWeave")
+		attacker.ComboReady = false
+		attacker.ComboCount = 0
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 2 })
+		if HeroHasTrait( "FistSpecialFireballTrait" ) then
+			SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 })
+		end
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "NumProjectiles", Value = 1 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0 })
+		SetWeaponProperty({ WeaponName = "FistWeaponSpecialDash", DestinationId = CurrentRun.Hero.ObjectId, Property = "FireFx2", Value = "null" })
+		if not args or not args.Undelivered then
+			ComboDeliveredPresentation( attacker, triggerArgs )
+		end
+	end
 end, DarkZagreus)
