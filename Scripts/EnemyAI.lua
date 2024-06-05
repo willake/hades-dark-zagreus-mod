@@ -55,6 +55,15 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
         attackDistance = weaponAIData.AttackDistanceForPostCharge
     end
 
+    -- bad way, hardcoded attack distance
+    -- dash toward
+    if enemy.DZ.TempAction == 0 then
+        attackDistance = 600
+    -- dash away
+    elseif enemy.DZ.TempAction == 3 then
+        attackDistance = 200
+    end 
+
     local moveSuccessDistance = weaponAIData.MoveSuccessDistance or 32
 
     if moveSuccessDistance < 32 then

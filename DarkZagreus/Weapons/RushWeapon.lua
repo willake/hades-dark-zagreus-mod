@@ -7,7 +7,6 @@ WeaponData.DarkRush =
 
     AIData =
     {
-        AttackDistance = 450,
         SkipAngleTowardTarget = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
