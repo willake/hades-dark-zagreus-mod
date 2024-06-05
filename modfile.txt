@@ -1,3 +1,4 @@
+Load Priority 100
 Top Import "config.lua"
 Import "Scripts/DebugScripts.lua"
 Import "Libraries/luann/luann.lua"
