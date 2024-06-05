@@ -122,6 +122,10 @@ end
 
 -- x86 only
 function DZUIHandleLoadRecordFromFile()
+	if CurrentDeathAreaRoom == nil then
+		ModUtil.Hades.PrintDisplay("You can only load record while outside the run", 3, {255, 0, 0, 255})
+		return
+	end
 	if io == nil then
 		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
 	else
@@ -136,13 +140,17 @@ function DZUIHandleLoadRecordFromFile()
 end
 
 function DZUIHandleClearRecord()
+	if CurrentDeathAreaRoom == nil then
+		ModUtil.Hades.PrintDisplay("You can only clear record while outside the run", 3, {255, 0, 0, 255})
+		return
+	end
 	ModUtil.Hades.NewMenuYesNo("ConfirmClearRecord", nil, nil, function ()
 		DZClearAllRecordInMemory()
 		ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
-	end, nil, 
-	"Sure to clear record?", 
-	"Clearing the record means the record will be not accessible anymore. You can export your record in x86 version before cleaning up. Are you sure to clear it?",
-	"Yes", "No")
+		end, nil, 
+		"Sure to clear record?", 
+		"Clearing the record means the record will be not accessible anymore. You can export your record in x86 version before cleaning up. Are you sure to clear it?",
+		"Yes", "No")
 end
 
 function DZUIHandleForceNextRoomBossRoom()
@@ -168,6 +176,10 @@ end
 
 -- StyxScribe only
 function DZUIHandleLoadRecordFromFileStyxScribe()
+	if CurrentDeathAreaRoom == nil then
+		ModUtil.Hades.PrintDisplay("You can only load record while outside the run", 3, {255, 0, 0, 255})
+		return
+	end
 	if StyxScribe == nil then
 		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works with StyxScribe installed", 3, {255, 0, 0, 255})
 	else
