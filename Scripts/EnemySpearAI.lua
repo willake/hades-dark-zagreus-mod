@@ -120,7 +120,6 @@ function DZAIFireSpearWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     if weaponAIData.PostFireChargeStages ~= nil then
         chargeTime = percentageCharged * weaponAIData.MaxChargeTime
-        DebugPrintf({ Text = "Set chargeTime to " .. chargeTime})
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then

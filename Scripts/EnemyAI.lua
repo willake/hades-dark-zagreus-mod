@@ -195,8 +195,10 @@ function DZAIMakeActionData(state, lastActions)
     end
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
-        DZDebugPrintString("Model is not available, make random data.")
-        return DZAIMakeRandomActionData(state)
+        if DarkZagreus.EnableAILog then
+            DZDebugPrintString("Model is not available, make random data.")
+        end
+            return DZAIMakeRandomActionData(state)
     end
 
     local input = {

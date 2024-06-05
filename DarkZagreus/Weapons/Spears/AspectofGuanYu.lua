@@ -160,7 +160,14 @@ WeaponData.DarkGuanYuSpearDash =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.425,
+			FireDuration = 0.15,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
+			},
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -250,7 +257,7 @@ WeaponData.DarkGuanYuSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.4,
+			FireDuration = 0.15,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,

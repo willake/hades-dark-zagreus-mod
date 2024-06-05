@@ -155,7 +155,13 @@ WeaponData.DarkSpearDash =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.425
+			FireDuration = 0.15,
+			{
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
+			},
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -287,7 +293,7 @@ WeaponData.DarkSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.4,
+			FireDuration = 0.15,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,

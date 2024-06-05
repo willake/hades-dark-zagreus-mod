@@ -112,7 +112,7 @@ WeaponData.DarkHadesSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.05,
+			FireDuration = 0.07,
 			PostFireChargeStages = 
 			{
 				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.60 },
@@ -154,7 +154,13 @@ WeaponData.DarkHadesSpearDash =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.425,
+			FireDuration = 0.15,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.60 },
+				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.90 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -286,7 +292,7 @@ WeaponData.DarkHadesSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.4,
+			FireDuration = 0.15,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
