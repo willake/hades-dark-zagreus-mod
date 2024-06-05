@@ -225,6 +225,9 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkDemeterFistSpecial"
 				enemy.SpecialDashAttackWeapon = "DarkDemeterFistSpecialDash"
 				enemy.DashAttackWeapon = "DarkDemeterFistDash"
+				-- equip them in advance because Powers.lua will modify their properties
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkDemeterFistSpecial" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkDemeterFistSpecialDash" })
             end
 		},
 		{
