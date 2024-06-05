@@ -102,6 +102,10 @@ This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, whic
 
 Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`, `CheckComboPowerReset`, `CheckComboPowers`
 
+## Future Plans
+- more accurate charge attack prediction
+- weapon powers with cast support
+
 ## Data Version Change logs
 
 ### v6
