@@ -221,7 +221,7 @@
             ImpactTargetUnitOnly = false
             VacuumStrength = 0
             ObstacleCollisionCheck = "PolygonContainsPoint"
-            SpawnOnDeath = "SpearReturnPoint"
+            SpawnOnDeath = "DarkSpearReturnPoint"
             SpawnType = "OBSTACLE"
             CanBeReflected = false
             Thing = {

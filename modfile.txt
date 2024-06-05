@@ -31,6 +31,9 @@ To "Game/Units/Enemies.sjson"
 SJSON "Game/Units/Hades.sjson"
 SJSON "DarkZagreus/Units/Guns/AspectofLucifer.sjson"
 
+To "Game/Obstacles/Gameplay.sjson"
+SJSON "Game/Obstacles/Gameplay.sjson"
+
 To "Game/Animations/PortraitAnimations.sjson"
 SJSON "Game/Animations/PortraitAnimations.sjson
 
