@@ -85,9 +85,6 @@ It seems like the bow charge VFX is handled internally, I couldn't make it work.
 - Export record for StyxScribe is not working, temporarily removed
 - The shield weapon AI using Aspect of Zeus has awuful behavior, because he doesn't know how long the shield gone. He might aggressively throw and return the shield if the player threw the shield a lot
 
-## Discussion
-The AI can't simulate the frequency(how often player make decision), so Dark Zagreus makes decision frequently. This can be a critical aspect of mimicing the player behavior. I am still thinking a way to address it.
-
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
 
@@ -105,6 +102,13 @@ Make sure ModUtil and DarkZagreus are imported.
 This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
 
 Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`, `CheckComboPowerReset`, `CheckComboPowers`
+
+## Discussion
+### Frequency
+The AI can't simulate the frequency(how often player make decision), so Dark Zagreus makes decision frequently. This can be a critical aspect of mimicing the player behavior. I am still thinking a way to address it.
+
+### More factors
+Upgrades like boons and hammers changes a player's behavior significantly, like people might like to use Zeus dash to kill enemies, or have a Ares shield throw which makes player agressively throwing shields. These can not be captured without implementing boon and hammers support. Will be interesting and fun to have it.
 
 ## Future Plans
 - more accurate charge attack prediction
