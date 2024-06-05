@@ -9,7 +9,7 @@ A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). I
 - [Mod Importer](https://www.nexusmods.com/hades/mods/26)
 - [ModUtil](https://www.nexusmods.com/hades/mods/27)
 - [Max Save With No Run History](https://www.speedrun.com/hades/resources/hshp9) (Optional)
-- [StyxScribe](https://github.com/SGG-Modding/StyxScribe/tree/main) (Optinal, unless you would like to export/load record and don't want to use x86 version, which happens when you are using MacOS.)
+- [StyxScribe](https://github.com/SGG-Modding/StyxScribe/tree/main) (Optinal, unless you would like to export/load record and don't want to use x86 version.) StyxScribe on MacOS is not actually supported now.
 
 ## Installation
 
