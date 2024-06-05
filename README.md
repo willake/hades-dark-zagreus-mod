@@ -83,7 +83,10 @@ It seems like the bow charge VFX is handled internally, I couldn't make it work.
 - Chaos shield is not handled correctly
 - The gun weapon AI sometimes makes the game freezing forever
 - Export record for StyxScribe is not working, temporarily removed
-- The shield weapon AI using Aspect of Zeus has awuful behavior, because he doesn't know how long the shield gone. He might aggressively throw and return the shield if the player threw the shield a lot.
+- The shield weapon AI using Aspect of Zeus has awuful behavior, because he doesn't know how long the shield gone. He might aggressively throw and return the shield if the player threw the shield a lot
+
+## Discussion
+The AI can't simulate the frequency(how often player make decision), so Dark Zagreus makes decision frequently. This can be a critical aspect of mimicing the player behavior. I am still thinking a way to address it.
 
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
