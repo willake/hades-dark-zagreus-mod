@@ -17,7 +17,6 @@ WeaponData.DarkDemeterFist =
         ChainedWeapon = "DarkDemeterFist2",
         PreFireDuration = 0.15,
         WaitUntilProjectileDeath = "DarkDemeterFist",
-        CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -133,7 +132,6 @@ WeaponData.DarkDemeterFistDash =
         ChainedWeapon = "DarkDemeterFist",
         PreFireDuration = 0.07,
         WaitUntilProjectileDeath = "DarkDemeterFistDash",
-        CanDoCombo = true,
         IsStartFromFistDash = true
     },
 

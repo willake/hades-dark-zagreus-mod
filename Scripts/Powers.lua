@@ -96,9 +96,10 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 
 	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
 
-    DebugPrintf({ Text = "Combo" .. attacker.ComboCount })
+    DZDebugPrintString(string.format("Combo %d" .. attacker.ComboCount))
 
 	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
+		-- for aspect of demeter, 12 combos get power special
 		attacker.ComboReady = true
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
@@ -110,6 +111,8 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+
+		DETemp.AI.HasPowerShot = true
 
 		DZAIComboReadyPresentation( attacker, triggerArgs )
 	end
@@ -129,6 +132,7 @@ end
 function DZAICheckComboPowerReset( attacker, weaponData )
 	if weaponData ~= nil and attacker.ComboReady then
         DZDebugPrintString("Reset Combo")
+		DZTemp.AI.HasPowerShot = false
 		attacker.ComboReady = false
 		attacker.ComboCount = 0
 		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 })

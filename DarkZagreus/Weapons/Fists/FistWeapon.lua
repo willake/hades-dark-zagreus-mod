@@ -15,7 +15,6 @@ WeaponData.DarkFist =
         ChainedWeapon = "DarkFist2",
         PreFireDuration = 0.15,
         WaitUntilProjectileDeath = "DarkFist",
-        CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -129,7 +128,6 @@ WeaponData.DarkFistDash =
         ChainedWeapon = "DarkFist",
         PreFireDuration = 0.07,
         WaitUntilProjectileDeath = "DarkFistDash",
-        CanDoCombo = true,
         IsStartFromFistDash = true
     },
 

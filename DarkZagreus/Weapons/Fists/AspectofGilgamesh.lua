@@ -15,7 +15,6 @@ WeaponData.DarkGilgameshFist =
         ChainedWeapon = "DarkGilgameshFist2",
         PreFireDuration = 0.2,
         WaitUntilProjectileDeath = "DarkGilgameshFist",
-        CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -222,7 +221,6 @@ WeaponData.DarkGilgameshFistDash =
         ChainedWeapon = "DarkGilgameshFist",
         PreFireDuration = 0.07,
         WaitUntilProjectileDeath = "DarkGilgameshFistDash",
-        CanDoCombo = true,
         IsStartFromFistDash = true
     },
 

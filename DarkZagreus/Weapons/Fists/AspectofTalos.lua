@@ -19,7 +19,6 @@ WeaponData.DarkTalosFist =
         ChainedWeapon = "DarkTalosFist2",
         PreFireDuration = 0.15,
         WaitUntilProjectileDeath = "DarkTalosFist",
-        CanDoCombo = true,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -134,7 +133,6 @@ WeaponData.DarkTalosFistDash =
         ChainedWeapon = "DarkTalosFist",
         PreFireDuration = 0.07,
         WaitUntilProjectileDeath = "DarkTalosFistDash",
-        CanDoCombo = true,
         IsStartFromFistDash = true
     },
 
