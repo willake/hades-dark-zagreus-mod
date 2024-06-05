@@ -52,6 +52,18 @@ Replace "Packages/DarkZagreus.pkg"
 To Win/Packages/720p/DarkZagreus.pkg
 Replace "Packages/DarkZagreus.pkg"
 
+To macOS/Packages/DarkZagreus.pkg_manifest
+Replace "Packages/DarkZagreus.pkg_manifest"
+
+To macOS/Packages/720p/DarkZagreus.pkg_manifest
+Replace "Packages/DarkZagreus.pkg_manifest"
+
+To macOS/Packages/DarkZagreus.pkg
+Replace "Packages/DarkZagreus.pkg"
+
+To macOS/Packages/720p/DarkZagreus.pkg
+Replace "Packages/DarkZagreus.pkg"
+
 To "Scripts/CodexScripts.lua"
 Import "Scripts/CodexScripts.lua"
 
