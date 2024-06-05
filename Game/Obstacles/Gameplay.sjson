@@ -1,0 +1,67 @@
+{
+    Obstacles = [
+        "_append"
+        {
+            Name = "DarkSpearReturnPoint"
+            DisplayInEditor = true
+            Life =
+            {
+                Invulnerable = true
+            }
+            Thing =
+            {
+                EditorOutlineDrawBounds = false
+                Graphic = "SpearReturnPoint"
+                StopsProjectiles = false
+                StopsUnits = false
+                Tallness = 227.0
+                UseBoundsForSortDrawArea = true
+                // Interact =
+                // {
+                //     AutoActivate = true
+                //     Distance = 100.0
+                //     UserFireWeapon = "SpearWeaponThrowInvisibleReturn"
+                //     VisualFx = "SpearManualPickupFx"
+                // }
+                Points = [
+                    { X = 0 Y = 10 }
+                    { X = 10 Y = 5 }
+                    { X = 0 Y = 0 }
+                    { X = -10 Y = 5 }
+                ]
+            }
+        }
+        {
+            Name = "DarkSpearReturnPointAlt01"
+            InheritFrom = "SpearReturnPoint"
+            Thing =
+            {
+                Graphic = "SpearReturnPointAlt01"
+                // Interact =
+                // {
+                //     // UserFireWeapon = "SpearWeaponThrowInvisibleReturn"
+                // }
+            }
+        }
+        {
+            Name = "DarkSpearReturnPointAlt02"
+            InheritFrom = "SpearReturnPoint"
+            Thing =
+            {
+                Graphic = "SpearReturnPointAlt02"
+            }
+        }
+        {
+            Name = "DarkSpearReturnPointAlt03"
+            InheritFrom = "SpearReturnPoint"
+            Thing =
+            {
+                Graphic = "SpearReturnPointAlt03"
+                // Interact =
+                // {
+                //     UserFireWeapon = "SpearWeaponThrowInvisibleReturn"
+                // }
+            }
+        }
+    ]
+}

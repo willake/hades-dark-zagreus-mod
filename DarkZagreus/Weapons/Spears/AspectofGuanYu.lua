@@ -207,7 +207,6 @@ WeaponData.DarkGuanYuSpearThrow =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.2,
-			WillThrowSpear = true,
 		},
 
 		Sounds =

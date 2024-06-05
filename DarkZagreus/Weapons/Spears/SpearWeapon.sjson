@@ -333,7 +333,7 @@
             Name = "DarkSpearThrowReturn"
             InheritFrom = "DarkSpearThrow"
             AlternateControl = "Attack2"
-            FireFromObstacle = "SpearReturnPoint"
+            FireFromObstacle = "DarkSpearReturnPoint"
             DestroyTargetedObstacle = true
             FireGraphic = "ZagreusSpearThrowFireReturn"
             Projectile = "SpearWeaponThrowReturn"
@@ -507,7 +507,7 @@
             //SwapOnFire = "SpearWeaponThrow"
             // AddControlOnFire = "SpearWeapon"
             // AddControlOnFire2 = "SpearWeaponSpin"
-            FireToObstacle = "SpearReturnPoint"
+            FireToObstacle = "DarkSpearReturnPoint"
             DestroyTargetedObstacle = true
             FireGraphic = "ZagreusDashNoCollide"
             UnblockedBlinkFx = "DashCrack"

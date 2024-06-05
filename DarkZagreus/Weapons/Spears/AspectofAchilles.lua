@@ -206,7 +206,6 @@ WeaponData.DarkAchillesSpearThrow =
 			MaxChargeTime = 0.12,
 			Range = 264,
 			ChargeRangeMultiplier = 3.34,
-			WillThrowSpear = true,
 			PreFireDuration = 0.04,
 			PreFireFx = "SpearChargeThrowTrait",
 			PreFireAnimation = "ZagreusSpearAlt01ThrowCharge",
@@ -250,7 +249,6 @@ WeaponData.DarkAchillesSpearThrowReturn =
 			AIMoveWithinRangeTimeout = 1.0,
 			-- FireDuration = 0.425,
 			WaitUntilProjectileDeath = "DarkAchillesSpearThrowReturn",
-			WillReturnSpear = true
 		},
 
 		Sounds =
@@ -377,7 +375,6 @@ WeaponData.DarkAchillesSpearRush =
 			-- AIAngleTowardsPlayerWhileFiring = true,
 			-- AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			WillReturnSpear = true,
 			PostFireWeapon = "DarkAchillesSpearThrowInvisibleReturn"
 		},
 

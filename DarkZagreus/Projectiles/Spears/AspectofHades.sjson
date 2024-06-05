@@ -46,7 +46,7 @@
             Name = "DarkHadesSpearThrow"
             InheritFrom = "DarkSpearThrow"
             SpawnType = "OBSTACLE"
-            SpawnOnDeath = "SpearReturnPointAlt02"
+            SpawnOnDeath = "DarkSpearReturnPointAlt02"
         }
         {
             Name = "DarkHadesSpearThrowReturn"

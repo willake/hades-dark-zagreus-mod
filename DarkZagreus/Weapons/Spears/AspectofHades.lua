@@ -200,7 +200,6 @@ WeaponData.DarkHadesSpearThrow =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.2,
-			WillThrowSpear = true,
 		},
 
 		Sounds =
@@ -252,7 +251,6 @@ WeaponData.DarkHadesSpearThrowReturn =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			FireDuration = 0.425,
-			WillReturnSpear = true
 		},
 
 		Sounds =

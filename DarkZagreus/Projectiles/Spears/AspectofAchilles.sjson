@@ -40,7 +40,7 @@
             InheritFrom = "DarkSpearThrow"
             Range = 264 // 880 * 0.3
             SpawnType = "OBSTACLE"
-            SpawnOnDeath = "SpearReturnPointAlt01"
+            SpawnOnDeath = "DarkSpearReturnPointAlt01"
         }
         {
             Name = "DarkAchillesSpearThrowReturn"
