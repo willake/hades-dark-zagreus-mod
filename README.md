@@ -1,4 +1,4 @@
-﻿# Dark Zagreus (Hades Mod) beta1.3
+﻿# Dark Zagreus (Hades Mod) beta1.3.1
 
 A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Hades equips the same weapon as the player's previous successful run. What sets this mod special is the AI of Dark Zagreus is powered by a deep learning model trained on the player's historical gameplay data of previous successful run. This experimental feature creates a dynamic challenge experience for players with the individual's style and strategies.
 
@@ -9,7 +9,7 @@ A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). I
 - [Mod Importer](https://www.nexusmods.com/hades/mods/26)
 - [ModUtil](https://www.nexusmods.com/hades/mods/27)
 - [Max Save With No Run History](https://www.speedrun.com/hades/resources/hshp9) (Optional)
-- [StyxScribe](https://github.com/SGG-Modding/StyxScribe/tree/main) (Optinal, unless you would like to export/load record and don't want to use x86 version, which happens when you are using MacOS.)
+- [StyxScribe](https://github.com/SGG-Modding/StyxScribe/tree/main) (Optinal, unless you would like to export/load record and don't want to use x86 version.) StyxScribe on MacOS is not actually supported now.
 
 ## Installation
 
@@ -100,7 +100,11 @@ Make sure ModUtil and DarkZagreus are imported.
 ## Dependencies
 This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
 
-Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`
+Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`, `CheckComboPowerReset`, `CheckComboPowers`
+
+## Future Plans
+- more accurate charge attack prediction
+- weapon powers with cast support
 
 ## Data Version Change logs
 
