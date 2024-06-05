@@ -152,6 +152,7 @@ WeaponData.DarkHadesSpearDash =
 		AIData =
 		{
 			SkipMovement = true,
+			GiveupDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			FireDuration = 0.15,

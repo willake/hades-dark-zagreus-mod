@@ -157,6 +157,7 @@ WeaponData.DarkGuanYuSpearDash =
 		AIData =
 		{
 			SkipMovement = true,
+			GiveupDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,

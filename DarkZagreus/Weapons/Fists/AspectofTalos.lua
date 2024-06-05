@@ -128,6 +128,7 @@ WeaponData.DarkTalosFistDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
@@ -238,6 +239,7 @@ WeaponData.DarkTalosFistSpecialDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         FireDuration = 0.4,

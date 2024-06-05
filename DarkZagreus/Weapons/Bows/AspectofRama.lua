@@ -93,6 +93,7 @@ WeaponData.DarkRamaBowDash =
 
     AIData =
     {
+        GiveupDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,

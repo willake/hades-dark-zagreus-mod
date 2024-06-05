@@ -61,6 +61,7 @@ WeaponData.DarkChaosShieldDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         AIAngleTowardsPlayerWhileFiring = true,
         SkipMovement = true,
         SkipAngleTowardTarget = true,

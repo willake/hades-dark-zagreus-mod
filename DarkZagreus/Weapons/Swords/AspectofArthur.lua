@@ -167,6 +167,7 @@ WeaponData.DarkArthurSwordDash =
     AIData =
     {
         PreFireDuration = 0.2,
+        GiveupDistance = 250,
         PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
