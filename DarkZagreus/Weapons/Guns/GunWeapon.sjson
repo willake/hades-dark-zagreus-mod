@@ -124,7 +124,7 @@
             // TriggerTapIgnoresCooldown = true
             // TriggersStoredAmmoVulnerability = true
             // SwapOnFire = "GunWeapon"
-            // ShareAmmoWeapon = "GunWeapon"
+            ShareAmmoWeapon = "DarkGun"
             // AutoLockArcDistance = 360
         }
         {
@@ -329,6 +329,9 @@
             AutoLock = true
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
+        }
+        {
+            Name = "DarkManualReload"
         }
     ]
 }

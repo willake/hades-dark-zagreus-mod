@@ -18,8 +18,7 @@ WeaponData.DarkTalosFist =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist2",
         PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = true,
-        CanDoCombo = true,
+        WaitUntilProjectileDeath = "DarkTalosFist",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -71,7 +70,7 @@ WeaponData.DarkTalosFist2 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist3",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkTalosFist2",
     }
 }
 
@@ -86,7 +85,7 @@ WeaponData.DarkTalosFist3 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist4",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkTalosFist3",
     }
 }
 
@@ -101,7 +100,7 @@ WeaponData.DarkTalosFist4 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist5",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkTalosFist4",
     }
 }
 	
@@ -116,7 +115,7 @@ WeaponData.DarkTalosFist5 =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkTalosFist5",
         Cooldown = 0.5
     }
 }
@@ -133,8 +132,7 @@ WeaponData.DarkTalosFistDash =
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
         PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = true,
-        CanDoCombo = true,
+        WaitUntilProjectileDeath = "DarkTalosFistDash",
         IsStartFromFistDash = true
     },
 
@@ -295,7 +293,7 @@ WeaponData.DarkTalosRush =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true,
+        WaitUntilProjectileDeath = "DarkTalosRush",
         AddRush = {
 			FunctionName = "DZAIFistVacuumRush",
 			FunctionArgs =

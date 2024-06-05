@@ -16,7 +16,7 @@ WeaponData.DarkHadesSpear =
 			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.60 }, -- 0.75
 				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1,
@@ -73,7 +73,7 @@ WeaponData.DarkHadesSpear2 =
 			FireDuration = 0.05,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpearSpin2", Threshold = 0.60 },
 				{ ChargeWeapon = "DarkHadesSpearSpin3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1
@@ -112,10 +112,10 @@ WeaponData.DarkHadesSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.05,
+			FireDuration = 0.07,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.75 },
+				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.60 },
 				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.90 },
 			},
 			MaxChargeTime = 1
@@ -154,7 +154,13 @@ WeaponData.DarkHadesSpearDash =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.425,
+			FireDuration = 0.15,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkHadesSpear2", Threshold = 0.60 },
+				{ ChargeWeapon = "DarkHadesSpear3", Threshold = 0.90 },
+			},
+			MaxChargeTime = 1
 		},
 
 		Sounds =
@@ -286,7 +292,7 @@ WeaponData.DarkHadesSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.4,
+			FireDuration = 0.15,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -341,4 +347,10 @@ WeaponData.DarkHadesSpearSpin2 =
 WeaponData.DarkHadesSpearSpin3 =
 	{
 		InheritFrom = { "DarkHadesSpearSpin" }
+	}
+
+EffectData.DZMarkTargetSpin = 
+	{
+		OnApplyFunctionName = "DZAIMarkTargetSpinApply",
+		OnClearFunctionName = "DZAIMarkTargetSpinClear",
 	}

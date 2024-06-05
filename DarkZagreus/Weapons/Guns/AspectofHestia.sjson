@@ -23,7 +23,7 @@
             FireGraphic = "ZagreusGunAlt01GrenadeTossFire"
         }
         {
-            Name = "DarkManualReloadEffectApplicator"
+            Name = "DZManualReloadEffectApplicator"
             InheritFrom = "1_BaseDZMagicWeapon"
             Type = "GUN"
             Projectile = "null"
@@ -32,7 +32,7 @@
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
             Effect = {
-                Name = "DarkManualReloadBonus"
+                Name = "DZManualReloadBonus"
                 Duration = 1000.0
                 CanAffectInvulnerable = true
                 FrontFx = "GunManualReloadTraitFx"

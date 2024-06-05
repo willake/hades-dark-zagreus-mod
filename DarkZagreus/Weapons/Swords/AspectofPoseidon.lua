@@ -7,12 +7,14 @@ WeaponData.DarkPoseidonSword =
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        ChainedWeapon = "DarkPoseidonSword2",
-        FireDuration = 0.2,
         AIMoveWithinRangeTimeoutMin = 0.3,
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
+        SkipAngleTowardTarget = true,
+        PreFireDuration = 0.05,
+        PreFireAnimation = "ZagreusSwordAlt02Charge1",
+        ChainedWeapon = "DarkPoseidonSword2",
+        WaitUntilProjectileDeath = "DarkPoseidonSword"
     },
 
     CauseImpactReaction = true,
@@ -66,14 +68,15 @@ WeaponData.DarkPoseidonSword2 =
 
     AIData =
     {
-        FireDuration = 0.425,
         SkipMovement = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         SkipAngleTowardTarget = true,
         ChainedWeapon = "DarkPoseidonSword3",
-        PreFireDuration = 0.2, -- 0.3
+        PreFireDuration = 0.13, -- 0.3 
         PreFireAnimation = "ZagreusSwordAlt02Charge2",
         FireAnimation = "ZagreusSwordAlt02Attack2",
-        FireFxOnSelf = "SwordSwipeB"
+        FireFxOnSelf = "SwordSwipeB",
+        WaitUntilProjectileDeath = "DarkPoseidonSword2"
     },
 
     Sounds =
@@ -107,15 +110,15 @@ WeaponData.DarkPoseidonSword3 =
 
     AIData =
     {
-        FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.3,
+        PreFireDuration = 0.25,
         PreFireAnimation = "ZagreusSwordAlt02Charge3",
         PreFireFx = "ChargeAttack",
         PreFireSound = "/Leftovers/SFX/AuraCharge",
         FireAnimation = "ZagreusSwordAlt02Attack3",
-        FireFxOnSelf = "SwordSwipeC"
+        FireFxOnSelf = "SwordSwipeC",
+        WaitUntilProjectileDeath = "DarkPoseidonSword3"
     },
 
     Sounds =
@@ -149,17 +152,18 @@ WeaponData.DarkPoseidonSword3 =
 
 WeaponData.DarkPoseidonSwordDash =
 {
-    Name = "DarkPoseidonSword",
+    Name = "DarkPoseidonSwordDash",
     StartingWeapon = false,
     CauseImpactReaction = true,
 
     AIData =
     {
-        FireDuration = 0.3,
+        PreFireDuration = 0.05,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
+        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        WaitUntilProjectileDeath = "DarkPoseidonSwordDash"
     },
 
     Sounds =
@@ -203,12 +207,13 @@ WeaponData.DarkPoseidonSwordParry =
 
     AIData =
     {
-        FireDuration = 0.5,
-        AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 0.3,
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
+        SkipAngleTowardTarget = true,
+        PreFireDuration = 0.28,
+        PreFireAnimation = "ZagreusSwordAlt02ParryCharge",
+        FireDuration = 0.2,
     },
 
     Sounds =

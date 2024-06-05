@@ -18,8 +18,8 @@
             Range = 430
             Speed = 6000
             DamageRadius = 0
-            DamageLow = 10 //25
-            DamageHigh = 10 // 25
+            DamageLow = 8 // 25
+            DamageHigh = 8 // 25
             CriticalFx = "CriticalHit"
             HitVulnerabilityFx = "Backstab"
             UseArmor = true
@@ -85,8 +85,8 @@
             DetonateGraphic = "SpearDashSwipe"
             ProjectileDefenseAngle = 100
             ProjectileDefenseRadius = 240
-            DamageLow = 10 // 20
-            DamageHigh = 10 // 20
+            DamageLow = 7 // 20
+            DamageHigh = 7 // 20
             Thing =
                 {
                 Graphic = "SpearDashSwipe"
@@ -120,8 +120,8 @@
         {
             Name = "DarkSpearLunarThree"
             InheritFrom = "DarkSpear"
-            DamageLow = 10 // 70
-            DamageHigh = 10 // 70
+            DamageLow = 24 // 70
+            DamageHigh = 24 // 70
         }
         {
             Name = "DarkSpearSpin"
@@ -183,16 +183,16 @@
         {
             Name = "DarkSpearSpin2"
             InheritFrom = "DarkSpearSpin"
-            DamageLow = 15 // 50
-            DamageHigh = 15 // 50
+            DamageLow = 17 // 50
+            DamageHigh = 17 // 50
             DamageRadius = 350
             DeflectProjectiles = false
         }
         {
             Name = "DarkSpearSpin3"
             InheritFrom = "DarkSpearSpin"
-            DamageLow = 20 // 100
-            DamageHigh = 20 // 100
+            DamageLow = 33 // 100
+            DamageHigh = 33 // 100
             DamageRadius = 500
             DeflectProjectiles = false
             }
@@ -211,8 +211,8 @@
             UnlimitedUnitPenetration = true
             Range = 880
             Speed = 3000
-            DamageLow = 10 // 25
-            DamageHigh = 10 // 25
+            DamageLow = 8 // 25 / 3
+            DamageHigh = 8 // 25 / 3
             ProjectileDefenseRadius = 75
             CriticalFx = "CriticalHit"
             HitVulnerabilityFx = "Backstab"
@@ -280,8 +280,8 @@
             AttachToOwner = true
             Type = "INSTANT"
             Range = 50
-            DamageLow = 25
-            DamageHigh = 25
+            DamageLow = 8 // 25
+            DamageHigh = 8 // 25
             DamageRadius = 100.0
             DamageRadiusScaleY = 0.65
             UseVulnerability = true

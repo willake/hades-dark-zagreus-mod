@@ -108,3 +108,21 @@ function DZAIPositionEffectStacks( id )
 		Attach({ Id = effectId, DestinationId = id, OffsetY = -60, OffsetX = ((i - 1) * spacing - width/2) })
 	end
 end
+
+function DZAIReloadPresentationStart( attacker, weaponData, state )
+	if IsMoving({ Id = attacker.ObjectId }) then
+		SetAnimation({ DestinationId = attacker.ObjectId, Name = weaponData.MovingReloadAnimation })
+	else
+		SetAnimation({ DestinationId = attacker.ObjectId, Name = weaponData.IdleReloadAnimation })
+		-- FireWeaponFromUnit({ Weapon = "GunReloadSelf", AutoEquip = true, Id = attacker.ObjectId, DestinationId = attacker.ObjectId })
+	end
+end
+
+function DZAIReloadPresentationComplete( attacker, weaponData, state )
+	Flash({ Id = attacker.ObjectId, Speed = 6, MinFraction = 0, MaxFraction = 1, Color = Color.White, Duration = 0.15, ExpireAfterCycle = false })
+	if DZTemp.AI.Weapon and DZTemp.AI.Weapon.WeaponName == "GunWeapon" and DZTemp.AI.Weapon.ItemIndex == 4 then
+		PlaySound({ Name = "/SFX/Player Sounds/ZagreusGunReloadCompleteFlashLucifer", Id = attacker.ObjectId })
+	else
+		PlaySound({ Name = "/SFX/Player Sounds/ZagreusGunReloadCompleteFlash", Id = attacker.ObjectId })
+	end
+end

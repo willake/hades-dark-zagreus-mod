@@ -1,4 +1,4 @@
-﻿# Dark Zagreus (Hades Mod) beta1.1
+﻿# Dark Zagreus (Hades Mod) beta1.3
 
 A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Hades equips the same weapon as the player's previous successful run. What sets this mod special is the AI of Dark Zagreus is powered by a deep learning model trained on the player's historical gameplay data of previous successful run. This experimental feature creates a dynamic challenge experience for players with the individual's style and strategies.
 
@@ -9,6 +9,7 @@ A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). I
 - [Mod Importer](https://www.nexusmods.com/hades/mods/26)
 - [ModUtil](https://www.nexusmods.com/hades/mods/27)
 - [Max Save With No Run History](https://www.speedrun.com/hades/resources/hshp9) (Optional)
+- [StyxScribe](https://github.com/SGG-Modding/StyxScribe/tree/main) (Optinal, unless you would like to export/load record and don't want to use x86 version, which happens when you are using MacOS.)
 
 ## Installation
 
@@ -64,17 +65,24 @@ If you don't see it. You can also find it by right click the game on Steam -> Pr
 This function saves your previous run record to file, it is useful when you want to share your record data with someone. The save file will be located at `${YourHadesRootFolder}\x86\DZRecord.log`.
 #### Load record from file
 This function loads record from file, it is useful when you want to load other's record data. The file should be placed as `${YourHadesRootFolder}\x86\DZRecord.log`. Inside the game, execute `LoadRecordFromFile` command to load file. Dark Zagreus in your next encounter will be driven by this record.
+### StyxScribe only
+#### Load record from file StyxScribe
+Same as `Load record from file` but works with StyxScribe, which means that this feature works on any platform as long as StyxScribe is working.
 
 ## Limitation
 ### Cast, call, and summon support
-Cast, call, and summon are complex systems in Hades, requiring considerable time to implement. Therefore, Dark Zagreus will not use these actions. Cast might be supported in the future as it is somewhat easier to implement.
+Cast, call, and summon are complex systems in Hades, requiring considerable time to implement. Therefore, Dark Zagreus will not use these actions. Cast might be supported in the future as it is somewhat easier to implement. This also leads to a problem that upgraded weapon powers related to Cast are all missing right now.
 
 ### Boons and Daedalus Hammer
 Boons and Daedalus Hammer upgrades are driven by the trait system in the game code. The challenge in implementing these for non-player characters is that many mechanics are specifically designed for player use. The functions these upgrades introduce are tailored for manipulating the player character, requiring replication and reimplementation of all traits and their functions for Dark Zagreus. This is a substantial amount of work and may be supported in future versions. Other mod developers are welcome to build upon this mod and extend its capabilities.
 
+### Bow Charge VFX
+It seems like the bow charge VFX is handled internally, I couldn't make it work. Still looking for a way to fix it.
+
 ## Known issues
-- Bow charging animations are missing
-- Aspect of Lucifer (The 4th gun weapon) attack is not working
+- Chaos shield is not handled correctly
+- The gun weapon AI sometimes makes the game freezing forever
+- Export record for StyxScribe is not working, temporarily removed
 
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
@@ -89,7 +97,17 @@ Make sure you run the `modimporter.exe`
 ### When I open the game, a screen shows up saying that save files can't be loaded
 Make sure ModUtil and DarkZagreus are imported.
 
+## Dependencies
+This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
+
+Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSpinApply`, `ShieldThrowProjectileBonusApply`, `GrenadeSelfDamageOutputApply`, `StartNewRun`, `EndRun`, `RecordRunCleared`, `DamageHero`, `DamageEnemy`
+
 ## Data Version Change logs
+
+### v6
+
+- add IsReloading and Ammo
+- add ManualReload action
 
 ### v5
 

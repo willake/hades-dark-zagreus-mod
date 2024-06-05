@@ -4,18 +4,21 @@
     {
       Name = "DarkPoseidonSword"
       InheritFrom = "DarkSword"
-      ChargeStartAnimation = "ZagreusSwordAlt02Charge1"
+      ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordAlt02Attack1"
+      Projectile = "DarkPoseidonSword"
     }
     {
       Name = "DarkPoseidonSword2"
       InheritFrom = "DarkSword2"
+      Projectile = "DarkPoseidonSword2"
       // ChargeStartAnimation = "ZagreusSwordAlt02Charge2"
       // FireGraphic = "ZagreusSwordAlt02Attack2"
     }
     {
       Name = "DarkPoseidonSword3"
       InheritFrom = "DarkSword3"
+      Projectile = "DarkPoseidonSword3"
       // ChargeStartAnimation = "ZagreusSwordAlt02Charge3"
       // FireGraphic = "ZagreusSwordAlt02Attack3"
     }
@@ -23,12 +26,14 @@
       Name = "DarkPoseidonSwordDash"
       InheritFrom = "DarkSwordDash"
       FireGraphic = "ZagreusSwordAlt02DashAttack"
+      Projectile = "DarkPoseidonSwordDash"
     }
     {
       Name = "DarkPoseidonSwordParry"
       InheritFrom = "DarkSwordParry"
-      ChargeStartAnimation = "ZagreusSwordAlt02ParryCharge"
+      ChargeStartAnimation = "null"
       FireGraphic = "ZagreusSwordAlt02ParryFire"
+      Projectile = "DarkPoseidonSwordParry"
     }
   ]
 }

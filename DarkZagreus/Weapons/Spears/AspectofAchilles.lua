@@ -156,7 +156,14 @@ WeaponData.DarkAchillesSpearDash =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.425,
+			FireDuration = 0.15,
+			PostFireChargeStages = 
+			{
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.93 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.66 },
+			},
+			MaxChargeTime = 1.7
 		},
 
 		Sounds =
@@ -241,7 +248,7 @@ WeaponData.DarkAchillesSpearThrowReturn =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			-- FireDuration = 0.425,
-			WaitUntilProjectileDeath = true,
+			WaitUntilProjectileDeath = "DarkAchillesSpearThrowReturn",
 			WillReturnSpear = true
 		},
 
@@ -289,7 +296,7 @@ WeaponData.DarkAchillesSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.4,
+			FireDuration = 0.15,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
@@ -403,3 +410,8 @@ WeaponData.DarkAchillesSpearRush =
 
 		NoExpressiveAnim = true,
 	}
+
+EffectData.DZSpearRushBonus =
+{
+	OnApplyFunctionName = "DZAISpearRushBonusApply",
+}

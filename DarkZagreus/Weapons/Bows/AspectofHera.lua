@@ -10,6 +10,7 @@ WeaponData.DarkHeraBow =
         IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeoutMin = 0.5,
         AIMoveWithinRangeTimeoutMax = 1.0,
         SkipAttackAfterMoveTimeout = true,
@@ -26,7 +27,7 @@ WeaponData.DarkHeraBow =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkHeraBow"
     },
 
     Sounds =
@@ -90,9 +91,10 @@ WeaponData.DarkHeraBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowAlt02Start",
         PreFireFx = "BowChargeRamaDash",
@@ -106,7 +108,7 @@ WeaponData.DarkHeraBowDash =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkHeraBowDash"
     },
 
     Sounds =
@@ -158,15 +160,15 @@ WeaponData.DarkHeraBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.1,
         PreFireAnimation = "ZagreusBowAlt02RapidFire_Start",
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowAlt02RapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkHeraBowSplitShot"
     },
 
     Sounds =

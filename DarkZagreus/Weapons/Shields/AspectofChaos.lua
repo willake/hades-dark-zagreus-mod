@@ -9,10 +9,11 @@ WeaponData.DarkChaosShield = {
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.3,
+        AttackDistanceForPostCharge = 600,
         PostFireChargeWeapon = "DarkChaosShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
+        PreFireDuration = 0.15,
     },
 
     Sounds =
@@ -60,11 +61,11 @@ WeaponData.DarkChaosShieldDash =
 
     AIData =
     {
-        FireDuration = 0.45,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = "DarkChaosShieldDash",
     },
 
     Sounds =
@@ -98,7 +99,7 @@ WeaponData.DarkChaosShieldThrow =
 {
     Name = "DarkChaosShieldThrow",
     StartingWeapon = false,
-    OnHitFunctionNames = { "IncrementHitByShield" },
+    -- OnHitFunctionNames = { "IncrementHitByShield" },
 
     AIData =
     {
@@ -106,8 +107,8 @@ WeaponData.DarkChaosShieldThrow =
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        WaitUntilProjectileDeath = true,
-        PostFireBonusWeapon = "DarkChaosShieldThrowBonus"
+        WaitUntilProjectileDeath = "DarkChaosShieldThrow",
+        PreFireDuration = 0.28,
     },
 		
     Sounds =
@@ -150,8 +151,7 @@ WeaponData.DarkChaosShieldThrowBonus =
     {
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.2,
-        WillConsumeBonus = true
+        FireDuration = 0.2
     },
 		
     Sounds =
@@ -195,6 +195,7 @@ WeaponData.DarkChaosShieldRush =
     AIData =
     {
         AITrackTargetDuringCharge = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusShieldAlt01AttackCharge",
@@ -211,8 +212,7 @@ WeaponData.DarkChaosShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true,
-        WillEnableBonus = true -- spectically for chaos shield
+        FireDuration = 0.2,
     },
 
     Sounds =
@@ -257,4 +257,15 @@ WeaponData.DarkChaosShieldRush =
     },
 
     Upgrades = { },
+}
+
+WeaponData.DarkChaosShieldThrowProjectileBonusApplicator =
+{
+    Name = "DarkChaosShieldThrowProjectileBonusApplicator",
+}
+
+EffectData.DZThrowProjectileBonus =
+{
+    OnApplyFunctionName = "DZAIShieldThrowProjectileBonusApply",
+    OnClearFunctionName = "DZAIShieldThrowProjectileBonusClear",
 }

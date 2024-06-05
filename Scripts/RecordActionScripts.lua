@@ -48,6 +48,12 @@ OnWeaponFired{ "SwordParry",
         end
 
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+
+        -- aspect of nemesis mark critical after fire sword parry
+        if HeroHasTrait("SwordCriticalParryTrait") then
+			DZTemp.LastMarkTargetTime = _worldTime
+            DZTemp.ValidMarkTime = 3.0
+		end
     end
 }
 
@@ -159,6 +165,8 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
         if DZTemp.ShieldThrowed == false then
             DZTemp.ShieldThrowed = true 
         end
+
+        DZTemp.HasShieldBonus = false
     end
 }
 
@@ -223,7 +231,11 @@ OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))     
+        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))  
+        
+        if DZTemp.HasPowerShot then
+            DZTemp.HasPowerShot = false
+        end
     end 
 }
 
@@ -255,3 +267,5 @@ OnWeaponFired{ "RushWeapon",
         DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action))
     end
 } 
+
+-- for manual reload, see Combat.lua, because from OnControlPressed, I couldn't know how to verify if relaod is successful

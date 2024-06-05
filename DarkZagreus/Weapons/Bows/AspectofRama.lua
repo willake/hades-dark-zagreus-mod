@@ -9,6 +9,7 @@ WeaponData.DarkRamaBow =
     {
         IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
+        AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 0.5,
         AIMoveWithinRangeTimeoutMax = 1.0,
@@ -26,7 +27,7 @@ WeaponData.DarkRamaBow =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkRamaBow"
     },
 
     Sounds =
@@ -92,9 +93,10 @@ WeaponData.DarkRamaBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowRamaDashShot_Start",
         PreFireFx = "BowChargeRamaDash",
@@ -108,7 +110,7 @@ WeaponData.DarkRamaBowDash =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkRamaBowDash"
     },
 
     Sounds =
@@ -160,15 +162,15 @@ WeaponData.DarkRamaBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.18,
         PreFireAnimation = "ZagreusBowRamaRapidLoop_Start",
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowRamaRapidLoop_Fire",
         -- FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkRamaBowSplitShot"
     },
 
     Sounds =

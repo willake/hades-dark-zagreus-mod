@@ -7,15 +7,15 @@ WeaponData.DarkRush =
 
     AIData =
     {
-        PreAttackDuration = 0,
-        PostAttackDuration = 0,
         -- AttackDistance = 600,
         SkipMovement = true,
+        SkipAngleTowardTarget = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.07,
-        -- WaitUntilProjectileDeath = true
+        FireDuration = 0.05,
+        PreFireDuration = 0.07,
+        -- WaitUntilProjectileDeath = "DarkRush"
     },
 
     SimSlowBlur =

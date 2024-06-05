@@ -8,12 +8,14 @@ WeaponData.DarkNemesisSword =
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        ChainedWeapon = "DarkNemesisSword2",
-        FireDuration = 0.2,
         AIMoveWithinRangeTimeoutMin = 0.3,
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
+        SkipAngleTowardTarget = true,
+        PreFireDuration = 0.05,
+        PreFireAnimation = "ZagreusSwordAlt01Charge1",
+        ChainedWeapon = "DarkNemesisSword2",
+        WaitUntilProjectileDeath = "DarkNemesisSword"
     },
 
     Sounds =
@@ -57,14 +59,15 @@ WeaponData.DarkNemesisSword2 =
 
     AIData =
     {
-        FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkNemesisSword3",
-        PreFireDuration = 0.2, -- 0.3
+        PreFireDuration = 0.13, -- 0.3 
         PreFireAnimation = "ZagreusSwordAlt01Charge2",
         FireAnimation = "ZagreusSwordAlt01Attack2",
-        FireFxOnSelf = "SwordSwipeB"
+        FireFxOnSelf = "SwordSwipeB",
+        WaitUntilProjectileDeath = "DarkNemesisSword2"
     },
 
     Sounds =
@@ -98,15 +101,16 @@ WeaponData.DarkNemesisSword3 =
 
     AIData =
     {
-        FireDuration = 0.425,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.3,
+        AIAngleTowardsPlayerWhileFiring = true,
+        PreFireDuration = 0.25,
         PreFireAnimation = "ZagreusSwordAlt01Charge3",
         PreFireFx = "ChargeAttack",
         PreFireSound = "/Leftovers/SFX/AuraCharge",
         FireAnimation = "ZagreusSwordAlt01Attack3",
-        FireFxOnSelf = "SwordSwipeC"
+        FireFxOnSelf = "SwordSwipeC",
+        WaitUntilProjectileDeath = "DarkNemesisSword3"
     },
 
     Sounds =
@@ -146,11 +150,12 @@ WeaponData.DarkNemesisSwordDash =
 
     AIData =
     {
-        FireDuration = 0.3,
+        PreFireDuration = 0.05,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
+        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        WaitUntilProjectileDeath = "DarkNemesisSwordDash"
     },
 
     Sounds =
@@ -196,12 +201,13 @@ WeaponData.DarkNemesisSwordParry =
 
     AIData =
     {
-        FireDuration = 0.8,
-        AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeoutMin = 0.3,
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
+        SkipAngleTowardTarget = true,
+        PreFireDuration = 0.28,
+        PreFireAnimation = "ZagreusSwordAlt01ParryCharge",
+        FireDuration = 0.2,
     },
     Sounds =
     {

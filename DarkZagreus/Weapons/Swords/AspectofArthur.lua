@@ -8,16 +8,16 @@ WeaponData.DarkArthurSword =
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        ChainedWeapon = "DarkArthurSword2",
-        PreFireDuration = 0.3,
-        PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
-        FireDuration = 0.2,
-        FireAnimation = "ZagreusSwordArthurAttack1_Fire",
-        FireFxOnSelf = "SwordSwipeC-Arthur",
         AIMoveWithinRangeTimeoutMin = 0.3,
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
+        SkipAngleTowardTarget = true,
+        PreFireDuration = 0.25,
+        PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
+        ChainedWeapon = "DarkArthurSword2",
+        FireAnimation = "ZagreusSwordArthurAttack1_Fire",
+        FireFxOnSelf = "SwordSwipeC-Arthur",
+        FireDuration = 0.1
     },
 
     Sounds =
@@ -62,16 +62,17 @@ WeaponData.DarkArthurSword2 =
 
     AIData =
     {
-        FireDuration = 0.435,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkArthurSword3",
-        PreFireDuration = 0.3, -- 0.3
-        PreFireAnimation = "ZagreusSwordArthurAttack2_Charge",
         PreFireFx = "ChargeAttack-Arthur",
         PreFireSound = "/VO/ZagreusEmotes/EmoteCharging",
+        PreFireDuration = 0.33, -- 0.3 
+        PreFireAnimation = "ZagreusSwordArthurAttack2_Charge",
         FireAnimation = "ZagreusSwordArthurAttack2_Fire",
-        FireFxOnSelf = "SwordSwipeA-Arthur"
+        FireFxOnSelf = "SwordSwipeA-Arthur",
+        FireDuration = 0.05
     },
 
     Sounds =
@@ -113,18 +114,17 @@ WeaponData.DarkArthurSword3 =
 
     AIData =
     {
-        FireDuration = 0.425,
-        AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.3,
+        AIAngleTowardsPlayerWhileFiring = true,
+        PreFireDuration = 0.48,
         PreFireAnimation = "ZagreusSwordArthurAttack3_Charge",
         PreFireFx = "ChargeAttack-Arthur",
         PreFireSound = "/VO/ZagreusEmotes/EmoteHeavyCharging",
         FireAnimation = "ZagreusSwordArthurAttack3_Fire",
-        FireFxOnSelf = "SwordSwipeAFlipped-Arthur"
+        FireFxOnSelf = "SwordSwipeAFlipped-Arthur",
+        FireDuration = 0.05
+
     },
 
     Sounds =
@@ -166,13 +166,13 @@ WeaponData.DarkArthurSwordDash =
 
     AIData =
     {
-        FireDuration = 0.3,
-        AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        PreFireDuration = 0.3,
+        PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
+        AIAngleTowardsPlayerWhileFiring = true,
+        AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        FireDuration = 0.05
     },
 
     Sounds =
@@ -208,14 +208,15 @@ WeaponData.DarkArthurSwordParry =
 
     AIData =
     {
-        -- PreFireDuration = 0.3, -- should be 0.5, but it looks weird
-        FireDuration = 0.5,
-        AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        PostFireWeapon = "DarkConsecrationField",
         AIMoveWithinRangeTimeoutMin = 0.3,
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
+        SkipAngleTowardTarget = true,
+        PreFireDuration = 0.3,
+        PostFireWeapon = "DarkConsecrationField",
+        PreFireAnimation = "ZagreusSwordAlt03ParryCharge",
+        FireAnimation = "ZagreusSwordAlt03ParryFire",
+        FireDuration = 0.2
     },
 
     Sounds =
@@ -257,7 +258,7 @@ WeaponData.DarkConsecrationField =
     AIData =
     {
         -- PreFireDuration = 0.3, -- should be 0.5, but it looks weird
-        FireDuration = 0.2,
+        FireDuration = 0.07,
         AIAttackDistance = 9999,
         AIBufferDistance = 9999,
         FireOnSelf = true

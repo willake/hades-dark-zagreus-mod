@@ -1,7 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusShieldAI( enemy, currentRun )
-    enemy.HasBonus = false -- for chaos shield
     return DZAIDoShieldAILoop( enemy, currentRun )
 end
 
@@ -17,7 +16,7 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
     end
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
 
-    table.insert(enemy.WeaponHistory, enemy.WeaponName)
+    -- table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
 
@@ -38,7 +37,7 @@ function DZAIDoShieldAILoop(enemy, currentRun, targetId)
         
         -- Movement
         if not weaponAIData.SkipMovement then
-			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, percentageCharged)
+			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
 
 			if didTimeout and weaponAIData.SkipAttackAfterMoveTimeout then
 				return true
@@ -154,10 +153,6 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
         DZAIDoRegularFire(enemy, weaponAIData, targetId)
     end
 
-    enemy.DZ.LastActionTime = _worldTime
-    -- save both which action is used and the charge time
-    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction, ChargeTime = actionData.ChargeTime })
-
     -- Fire end
 
     -- shield will fire a rush weapon after primary attack
@@ -167,24 +162,17 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 
         DZAIDoPreFire(enemy, postFireWeaponAIData, targetId)
 
-        DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, actionData.ChargeTime)
-        
-        if postFireWeaponAIData.WillEnableBonus then
-            enemy.HasBonus = true
-        end
+        DZAIDoChargeDistanceFire(enemy, postFireWeaponAIData, targetId, percentageCharged)
     end
 
-    if weaponAIData.PostFireBonusWeapon ~= nil and enemy.HasBonus then
-        local bonusWeaponAIData = 
-            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireBonusWeapon)
+    enemy.DZ.LastActionTime = _worldTime
+    -- save both which action is used and the charge time
+    DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
 
-        DZAIDoPreFire(enemy, bonusWeaponAIData, targetId)
-
-        DZAIDoRegularFire(enemy, bonusWeaponAIData, targetId)
-
-        if bonusWeaponAIData.WillConsumeBonus then
-            enemy.HasBonus = false
-        end
+    if enemy.DZ.TempAction == 4 then
+        if DZTemp.AI.Weapon.ItemIndex == 2 then
+			FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowProjectileBonusApplicator", Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+		end
     end
 
     if ReachedAIStageEnd(enemy) or currentRun.CurrentRoom.InStageTransition then
@@ -196,8 +184,8 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 end
 
 function DZAISelectShieldWeapon(enemy, actionData)
-    local total = 
-        actionData.Attack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+    local total = actionData.Attack + actionData.SpecialAttack 
+        + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -206,25 +194,31 @@ function DZAISelectShieldWeapon(enemy, actionData)
 
     local lastAction = DZAIGetLastAction(enemy)
 
-    -- use attack weapon
-    if r < actionData.Attack then
-
-        enemy.DZ.TempAction = 1
-
-        -- if the last action is dash, do dash attack
-        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-            enemy.WeaponName = enemy.DashAttackWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
-        end
-
-        -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
+    -- use special attack
+    if r < actionData.SpecialAttack then
+        enemy.DZ.TempAction = 2
+        enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.ChargeAttack then
+    -- use dash
+    if r < actionData.SpecialAttack + actionData.DashToward then
+        enemy.DZ.TempAction = 0
+        enemy.WeaponName = enemy.DashWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+        enemy.DZ.TempAction = 3
+        enemy.WeaponName = enemy.DashWeapon
+        enemy.ChainedWeapon = nil
+        enemy.DZ.FireTowardTarget = false
+        return enemy.WeaponName
+    end
+
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ChargeAttack then
 
         enemy.DZ.TempAction = 4
 
@@ -241,32 +235,20 @@ function DZAISelectShieldWeapon(enemy, actionData)
         return enemy.WeaponName
     end
 
-    -- use special attack
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
-        enemy.DZ.TempAction = 2
-        enemy.WeaponName = enemy.SpecialAttackWeapon
+    -- use attack weapon
+    enemy.DZ.TempAction = 1
+
+    -- if the last action is dash, do dash attack
+    if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+        enemy.WeaponName = enemy.DashAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    -- use dash
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
-        enemy.DZ.TempAction = 0
-        enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
-    end
-
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
-        enemy.DZ.TempAction = 3
-        enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
-        enemy.DZ.FireTowardTarget = false
-        return enemy.WeaponName
-    end
-
-    enemy.WeaponName = nil
-    return nil
+    -- or just do a regular attack
+    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.ChainedWeapon = nil
+    return enemy.WeaponName
 end
 
 -- logic for deciding the charge time

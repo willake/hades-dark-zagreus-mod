@@ -16,7 +16,7 @@ function DZAIDoBowAILoop(enemy, currentRun, targetId)
     end
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     
-    table.insert(enemy.WeaponHistory, enemy.WeaponName)
+    -- table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
 
@@ -155,9 +155,8 @@ function DZAIFireBowWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 end
 
 function DZAISelectBowWeapon(enemy, actionData)
-    local total = 
-        actionData.Attack + actionData.ChargeAttack 
-        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+    local total = actionData.Attack + actionData.ChargeAttack 
+        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -166,27 +165,8 @@ function DZAISelectBowWeapon(enemy, actionData)
 
     local lastAction = DZAIGetLastAction(enemy)
 
-    -- use attack weapon
-    if r < actionData.Attack + actionData.ChargeAttack then
-
-        -- if the last action is dash, do dash attack
-        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-            enemy.DZ.TempAction = 1
-            enemy.WeaponName = enemy.DashAttackWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
-        end
-
-        enemy.DZ.TempAction = 1
-
-        -- do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
-    end
-
     -- use special attack
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
+    if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
@@ -194,14 +174,14 @@ function DZAISelectBowWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
@@ -209,8 +189,20 @@ function DZAISelectBowWeapon(enemy, actionData)
         return enemy.WeaponName
     end
 
-    enemy.WeaponName = nil
-    return nil
+    -- use attack weapon
+    -- if the last action is dash, do dash attack
+    enemy.DZ.TempAction = 1
+    
+    if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
+        enemy.WeaponName = enemy.DashAttackWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
+    -- do a regular attack
+    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.ChainedWeapon = nil
+    return enemy.WeaponName
 end
 
 -- logic for deciding the charge time

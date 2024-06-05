@@ -7,6 +7,9 @@ function DarkZagreusAI( enemy, currentRun )
     enemy.DZ.LastActionTime = 0
     DZTemp.AI = {}
     DZTemp.AI.ObjectId = enemy.ObjectId
+    DZTemp.AI.Weapon = DarkZagreus.DefaultAIWeapon
+    DZTemp.AI.HasShieldBonus = false
+    DZTemp.AI.HasPowerShot = false
 
     local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
     local weapon = {}
@@ -16,7 +19,8 @@ function DarkZagreusAI( enemy, currentRun )
     end 
     
     if weapon and weapon.WeaponName then
-        ailoop = _G[DZWeaponAI[weapon.WeaponName]] 
+        ailoop = _G[DZWeaponAI[weapon.WeaponName]]
+        DZTemp.AI.Weapon = weapon 
     end
 
     while IsAIActive( enemy, currentRun ) do
@@ -29,6 +33,7 @@ function DarkZagreusAI( enemy, currentRun )
 end
 
 function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, percentageCharged)
+
     if weaponAIData == nil then
         weaponAIData = enemy
     end
@@ -46,13 +51,23 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
         attackDistance = percentageCharged * rangeMax
     end
 
+    if weaponAIData.AttackDistanceForPostCharge and percentageCharged > 0.05 then
+        attackDistance = weaponAIData.AttackDistanceForPostCharge
+    end
+
+    local moveSuccessDistance = weaponAIData.MoveSuccessDistance or (attackDistance - 200)
+
+    if moveSuccessDistance < 32 then
+        moveSuccessDistance = 32
+    end
+
     AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
     -- Move to target
 	Move({ 
         Id = enemy.ObjectId, 
         DestinationId = targetId, 
-        SuccessDistance = weaponAIData.MoveSuccessDistance or 32, 
+        SuccessDistance = moveSuccessDistance, 
         LookAheadMultiplier = enemy.LookAheadMultiplier })
     
     -- Wait until within attack range
@@ -66,11 +81,9 @@ function DZAIDoMove(enemy, currentRun, targetId, weaponAIData, actionData, perce
 		timeout = timeout / enemy.SpeedMultiplier
 	end
 
-    NotifyWithinDistance({ Id = enemy.ObjectId, DestinationId = targetId, Distance = attackDistance,
-		StopsUnits = weaponAIData.AIRequireUnitLineOfSight, StopsProjectiles = weaponAIData.AIRequireProjectileLineOfSight,
-		LineOfSightBuffer = weaponAIData.AILineOfSightBuffer,
-		LineOfSightEndBuffer = weaponAIData.AILineOfSighEndBuffer,
-		Notify = enemy.AINotifyName, Timeout = timeout or 9.0 })
+    NotifyWithinDistance({ 
+        Id = enemy.ObjectId, DestinationId = targetId, Distance = attackDistance,
+        Notify = enemy.AINotifyName, Timeout = 1.0 }) -- timeout or 9.0
 
 	waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 
@@ -121,9 +134,24 @@ function DZAIGetCurrentState(enemy)
             isDamageEnemyRecently = _worldTime - DZTemp.AI.LastDamageEnemyTime < 1.0
         end
 
-        if DZTemp.AI.LastMarkedTargetTime and DZTemp.AI.ValidMarkTime then
-            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkedTargetTime < DZTemp.AI.ValidMarkTime
+        if DZTemp.AI.LastMarkTargetTime and DZTemp.AI.ValidMarkTime then
+            isMarkTargetRecently = _worldTime - DZTemp.AI.LastMarkTargetTime < DZTemp.AI.ValidMarkTime
         end 
+
+        if DZTemp.AI.HasPowerShot or DZTemp.AI.HasShieldBonus then
+            isMarkTargetRecently = true
+        end
+    end
+
+    local ammoData =
+	{
+		Current = 0,
+		Maximum = 1
+	}
+
+    if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
+        ammoData.Current = GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
+        ammoData.Maximum = GetWeaponMaxAmmo({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon }) or 1
     end
     
     return {
@@ -132,7 +160,9 @@ function DZAIGetCurrentState(enemy)
         Distance = distance / 1000,
         GetDamagedRecently = isGetDamagedRecently and 1.0 or 0.0,
         DamageEnemyRecently = isDamageEnemyRecently and 1.0 or 0.0,
-        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0
+        MarkTargetRecently = isMarkTargetRecently and 1.0 or 0.0,
+        IsReloading = enemy.Reloading and 1.0 or 0.0,
+        Ammo = ammoData.Current / ammoData.Maximum
     }
 end
 
@@ -144,6 +174,7 @@ function DZAIMakeLastActionData(action)
         (action.Action == 2) and 1 or 0, -- if last action is special attack,
         (action.Action == 3) and 1 or 0, -- if last action is dash away
         (action.Action == 4) and 1 or 0, -- if last action is charged attack, which appears in spear and shield  
+        (action.Action == 5) and 1 or 0, -- if last action is manual reload
     }
 end
 
@@ -154,15 +185,25 @@ end
 
 function DZAIMakeActionData(state, lastActions)
 
-    local consideration = 2 -- how many last actions need to be considered
+    local settings = DarkZagreus.ModelSettings
+    local consideration = settings.Consideration -- how many last actions need to be considered
+
+    if DarkZagreus.EnableAILog then
+        DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+            state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
+            state.IsReloading, state.Ammo))
+    end
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
-        return DZAIMakeRandomActionData(state)
+        if DarkZagreus.EnableAILog then
+            DZDebugPrintString("Model is not available, make random data.")
+        end
+            return DZAIMakeRandomActionData(state)
     end
 
     local input = {
         state.OwnHP, state.ClosestEnemyHP, state.Distance, 
-        state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently }
+        state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently, state.IsReloading, state.Ammo }
 
     for i = 1, consideration do
         local data = DZAIMakeLastActionData(lastActions[#lastActions + 1 - i])    
@@ -178,19 +219,24 @@ function DZAIMakeActionData(state, lastActions)
     local specialProb = DZTemp.Model[4].cells[3].signal
     local dashAwayProb = DZTemp.Model[4].cells[4].signal
     local chargeAttackProb = DZTemp.Model[4].cells[5].signal
+    local manualReloadProb = DZTemp.Model[4].cells[6].signal
 
-    -- DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
-    -- DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
-    -- DZDebugPrintString(string.format("special prob | %.3f", specialProb))
-    -- DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
-    -- DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+    if DarkZagreus.EnableAILog then
+        DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
+        DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
+        DZDebugPrintString(string.format("special prob | %.3f", specialProb))
+        DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
+        DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+        DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb)) 
+    end
 
     return {    
         DashToward = dashTowardProb,
         Attack = attackProb,
         SpecialAttack = specialProb,
         DashAway = dashAwayProb,
-        ChargeAttack = chargeAttackProb
+        ChargeAttack = chargeAttackProb,
+        ManualReload = manualReloadProb
     }
 end
 
@@ -276,12 +322,17 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
         end
     end
 
-    
-    
+    -- for aspect of chaos
+    if enemy.DZ.TempAction == 2 and DZTemp.AI.HasShieldBonus then
+        FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowBonus", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+        DZTemp.AI.HasShieldBonus = false
+        ClearEffect({ Id = enemy.ObjectId, Name = "DZThrowProjectileBonus" })
+    end
+
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
-		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
-		waitUntil( enemy.AINotifyName )
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName, Timeout = 1.0 })
+        waitUntil( enemy.AINotifyName, enemy.AIThreadName)
 	else
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
@@ -393,7 +444,7 @@ function DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharg
 
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
-		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName })
+		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName})
 		waitUntil( enemy.AINotifyName )
 	else
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )

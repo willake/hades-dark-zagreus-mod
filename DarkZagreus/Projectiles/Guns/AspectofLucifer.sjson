@@ -18,8 +18,8 @@
             ImmunityDuration = 0.05
             MultiDetonate = true
             DrawAsBeam = true
-            DamageLow = 1 // 10
-            DamageHigh = 1 // 10
+            DamageLow = 4 // 10
+            DamageHigh = 4 // 10
             ConsecutiveHitWindow = 0.6
             DamagePerConsecutiveHit = 0.75
             Range = 692.25 // 710.0 * 0.975
@@ -103,14 +103,14 @@
         {
             Name = "DarkLuciferGunBomb"
             InheritFrom = "DarkGunBomb"
-            DamageLow = 5 // 50
-            DamageHigh = 5 // 50
+            DamageLow = 17 // 50
+            DamageHigh = 17 // 50
         }
         {
             Name = "DarkLuciferGunBombImmolation"
             InheritFrom = "DarkGunBombImmolation"
-            DamageLow = 2 // 20
-            DamageHigh = 2 // 20
+            DamageLow = 7 // 20
+            DamageHigh = 7 // 20
         }
     ]
 }

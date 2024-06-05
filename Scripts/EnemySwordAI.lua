@@ -15,7 +15,7 @@ function DZAIDoSwordAILoop(enemy, currentRun, targetId)
         return true -- continue to next action
     end
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
-    table.insert(enemy.WeaponHistory, enemy.WeaponName)
+    -- table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
 
@@ -130,9 +130,9 @@ function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
 
     -- Prefire End
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     -- Fire
     
@@ -163,8 +163,7 @@ end
 function DZAISelectSwordWeapon(enemy, actionData)
     local total = 
         actionData.Attack + actionData.SpecialAttack 
-        + actionData.DashToward + actionData.DashAway
-        + actionData.ChargeAttack
+        + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
     
     enemy.DZ.TempAction = 0
@@ -172,38 +171,8 @@ function DZAISelectSwordWeapon(enemy, actionData)
     local lastAction = DZAIGetLastAction(enemy)
     local lastActionTime = enemy.DZ.LastActionTime
 
-    -- use attack weapon
-    -- I'll treat attack and charge attack the same in this domain
-    if r < actionData.Attack + actionData.ChargeAttack then
-
-        enemy.DZ.TempAction = 1
-
-        -- if the last action is dash, do dash attack
-        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - lastActionTime < 0.3 then
-            enemy.WeaponName = enemy.DashAttackWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
-        end
-
-        -- if the last action is also attack, do weapon combo
-        if lastAction.Action == 1 then
-            DebugPrintf({ Text = "Previous is attack"})
-            if enemy.ChainedWeapon ~= nil and _worldTime - lastActionTime < 0.3 then
-                DebugPrintf({ Text = "Do combo"})
-                enemy.WeaponName = enemy.ChainedWeapon
-                enemy.ChainedWeapon = nil
-                return enemy.WeaponName
-            end
-        end
-
-        -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
-    end
-
     -- use special attack
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
+    if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
@@ -211,14 +180,14 @@ function DZAISelectSwordWeapon(enemy, actionData)
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
         enemy.ChainedWeapon = nil
@@ -226,6 +195,28 @@ function DZAISelectSwordWeapon(enemy, actionData)
         return enemy.WeaponName
     end
 
-    enemy.WeaponName = nil
-    return nil
+    -- use attack weapon
+    -- I'll treat attack and charge attack the same in this domain
+    enemy.DZ.TempAction = 1
+
+    -- if the last action is dash, do dash attack
+    if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - lastActionTime < 0.3 then
+        enemy.WeaponName = enemy.DashAttackWeapon
+        enemy.ChainedWeapon = nil
+        return enemy.WeaponName
+    end
+
+    -- if the last action is also attack, do weapon combo
+    if lastAction.Action == 1 then
+        if enemy.ChainedWeapon ~= nil and _worldTime - lastActionTime < 0.3 then
+            enemy.WeaponName = enemy.ChainedWeapon
+            enemy.ChainedWeapon = nil
+            return enemy.WeaponName
+        end
+    end
+
+    -- or just do a regular attack
+    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.ChainedWeapon = nil
+    return enemy.WeaponName
 end

@@ -10,6 +10,7 @@ WeaponData.DarkChironBow =
         IsAttackDistanceBasedOnCharge = true,
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeoutMin = 0.5,
         AIMoveWithinRangeTimeoutMax = 1.0,
         SkipAttackAfterMoveTimeout = true,
@@ -26,7 +27,7 @@ WeaponData.DarkChironBow =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkChironBow"
     },
 
     Sounds =
@@ -91,9 +92,10 @@ WeaponData.DarkChironBowDash =
 
     AIData =
     {
-        AIChargeTargetMarker = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusBowAlt01Start",
         PreFireFx = "BowChargeRamaDash",
@@ -107,7 +109,7 @@ WeaponData.DarkChironBowDash =
         MaxChargeTime = 1,
         Range = 45,
         ChargeRangeMultiplier = 20,
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkChironBowDash"
     },
 
 
@@ -165,15 +167,15 @@ WeaponData.DarkChironBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
-        AIChargeTargetMarker = true,
         AITrackTargetDuringCharge = true,
+        AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         PreFireDuration = 0.1,
         PreFireAnimation = "ZagreusBowAlt01RapidFire_Start",
         PreFireFx = "BowChargeFast",
         FireAnimation = "ZagreusBowAlt01RapidFire_Fire",
         FireSound = "/VO/ZagreusEmotes/EmoteRanged",
-        WaitUntilProjectileDeath = true
+        WaitUntilProjectileDeath = "DarkChironBowSplitShot"
     },
 
     Sounds =

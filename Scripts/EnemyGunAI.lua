@@ -18,9 +18,13 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
     if enemy.WeaponName == nil then
         return true -- continue to next action
     end
+
+    if DZTemp.AI.Reloading then
+        return true
+    end
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     
-    table.insert(enemy.WeaponHistory, enemy.WeaponName)
+    -- table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
 	local weaponAIData = GetWeaponAIData(enemy)
 
@@ -36,7 +40,13 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 
     -- if there is a target
     if targetId ~= nil and targetId ~= 0 then
-        
+
+        -- do manual reload here so the AI can reload while walking
+        if enemy.DZ.TempAction == 5 then
+            DZAIManualReload(enemy)
+            return true
+        end
+    
         -- Movement
         if not weaponAIData.SkipMovement then
 			local didTimeout = DZAIDoMove( enemy, currentRun, targetId, weaponAIData, actionData, 0)
@@ -46,21 +56,25 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 			end
 		end
 
-        if enemy.WeaponName == nil then
-            return true
-        end
-
         -- Attack
 		local attackSuccess = false
 
         while not attackSuccess do
             attackSuccess = DZAIDoGunAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
-
+            
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
-				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
-				waitUntil( enemy.AINotifyName )
+				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 5.0 })
+				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
+        end
+
+        local ammo = 
+            GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
+        
+        if ammo <= 0 then
+            DZDebugPrintString("Reload")
+            DZAIReloadGun(enemy, weaponAIData)
         end
     end
 
@@ -107,9 +121,9 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 
     -- ATTACK
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-		return false
-	end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+	-- 	return false
+	-- end
 
     if not DZAIFireGunWeapon( enemy, weaponAIData, currentRun, targetId, actionData ) then
         return false
@@ -125,9 +139,9 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
         return true
     end
 
-    if not CanAttack({ Id = enemy.ObjectId }) then
-        return false
-    end
+    -- if not CanAttack({ Id = enemy.ObjectId }) then
+    --     return false
+    -- end
 
     if weaponAIData.AIAngleTowardsPlayerWhileFiring then
         AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
@@ -153,9 +167,9 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 
     -- Prefire End
 
-    -- if not CanAttack({ Id = enemy.ObjectId }) then
-    --     return false
-    -- end
+    if not CanAttack({ Id = enemy.ObjectId }) then
+        return false
+    end
 
     -- Fire
     
@@ -164,6 +178,11 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     enemy.DZ.LastActionTime = _worldTime
     -- save both which action is used and the charge time
     DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
+
+    if enemy.DZ.TempAction == 1 and DZTemp.AI.HasPowerShot then
+        DZTemp.AI.HasPowerShot = false
+        ClearEffect({ Id = enemy.ObjectId, Name = "DZManualReloadBonus" })
+    end
 
     -- Fire end
 
@@ -187,9 +206,8 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
 end
 
 function DZAISelectGunWeapon(enemy, actionData)
-    local total = 
-        actionData.Attack + actionData.ChargeAttack 
-        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway
+    local total = actionData.Attack + actionData.ChargeAttack 
+        + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload
     local r = math.random() * total
     -- init combo weapon to nil
     -- enemy.PostAttackChargeWeapon = nil
@@ -197,60 +215,108 @@ function DZAISelectGunWeapon(enemy, actionData)
     enemy.DZ.TempAction = 0
     enemy.DZ.FireTowardTarget = true
     enemy.DZ.ShouldPreWarm = false
-    -- enemy.DZ.SkipStop = false
+    enemy.ChainedWeapon = nil
 
     local lastAction = DZAIGetLastAction(enemy)
-    
-    if r < actionData.Attack + actionData.ChargeAttack then
-        enemy.DZ.TempAction = 1
-
-        if lastAction.Action ~= 1 then
-            enemy.DZ.ShouldPreWarm = true
-        end
-
-        -- if the last action is dash, do dash attack
-        if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
-            enemy.WeaponName = enemy.DashAttackWeapon
-            enemy.ChainedWeapon = nil
-            return enemy.WeaponName
-        end
-
-        -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
-        enemy.ChainedWeapon = nil
-        return enemy.WeaponName
-    end
 
     -- use special attack
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack then
+    if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = enemy.SpecialAttackWeapon
-        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- use dash
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward then
+    if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
         enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
-    if r < actionData.Attack + actionData.ChargeAttack + actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
         enemy.WeaponName = enemy.DashWeapon
-        enemy.ChainedWeapon = nil
         enemy.DZ.FireTowardTarget = false
         return enemy.WeaponName
     end
 
-    enemy.WeaponName = nil
-    return nil
+    if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload then
+        enemy.DZ.TempAction = 5
+        enemy.WeaponName = enemy.ReloadWeapon
+        return enemy.WeaponName
+    end
+
+    -- attack 
+    enemy.DZ.TempAction = 1
+
+    if lastAction.Action ~= 1 then
+        enemy.DZ.ShouldPreWarm = true
+    end
+
+    -- if the last action is dash, do dash attack
+    if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
+
+        if DZTemp.AI.HasPowerShot then
+            enemy.WeaponName = enemy.DashAttackPowerWeapon
+            return enemy.WeaponName    
+        end
+
+        enemy.WeaponName = enemy.DashAttackWeapon
+        return enemy.WeaponName
+    end
+
+    -- or just do a regular attack
+
+    if DZTemp.AI.HasPowerShot then
+        enemy.WeaponName = enemy.PrimaryPowerWeapon
+        return enemy.WeaponName    
+    end
+
+    enemy.WeaponName = enemy.PrimaryWeapon
+    return enemy.WeaponName
 end
 
--- for aspect of hestia
-function DZAIManualReloadBonusApply( triggerArgs )
-	-- SwapWeapon({ Name = "GunWeapon", SwapWeaponName = "SniperGunWeapon", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "GunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
-	-- SwapWeapon({ Name = "GunWeaponDash", SwapWeaponName = "SniperGunWeaponDash", ClearFireRequest = true, StompOriginalWeapon = false, GainedControlFrom = "SniperGunWeapon", DestinationId = CurrentRun.Hero.ObjectId, ExtendControlIfSwapActive = true, RequireCurrentControl = true })
+function DZAIReloadGun(enemy, weaponData)
+    -- if SetThreadWait( "ReloadGun" .. enemy.ObjectId, weaponData.ActiveReloadTime ) then
+	-- 	return
+	-- end
+    -- DZTemp.AI.Reloading = true
+
+	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
+    DZAIReloadPresentationStart( enemy, weaponData, presentationState )
+    wait(weaponData.ActiveReloadTime, enemy.AIThreadName)
+    if enemy.HandlingDeath then
+        return false
+    end
+    DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
+    DZTemp.AI.Reloading = false
+    return true
+end
+
+function DZAIManualReload( enemy )
+	local weaponData = GetWeaponData( enemy, enemy.PrimaryWeapon )
+    if weaponData ~= nil and weaponData.ActiveReloadTime ~= nil then
+        if enemy.Reloading then
+            return
+        end
+
+        local weapon = DZTemp.AI.Weapon
+
+        if RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
+            -- aspect of hestia can reload whenever
+            if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
+                return
+            end 
+        end
+
+        DZAIReloadGun( enemy, weaponData )
+
+        if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
+            EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DZManualReloadEffectApplicator" })
+            ApplyEffectFromWeapon({ Id = enemy.ObjectId, DestinationId = enemy.ObjectId, WeaponName = "DZManualReloadEffectApplicator", EffectName = "DZManualReloadBonus" })
+        end
+
+        return
+    end
 end

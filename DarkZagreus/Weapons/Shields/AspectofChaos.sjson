@@ -17,6 +17,7 @@
             Name = "DarkChaosShieldThrow"
             InheritFrom = "DarkShieldThrow"
             Projectile = "DarkChaosShieldThrow"
+            FireGraphic = "ZagreusShieldAlt01Throw"
         }
         {
             Name = "DarkChaosShieldThrowBonus"
@@ -32,12 +33,32 @@
             NumProjectiles = 2 // vary by level
             BarrelLength = 30
             DefaultControl = false
-            FireGraphic = "ZagreusShieldAlt01Throw"
+            // FireGraphic = "ZagreusShieldAlt01Throw"
         }
         {
             Name = "DarkChaosShieldRush"
             InheritFrom = "DarkShieldRush"
             Projectile = "DarkChaosShieldRush"
+        }
+        {
+            Name = "DarkChaosShieldThrowProjectileBonusApplicator"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "null"
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+            Effect = {
+                Name = "DZThrowProjectileBonus"
+                Modifier = 1
+                Duration = 5
+                CanAffectInvulnerable = true
+                FrontFx = "ChaosShieldBonusFx"
+                FlashFrontFxWhenExpiring = true
+                // OnlyAffectName = "_PlayerUnit"
+                IgnoreName = "_PlayerUnit"
+            }
         }
     ]
 }

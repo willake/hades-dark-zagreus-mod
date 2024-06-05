@@ -12,8 +12,10 @@ WeaponData.DarkHestiaGun =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         -- FireDuration = 0.05,
-        WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.07,
+        WaitUntilProjectileDeath = "DarkHestiaGun",
         AIMoveWithinRangeTimeout = 0.5,
+        SkipAngleTowardTarget = true,
         SkipAttackAfterMoveTimeout = true,
     },
     
@@ -75,7 +77,7 @@ WeaponData.DarkHestiaGunDash =
     DashWeapon = nil,
 
     IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
-				MovingReloadAnimation = "ZagreusGunAlt01RunReload",
+    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
 
     AIData =
     {
@@ -85,7 +87,9 @@ WeaponData.DarkHestiaGunDash =
         -- FireDuration = 0.05,
         -- CanHold = true,
         -- ChainedWeapon = "DarkGun"
-        WaitUntilProjectileDeath = true
+        PreFireDuration = 0.07,
+        SkipAngleTowardTarget = true,
+        WaitUntilProjectileDeath = "DarkHestiaGunDash"
     },
 
     Sounds =
@@ -131,7 +135,8 @@ WeaponData.DarkHestiaGunGrenadeToss =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.2
+        PreFireDuration = 0.2,
+        FireDuration = 0.1
     },
 
     Sounds =
@@ -165,7 +170,7 @@ WeaponData.DarkHestiaGunGrenadeToss =
 WeaponData.DarkHestiaSniperGun = {
     InheritFrom = { "DarkHestiaGun" },
     DashWeapon = nil,
-    OnFiredFunctionName = "ClearManualReloadVFX",
+    OnFiredFunctionName = "DZAIClearManualReloadVFX",
 }
 
 WeaponData.DarkHestiaSniperGunDash = {
@@ -173,12 +178,12 @@ WeaponData.DarkHestiaSniperGunDash = {
     -- DashWeapon = SniperGunWeaponDash,
 }
 
-WeaponData.DarkManualReloadEffectApplicator =
+WeaponData.DZManualReloadEffectApplicator =
 {
     -- CompleteObjectivesOnFire = { "ManualReload" },
 }
 
-EffectData.DarkManualReloadBonus =
+EffectData.DZManualReloadBonus =
 {
     OnApplyFunctionName = "DZAIManualReloadBonusApply",
     OnClearFunctionName = "DZAIManualReloadBonusClear",

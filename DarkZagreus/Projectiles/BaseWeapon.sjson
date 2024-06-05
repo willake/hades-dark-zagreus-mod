@@ -21,6 +21,15 @@
             BackFx = "null"
             IgnoreName = "HydraTooth"
           }
+          {
+            Name = "DZMarkTargetSpin"
+            Duration = 10.0
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
+            FrontFx = "MarkTargetHades"
+            BackFx = "null"
+          }
         ]
         // ignore effects
     }

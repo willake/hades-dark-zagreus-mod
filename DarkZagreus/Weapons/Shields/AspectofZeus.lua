@@ -8,11 +8,12 @@ WeaponData.DarkZeusShield = {
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        FireDuration = 0.3,
+        AttackDistanceForPostCharge = 600,
         PostFireChargeWeapon = "DarkZeusShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
+        PreFireDuration = 0.15,
+        WaitUntilProjectileDeath = "DarkZeusShield",
     },
 
     Sounds =
@@ -61,12 +62,12 @@ WeaponData.DarkZeusShieldDash =
 
     AIData =
     {
-        FireDuration = 0.45,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = "DarkZeusShieldDash",
     },
 
     Sounds =
@@ -108,10 +109,9 @@ WeaponData.DarkZeusShieldThrow =
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-        PreFireDuration = 0.2,
-        FireAnimation = "ZagreusShieldThrow",
+        PreFireDuration = 0.28,
         FireDuration = 0.2,
-        -- WaitUntilProjectileDeath = true,
+        -- WaitUntilProjectileDeath = "DarkZeusShieldThrow",
         IsZeusShieldThrow = true 
         -- while equiping zeus shield, players can throw it and hit it again to make it turn back
     },
@@ -157,6 +157,7 @@ WeaponData.DarkZeusShieldRush =
     AIData =
     {
         AITrackTargetDuringCharge = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         PreFireDuration = 0.2,
         PreFireAnimation = "ZagreusShieldAlt02AttackCharge",
@@ -173,7 +174,7 @@ WeaponData.DarkZeusShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true
+        FireDuration = 0.2,
     },
 
     Sounds =

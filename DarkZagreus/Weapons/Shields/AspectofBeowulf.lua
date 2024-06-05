@@ -12,10 +12,12 @@ WeaponData.DarkBeowulfShield = {
     {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.3,
+        AttackDistanceForPostCharge = 600,
         PostFireChargeWeapon = "DarkBeowulfShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
+        PreFireDuration = 0.15,
+        
     },
 
     Sounds =
@@ -74,12 +76,12 @@ WeaponData.DarkBeowulfShieldDash =
 
     AIData =
     {
-        FireDuration = 0.45,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
+        PreFireDuration = 0.12,
+        WaitUntilProjectileDeath = "DarkBeowulfShieldDash",
     },
 
     Sounds =
@@ -119,9 +121,8 @@ WeaponData.DarkBeowulfShieldThrow =
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-        PreFireDuration = 0.2,
-        FireAnimation = "ZagreusShieldThrow",
-        WaitUntilProjectileDeath = true,
+        PreFireDuration = 0.28,
+        WaitUntilProjectileDeath = "DarkBeowulfShieldThrow",
     },
 		
     Sounds =
@@ -178,6 +179,7 @@ WeaponData.DarkBeowulfShieldRush =
     AIData =
     {
         AITrackTargetDuringCharge = true,
+        AIChargeTargetMarker = "ShadeBowTargetMarker",
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         PreFireDuration = 0.2,
@@ -195,7 +197,7 @@ WeaponData.DarkBeowulfShieldRush =
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
         ChargeVelocityMultiplier = 5,
-        WaitUntilProjectileDeath = true
+        FireDuration = 0.2,
     },
 
     Sounds =
