@@ -68,7 +68,7 @@
             Name = "DarkRamaBowSplitShot"
             InheritFrom = "DarkBowSplitShot"
             DamageLow = 5
-            DamageHigh = 5
+            DamageHigh = 10
             NoJumpTargetRandomSpread = 90
             NumJumps = 1
             BounceWhenOutOfJumpTargets = true

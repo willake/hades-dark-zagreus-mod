@@ -19,8 +19,8 @@
         Range = 710.0
         Speed = 8000.0
         DamageRadius = 0
-        DamageLow = 4 // 10
-        DamageHigh = 4 // 10
+        DamageLow = 7 // 10
+        DamageHigh = 7 // 10
         CriticalFx = "CriticalHit"
         HitVulnerabilityFx = "Backstab"
         UseArmor = true
@@ -231,8 +231,8 @@
         Name = "DarkSniperGun"
         InheritFrom = "DarkGun"
         Range = 1050
-        DamageLow = 17 // 50
-        DamageHigh = 17 // 50
+        DamageLow = 25 // 50
+        DamageHigh = 25 // 50
         Thing = {
             Graphic = "GunWeaponProjectile_Sniper"
             OffsetZ = 70
