@@ -151,6 +151,7 @@ WeaponData.DarkNemesisSwordDash =
     AIData =
     {
         PreFireDuration = 0.05,
+        GiveupDistance = 250,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,

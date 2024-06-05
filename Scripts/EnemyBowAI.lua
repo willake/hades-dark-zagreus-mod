@@ -45,6 +45,27 @@ function DZAIDoBowAILoop(enemy, currentRun, targetId)
 			end
 		end
 
+        if weaponAIData.GiveupDistance then
+            local hasLineOfSight = HasLineOfSight({ Id = enemy.ObjectId, DestinationId = targetId, StopsProjectiles = true, StopsUnits = true, PreferAvoidUnits = false })
+            local distance = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
+            
+            if distance > weaponAIData.GiveupDistance or hasLineOfSight == false then
+                return true
+            end
+        end
+
+        if weaponAIData.GiveupDistanceBasedOnCharge then
+            local hasLineOfSight = HasLineOfSight({ Id = enemy.ObjectId, DestinationId = targetId, StopsProjectiles = true, StopsUnits = true, PreferAvoidUnits = false })
+            local distance = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
+
+            local rangeMax = weaponAIData.Range * weaponAIData.ChargeRangeMultiplier
+            local giveupDistance = percentageCharged * rangeMax
+            
+            if distance > giveupDistance or hasLineOfSight == false then
+                return true
+            end
+        end
+
         -- Attack
 		local attackSuccess = false
 

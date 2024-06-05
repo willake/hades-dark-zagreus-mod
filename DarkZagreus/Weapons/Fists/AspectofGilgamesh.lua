@@ -216,6 +216,7 @@ WeaponData.DarkGilgameshFistDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
@@ -310,6 +311,7 @@ WeaponData.DarkGilgameshFistSpecialDash =
 
     AIData =
     {
+        GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         FireDuration = 0.4,

@@ -56,6 +56,15 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 			end
 		end
 
+        if weaponAIData.GiveupDistance then
+            local hasLineOfSight = HasLineOfSight({ Id = enemy.ObjectId, DestinationId = targetId, StopsProjectiles = true, StopsUnits = true, PreferAvoidUnits = false })
+            local distance = GetDistance({ Id = enemy.ObjectId, DestinationId = targetId })
+            
+            if distance > weaponAIData.GiveupDistance or hasLineOfSight == false then
+                return true
+            end
+        end
+
         -- Attack
 		local attackSuccess = false
 
