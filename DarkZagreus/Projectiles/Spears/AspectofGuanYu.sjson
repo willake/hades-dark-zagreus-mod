@@ -135,8 +135,8 @@
             DetonateGraphic = "SpearDashSwipe"
             ProjectileDefenseAngle = 100
             ProjectileDefenseRadius = 240
-            DamageLow = 10 // 30
-            DamageHigh = 10 // 30
+            DamageLow = 15 // 30
+            DamageHigh = 15 // 30
             Thing =
                 {
                 Graphic = "SpearDashSwipe"
@@ -176,8 +176,8 @@
             NumBounces = 99999
             DamageRadius = 105 // 210 * 0.50
             // ProjectileDefenseRadius = 275, original SpearSpin do not have this...
-            DamageLow = 7 // 20
-            DamageHigh = 7 // 20
+            DamageLow = 10 // 20
+            DamageHigh = 10 // 20
             Thing = {
                 Graphic = "null"
                 OffsetZ = 70
@@ -208,8 +208,8 @@
         {
             Name = "DarkGuanYuSpearSpin2"
             InheritFrom = "DarkGuanYuSpearSpin"
-            DamageLow = 10 // 30
-            DamageHigh = 10 // 30
+            DamageLow = 15 // 30
+            DamageHigh = 15 // 30
             DamageRadius = 175 // 350 * 0.5
             DeflectProjectiles = false
             TotalFuse = 1.00 // 0 + 1.00 
@@ -217,8 +217,8 @@
         {
             Name = "DarkGuanYuSpearSpin3"
             InheritFrom = "DarkGuanYuSpearSpin"
-            DamageLow = 17 // 50
-            DamageHigh = 17 // 50
+            DamageLow = 25 // 50
+            DamageHigh = 25 // 50
             DamageRadius = 250 // 500 * 0.5
             DeflectProjectiles = false
             TotalFuse = 1.25 // 0 + 1.25

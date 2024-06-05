@@ -13,8 +13,8 @@
         Name = "DarkZeusShieldThrow"
         InheritFrom = "DarkShieldThrow"
         GroupName = "Standing"
-        DamageLow = 3 // 15 * 0.5 / 3
-        DamageHigh = 3 // 15 * 0.5 / 3
+        DamageLow = 8 // 15
+        DamageHigh = 8 // 15
         ClearWeaponBonusesOnHit = true
         MultipleUnitCollisions = false
         IgnoreCoverageAngles = true
