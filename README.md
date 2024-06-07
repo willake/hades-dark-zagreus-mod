@@ -67,7 +67,7 @@ This function saves your previous run record to file, it is useful when you want
 This function loads record from file, it is useful when you want to load other's record data. It is only avilable in the House of Hades. The file should be placed as `${YourHadesRootFolder}\x86\DZRecords\DZRecord.log`. Inside the game, execute `LoadRecordFromFile` command to load file. Dark Zagreus in your next encounter will be driven by this record.
 ### StyxScribe only
 #### Load record from file StyxScribe
-Same as `Load record from file` but works with StyxScribe, which means that this feature works on any platform as long as StyxScribe is working.
+Same as `Load record from file` but works with StyxScribe, which means that this feature works on any platform as long as StyxScribe is working. The file should ba placed at the same folder as `StyxScribe.py`.
 
 ## Limitation
 ### Cast, call, and summon support

@@ -49,14 +49,14 @@ if io then
 	DZCommands.Entries.ExportRecordToFile = {
 		Entries = {
 			{
-				Text = "This function exports the record to a file. It only works on the x86 (32-bit) version. The file will be saved in the x86 folder of the root directory with the name DZRecord.log. Press confirm to execute."
+				Text = "This function exports the record to a file. It only works on the x86 (32-bit) version. The file will be saved at ${YourHadesRootFolder}\\x86\\DZRecords with the name ${time}.log. Press confirm to execute."
 			}
 		}
 	}
 	DZCommands.Entries.LoadRecordFromFile = {
 		Entries = {
 			{
-				Text = "This function loads record from a file. It only works on the x86 (32-bit) version. The file must be located in the x86 folder of the root directory and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
+				Text = "This function loads record from a file. It only works on the x86 (32-bit) version. Place the file at `${YourHadesRootFolder}\x86\\DZRecords` and name it DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
 			}
 		}
 	}
@@ -73,7 +73,7 @@ if StyxScribe then
 	DZCommands.Entries.LoadRecordFromFileStyxScribe = {
 		Entries = {
 			{
-				Text = "This function loads record from a file. It could work on any version but only with StyxScribe installed. The file must be located in the Hades root folder and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
+				Text = "This function loads record from a file. It could work on any version but only with StyxScribe installed. The file must be located at the same folder as StyxScribe.py and named DZRecord.log. Dark Zagreus in your next encounter will be driven by this record. Press confirm to execute."
 			}
 		}
 	}
