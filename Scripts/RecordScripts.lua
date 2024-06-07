@@ -257,7 +257,7 @@ end
 
 DZSavePrevRunRecordToFile = function ()
     DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
-    DZSaveTrainingData(DZPersistent.PrevRunRecord, "DZRecord.log")
+    DZSaveTrainingData(DZPersistent.PrevRunRecord)
 end
 
 DZLoadPreRunRecordFromFile = function ()
