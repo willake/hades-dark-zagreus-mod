@@ -87,12 +87,13 @@ if io and os then
     end
 
     DZSaveTrainingData = function(curRunRecord)
-        if DZIsDirExists("DZRecords") == false then
+        if DZIsDirExists(DarkZagreus.RecordDirectoryName) == false then
             -- really don't like this, but seems to be the only way within this environment
             -- this will make users scared :(
-            os.execute("mkdir DZRecords")
+            os.execute("mkdir " .. DarkZagreus.RecordDirectoryName)
         end
-        local filePath = string.format("DZRecords\\%d.log", os.time())
+        local currentTime = os.date("%y%m%d%H%M%S") -- as format YY:MM:DD:HH:MM:SS
+        local filePath = string.format(DarkZagreus.RecordDirectoryName .. "\\%s.log", currentTime)
         local file = io.open(filePath, "w+")
 
         if curRunRecord == nil or curRunRecord.Weapon == nil or curRunRecord.History == nil then
@@ -145,7 +146,16 @@ if io and os then
         file:close()
     end
 
-    DZLoadTrainingData = function(filePath)
+    DZLoadTrainingData = function()
+        local filePath = string.format(
+            "%s\\%s.log",
+            DarkZagreus.RecordDirectoryName, DarkZagreus.LoadRecordFileName)
+
+        if DZIsDirExists(DarkZagreus.RecordDirectoryName) == false 
+           or DZIsFileExists(filePath) == false then
+            return nil
+        end
+
         local data = {
             Version = "",
             Weapon = {},

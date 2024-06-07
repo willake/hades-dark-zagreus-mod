@@ -131,7 +131,6 @@ function DZUIHandleLoadRecordFromFile()
 	else
 		ModUtil.Hades.NewMenuYesNo("ConfirmLoadRecord", nil, nil, function ()
 			DZLoadPreRunRecordFromFile()
-			ModUtil.Hades.PrintDisplay("Successfully load record", 3, {0, 255, 255, 255})
 		end, nil, 
 		"Sure to load record?", 
 		"It will override your lastest record. Are you sure to load a record?",

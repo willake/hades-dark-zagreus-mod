@@ -262,9 +262,12 @@ end
 
 DZLoadPreRunRecordFromFile = function ()
     DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
-    local record = DZLoadTrainingData("DZRecord.log")
+    local record = DZLoadTrainingData()
     if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
         DZPersistent.PrevRunRecord = record
+        ModUtil.Hades.PrintDisplay("Successfully load record", 3, {0, 255, 255, 255})
+    else
+        ModUtil.Hades.PrintDisplay("File is not found", 3, {255, 0, 0, 255})
     end
 end
 
