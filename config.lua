@@ -31,6 +31,9 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
     ChargeAttack = 0.2,
     ManualReload = 0.00
 }
+
+DarkZagreus.RecordDirectoryName = "DZRecords"
+DarkZagreus.LoadRecordFileName = "DZRecord"
 -- State Scheme
 -- {
 --     OwnHP,
