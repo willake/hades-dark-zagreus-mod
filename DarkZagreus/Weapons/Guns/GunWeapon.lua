@@ -22,8 +22,8 @@ WeaponData.DarkGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunReloadStart",
-    MovingReloadAnimation = "ZagreusGunRunReload",
+    IdleReloadAnimation = "DarkZagreusGunReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunRunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",

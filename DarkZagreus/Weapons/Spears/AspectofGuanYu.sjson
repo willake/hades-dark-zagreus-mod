@@ -5,8 +5,8 @@
             Name = "DarkGuanYuSpear"
             InheritFrom = "DarkSpear"
             Projectile = "DarkGuanYuSpear"
-            ChargeStartAnimation = "ZagreusSpearLunarThrust1_Start"
-            FireGraphic = "ZagreusSpearLunarThrust1_Fire"
+            ChargeStartAnimation = "DarkZagreusSpearLunarThrust1_Start"
+            FireGraphic = "DarkZagreusSpearLunarThrust1_Fire"
             ChargeTime = 0.12
         }
         {
@@ -14,8 +14,8 @@
             InheritFrom = "DarkGuanYuSpear"
             Projectile = "DarkGuanYuSpear2"
             ControlWindow = 0.5
-            ChargeStartAnimation = "ZagreusSpearLunarThrust2_Start"
-            FireGraphic = "ZagreusSpearLunarThrust2_Fire"
+            ChargeStartAnimation = "DarkZagreusSpearLunarThrust2_Start"
+            FireGraphic = "DarkZagreusSpearLunarThrust2_Fire"
             ChargeTime = 0.33
             ChargeTimeFrames = 5
             CanCancelDisables = false
@@ -65,8 +65,8 @@
             ControlWindow = 0.5
             //   RemoveControlOnFire = "SpearWeapon3"
             //   AddControlOnFire = "SpearWeapon"
-            ChargeStartAnimation = "ZagreusSpearLunarThrust3_Start"
-            FireGraphic = "ZagreusSpearLunarThrust3_Fire"
+            ChargeStartAnimation = "DarkZagreusSpearLunarThrust3_Start"
+            FireGraphic = "DarkZagreusSpearLunarThrust3_Fire"
             ChargeTime = 0.52
             ControlWindow = 0.62
             ChargeTimeFrames = 3
@@ -105,8 +105,8 @@
             Name = "DarkGuanYuSpearDash"
             InheritFrom = "DarkGuanYuSpear"
             Projectile = "DarkGuanYuSpearDash"
-            ChargeStartAnimation = "ZagreusSpearAlt03DashAttack_Charge"
-            FireGraphic = "ZagreusSpearAlt03DashAttack"
+            ChargeStartAnimation = "DarkZagreusSpearAlt03DashAttack_Charge"
+            FireGraphic = "DarkZagreusSpearAlt03DashAttack"
             // SwapOnFire = "DarkGuanYuSpear"
             Effects = [
                 {
@@ -176,9 +176,9 @@
             // RemoveControlOnFire4 = "null"
             ReloadTime = 0.6
             SpawnOnDeath = "null"
-            ChargeStartAnimation = "ZagreusSpearAlt03ThrowCharge"
-            ChargeCancelGraphic = "ZagreusSpearAlt03ThrowFireReturnToIdle"
-            FireGraphic = "ZagreusSpearAlt03ThrowFire"
+            ChargeStartAnimation = "DarkZagreusSpearAlt03ThrowCharge"
+            ChargeCancelGraphic = "DarkZagreusSpearAlt03ThrowFireReturnToIdle"
+            FireGraphic = "DarkZagreusSpearAlt03ThrowFire"
         }
     ]
 }

@@ -15,7 +15,7 @@
             ShowFreeAimLine = false
             AimLineAnimation = "null"
             ChargeStartAnimation = "null"
-            FireGraphic = "ZagreusShieldPunch"
+            FireGraphic = "DarkZagreusShieldPunch"
             ChargeCancelGraphic = "null"
             ChargeStartFx = "null"
             ChargeFinishFx = "null"
@@ -90,7 +90,7 @@
             ControlWindow = 0.45
             AutoLockArcDistance = 90
             SelfVelocity = 400
-            FireGraphic = "ZagreusShieldPunchFast"
+            FireGraphic = "DarkZagreusShieldPunchFast"
             ChargeTimeFrames = 0
             ChargeStartAnimation = "null"
             Enabled = true
@@ -314,7 +314,7 @@
             // ShowFreeAimLine = true
             // AimLineAnimation = "AuraAimLine"
             ChargeStartAnimation = "null"
-            FireGraphic = "ZagreusShieldThrow"
+            FireGraphic = "DarkZagreusShieldThrow"
             LockTriggerForCharge = false
             FireOnRelease = false
             ChargeRangeMultiplier = 1.0

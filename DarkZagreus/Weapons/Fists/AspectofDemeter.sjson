@@ -5,43 +5,43 @@
             Name = "DarkDemeterFist"
             InheritFrom = "DarkFist"
             Projectile = "DarkDemeterFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Start"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire1"
+            ChargeStartAnimation = "DarkZagreusFistAlt01FlurryPunch_Start"
+            FireGraphic = "DarkZagreusFistAlt01FlurryPunch_Fire1"
         }
         {
             Name = "DarkDemeterFist2"
             InheritFrom = "DarkFist2"
             Projectile = "DarkDemeterFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge2"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire2"
+            ChargeStartAnimation = "DarkZagreusFistAlt01FlurryPunch_Charge2"
+            FireGraphic = "DarkZagreusFistAlt01FlurryPunch_Fire2"
         }
         {
             Name = "DarkDemeterFist3"
             InheritFrom = "DarkFist3"
             Projectile = "DarkDemeterFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge3"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire3"
+            ChargeStartAnimation = "DarkZagreusFistAlt01FlurryPunch_Charge3"
+            FireGraphic = "DarkZagreusFistAlt01FlurryPunch_Fire3"
         }
         {
             Name = "DarkDemeterFist4"
             InheritFrom = "DarkFist4"
             Projectile = "DarkDemeterFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge4"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire4"
+            ChargeStartAnimation = "DarkZagreusFistAlt01FlurryPunch_Charge4"
+            FireGraphic = "DarkZagreusFistAlt01FlurryPunch_Fire4"
         }
         {
             Name = "DarkDemeterFist5"
             InheritFrom = "DarkFist5"
             Projectile = "DarkDemeterFist"
-            ChargeStartAnimation = "ZagreusFistAlt01FlurryPunch_Charge5"
-            FireGraphic = "ZagreusFistAlt01FlurryPunch_Fire5"
+            ChargeStartAnimation = "DarkZagreusFistAlt01FlurryPunch_Charge5"
+            FireGraphic = "DarkZagreusFistAlt01FlurryPunch_Fire5"
         }
         {
             Name = "DarkDemeterFistDash"
             InheritFrom = "DarkFistDash"
             Projectile = "DarkDemeterFistDash"
-            ChargeStartAnimation = "ZagreusFistAlt01DashHayMaker_Charge"
-            FireGraphic = "ZagreusFistAlt01DashHayMaker_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt01DashHayMaker_Charge"
+            FireGraphic = "DarkZagreusFistAlt01DashHayMaker_Fire"
         }
         {
             Name = "DarkDemeterFistSpecial"

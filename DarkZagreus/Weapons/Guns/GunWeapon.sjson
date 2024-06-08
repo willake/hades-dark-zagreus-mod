@@ -14,8 +14,8 @@
             FireFx = "GunFire"
             ChargeTimeFrames = 4
             ChargeStartAnimation = "null"
-            FireGraphic = "ZagreusGunFire"
-            FailedToFireCooldownAnimation = "ZagreusGunFireEmpty"
+            FireGraphic = "DarkZagreusGunFire"
+            FailedToFireCooldownAnimation = "DarkZagreusGunFireEmpty"
             FailedToFireCooldownDuration = 0.15
             TriggerReleaseGraphic = "null"
             FireOnRelease = false
@@ -136,8 +136,8 @@
             ClipSize = 1
             ReloadTime = 1.5
             ReloadOnCreation = false
-            ChargeStartAnimation = "ZagreusGunGrenadeTossCharge"
-            FireGraphic = "ZagreusGunGrenadeTossFire"
+            ChargeStartAnimation = "DarkZagreusGunGrenadeTossCharge"
+            FireGraphic = "DarkZagreusGunGrenadeTossFire"
             ChargeTime = 0.1
             MinChargeToFire = 0
             FireOnRelease = true

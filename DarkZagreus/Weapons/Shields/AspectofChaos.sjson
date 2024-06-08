@@ -5,19 +5,19 @@
             Name = "DarkChaosShield"
             InheritFrom = "DarkShield"
             Projectile = "DarkChaosShield"
-            FireGraphic = "ZagreusShieldAlt01Punch"
+            FireGraphic = "DarkZagreusShieldAlt01Punch"
         }
         {
             Name = "DarkChaosShieldDash"
             InheritFrom = "DarkChaosShield"
             Projectile = "DarkChaosShieldDash"
-            FireGraphic = "ZagreusShieldAlt01PunchFast"
+            FireGraphic = "DarkZagreusShieldAlt01PunchFast"
         }
         {
             Name = "DarkChaosShieldThrow"
             InheritFrom = "DarkShieldThrow"
             Projectile = "DarkChaosShieldThrow"
-            FireGraphic = "ZagreusShieldAlt01Throw"
+            FireGraphic = "DarkZagreusShieldAlt01Throw"
         }
         {
             Name = "DarkChaosShieldThrowBonus"

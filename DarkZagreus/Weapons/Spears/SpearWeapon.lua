@@ -297,9 +297,9 @@ WeaponData.DarkSpearSpin =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			PreFireDuration = 0.26,
-			PreFireAnimation = "ZagreusSpearSpinStart",
-            PreFireCancelAnimation = "ZagreusSpearSpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearSpinAttack",
+			PreFireAnimation = "DarkZagreusSpearSpinStart",
+            PreFireCancelAnimation = "DarkZagreusSpearSpinStartChargeCancel",
+            FireAnimation = "DarkZagreusSpearSpinAttack",
 		},
 
 		Sounds =

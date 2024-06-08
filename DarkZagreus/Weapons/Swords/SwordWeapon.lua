@@ -11,7 +11,7 @@ WeaponData.DarkSword =
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.05,
-        PreFireAnimation = "ZagreusSwordCharge1",
+        PreFireAnimation = "DarkZagreusSwordCharge1",
         ChainedWeapon = "DarkSword2",
         WaitUntilProjectileDeath = "DarkSword"
     },
@@ -65,8 +65,8 @@ WeaponData.DarkSword2 =
         SkipAngleTowardTarget = true,
         ChainedWeapon = "DarkSword3",
         PreFireDuration = 0.13, -- 0.3 
-        PreFireAnimation = "ZagreusSwordCharge2",
-        FireAnimation = "ZagreusSwordAttack2",
+        PreFireAnimation = "DarkZagreusSwordCharge2",
+        FireAnimation = "DarkZagreusSwordAttack2",
         FireFxOnSelf = "SwordSwipeB",
         WaitUntilProjectileDeath = "DarkSword2"
     },
@@ -108,10 +108,10 @@ WeaponData.DarkSword3 =
         AIAngleTowardsPlayerWhileFiring = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.25,
-        PreFireAnimation = "ZagreusSwordCharge3",
+        PreFireAnimation = "DarkZagreusSwordCharge3",
         PreFireFx = "ChargeAttack",
         PreFireSound = "/Leftovers/SFX/AuraCharge",
-        FireAnimation = "ZagreusSwordAttack3",
+        FireAnimation = "DarkZagreusSwordAttack3",
         FireFxOnSelf = "SwordSwipeC",
         WaitUntilProjectileDeath = "DarkSword3"
     },
@@ -212,7 +212,7 @@ WeaponData.DarkSwordParry =
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.28,
-        PreFireAnimation = "ZagreusSwordParryCharge",
+        PreFireAnimation = "DarkZagreusSwordParryCharge",
         FireDuration = 0.2,
     },
     

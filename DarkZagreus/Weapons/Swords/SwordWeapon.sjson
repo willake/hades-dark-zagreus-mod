@@ -10,7 +10,7 @@
       ClipSize = 1
       RootOwnerWhileFiring = false
       ChargeStartAnimation = "null"
-      FireGraphic = "ZagreusSwordAttack1"
+      FireGraphic = "DarkZagreusSwordAttack1"
       FireFx = "SwordSwipeAFlipped"
       ChargeFx = "null"
       ChargeTime = 0.0
@@ -382,7 +382,7 @@
       ChargeTime = 0.0
       SelfVelocity = 1000 // 400
       ChargeStartAnimation = "null"
-      FireGraphic = "ZagreusSwordDashAttack"
+      FireGraphic = "DarkZagreusSwordDashAttack"
       FireFx = "SwordSwipeC"
       // Enabled = true
       // ControlWindow = 0.45
@@ -470,7 +470,7 @@
       ChargeStartFx = "null"
       ChargeFinishFx = "null"
       ChargeStartAnimation = "null"
-      FireGraphic = "ZagreusSwordParryFire"
+      FireGraphic = "DarkZagreusSwordParryFire"
       FireFx = "null"
       // CancelMovement = false
       // CanCancelDisables = true

@@ -10,8 +10,8 @@
             ClipSize = 1
             RootOwnerWhileFiring = false
             BarrelLength = 0
-            ChargeStartAnimation = "ZagreusSpearCharge1"
-            FireGraphic = "ZagreusSpearAttack1"
+            ChargeStartAnimation = "DarkZagreusSpearCharge1"
+            FireGraphic = "DarkZagreusSpearAttack1"
             LockTrigger = true
             DisableOwnerForDurationFrames = 0
             ChargeTimeFrames = 7
@@ -101,8 +101,8 @@
             InheritFrom = "DarkSpear"
             Projectile = "DarkSpearDash"
             Control = "Attack2"
-            ChargeStartAnimation = "ZagreusSpearDashAttack_Charge"
-            FireGraphic = "ZagreusSpearDashAttack"
+            ChargeStartAnimation = "DarkZagreusSpearDashAttack_Charge"
+            FireGraphic = "DarkZagreusSpearDashAttack"
             LockTrigger = true
             DisableOwnerForDurationFrames = 0
             ChargeTimeFrames = 1
@@ -160,8 +160,8 @@
             //   SwapOnFire = "SpearWeapon3"
             Projectile = "DarkSpearTwoThree"
             // ControlWindow = 0.5
-            ChargeStartAnimation = "ZagreusSpearCharge2"
-            FireGraphic = "ZagreusSpearAttack2"
+            ChargeStartAnimation = "DarkZagreusSpearCharge2"
+            FireGraphic = "DarkZagreusSpearAttack2"
             ChargeTimeFrames = 5
             CanCancelDisables = false
             Effects = [
@@ -209,8 +209,8 @@
             ControlWindow = 0.5
             //   RemoveControlOnFire = "SpearWeapon3"
             //   AddControlOnFire = "SpearWeapon"
-            ChargeStartAnimation = "ZagreusSpearCharge3"
-            FireGraphic = "ZagreusSpearAttack3"
+            ChargeStartAnimation = "DarkZagreusSpearCharge3"
+            FireGraphic = "DarkZagreusSpearAttack3"
             ChargeTimeFrames = 3
             CanCancelDisables = false
             Effects = [
@@ -257,10 +257,10 @@
             NumProjectiles = 1
             ProjectileSpacing = 40
             ChargeTime = 0.16
-            ChargeStartAnimation = "ZagreusSpearThrowCharge"
-            ChargeCancelGraphic = "ZagreusSpearThrowFireReturnToIdle"
+            ChargeStartAnimation = "DarkZagreusSpearThrowCharge"
+            ChargeCancelGraphic = "DarkZagreusSpearThrowFireReturnToIdle"
             ChargeFx = "null"
-            FireGraphic = "ZagreusSpearThrowFire"
+            FireGraphic = "DarkZagreusSpearThrowFire"
             // FireOnRelease = false
             // LockTriggerForCharge = true
             // ShowFreeAimLine = true
@@ -335,7 +335,7 @@
             AlternateControl = "Attack2"
             FireFromObstacle = "DarkSpearReturnPoint"
             DestroyTargetedObstacle = true
-            FireGraphic = "ZagreusSpearThrowFireReturn"
+            FireGraphic = "DarkZagreusSpearThrowFireReturn"
             Projectile = "SpearWeaponThrowReturn"
             ShowFreeAimLine = false
             AimLineAnimation = "null"
@@ -509,7 +509,7 @@
             // AddControlOnFire2 = "SpearWeaponSpin"
             FireToObstacle = "DarkSpearReturnPoint"
             DestroyTargetedObstacle = true
-            FireGraphic = "ZagreusDashNoCollide"
+            FireGraphic = "DarkZagreusDashNoCollide"
             UnblockedBlinkFx = "DashCrack"
             ChargeTime = 0
             SelfVelocity = 0

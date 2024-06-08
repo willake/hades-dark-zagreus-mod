@@ -6,7 +6,7 @@
         InheritFrom = "1_BaseDZSlowWeapon"
         Type = "BLINK"
         Control = "Rush"
-        FireGraphic = "ZagreusDashNoCollide"
+        FireGraphic = "DarkZagreusDashNoCollide"
         UnblockedBlinkFx = "DashCrack"
         SelfVelocity = 0
         SelfVelocityCap = 0

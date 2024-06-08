@@ -9,8 +9,8 @@
             Projectile = "DarkFist"
             ClipSize = 1
             RootOwnerWhileFiring = false
-            ChargeStartAnimation = "ZagreusFistFlurryPunch_Start"
-            FireGraphic = "ZagreusFistFlurryPunch_Fire1"
+            ChargeStartAnimation = "DarkZagreusFistFlurryPunch_Start"
+            FireGraphic = "DarkZagreusFistFlurryPunch_Fire1"
             FireFx = "null"
             NumProjectiles = 1
             ChargeTime = 0.16
@@ -159,8 +159,8 @@
             Type = "GUN"
             Projectile = "DarkFist"
             ClipSize = 1
-            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge2"
-            FireGraphic = "ZagreusFistFlurryPunch_Fire2"
+            ChargeStartAnimation = "DarkZagreusFistFlurryPunch_Charge2"
+            FireGraphic = "DarkZagreusFistFlurryPunch_Fire2"
             FireFx = "null"
             NumProjectiles = 1
             ChargeTime = 0.08
@@ -262,8 +262,8 @@
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkFist"
-            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge3"
-            FireGraphic = "ZagreusFistFlurryPunch_Fire3"
+            ChargeStartAnimation = "DarkZagreusFistFlurryPunch_Charge3"
+            FireGraphic = "DarkZagreusFistFlurryPunch_Fire3"
             FireFx = "null"
             ChargeTime = 0.08
             ControlWindow = 0.3
@@ -355,8 +355,8 @@
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkFist"
-            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge4"
-            FireGraphic = "ZagreusFistFlurryPunch_Fire4"
+            ChargeStartAnimation = "DarkZagreusFistFlurryPunch_Charge4"
+            FireGraphic = "DarkZagreusFistFlurryPunch_Fire4"
             FireFx = "null"
             ChargeTime = 0.08
             ControlWindow = 0.3
@@ -428,8 +428,8 @@
             Control = "Attack2"
             Type = "GUN"
             Projectile = "DarkFist"
-            ChargeStartAnimation = "ZagreusFistFlurryPunch_Charge5"
-            FireGraphic = "ZagreusFistFlurryPunch_Fire5"
+            ChargeStartAnimation = "DarkZagreusFistFlurryPunch_Charge5"
+            FireGraphic = "DarkZagreusFistFlurryPunch_Fire5"
             FireFx = "null"
             ChargeTime = 0.08
             ControlWindow = 0.3
@@ -494,8 +494,8 @@
             BarrelLength = 0
             ChargeTime = 0.08
             LockTriggerForCharge = true
-            ChargeStartAnimation = "ZagreusFistDashHayMaker_Charge"
-            FireGraphic = "ZagreusFistDashHayMaker_Fire"
+            ChargeStartAnimation = "DarkZagreusFistDashHayMaker_Charge"
+            FireGraphic = "DarkZagreusFistDashHayMaker_Fire"
             FireFx = "null"
             Enabled = true
             ForceReleaseOnSwap = false

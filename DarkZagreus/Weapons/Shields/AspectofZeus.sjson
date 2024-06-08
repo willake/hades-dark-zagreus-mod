@@ -4,20 +4,20 @@
         {
             Name = "DarkZeusShield"
             InheritFrom = "DarkShield"
-            FireGraphic = "ZagreusShieldAlt02Punch"
+            FireGraphic = "DarkZagreusShieldAlt02Punch"
             Projectile = "DarkZeusShield"
 
         }
         {
             Name = "DarkZeusShieldDash"
             InheritFrom = "DarkZeusShield"
-            FireGraphic = "ZagreusShieldAlt02PunchFast"
+            FireGraphic = "DarkZagreusShieldAlt02PunchFast"
             Projectile = "DarkZeusShieldDash"
         }
         {
             Name = "DarkZeusShieldThrow"
             InheritFrom = "DarkShieldThrow"
-            FireGraphic = "ZagreusShieldAlt02Throw"
+            FireGraphic = "DarkZagreusShieldAlt02Throw"
             DisableOwnerForDuration = 0
             Projectile = "DarkZeusShieldThrow"
         }

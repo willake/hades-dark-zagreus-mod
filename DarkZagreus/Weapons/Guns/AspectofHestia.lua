@@ -24,8 +24,8 @@ WeaponData.DarkHestiaGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
-    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
+    IdleReloadAnimation = "DarkZagreusGunAlt01ReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunAlt01RunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
@@ -76,8 +76,8 @@ WeaponData.DarkHestiaGunDash =
     InheritFrom = { "DarkHestiaGun" },
     DashWeapon = nil,
 
-    IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
-    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
+    IdleReloadAnimation = "DarkZagreusGunAlt01ReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunAlt01RunReload",
 
     AIData =
     {

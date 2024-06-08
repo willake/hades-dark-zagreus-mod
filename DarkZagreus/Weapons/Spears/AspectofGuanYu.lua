@@ -262,9 +262,9 @@ WeaponData.DarkGuanYuSpearSpin =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			PreFireDuration = 0.26,
-			PreFireAnimation = "ZagreusSpearAlt03SpinStart",
-            PreFireCancelAnimation = "ZagreusSpearAlt03SpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearAlt03SpinAttack",
+			PreFireAnimation = "DarkZagreusSpearAlt03SpinStart",
+            PreFireCancelAnimation = "DarkZagreusSpearAlt03SpinStartChargeCancel",
+            FireAnimation = "DarkZagreusSpearAlt03SpinAttack",
 			WaitUntilProjectileDeath = "DarkGuanYuSpearSpin"
 		},
 

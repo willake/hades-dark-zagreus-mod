@@ -5,22 +5,22 @@
             Name = "DarkHestiaGun"
             InheritFrom = "DarkGun"
             Projectile = "DarkHestiaGun"
-            FireGraphic = "ZagreusGunAlt01Fire"
-            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            FireGraphic = "DarkZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
         }
         {
             Name = "DarkHestiaGunDash"
             InheritFrom = "DarkGunDash"
             Projectile = "DarkHestiaGun"
-            FireGraphic = "ZagreusGunAlt01Fire"
-            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            FireGraphic = "DarkZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
         }
         {
             Name = "DarkHestiaGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
             Projectile = "DarkHestiaGunGrenadeToss"
-            ChargeStartAnimation = "ZagreusGunAlt01GrenadeTossCharge"
-            FireGraphic = "ZagreusGunAlt01GrenadeTossFire"
+            ChargeStartAnimation = "DarkZagreusGunAlt01GrenadeTossCharge"
+            FireGraphic = "DarkZagreusGunAlt01GrenadeTossFire"
         }
         {
             Name = "DZManualReloadEffectApplicator"
@@ -45,16 +45,16 @@
             Name = "DarkHestiaSniperGun"
             InheritFrom = "DarkSniperGun"
             Projectile = "DarkHestiaSniperGun"
-            FireGraphic = "ZagreusGunAlt01Fire"
-            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            FireGraphic = "DarkZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
             Enabled = true
         }
         {
             Name = "DarkHestiaSniperGunDash"
             InheritFrom = "DarkHestiaSniperGun"
             Projectile = "DarkHestiaSniperGun"
-            FireGraphic = "ZagreusGunAlt01Fire"
-            FailedToFireCooldownAnimation = "ZagreusGunAlt01FireEmpty"
+            FireGraphic = "DarkZagreusGunAlt01Fire"
+            FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
             Enabled = true
         }
     ]
