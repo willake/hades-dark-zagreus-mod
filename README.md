@@ -28,11 +28,14 @@ Dark Zagreus uses some functions from ModUtil, so installing ModUtil is required
 ### Step 3 - Import Dark Zagreus
 To install the mod, download it and place it in the `Mods` folder of Hades, which has shown in the previous steps, the folder is located at `${YourHadesRootFolder}\Content\Mods`. Next, run the mod importer. Once the importer has finished, you're ready to go.
 
-### Step 4 - Import a clean 100% save file (Optional)
+### Step 4 - Import a clean 100% save file (Optional, Highly Reconmmended)
 The mod will save some data into your save file. Since it replaces the final boss, you might miss some story elements if you haven't finished the game yet. For the best experience, it is highly recommended to use a save file from a completed game. You can duplicate your save file as a backup. Alternatively, you can add a 100% save file to your game. For this, I suggest using [Max Save With No Run History](https://www.speedrun.com/hades/resources/hshp9) by ellomenop from the speedrun community.
 
 ### How to import/backup a save file
 The save file is located at `C:\Users\${YourUserName}\Documents\Saved Games\Hades`. The files are named according to the pattern `ProfileX.sav`, where X is the number of the save slot. To back up a save file, simply copy the file to another location or rename it. To import a save file, rename the file to ProfileX.sav, with X being the number of the save slot you want to use.
+
+### Step 5 - Start Hades
+In the House of Hades, if you open Codex Menu and see a section titled Dark Zagreus. That means the mod has been successfully installed.
 
 ## Feature
 After installing the mod, you can start a run. At the end of the run, you will see Dark Zagreus standing opposite you, ready to fight. In the first attempt, since there is no previous run data, Dark Zagreus will equip the most basic weapon, and his AI will be driven by random values. After completing the run, the next time you encounter Dark Zagreus, he will equip the weapon you used in your previous run.
@@ -42,7 +45,7 @@ After installing the mod, you can start a run. At the end of the run, you will s
 > Real-time deep learning model training takes time. The model is trained when you enter the boss room, so the screen might freeze for a few seconds during this process. 
 
 ### Commands
-This mod also offers debug features. To see the available commands, press `C` (or the corresponding button for your platform) to open the Codex in the game.
+This mod offers debug features. To see the available commands, press `C` (or the corresponding button for your platform) to open the Codex in the game.
 There are a list of commands. To execute them, select a command and press `Enter` (or the corresponding confirm button).
 
 ![commands](./ReadmeAssets/commands.png)
@@ -71,16 +74,25 @@ Same as `Load record from file` but works with StyxScribe, which means that this
 
 ## Limitation
 ### Cast, call, and summon support
-Cast, call, and summon are complex systems in Hades, requiring considerable time to implement. Therefore, Dark Zagreus will not use these actions. Cast might be supported in the future as it is somewhat easier to implement. This also leads to a problem that upgraded weapon powers related to Cast are all missing right now.
+Dark Zagreus won't use cast, call, and summon. These are complex systems in Hades, requiring considerable time to implement. Therefore, Dark Zagreus will not use these actions. Cast might be supported in the future as it is somewhat easier to implement. This also leads to a problem that upgraded weapon powers related to Cast are all missing right now.
 
 ### Boons and Daedalus Hammer
-Boons and Daedalus Hammer upgrades are driven by the trait system in the game code. The challenge in implementing these for non-player characters is that many mechanics are specifically designed for player use. The functions these upgrades introduce are tailored for manipulating the player character, requiring replication and reimplementation of all traits and their functions for Dark Zagreus. This is a substantial amount of work and may be supported in future versions. Other mod developers are welcome to build upon this mod and extend its capabilities.
+Dark Zagreus won't have boons and hammer upgrades. Boons and Daedalus Hammer upgrades are driven by the trait system in the game code. The challenge in implementing these for non-player characters is that many mechanics are specifically designed for player use. The functions these upgrades introduce are tailored for manipulating the player character, requiring replication and reimplementation of all traits and their functions for Dark Zagreus. This is a substantial amount of work and may be supported in future versions. Other mod developers are welcome to build upon this mod and extend its capabilities.
+
+### Frequency
+The Dark Zagreus can not capture the frequency of the player using the weapon. Take Aspect of Zeus for example, while players often throw and leave the shield away to damage enemies, Dark Zagreus will aggressively throw and return the shield. It is because he only knows players often use special weapons but doesn't know how long they use them again.
+
+### Unsupported Weapons
+Due to the above limitation, thr following weapons are currently not supported
+- Aspect of Hera (Bow3) - uses Cast to enhance damage
+- Aspect of Zeus (Shield3) - Dark Zagreus can't capture frequency
+- Aspect of Beowulf (Shield4) - uses Cast to enpower rush
 
 ### Bow Charge VFX
 It seems like the bow charge VFX is handled internally, I couldn't make it work. Still looking for a way to fix it.
 
 ## Known issues
-- Chaos shield is not handled correctly
+- Bow weapon does not have charge VFX
 - The gun weapon AI sometimes makes the game freezing forever
 - Export record for StyxScribe is not working, temporarily removed
 - The shield weapon AI using Aspect of Zeus has awuful behavior, because it doesn't know how long the shield gone. It might aggressively throw and return the shield if the player threw the shield a lot
@@ -88,7 +100,7 @@ It seems like the bow charge VFX is handled internally, I couldn't make it work.
 ## Special Thanks
 The deep learning library in this mod is a modified version of [luann](https://github.com/wixico/luann) by wixico. Thanks to wixico implementing a lightweight and fast neural network in lua.
 
-Thanks to the [mod community](https://github.com/SGG-Modding) of Hades for providing thorough tutorials. I also appreciate everyone on the Discord server for answering my questions and providing useful information.
+Thanks to the [moding community](https://github.com/SGG-Modding) and ModUtils of Hades for providing thorough tutorials. I also appreciate everyone on the Discord server for answering my questions and providing useful information.
 
 The command features is inspired by [CodexMenu](https://www.nexusmods.com/hades/mods/15) mod by LRevolution.
 
