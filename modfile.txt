@@ -161,3 +161,6 @@ SJSON "DarkZagreus/Projectiles/Guns/GunWeapon.sjson"
 SJSON "DarkZagreus/Projectiles/Guns/AspectofEris.sjson"
 SJSON "DarkZagreus/Projectiles/Guns/AspectofHestia.sjson"
 SJSON "DarkZagreus/Projectiles/Guns/AspectofLucifer.sjson"
+
+To "Game/Animations/EnemyAnimations.sjson"
+SJSON "Game/Animations/DarkZagreus.sjson"

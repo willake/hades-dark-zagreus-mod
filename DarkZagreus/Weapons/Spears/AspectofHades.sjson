@@ -5,29 +5,29 @@
             Name = "DarkHadesSpear"
             InheritFrom = "DarkHadesSpear"
             Projectile = "DarkHadesSpear"
-            ChargeStartAnimation = "ZagreusSpearAlt02Charge1"
-            FireGraphic = "ZagreusSpearAlt02Attack1"
+            ChargeStartAnimation = "DarkZagreusSpearAlt02Charge1"
+            FireGraphic = "DarkZagreusSpearAlt02Attack1"
         }
         {
             Name = "DarkHadesSpear2"
             InheritFrom = "DarkHadesSpear"
             Projectile = "DarkHadesSpearTwoThree"
-            ChargeStartAnimation = "ZagreusSpearAlt02Charge2"
-            FireGraphic = "ZagreusSpearAlt02Attack2"
+            ChargeStartAnimation = "DarkZagreusSpearAlt02Charge2"
+            FireGraphic = "DarkZagreusSpearAlt02Attack2"
         }
         {
             Name = "DarkHadesSpear3"
             InheritFrom = "DarkHadesSpear"
             Projectile = "DarkHadesSpearTwoThree"
-            ChargeStartAnimation = "ZagreusSpearAlt02Charge3"
-            FireGraphic = "ZagreusSpearAlt02Attack3"
+            ChargeStartAnimation = "DarkZagreusSpearAlt02Charge3"
+            FireGraphic = "DarkZagreusSpearAlt02Attack3"
         }
         {
             Name = "DarkHadesSpearDash"
             InheritFrom = "DarkSpearDash"
             Projectile = "DarkHadesSpearDash"
-            ChargeStartAnimation = "ZagreusSpearAlt02DashAttack_Charge"
-            FireGraphic = "ZagreusSpearAlt02DashAttack"
+            ChargeStartAnimation = "DarkZagreusSpearAlt02DashAttack_Charge"
+            FireGraphic = "DarkZagreusSpearAlt02DashAttack"
         }
         {
             Name = "DarkHadesSpearSpin"
@@ -51,9 +51,9 @@
             Name = "DarkHadesSpearThrow"
             InheritFrom = "DarkSpearThrow"
             Projectile = "DarkHadesSpearThrow"
-            ChargeStartAnimation = "ZagreusSpearAlt02ThrowCharge"
-            ChargeCancelGraphic = "ZagreusSpearAlt02ThrowFireReturnToIdle"
-            FireGraphic = "ZagreusSpearAlt02ThrowFire"
+            ChargeStartAnimation = "DarkZagreusSpearAlt02ThrowCharge"
+            ChargeCancelGraphic = "DarkZagreusSpearAlt02ThrowFireReturnToIdle"
+            FireGraphic = "DarkZagreusSpearAlt02ThrowFire"
         }
         {
             Name = "DarkHadesSpearThrowReturn"
@@ -65,7 +65,7 @@
             SelfVelocity = 0.0
             ChargeTimeFrames = 0
             ChargeStartAnimation = "null"
-            FireGraphic = "ZagreusSpearAlt02ThrowFireReturn"
+            FireGraphic = "DarkZagreusSpearAlt02ThrowFireReturn"
             FireFromObstacle = "DarkSpearReturnPointAlt02"
         }
     ]

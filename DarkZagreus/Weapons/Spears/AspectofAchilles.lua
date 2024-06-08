@@ -208,9 +208,9 @@ WeaponData.DarkAchillesSpearThrow =
 			ChargeRangeMultiplier = 3.34,
 			PreFireDuration = 0.04,
 			PreFireFx = "SpearChargeThrowTrait",
-			PreFireAnimation = "ZagreusSpearAlt01ThrowCharge",
-			PreFireCancelAnimation = "ZagreusSpearAlt01ThrowFireReturnToIdle",
-			FireAnimation = "ZagreusSpearAlt01ThrowFire"
+			PreFireAnimation = "DarkZagreusSpearAlt01ThrowCharge",
+			PreFireCancelAnimation = "DarkZagreusSpearAlt01ThrowFireReturnToIdle",
+			FireAnimation = "DarkZagreusSpearAlt01ThrowFire"
 		},
 
         Sounds =
@@ -300,9 +300,9 @@ WeaponData.DarkAchillesSpearSpin =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			PreFireDuration = 0.26,
-			PreFireAnimation = "ZagreusSpearAlt01SpinStart",
-            PreFireCancelAnimation = "ZagreusSpearAlt01SpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearAlt01SpinAttack"
+			PreFireAnimation = "DarkZagreusSpearAlt01SpinStart",
+            PreFireCancelAnimation = "DarkZagreusSpearAlt01SpinStartChargeCancel",
+            FireAnimation = "DarkZagreusSpearAlt01SpinAttack"
 		},
 
 		Sounds =

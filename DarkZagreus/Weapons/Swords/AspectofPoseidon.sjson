@@ -5,7 +5,7 @@
       Name = "DarkPoseidonSword"
       InheritFrom = "DarkSword"
       ChargeStartAnimation = "null"
-      FireGraphic = "ZagreusSwordAlt02Attack1"
+      FireGraphic = "DarkZagreusSwordAlt02Attack1"
       Projectile = "DarkPoseidonSword"
     }
     {
@@ -25,14 +25,14 @@
     {
       Name = "DarkPoseidonSwordDash"
       InheritFrom = "DarkSwordDash"
-      FireGraphic = "ZagreusSwordAlt02DashAttack"
+      FireGraphic = "DarkZagreusSwordAlt02DashAttack"
       Projectile = "DarkPoseidonSwordDash"
     }
     {
       Name = "DarkPoseidonSwordParry"
       InheritFrom = "DarkSwordParry"
       ChargeStartAnimation = "null"
-      FireGraphic = "ZagreusSwordAlt02ParryFire"
+      FireGraphic = "DarkZagreusSwordAlt02ParryFire"
       Projectile = "DarkPoseidonSwordParry"
     }
   ]

@@ -12,7 +12,7 @@ WeaponData.DarkPoseidonSword =
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.05,
-        PreFireAnimation = "ZagreusSwordAlt02Charge1",
+        PreFireAnimation = "DarkZagreusSwordAlt02Charge1",
         ChainedWeapon = "DarkPoseidonSword2",
         WaitUntilProjectileDeath = "DarkPoseidonSword"
     },
@@ -73,8 +73,8 @@ WeaponData.DarkPoseidonSword2 =
         SkipAngleTowardTarget = true,
         ChainedWeapon = "DarkPoseidonSword3",
         PreFireDuration = 0.13, -- 0.3 
-        PreFireAnimation = "ZagreusSwordAlt02Charge2",
-        FireAnimation = "ZagreusSwordAlt02Attack2",
+        PreFireAnimation = "DarkZagreusSwordAlt02Charge2",
+        FireAnimation = "DarkZagreusSwordAlt02Attack2",
         FireFxOnSelf = "SwordSwipeB",
         WaitUntilProjectileDeath = "DarkPoseidonSword2"
     },
@@ -113,10 +113,10 @@ WeaponData.DarkPoseidonSword3 =
         SkipMovement = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.25,
-        PreFireAnimation = "ZagreusSwordAlt02Charge3",
+        PreFireAnimation = "DarkZagreusSwordAlt02Charge3",
         PreFireFx = "ChargeAttack",
         PreFireSound = "/Leftovers/SFX/AuraCharge",
-        FireAnimation = "ZagreusSwordAlt02Attack3",
+        FireAnimation = "DarkZagreusSwordAlt02Attack3",
         FireFxOnSelf = "SwordSwipeC",
         WaitUntilProjectileDeath = "DarkPoseidonSword3"
     },
@@ -213,7 +213,7 @@ WeaponData.DarkPoseidonSwordParry =
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.28,
-        PreFireAnimation = "ZagreusSwordAlt02ParryCharge",
+        PreFireAnimation = "DarkZagreusSwordAlt02ParryCharge",
         FireDuration = 0.2,
     },
 

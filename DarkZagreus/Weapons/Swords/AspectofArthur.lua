@@ -13,9 +13,9 @@ WeaponData.DarkArthurSword =
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.25,
-        PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
+        PreFireAnimation = "DarkZagreusSwordArthurAttack1_Charge",
         ChainedWeapon = "DarkArthurSword2",
-        FireAnimation = "ZagreusSwordArthurAttack1_Fire",
+        FireAnimation = "DarkZagreusSwordArthurAttack1_Fire",
         FireFxOnSelf = "SwordSwipeC-Arthur",
         FireDuration = 0.1
     },
@@ -69,8 +69,8 @@ WeaponData.DarkArthurSword2 =
         PreFireFx = "ChargeAttack-Arthur",
         PreFireSound = "/VO/ZagreusEmotes/EmoteCharging",
         PreFireDuration = 0.33, -- 0.3 
-        PreFireAnimation = "ZagreusSwordArthurAttack2_Charge",
-        FireAnimation = "ZagreusSwordArthurAttack2_Fire",
+        PreFireAnimation = "DarkZagreusSwordArthurAttack2_Charge",
+        FireAnimation = "DarkZagreusSwordArthurAttack2_Fire",
         FireFxOnSelf = "SwordSwipeA-Arthur",
         FireDuration = 0.05
     },
@@ -118,10 +118,10 @@ WeaponData.DarkArthurSword3 =
         SkipAngleTowardTarget = true,
         AIAngleTowardsPlayerWhileFiring = true,
         PreFireDuration = 0.48,
-        PreFireAnimation = "ZagreusSwordArthurAttack3_Charge",
+        PreFireAnimation = "DarkZagreusSwordArthurAttack3_Charge",
         PreFireFx = "ChargeAttack-Arthur",
         PreFireSound = "/VO/ZagreusEmotes/EmoteHeavyCharging",
-        FireAnimation = "ZagreusSwordArthurAttack3_Fire",
+        FireAnimation = "DarkZagreusSwordArthurAttack3_Fire",
         FireFxOnSelf = "SwordSwipeAFlipped-Arthur",
         FireDuration = 0.05
 
@@ -168,7 +168,7 @@ WeaponData.DarkArthurSwordDash =
     {
         PreFireDuration = 0.2,
         GiveupDistance = 250,
-        PreFireAnimation = "ZagreusSwordArthurAttack1_Charge",
+        PreFireAnimation = "DarkZagreusSwordArthurAttack1_Charge",
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
@@ -215,8 +215,8 @@ WeaponData.DarkArthurSwordParry =
         SkipAngleTowardTarget = true,
         PreFireDuration = 0.3,
         PostFireWeapon = "DarkConsecrationField",
-        PreFireAnimation = "ZagreusSwordAlt03ParryCharge",
-        FireAnimation = "ZagreusSwordAlt03ParryFire",
+        PreFireAnimation = "DarkZagreusSwordAlt03ParryCharge",
+        FireAnimation = "DarkZagreusSwordAlt03ParryFire",
         FireDuration = 0.2
     },
 
