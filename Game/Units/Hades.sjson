@@ -23,7 +23,7 @@
         DeathFx = "null"
         DieOnCollisionRequiredVelocityMultiplier = 0.0
         HitSound = "/SFX/Enemy Sounds/Hades/EmoteHurt"
-        InvulnerableFx = "Invincibubble_Hades"
+        InvulnerableFx = "Invincibubble"
       }
       Thing = 
       {

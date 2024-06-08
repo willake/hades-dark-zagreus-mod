@@ -610,7 +610,7 @@
             Name = "DarkZagreusSwordArthurIdle"
             InheritFrom = "ZagreusSwordArthurIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -621,7 +621,7 @@
             InheritFrom = "ZagreusSwordArthurRun"
             MoveAnimation = "DarkZagreusSwordArthurRun"
             StopAnimation = "DarkZagreusSwordArthurRunStop"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -630,7 +630,7 @@
         {
             Name = "DarkZagreusSwordArthurRunStop"
             InheritFrom = "ZagreusSwordArthurRunStop"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -640,7 +640,7 @@
             Name = "DarkZagreusSwordArthurAttack1_Charge"
             InheritFrom = "ZagreusSwordArthurAttack1_Charge"
             ChainTo = "null"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -650,7 +650,7 @@
             Name = "DarkZagreusSwordArthurAttack1_Fire"
             InheritFrom = "ZagreusSwordArthurAttack1_Fire"
             ChainTo = "DarkZagreusSwordArthurAttack1_ReturnToIdle"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -661,7 +661,7 @@
             InheritFrom = "ZagreusSwordArthurAttack1_ReturnToIdle"
             ChainTo = "DarkZagreusSwordArthurIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -671,7 +671,7 @@
             Name = "DarkZagreusSwordArthurAttack2_Charge"
             InheritFrom = "ZagreusSwordArthurAttack2_Charge"
             ChainTo = "null"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -681,7 +681,7 @@
             Name = "DarkZagreusSwordArthurAttack2_Fire"
             InheritFrom = "ZagreusSwordArthurAttack2_Fire"
             ChainTo = "DarkZagreusSwordArthurAttack2_ReturnToIdle"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -692,7 +692,7 @@
             InheritFrom = "ZagreusSwordArthurAttack2_ReturnToIdle"
             ChainTo = "DarkZagreusSwordArthurIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -702,7 +702,7 @@
             Name = "DarkZagreusSwordArthurAttack3_Charge"
             InheritFrom = "ZagreusSwordArthurAttack3_Charge"
             ChainTo = "null"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -712,7 +712,7 @@
             Name = "DarkZagreusSwordArthurAttack3_Fire"
             InheritFrom = "ZagreusSwordArthurAttack3_Fire"
             ChainTo = "DarkZagreusSwordArthurAttack3_ReturnToIdle"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -723,7 +723,7 @@
             InheritFrom = "ZagreusSwordArthurAttack3_ReturnToIdle"
             ChainTo = "DarkZagreusSwordArthurIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -735,7 +735,7 @@
             //InheritFrom = "ZagreusSwordParry"
             ChainTo = "DarkZagreusSwordAlt03ParryReturnToIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -747,7 +747,7 @@
             //InheritFrom = "ZagreusSwordParryChargeFast"
             ChainTo = "null"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -758,7 +758,7 @@
             InheritFrom = "ZagreusSwordAlt03ParryCharge"
             //InheritFrom = "ZagreusSwordParryCharge"
             ChainTo = "null"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -771,7 +771,7 @@
             //InheritFrom = "ZagreusSwordParryFire"
             ChainTo = "DarkZagreusSwordAlt03ParryReturnToIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -783,7 +783,7 @@
             //InheritFrom = "ZagreusSwordParryReturnToIdle"
             ChainTo = "DarkZagreusSwordArthurIdle"
             MoveAnimation = "DarkZagreusSwordArthurRun"
-            ChildAnimation = "DarkArthurSwordGlowEmitter"
+            ChildAnimation = "ArthurSwordGlowEmitter"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -2157,7 +2157,7 @@
             InheritFrom = "ZagreusSpearLunarThrust1_ReturnToIdle"
             ChainTo = "DarkZagreusSpearLunarThrusts_Idle"
             MoveAnimation = "DarkZagreusSpearAlt03Run"
-            ChildAnimation = "DarkGuanYuIdleBloodDrip"
+            ChildAnimation = "GuanYuIdleBloodDrip"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -2237,7 +2237,7 @@
             Name = "DarkZagreusSpearLunarThrusts_Idle"
             InheritFrom = "ZagreusSpearLunarThrusts_Idle"
             MoveAnimation = "DarkZagreusSpearAlt03Run"
-            ChildAnimation = "DarkGuanYuIdleBloodDrip"
+            ChildAnimation = "GuanYuIdleBloodDrip"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -2913,7 +2913,7 @@
             InheritFrom = "ZagreusSpearAlt03AttackReturnToIdle_Loop"
             //InheritFrom = "ZagreusSpearAttackReturnToIdle_Loop"
             MoveAnimation = "DarkZagreusSpearAlt03Run"
-            ChildAnimation = "DarkGuanYuIdleBloodDrip"
+            ChildAnimation = "GuanYuIdleBloodDrip"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -2953,7 +2953,7 @@
             InheritFrom = "ZagreusSpearAlt03ThrowFireReturn"
             //InheritFrom = "ZagreusSpearThrowFireReturn"
             MoveAnimation = "DarkZagreusSpearAlt03Run"
-            ChildAnimation = "DarkGuanYuIdleBloodDrip"
+            ChildAnimation = "GuanYuIdleBloodDrip"
             Red = 0.1
             Green = 0.1
             Blue = 0.1
@@ -3999,6 +3999,7 @@
             Red = 0.1
             Green = 0.1
             Blue = 0.1
+            MoveAnimation = "DarkZagreusBowRun"
         }
 
         {
@@ -4100,6 +4101,7 @@
             Red = 0.1
             Green = 0.1
             Blue = 0.1
+            MoveAnimation = "DarkZagreusBowRun"
         }
 
         {
@@ -4255,6 +4257,7 @@
             Red = 0.1
             Green = 0.1
             Blue = 0.1
+            MoveAnimation = "DarkZagreusBowRamaRun"
         }
 
         {
@@ -4289,7 +4292,7 @@
         {
             Name = "DarkZagreusBowRamaDashShot_Beam"
             InheritFrom = "ZagreusBowRamaDashShot_Beam"
-            ChainTo = "DarkZZagreusBowRamaHeavyShotFireEndLoop"
+            ChainTo = "DarkZagreusBowRamaHeavyShotFireEndLoop"
             MoveAnimation = "DarkZagreusBowRamaRun"
             Red = 0.1
             Green = 0.1
