@@ -18,22 +18,6 @@
             ChargeFx = "null"
             SelfVelocity = 0
             BarrelLength = 0
-            // LockTrigger = true
-            // CancelChargeOnRelease = false
-            // ForceReleaseOnSwap = false
-            // SwapOnFire = "FistWeapon2"
-            // BlockMoveInput = false
-            // CancelMovement = false
-            // ChargeCancelMovement = false
-            // FullyAutomatic = true
-            // AllowExternalForceRelease = false
-            // AutoLock = true
-            // AutoLockRange = 360
-            // AutoLockArcDistance = 220
-            // CanCancelDisables = false
-            // CanCancelRotateDisables = true
-            // TriggersStoredAmmoVulnerability = true
-            // IgnoreTriggerLockDuringCooldown = true
             Effects = [
                 {
                     Name = "FistDisable"
@@ -169,14 +153,6 @@
             SelfVelocity = 0
             BarrelLength = 0
             ControlWindow = 0.3
-            // LockTrigger = true
-            // LockTriggerForCharge = true
-            // CancelChargeOnRelease = false
-            // FullyAutomatic = true
-            // SwapOnFire = "FistWeapon3"
-            // CanCancelDisables = false
-            // CanCancelRotateDisables = true
-            // TriggersStoredAmmoVulnerability = true
             Effects = [
                 {
                     Name = "FistDisable2"
@@ -267,7 +243,6 @@
             FireFx = "null"
             ChargeTime = 0.08
             ControlWindow = 0.3
-            // SwapOnFire = "FistWeapon4"
             Effects = [
                 {
                 Name = "FistDisable3"
@@ -360,7 +335,6 @@
             FireFx = "null"
             ChargeTime = 0.08
             ControlWindow = 0.3
-            // SwapOnFire = "FistWeapon5"
             Effects = [
                 {
                 Name = "FistDisable4"
@@ -501,18 +475,6 @@
             ForceReleaseOnSwap = false
             ControlWindow = 0.3
             SelfVelocity = 0
-            // SwapOnFire = "FistWeapon"
-            // AutoLockArcDistance = 360
-            // AutoLockRange = 200
-            // CanCancelDisables = true
-            // CanCancelOwnDisables = true
-            // LockTriggerTransferFromOnSwap = false
-            // AllowExternalForceRelease = false
-            // LockTrigger = false
-            // SetCompleteAngleOnFire = false
-            // SetCompleteAngleOnCharge = false
-            // TriggerTapIgnoresCooldown = true
-            // IgnoreTriggerLockDuringCooldown = false
             Effects = [
                 {
                     Name = "FistDashDisable"
@@ -559,11 +521,11 @@
             ChargeSoundFadeTime = 0.25
             RootOwnerWhileFiring = false
             BarrelLength = 0
-            FireFx = "null"
             ShowFreeAimLine = false
             AimLineAnimation = "null"
-            ChargeStartAnimation = "null"
-            FireGraphic = "null"
+            ChargeStartAnimation = "DarkZagreusFistAerialUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAerialUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
             LockTriggerForCharge = true
             FireOnRelease = false
             ChargeCancelGraphic = "null"
@@ -574,20 +536,6 @@
             MinChargeToFire = 1
             ChargeTime = 0.18
             Cooldown = 0.5
-            // ReloadOnRelease = true
-            // AllowExternalForceRelease = false
-            // PriorityFireRequest = true
-            // CancelMovement = false
-            // CanCancelDisables = true
-            // CanCancelOwnDisables = false
-            // ChargeCancelMovement = false
-            // FullyAutomatic = false
-            // AutoLock = false
-            // AutoLockRange = 1000
-            // IgnoreTriggerLockDuringCooldown = true
-            // TriggersStoredAmmoVulnerability = true
-            // SetCompleteAngleOnFire = false
-            // SetCompleteAngleOnCharge = false
             Effects = [
                 {
                     Name = "FistSpecialInvulnerable"
@@ -685,24 +633,12 @@
             ChargeTime = 0.11
             NumProjectiles = 1
             FullyAutomatic = false
-            ChargeStartAnimation = "null"
-            FireGraphic = "null"
-            FireFx = "null"
+            ChargeStartAnimation = "DarkZagreusFistDashUpperCut_Start"
+            FireGraphic = "DarkZagreusFistDashUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
             Enabled = true
             ControlWindow = 0.3
             SelfVelocity = 0
-            // LockTriggerForCharge = true
-            // SwapOnFire = "FistWeaponSpecial"
-            // ForceReleaseOnSwap = true
-            // AutoLockArcDistance = 360
-            // AutoLockRange = 200
-            // CanCancelDisables = true
-            // CanCancelOwnDisables = true
-            // LockTriggerTransferFromOnSwap = false
-            // AllowExternalForceRelease = false
-            // LockTrigger = false
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
             Effects = [
                 {
                     Name = "FistSpecialDashDisable"

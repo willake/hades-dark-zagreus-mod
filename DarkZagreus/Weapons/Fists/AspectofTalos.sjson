@@ -47,13 +47,10 @@
             Name = "DarkTalosFistSpecial"
             InheritFrom = "DarkFistSpecial"
             Projectile = "DarkTalosFistSpecial"
-            // ChargeStartAnimation = "ZagreusFistAlt02Grab_Start"
-            // ChargeStartAnimation = "ZagreusFistAlt02DashHayMaker_Fire"
-            // FireGraphic = "ZagreusFistAlt02AerialUpperCut_Fire"
-            // ChargeTime = 0.24
-            // AutoLock = true
-            // AutoLockArcDistance = 220
-            // AutoLockRange = 800
+            ChargeStartAnimation = "DarkZagreusFistAlt02Grab_Start"
+            FireGraphic = "DarkZagreusFistAlt02AerialUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
+            ChargeTime = 0.24
         }
         {
             Name = "DarkTalosFistSpecialVacuum"
@@ -63,21 +60,15 @@
             Projectile = "DarkTalosFistSpecialVacuum"
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
-            // ClearFireRequestOnChargeCancel = false
-            // FullyAutomatic = true
-            // AutoLock = true
-            // SetCompleteAngleOnFire = true
         }
         {
             Name = "DarkTalosFistSpecialDash"
             InheritFrom = "DarkFistSpecialDash"
             Projectile = "DarkTalosFistSpecialDash"
-            // ChargeStartAnimation = "ZagreusFistAlt02Grab_Start"
-            // FireGraphic = "ZagreusFistAlt02DashUpperCut_Fire"
-            // ChargeTime = 0.24
-            // AutoLock = true
-            // AutoLockArcDistance = 220
-            // AutoLockRange = 800
+            ChargeStartAnimation = "DarkZagreusFistAlt02Grab_Start"
+            FireGraphic = "DarkZagreusFistAlt02DashUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
+            ChargeTime = 0.24
         }
         {
             Name = "DarkTalosRush"

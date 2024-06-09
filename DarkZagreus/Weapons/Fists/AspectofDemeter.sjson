@@ -47,11 +47,17 @@
             Name = "DarkDemeterFistSpecial"
             InheritFrom = "DarkFistSpecial"
             Projectile = "DarkDemeterFistSpecial"
+            ChargeStartAnimation = "DarkZagreusFistAlt01AerialUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAlt01AerialUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
         }
         {
             Name = "DarkDemeterFistSpecialDash"
             InheritFrom = "DarkFistSpecialDash"
             Projectile = "DarkDemeterFistSpecialDash"
+            ChargeStartAnimation = "DarkZagreusFistAlt01DashUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAlt01DashUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
         }
     ]
 }

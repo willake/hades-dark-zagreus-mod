@@ -17,8 +17,8 @@ WeaponData.DarkTalosFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist2",
-        PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = "DarkTalosFist",
+        -- PreFireDuration = 0.15,
+        FireDuration = 0.25, -- 0.15 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -69,8 +69,8 @@ WeaponData.DarkTalosFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist3",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkTalosFist2",
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
     }
 }
 
@@ -84,8 +84,8 @@ WeaponData.DarkTalosFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist4",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkTalosFist3",
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
     }
 }
 
@@ -99,8 +99,8 @@ WeaponData.DarkTalosFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist5",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkTalosFist4",
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
     }
 }
 	
@@ -114,9 +114,9 @@ WeaponData.DarkTalosFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkTalosFist5",
-        Cooldown = 0.5
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
+        Cooldown = 0.5,
     }
 }
 
@@ -132,9 +132,8 @@ WeaponData.DarkTalosFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkTalosFist",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkTalosFistDash",
-        IsStartFromFistDash = true
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.15, -- 0.07 + 0.08
     },
 
     Sounds =
@@ -175,11 +174,8 @@ WeaponData.DarkTalosFistSpecial =
     {
         AttackDistance = 700,
         AIAngleTowardsPlayerWhileFiring = true,
-        FireDuration = 0.4,
-        PreFireDuration = 0.24,
-        PreFireAnimation = "DarkZagreusFistAlt02Grab_Start",
-        FireAnimation = "DarkZagreusFistAlt02AerialUpperCut_Fire",
-        FireFxOnSelf = "FistFxUppercutDirectional",
+        -- PreFireDuration = 0.23,
+        FireDuration = 0.73, -- 0.23 + 0.5
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
         OnWeaponChargeFunction =
@@ -242,11 +238,8 @@ WeaponData.DarkTalosFistSpecialDash =
         GiveupDistance = 700,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        FireDuration = 0.4,
-        PreFireDuration = 0.24,
-        PreFireAnimation = "DarkZagreusFistAlt02Grab_Start",
-        FireAnimation = "DarkZagreusFistAlt02DashUpperCut_Fire",
-        FireFxOnSelf = "FistFxUppercutDirectional",
+        -- PreFireDuration = 0.24,
+        FireDuration = 0.44, -- 0.24 + 0.2
         OnWeaponChargeFunction =
 		{
 			FunctionName = "DZAICheckVacuumPlayer",
