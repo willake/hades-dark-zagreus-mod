@@ -122,7 +122,7 @@ function DZAIDoGunAttackOnce(enemy, currentRun, targetId, weaponAIData, actionDa
 		if not weaponAIData.SkipAngleTowardTargetWait then
 			enemy.AINotifyName = "WaitForRotation"..enemy.ObjectId
 			NotifyOnRotationComplete({ Id = enemy.ObjectId, Cosmetic = true, Notify = enemy.AINotifyName, Timeout = 9.0 })
-			waitUntil( enemy.AINotifyName )
+			waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 		end
 	end
 
