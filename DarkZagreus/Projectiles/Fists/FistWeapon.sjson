@@ -13,8 +13,8 @@
         CheckUnitImpact = true
         CheckObstacleImpact = true
         UnlimitedUnitPenetration = true
-        DamageLow = 10 // 15
-        DamageHigh = 10 // 15
+        DamageLow = 15 // 15
+        DamageHigh = 15 // 15
         Speed = 0
         Range = 0
         StartDelay = 0.02
@@ -80,8 +80,8 @@
 	{
         Name = "DarkFistDash"
         InheritFrom = "DarkFist"
-        DamageLow = 13 // 25
-        DamageHigh = 13 // 25
+        DamageLow = 25 // 25
+        DamageHigh = 25 // 25
         ImpactVelocity = 0
         ImpactVelocityCap = 0
         DetonateGraphic = null
@@ -157,8 +157,8 @@
         NumPenetrations = 99999
         StartDelay = 0.0
         Fuse = 0.25
-        DamageLow = 15 // 30
-        DamageHigh = 15 // 30
+        DamageLow = 30 // 30
+        DamageHigh = 30 // 30
         AttachToOwner = true
         ImpactVelocity = 0
         ImpactVelocityCap = 0
@@ -220,8 +220,8 @@
 	{
         Name = "DarkFistSpecialDash"
         InheritFrom = "DarkFistSpecial"
-        DamageLow = 20 // 40
-        DamageHigh = 20 // 40
+        DamageLow = 40 // 40
+        DamageHigh = 40 // 40
         Effects = [
             {
                 Name = "OnHitStun"

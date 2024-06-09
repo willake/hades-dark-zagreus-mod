@@ -4,8 +4,8 @@
     {
 		Name = "DarkArthurSword"
 		InheritFrom = "DarkSword"
-		DamageLow = 25 // 50
-		DamageHigh = 25
+		DamageLow = 40 // 50
+		DamageHigh = 40
 		ProjectileDefenseAngle = 40
 		ProjectileDefenseRadius = 420
         ImpactVelocity = 0
@@ -49,8 +49,8 @@
     {
 		Name = "DarkArthurSword2"
 		InheritFrom = "DarkSword2"
-		DamageLow = 25 // 50
-		DamageHigh = 25 // 50
+		DamageLow = 40 // 50
+		DamageHigh = 40 // 50
 		ArcStart = 90
 		ArcEnd = -130
 		Speed = 2000
@@ -94,8 +94,8 @@
 	{
 		Name = "DarkArthurSword3"
 		InheritFrom = "DarkSword3"
-		DamageLow = 25 // 50
-		DamageHigh = 25 // 50
+		DamageLow = 40 // 50
+		DamageHigh = 40 // 50
 		ArcStart = -110
 		ArcEnd = 130
 		Speed = 2400
@@ -143,8 +143,8 @@
 	{
 		Name = "DarkArthurSwordParry"
 		InheritFrom = "DarkSwordParry"
-		DamageLow = 35 // 70
-		DamageHigh = 35 // 70
+		DamageLow = 60 // 70
+		DamageHigh = 60 // 70
 		DetonateGraphic = "RadialNovaSwordParry-Arthur"
 	}
 	{

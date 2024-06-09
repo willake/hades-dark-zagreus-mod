@@ -12,8 +12,8 @@
         {
             Name = "DarkHadesSpearTwoThree"
             InheritFrom = "DarkHadesSpear"
-            DamageLow = 15 // 30
-            DamageHigh = 15 // 30
+            DamageLow = 30 // 30
+            DamageHigh = 30 // 30
         }
         {
             Name = "DarkHadesSpearSpin"

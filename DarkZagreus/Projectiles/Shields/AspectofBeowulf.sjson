@@ -20,8 +20,8 @@
         Speed = 2900
         ReturnToOwnerAfterInactiveSeconds = 0.4
         ReturnToOwnerSpeed = 2500
-        DamageLow = 25 // 45
-        DamageHigh = 25 // 45
+        DamageLow = 45 // 45
+        DamageHigh = 45 // 45
         // OnDeathFiredByAnimation = "ZagreusShieldBeowulfHeavyThrow_ReturnToIdle"
         OnDeathFiredByAnimation = "ZagreusShieldBeowulfCatch"
         Thing = {
@@ -65,8 +65,8 @@
     {
         Name = "DarkBeowulfShieldRush"
         InheritFrom = "DarkShieldRush"
-        DamageLow = 25 // 50
-        DamageHigh = 25 // 50
+        DamageLow = 50 // 50
+        DamageHigh = 50 // 50
         DissipateGraphic = "ShieldRush3DBeowulf-Out"
         Thing = {
             Graphic = "ShieldRush3DBeowulf"

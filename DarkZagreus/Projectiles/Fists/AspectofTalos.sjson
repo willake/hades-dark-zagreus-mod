@@ -23,8 +23,8 @@
         AffectsEnemies = true
         AffectsFriends = false
         AffectsSelf = false
-        DamageLow = 10 // 20
-        DamageHigh = 10 // 20
+        DamageLow = 20 // 20
+        DamageHigh = 20 // 20
         IgnoreCoverageAngles = true
         UseVulnerability = false
         CanCrit = false

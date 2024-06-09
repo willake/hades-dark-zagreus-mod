@@ -14,8 +14,8 @@
       CheckUnitImpact = true
       CheckObstacleImpact = true
       UnlimitedUnitPenetration = true
-      DamageLow = 8 // 15
-      DamageHigh = 8 // 15
+      DamageLow = 15 // 15
+      DamageHigh = 15 // 15
       Speed = 2700
       Range = 260
       NumPenetrations = 99999
@@ -91,8 +91,8 @@
       UnlimitedUnitPenetration = true
       DamageRadius = 0
       DamageRadiusScaleY = 0.6
-      DamageLow = 13 // 25
-      DamageHigh = 13 // 25
+      DamageLow = 25 // 25
+      DamageHigh = 25 // 25
       ImpactVelocity = 0
       Speed = 0
       Range = 0
@@ -176,8 +176,8 @@
       UnlimitedUnitPenetration = true
       DamageRadius = 0
       DamageRadiusScaleY = 0.6
-      DamageLow = 13 // 25
-      DamageHigh = 13
+      DamageLow = 25 // 25
+      DamageHigh = 25
       Speed = 0
       Range = 0
       Fuse = 0.5
@@ -254,8 +254,8 @@
     {
       Name = "DarkSwordDash"
       InheritFrom = "DarkSword3"
-      DamageLow = 10 // 20
-      DamageHigh = 10 // 20
+      DamageLow = 20 // 20
+      DamageHigh = 20 // 20
       ImpactVelocity = 0
       ImpactVelocityCap = 0
       Fuse = 0.3
@@ -299,8 +299,8 @@
       NumPenetrations = 99999
       Fuse = 0.02
       DamageRadius = 380
-      DamageLow = 25 // 50
-      DamageHigh = 25
+      DamageLow = 50 // 50
+      DamageHigh = 50
       BlastDuration = 0.1
       BlastSpeed = 2200
       AttachToOwner = true

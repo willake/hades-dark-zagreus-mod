@@ -18,8 +18,8 @@
             Range = 430
             Speed = 6000
             DamageRadius = 0
-            DamageLow = 13 // 25
-            DamageHigh = 13 // 25
+            DamageLow = 25 // 25
+            DamageHigh = 25 // 25
             CriticalFx = "CriticalHit"
             HitVulnerabilityFx = "Backstab"
             UseArmor = true
@@ -85,8 +85,8 @@
             DetonateGraphic = "SpearDashSwipe"
             ProjectileDefenseAngle = 100
             ProjectileDefenseRadius = 240
-            DamageLow = 10 // 20
-            DamageHigh = 10 // 20
+            DamageLow = 20 // 20
+            DamageHigh = 20 // 20
             Thing =
                 {
                 Graphic = "SpearDashSwipe"
@@ -114,14 +114,14 @@
         {
             Name = "DarkSpearTwoThree"
             InheritFrom = "DarkSpear"
-            DamageLow = 15 // 30
-            DamageHigh = 15 // 30
+            DamageLow = 30 // 30
+            DamageHigh = 30 // 30
         }
         {
             Name = "DarkSpearLunarThree"
             InheritFrom = "DarkSpear"
-            DamageLow = 35 // 70
-            DamageHigh = 35 // 70
+            DamageLow = 70 // 70
+            DamageHigh = 70 // 70
         }
         {
             Name = "DarkSpearSpin"
@@ -145,8 +145,8 @@
             CheckUnitImpact = false
             CheckObstacleImpact = true
             UnlimitedUnitPenetration = true
-            DamageLow = 15 // 30
-            DamageHigh = 15 // 30
+            DamageLow = 30 // 30
+            DamageHigh = 30 // 30
             ImpactVelocity = 0
             CriticalFx = "CriticalHit"
             HitVulnerabilityFx = "Backstab"
@@ -183,16 +183,16 @@
         {
             Name = "DarkSpearSpin2"
             InheritFrom = "DarkSpearSpin"
-            DamageLow = 25 // 50
-            DamageHigh = 25 // 50
+            DamageLow = 50 // 50
+            DamageHigh = 50 // 50
             DamageRadius = 350
             DeflectProjectiles = false
         }
         {
             Name = "DarkSpearSpin3"
             InheritFrom = "DarkSpearSpin"
-            DamageLow = 50 // 100
-            DamageHigh = 50 // 100
+            DamageLow = 100 // 100
+            DamageHigh = 100 // 100
             DamageRadius = 500
             DeflectProjectiles = false
             }
@@ -211,8 +211,8 @@
             UnlimitedUnitPenetration = true
             Range = 880
             Speed = 3000
-            DamageLow = 13 // 25
-            DamageHigh = 13 // 25
+            DamageLow = 25 // 25
+            DamageHigh = 25 // 25
             ProjectileDefenseRadius = 75
             CriticalFx = "CriticalHit"
             HitVulnerabilityFx = "Backstab"
@@ -280,8 +280,8 @@
             AttachToOwner = true
             Type = "INSTANT"
             Range = 50
-            DamageLow = 13 // 25
-            DamageHigh = 13 // 25
+            DamageLow = 25 // 25
+            DamageHigh = 25 // 25
             DamageRadius = 100.0
             DamageRadiusScaleY = 0.65
             UseVulnerability = true

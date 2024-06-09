@@ -22,8 +22,8 @@
         RequireHitCenter = false
         DamageLow = 13 // 25
         DamageHigh = 13 // 25
-        // ImpactVelocity = 2500
-        // ImpactVelocityCap = 2500
+        ImpactVelocity = 1500 // 2500
+        ImpactVelocityCap = 1500 // 2500
         InvulnerableImpactOwnerVelocity = 350
         UseRadialImpact = false
         DamageRadiusScaleX = 1.0
@@ -77,8 +77,8 @@
         NumPenetrations = 9999
         AttachToOwner = true
         Fuse = 0.3
-        DamageLow = 4
-        DamageHigh = 4
+        DamageLow = 10 // 4
+        DamageHigh = 10 // 4
         // ImpactVelocity = 2200
         // ImpactVelocityCap = 2200
         UseRadialImpact = false
