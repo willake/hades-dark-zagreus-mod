@@ -76,14 +76,13 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 5.0 })
 				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
-        end
 
-        local ammo = 
-            GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
+            local ammo = 
+                GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
         
-        if ammo <= 0 then
-            DZDebugPrintString("Reload")
-            DZAIReloadGun(enemy, weaponAIData)
+            if ammo <= 0 then
+                DZAIReloadGun(enemy, weaponAIData)
+            end
         end
     end
 
