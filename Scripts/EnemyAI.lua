@@ -457,7 +457,7 @@ function DZAIDoChargeDistanceFire(enemy, weaponAIData, targetId, percentageCharg
     if weaponAIData.WaitUntilProjectileDeath ~= nil then
 		enemy.AINotifyName = "ProjectilesDead"..enemy.ObjectId
 		NotifyOnProjectilesDead({ Name = weaponAIData.WaitUntilProjectileDeath, Notify = enemy.AINotifyName})
-		waitUntil( enemy.AINotifyName )
+		waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 	else
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end

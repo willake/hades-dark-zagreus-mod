@@ -62,7 +62,7 @@ function DZAIDoFistAILoop(enemy, currentRun, targetId)
                 DZDebugPrintString("Attack failed. Gonna try again.")
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
-				waitUntil( enemy.AINotifyName )
+				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
         end
     end
@@ -102,7 +102,7 @@ function DZAIDoFistAttackOnce(enemy, currentRun, targetId, weaponAIData, actionD
 		if not weaponAIData.SkipAngleTowardTargetWait then
 			enemy.AINotifyName = "WaitForRotation"..enemy.ObjectId
 			NotifyOnRotationComplete({ Id = enemy.ObjectId, Cosmetic = true, Notify = enemy.AINotifyName, Timeout = 9.0 })
-			waitUntil( enemy.AINotifyName )
+			waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 		end
 	end
 

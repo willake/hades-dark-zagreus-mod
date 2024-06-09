@@ -76,7 +76,7 @@ UnitSetData.Enemies.Hades.OnDeathFunctionArgs = {
     StartPanTime = 1.5, 
     MessageLayer = "ScreenOverlay", 
     MessageDelay = 1.5, 
-    MessageDuration = 3.5, 
+    MessageDuration = 2.5, 
     AddInterBiomeTimerBlock = true }
 
 

@@ -65,7 +65,7 @@ function DZAIDoSpearAILoop(enemy, currentRun, targetId)
             if not attackSuccess then
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
-				waitUntil( enemy.AINotifyName )
+				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
         end
     end
@@ -105,7 +105,7 @@ function DZAIDoSpearAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 		if not weaponAIData.SkipAngleTowardTargetWait then
 			enemy.AINotifyName = "WaitForRotation"..enemy.ObjectId
 			NotifyOnRotationComplete({ Id = enemy.ObjectId, Cosmetic = true, Notify = enemy.AINotifyName, Timeout = 9.0 })
-			waitUntil( enemy.AINotifyName )
+			waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 		end
 	end
 
