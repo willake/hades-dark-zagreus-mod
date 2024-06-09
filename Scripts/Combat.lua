@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 -- check if is damaged
 ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
     if DZCheckCanRecord() then

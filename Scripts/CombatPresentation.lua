@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 function DZDarkZagreusKillPresentation( unit, args )
 	DebugPrint({ Text = "Dark Zagreus Kill Presentation: " })
 	unit.InTransition = true

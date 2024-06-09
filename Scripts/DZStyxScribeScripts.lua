@@ -1,4 +1,6 @@
 
+if not DarkZagreus.Config.Enabled then return end
+
 function DZStyxScribeSaveTrainingData(curRunRecord)
     DZDebugPrintString("DZStyxScribeLoadTrainingData() - Not really save the file because StyxScribe is not found.")
 end
