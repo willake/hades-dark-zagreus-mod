@@ -11,8 +11,7 @@ WeaponData.DarkGun =
         AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05
-        WaitUntilProjectileDeath = "DarkGun",
+        FireDuration = 0.07,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -80,8 +79,7 @@ WeaponData.DarkGunDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05,
-        WaitUntilProjectileDeath = "DarkGunDash"
+        FireDuration = 0.07,
     },
 
     Sounds =
