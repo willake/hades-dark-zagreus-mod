@@ -44,6 +44,10 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
         -- do manual reload here so the AI can reload while walking
         if enemy.DZ.TempAction == 5 then
             DZAIManualReload(enemy)
+
+            enemy.DZ.LastActionTime = _worldTime
+            -- save both which action is used and the charge time
+            DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
             return true
         end
     
