@@ -1,8 +1,11 @@
 ﻿# Dark Zagreus (Hades Mod) v1.0
 
-A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Dark Zagreus equips the same weapon as the player's previous successful run. What sets this mod special is the AI of Dark Zagreus is powered by a deep learning model trained on the player's historical gameplay data of previous successful run. This experimental feature creates a dynamic challenge experience for players with the individual's style and strategies.
-
+A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Dark Zagreus equips the same weapon as the player's previous successful run. What sets this mod apart is that Dark Zagreus takes inspiration from the player's previous successful runs, decisions and performances, and dynamically adapts to your playstyle.
 ![Demo](./ReadmeAssets/demo.gif)
+
+## Asking For Help For My Research
+
+This mod is part of my master's thesis research. Your participation in completing the questionnaire while playing the mod would be greatly appreciated and extremely helpful. For more information, please check the [questionnaire](https://survey.uu.nl/jfe/form/SV_06ycfpE2cBvUM4u).
 
 ## Requirements
 - [Hades](https://store.steampowered.com/app/1145360/Hades/) (V1.38290 or above)
@@ -38,15 +41,16 @@ The save file is located at `C:\Users\${YourUserName}\Documents\Saved Games\Hade
 In the House of Hades, if you open Codex Menu and see a section titled Dark Zagreus. That means the mod has been successfully installed.
 
 ## Feature
-After installing the mod, you can start a run. At the end of the run, you will see Dark Zagreus standing opposite you, ready to fight. In the first attempt, since there is no previous run data, Dark Zagreus will equip the most basic weapon, and his AI will be driven by random values. After completing the run, the next time you encounter Dark Zagreus, he will equip the weapon you used in your previous run.
+After installing the mod, you can start a run. At the end of the run, you will see Dark Zagreus standing opposite you, ready to fight. The first attempt of fighting Dark Zagreus will be a default challenge, where he will wield the Stygian Blade and show scripted behavior. Every time you defeat him, he will adapt his weapon and playstyle to your own.
 
-> Note that only successful runs will be considered. If you die during a run, the AI will not be updated.
-
-> Real-time deep learning model training takes time. The model is trained when you enter the boss room, so the screen might freeze for a few seconds during this process. 
+> Note that only successful runs will be considered. If you die during a run, he will not adapt to that run.
+> A brief moment of loading might appear when you enter the final boss room, which should not take longer than a few seconds.
 
 ### Commands
 This mod offers debug features. To see the available commands, press `C` (or the corresponding button for your platform) to open the Codex in the game.
 There are a list of commands. To execute them, select a command and press `Enter` (or the corresponding confirm button).
+
+**If you are participating the study(see Asking For Help For My Research above), please do not use these commands except ExportRecordToFile during the study period.**
 
 ![commands](./ReadmeAssets/commands.png)
 
@@ -71,6 +75,18 @@ This function loads record from file, it is useful when you want to load other's
 ### StyxScribe only
 #### Load record from file StyxScribe
 Same as `Load record from file` but works with StyxScribe, which means that this feature works on any platform as long as StyxScribe is working. The file should ba placed at the same folder as `StyxScribe.py`.
+
+## Trobule Shoorting
+### The mod is not applied. Hades is still the same.
+Make sure you run the `modimporter.exe`
+### When I open the game, a screen shows up saying that save files can't be loaded
+Make sure ModUtil and DarkZagreus are imported.
+
+If you have more questions or observe any bugs, feel free to contact me.
+
+Email: huienlin.game@gmail.com
+
+You can also find me in the [SGG modding community](https://discord.gg/KuMbyrN). Just tag @huiun.
 
 ## Limitation
 ### Cast, call, and summon support
@@ -103,12 +119,6 @@ The deep learning library in this mod is a modified version of [luann](https://g
 Thanks to the [moding community](https://github.com/SGG-Modding) and ModUtils of Hades for providing thorough tutorials. I also appreciate everyone on the Discord server for answering my questions and providing useful information.
 
 The command features is inspired by [CodexMenu](https://www.nexusmods.com/hades/mods/15) mod by LRevolution.
-
-## Trobule Shoorting
-### The mod is not applied. Hades is still the same.
-Make sure you run the `modimporter.exe`
-### When I open the game, a screen shows up saying that save files can't be loaded
-Make sure ModUtil and DarkZagreus are imported.
 
 ## Dependencies
 This mod overrides `ReloadGun` and `ManualReload` function in `Combat.lua`, which might cause problem with other mods which also override this function.
