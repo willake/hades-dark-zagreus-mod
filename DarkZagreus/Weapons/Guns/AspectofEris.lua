@@ -11,10 +11,9 @@ WeaponData.DarkErisGun =
         AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05,
-        -- CanHold = true
-        WaitUntilProjectileDeath = "DarkErisGun",
+        FireDuration = 0.17, -- 0.07 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
+        SkipAngleTowardTarget = true,
         SkipAttackAfterMoveTimeout = true,
     },
     
@@ -23,8 +22,8 @@ WeaponData.DarkErisGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunAlt02ReloadStart",
-				MovingReloadAnimation = "ZagreusGunAlt02RunReload",
+    IdleReloadAnimation = "DarkZagreusGunAlt02ReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunAlt02RunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
@@ -75,8 +74,8 @@ WeaponData.DarkErisGunDash =
     InheritFrom = { "DarkErisGun" },
     DashWeapon = nil,
 
-    IdleReloadAnimation = "ZagreusGunAlt02ReloadStart",
-				MovingReloadAnimation = "ZagreusGunAlt02RunReload",
+    IdleReloadAnimation = "DarkZagreusGunAlt02ReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunAlt02RunReload",
 
     AIData =
     {
@@ -84,10 +83,7 @@ WeaponData.DarkErisGunDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05,
-        -- CanHold = true,
-        -- ChainedWeapon = "DarkGun"
-        WaitUntilProjectileDeath = "DarkErisGunDash"
+        FireDuration = 0.1, -- 0.07 + 0.02
     },
 
     Sounds =
@@ -131,9 +127,8 @@ WeaponData.DarkErisGunGrenadeToss =
     {
         AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.2
+        FireDuration = 0.28
     },
 
     Sounds =

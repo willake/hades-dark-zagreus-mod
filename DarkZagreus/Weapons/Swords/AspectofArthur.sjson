@@ -4,9 +4,10 @@
     {
       Name = "DarkArthurSword"
       InheritFrom = "DarkSword"
-      ChargeStartAnimation = "null"
-      FireGraphic = "null"
-      FireFx = "null"
+      ChargeTime = 0.26
+      ChargeStartAnimation = "DarkZagreusSwordArthurAttack1_Charge"
+      FireGraphic = "DarkZagreusSwordArthurAttack1_Fire"
+      FireFx = "SwordSwipeC-Arthur"
       Projectile = "DarkArthurSword"
       RootOwnerWhileFiring = true
       Effects = [
@@ -108,8 +109,11 @@
     {
       Name = "DarkArthurSword2"
       InheritFrom = "DarkSword2"
-      // FireGraphic = "ZagreusSwordArthurAttack2_Fire"
-      // FireFx = "SwordSwipeA-Arthur"
+      ChargeTime = 0.34
+      ChargeFx = "ChargeAttack-Arthur"
+      ChargeStartAnimation = "DarkZagreusSwordArthurAttack2_Charge"
+      FireGraphic = "DarkZagreusSwordArthurAttack2_Fire"
+      FireFx = "SwordSwipeA-Arthur"
       Projectile = "DarkArthurSword2"
       BarrelLength = "0"
       Effects = [
@@ -205,8 +209,10 @@
     {
       Name = "DarkArthurSword3"
       InheritFrom = "DarkSword3"
-      // FireGraphic = "ZagreusSwordArthurAttack3_Fire"
-      // FireFx = "SwordSwipeAFlipped-Arthur"
+      ChargeTime = 0.49
+      ChargeStartAnimation = "DarkZagreusSwordArthurAttack3_Charge"
+      FireGraphic = "DarkZagreusSwordArthurAttack3_Fire"
+      FireFx = "SwordSwipeAFlipped-Arthur"
       Projectile = "DarkArthurSword3"
       SelfVelocity = 1000 // 600 * 0.75
       SelfVelocityCap = 1000 // 600 * 0.75
@@ -302,17 +308,19 @@
       Name = "DarkArthurSwordDash"
       InheritFrom = "DarkSwordDash"
       Projectile = "DarkArthurSwordDash"
-      FireGraphic = "ZagreusSwordArthurAttack1_Fire"
+      ChargeTime = 0.21
+      ChargeStartAnimation = "DarkZagreusSwordArthurAttack1_Charge"
+      FireGraphic = "DarkZagreusSwordArthurAttack1_Fire"
       FireFx = "SwordSwipeC-Arthur"
       RootOwnerWhileFiring = true
     }
     {
       Name = "DarkArthurSwordParry"
       InheritFrom = "DarkSwordParry"
-      ChargeStartAnimation = "null"
-      FireGraphic = "null"
+      ChargeStartAnimation = "DarkZagreusSwordAlt03ParryCharge"
+      FireGraphic = "DarkZagreusSwordAlt03ParryFire"
       Projectile = "DarkArthurSwordParry"
-      ChargeTime = 0.0
+      ChargeTime = 0.48
       Effects = [
         {
           Trigger = "Fire"

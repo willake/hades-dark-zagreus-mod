@@ -5,8 +5,8 @@
             Name = "DarkGilgameshFist"
             InheritFrom = "DarkFist"
             Projectile = "DarkGilgameshFistClawL"
-            ChargeStartAnimation = "ZagreusFistAlt03ClawL_Start"
-            FireGraphic = "ZagreusFistAlt03ClawL_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt03ClawL_Start"
+            FireGraphic = "DarkZagreusFistAlt03ClawL_Fire"
             FireFx = "ClawSwipe"
             ChargeTime = 0.21
             Effects = [
@@ -133,8 +133,8 @@
             Projectile = "DarkGilgameshFistClawR"
             ControlWindow = 0.5
             ChargeTime = 0.14
-            ChargeStartAnimation = "ZagreusFistAlt03ClawR_Start"
-            FireGraphic = "ZagreusFistAlt03ClawR_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt03ClawR_Start"
+            FireGraphic = "DarkZagreusFistAlt03ClawR_Fire"
             FireFx = "ClawSwipeFlipped"
             Effects = [
                 {
@@ -221,8 +221,8 @@
             Projectile = "DarkGilgameshFistClawL"
             ControlWindow = 0.5
             ChargeTime = 0.14
-            ChargeStartAnimation = "ZagreusFistAlt03ClawL_Start"
-            FireGraphic = "ZagreusFistAlt03ClawL_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt03ClawL_Start"
+            FireGraphic = "DarkZagreusFistAlt03ClawL_Fire"
             FireFx = "ClawSwipe"
             Effects = [
                 {
@@ -311,8 +311,8 @@
             Projectile = "DarkGilgameshFistClawR"
             ChargeTime = 0.13
             ControlWindow = 0.5
-            ChargeStartAnimation = "ZagreusFistAlt03ClawR_Start"
-            FireGraphic = "ZagreusFistAlt03ClawR_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt03ClawR_Start"
+            FireGraphic = "DarkZagreusFistAlt03ClawR_Fire"
             FireFx = "ClawSwipeFlipped"
             Effects = [
                 {
@@ -378,10 +378,10 @@
             Name = "DarkGilgameshFist5"
             InheritFrom = "DarkFist5"
             Projectile = "DarkGilgameshFistClawL"
-            ChargeTime = 0.12
+            ChargeTime = 0.13
             ControlWindow = 0.5
-            ChargeStartAnimation = "ZagreusFistAlt03ClawL_Start"
-            FireGraphic = "ZagreusFistAlt03ClawL_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt03ClawL_Start"
+            FireGraphic = "DarkZagreusFistAlt03ClawL_Fire"
             FireFx = "ClawSwipe"
             Effects = [
                 {
@@ -438,8 +438,8 @@
             Name = "DarkGilgameshFistDash"
             InheritFrom = "DarkFistDash"
             Projectile = "DarkGilgameshFistClawDash"
-            ChargeStartAnimation = "ZagreusFistAlt03DashAttack_Charge"
-            FireGraphic = "ZagreusFistAlt03DashAttack_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt03DashAttack_Charge"
+            FireGraphic = "DarkZagreusFistAlt03DashAttack_Fire"
             ChargeTime = 0.08
             Effects = [
                 {
@@ -482,11 +482,17 @@
             Name = "DarkGilgameshFistSpecial"
             InheritFrom = "DarkFistSpecial"
             Projectile = "DarkGilgameshFistSpecial"
+            ChargeStartAnimation = "DarkZagreusFistAlt03AerialUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAlt03AerialUpperCut_Fire"
+            FireFx = "ClawSwipeUppercut"
         }
         {
             Name = "DarkGilgameshFistSpecialDash"
             InheritFrom = "DarkFistSpecialDash"
             Projectile = "DarkGilgameshFistSpecialDash"
+            ChargeStartAnimation = "DarkZagreusFistAlt03DashUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAlt03DashUpperCut_Fire"
+            FireFx = "ClawSwipeUppercutSpecial"
             Effects = [
                 {
                     Name = "FistSpecialDashDisable"
@@ -546,7 +552,7 @@
         {
             Name = "DarkGilgameshRush"
             InheritFrom = "DarkRush"
-            FireGraphic = "ZagreusFistAlt03DashNoCollide"
+            FireGraphic = "DarkZagreusFistAlt03DashNoCollide"
             UnblockedBlinkFx = "null"
             WeaponRange = 225 // 300 * 0.75
             ClipSize = 3 // 1 + 2

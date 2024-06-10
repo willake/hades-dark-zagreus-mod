@@ -14,14 +14,15 @@ WeaponData.DarkGuanYuSpear =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			ChainedWeapon = "DarkGuanYuSpear2",
-			FireDuration = 0.3,
+			-- PreFireDuration = 0.12,
+			FireDuration = 0.42, -- 0.12 + 0.3
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.4 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7,
+			MaxChargeTime = 1.2,
 			AIMoveWithinRangeTimeoutMin = 0.3,
 			AIMoveWithinRangeTimeoutMax = 0.6,
 			SkipAttackAfterMoveTimeout = true,
@@ -75,14 +76,15 @@ WeaponData.DarkGuanYuSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkGuanYuSpear3",
-			FireDuration = 0.05,
+			-- PreFireDuration = 0.32,
+			FireDuration = 0.53, -- 0.32 + 0.21
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.4 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2
 		},
 
 		Sounds =
@@ -117,14 +119,15 @@ WeaponData.DarkGuanYuSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.05,
+			-- PreFireDuration = 0.52,
+			FireDuration = 0.82, -- 0.52 + 0.3
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.4 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2
 		},
 
 		Sounds =
@@ -161,14 +164,14 @@ WeaponData.DarkGuanYuSpearDash =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.15,
+			FireDuration = 0.31,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin2", Threshold = 0.4 },
+				{ ChargeWeapon = "DarkGuanYuSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2
 		},
 
 		Sounds =
@@ -198,7 +201,6 @@ WeaponData.DarkGuanYuSpearThrow =
 	{
 		Name = "DarkGuanYuSpearThrow",
 		StartingWeapon = false,
-
 		AIData =
 		{
 			AttackDistanceMin = 600,
@@ -206,7 +208,8 @@ WeaponData.DarkGuanYuSpearThrow =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.2,
+			-- PreFireDuration = 0.28,
+			FireDuration = 0.56, -- 0.28 + 0.28
 		},
 
 		Sounds =
@@ -257,14 +260,14 @@ WeaponData.DarkGuanYuSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.15,
+			FireDuration = 0.34,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			PreFireDuration = 0.26,
-			PreFireAnimation = "ZagreusSpearAlt03SpinStart",
-            PreFireCancelAnimation = "ZagreusSpearAlt03SpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearAlt03SpinAttack",
+			PreFireAnimation = "DarkZagreusSpearAlt03SpinStart",
+            PreFireCancelAnimation = "DarkZagreusSpearAlt03SpinStartChargeCancel",
+            FireAnimation = "DarkZagreusSpearAlt03SpinAttack",
 			WaitUntilProjectileDeath = "DarkGuanYuSpearSpin"
 		},
 

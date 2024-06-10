@@ -15,7 +15,7 @@
             ShowFreeAimLine = false
             AimLineAnimation = "null"
             ChargeStartAnimation = "null"
-            FireGraphic = "ZagreusShieldPunch"
+            FireGraphic = "DarkZagreusShieldPunch"
             ChargeCancelGraphic = "null"
             ChargeStartFx = "null"
             ChargeFinishFx = "null"
@@ -24,21 +24,7 @@
             ChargeTime = 0
             DisableOwnerForDurationFrames = 0
             CanCancelDisables = false
-            // TriggersStoredAmmoVulnerability = true
-            // CancelMovement = false
-            // ChargeCancelMovement = false
-            // BlockMoveInput = false
-            // FullyAutomatic = true
-            // AutoLock = false
-            // AutoLockRange = 1000
-            // LockTriggerForCharge = false
-            // RequestTriggerLockDuringReload = true
-            // FireOnRelease = false
-            // ReloadOnRelease = true
             // ReloadTime = 0.4
-            // SwapOnFire = "ShieldWeaponRush"
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
             Effects = [
                 {
                     Trigger = "Fire"
@@ -90,16 +76,14 @@
             ControlWindow = 0.45
             AutoLockArcDistance = 90
             SelfVelocity = 400
-            FireGraphic = "ZagreusShieldPunchFast"
+            FireGraphic = "DarkZagreusShieldPunchFast"
             ChargeTimeFrames = 0
             ChargeStartAnimation = "null"
             Enabled = true
             CanCancelDisables = true
             CanCancelOwnDisables = true
-            // LockTriggerTransferFromOnSwap = false
-            // AllowExternalForceRelease = false
             // MinChargeToFire = 0
-            // ChargeTime = 0
+            ChargeTime = 0
             Effects = [
                 {
                     Trigger = "Fire"
@@ -161,10 +145,10 @@
             ChargeCancelGraphic = "null"
             ChargeStartFx = "ShieldCharge"
             FireGraphic = "null"
-            // FireOnRelease = true
             Cooldown = 0
             MinChargeToFire = 0.2
-            ChargeTime = 0.8
+            ChargeTime = 0
+            // ChargeTime = 0.8
             // ShowFreeAimLine = true
             // AimLineAnimation = "AuraAimLineShield"
             SelfVelocity = 600
@@ -314,7 +298,7 @@
             // ShowFreeAimLine = true
             // AimLineAnimation = "AuraAimLine"
             ChargeStartAnimation = "null"
-            FireGraphic = "ZagreusShieldThrow"
+            FireGraphic = "DarkZagreusShieldThrow"
             LockTriggerForCharge = false
             FireOnRelease = false
             ChargeRangeMultiplier = 1.0

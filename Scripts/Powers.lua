@@ -1,3 +1,4 @@
+if not DarkZagreus.Config.Enabled then return end
 -- these function are replicated version from Power.lua
 -- because the original version is only available for player character
 

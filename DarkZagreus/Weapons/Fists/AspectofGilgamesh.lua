@@ -13,8 +13,8 @@ WeaponData.DarkGilgameshFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist2",
-        PreFireDuration = 0.2,
-        WaitUntilProjectileDeath = "DarkGilgameshFist",
+        -- PreFireDuration = 0.2,
+        FireDuration = 0.47, -- 0.2 + 0.27
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -68,8 +68,8 @@ WeaponData.DarkGilgameshFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist3",
-        PreFireDuration = 0.13,
-        WaitUntilProjectileDeath = "DarkGilgameshFist2",
+        -- PreFireDuration = 0.13,
+        FireDuration = 0.4, -- 0.13 + 0.27
     },
 
     Sounds =
@@ -105,8 +105,8 @@ WeaponData.DarkGilgameshFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist4",
-        PreFireDuration = 0.13,
-        WaitUntilProjectileDeath = "DarkGilgameshFist3",
+        -- PreFireDuration = 0.13, 
+        FireDuration = 0.4, -- 0.13 + 0.27
     },
 
     Sounds =
@@ -142,8 +142,8 @@ WeaponData.DarkGilgameshFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist5",
-        PreFireDuration = 0.12,
-        WaitUntilProjectileDeath = "DarkGilgameshFist4",
+        -- PreFireDuration = 0.12,
+        FireDuration = 0.39, -- 0.12 + 0.27
     },
 
     Sounds =
@@ -179,9 +179,9 @@ WeaponData.DarkGilgameshFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
-        PreFireDuration = 0.12,
-        WaitUntilProjectileDeath = "DarkGilgameshFist5",
-        Cooldown = 0.5
+        -- PreFireDuration = 0.12,
+        FireDuration = 0.39, -- 0.12 + 0.27
+        Cooldown = 0.5,
     },
 
     Sounds =
@@ -220,9 +220,8 @@ WeaponData.DarkGilgameshFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkGilgameshFist",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkGilgameshFistDash",
-        IsStartFromFistDash = true
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.21, -- 0.07 + 0.14
     },
 
     Sounds =
@@ -262,11 +261,8 @@ WeaponData.DarkGilgameshFistSpecial =
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        FireDuration = 0.4,
-        PreFireDuration = 0.18,
-        PreFireAnimation = "ZagreusFistAlt03AerialUpperCut_Start",
-        FireAnimation = "ZagreusFistAlt03AerialUpperCut_Fire",
-        FireFxOnSelf = "ClawSwipeUppercut",
+        -- PreFireDuration = 0.18,
+        FireDuration = 0.75, -- 0.18 + 0.57
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -314,11 +310,8 @@ WeaponData.DarkGilgameshFistSpecialDash =
         GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        FireDuration = 0.4,
-        PreFireDuration = 0.17,
-        PreFireAnimation = "ZagreusFistAlt03DashUpperCut_Start",
-        FireAnimation = "ZagreusFistAlt03DashUpperCut_Fire",
-        FireFxOnSelf = "ClawSwipeUppercutSpecial",
+        -- PreFireDuration = 0.1,
+        FireDuration = 0.38, -- 0.1 + 0.28
     },
 
     Sounds =

@@ -1,6 +1,13 @@
+import os
+import time
+
 def _save_dataset( message ):
     try:
-        with open('DZRecord2.log', 'w') as outfile:
+        folder_name = 'DZRecrods'
+        if os.path.isdir(folder_name) == False:
+            os.makedirs(folder_name)
+        filepath = folder_name + '/' + time.time() + '.log'
+        with open(filepath, 'w') as outfile:
             outfile.write(message)
         Scribe.Send( "DarkZagreus: DZStyxScribeSaveTrainingDataCallback: " + "true" )
     except IOError as e:
@@ -20,8 +27,6 @@ def _load_dataset( message ):
     except IOError as e:
         print(f"An error occurred while reading the file: {e}")
         return None
-
-Priority = 0
 
 def Load():
     Scribe.AddHook(_load_dataset, "DarkZagreus: DZStyxScribeLoadTrainingData: ", __name__)

@@ -21,8 +21,8 @@
       Name = "DarkHeraBowSplitShot"
       InheritFrom = "DarkBowSplitShot"
       Projectile = "DarkHeraBowSplitShot"
-      ChargeStartAnimation = "null"
-      FireGraphic = "null"
+      ChargeStartAnimation = "DarkZagreusBowAlt02RapidFire_Start"
+      FireGraphic = "DarkZagreusBowAlt02RapidFire_Fire"
     }
   ]
 }

@@ -34,7 +34,7 @@ UnitSetData.Enemies.Hades.PactDataStage0 =
     },
 }
 
-UnitSetData.Enemies.Hades.SpawnAnimation = "ZagreusIdle"
+UnitSetData.Enemies.Hades.SpawnAnimation = "DarkZagreusIdle"
 UnitSetData.Enemies.Hades.AISetupDelay = 2.5
 
 UnitSetData.Enemies.Hades.DefaultAIData =
@@ -53,7 +53,7 @@ UnitSetData.Enemies.Hades.BossPresentationSuperPriorityIntroTextLineSets =
             PostLineAnim = "ZagreusTalkDenialReturnToIdle", PostLineAnimTarget = "Hero",
             Text = "Who... who are you?" },
         { Cue = nil,
-            PostLineAnim = "ZagreusIdle", Portrait = "Portrait_DarkZag_Serious_01", Speaker = "NPC_DarkZag_01",
+            PostLineAnim = "DarkZagreusIdle", Portrait = "Portrait_DarkZag_Serious_01", Speaker = "NPC_DarkZag_01",
             AngleTowardTargetId = 40000,
             PreLineFunctionName = "StartFinalBossRoomIntroMusic",
             PostLineFunctionName = "StartFinalBossRoomMusic",
@@ -67,15 +67,16 @@ UnitSetData.Enemies.Hades.BossPresentationRepeatableTextLineSets = nil
 UnitSetData.Enemies.Hades.LowHealthVoiceLines = nil
 UnitSetData.Enemies.Hades.DefeatedVoiceLines = nil
 UnitSetData.Enemies.Hades.BossKillVoiceLines = nil
+UnitSetData.Enemies.Hades.RepulseOnMeleeInvulnerableHit = nil
 
-UnitSetData.Enemies.Hades.DeathAnimation = "ZagreusDeadStartBlood" -- ZagreusDeathFullScreen is not transparent background so I can't use it
+UnitSetData.Enemies.Hades.DeathAnimation = "DarkZagreusDeadStartBlood" -- ZagreusDeathFullScreen is not transparent background so I can't use it
 UnitSetData.Enemies.Hades.OnDeathFunctionName = "DZDarkZagreusKillPresentation"
 UnitSetData.Enemies.Hades.OnDeathFunctionArgs = { 
     Message = "DarkZagreusDefeatedMessage", 
     StartPanTime = 1.5, 
     MessageLayer = "ScreenOverlay", 
     MessageDelay = 1.5, 
-    MessageDuration = 3.5, 
+    MessageDuration = 2.5, 
     AddInterBiomeTimerBlock = true }
 
 

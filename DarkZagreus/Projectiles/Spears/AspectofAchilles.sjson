@@ -12,8 +12,8 @@
         {
             Name = "DarkAchillesSpearTwoThree"
             InheritFrom = "DarkAchillesSpear"
-            DamageLow = 15 // 30
-            DamageHigh = 15 // 30
+            DamageLow = 30 // 30
+            DamageHigh = 30 // 30
         }
         {
             Name = "DarkAchillesSpearSpin"
@@ -22,16 +22,16 @@
         {
             Name = "DarkAchillesSpearSpin2"
             InheritFrom = "DarkAchillesSpearSpin"
-            DamageLow = 25 // 50
-            DamageHigh = 25 // 50
+            DamageLow = 50 // 50
+            DamageHigh = 50 // 50
             DamageRadius = 350
             DeflectProjectiles = false
         }
         {
             Name = "DarkAchillesSpearSpin3"
             InheritFrom = "DarkAchillesSpearSpin"
-            DamageLow = 50 // 100
-            DamageHigh = 50 // 100
+            DamageLow = 100 // 100
+            DamageHigh = 100 // 100
             DamageRadius = 500
             DeflectProjectiles = false
         }

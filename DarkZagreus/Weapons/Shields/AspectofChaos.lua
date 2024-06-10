@@ -13,7 +13,7 @@ WeaponData.DarkChaosShield = {
         PostFireChargeWeapon = "DarkChaosShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
-        PreFireDuration = 0.15,
+        FireDuration = 0.41, -- no charge time
     },
 
     Sounds =
@@ -65,8 +65,7 @@ WeaponData.DarkChaosShieldDash =
         AIAngleTowardsPlayerWhileFiring = true,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.12,
-        WaitUntilProjectileDeath = "DarkChaosShieldDash",
+        FireDuration = 0.2,
     },
 
     Sounds =
@@ -109,7 +108,7 @@ WeaponData.DarkChaosShieldThrow =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = "DarkChaosShieldThrow",
-        PreFireDuration = 0.28,
+        -- FireDuration = 0.28,
     },
 		
     Sounds =
@@ -199,12 +198,12 @@ WeaponData.DarkChaosShieldRush =
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         PreFireDuration = 0.2,
-        PreFireAnimation = "ZagreusShieldAlt01AttackCharge",
+        PreFireAnimation = "DarkZagreusShieldAlt01AttackCharge",
         PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
-        FireAnimation = "ZagreusShieldAlt01AttackFire",
-        PreFireCancelAnimation = "ZagreusShieldAlt01AttackChargeCancel",
-        MinChargeStartFx = "ShieldCharge",
+        FireAnimation = "DarkZagreusShieldAlt01AttackFire",
+        PreFireCancelAnimation = "DarkZagreusShieldAlt01AttackChargeCancel",
+        ChargeFx = "ShieldCharge",
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
         MinChargeTime = 0.2,
@@ -212,8 +211,8 @@ WeaponData.DarkChaosShieldRush =
         -- Range = 45,
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
-        ChargeVelocityMultiplier = 5,
-        FireDuration = 0.2,
+        ChargeVelocityMultiplier = 4,
+        FireDuration = 0.3,
     },
 
     Sounds =

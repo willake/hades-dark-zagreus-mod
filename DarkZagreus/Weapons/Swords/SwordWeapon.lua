@@ -10,10 +10,9 @@ WeaponData.DarkSword =
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.05,
-        PreFireAnimation = "ZagreusSwordCharge1",
+        -- PreFireDuration = 0.05,
+        FireDuration = 0.22, -- 0.05 + 0.17
         ChainedWeapon = "DarkSword2",
-        WaitUntilProjectileDeath = "DarkSword"
     },
 
     CauseImpactReaction = true,
@@ -64,11 +63,8 @@ WeaponData.DarkSword2 =
         AIAngleTowardsPlayerWhileFiring = true,
         SkipAngleTowardTarget = true,
         ChainedWeapon = "DarkSword3",
-        PreFireDuration = 0.13, -- 0.3 
-        PreFireAnimation = "ZagreusSwordCharge2",
-        FireAnimation = "ZagreusSwordAttack2",
-        FireFxOnSelf = "SwordSwipeB",
-        WaitUntilProjectileDeath = "DarkSword2"
+        -- PreFireDuration = 0.13,
+        FireDuration = 0.33, -- 0.13 + 0.2
     },
 
     Sounds =
@@ -107,13 +103,10 @@ WeaponData.DarkSword3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.25,
-        PreFireAnimation = "ZagreusSwordCharge3",
+        -- PreFireDuration = 0.25,
+        FireDuration = 0.62, -- 0.25 + 0.37
         PreFireFx = "ChargeAttack",
-        PreFireSound = "/Leftovers/SFX/AuraCharge",
-        FireAnimation = "ZagreusSwordAttack3",
-        FireFxOnSelf = "SwordSwipeC",
-        WaitUntilProjectileDeath = "DarkSword3"
+        PreFireSound = "/Leftovers/SFX/AuraCharge"
     },
 
     Sounds =
@@ -155,13 +148,12 @@ WeaponData.DarkSwordDash =
 
     AIData =
     {
-        PreFireDuration = 0.05,
         GiveupDistance = 250,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        WaitUntilProjectileDeath = "DarkSwordDash"
+        FireDuration = 0.19,
     },
 
     Sounds =
@@ -211,9 +203,8 @@ WeaponData.DarkSwordParry =
         AIMoveWithinRangeTimeoutMax = 0.6,
         SkipAttackAfterMoveTimeout = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.28,
-        PreFireAnimation = "ZagreusSwordParryCharge",
-        FireDuration = 0.2,
+        -- PreFireDuration = 0.28,
+        FireDuration = 0.82, -- 0.28 + 0.54
     },
     
     Sounds =

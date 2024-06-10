@@ -1,3 +1,5 @@
+if not DarkZagreus.Config.Enabled then return end
+
 function DZDarkZagreusKillPresentation( unit, args )
 	DebugPrint({ Text = "Dark Zagreus Kill Presentation: " })
 	unit.InTransition = true
@@ -39,7 +41,7 @@ function DZDarkZagreusKillPresentation( unit, args )
 	SetMusicSection( 3 )
 
 	Stop({ Id = unit.ObjectId })
-	SetAnimation({ Name = "ZagreusDeadLoop", DestinationId = unit.ObjectId })
+	SetAnimation({ Name = "DarkZagreusDeadLoop", DestinationId = unit.ObjectId })
 	AngleTowardTarget({ Id = CurrentRun.Hero.ObjectId, DestinationId = unit.ObjectId })
 
 	if unit.Phase2ActivateGroups ~= nil then

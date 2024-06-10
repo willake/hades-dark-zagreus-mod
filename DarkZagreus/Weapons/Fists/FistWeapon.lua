@@ -13,8 +13,8 @@ WeaponData.DarkFist =
     {
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist2",
-        PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = "DarkFist",
+        -- PreFireDuration = 0.15,
+        FireDuration = 0.25, -- 0.15 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -64,8 +64,8 @@ WeaponData.DarkFist2 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist3",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkFist2",
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
     }
 }
 
@@ -79,8 +79,8 @@ WeaponData.DarkFist3 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist4",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkFist3",
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
     }
 }
 
@@ -94,8 +94,8 @@ WeaponData.DarkFist4 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist5",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkFist4",
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1 
     }
 }
 	
@@ -109,9 +109,9 @@ WeaponData.DarkFist5 =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkFist5",
-        Cooldown = 0.5
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1 
+        Cooldown = 0.5,
     }
 }
 
@@ -127,9 +127,8 @@ WeaponData.DarkFistDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         ChainedWeapon = "DarkFist",
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkFistDash",
-        IsStartFromFistDash = true
+        -- PreFireDuration = 0.07,
+        FireDuration = 0.15, -- 0.07 + 0.08
     },
 
     Sounds =
@@ -169,11 +168,8 @@ WeaponData.DarkFistSpecial =
     AIData =
     {
         AIAngleTowardsPlayerWhileFiring = true,
-        FireDuration = 0.4,
-        PreFireDuration = 0.17,
-        PreFireAnimation = "ZagreusFistAerialUpperCut_Start",
-        FireAnimation = "ZagreusFistAerialUpperCut_Fire",
-        FireFxOnSelf = "FistFxUppercutDirectional",
+        -- PreFireDuration = 0.17,
+        FireDuration = 0.67, -- 0.17 + 0.5
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -220,11 +216,8 @@ WeaponData.DarkFistSpecialDash =
         GiveupDistance = 250,
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
-        FireDuration = 0.4,
-        PreFireDuration = 0.17,
-        PreFireAnimation = "ZagreusFistDashUpperCut_Start",
-        FireAnimation = "ZagreusFistDashUpperCut_Fire",
-        FireFxOnSelf = "FistFxUppercutDirectional"
+        -- PreFireDuration = 0.1,
+        FireDuration = 0.3, -- 0.1 + 0.2
     },
 
     Sounds =

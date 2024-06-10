@@ -11,9 +11,7 @@ WeaponData.DarkHestiaGun =
         AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05,
-        PreFireDuration = 0.07,
-        WaitUntilProjectileDeath = "DarkHestiaGun",
+        FireDuration = 0.17, -- 0.07 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
         SkipAngleTowardTarget = true,
         SkipAttackAfterMoveTimeout = true,
@@ -24,8 +22,8 @@ WeaponData.DarkHestiaGun =
 
     ReloadDelay = 0.2,
     ActiveReloadTime = 0.75,
-    IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
-    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
+    IdleReloadAnimation = "DarkZagreusGunAlt01ReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunAlt01RunReload",
 
     OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
     NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
@@ -76,8 +74,8 @@ WeaponData.DarkHestiaGunDash =
     InheritFrom = { "DarkHestiaGun" },
     DashWeapon = nil,
 
-    IdleReloadAnimation = "ZagreusGunAlt01ReloadStart",
-    MovingReloadAnimation = "ZagreusGunAlt01RunReload",
+    IdleReloadAnimation = "DarkZagreusGunAlt01ReloadStart",
+    MovingReloadAnimation = "DarkZagreusGunAlt01RunReload",
 
     AIData =
     {
@@ -85,12 +83,8 @@ WeaponData.DarkHestiaGunDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05,
-        -- CanHold = true,
-        -- ChainedWeapon = "DarkGun"
-        PreFireDuration = 0.07,
-        SkipAngleTowardTarget = true,
-        WaitUntilProjectileDeath = "DarkHestiaGunDash"
+        FireDuration = 0.1, -- 0.07 + 0.02
+        SkipAngleTowardTarget = true
     },
 
     Sounds =
@@ -134,10 +128,8 @@ WeaponData.DarkHestiaGunGrenadeToss =
     {
         AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
-        PreFireDuration = 0.2,
-        FireDuration = 0.1
+        AIMoveWithinRangeTimeout = 1,
+        FireDuration = 0.28
     },
 
     Sounds =

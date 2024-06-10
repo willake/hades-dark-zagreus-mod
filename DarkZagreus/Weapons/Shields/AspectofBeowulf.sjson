@@ -12,8 +12,8 @@
             DamageHigh = 4 // 40
             ImpactVelocity = 1800
             ImpactVelocityCap = 1800
-            ChargeStartAnimation = "ZagreusShieldHeavyPound_Charge"
-            FireGraphic = "ZagreusShieldHeavyPound_Fire"
+            ChargeStartAnimation = "DarkZagreusShieldHeavyPound_Charge"
+            FireGraphic = "DarkZagreusShieldHeavyPound_Fire"
             Effects = [
                 {
                     Trigger = "Fire"
@@ -59,10 +59,10 @@
             Name = "DarkBeowulfShieldDash"
             InheritFrom = "DarkBeowulfShield"
             Projectile = "DarkBeowulfShieldDash"
-            ChargeTime = 0.12
+            ChargeTime = 0.13
             MinChargeToFire = 1.0
-            ChargeStartAnimation = "ZagreusShieldBeowulfPunchFast_Charge"
-            FireGraphic = "ZagreusShieldBeowulfPunchFast"
+            ChargeStartAnimation = "DarkZagreusShieldBeowulfPunchFast_Charge"
+            FireGraphic = "DarkZagreusShieldBeowulfPunchFast"
             Effects = [
                 {
                     Trigger = "Fire"
@@ -117,8 +117,8 @@
             StartDelay = 0.12
             MinChargeStartFx = "ShieldChargeThrowTrait"
             // LockTriggerForCharge = true
-            ChargeStartAnimation = "ZagreusShieldBeowulfHeavyThrow_Charge"
-            FireGraphic = "ZagreusShieldBeowulfHeavyThrow_Fire"
+            ChargeStartAnimation = "DarkZagreusShieldBeowulfHeavyThrow_Charge"
+            FireGraphic = "DarkZagreusShieldBeowulfHeavyThrow_Fire"
             Effects = [
                 {
                     Trigger = "Fire"

@@ -11,14 +11,15 @@ WeaponData.DarkAchillesSpear =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			ChainedWeapon = "DarkAchillesSpear2",
-			FireDuration = 0.3,
+			-- PreFireDuration = 0.12,
+			FireDuration = 0.42, -- 0.12 + 0.3
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7,
+			MaxChargeTime = 1.2,
 			AIMoveWithinRangeTimeoutMin = 0.3,
 			AIMoveWithinRangeTimeoutMax = 0.6,
 			SkipAttackAfterMoveTimeout = true,
@@ -69,14 +70,15 @@ WeaponData.DarkAchillesSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkAchillesSpear3",
-			FireDuration = 0.05,
+			-- PreFireDuration = 0.08,
+			FireDuration = 0.29, -- 0.08 + 0.21
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2,
 		},
 
 		Sounds =
@@ -112,14 +114,15 @@ WeaponData.DarkAchillesSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.05,
+			-- PreFireDuration = 0.03,
+			FireDuration = 0.33, -- 0.03 + 0.3 
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2,
 		},
 
 		Sounds =
@@ -157,14 +160,14 @@ WeaponData.DarkAchillesSpearDash =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.15,
+			FireDuration = 0.31,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkAchillesSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2,
 		},
 
 		Sounds =
@@ -200,7 +203,8 @@ WeaponData.DarkAchillesSpearThrow =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.5,
+			-- FireDuration = 0.5,
+			WaitUntilProjectileDeath = "DarkAchillesSpearThrow",
 			IsRangeBasedOnCharge = true,
 			MinChargeTime = 0.04,
 			MaxChargeTime = 0.12,
@@ -208,9 +212,9 @@ WeaponData.DarkAchillesSpearThrow =
 			ChargeRangeMultiplier = 3.34,
 			PreFireDuration = 0.04,
 			PreFireFx = "SpearChargeThrowTrait",
-			PreFireAnimation = "ZagreusSpearAlt01ThrowCharge",
-			PreFireCancelAnimation = "ZagreusSpearAlt01ThrowFireReturnToIdle",
-			FireAnimation = "ZagreusSpearAlt01ThrowFire"
+			PreFireAnimation = "DarkZagreusSpearAlt01ThrowCharge",
+			PreFireCancelAnimation = "DarkZagreusSpearAlt01ThrowFireReturnToIdle",
+			FireAnimation = "DarkZagreusSpearAlt01ThrowFire"
 		},
 
         Sounds =
@@ -247,8 +251,8 @@ WeaponData.DarkAchillesSpearThrowReturn =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			-- FireDuration = 0.425,
-			WaitUntilProjectileDeath = "DarkAchillesSpearThrowReturn",
+			FireDuration = 0.425,
+			-- WaitUntilProjectileDeath = "DarkAchillesSpearThrowReturn",
 		},
 
 		Sounds =
@@ -295,14 +299,14 @@ WeaponData.DarkAchillesSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.15,
+			FireDuration = 0.34,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			PreFireDuration = 0.26,
-			PreFireAnimation = "ZagreusSpearAlt01SpinStart",
-            PreFireCancelAnimation = "ZagreusSpearAlt01SpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearAlt01SpinAttack"
+			PreFireAnimation = "DarkZagreusSpearAlt01SpinStart",
+            PreFireCancelAnimation = "DarkZagreusSpearAlt01SpinStartChargeCancel",
+            FireAnimation = "DarkZagreusSpearAlt01SpinAttack"
 		},
 
 		Sounds =

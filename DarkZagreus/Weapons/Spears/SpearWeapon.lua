@@ -11,14 +11,15 @@ WeaponData.DarkSpear =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			ChainedWeapon = "DarkSpear2",
-			FireDuration = 0.3,
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7,
+			MaxChargeTime = 1.2,
+			-- PreFireDuration = 0.12,
+			FireDuration = 0.42, -- 0.12 + 0.3
 			AIMoveWithinRangeTimeoutMin = 0.3,
 			AIMoveWithinRangeTimeoutMax = 0.6,
 			SkipAttackAfterMoveTimeout = true,
@@ -69,14 +70,15 @@ WeaponData.DarkSpear2 =
 			AITrackTargetDuringCharge = true,
 			SkipMovement = true,
 			ChainedWeapon = "DarkSpear3",
-			FireDuration = 0.05,
+			-- PreFireDuration = 0.08,
+			FireDuration = 0.29, -- 0.08 + 0.21
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2,
 		},
 
 		Sounds =
@@ -112,14 +114,15 @@ WeaponData.DarkSpear3 =
 			SkipMovement = true,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.05,
+			-- PreFireDuration = 0.03,
+			FireDuration = 0.33, -- 0.03 + 0.3 
 			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2,
 		},
 
 		Sounds =
@@ -156,13 +159,14 @@ WeaponData.DarkSpearDash =
 			GiveupDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
-			FireDuration = 0.15,
+			FireDuration = 0.31,
+			PostFireChargeStages = 
 			{
-				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.6 },
-				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.93 },
-				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.66 },
+				{ ChargeWeapon = "DarkSpearSpin", Threshold = 0.3 },
+				{ ChargeWeapon = "DarkSpearSpin2", Threshold = 0.45 },
+				{ ChargeWeapon = "DarkSpearSpin3", Threshold = 1.1 },
 			},
-			MaxChargeTime = 1.7
+			MaxChargeTime = 1.2,
 		},
 
 		Sounds =
@@ -200,7 +204,9 @@ WeaponData.DarkSpearThrow =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.2,
+			-- PreFireDuration = 0.12, 
+			-- FireDuration = 0.52, -- 0.12 + 0.4
+			WaitUntilProjectileDeath = "DarkSpearThrow",
 		},
 
 		Sounds =
@@ -251,7 +257,8 @@ WeaponData.DarkSpearThrowReturn =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			FireDuration = 0.425,
+			-- FireDuration = 0.425,
+			WaitUntilProjectileDeath = "DarkSpearThrowReturn",
 		},
 
 		Sounds =
@@ -292,14 +299,14 @@ WeaponData.DarkSpearSpin =
 
 		AIData =
 		{
-			FireDuration = 0.15,
+			FireDuration = 0.34,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			PreFireDuration = 0.26,
-			PreFireAnimation = "ZagreusSpearSpinStart",
-            PreFireCancelAnimation = "ZagreusSpearSpinStartChargeCancel",
-            FireAnimation = "ZagreusSpearSpinAttack",
+			PreFireAnimation = "DarkZagreusSpearSpinStart",
+            PreFireCancelAnimation = "DarkZagreusSpearSpinStartChargeCancel",
+            FireAnimation = "DarkZagreusSpearSpinAttack",
 		},
 
 		Sounds =

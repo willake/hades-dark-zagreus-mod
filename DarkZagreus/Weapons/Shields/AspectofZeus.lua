@@ -12,8 +12,7 @@ WeaponData.DarkZeusShield = {
         PostFireChargeWeapon = "DarkZeusShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
-        PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = "DarkZeusShield",
+        FireDuration = 0.41, -- no charge time
     },
 
     Sounds =
@@ -66,8 +65,7 @@ WeaponData.DarkZeusShieldDash =
         AIAngleTowardsPlayerWhileFiring = true,
         SkipMovement = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.12,
-        WaitUntilProjectileDeath = "DarkZeusShieldDash",
+        FireDuration = 0.2,
     },
 
     Sounds =
@@ -109,8 +107,8 @@ WeaponData.DarkZeusShieldThrow =
         AttackDistanceMax = 1000,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 2.5,
-        PreFireDuration = 0.28,
-        FireDuration = 0.2,
+        -- PreFireDuration = 0.28,
+        FireDuration = 0.4,
         -- WaitUntilProjectileDeath = "DarkZeusShieldThrow",
         IsZeusShieldThrow = true 
         -- while equiping zeus shield, players can throw it and hit it again to make it turn back
@@ -160,12 +158,12 @@ WeaponData.DarkZeusShieldRush =
         AIChargeTargetMarker = "ShadeBowTargetMarker",
         SkipMovement = true,
         PreFireDuration = 0.2,
-        PreFireAnimation = "ZagreusShieldAlt02AttackCharge",
+        PreFireAnimation = "DarkZagreusShieldAlt02AttackCharge",
         PreFireFx = "BowCharge",
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
-        FireAnimation = "ZagreusShieldAlt02AttackFire",
-        PreFireCancelAnimation = "ZagreusShieldAlt02AttackChargeCancel",
-        MinChargeStartFx = "ShieldCharge",
+        FireAnimation = "DarkZagreusShieldAlt02AttackFire",
+        PreFireCancelAnimation = "DarkZagreusShieldAlt02AttackChargeCancel",
+        ChargeFx = "ShieldCharge",
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
         MinChargeTime = 0.2,
@@ -173,8 +171,8 @@ WeaponData.DarkZeusShieldRush =
         -- Range = 45,
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
-        ChargeVelocityMultiplier = 5,
-        FireDuration = 0.2,
+        ChargeVelocityMultiplier = 4,
+        FireDuration = 0.3,
     },
 
     Sounds =

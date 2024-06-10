@@ -5,55 +5,52 @@
             Name = "DarkTalosFist"
             InheritFrom = "DarkFist"
             Projectile = "DarkTalosFist"
-            ChargeStartAnimation = "ZagreusFistAlt02FlurryPunch_Start"
-            FireGraphic = "ZagreusFistAlt02FlurryPunch_Fire1"
+            ChargeStartAnimation = "DarkZagreusFistAlt02FlurryPunch_Start"
+            FireGraphic = "DarkZagreusFistAlt02FlurryPunch_Fire1"
         }
         {
             Name = "DarkTalosFist2"
             InheritFrom = "DarkFist2"
             Projectile = "DarkTalosFist"
-            ChargeStartAnimation = "ZagreusFistAlt02FlurryPunch_Charge2"
-            FireGraphic = "ZagreusFistAlt02FlurryPunch_Fire2"
+            ChargeStartAnimation = "DarkZagreusFistAlt02FlurryPunch_Charge2"
+            FireGraphic = "DarkZagreusFistAlt02FlurryPunch_Fire2"
         }
         {
             Name = "DarkTalosFist3"
             InheritFrom = "DarkFist3"
             Projectile = "DarkTalosFist"
-            ChargeStartAnimation = "ZagreusFistAlt02FlurryPunch_Charge3"
-            FireGraphic = "ZagreusFistAlt02FlurryPunch_Fire3"
+            ChargeStartAnimation = "DarkZagreusFistAlt02FlurryPunch_Charge3"
+            FireGraphic = "DarkZagreusFistAlt02FlurryPunch_Fire3"
         }
         {
             Name = "DarkTalosFist4"
             InheritFrom = "DarkFist4"
             Projectile = "DarkTalosFist"
-            ChargeStartAnimation = "ZagreusFistAlt02FlurryPunch_Charge4"
-            FireGraphic = "ZagreusFistAlt02FlurryPunch_Fire4"
+            ChargeStartAnimation = "DarkZagreusFistAlt02FlurryPunch_Charge4"
+            FireGraphic = "DarkZagreusFistAlt02FlurryPunch_Fire4"
         }
         {
             Name = "DarkTalosFist5"
             InheritFrom = "DarkFist5"
             Projectile = "DarkTalosFist"
-            ChargeStartAnimation = "ZagreusFistAlt02FlurryPunch_Charge5"
-            FireGraphic = "ZagreusFistAlt02FlurryPunch_Fire5"
+            ChargeStartAnimation = "DarkZagreusFistAlt02FlurryPunch_Charge5"
+            FireGraphic = "DarkZagreusFistAlt02FlurryPunch_Fire5"
         }
         {
             Name = "DarkTalosFistDash"
             InheritFrom = "DarkFistDash"
             Projectile = "DarkTalosFistDash"
-            ChargeStartAnimation = "ZagreusFistAlt02DashHayMaker_Charge"
-            FireGraphic = "ZagreusFistAlt02DashHayMaker_Fire"
+            ChargeStartAnimation = "DarkZagreusFistAlt02DashHayMaker_Charge"
+            FireGraphic = "DarkZagreusFistAlt02DashHayMaker_Fire"
         }
         {
             Name = "DarkTalosFistSpecial"
             InheritFrom = "DarkFistSpecial"
             Projectile = "DarkTalosFistSpecial"
-            // ChargeStartAnimation = "ZagreusFistAlt02Grab_Start"
-            // ChargeStartAnimation = "ZagreusFistAlt02DashHayMaker_Fire"
-            // FireGraphic = "ZagreusFistAlt02AerialUpperCut_Fire"
-            // ChargeTime = 0.24
-            // AutoLock = true
-            // AutoLockArcDistance = 220
-            // AutoLockRange = 800
+            ChargeStartAnimation = "DarkZagreusFistAlt02Grab_Start"
+            FireGraphic = "DarkZagreusFistAlt02AerialUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
+            ChargeTime = 0.24
         }
         {
             Name = "DarkTalosFistSpecialVacuum"
@@ -63,21 +60,15 @@
             Projectile = "DarkTalosFistSpecialVacuum"
             FireFx = "null"
             IgnoreOwnerAttackDisabled = true
-            // ClearFireRequestOnChargeCancel = false
-            // FullyAutomatic = true
-            // AutoLock = true
-            // SetCompleteAngleOnFire = true
         }
         {
             Name = "DarkTalosFistSpecialDash"
             InheritFrom = "DarkFistSpecialDash"
             Projectile = "DarkTalosFistSpecialDash"
-            // ChargeStartAnimation = "ZagreusFistAlt02Grab_Start"
-            // FireGraphic = "ZagreusFistAlt02DashUpperCut_Fire"
-            // ChargeTime = 0.24
-            // AutoLock = true
-            // AutoLockArcDistance = 220
-            // AutoLockRange = 800
+            ChargeStartAnimation = "DarkZagreusFistAlt02Grab_Start"
+            FireGraphic = "DarkZagreusFistAlt02DashUpperCut_Fire"
+            FireFx = "FistFxUppercutDirectional"
+            ChargeTime = 0.24
         }
         {
             Name = "DarkTalosRush"

@@ -3,7 +3,7 @@ DarkZagreus.Config = {
     Enabled = true
 }
 
-DarkZagreus.Version = "beta1.3.2"
+DarkZagreus.Version = "v1.0"
 DarkZagreus.DataVersion = "v6" -- for training data, when the data scheme chages, the version increases
 
 -- Config
@@ -24,13 +24,16 @@ DarkZagreus.DefaultAIWeapon = {
 }
 
 DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
-    DashToward = 0.1, -- 0.2
+    DashToward = 0.25, -- 0.2
     Attack = 0.5, -- 0.5
     SpecialAttack = 0.2, -- 0.2
     DashAway = 0.05,
-    ChargeAttack = 0.2,
-    ManualReload = 0.00
+    ChargeAttack = 0.0,
+    ManualReload = 0.0
 }
+
+DarkZagreus.RecordDirectoryName = "DZRecords"
+DarkZagreus.LoadRecordFileName = "DZRecord"
 -- State Scheme
 -- {
 --     OwnHP,

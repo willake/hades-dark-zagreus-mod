@@ -13,9 +13,9 @@
             BarrelLength = 50
             ChargeTime = 0.0
             // ChargeStartAnimation = "ZagreusGunLucifer_Start"
-            FireGraphic = "ZagreusGunLucifer_Fire"
-            FireEndGraphic = "ZagreusGunLucifer_ReturnToIdle"
-            FailedToFireCooldownAnimation = "ZagreusGunLuciferFireEmpty"
+            FireGraphic = "DarkZagreusGunLucifer_Fire"
+            FireEndGraphic = "DarkZagreusGunLucifer_ReturnToIdle"
+            FailedToFireCooldownAnimation = "DarkZagreusGunLuciferFireEmpty"
             OnlyChargeOnce = true
             FireFx = "null"
             MaxAmmo = 20
@@ -105,8 +105,8 @@
             Name = "DarkLuciferGunGrenadeToss"
             InheritFrom = "DarkGunGrenadeToss"
             Projectile = "DarkLuciferGunGrenadeToss"
-            ChargeStartAnimation = "ZagreusGunLuciferGrenadeTossCharge"
-            FireGraphic = "ZagreusGunLuciferGrenadeTossFire"
+            ChargeStartAnimation = "DarkZagreusGunLuciferGrenadeTossCharge"
+            FireGraphic = "DarkZagreusGunLuciferGrenadeTossFire"
         }
         {
             Name = "DarkLuciferGunBomb"

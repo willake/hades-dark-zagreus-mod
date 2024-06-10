@@ -53,7 +53,7 @@ function DZTrainAI()
     DZTemp.Model = network
 end
 
-function DZSaveTrainingData(curRunRecord, filePath)
+function DZSaveTrainingData(curRunRecord)
     DZDebugPrintString("DZSaveTrainingData() - Not really save the file because it is x64 version.")
 end
 
@@ -62,10 +62,38 @@ function DZLoadTrainingData(filePath)
     return nil
 end
 
-
 -- if io module is avilable, create a new record file then start logging
-if io then
-    DZSaveTrainingData = function(curRunRecord, filePath)
+if io and os then
+    function DZIsFileExists(file)
+        -- some error codes:
+        -- 13 : EACCES - Permission denied
+        -- 17 : EEXIST - File exists
+        -- 20	: ENOTDIR - Not a directory
+        -- 21	: EISDIR - Is a directory
+        --
+        local isok, errstr, errcode = os.rename(file, file)
+        if isok == nil then
+           if errcode == 13 then 
+              -- Permission denied, but it exists
+              return true
+           end
+           return false
+        end
+        return true
+      end
+      
+    function DZIsDirExists(path)
+        return DZIsFileExists(path .. "/")
+    end
+
+    DZSaveTrainingData = function(curRunRecord)
+        if DZIsDirExists(DarkZagreus.RecordDirectoryName) == false then
+            -- really don't like this, but seems to be the only way within this environment
+            -- this will make users scared :(
+            os.execute("mkdir " .. DarkZagreus.RecordDirectoryName)
+        end
+        local currentTime = os.date("%y%m%d%H%M%S") -- as format YY:MM:DD:HH:MM:SS
+        local filePath = string.format(DarkZagreus.RecordDirectoryName .. "\\%s.log", currentTime)
         local file = io.open(filePath, "w+")
 
         if curRunRecord == nil or curRunRecord.Weapon == nil or curRunRecord.History == nil then
@@ -118,7 +146,16 @@ if io then
         file:close()
     end
 
-    DZLoadTrainingData = function(filePath)
+    DZLoadTrainingData = function()
+        local filePath = string.format(
+            "%s\\%s.log",
+            DarkZagreus.RecordDirectoryName, DarkZagreus.LoadRecordFileName)
+
+        if DZIsDirExists(DarkZagreus.RecordDirectoryName) == false 
+           or DZIsFileExists(filePath) == false then
+            return nil
+        end
+
         local data = {
             Version = "",
             Weapon = {},
