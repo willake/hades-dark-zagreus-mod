@@ -1,4 +1,4 @@
-﻿# Dark Zagreus (Hades Mod) beta1.3.3
+﻿# Dark Zagreus (Hades Mod) v1.0
 
 A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Dark Zagreus equips the same weapon as the player's previous successful run. What sets this mod special is the AI of Dark Zagreus is powered by a deep learning model trained on the player's historical gameplay data of previous successful run. This experimental feature creates a dynamic challenge experience for players with the individual's style and strategies.
 
@@ -124,7 +124,10 @@ Upgrades like boons and hammers changes a player's behavior significantly, like 
 
 ## Future Plans
 - more accurate charge attack prediction
+- full bow charge support
 - weapon powers with cast support
+- improve shield AI to not wait until shield projectile death
+- cast
 
 ## Data Version Change logs
 
