@@ -378,7 +378,7 @@
             Name = "DarkGilgameshFist5"
             InheritFrom = "DarkFist5"
             Projectile = "DarkGilgameshFistClawL"
-            ChargeTime = 0.12
+            ChargeTime = 0.13
             ControlWindow = 0.5
             ChargeStartAnimation = "DarkZagreusFistAlt03ClawL_Start"
             FireGraphic = "DarkZagreusFistAlt03ClawL_Fire"
@@ -482,11 +482,17 @@
             Name = "DarkGilgameshFistSpecial"
             InheritFrom = "DarkFistSpecial"
             Projectile = "DarkGilgameshFistSpecial"
+            ChargeStartAnimation = "DarkZagreusFistAlt03AerialUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAlt03AerialUpperCut_Fire"
+            FireFx = "ClawSwipeUppercut"
         }
         {
             Name = "DarkGilgameshFistSpecialDash"
             InheritFrom = "DarkFistSpecialDash"
             Projectile = "DarkGilgameshFistSpecialDash"
+            ChargeStartAnimation = "DarkZagreusFistAlt03DashUpperCut_Start"
+            FireGraphic = "DarkZagreusFistAlt03DashUpperCut_Fire"
+            FireFx = "ClawSwipeUppercutSpecial"
             Effects = [
                 {
                     Name = "FistSpecialDashDisable"

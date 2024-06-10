@@ -166,11 +166,6 @@ WeaponData.DarkRamaBowSplitShot =
         AITrackTargetDuringCharge = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
-        PreFireDuration = 0.18,
-        PreFireAnimation = "DarkZagreusBowRamaRapidLoop_Start",
-        PreFireFx = "BowChargeFast",
-        FireAnimation = "DarkZagreusBowRamaRapidLoop_Fire",
-        -- FireSound = "/VO/ZagreusEmotes/EmoteRanged",
         WaitUntilProjectileDeath = "DarkRamaBowSplitShot"
     },
 

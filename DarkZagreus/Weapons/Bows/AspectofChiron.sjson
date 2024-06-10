@@ -22,15 +22,8 @@
       InheritFrom = "DarkBowSplitShot"
       Projectile = "DarkChironBowSplitShot"
       NumProjectiles = 4 // 9 - 5
-      ChargeStartAnimation = "null"
-      FireGraphic = "null"
+      ChargeStartAnimation = "DarkZagreusBowAlt01RapidFire_Start"
+      FireGraphic = "DarkZagreusBowAlt01RapidFire_Fire"
     }
   ]
 }
-// not found
-// {
-// 	WeaponNames = { "BowWeapon", "BowWeaponDash" },
-// 	EffectName = "MarkTarget",
-// 	EffectProperty = "Active",
-// 	ChangeValue = true,
-// },

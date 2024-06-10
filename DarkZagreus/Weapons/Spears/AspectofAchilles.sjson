@@ -50,22 +50,13 @@
             Name = "DarkAchillesSpearThrow"
             InheritFrom = "DarkSpearThrow"
             Projectile = "DarkAchillesSpearThrow"
-            // FireOnRelease = true
-            // FullyAutomatic = true
-            // LockTriggerForCharge = false
-            // LockTriggerForCharge = false
             // ChargeTime = 0.07
-            // RemoveControlOnCharge = "SpearWeaponSpin"
             // MinChargeToFire = 0.04
             // ChargeRangeMultiplier = 3.34
-            // AllowExternalForceRelease = false
-            // AllowExternalForceReleaseIfAnyCharged = true
             ChargeStartFx = "null"
             ChargeCancelGraphic = "null"
             ChargeStartAnimation = "null"
             FireGraphic = "null"
-            // SwapOnFire = "SpearRushWeapon"
-            // AddControlOnFire = "SpearWeaponThrowReturn"
         }
         {
             Name = "DarkAchillesSpearThrowReturn"

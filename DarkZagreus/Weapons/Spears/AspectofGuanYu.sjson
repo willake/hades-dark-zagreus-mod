@@ -7,7 +7,7 @@
             Projectile = "DarkGuanYuSpear"
             ChargeStartAnimation = "DarkZagreusSpearLunarThrust1_Start"
             FireGraphic = "DarkZagreusSpearLunarThrust1_Fire"
-            ChargeTime = 0.12
+            ChargeTime = 0.13
         }
         {
             Name = "DarkGuanYuSpear2"
@@ -16,8 +16,8 @@
             ControlWindow = 0.5
             ChargeStartAnimation = "DarkZagreusSpearLunarThrust2_Start"
             FireGraphic = "DarkZagreusSpearLunarThrust2_Fire"
-            ChargeTime = 0.33
             ChargeTimeFrames = 5
+            ChargeTime = 0.33
             CanCancelDisables = false
             ControlWindow = 0.43
             Effects = [
@@ -63,13 +63,11 @@
             InheritFrom = "DarkGuanYuSpear"
             Projectile = "DarkGuanYuSpear3"
             ControlWindow = 0.5
-            //   RemoveControlOnFire = "SpearWeapon3"
-            //   AddControlOnFire = "SpearWeapon"
             ChargeStartAnimation = "DarkZagreusSpearLunarThrust3_Start"
             FireGraphic = "DarkZagreusSpearLunarThrust3_Fire"
-            ChargeTime = 0.52
             ControlWindow = 0.62
             ChargeTimeFrames = 3
+            ChargeTime = 0.53
             CanCancelDisables = false
             Effects = [
                 {

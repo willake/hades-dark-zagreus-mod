@@ -164,11 +164,6 @@ WeaponData.DarkHeraBowSplitShot =
         AITrackTargetDuringCharge = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
-        PreFireDuration = 0.1,
-        PreFireAnimation = "DarkZagreusBowAlt02RapidFire_Start",
-        PreFireFx = "BowChargeFast",
-        FireAnimation = "DarkZagreusBowAlt02RapidFire_Fire",
-        FireSound = "/VO/ZagreusEmotes/EmoteRanged",
         WaitUntilProjectileDeath = "DarkHeraBowSplitShot"
     },
 

@@ -12,8 +12,7 @@ WeaponData.DarkShield = {
         PostFireChargeWeapon = "DarkShieldRush",
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
-        PreFireDuration = 0.15,
-        WaitUntilProjectileDeath = "DarkShield",
+        FireDuration = 0.41, -- no charge time
     },
 
     Sounds =
@@ -67,8 +66,7 @@ WeaponData.DarkShieldDash =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         SkipAngleTowardTarget = true,
-        PreFireDuration = 0.12,
-        WaitUntilProjectileDeath = "DarkShieldDash",
+        FireDuration = 0.2,
     },
 
     Sounds =
@@ -109,7 +107,7 @@ WeaponData.DarkShieldThrow =
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = "DarkShieldThrow",
-        PreFireDuration = 0.28,
+        -- FireDuration = 0.2,
     },
 		
     Sounds =
@@ -162,16 +160,16 @@ WeaponData.DarkShieldRush =
         PreFireSound = "/SFX/Player Sounds/ZagreusBowChargeup",
         FireAnimation = "DarkZagreusShieldAttackFire",
         PreFireCancelAnimation = "DarkZagreusShieldAttackChargeCancel",
-        MinChargeStartFx = "ShieldCharge",
+        ChargeFx = "ShieldCharge",
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
         MinChargeTime = 0.2,
-        MaxChargeTime = 1,
+        MaxChargeTime = 1.0,
         -- Range = 45,
         -- ChargeRangeMultiplier = 20,
         Velocity = 600,
-        ChargeVelocityMultiplier = 5,
-        FireDuration = 0.2,
+        ChargeVelocityMultiplier = 4,
+        FireDuration = 0.3,
     },
 
     Sounds =
