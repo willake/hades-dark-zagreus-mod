@@ -171,11 +171,6 @@ WeaponData.DarkChironBowSplitShot =
         AITrackTargetDuringCharge = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AIMoveWithinRangeTimeout = 1.0,
-        PreFireDuration = 0.1,
-        PreFireAnimation = "DarkZagreusBowAlt01RapidFire_Start",
-        PreFireFx = "BowChargeFast",
-        FireAnimation = "DarkZagreusBowAlt01RapidFire_Fire",
-        FireSound = "/VO/ZagreusEmotes/EmoteRanged",
         WaitUntilProjectileDeath = "DarkChironBowSplitShot"
     },
 
@@ -211,10 +206,3 @@ EffectData.DZMarkTarget =
     OnApplyFunctionName = "DZAIMarkTargetApply",
     OnClearFunctionName = "DZAIMarkTargetClear",
 }
--- {
---     WeaponNames = { "BowWeapon", "BowWeaponDash" },
---     WeaponProperty = "ChargeCancelGraphic",
---     ChangeValue = "ZagreusBowAlt01StartCancel",
---     ChangeType = "Absolute",
---     ExcludeLinked = true,
--- }

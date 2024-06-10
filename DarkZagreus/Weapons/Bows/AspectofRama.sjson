@@ -162,17 +162,8 @@
       NumProjectiles = 3
       ProjectileInterval = 0.045 // 0.03 * 1.5
       ChargeTime = 0.18
-      // AutoLock = true
-      // AutoLockRange = 1000
-      // AutoLockArcDistance = 1.5708
       ChargeStartAnimation = "DarkZagreusBowRamaRapidLoop_Start"
       FireGraphic = "DarkZagreusBowRamaRapidLoop_Fire"
-    //   LockTriggerForCharge = true
-    //   FireOnRelease = false
-    // FullyAutomatic = true
-    // ForceReleaseOnFire = false
-    // AllowExternalForceRelease = false
-    // ForceReleaseWeaponOnFire = null
       ShowFreeAimLine = false
       MinChargeToFire = 1.0
     //   ReloadTime = 0.35

@@ -166,11 +166,6 @@ WeaponData.DarkBowSplitShot =
         AttackDistanceMax = 900,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        PreFireDuration = 0.2,
-        PreFireAnimation = "DarkZagreusBowRapidFire_Start",
-        PreFireFx = "BowChargeFast",
-        FireAnimation = "DarkZagreusBowRapidFire_Fire",
-        FireSound = "/VO/ZagreusEmotes/EmoteRanged",
         WaitUntilProjectileDeath = "DarkBowSplitShot",
     },
 
