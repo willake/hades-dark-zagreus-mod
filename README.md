@@ -120,7 +120,7 @@ Other wrapped functions: `MarkTargetApply`, `SpearRushBonusApply`, `MarkTargetSp
 The AI can't simulate the frequency(how often player make decision), so Dark Zagreus makes decision frequently. This can be a critical aspect of mimicing the player behavior. I am still thinking a way to address it.
 
 ### More factors
-Upgrades like boons and hammers changes a player's behavior significantly, like people might like to use Zeus dash to kill enemies, or have a Ares shield throw which makes player agressively throwing shields. These can not be captured without implementing boon and hammers support. Will be interesting and fun to have it.
+Upgrades like boons and hammers changes a player's behavior significantly, like people might like to use Zeus dash to kill enemies, or have a Ares shield throw which can kill tons of enemies by agressively throwing shields. These can not be captured without implementing boon and hammers support. Will be interesting and fun to have it.
 
 ## Future Plans
 - more accurate charge attack prediction
