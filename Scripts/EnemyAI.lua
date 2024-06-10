@@ -161,7 +161,7 @@ function DZAIGetCurrentState(enemy)
 		Maximum = 1
 	}
 
-    if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
+    if DZTemp.AI.Weapon.WeaponName == "GunWeapon" then
         ammoData.Current = GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
         ammoData.Maximum = GetWeaponMaxAmmo({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon }) or 1
     end
