@@ -20,18 +20,6 @@
             SelfVelocity = 0
             SelfVelocityCap = 0
             NumProjectiles = 1
-            // BlockMoveInput = false
-            // CancelMovement = false
-            // ChargeCancelMovement = false
-            // FullyAutomatic = false
-            // AutoLock = true
-            // AutoLockRange = 595
-            // AutoLockArcDistance = 90
-            //   SwapOnFire = "SpearWeapon2"
-            //   AddOnFire = "SpearWeaponSpin"
-            // FireOnRelease = false
-            // CanCancelDisables = false
-            // TriggersStoredAmmoVulnerability = true
             Effects = [
                 {
                 Name = "SpearDisable"
@@ -108,14 +96,6 @@
             ChargeTimeFrames = 1
             // Cooldown = 0.02
             // ControlWindow = 0.45
-            //   SwapOnFire = "SpearWeapon2"
-            //   AddOnFire = "SpearWeaponSpin"
-            // CanCancelDisables = true
-            // CanCancelOwnDisables = true
-            // LockTriggerTransferFromOnSwap = false
-            // AllowExternalForceRelease = false
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
             Effects = [
                 {
                 Name = "SpearDisable"
@@ -157,7 +137,6 @@
         {
             Name = "DarkSpear2"
             InheritFrom = "DarkSpear"
-            //   SwapOnFire = "SpearWeapon3"
             Projectile = "DarkSpearTwoThree"
             // ControlWindow = 0.5
             ChargeStartAnimation = "DarkZagreusSpearCharge2"
@@ -256,34 +235,11 @@
             SelfVelocity = 0.0
             NumProjectiles = 1
             ProjectileSpacing = 40
-            ChargeTime = 0.16
+            ChargeTime = 0.13
             ChargeStartAnimation = "DarkZagreusSpearThrowCharge"
             ChargeCancelGraphic = "DarkZagreusSpearThrowFireReturnToIdle"
             ChargeFx = "null"
             FireGraphic = "DarkZagreusSpearThrowFire"
-            // FireOnRelease = false
-            // LockTriggerForCharge = true
-            // ShowFreeAimLine = true
-            // AimLineAnimation = "AuraAimLine"
-            // SwapOnFire = "SpearWeaponThrowReturn"
-            // RemoveControlOnFire = "SpearWeapon"
-            // RemoveControlOnFire2 = "SpearWeapon2"
-            // RemoveControlOnFire3 = "SpearWeapon3"
-            // RemoveControlOnFire4 = "SpearWeaponDash"
-            // CanCancelDisables = true
-            // TriggersStoredAmmoVulnerability = true
-            // ReloadTime = 0.8
-            // RequestTriggerLockDuringReload = true
-            // AllowExternalForceRelease = false
-            // AutoLock = true
-            // AutoLockRange = 850
-            // AutoLockArcDistance = 90
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
-            // BlockMoveInput = true
-            // CancelMovement = true
-            // ChargeCancelMovement = true
-            // FullyAutomatic = false
             Effects = [
                 {
                 Name = "SpearThrowDisable"
@@ -342,13 +298,6 @@
             SelfVelocity = 0.0
             ChargeTimeFrames = 0
             ChargeStartAnimation = "null"
-            //   SwapOnFire = "SpearWeaponThrow"
-            //   AddControlOnFire = "SpearWeapon"
-            //   AddControlOnFire2 = "SpearWeaponSpin"
-            // RemoveControlOnFire = "null"
-            // LockTriggerTransferFromOnSwap = false
-            // SetCompleteAngleOnFire = false
-            // OwnerFaceProjectile = true
             Effects = [
                 {
                 Name = "SpearThrowReturnDisable"
@@ -392,29 +341,7 @@
             // ChargeStartAnimation = "ZagreusSpearSpinStart"
             // ChargeCancelGraphic = "ZagreusSpearSpinStartChargeCancel"
             // FireGraphic = "ZagreusSpearSpinAttack"
-            // BlockMoveInput = true
-            // CancelMovement = true
-            // ChargeCancelMovement = true
-            // FullyAutomatic = true
-            // ForceReleaseOnSwap = false
-            // AutoLock = false
-            // AutoLockRange = 100
-            // AutoLockArcDistance = 90
-            // LockTriggerForCharge = false
-            // FireOnRelease = true
             // ControlWindow = 0.34
-            // LoseControlOnRelease = true
-            // LoseControlIfNotCharging = false
-            // CanCancelDisables = false
-            // AcceptTriggerLockRequests = false
-            // AllowExternalForceRelease = false
-            // AllowExternalForceReleaseIfAnyCharged = true
-            //   RemoveControlOnCharge = "SpearWeaponThrow"
-            //   AddControlOnFire = "SpearWeaponThrow"
-            //   AddControlOnChargeCancel = "SpearWeaponThrow"
-            // TriggersStoredAmmoVulnerability = true
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
             Effects = [
                 {
                 Name = "SwordReflection2"
@@ -522,18 +449,6 @@
             ChargeFx = "null"
             // Cooldown = 0.05
             // ArsenalCooldown = 0.0
-            // CancelMovement = false
-            // Enabled = false
-            // FullyAutomatic = false
-            // AutoLock = false
-            // UseTargetAngle = true
-            // BlockMoveInput = true
-            // IgnoreForceCooldown = true
-            // ForceReleaseAllOnFire = true
-            // CanCancelDisables = true
-            // SetTargetAngleOnRequest = false
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
             Effects =
             [{
                 Name = "DZSpearRushBonus"
