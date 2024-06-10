@@ -15,9 +15,8 @@ WeaponData.DarkLuciferGun =
         NeedPreWarm = true,
         PreWarmDuration = 0.28,
         PreWarmAnimation = "DarkZagreusGunLucifer_Start",
-        PreFireDuration = 0.13,
         PreFireFx = "GunCharge",
-        FireDuration = 0.15,
+        FireDuration = 0.12,
         AIMoveWithinRangeTimeout = 0.5,
         SkipAttackAfterMoveTimeout = true,
     },
@@ -92,10 +91,7 @@ WeaponData.DarkLuciferGunDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        -- FireDuration = 0.05,
-        -- CanHold = true,
-        -- ChainedWeapon = "DarkGun",
-        FireDuration = 0.15,
+        FireDuration = 0.12,
         NeedPreWarm = true,
         PreWarmDuration = 0.3,
         PreWarmAnimation = "DarkZagreusGunLucifer_Start"
@@ -142,9 +138,8 @@ WeaponData.DarkLuciferGunGrenadeToss =
     {
         AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.2
+        FireDuration = 0.37
     },
 
     Sounds =

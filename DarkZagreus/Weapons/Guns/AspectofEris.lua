@@ -11,9 +11,9 @@ WeaponData.DarkErisGun =
         AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.07,
-        -- CanHold = true
+        FireDuration = 0.17, -- 0.07 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
+        SkipAngleTowardTarget = true,
         SkipAttackAfterMoveTimeout = true,
     },
     
@@ -83,9 +83,7 @@ WeaponData.DarkErisGunDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.07,
-        -- CanHold = true,
-        -- ChainedWeapon = "DarkGun"
+        FireDuration = 0.1, -- 0.07 + 0.02
     },
 
     Sounds =
@@ -129,9 +127,8 @@ WeaponData.DarkErisGunGrenadeToss =
     {
         AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
-        FireDuration = 0.2
+        FireDuration = 0.28
     },
 
     Sounds =

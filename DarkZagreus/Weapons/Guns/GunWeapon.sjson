@@ -27,21 +27,6 @@
             ScatterCap = 35
             TriggerTapIgnoresCooldown = false
             MaxAmmo = 12
-            // BlockMoveInput = false
-            // CancelMovement = false
-            // ChargeCancelMovement = false
-            // FullyAutomatic = true
-            // AutoLock = true
-            // AutoLockRange = 710
-            // AutoLockArcDistance = 360
-            // LockTriggerForCharge = true
-            // LockTriggerTransferFromOnSwap = false
-            // CanCancelDisables = false
-            // AllowExternalForceRelease = false
-            // TriggersStoredAmmoVulnerability = true
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = false
-            // ClearFireRequestOnChargeCancel = false
             Effects = [
                 {
                     Name = "GunDisable"
@@ -108,24 +93,13 @@
             Control = "Attack2"
             // ControlWindow = 0.45
             SelfVelocity = 0
-            // CanCancelDisables = true
-            // CanCancelOwnDisables = false
             FailedToFireCooldownAnimation = "null"
-            // LockTriggerTransferFromOnSwap = false
-            // AllowExternalForceRelease = false
-            // ClearFireRequestOnChargeCancel = false
-            // PreFireAnimation = null
-            // FireGraphic = null
             NumProjectiles = 1
             ProjectileAngleOffset = 0
             Scatter = 0
             ScatterCap = 0
             ProjectileInterval = 0.0
-            // TriggerTapIgnoresCooldown = true
-            // TriggersStoredAmmoVulnerability = true
-            // SwapOnFire = "GunWeapon"
             ShareAmmoWeapon = "DarkGun"
-            // AutoLockArcDistance = 360
         }
         {
             Name = "DarkGunGrenadeToss"
@@ -143,27 +117,6 @@
             FireOnRelease = true
             TargetReticleAnimation = "GunGrenadeWarningDecal_Static"
             FireFx = "GunGrenadeFireFx"
-            // BlockMoveInput = true
-            // CancelMovement = true
-            // ChargeCancelMovement = true
-            // LockTriggerForCharge = false
-            // LockTriggerTransferFromOnSwap = false
-            // CanCancelDisables = true
-            // TriggersStoredAmmoVulnerability = true
-            // AcceptTriggerLockRequests = false
-            // AllowExternalForceRelease = true
-            // PriorityFireRequest = true
-            // SetCompleteAngleOnFire = true
-            // SetCompleteAngleOnCharge = true
-            // DestroySpawnsOnUnequip = false
-            // ShowFreeAimLine = true
-            // AimLineAnimation = "null"
-            // ManualAiming = true
-            // ManualAimingInitialOffset = 420
-            // AutoLockRange = 1200
-            // AutoLock = false
-            // FullyAutomatic = true
-            // AutoLockIgnore = "GunBombUnit"
             Effects =
             [
                 {

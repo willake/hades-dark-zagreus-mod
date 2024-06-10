@@ -11,8 +11,7 @@ WeaponData.DarkHestiaGun =
         AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.07,
-        PreFireDuration = 0.07,
+        FireDuration = 0.17, -- 0.07 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
         SkipAngleTowardTarget = true,
         SkipAttackAfterMoveTimeout = true,
@@ -84,10 +83,7 @@ WeaponData.DarkHestiaGunDash =
         SkipMovement = true,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.07,
-        -- CanHold = true,
-        -- ChainedWeapon = "DarkGun"
-        PreFireDuration = 0.07,
+        FireDuration = 0.1, -- 0.07 + 0.02
         SkipAngleTowardTarget = true
     },
 
@@ -132,10 +128,8 @@ WeaponData.DarkHestiaGunGrenadeToss =
     {
         AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
-        AITrackTargetDuringCharge = true,
-        AIMoveWithinRangeTimeout = 1.0,
-        PreFireDuration = 0.2,
-        FireDuration = 0.1
+        AIMoveWithinRangeTimeout = 1,
+        FireDuration = 0.28
     },
 
     Sounds =
