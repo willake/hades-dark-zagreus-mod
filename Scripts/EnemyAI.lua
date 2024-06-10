@@ -286,10 +286,6 @@ function DZAIDoPreFire(enemy, weaponAIData, targetId)
         wait( weaponAIData.PreFireDuration, enemy.AIThreadName )
     end
 
-    if weaponAIData.PreFireFx then
-        StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.PreFireFx })
-    end
-
     -- if weaponAIData.PreFireSound then
     --     StopSound({ Name = weaponAIData.PreFireSound, Id = enemy.ObjectId })
     -- end
