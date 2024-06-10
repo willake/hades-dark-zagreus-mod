@@ -81,7 +81,7 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
                 GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
         
             if ammo <= 0 then
-                DZAIReloadGun(enemy, weaponAIData)
+                DZAIReloadGun(enemy)
             end
         end
     end
@@ -284,20 +284,25 @@ function DZAISelectGunWeapon(enemy, actionData)
     return enemy.WeaponName
 end
 
-function DZAIReloadGun(enemy, weaponData)
+function DZAIReloadGun(enemy)
     -- if SetThreadWait( "ReloadGun" .. enemy.ObjectId, weaponData.ActiveReloadTime ) then
 	-- 	return
 	-- end
     -- DZTemp.AI.Reloading = true
+    local weaponData = GetWeaponData( enemy, enemy.PrimaryWeapon )
 
-	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
+    if weaponData == nil then
+        return
+    end
+
+	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryWeapon, Method = "EmptyAmmo" })
     DZAIReloadPresentationStart( enemy, weaponData, presentationState )
     wait(weaponData.ActiveReloadTime, enemy.AIThreadName)
     if enemy.HandlingDeath then
         return false
     end
     DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
-    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryWeapon, Method = "RefillAmmo" })
     DZTemp.AI.Reloading = false
     return true
 end
@@ -318,7 +323,7 @@ function DZAIManualReload( enemy )
             end 
         end
 
-        DZAIReloadGun( enemy, weaponData )
+        DZAIReloadGun( enemy )
 
         if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
             EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DZManualReloadEffectApplicator" })
