@@ -77,8 +77,8 @@
         NumPenetrations = 9999
         AttachToOwner = true
         Fuse = 0.3
-        DamageLow = 10 // 4
-        DamageHigh = 10 // 4
+        DamageLow = 4 // 4
+        DamageHigh = 4 // 4
         // ImpactVelocity = 2200
         // ImpactVelocityCap = 2200
         UseRadialImpact = false

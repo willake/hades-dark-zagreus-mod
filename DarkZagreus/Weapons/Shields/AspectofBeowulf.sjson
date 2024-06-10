@@ -59,7 +59,7 @@
             Name = "DarkBeowulfShieldDash"
             InheritFrom = "DarkBeowulfShield"
             Projectile = "DarkBeowulfShieldDash"
-            ChargeTime = 0.12
+            ChargeTime = 0.13
             MinChargeToFire = 1.0
             ChargeStartAnimation = "DarkZagreusShieldBeowulfPunchFast_Charge"
             FireGraphic = "DarkZagreusShieldBeowulfPunchFast"
