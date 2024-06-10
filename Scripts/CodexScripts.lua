@@ -124,32 +124,32 @@ end
 function DZUIHandleLoadRecordFromFile()
 	if CurrentDeathAreaRoom == nil then
 		ModUtil.Hades.PrintDisplay("You can only load record while outside the run", 3, {255, 0, 0, 255})
-		return
-	end
-	if io == nil then
-		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
 	else
-		ModUtil.Hades.NewMenuYesNo("ConfirmLoadRecord", nil, nil, function ()
-			DZLoadPreRunRecordFromFile()
-		end, nil, 
-		"Sure to load record?", 
-		"It will override your lastest record. Are you sure to load a record?",
-		"Yes", "No")
+		if io == nil then
+			ModUtil.Hades.PrintDisplay("Can't load record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
+		else
+			ModUtil.Hades.NewMenuYesNo("ConfirmLoadRecord", nil, nil, function ()
+				DZLoadPreRunRecordFromFile()
+			end, nil, 
+			"Sure to load record?", 
+			"It will override your lastest record. Are you sure to load a record?",
+			"Yes", "No")
+		end
 	end
 end
 
 function DZUIHandleClearRecord()
 	if CurrentDeathAreaRoom == nil then
 		ModUtil.Hades.PrintDisplay("You can only clear record while outside the run", 3, {255, 0, 0, 255})
-		return
+	else
+		ModUtil.Hades.NewMenuYesNo("ConfirmClearRecord", nil, nil, function ()
+			DZClearAllRecordInMemory()
+			ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
+			end, nil, 
+			"Sure to clear record?", 
+			"Clearing the record means the record will be not accessible anymore. You can export your record in x86 version before cleaning up. Are you sure to clear it?",
+			"Yes", "No")
 	end
-	ModUtil.Hades.NewMenuYesNo("ConfirmClearRecord", nil, nil, function ()
-		DZClearAllRecordInMemory()
-		ModUtil.Hades.PrintDisplay("Successfully clear record", 3, {0, 255, 255, 255})
-		end, nil, 
-		"Sure to clear record?", 
-		"Clearing the record means the record will be not accessible anymore. You can export your record in x86 version before cleaning up. Are you sure to clear it?",
-		"Yes", "No")
 end
 
 function DZUIHandleForceNextRoomBossRoom()
@@ -177,16 +177,16 @@ end
 function DZUIHandleLoadRecordFromFileStyxScribe()
 	if CurrentDeathAreaRoom == nil then
 		ModUtil.Hades.PrintDisplay("You can only load record while outside the run", 3, {255, 0, 0, 255})
-		return
-	end
-	if StyxScribe == nil then
-		ModUtil.Hades.PrintDisplay("Can't load record. This feature only works with StyxScribe installed", 3, {255, 0, 0, 255})
 	else
-		ModUtil.Hades.NewMenuYesNo("Confirm load record", nil, nil, function ()
-			DZStyxScribeLoadTrainingData()
-		end, nil, 
-		"Sure to load record?", 
-		"It will override your lastest record. Are you sure to load a record?",
-		"Yes", "No")
+		if StyxScribe == nil then
+			ModUtil.Hades.PrintDisplay("Can't load record. This feature only works with StyxScribe installed", 3, {255, 0, 0, 255})
+		else
+			ModUtil.Hades.NewMenuYesNo("Confirm load record", nil, nil, function ()
+				DZStyxScribeLoadTrainingData()
+			end, nil, 
+			"Sure to load record?", 
+			"It will override your lastest record. Are you sure to load a record?",
+			"Yes", "No")
+		end
 	end
 end
