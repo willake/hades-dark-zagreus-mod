@@ -12,9 +12,8 @@ WeaponData.DarkErisGun =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         FireDuration = 0.17, -- 0.07 + 0.1
-        AIMoveWithinRangeTimeout = 0.5,
+        AIMoveWithinRangeTimeout = 2,
         SkipAngleTowardTarget = true,
-        SkipAttackAfterMoveTimeout = true,
     },
     
     CauseImpactReaction = true,
@@ -25,8 +24,6 @@ WeaponData.DarkErisGun =
     IdleReloadAnimation = "DarkZagreusGunAlt02ReloadStart",
     MovingReloadAnimation = "DarkZagreusGunAlt02RunReload",
 
-    OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
-    NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
     LowAmmoSoundThreshold = 5,
 
     NoAmmoText = "GunReloadingStart",

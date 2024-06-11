@@ -12,9 +12,8 @@ WeaponData.DarkGun =
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         FireDuration = 0.17, -- 0.07 + 0.1
-        AIMoveWithinRangeTimeout = 0.5,
+        AIMoveWithinRangeTimeout = 2,
         SkipAngleTowardTarget = true,
-        SkipAttackAfterMoveTimeout = true,
     },
     
     CauseImpactReaction = true,
@@ -25,8 +24,6 @@ WeaponData.DarkGun =
     IdleReloadAnimation = "DarkZagreusGunReloadStart",
     MovingReloadAnimation = "DarkZagreusGunRunReload",
 
-    OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
-    NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
     LowAmmoSoundThreshold = 5,
 
     NoAmmoText = "GunReloadingStart",
