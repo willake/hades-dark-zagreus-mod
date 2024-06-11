@@ -202,7 +202,7 @@ WeaponData.DarkHadesSpearThrow =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			-- FireDuration = 0.2,
+			FireDuration = 0.5,
 			WaitUntilProjectileDeath = "DarkHadesSpearThrow"
 		},
 
@@ -254,8 +254,8 @@ WeaponData.DarkHadesSpearThrowReturn =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			-- FireDuration = 0.425,
-			WaitUntilProjectileDeath = "DarkHadesSpearThrowReturn"
+			FireDuration = 0.425,
+			-- WaitUntilProjectileDeath = "DarkHadesSpearThrowReturn"
 		},
 
 		Sounds =

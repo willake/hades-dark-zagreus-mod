@@ -205,8 +205,8 @@ WeaponData.DarkSpearThrow =
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			-- PreFireDuration = 0.12, 
-			-- FireDuration = 0.52, -- 0.12 + 0.4
-			WaitUntilProjectileDeath = "DarkSpearThrow",
+			FireDuration = 0.5, -- 0.12 + 0.4
+			-- WaitUntilProjectileDeath = "DarkSpearThrow",
 		},
 
 		Sounds =
@@ -257,8 +257,8 @@ WeaponData.DarkSpearThrowReturn =
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
-			-- FireDuration = 0.425,
-			WaitUntilProjectileDeath = "DarkSpearThrowReturn",
+			FireDuration = 0.425,
+			-- WaitUntilProjectileDeath = "DarkSpearThrowReturn",
 		},
 
 		Sounds =
