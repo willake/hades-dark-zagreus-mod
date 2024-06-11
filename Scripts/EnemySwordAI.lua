@@ -82,9 +82,7 @@ function DZAIDoSwordAttackOnce(enemy, currentRun, targetId, weaponAIData, action
 		currentRun.Hero.KillStealVictimId = targetId
 	end
 
-    if weaponAIData.SkipAngleTowardTarget then
-		--DZDebugPrintString("Skipping default AngleTowardTarget")
-	else
+    if weaponAIData.AngleTowardTarget then
 		AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
 		if not weaponAIData.SkipAngleTowardTargetWait then
