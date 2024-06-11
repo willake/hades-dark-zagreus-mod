@@ -2,7 +2,6 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusGunAI( enemy, currentRun )
     enemy.DZ.ShouldPreWarm = false
-    enemy.DZ.Ammo = enemy.MaxAmmo
     return DZAIDoGunAILoop( enemy, currentRun )
 end
 
@@ -81,8 +80,8 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 5.0 })
 				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
-
-            if enemy.DZ.Ammo <= 0 then
+            
+            if DZTemp.AI.Ammo <= 0 then
                 DZAIReloadGun(enemy)
             end
         end
@@ -195,7 +194,7 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
     end
 
     if enemy.DZ.TempAction == 1 then
-        enemy.DZ.Ammo = enemy.DZ.Ammo - 1
+        DZTemp.AI.Ammo = DZTemp.AI.Ammo - 1
     end
 
     -- Fire end
@@ -324,7 +323,7 @@ function DZAIReloadGun(enemy)
     if enemy.DashAttackPowerWeapon then
         RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackPowerWeapon, Method = "RefillAmmo" }) 
     end
-    enemy.DZ.Ammo = enemy.MaxAmmo
+    DZTemp.AI.Ammo = enemy.MaxAmmo
     DZTemp.AI.Reloading = false
     return true
 end
@@ -338,7 +337,7 @@ function DZAIManualReload( enemy )
 
         local weapon = DZTemp.AI.Weapon
 
-        if enemy.DZ.Ammo == enemy.MaxAmmo then
+        if DZTemp.AI.Ammo == enemy.MaxAmmo then
             -- aspect of hestia can reload whenever
             if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
                 return

@@ -11,6 +11,9 @@ function DarkZagreusAI( enemy, currentRun )
     DZTemp.AI.Weapon = DarkZagreus.DefaultAIWeapon
     DZTemp.AI.HasShieldBonus = false
     DZTemp.AI.HasPowerShot = false
+    if enemy.MaxAmmo then
+        DZTemp.AI.Ammo = enemy.MaxAmmo
+    end
 
     local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
     local weapon = {}
