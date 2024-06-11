@@ -110,17 +110,24 @@ end
 
 
 -- test weapon charge time
--- OnWeaponCharging { "ShieldWeapon ShieldWeaponDash ShieldThrow ShieldThrowDash",
+-- OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
 --     function(triggerArgs)        
 --         DZTemp.StartChargingTime = _worldTime
+--         DZDebugPrintString(string.format("Start Chage time: %.2f", _worldTime))
 --     end 
 -- }
 
--- OnWeaponFired{ "ShieldWeapon ShieldWeaponDash ShieldWeaponRush ShieldThrow ShieldThrowDash",
+-- OnWeaponFired{ "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
 --     function( triggerArgs )
---         local duration = _worldTime - DZTemp.StartChargingTime
+        
+--         local duration = 0.0
+        
+--         if DZTemp.StartChargingTime then
+--             duration = _worldTime - DZTemp.StartChargingTime 
+--         end
         
 --         -- DebugPrint({ Text = "Attack" })
 --         DZDebugPrintString(string.format("Charge time: %.2f", duration))
+--         DZDebugPrintString(string.format("Start Fire time: %.2f", _worldTime))
 --     end
 -- }

@@ -94,15 +94,13 @@ function DZAIDoShieldAttackOnce(enemy, currentRun, targetId, weaponAIData, actio
 		currentRun.Hero.KillStealVictimId = targetId
 	end
 
-    if weaponAIData.SkipAngleTowardTarget then
-		--DZDebugPrintString("Skipping default AngleTowardTarget")
-	else
+    if weaponAIData.AngleTowardTarget then
 		AngleTowardTarget({ Id = enemy.ObjectId, DestinationId = targetId })
 
 		if not weaponAIData.SkipAngleTowardTargetWait then
 			enemy.AINotifyName = "WaitForRotation"..enemy.ObjectId
 			NotifyOnRotationComplete({ Id = enemy.ObjectId, Cosmetic = true, Notify = enemy.AINotifyName, Timeout = 9.0 })
-			waitUntil( enemy.AINotifyName, enemy.AIThreadName)
+			waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 		end
 	end
 
