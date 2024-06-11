@@ -44,6 +44,10 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
         -- do manual reload here so the AI can reload while walking
         if enemy.DZ.TempAction == 5 then
             DZAIManualReload(enemy)
+
+            enemy.DZ.LastActionTime = _worldTime
+            -- save both which action is used and the charge time
+            DZAIEnqueueLastAction(enemy, { Action = enemy.DZ.TempAction })
             return true
         end
     
@@ -76,12 +80,9 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 5.0 })
 				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
-
-            local ammo = 
-                GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
-        
-            if ammo <= 0 then
-                DZAIReloadGun(enemy, weaponAIData)
+            
+            if DZTemp.AI.Ammo <= 0 then
+                DZAIReloadGun(enemy)
             end
         end
     end
@@ -192,6 +193,10 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
         ClearEffect({ Id = enemy.ObjectId, Name = "DZManualReloadBonus" })
     end
 
+    if enemy.DZ.TempAction == 1 then
+        DZTemp.AI.Ammo = DZTemp.AI.Ammo - 1
+    end
+
     -- Fire end
 
     -- if not CanAttack({ Id = enemy.ObjectId }) then
@@ -284,20 +289,41 @@ function DZAISelectGunWeapon(enemy, actionData)
     return enemy.WeaponName
 end
 
-function DZAIReloadGun(enemy, weaponData)
+function DZAIReloadGun(enemy)
     -- if SetThreadWait( "ReloadGun" .. enemy.ObjectId, weaponData.ActiveReloadTime ) then
 	-- 	return
 	-- end
     -- DZTemp.AI.Reloading = true
+    local weaponData = GetWeaponData( enemy, enemy.PrimaryWeapon )
 
-	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "EmptyAmmo" })
+    if weaponData == nil then
+        return
+    end
+
+    -- SharedAmmoWeapon is not working, so I can only handle ammo by myself
+	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryWeapon, Method = "EmptyAmmo" })
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackWeapon, Method = "EmptyAmmo" })
+    if enemy.PrimaryPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryPowerWeapon, Method = "EmptyAmmo" }) 
+    end
+    if enemy.DashAttackPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackPowerWeapon, Method = "EmptyAmmo" }) 
+    end
     DZAIReloadPresentationStart( enemy, weaponData, presentationState )
     wait(weaponData.ActiveReloadTime, enemy.AIThreadName)
     if enemy.HandlingDeath then
         return false
     end
     DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
-    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "RefillAmmo" })
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryWeapon, Method = "RefillAmmo" })
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackWeapon, Method = "RefillAmmo" })
+    if enemy.PrimaryPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryPowerWeapon, Method = "RefillAmmo" }) 
+    end
+    if enemy.DashAttackPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackPowerWeapon, Method = "RefillAmmo" }) 
+    end
+    DZTemp.AI.Ammo = enemy.MaxAmmo
     DZTemp.AI.Reloading = false
     return true
 end
@@ -311,14 +337,14 @@ function DZAIManualReload( enemy )
 
         local weapon = DZTemp.AI.Weapon
 
-        if RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
+        if DZTemp.AI.Ammo == enemy.MaxAmmo then
             -- aspect of hestia can reload whenever
             if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
                 return
             end 
         end
 
-        DZAIReloadGun( enemy, weaponData )
+        DZAIReloadGun( enemy )
 
         if weapon and weapon.WeaponName == "GunWeapon" and weapon.ItemIndex == 3 then
             EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DZManualReloadEffectApplicator" })

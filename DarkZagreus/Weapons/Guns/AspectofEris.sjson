@@ -7,6 +7,7 @@
             Projectile = "DarkErisGun"
             FireGraphic = "DarkZagreusGunAlt02Fire"
             FailedToFireCooldownAnimation = "DarkZagreusGunAlt02FireEmpty"
+            MaxAmmo = 12
         }
         {
             Name = "DarkErisGunDash"
@@ -14,7 +15,7 @@
             Projectile = "DarkErisGun"
             FireGraphic = "DarkZagreusGunAlt02Fire"
             FailedToFireCooldownAnimation = "DarkZagreusGunAlt02FireEmpty"
-            ShareAmmoWeapon = "DarkErisGunDash"
+            ShareAmmoWeapon = "DarkErisGun"
         }
         {
             Name = "DarkErisGunGrenadeToss"

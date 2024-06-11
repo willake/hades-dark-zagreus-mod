@@ -1,6 +1,7 @@
 if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusAI( enemy, currentRun )
+    -- should merge these data into a single object sometimes
     enemy.DZ = {} -- for storing data related to this mod
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired
@@ -10,6 +11,9 @@ function DarkZagreusAI( enemy, currentRun )
     DZTemp.AI.Weapon = DarkZagreus.DefaultAIWeapon
     DZTemp.AI.HasShieldBonus = false
     DZTemp.AI.HasPowerShot = false
+    if enemy.MaxAmmo then
+        DZTemp.AI.Ammo = enemy.MaxAmmo
+    end
 
     local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
     local weapon = {}
@@ -161,7 +165,7 @@ function DZAIGetCurrentState(enemy)
 		Maximum = 1
 	}
 
-    if DZPersistent.CurRunRecord.Weapon.WeaponName == "GunWeapon" then
+    if DZTemp.AI.Weapon.WeaponName == "GunWeapon" then
         ammoData.Current = GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
         ammoData.Maximum = GetWeaponMaxAmmo({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon }) or 1
     end

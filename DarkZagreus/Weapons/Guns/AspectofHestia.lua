@@ -11,10 +11,9 @@ WeaponData.DarkHestiaGun =
         AttackDistance = 680,
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
-        FireDuration = 0.17, -- 0.07 + 0.1
+        FireDuration = 0.18, -- 0.07 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
         SkipAngleTowardTarget = true,
-        SkipAttackAfterMoveTimeout = true,
     },
     
     CauseImpactReaction = true,
@@ -25,8 +24,6 @@ WeaponData.DarkHestiaGun =
     IdleReloadAnimation = "DarkZagreusGunAlt01ReloadStart",
     MovingReloadAnimation = "DarkZagreusGunAlt01RunReload",
 
-    OutOfAmmoFunctionName = "GunOutOfAmmoPresentation",
-    NoAmmoFunctionName = "GunFailedNoAmmoPresentation",
     LowAmmoSoundThreshold = 5,
 
     NoAmmoText = "GunReloadingStart",
@@ -128,7 +125,7 @@ WeaponData.DarkHestiaGunGrenadeToss =
     {
         AttackDistance = 500,
         AIAngleTowardsPlayerWhileFiring = true,
-        AIMoveWithinRangeTimeout = 1,
+        AIMoveWithinRangeTimeout = 2,
         FireDuration = 0.28
     },
 
@@ -161,14 +158,36 @@ WeaponData.DarkHestiaGunGrenadeToss =
 }
 
 WeaponData.DarkHestiaSniperGun = {
+    Name = "DarkHestiaSniperGun",
     InheritFrom = { "DarkHestiaGun" },
     DashWeapon = nil,
     OnFiredFunctionName = "DZAIClearManualReloadVFX",
+
+    AIData =
+    {
+        AttackDistance = 680,
+        AIAngleTowardsPlayerWhileFiring = true,
+        AITrackTargetDuringCharge = true,
+        FireDuration = 0.18, -- 0.07 + 0.1
+        AIMoveWithinRangeTimeout = 0.5,
+        SkipAngleTowardTarget = true,
+    },
 }
 
 WeaponData.DarkHestiaSniperGunDash = {
+    Name = "DarkHestiaSniperGunDash",
     InheritFrom = { "DarkHestiaSniperGun" },
     -- DashWeapon = SniperGunWeaponDash,
+
+    AIData =
+    {
+        GiveupDistance = 680,
+        SkipMovement = true,
+        AIAngleTowardsPlayerWhileFiring = true,
+        AITrackTargetDuringCharge = true,
+        FireDuration = 0.1, -- 0.07 + 0.02
+        SkipAngleTowardTarget = true
+    },
 }
 
 WeaponData.DZManualReloadEffectApplicator =

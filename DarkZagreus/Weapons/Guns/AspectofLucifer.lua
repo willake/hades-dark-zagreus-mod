@@ -17,8 +17,7 @@ WeaponData.DarkLuciferGun =
         PreWarmAnimation = "DarkZagreusGunLucifer_Start",
         PreFireFx = "GunCharge",
         FireDuration = 0.12,
-        AIMoveWithinRangeTimeout = 0.5,
-        SkipAttackAfterMoveTimeout = true,
+        AIMoveWithinRangeTimeout = 2,
     },
     
     CauseImpactReaction = true,

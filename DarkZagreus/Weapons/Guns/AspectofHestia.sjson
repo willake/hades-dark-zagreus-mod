@@ -14,6 +14,7 @@
             Projectile = "DarkHestiaGun"
             FireGraphic = "DarkZagreusGunAlt01Fire"
             FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
+            ShareAmmoWeapon = "DarkHestiaGun"
         }
         {
             Name = "DarkHestiaGunGrenadeToss"
@@ -48,6 +49,7 @@
             FireGraphic = "DarkZagreusGunAlt01Fire"
             FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
             Enabled = true
+            ShareAmmoWeapon = "DarkHestiaGun"
         }
         {
             Name = "DarkHestiaSniperGunDash"
@@ -56,6 +58,7 @@
             FireGraphic = "DarkZagreusGunAlt01Fire"
             FailedToFireCooldownAnimation = "DarkZagreusGunAlt01FireEmpty"
             Enabled = true
+            ShareAmmoWeapon = "DarkHestiaGun"
         }
     ]
 }
