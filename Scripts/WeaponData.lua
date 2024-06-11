@@ -92,6 +92,9 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkGunGrenadeToss"
 				enemy.DashAttackWeapon = "DarkGunDash"
 				enemy.ReloadWeapon = "DarkManualReload"
+				enemy.MaxAmmo = 12
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGun" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGunDash" })
             end
 		},
 		{
@@ -101,6 +104,9 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkErisGunGrenadeToss"
 				enemy.DashAttackWeapon = "DarkErisGunDash"
 				enemy.ReloadWeapon = "DarkManualReload"
+				enemy.MaxAmmo = 12
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkErisGun" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkErisGunDash" })
             end
 		},
 		{
@@ -112,6 +118,11 @@ DZWeaponData =
 				enemy.DashAttackWeapon = "DarkHestiaGunDash"
 				enemy.DashAttackPowerWeapon = "DarkHestiaSniperGunDash"
 				enemy.ReloadWeapon = "DarkManualReload"
+				enemy.MaxAmmo = 12
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkHestiaGun" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkHestiaSniperGun" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkDarkHestiaGunDashHestiaGun" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkHestiaSniperGunDash" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DZManualReloadEffectApplicator" })
             end
 		},
@@ -122,6 +133,9 @@ DZWeaponData =
 				enemy.SpecialAttackWeapon = "DarkLuciferGunGrenadeToss"
 				enemy.DashAttackWeapon = "DarkLuciferGunDash"
 				enemy.ReloadWeapon = "DarkManualReload"
+				enemy.MaxAmmo = 20
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGun" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunDash" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunBomb" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkLuciferGunBombImmolation" })
             end

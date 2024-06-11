@@ -1,6 +1,7 @@
 if not DarkZagreus.Config.Enabled then return end 
 
 function DarkZagreusAI( enemy, currentRun )
+    -- should merge these data into a single object sometimes
     enemy.DZ = {} -- for storing data related to this mod
     enemy.DZ.LastActions = {} -- a queue for storing last actions, max size is 1 now
     enemy.DZ.TempAction = 0 -- mark action while selecting a weapon, enqueue action when the weapon is actually fired

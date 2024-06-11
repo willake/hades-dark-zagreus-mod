@@ -2,6 +2,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 function DarkZagreusGunAI( enemy, currentRun )
     enemy.DZ.ShouldPreWarm = false
+    enemy.DZ.Ammo = enemy.MaxAmmo
     return DZAIDoGunAILoop( enemy, currentRun )
 end
 
@@ -81,10 +82,7 @@ function DZAIDoGunAILoop(enemy, currentRun, targetId)
 				waitUntil( enemy.AINotifyName, enemy.AIThreadName )
 			end
 
-            local ammo = 
-                GetWeaponProperty({ Id = enemy.ObjectId, WeaponName = enemy.PrimaryWeapon, Property = "Ammo" }) or 0
-        
-            if ammo <= 0 then
+            if enemy.DZ.Ammo <= 0 then
                 DZAIReloadGun(enemy)
             end
         end
@@ -196,6 +194,10 @@ function DZAIFireGunWeapon(enemy, weaponAIData, currentRun, targetId, actionData
         ClearEffect({ Id = enemy.ObjectId, Name = "DZManualReloadBonus" })
     end
 
+    if enemy.DZ.TempAction == 1 then
+        enemy.DZ.Ammo = enemy.DZ.Ammo - 1
+    end
+
     -- Fire end
 
     -- if not CanAttack({ Id = enemy.ObjectId }) then
@@ -299,7 +301,15 @@ function DZAIReloadGun(enemy)
         return
     end
 
+    -- SharedAmmoWeapon is not working, so I can only handle ammo by myself
 	RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryWeapon, Method = "EmptyAmmo" })
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackWeapon, Method = "EmptyAmmo" })
+    if enemy.PrimaryPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryPowerWeapon, Method = "EmptyAmmo" }) 
+    end
+    if enemy.DashAttackPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackPowerWeapon, Method = "EmptyAmmo" }) 
+    end
     DZAIReloadPresentationStart( enemy, weaponData, presentationState )
     wait(weaponData.ActiveReloadTime, enemy.AIThreadName)
     if enemy.HandlingDeath then
@@ -307,6 +317,14 @@ function DZAIReloadGun(enemy)
     end
     DZAIReloadPresentationComplete( enemy, weaponData, presentationState )
     RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryWeapon, Method = "RefillAmmo" })
+    RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackWeapon, Method = "RefillAmmo" })
+    if enemy.PrimaryPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.PrimaryPowerWeapon, Method = "RefillAmmo" }) 
+    end
+    if enemy.DashAttackPowerWeapon then
+        RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackPowerWeapon, Method = "RefillAmmo" }) 
+    end
+    enemy.DZ.Ammo = enemy.MaxAmmo
     DZTemp.AI.Reloading = false
     return true
 end
@@ -320,7 +338,7 @@ function DZAIManualReload( enemy )
 
         local weapon = DZTemp.AI.Weapon
 
-        if RunWeaponMethod({ Id = enemy.ObjectId, Weapon = weaponData.Name, Method = "IsAmmoFull" }) then
+        if enemy.DZ.Ammo == enemy.MaxAmmo then
             -- aspect of hestia can reload whenever
             if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
                 return
