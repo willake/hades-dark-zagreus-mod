@@ -169,7 +169,6 @@ WeaponData.DarkHestiaSniperGun = {
         AITrackTargetDuringCharge = true,
         FireDuration = 0.18, -- 0.07 + 0.1
         AIMoveWithinRangeTimeout = 0.5,
-        AngleTowardTarget = true,
     },
 }
 
@@ -185,7 +184,6 @@ WeaponData.DarkHestiaSniperGunDash = {
         AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         FireDuration = 0.1, -- 0.07 + 0.02
-        AngleTowardTarget = true,
     },
 }
 
