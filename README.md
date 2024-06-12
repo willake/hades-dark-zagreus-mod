@@ -1,4 +1,4 @@
-﻿# Dark Zagreus (Hades Mod) v1.2
+﻿# Dark Zagreus (Hades Mod) v1.2.1
 
 **The mod is available on [Nexus Mod](https://www.nexusmods.com/hades/mods/191)!**
 
