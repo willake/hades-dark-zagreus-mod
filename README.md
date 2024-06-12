@@ -1,4 +1,6 @@
-﻿# Dark Zagreus (Hades Mod) v1.2
+﻿# Dark Zagreus (Hades Mod) v1.2.1
+
+**The mod is available on [Nexus Mod](https://www.nexusmods.com/hades/mods/191)!**
 
 A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). It turns the final boss, Hades himself, into a mirror image of the player character, whom I call Dark Zagreus. Inspired by similar concepts in other games, like Dark Link from the Zelda series. In each encounter, Dark Zagreus equips the same weapon as the player's previous successful run. What sets this mod apart is that Dark Zagreus takes inspiration from the player's previous successful runs, decisions and performances, and dynamically adapts to your playstyle.
 
@@ -6,7 +8,8 @@ A mod for the game [Hades](https://store.steampowered.com/app/1145360/Hades/). I
 
 ## Asking For Help For My Research
 
-This mod is part of my master's thesis research. Your participation in completing the questionnaire while playing the mod would be greatly appreciated and extremely helpful. For more information, please check the [questionnaire](https://survey.uu.nl/jfe/form/SV_06ycfpE2cBvUM4u).
+
+If you are playing this mod for the first time, I would like to kindly ask for your assistance with my research by filling out a questionnaire. This mod is part of my master's thesis and the questionnaire is about your thought before&after encountering Dark Zagreus. This mod is part of my master's thesis research. Your participation in completing the questionnaire while playing the mod would be greatly appreciated and extremely helpful. For more information, please check the [questionnaire](https://survey.uu.nl/jfe/form/SV_06ycfpE2cBvUM4u).
 
 ## Requirements
 - [Hades](https://store.steampowered.com/app/1145360/Hades/) (V1.38290 or above)

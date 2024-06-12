@@ -2,7 +2,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 -- Replace Hades to Zagreus
 -- set phases to only 1
-UnitSetData.Enemies.Hades.MaxHealth = 10000
+UnitSetData.Enemies.Hades.MaxHealth = 14000
 UnitSetData.Enemies.Hades.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.Phases = 1
 UnitSetData.Enemies.Hades.ShrineDataOverwrites.MaxHealth = 20000
