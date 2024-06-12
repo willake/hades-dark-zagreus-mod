@@ -147,8 +147,8 @@ end}
 
 -- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
-    if currentRun.Cleared ~= nil then
-        DZDebugPrintString("RecordRunCleared() - EndRun " .. tostring(currentRun.Cleared)) 
+    if CurrentRun.Cleared ~= nil then
+        DZDebugPrintString("RecordRunCleared() - EndRun " .. tostring(CurrentRun.Cleared)) 
     else
         DZDebugPrintString("RecordRunCleared() - EndRun " .. "false")
     end
@@ -165,7 +165,7 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     DZPersistent.CurRunRecord = {}
 
-    return base(currentRun)
+    return base()
 end, DarkZagreus)
 
 --- Managing Start/End recording end
