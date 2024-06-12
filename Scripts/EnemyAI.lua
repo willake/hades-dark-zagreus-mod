@@ -131,7 +131,7 @@ end
 
 function DZAIGetCurrentState(enemy)
     local distance = 0.00
-    distance = GetDistance({ Id = enemy.ObjectId, DestinationId = currentRun.Hero.ObjectId })
+    distance = GetDistance({ Id = enemy.ObjectId, DestinationId = CurrentRun.Hero.ObjectId })
 
     if distance > 1000 then
         distance = 1000
