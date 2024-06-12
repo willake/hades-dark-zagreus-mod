@@ -197,7 +197,7 @@
 				IgnoreName = "_PlayerUnit"
 				Type = "DAMAGE_TAKEN"
 				Duration = 0.25
-				Modifier = 1.0
+				Modifier = 0.8 // 1.0 * 0.8
 				OverheadFx = "ConsecrationBuffedFront"
 				BackFx = "ConsecrationBuffedBack"
 				Sound = "/Leftovers/SFX/ConsecrationLoopSFX2"
@@ -219,7 +219,7 @@
 				ExtendDurationOnReapply = true
 				Type = "SPEED"
 				Duration = 1.0
-				Modifier = 1
+				Modifier = 0.5
 				Active = true
 				CanAffectInvulnerable = false
 				FrontFx = null
