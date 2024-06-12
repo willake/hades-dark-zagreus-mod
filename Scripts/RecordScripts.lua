@@ -65,7 +65,7 @@ function DZGetCurrentState()
     local enemyHealth = 0.00
 
     if enemy ~= nil and enemy.Health ~= nil then
-        distance = GetDistance({ Id = closestId, DestinationId = currentRun.Hero.ObjectId })
+        distance = GetDistance({ Id = closestId, DestinationId = CurrentRun.Hero.ObjectId })
         enemyHealth = enemy.Health / enemy.MaxHealth
     end
 
