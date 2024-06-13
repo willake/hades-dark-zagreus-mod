@@ -11,6 +11,9 @@ Import "Scripts/DZStyxScribeScripts.lua"
 Import "Scripts/TraitScripts.lua"
 Import "Scripts/UpgradeManager.lua"
 
+To "Scripts/TraitData.lua"
+Import "Scripts/TraitData.lua"
+
 To "StyxScribeScripts/DZStyxScribeScripts.py"
 Replace "Scripts/DZStyxScribeScripts.py"
 

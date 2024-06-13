@@ -1,3 +1,4 @@
+
 function DZUtil.Trait.AddTraitToUnit(args)
     local unit = args.Unit
 	local traitData = args.TraitData
@@ -13,32 +14,38 @@ function DZUtil.Trait.AddTraitToUnit(args)
 	DZUtil.Trait.EquipReferencedWeapons( unit, traitData )
 	DZUtil.Trait.AddTraitData( unit, traitData, args )
 
-	EquipSpecialWeapons( CurrentRun.Hero, traitData )
-	AddAssistWeapons( CurrentRun.Hero, traitData )
-	for weaponName, v in pairs( CurrentRun.Hero.Weapons ) do
-		AddWallSlamWeapons( CurrentRun.Hero, traitData )
-		AddOnDamageWeapons(CurrentRun.Hero, weaponName, traitData)
-		AddOnFireWeapons(CurrentRun.Hero, weaponName, traitData)
+	EquipSpecialWeapons( unit, traitData )
+
+    -- Note(Huiun): This is assist, will have this in the future
+	-- AddAssistWeapons( unit, traitData )
+
+
+	for weaponName, v in pairs( unit.Weapons ) do
+		AddWallSlamWeapons( unit, traitData )
+		AddOnDamageWeapons(unit, weaponName, traitData)
+		AddOnFireWeapons(unit, weaponName, traitData)
 		if traitData.UpgradeHeroWeapon ~= nil and Contains(traitData.UpgradeHeroWeapon.WeaponNames, weaponName) then
 			AddHeroWeaponUpgrade(weaponName, traitData.UpgradeHeroWeapon.UpgradeName)
 		end
 	end
 
-	if ( traitData.EnemyPropertyChanges or traitData.AddEnemyOnDeathWeapons ) and ActiveEnemies ~= nil then
-		for enemyId, enemy in pairs( ActiveEnemies ) do
-			EquipReferencedEnemyWeapons( currentRun, traitData, enemy )
-			ApplyEnemyTrait( CurrentRun, traitData, enemy )
-		end
-	end
+    -- Note(Huiun): I think I won't need this, but leave here
+	-- if ( traitData.EnemyPropertyChanges or traitData.AddEnemyOnDeathWeapons ) and ActiveEnemies ~= nil then
+	-- 	for enemyId, enemy in pairs( ActiveEnemies ) do
+	-- 		EquipReferencedEnemyWeapons( currentRun, traitData, enemy )
+	-- 		ApplyEnemyTrait( CurrentRun, traitData, enemy )
+	-- 	end
+	-- end
 
-	if traitData.AddShout then
-		if traitData.AddShout.Cost then
-			CurrentRun.Hero.SuperCost = traitData.AddShout.Cost
-		else
-			CurrentRun.Hero.SuperCost = 25
-		end
-		ShowSuperMeter()
-	end
+    -- Note(Huiun): This is Call, will have it in the future
+	-- if traitData.AddShout then
+	-- 	if traitData.AddShout.Cost then
+	-- 		CurrentRun.Hero.SuperCost = traitData.AddShout.Cost
+	-- 	else
+	-- 		CurrentRun.Hero.SuperCost = 25
+	-- 	end
+	-- 	ShowSuperMeter()
+	-- end
 end
 
 function DZUtil.Trait.EquipReferencedWeapons( unit, traitData )
@@ -247,6 +254,6 @@ function DZUtil.Trait.UnitHasTrait(unit, traitName)
             return true
         end
     end
-    
+
     return false 
 end

@@ -41,6 +41,8 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                     ItemIndex = DarkZagreus.DefaultAIWeapon.ItemIndex
                 })
             end 
+
+            DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZSwordCriticalParryTrait", Rarity = "Legendary"})})
         end
     end
 end }
