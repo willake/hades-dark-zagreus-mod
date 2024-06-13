@@ -1,6 +1,13 @@
 if not DarkZagreus.Config.Enabled then return end 
 DZDebugPrintString(string.format("Mod is loaded. Version: %s Data version: %s", DarkZagreus.Version, DarkZagreus.DataVersion))
 
+DZUtil = {
+    Upgrade = {},
+    Trait = {}
+}
+
+SaveIgnores["DZUtil"] = true
+
 -- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
     DZDebugPrintString("Enter D_Boss01")
