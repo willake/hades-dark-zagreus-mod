@@ -42,7 +42,7 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 })
             end 
 
-            DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZSwordCriticalParryTrait", Rarity = "Legendary"})})
+            -- DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZSwordCriticalParryTrait", Rarity = "Legendary"})})
         end
     end
 end }
