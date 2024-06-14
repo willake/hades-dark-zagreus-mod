@@ -6,7 +6,7 @@ DZWeaponData =
 	{
 		{
 			Equip = function (enemy)
-				enemy.Weapons = {"DarkSword", "DarkRush", "DarkSwordParry", "DarkSwordDash"}
+				enemy.Weapons = { DarkSword = true, DarkSword2 = true, DarkSword3 = true, DarkRush = true, DarkSwordParry = true, DarkSwordDash = true}
                 enemy.PrimaryWeapon = "DarkSword"
                 enemy.DashWeapon = "DarkRush"
                 enemy.SpecialAttackWeapon = "DarkSwordParry"

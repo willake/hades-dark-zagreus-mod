@@ -349,6 +349,20 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
 
+    if enemy.OnFireWeapons[weaponAIData.WeaponName] ~= nil then
+		for onFireWeaponName, onFireWeaponData in pairs( enemy.OnFireWeapons[weaponAIData.WeaponName] ) do
+			if type(onFireWeaponData) == "table" then
+				if onFireWeaponData.UseTargetLocation then
+					FireWeaponFromUnit({ Weapon = onFireWeaponName, Id = CurrentRun.Hero.ObjectId, DestinationId = targetId })
+				else
+					FireWeaponFromUnit({ Weapon = onFireWeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+				end
+			else
+				FireWeaponFromUnit({ Weapon = onFireWeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+			end
+		end
+	end
+
     if weaponAIData.FireFxOnSelf then
         StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
     end

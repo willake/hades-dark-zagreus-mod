@@ -523,7 +523,7 @@ ModUtil.Table.Merge(
                         AIMoveWithinRangeTimeoutMax = 0.6,
                         SkipAttackAfterMoveTimeout = true,
                         SkipAngleTowardTarget = true,
-                        PostFireWeapon = "DarkConsecrationField",
+                        -- PostFireWeapon = "DarkConsecrationField",
                         -- PreFireDuration = 0.48,
                         FireDuration = 1.08 -- 0.48 + 0.6
                     },
