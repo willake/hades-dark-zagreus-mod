@@ -35,6 +35,26 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
 
 DarkZagreus.RecordDirectoryName = "DZRecords"
 DarkZagreus.LoadRecordFileName = "DZRecord"
+
+DarkZagreus.AvailableTraits = {} -- filled by other scripts
+
+-- setup utility functions
+DZUtil = {
+    AI = {},
+    Upgrade = {},
+    Trait = {}
+}
+
+SaveIgnores["DZUtil"] = true
+
+-- DZPersistant for data which can be saved with save files
+DZPersistent = {}
+
+-- DZTemp for data should be deleted after leaving the game
+DZTemp = {}
+
+SaveIgnores["DZTemp"] = true
+
 -- State Scheme
 -- {
 --     OwnHP,

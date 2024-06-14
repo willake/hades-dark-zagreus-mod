@@ -12,6 +12,8 @@ DZWeaponData =
                 enemy.SpecialAttackWeapon = "DarkSwordParry"
                 enemy.DashAttackWeapon = "DarkSwordDash"
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword2" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword3" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordParry" })
 				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordDash" })

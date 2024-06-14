@@ -1,15 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end 
 DZDebugPrintString(string.format("Mod is loaded. Version: %s Data version: %s", DarkZagreus.Version, DarkZagreus.DataVersion))
 
-DarkZagreus.AvailableTraits = {}
-
-DZUtil = {
-    Upgrade = {},
-    Trait = {}
-}
-
-SaveIgnores["DZUtil"] = true
-
 -- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
     DZDebugPrintString("Enter D_Boss01")
@@ -44,18 +35,10 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 })
             end 
 
-            -- DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZSwordCriticalParryTrait", Rarity = "Legendary"})})
+            DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZSwordConsecrationTrait", Rarity = "Legendary"})})
         end
     end
 end }
-
--- DZPersistant for data which can be saved with save files
-DZPersistent = {}
-
--- DZTemp for data should be deleted after leaving the game
-DZTemp = {}
-
-SaveIgnores["DZTemp"] = true
 
 -- Load Dark Zagreus's portrait
 local package = "DarkZagreus"

@@ -13,6 +13,7 @@ Import "Scripts/UpgradeManager.lua"
 
 To "Scripts/TraitData.lua"
 Import "Scripts/TraitData.lua"
+Import "DarkZagreus/Weapons/Swords/SwordTraitData.lua"
 
 To "StyxScribeScripts/DZStyxScribeScripts.py"
 Replace "Scripts/DZStyxScribeScripts.py"

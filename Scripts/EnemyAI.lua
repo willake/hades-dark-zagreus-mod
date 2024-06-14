@@ -501,3 +501,39 @@ function DZGetRandomAngleInOppositeDirection(angle)
 
     return (angle + 90 + r) % 360
 end
+
+function DZUtil.AI.GetWeaponAIData(enemy)
+    local weaponAIData = ShallowCopyTable(enemy.DefaultAIData) or enemy
+	if WeaponData[enemy.WeaponName] ~= nil and WeaponData[enemy.WeaponName].AIData ~= nil then
+		local weaponData = ShallowCopyTable(WeaponData[enemy.WeaponName].AIData)
+
+        -- Note(Huiun): For weapon traits
+        if enemy.WeaponDataOverride and enemy.WeaponDataOverride[enemy.WeaponName] and enemy.WeaponDataOverride[enemy.WeaponName].AIData then
+            OverwriteTableKeys( weaponData, enemy.WeaponDataOverride[enemy.WeaponName].AIData)
+        end
+
+		OverwriteTableKeys( weaponAIData, weaponData)
+	end
+
+	weaponAIData.WeaponName = enemy.WeaponName
+
+	return weaponAIData
+end
+
+function DZUtil.AI.GetWeaponAIDataByName(enemy, weaponName)
+    local weaponAIData = ShallowCopyTable(enemy.DefaultAIData) or enemy
+	if WeaponData[weaponName] ~= nil and WeaponData[weaponName].AIData ~= nil then
+		local weaponData = ShallowCopyTable(WeaponData[weaponName].AIData)
+
+        -- Note(Huiun): For weapon traits
+        if enemy.WeaponDataOverride and enemy.WeaponDataOverride[weaponName] and enemy.WeaponDataOverride[weaponName].AIData then
+            OverwriteTableKeys( weaponData, enemy.WeaponDataOverride[weaponName].AIData)
+        end
+
+		OverwriteTableKeys( weaponAIData, weaponData)
+	end
+
+	weaponAIData.WeaponName = weaponName
+
+	return weaponAIData
+end

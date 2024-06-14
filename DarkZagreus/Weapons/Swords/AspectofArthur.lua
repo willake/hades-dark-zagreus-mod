@@ -237,19 +237,3 @@ WeaponData.DarkArthurSwordParry =
         "ZagreusSwordParry_Bink",
     },
 }
-
-WeaponData.DarkConsecrationField =
-{
-    Name = "DarkConsecrationField",
-    StartingWeapon = false,
-
-    AIData =
-    {
-        -- PreFireDuration = 0.3, -- should be 0.5, but it looks weird
-        FireDuration = 0.07,
-        FireOnSelf = true
-    },
-
-    OnFiredFunctionName = "DisableTraps",
-    OnFiredFunctionArgs = { Range = 450, Duration = 8 },
-}

@@ -332,6 +332,18 @@ ModUtil.Table.Merge(
             {
                 DarkSword =
                 {
+                    AIData =
+                    {
+                        AIAngleTowardsPlayerWhileFiring = true,
+                        AIMoveWithinRangeTimeoutMin = 0.3,
+                        AIMoveWithinRangeTimeoutMax = 0.6,
+                        SkipAttackAfterMoveTimeout = true,
+                        SkipAngleTowardTarget = true,
+                        -- PreFireDuration = 0.25,
+                        FireDuration = 0.53, -- 0.25 + 0.28
+                        ChainedWeapon = "DarkSword2",
+                    },
+
                     WeaponBinks =
                     {
                         "ZagreusSwordArthurIdle_Bink",
@@ -358,6 +370,18 @@ ModUtil.Table.Merge(
 
                 DarkSword2 =
                 {
+                    AIData =
+                    {
+                        SkipMovement = true,
+                        SkipAngleTowardTarget = true,
+                        AIAngleTowardsPlayerWhileFiring = true,
+                        ChainedWeapon = "DarkSword3",
+                        PreFireFx = "ChargeAttack-Arthur", -- Note(Huiun): cuz ChargeFx not working
+                        PreFireSound = "/VO/ZagreusEmotes/EmoteCharging",
+                        -- PreFireDuration = 0.33, 
+                        FireDuration = 0.81 -- 0.33 + 0.48
+                    },
+
                     HitSimSlowCooldown = 0.3,
                     HitSimSlowParameters =
                     {
@@ -403,6 +427,17 @@ ModUtil.Table.Merge(
 
                 DarkSword3 =
                 {
+                    AIData =
+                    {
+                        SkipMovement = true,
+                        SkipAngleTowardTarget = true,
+                        AIAngleTowardsPlayerWhileFiring = true,
+                        -- PreFireDuration = 0.48,
+                        FireDuration = 0.78, -- 0.48 + 0.3
+                        PreFireFx = "ChargeAttack-Arthur",
+                        PreFireSound = "/VO/ZagreusEmotes/EmoteHeavyCharging",
+                    },
+
                     HitSimSlowCooldown = 0.3,
                     HitSimSlowParameters =
                     {
@@ -446,6 +481,17 @@ ModUtil.Table.Merge(
                 },
                 DarkSwordDash =
                 {
+                    AIData =
+                    {
+                        -- PreFireDuration = 0.2,
+                        FireDuration = 0.38, -- 0.2 + 0.18
+                        GiveupDistance = 250,
+                        AIAngleTowardsPlayerWhileFiring = true,
+                        AIMoveWithinRangeTimeout = 1.0,
+                        SkipMovement = true,
+                        SkipAngleTowardTarget = true,
+                    },
+
                     HitSimSlowCooldown = 0.2,
                     Sounds =
                     {
@@ -471,6 +517,17 @@ ModUtil.Table.Merge(
                 },
                 DarkSwordParry =
                 {
+                    AIData =
+                    {
+                        AIMoveWithinRangeTimeoutMin = 0.3,
+                        AIMoveWithinRangeTimeoutMax = 0.6,
+                        SkipAttackAfterMoveTimeout = true,
+                        SkipAngleTowardTarget = true,
+                        PostFireWeapon = "DarkConsecrationField",
+                        -- PreFireDuration = 0.48,
+                        FireDuration = 1.08 -- 0.48 + 0.6
+                    },
+                    
                     HitSimSlowCooldown = 0.2,
                     Sounds =
                     {
@@ -932,36 +989,15 @@ ModUtil.Table.Merge(
                         Format = "NegativePercentDelta",
                     }
                 },
-                --[[
-                {
-                    WeaponName = "ConsecrationField",
-                    EffectName = "DodgeBonus",
-                    EffectProperty = "DodgeChance",
-                    BaseValue = 0.10,
-                    ChangeType = "Add",
-                    ExtractValue =
-                    {
-                        ExtractAs = "TooltipDodge",
-                        Format = "Percent",
-                    }
-                },
-                ]]
-                --[[
-                {
-                    WeaponName = "ConsecrationField",
-                    EffectName = "ConsecrationDamage",
-                    EffectProperty = "Modifier",
-                    BaseValue = 1.07,
-                    SourceIsMultiplier = true,
-                    ChangeType = "Multiply",
-                    ExtractValue =
-                    {
-                        ExtractAs = "TooltipDamage",
-                        Format = "PercentDelta",
-                    }
-                },
-                ]]
             },
         },
+    }
+)
+
+ModUtil.Table.Merge(
+    DarkZagreus.AvailableTraits, {
+        "DZSwordCriticalParryTrait",
+        "DZDislodgeAmmoTrait",
+        "DZSwordConsecrationTrait"
     }
 )

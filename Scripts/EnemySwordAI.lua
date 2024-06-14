@@ -17,7 +17,7 @@ function DZAIDoSwordAILoop(enemy, currentRun, targetId)
     -- DebugAssert({ Condition = enemy.WeaponName ~= nil, Text = "Enemy has no weapon!" })
     -- table.insert(enemy.WeaponHistory, enemy.WeaponName)
 
-	local weaponAIData = GetWeaponAIData(enemy)
+	local weaponAIData = DZUtil.AI.GetWeaponAIData(enemy)
 
     -- pass ChainedWeapon to enemy object
     if weaponAIData.ChainedWeapon ~= nil then
@@ -141,7 +141,7 @@ function DZAIFireSwordWeapon(enemy, weaponAIData, currentRun, targetId, actionDa
     -- AspectofArthur will fire an area after special attack
     if weaponAIData.PostFireWeapon ~= nil then
         local postFireWeaponAIData = 
-            DZAIGetWeaponAIData(enemy, weaponAIData.PostFireWeapon)
+            DZUtil.AI.GetWeaponAIDataByName(enemy, weaponAIData.PostFireWeapon)
 
         DZAIDoRegularFire(enemy, postFireWeaponAIData, targetId)
     end
