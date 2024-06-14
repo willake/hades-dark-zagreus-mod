@@ -8,6 +8,11 @@ Import "Scripts/RecordScripts.lua"
 Import "Scripts/RecordActionScripts.lua"
 Import "Scripts/TrainingScripts.lua"
 Import "Scripts/DZStyxScribeScripts.lua"
+Import "Scripts/TraitScripts.lua"
+Import "Scripts/UpgradeManager.lua"
+
+To "Scripts/TraitData.lua"
+Import "Scripts/TraitData.lua"
 
 To "StyxScribeScripts/DZStyxScribeScripts.py"
 Replace "Scripts/DZStyxScribeScripts.py"

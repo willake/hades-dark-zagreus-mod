@@ -54,66 +54,67 @@ function DZDebugPrintTable(tableName, table, depth)
     DebugPrint({ Text = whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}" })
 end
 
--- local DZDebugPrintToFile = function(...) print("Not working on x64.") end
--- local DZDebugPrintTableToFile = function(...) print("Not working on x64.") end
--- if io then
---     local logFilePath = "DarkZagreus.log"
---     io.open(logFilePath, "w"):close()
+local DZDebugPrintToFile = function(...) print("Not working on x64.") end
+local DZDebugPrintTableToFile = function(...) print("Not working on x64.") end
+if io then
+    local logFilePath = "DarkZagreus.log"
+    io.open(logFilePath, "w"):close()
 
---     DZDebugPrintToFile = function(...)
---         local file = io.open(logFilePath, "a")
+    DZDebugPrintToFile = function(...)
+        local file = io.open(logFilePath, "a")
 
---         local out = {}
---         local args = { ... }
---         for i, v in ipairs(args) do
---             table.insert(out, "\t")
---             table.insert(out, tostring(v))
---         end
---         table.insert(out, "\n")
---         table.remove(out, 1)
+        local out = {}
+        local args = { ... }
+        for i, v in ipairs(args) do
+            table.insert(out, "\t")
+            table.insert(out, tostring(v))
+        end
+        table.insert(out, "\n")
+        table.remove(out, 1)
 
---         file:write(table.unpack(out))
---         file:close()
---     end
+        file:write(table.unpack(out))
+        file:close()
+    end
 
---     function DZDebugPrintTableToFile(tableName, table, depth)
---         if table == nil then
---             DZDebugPrintToFile(tableName .. " is nil")
---             return
---         end
---         if depth == nil then
---             depth = 0
---         end
---         local whiteSpaceBegin = "";
---         local newDepth = depth
---         if depth == -1 then
---             newDepth = -1
---         else
---             for i = 1, depth do
---                 for x = 1, 2 do
---                     whiteSpaceBegin = whiteSpaceBegin .. " "
---                 end
---             end
---             newDepth = depth + 1
---         end
---         DZDebugPrintToFile(whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={")
---         for k, v in pairs(table) do
---             if type(v) == "table" then
---                 DZDebugPrintTableToFile(tostring(k), v, newDepth)
---             else
---                 DZDebugPrintToFile(whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v))
---             end
---         end
---         DZDebugPrintToFile(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
---     end    
--- end
+    function DZDebugPrintTableToFile(tableName, table, depth)
+        if table == nil then
+            DZDebugPrintToFile(tableName .. " is nil")
+            return
+        end
+        if depth == nil then
+            depth = 0
+        end
+        local whiteSpaceBegin = "";
+        local newDepth = depth
+        if depth == -1 then
+            newDepth = -1
+        else
+            for i = 1, depth do
+                for x = 1, 2 do
+                    whiteSpaceBegin = whiteSpaceBegin .. " "
+                end
+            end
+            newDepth = depth + 1
+        end
+        DZDebugPrintToFile(whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={")
+        for k, v in pairs(table) do
+            if type(v) == "table" then
+                DZDebugPrintTableToFile(tostring(k), v, newDepth)
+            else
+                DZDebugPrintToFile(whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v))
+            end
+        end
+        DZDebugPrintToFile(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
+    end    
+end
 
 
 -- test weapon charge time
 -- OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
 --     function(triggerArgs)        
---         DZTemp.StartChargingTime = _worldTime
---         DZDebugPrintString(string.format("Start Chage time: %.2f", _worldTime))
+--         DZDebugPrintTableToFile("Traits", GameState.TraitsTaken)
+--         -- DZTemp.StartChargingTime = _worldTime
+--         -- DZDebugPrintString(string.format("Start Chage time: %.2f", _worldTime))
 --     end 
 -- }
 

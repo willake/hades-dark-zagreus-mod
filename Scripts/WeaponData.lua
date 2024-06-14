@@ -6,10 +6,15 @@ DZWeaponData =
 	{
 		{
 			Equip = function (enemy)
+				enemy.Weapons = {"DarkSword", "DarkRush", "DarkSwordParry", "DarkSwordDash"}
                 enemy.PrimaryWeapon = "DarkSword"
                 enemy.DashWeapon = "DarkRush"
                 enemy.SpecialAttackWeapon = "DarkSwordParry"
                 enemy.DashAttackWeapon = "DarkSwordDash"
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordParry" })
+				EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordDash" })
             end
 		},
 		{
