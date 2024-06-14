@@ -54,13 +54,13 @@ function DZDebugPrintTable(tableName, table, depth)
     DebugPrint({ Text = whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}" })
 end
 
-local DZDebugPrintToFile = function(...) print("Not working on x64.") end
-local DZDebugPrintTableToFile = function(...) print("Not working on x64.") end
+DZUtil.Debug.PrintToFile = function(...) print("Not working on x64.") end
+DZUtil.Debug.PrintTableToFile = function(tableName, table, depth) print("Not working on x64.") end
 if io then
     local logFilePath = "DarkZagreus.log"
     io.open(logFilePath, "w"):close()
 
-    DZDebugPrintToFile = function(...)
+    DZUtil.Debug.PrintToFile = function(...)
         local file = io.open(logFilePath, "a")
 
         local out = {}
@@ -76,9 +76,9 @@ if io then
         file:close()
     end
 
-    function DZDebugPrintTableToFile(tableName, table, depth)
+    DZUtil.Debug.PrintTableToFile = function(tableName, table, depth)
         if table == nil then
-            DZDebugPrintToFile(tableName .. " is nil")
+            DZUtil.Debug.PrintToFile(tableName .. " is nil")
             return
         end
         if depth == nil then
@@ -96,18 +96,17 @@ if io then
             end
             newDepth = depth + 1
         end
-        DZDebugPrintToFile(whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={")
+        DZUtil.Debug.PrintToFile(whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={")
         for k, v in pairs(table) do
             if type(v) == "table" then
-                DZDebugPrintTableToFile(tostring(k), v, newDepth)
+                DZUtil.Debug.PrintTableToFile(tostring(k), v, newDepth)
             else
-                DZDebugPrintToFile(whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v))
+                DZUtil.Debug.PrintToFile(whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v))
             end
         end
-        DZDebugPrintToFile(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
+        DZUtil.Debug.PrintToFile(whiteSpaceBegin:sub(0, ((depth - 1) * 2) + 1) .. "}")
     end    
 end
-
 
 -- test weapon charge time
 -- OnWeaponCharging { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",

@@ -42,7 +42,9 @@ DarkZagreus.AvailableTraits = {} -- filled by other scripts
 DZUtil = {
     AI = {},
     Upgrade = {},
-    Trait = {}
+    Trait = {},
+    Record = {},
+    Debug = {}
 }
 
 SaveIgnores["DZUtil"] = true
