@@ -1,5 +1,6 @@
 ModUtil.Table.Merge(
     TraitData, {
+        -- SwordWeapon 2, Aspect of Nemesis
         DZSwordCriticalParryTrait = 
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -150,6 +151,131 @@ ModUtil.Table.Merge(
                     Key = "SwordPostParryCriticalAmount",
                     ExtractAs = "TooltipPercentChance",
                     Format = "Percent",
+                },
+            }
+        },
+        -- SwordWeapon 3, Aspect of Poseidon
+        DislodgeAmmoTrait =
+        {
+            Icon = "WeaponEnchantment_Sword02",
+            InheritFrom = { "WeaponEnchantmentTrait" },
+            RequiredWeapon = "DarkSword",
+            -- AddOutgoingDamageModifiers =
+            -- {
+            --     ValidWeaponMultiplier =
+            --     {
+            --         BaseValue = 1.10,
+            --         SourceIsMultiplier = true,
+            --     },
+            --     ValidWeapons = WeaponSets.HeroNonPhysicalWeapons,
+            --     ExtractValues =
+            --     {
+            --         {
+            --             Key = "ValidWeaponMultiplier",
+            --             ExtractAs = "TooltipDamage",
+            --             Format = "PercentDelta",
+            --         },
+            --     }
+            -- },
+            -- DislodgeAmmoProperties =
+            -- {
+            --     ValidWeapons = { "SwordParry" },
+            --     ForceMin = 300,
+            --     ForceMax = 420
+            -- },
+            -- DroppedAmmoForceMultiplier = 5,
+            WeaponBinks =
+            {
+                "ZagreusSword02_Bink",
+                "ZagreusSword02ReturnToIdle_Bink",
+                "ZagreusSword02DashAttack_Bink",
+                "ZagreusSword02Run_Bink",
+                "ZagreusSword02RunStop_Bink",
+                "ZagreusSword02Parry_Bink"
+            },
+            WeaponDataOverride =
+            {
+                DarkSword =
+                {
+                    WeaponBinks =
+                    {
+                        "ZagreusSword02_Bink",
+                        "ZagreusSword02ReturnToIdle_Bink",
+                        "ZagreusSword02DashAttack_Bink",
+                        "ZagreusSword02Run_Bink",
+                        "ZagreusSword02RunStop_Bink",
+                        "ZagreusSword02Parry_Bink"
+                    },
+                },
+                -- RangedWeapon =
+                -- {
+                --     NotReadyAmmoInEnemyText = "RetrieveAmmoOrDislodgeFromEnemy",
+                -- }
+            },
+            PropertyChanges =
+            {
+                {
+                    WeaponName = "DarkSword",
+                    WeaponProperty = "ChargeStartAnimation",
+                    ChangeValue = "DarkZagreusSwordAlt02Charge1",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSword",
+                    WeaponProperty = "FireGraphic",
+                    ChangeValue = "DarkZagreusSwordAlt02Attack1",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSword2",
+                    WeaponProperty = "ChargeStartAnimation",
+                    ChangeValue = "DarkZagreusSwordAlt02Charge2",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSword2",
+                    WeaponProperty = "FireGraphic",
+                    ChangeValue = "DarkZagreusSwordAlt02Attack2",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSword3",
+                    WeaponProperty = "ChargeStartAnimation",
+                    ChangeValue = "DarkZagreusSwordAlt02Charge3",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSword3",
+                    WeaponProperty = "FireGraphic",
+                    ChangeValue = "DarkZagreusSwordAlt02Attack3",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSwordParry",
+                    WeaponProperty = "FireGraphic",
+                    ChangeValue = "DarkZagreusSwordAlt02ParryFire",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSwordParry",
+                    WeaponProperty = "ChargeStartAnimation",
+                    ChangeValue = "DarkZagreusSwordAlt02ParryCharge",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponName = "DarkSwordDash",
+                    WeaponProperty = "FireGraphic",
+                    ChangeValue = "DarkZagreusSwordAlt02DashAttack",
+                    ChangeType = "Absolute",
+                    ExcludeLinked = true,
                 },
             }
         }
