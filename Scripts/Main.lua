@@ -1,6 +1,8 @@
 if not DarkZagreus.Config.Enabled then return end 
 DZDebugPrintString(string.format("Mod is loaded. Version: %s Data version: %s", DarkZagreus.Version, DarkZagreus.DataVersion))
 
+DarkZagreus.AvailableTraits = {}
+
 DZUtil = {
     Upgrade = {},
     Trait = {}

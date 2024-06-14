@@ -413,25 +413,6 @@
       ChargeStartAnimation = "DarkZagreusSwordParryCharge"
       FireGraphic = "DarkZagreusSwordParryFire"
       FireFx = "null"
-      // CancelMovement = false
-      // CanCancelDisables = true
-      // ChargeCancelMovement = false
-      // FullyAutomatic = false
-      // AutoLock = false
-      // AutoLockRange = 1000
-      // ShowFreeAimLine = false
-      // AimLineAnimation = "null"
-      // LockTriggerForCharge = true
-      // FireOnRelease = false
-      // ReloadOnRelease = true
-	  	// AllowExternalForceRelease = false
-	  	// IgnoreTriggerLockDuringCooldown = true
-      // TriggersStoredAmmoVulnerability = true
-	  	// AddControlOnFire = "SwordWeapon"
-	  	// RemoveControlOnFire = "SwordWeapon2"
-	  	// RemoveControlOnFire2 = "SwordWeapon3"
-	  	// SetCompleteAngleOnFire = true
-	  	// SetCompleteAngleOnCharge = true
       Effects = [
         {
           Trigger = "Fire"
@@ -556,6 +537,139 @@
           ClearOnAttack = false
         }
       ]
+    }
+    {
+      Name = "DarkSwordArthur1"
+      InheritFrom = "DarkSword3"
+      DamageLow = 60
+      DamageHigh = 60
+      ProjectileDefenseAngle = 40
+      ProjectileDefenseRadius = 420
+      ImpactVelocity = 0
+      ImpactVelocityCap = 0
+      Fuse = 0.26
+      Thing =
+      {
+        Points =
+        [
+          {
+            X = 450
+            Y = 70
+          }
+          {
+            X = 450
+            Y = -120
+          }
+          {
+            X = 0
+            Y = -120
+          }
+          {
+            X = 0
+            Y = 70
+          }
+        ]
+        Effects = [
+          {
+            Name = "OnHitStun"
+            Duration = 0.7
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = false // true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+          }
+        ]
+      }
+    }
+    {
+      Name = "DarkSwordArthur2"
+      InheritFrom = "DarkSword"
+      DamageLow = 80
+      DamageHigh = 80
+      ArcStart = 90
+      ArcEnd = -130
+      Speed = 2000
+      AttachToOwner = true
+      ImpactVelocity = 0
+      ImpactVelocityCap = 0
+      StartDelay = 0.03
+      ProjectileDefenseAngle = 40
+      ProjectileDefenseRadius = 420
+      Thing =
+      {
+        Points =
+        [
+          {
+            X = 0
+            Y = 0
+          }
+          {
+            X = 430
+            Y = 190
+          }
+          {
+            X = 430
+            Y = -190
+          }
+        ]
+        Effects = [
+          {
+            Name = "OnHitStun"
+            Duration = 0.7
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = false // true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+          }
+        ]
+      }
+    }
+    {
+      Name = "DarkSwordArthur3"
+      InheritFrom = "DarkSword"
+      DamageLow = 200
+      DamageHigh = 200
+      ArcStart = -110
+      ArcEnd = 130
+      Speed = 2400
+      AttachToOwner = true
+      StartDelay = 0.02
+      ProjectileDefenseAngle = 40
+      ProjectileDefenseRadius = 420
+      Thing =
+      {
+        Points =
+        [
+          {
+            X = 0
+            Y = 0
+          }
+          {
+            X = 430
+            Y = 110
+          }
+          {
+            X = 430
+            Y = -110
+          }
+        ]
+        Effects = [
+          {
+            Name = "OnHitStun"
+            Duration = 0.7
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = false // true
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+          }
+        ]
+      }
     }
   ]
 }
