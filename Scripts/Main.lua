@@ -28,9 +28,19 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
                 weaponData = prevWeaponData
             end
             
+            -- Note(Huiun): equip weapons first so that we can apply traits 
             DZWeaponData[weaponData.WeaponName].Equip(enemy)
             DZDebugPrintTable("DZ Weapon Equipped", weaponData)
 
+            DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = trait.Name, Rarity = trait.Rarity})}) 
+
+            -- Note(Huiun): apply weapon traits first
+            for index, trait in ipairs(prevTraits) do
+                if trait.Name and DarkZagreus.WeaponTraits[trait.Name] then
+                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = trait.Name, Rarity = trait.Rarity})}) 
+                end   
+            end
+            
             -- Note(Huiun): apply traits based on avilable traits
             for index, trait in ipairs(prevTraits) do
                 if trait.Name and DarkZagreus.AvailableTraits[trait.Name] then

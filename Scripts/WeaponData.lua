@@ -6,77 +6,49 @@ DZWeaponData =
 	{
 		Equip = function (enemy)
 			enemy.Weapons = { DarkSword = true, DarkSword2 = true, DarkSword3 = true, DarkRush = true, DarkSwordParry = true, DarkSwordDash = true}
-			enemy.PrimaryWeapon = "DarkSword"
-			enemy.DashWeapon = "DarkRush"
-			enemy.SpecialAttackWeapon = "DarkSwordParry"
-			enemy.DashAttackWeapon = "DarkSwordDash"
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword" })
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword2" })
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword3" })
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordParry" })
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordDash" })
-		end,
-		PostTraitApply = function (enemy)
+
+			enemy.DZActionConfig = {
+				PrimaryWeapon = "DarkSword",
+				DashWeapon = "DarkRush",
+				SpecialAttackWeapon = "DarkSwordParry",
+				DashAttackWeapon = "DarkSwordDash"
+			}
 		end
-		-- {
-		-- 	Equip = function (enemy)
-		-- 		enemy.Weapons = { DarkSword = true, DarkSword2 = true, DarkSword3 = true, DarkRush = true, DarkSwordParry = true, DarkSwordDash = true}
-        --         enemy.PrimaryWeapon = "DarkSword"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkSwordParry"
-        --         enemy.DashAttackWeapon = "DarkSwordDash"
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword2" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSword3" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordParry" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSwordDash" })
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkNemesisSword"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkNemesisSwordParry"
-        --         enemy.DashAttackWeapon = "DarkNemesisSwordDash"
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkPoseidonSword"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkPoseidonSwordParry"
-        --         enemy.DashAttackWeapon = "DarkPoseidonSwordDash"
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkArthurSword"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkArthurSwordParry"
-        --         enemy.DashAttackWeapon = "DarkArthurSwordDash"
-        --     end
-		-- }
 	},
 	SpearWeapon =
 	{
 		Equip = function (enemy)
 			enemy.Weapons = { 
 				DarkSpear = true, DarkSpear2 = true, DarkSpear3 = true, DarkRush = true, 
-				DarkSpearThrow = true, DarkSpearThrowReturn = true, DarkSpearThrowInvisibleReturn = true, DarkSpearDash = true }
-			enemy.PrimaryWeapon = "DarkSpear"
-			enemy.DashWeapon = "DarkRush"
-			enemy.SpecialAttackWeapon = "DarkSpearThrow"
-			enemy.SpecialAttackWeaponRush = "DarkSpearRush"
-			enemy.SpecialAttackWeaponReturn = "DarkSpearThrowReturn"
-			enemy.DashAttackWeapon = "DarkSpearDash"
-			enemy.ShouldReturnSpearAfterThrow = true;
-		end,
-		PostTraitApply = function (enemy)
-			local spearObstacle = 
-				GetProjectileProperty({ Id = enemy.ObjectId, WeaponName = "DarkSpear", Property = "SpawnOnDeath" }) or "DarkSpearReturnPoint"
-			enemy.SpearObstacle = spearObstacle
+				DarkSpearThrow = true, DarkSpearThrowReturn = true, 
+				DarkSpearThrowInvisibleReturn = true, DarkSpearDash = true, 
+				DarkSpearSpin = true, DarkSpearSpin2 = true, DarkSpearSpin3 = true }
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpear" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpear2" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpear3" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpearThrow" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpearThrowReturn" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpearDash" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpearSpin" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpearSpin2" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkSpearSpin3" })
+
+			enemy.DZActionConfig = {
+				PrimaryWeapon = "DarkSpear",
+				DashWeapon = "DarkRush",
+				SpecialAttackWeapon = "DarkSpearThrow",
+				SpecialAttackWeaponReturn = "DarkSpearThrowReturn",
+				DashAttackWeapon = "DarkSpearDash",
+				ShouldReturnSpearAfterThrow = true,
+				SpearObstacle = "DarkSpearReturnPoint"
+			}
 		end
 		-- {
 		-- 	Equip = function (enemy)

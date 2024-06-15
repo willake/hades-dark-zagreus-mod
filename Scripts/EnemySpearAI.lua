@@ -242,24 +242,26 @@ function DZAISelectSpearWeapon(enemy, actionData)
     enemy.DZ.TempAction = 0
     enemy.DZ.FireTowardTarget = true
     local lastAction = DZAIGetLastAction(enemy)
+    local actionConfig = enemy.DZActionConfig
 
     -- use special attack
     if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
-        if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
+        if  actionConfig.ShouldReturnSpearAfterThrow and
+            TableLength(GetIdsByType({ Name = actionConfig.SpearObstacle })) > 0 then
 
-            if enemy.SpecialAttackWeaponRush then
-                enemy.WeaponName = enemy.SpecialAttackWeaponRush
+            if actionConfig.ShouldRushToSpear and actionConfig.SpecialAttackWeaponRush then
+                enemy.WeaponName = actionConfig.SpecialAttackWeaponRush
                 enemy.ChainedWeapon = nil
                 return enemy.WeaponName        
             end
 
-            enemy.WeaponName = enemy.SpecialAttackWeaponReturn
+            enemy.WeaponName = actionConfig.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
-        enemy.WeaponName = enemy.SpecialAttackWeapon
+        enemy.WeaponName = actionConfig.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
@@ -267,14 +269,14 @@ function DZAISelectSpearWeapon(enemy, actionData)
     -- use dash
     if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
-        enemy.WeaponName = enemy.DashWeapon
+        enemy.WeaponName = actionConfig.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
-        enemy.WeaponName = enemy.DashWeapon
+        enemy.WeaponName = actionConfig.DashWeapon
         enemy.ChainedWeapon = nil
         enemy.DZ.FireTowardTarget = false
         return enemy.WeaponName
@@ -285,7 +287,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
         if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
             enemy.DZ.TempAction = 2
-            enemy.WeaponName = enemy.SpecialAttackWeaponReturn
+            enemy.WeaponName = actionConfig.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
@@ -294,13 +296,13 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
         -- if the last action is dash, do dash attack
         if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-            enemy.WeaponName = enemy.DashAttackWeapon
+            enemy.WeaponName = actionConfig.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.WeaponName = actionConfig.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
@@ -309,7 +311,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
     if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
         enemy.DZ.TempAction = 2
-        enemy.WeaponName = enemy.SpecialAttackWeaponReturn
+        enemy.WeaponName = actionConfig.SpecialAttackWeaponReturn
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
@@ -318,7 +320,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
     -- if the last action is dash, do dash attack
     if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-        enemy.WeaponName = enemy.DashAttackWeapon
+        enemy.WeaponName = actionConfig.DashAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
@@ -333,7 +335,7 @@ function DZAISelectSpearWeapon(enemy, actionData)
     end
 
     -- or just do a regular attack
-    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.WeaponName = actionConfig.PrimaryWeapon
     enemy.ChainedWeapon = nil
     return enemy.WeaponName
 end

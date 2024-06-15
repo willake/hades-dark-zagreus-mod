@@ -36,7 +36,8 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
 DarkZagreus.RecordDirectoryName = "DZRecords"
 DarkZagreus.LoadRecordFileName = "DZRecord"
 
-DarkZagreus.AvailableTraits = {} -- filled by other scripts
+DarkZagreus.AvailableTraits = {} -- filled by other scripts, containing traits that implemented
+DarkZagreus.WeaponTraits = {} -- traits for weapon upgrades, should be apllied first so distinguished from other traits
 
 -- setup utility functions
 DZUtil = {

@@ -33,6 +33,11 @@ ModUtil.Table.Merge(
                     MaxMultiplier = 3.0,
                 },
             },
+            DZActionConfig = {
+                ShouldRushToSpear = true,
+                SpecialAttackWeaponRush = "DarkSpearRush",
+                SpearObstacle = "DarkSpearReturnPointAlt01"
+            },
             PreEquipWeapons = { "DarkSpearRush", "DarkSpearThrowInvisibleReturn", },
             WeaponBinks =
             {
@@ -384,6 +389,9 @@ ModUtil.Table.Merge(
                     MaxMultiplier = 5,
                 },
             },
+            DZActionConfig = {
+                SpearObstacle = "DarkSpearReturnPointAlt02"
+            },
             WeaponBinks =
             {
                 "ZagreusSpear02Run_Bink",
@@ -637,6 +645,9 @@ ModUtil.Table.Merge(
             },
             RequiredWeapons = {"DarkSpear", "DarkSpearThrow",},
             RequiredFalseTraits = { "DZSpearAutoAttack", "DZSpearSpinAura" },
+            DZActionConfig = {
+                ShouldReturnSpearAfterThrow = false
+            },
             WeaponBinks =
             {
                 "ZagreusSpear03Run_Bink",
@@ -1443,20 +1454,13 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-                {
-                    WeaponName = "DarkSpearDash",
-                    WeaponProperty = "SwapOnFire",
-                    ChangeValue = "DarkSpear",
-                    ChangeType = "Absolute",
-                    ExcludeLinked = true,
-                },
             },
         },
     }
 )
 
 ModUtil.Table.Merge(
-    DarkZagreus.AvailableTraits, {
+    DarkZagreus.WeaponTraits, {
         "DZSpearTeleportTrait",
         "DZSpearWeaveTrait",
         "DZSpearSpinTravel"

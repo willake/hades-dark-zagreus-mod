@@ -995,7 +995,7 @@ ModUtil.Table.Merge(
 )
 
 ModUtil.Table.Merge(
-    DarkZagreus.AvailableTraits, {
+    DarkZagreus.WeaponTraits, {
         "DZSwordCriticalParryTrait",
         "DZDislodgeAmmoTrait",
         "DZSwordConsecrationTrait"
