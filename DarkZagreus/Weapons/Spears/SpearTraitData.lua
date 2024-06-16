@@ -68,6 +68,20 @@ ModUtil.Table.Merge(
                 },
                 DarkSpearThrow =
                 {
+                    AIData =
+                    {
+                        AITrackTargetDuringCharge = true,
+                        IsRangeBasedOnCharge = true,
+                        MinChargeTime = 0.04,
+                        MaxChargeTime = 0.12,
+                        Range = 264,
+                        ChargeRangeMultiplier = 3.34,
+                        PreFireDuration = 0.04,
+                        PreFireFx = "SpearChargeThrowTrait",
+                        PreFireAnimation = "DarkZagreusSpearAlt01ThrowCharge",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt01ThrowFireReturnToIdle",
+                        FireAnimation = "DarkZagreusSpearAlt01ThrowFire"
+                    },
                     Sounds =
                     {
                         ChargeSounds =
@@ -131,7 +145,30 @@ ModUtil.Table.Merge(
                         },
                     },
                 },
-
+                DarkSpearSpin = {
+                    AIData =
+                    {
+                        PreFireAnimation = "DarkZagreusSpearAlt01SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt01SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt01SpinAttack"
+                    }
+                },
+                DarkSpearSpin2 = {
+                    AIData =
+                    {
+                        PreFireAnimation = "DarkZagreusSpearAlt01SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt01SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt01SpinAttack"
+                    }
+                },
+                DarkSpearSpin3 = {
+                    AIData =
+                    {
+                        PreFireAnimation = "DarkZagreusSpearAlt01SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt01SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt01SpinAttack"
+                    }
+                },
             },
             -- OnWeaponFiredFunctions =
             -- {
@@ -144,31 +181,10 @@ ModUtil.Table.Merge(
                 {
                     WeaponNames = { "DarkSpearThrow" },
                     WeaponProperty = "ChargeTime",
-                    ChangeValue = 0.07,
+                    ChangeValue = 0.00, -- 0.07
                     ChangeType = "Add",
                     ExcludeLinked = true,
                 },
-                -- {
-                --     WeaponNames = { "DarkSpearThrow" },
-                --     WeaponProperty = "MinChargeToFire",
-                --     ChangeValue = 0.04,
-                --     ChangeType = "Absolute",
-                --     ExcludeLinked = true,
-                -- },
-                -- {
-                --     WeaponNames = { "DarkSpearThrow" },
-                --     WeaponProperty = "ChargeRangeMultiplier",
-                --     ChangeValue = 3.34,
-                --     ChangeType = "Absolute",
-                --     ExcludeLinked = true,
-                -- },
-                -- {
-                --     WeaponNames = { "DarkSpearThrow" },
-                --     ProjectileProperty = "Range",
-                --     ChangeValue = 0.3,
-                --     ChangeType = "Multiply",
-                --     ExcludeLinked = true,
-                -- },
                 {
                     WeaponNames = { "DarkSpearThrow" },
                     WeaponProperty = "ChargeStartFx",
@@ -238,21 +254,21 @@ ModUtil.Table.Merge(
                 {
                     WeaponName = "DarkSpearThrow",
                     WeaponProperty = "ChargeStartAnimation",
-                    ChangeValue = "DarkZagreusSpearAlt01ThrowCharge",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponName = "DarkSpearThrow",
                     WeaponProperty = "ChargeCancelGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt01ThrowFireReturnToIdle",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponName = "DarkSpearThrow",
                     WeaponProperty = "FireGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt01ThrowFire",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
@@ -336,25 +352,25 @@ ModUtil.Table.Merge(
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "ChargeStartAnimation",
-                    ChangeValue = "DarkZagreusSpearAlt01SpinStart",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "ChargeCancelGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt01SpinStartChargeCancel",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "FireGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt01SpinAttack",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-                }
+            }
         },
         -- SpearWeapon 3, Aspect of Hades
         DZSpearWeaveTrait =
@@ -407,6 +423,14 @@ ModUtil.Table.Merge(
             {
                 DarkSpear =
                 {
+                    AIData = {
+                        PostFireChargeStages = 
+                        {
+                            { ChargeWeapon = "DarkSpearSpin2", Threshold = 0.30 }, -- 0.75
+                            { ChargeWeapon = "DarkSpearSpin3", Threshold = 1.05 },
+                        },
+                        MaxChargeTime = 1.15,
+                    },
                     WeaponBinks =
                     {
                         "ZagreusSpear02Run_Bink",
@@ -419,6 +443,63 @@ ModUtil.Table.Merge(
                         "ZagreusSpear02ThrowReceive_Bink"
                     }
                 },
+                DarkSpear2 = 
+                {
+                    AIData = {
+                        PostFireChargeStages = 
+                        {
+                            { ChargeWeapon = "DarkSpearSpin2", Threshold = 0.30 }, -- 0.75
+                            { ChargeWeapon = "DarkSpearSpin3", Threshold = 1.05 },
+                        },
+                        MaxChargeTime = 1.15,
+                    },
+                },
+                DarkSpear3 = 
+                {
+                    AIData = {
+                        PostFireChargeStages = 
+                        {
+                            { ChargeWeapon = "DarkSpearSpin2", Threshold = 0.30 }, -- 0.75
+                            { ChargeWeapon = "DarkSpearSpin3", Threshold = 1.05 },
+                        },
+                        MaxChargeTime = 1.15,
+                    },
+                },
+                DarkSpearDash = 
+                {
+                    AIData = {
+                        PostFireChargeStages = 
+                        {
+                            { ChargeWeapon = "DarkSpearSpin2", Threshold = 0.30 }, -- 0.75
+                            { ChargeWeapon = "DarkSpearSpin3", Threshold = 1.05 },
+                        },
+                        MaxChargeTime = 1.15,
+                    },
+                },
+                DarkSpearSpin = 
+                {
+                    AIData = {
+                        PreFireAnimation = "DarkZagreusSpearAlt02SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt02SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt02SpinAttack",
+                    }
+                },
+                DarkSpearSpin2 = 
+                {
+                    AIData = {
+                        PreFireAnimation = "DarkZagreusSpearAlt02SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt02SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt02SpinAttack",
+                    }
+                },
+                DarkSpearSpin3 = 
+                {
+                    AIData = {
+                        PreFireAnimation = "DarkZagreusSpearAlt02SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt02SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt02SpinAttack",
+                    }
+                }
             },
             PropertyChanges =
             {
@@ -579,21 +660,21 @@ ModUtil.Table.Merge(
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "ChargeStartAnimation",
-                    ChangeValue = "DarkZagreusSpearAlt02SpinStart",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "ChargeCancelGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt02SpinStartChargeCancel",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "FireGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt02SpinAttack",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
@@ -711,6 +792,10 @@ ModUtil.Table.Merge(
 
                 DarkSpear2 =
                 {	
+                    AIData = {
+                        -- PreFireDuration = 0.32,
+                        FireDuration = 0.53, -- 0.32 + 0.21
+                    },
                     Sounds =
                     {
                         FireSounds =
@@ -736,6 +821,10 @@ ModUtil.Table.Merge(
 
                 DarkSpear3 =
                 {
+                    AIData = {
+                        -- PreFireDuration = 0.52,
+			            FireDuration = 0.82, -- 0.52 + 0.3
+                    },
                     Sounds =
                     {
                         FireSounds =
@@ -761,6 +850,14 @@ ModUtil.Table.Merge(
 
                 DarkSpearSpin =
                 {
+                    AIData = 
+                    {
+                        PreFireAnimation = "DarkZagreusSpearAlt03SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt03SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt03SpinAttack",
+                        WaitUntilProjectileDeath = "DarkGuanYuSpearSpin"
+                    },
+
                     HitSimSlowParameters = { },
 
                     Sounds =
@@ -801,6 +898,14 @@ ModUtil.Table.Merge(
 
                 DarkSpearSpin2 =
                 {
+                    AIData = 
+                    {
+                        PreFireAnimation = "DarkZagreusSpearAlt03SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt03SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt03SpinAttack",
+                        WaitUntilProjectileDeath = "DarkGuanYuSpearSpin"
+                    },
+
                     HitSimSlowParameters = { },
 
                     Sounds =
@@ -839,6 +944,14 @@ ModUtil.Table.Merge(
 
                 DarkSpearSpin3 =
                 {
+                    AIData = 
+                    {
+                        PreFireAnimation = "DarkZagreusSpearAlt03SpinStart",
+                        PreFireCancelAnimation = "DarkZagreusSpearAlt03SpinStartChargeCancel",
+                        FireAnimation = "DarkZagreusSpearAlt03SpinAttack",
+                        WaitUntilProjectileDeath = "DarkGuanYuSpearSpin"
+                    },
+
                     HitSimSlowParameters = { },
 
                     Sounds =
@@ -878,7 +991,11 @@ ModUtil.Table.Merge(
 
                 DarkSpearThrow =
                 {
-
+                    AIData = 
+                    {
+                        -- PreFireDuration = 0.28,
+			            FireDuration = 0.56, -- 0.28 + 0.28
+                    },
                     Sounds =
                     {
                         FireSounds =
@@ -1151,7 +1268,7 @@ ModUtil.Table.Merge(
                     ExcludeLinked = true,
                 },
                 {
-                    TraitName = "SpearWeaveTrait",
+                    TraitName = "DZSpearWeaveTrait",
                     WeaponName = "DarkSpearThrow",
                     ProjectileProperty = "SpawnOnDeath",
                     ChangeValue = "null",
@@ -1159,7 +1276,7 @@ ModUtil.Table.Merge(
                     ExcludeLinked = true,
                 },
                 {
-                    TraitName = "SpearTeleportTrait",
+                    TraitName = "DZSpearTeleportTrait",
                     WeaponName = "DarkSpearThrow",
                     ProjectileProperty = "SpawnOnDeath",
                     ChangeValue = "null",
@@ -1311,21 +1428,21 @@ ModUtil.Table.Merge(
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "ChargeStartAnimation",
-                    ChangeValue = "DarkZagreusSpearAlt03SpinStart",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "ChargeCancelGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt03SpinStartChargeCancel",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
                 {
                     WeaponNames = { "DarkSpearSpin","DarkSpearSpin2","DarkSpearSpin3" },
                     WeaponProperty = "FireGraphic",
-                    ChangeValue = "DarkZagreusSpearAlt03SpinAttack",
+                    ChangeValue = "null",
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },

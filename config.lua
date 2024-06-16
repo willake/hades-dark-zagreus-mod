@@ -5,7 +5,7 @@ DarkZagreus.Config = {
 }
 
 DarkZagreus.Version = "v1.2.1"
-DarkZagreus.DataVersion = "v6" -- for training data, when the data scheme chages, the version increases
+DarkZagreus.DataVersion = "v7" -- for training data, when the data scheme chages, the version increases
 
 -- Config
 DarkZagreus.EnablePlayerLog = false
