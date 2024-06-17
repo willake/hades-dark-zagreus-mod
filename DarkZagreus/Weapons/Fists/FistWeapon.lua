@@ -160,7 +160,7 @@ WeaponData.DarkFistSpecial =
     StartingWeapon = false,
     -- DamageNumberGenusName = "FistWeaponSpecial",
     -- DashWeapon = "FistWeaponSpecialDash",
-    --ComboPoints = 1,
+    ComboPoints = 1,
     -- OnFiredFunctionName = "CheckComboPowerReset",
     CauseImpactReaction = true,
     ImpactReactionHitsOverride = 2,
@@ -208,7 +208,7 @@ WeaponData.DarkFistSpecialDash =
     StartingWeapon = false,
     CauseImpactReaction = true,
     -- DamageNumberGenusName = "FistWeaponSpecial",
-    --ComboPoints = 1,
+    ComboPoints = 1,
     -- OnFiredFunctionName = "CheckComboPowerReset",
 
     AIData =
