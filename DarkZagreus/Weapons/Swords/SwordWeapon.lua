@@ -252,6 +252,6 @@ WeaponData.DarkConsecrationField =
         FireOnSelf = true
     },
 
-    OnFiredFunctionName = "DisableTraps",
-    OnFiredFunctionArgs = { Range = 450, Duration = 8 },
+    -- OnFiredFunctionName = "DisableTraps",
+    -- OnFiredFunctionArgs = { Range = 450, Duration = 8 },
 }

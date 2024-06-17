@@ -161,22 +161,22 @@
             }
             Effects = [
                 {
-                Name = "RushGrip"
-                Type = "GRIP"
-                Duration = 0.35
-                Modifier = 0.1
-                HaltOnEnd = true
-                Active = false
+                    Name = "RushGrip"
+                    Type = "GRIP"
+                    Duration = 0.35
+                    Modifier = 0.1
+                    HaltOnEnd = true
+                    Active = false
                 }
                 {
-                Name = "OnHitStun"
-                Duration = 0.5
-                DisableMove = true
-                DisableRotate = true
-                DisableAttack = true
-                Active = false // true
-                CanAffectInvulnerable = false
-                FrontFx = "null"
+                    Name = "OnHitStun"
+                    Duration = 0.5
+                    DisableMove = true
+                    DisableRotate = true
+                    DisableAttack = true
+                    Active = false // true
+                    CanAffectInvulnerable = false
+                    FrontFx = "null"
                 }
             ]
         }
