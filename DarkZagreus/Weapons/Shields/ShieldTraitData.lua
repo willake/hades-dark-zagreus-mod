@@ -1,6 +1,58 @@
 ModUtil.Table.Merge(
     TraitData, {
-        -- DarkShield 2, Aspect of Chaos
+        -- ShieldWeapon 1, Aspect of Zagreus
+        DZShieldBaseUpgradeTrait =
+        {
+            InheritFrom = { "WeaponEnchantmentTrait" },
+            RarityLevels =
+            {
+                Common =
+                {
+                    MinMultiplier = 1.0,
+                    MaxMultiplier = 1.0,
+                },
+                Rare =
+                {
+                    MinMultiplier = 2.0,
+                    MaxMultiplier = 2.0,
+                },
+                Epic =
+                {
+                    MinMultiplier = 3.0,
+                    MaxMultiplier = 3.0,
+                },
+                Heroic =
+                {
+                    MinMultiplier = 4.0,
+                    MaxMultiplier = 4.0,
+                },
+                Legendary =
+                {
+                    MinMultiplier = 5.0,
+                    MaxMultiplier = 5.0,
+                },
+            },
+            PropertyChanges =
+            {
+                {
+                    WeaponNames = { "DarkShield", "DarkShieldDash" },
+                    ProjectileProperty = "DamageLow",
+                    BaseValue = 3,
+                    ChangeType = "Add",
+                    ExcludeLinked = true,
+                    ExtractValue =
+                    {
+                        ExtractAs = "TooltipDamage",
+                    },
+                },
+                {
+                    WeaponNames = { "DarkShield", "DarkShieldDash" },
+                    ProjectileProperty = "DamageHigh",
+                    DeriveValueFrom = "DamageLow",
+                },
+            },
+        },
+        -- ShieldWeapon 2, Aspect of Chaos
         DZShieldRushBonusProjectileTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -134,7 +186,7 @@ ModUtil.Table.Merge(
                 },
             }
         },
-        -- DarkShield 3, Aspect of Zeus
+        -- ShieldWeapon 3, Aspect of Zeus
         DZShieldTwoShieldTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -494,7 +546,7 @@ ModUtil.Table.Merge(
                 },
             },
         },
-        -- DarkShield 4, Aspect of Beowulf
+        -- ShieldWeapon 4, Aspect of Beowulf
         -- this weapon also changes the behavior of ranged weapon (red crystal)
         -- but I can't intergate ranged weapon with this mod, so I ignore all of the related actions
         DZShieldLoadAmmoTrait =
@@ -1522,8 +1574,9 @@ ModUtil.Table.Merge(
 
 ModUtil.Table.Merge(
     DarkZagreus.WeaponTraits, {
-        "DZShieldRushBonusProjectileTrait",
-        "DZShieldTwoShieldTrait",
-        "DZShieldLoadAmmoTrait"
+        ShieldBaseUpgradeTrait = true,
+        ShieldRushBonusProjectileTrait = true,
+        ShieldTwoShieldTrait = true,
+        ShieldLoadAmmoTrait = true
     }
 )

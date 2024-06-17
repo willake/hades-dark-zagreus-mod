@@ -1,6 +1,6 @@
 ModUtil.Table.Merge(
     TraitData, {
-        -- DarkBow 1, Aspect of Zagreus
+        -- BowWeapon 1, Aspect of Zagreus
         DZBowBaseUpgradeTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -51,7 +51,7 @@ ModUtil.Table.Merge(
 
             },
         },
-        -- DarkBow 2, Aspect of Chiron
+        -- BowWeapon 2, Aspect of Chiron
         DZBowMarkHomingTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -287,7 +287,7 @@ ModUtil.Table.Merge(
                 }
             }
         },
-        -- DarkBow 3, Aspect of Hera
+        -- BowWeapon 3, Aspect of Hera
         DZBowLoadAmmoTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -559,7 +559,7 @@ ModUtil.Table.Merge(
                 },
             }
         },
-        -- DarkBow 4, Aspect of Rama
+        -- BowWeapon 4, Aspect of Rama
         DZBowBondTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -1148,9 +1148,9 @@ ModUtil.Table.Merge(
 
 ModUtil.Table.Merge(
     DarkZagreus.WeaponTraits, {
-        "DZBowBaseUpgradeTrait",
-        "DZBowMarkHomingTrait",
-        "DZBowLoadAmmoTrait",
-        "DZBowBondTrait"
+        BowBaseUpgradeTrait = true,
+        BowMarkHomingTrait = true,
+        BowLoadAmmoTrait = true,
+        BowBondTrait = true
     }
 )

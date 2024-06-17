@@ -1,5 +1,115 @@
 ModUtil.Table.Merge(
     TraitData, {
+        -- SwordWeapon 1, Aspect of Zagreus
+        DZSwordBaseUpgradeTrait =
+        {
+            InheritFrom = { "WeaponEnchantmentTrait" },
+            RarityLevels =
+            {
+                Common =
+                {
+                    MinMultiplier = 1,
+                    MaxMultiplier = 1,
+                },
+                Rare =
+                {
+                    MinMultiplier = 2,
+                    MaxMultiplier = 2,
+                },
+                Epic =
+                {
+                    MinMultiplier = 3,
+                    MaxMultiplier = 3,
+                },
+                Heroic =
+                {
+                    MinMultiplier = 4,
+                    MaxMultiplier = 4,
+                },
+                Legendary =
+                {
+                    MinMultiplier = 5.0,
+                    MaxMultiplier = 5.0,
+                },
+            },
+            PropertyChanges =
+            {
+                {
+                    WeaponNames = { "DarkSword", "DarkSword2", "DarkSword3" },
+                    WeaponProperty = "ChargeTime",
+                    BaseValue = 0.97,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponNames = { "DarkSword" },
+                    EffectName = "SwordDisableHeavy",
+                    EffectProperty = "Duration",
+                    BaseValue = 0.97,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+
+                {
+                    WeaponNames = { "DarkSword" },
+                    EffectName = "SwordDisableCancelableAndLockTrigger",
+                    EffectProperty = "Duration",
+                    BaseValue = 0.97,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponNames = { "DarkSword2" },
+                    EffectName = "SwordDisableCancelableAndLockTrigger2",
+                    EffectProperty = "Duration",
+                    BaseValue = 0.97,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponNames = { "DarkSword3" },
+                    EffectName = "SwordDisable3",
+                    EffectProperty = "Duration",
+                    BaseValue = 0.97,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponNames = { "DarkSword3" },
+                    EffectName = "SwordDisableAttackCancelable3",
+                    EffectProperty = "Duration",
+                    BaseValue = 0.97,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+                {
+                    UnitProperty = "Speed",
+                    BaseValue = 1.03,
+                    ChangeType = "Multiply",
+                    SourceIsMultiplier = true,
+                },
+            },
+            ExtractEntry =
+            {
+                BaseValue = 0.97,
+                SourceIsMultiplier = true,
+            },
+            ExtractValues =
+            {
+                {
+                    Key = "ExtractEntry",
+                    DecimalPlaces = 2,
+                    Format = "NegativePercentDelta",
+                    ExtractAs = "TooltipSpeed",
+                },
+            }
+        },
         -- SwordWeapon 2, Aspect of Nemesis
         DZSwordCriticalParryTrait = 
         {
@@ -996,8 +1106,9 @@ ModUtil.Table.Merge(
 
 ModUtil.Table.Merge(
     DarkZagreus.WeaponTraits, {
-        "DZSwordCriticalParryTrait",
-        "DZDislodgeAmmoTrait",
-        "DZSwordConsecrationTrait"
+        SwordBaseUpgradeTrait = true,
+        SwordCriticalParryTrait = true,
+        DislodgeAmmoTrait = true,
+        SwordConsecrationTrait = true
     }
 )

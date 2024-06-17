@@ -1,5 +1,82 @@
 ModUtil.Table.Merge(
     TraitData, {
+        -- SpearWeapon 1, Aspect of Zagreus
+        DZSpearBaseUpgradeTrait =
+        {
+            InheritFrom = { "WeaponEnchantmentTrait" },
+            RarityLevels =
+            {
+                Common =
+                {
+                    MinMultiplier = 1.00,
+                    MaxMultiplier = 1.00,
+                },
+                Rare =
+                {
+                    MinMultiplier = 1.375,
+                    MaxMultiplier = 1.375,
+                },
+                Epic =
+                {
+                    MinMultiplier = 1.75,
+                    MaxMultiplier = 1.75,
+                },
+                Heroic =
+                {
+                    MinMultiplier = 2.125,
+                    MaxMultiplier = 2.125,
+                },
+                Legendary =
+                {
+                    MinMultiplier = 2.5,
+                    MaxMultiplier = 2.5,
+                },
+            },
+            AddOutgoingDamageModifiers =
+            {
+                ValidWeaponMultiplier =
+                {
+                    BaseValue = 1.1,
+                    SourceIsMultiplier = true,
+                },
+                ValidWeapons = { "DarkSpearThrowReturn", "DarkSpearThrow" },
+                ExtractValues =
+                {
+                    {
+                        Key = "ValidWeaponMultiplier",
+                        ExtractAs = "TooltipDamage",
+                        Format = "PercentDelta",
+                    },
+                }
+            },
+            PropertyChanges =
+            {
+                {
+                    WeaponNames = { "DarkSpearThrowReturn", "DarkSpearThrow" },
+                    ProjectileProperty = "Range",
+                    BaseValue = 1.1,
+                    SourceIsMultiplier = true,
+                    ChangeType = "MultiplyBase",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponNames = { "DarkSpearThrowReturn", "DarkSpearThrow" },
+                    ProjectileProperty = "Speed",
+                    BaseValue = 1.1,
+                    SourceIsMultiplier = true,
+                    ChangeType = "MultiplyBase",
+                    ExcludeLinked = true,
+                },
+                {
+                    WeaponNames = { "DarkSpearThrowReturn", "DarkSpearThrow" },
+                    WeaponProperty = "ChargeTime",
+                    BaseValue = 0.9,
+                    SourceIsMultiplier = true,
+                    ChangeType = "Multiply",
+                    ExcludeLinked = true,
+                },
+            },
+        },
         -- SpearWeapon 2, Aspect of Achilles
         DZSpearTeleportTrait =
         {
@@ -1578,8 +1655,9 @@ ModUtil.Table.Merge(
 
 ModUtil.Table.Merge(
     DarkZagreus.WeaponTraits, {
-        "DZSpearTeleportTrait",
-        "DZSpearWeaveTrait",
-        "DZSpearSpinTravel"
+        SpearBaseUpgradeTrait = true,
+        SpearTeleportTrait = true,
+        SpearWeaveTrait = true,
+        SpearSpinTravel = true
     }
 )

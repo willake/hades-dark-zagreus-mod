@@ -1,6 +1,53 @@
 ModUtil.Table.Merge(
     TraitData, {
-        -- DarkFist 2, Aspect of Talos 
+        -- FistWeapon 1, Aspect of Zagreus
+        DZFistBaseUpgradeTrait =
+        {
+            InheritFrom = { "WeaponEnchantmentTrait" },
+            RarityLevels =
+            {
+                Common =
+                {
+                    MinMultiplier = 1.000,
+                    MaxMultiplier = 1.000,
+                },
+                Rare =
+                {
+                    MinMultiplier = 1.50,
+                    MaxMultiplier = 1.50,
+                },
+                Epic =
+                {
+                    MinMultiplier = 2.0,
+                    MaxMultiplier = 2.0,
+                },
+                Heroic =
+                {
+                    MinMultiplier = 2.5,
+                    MaxMultiplier = 2.5,
+                },
+                Legendary =
+                {
+                    MinMultiplier = 3.0,
+                    MaxMultiplier = 3.0,
+                },
+            },
+            PropertyChanges =
+            {	
+                {
+                    LifeProperty = "DodgeChance",
+                    BaseValue = 0.05,
+                    ChangeType = "Add",
+                    DataValue = false,
+                    ExtractValue =
+                    {
+                        ExtractAs = "TooltipChance",
+                        Format = "Percent"
+                    },
+                },
+            }
+        },
+        -- FistWeapon 2, Aspect of Talos 
         DZFistVacuumTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -369,7 +416,7 @@ ModUtil.Table.Merge(
                 },
             },
         },
-        -- DarkFist 3, Aspect of Demeter
+        -- FistWeapon 3, Aspect of Demeter
         DZFistWeaveTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -645,7 +692,7 @@ ModUtil.Table.Merge(
                 },
             },
         },
-        -- DarkFist 4, Aspect of Gilgamesh
+        -- FistWeapon 4, Aspect of Gilgamesh
         DZFistDetonateTrait = 
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -1731,8 +1778,9 @@ ModUtil.Table.Merge(
 
 ModUtil.Table.Merge(
     DarkZagreus.WeaponTraits, {
-        "DZFistVacuumTrait",
-        "DZFistWeaveTrait",
-        "DZFistDetonateTrait"
+        FistBaseUpgradeTrait = true,
+        FistVacuumTrait = true,
+        FistWeaveTrait = true,
+        FistDetonateTrait = true
     }
 )

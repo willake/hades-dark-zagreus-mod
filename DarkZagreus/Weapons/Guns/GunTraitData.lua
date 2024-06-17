@@ -1,6 +1,54 @@
 ModUtil.Table.Merge(
     TraitData, {
-        -- DarkGun 2, Aspect of Eris
+        -- GunWeapon 1, Aspect of Zagreus
+        DZGunBaseUpgradeTrait =
+        {
+            InheritFrom = { "WeaponEnchantmentTrait" },
+            RarityLevels =
+            {
+                Common =
+                {
+                    MinMultiplier = 1.0,
+                    MaxMultiplier = 1.0,
+                },
+                Rare =
+                {
+                    MinMultiplier = 1.5,
+                    MaxMultiplier = 1.5,
+                },
+                Epic =
+                {
+                    MinMultiplier = 2.0,
+                    MaxMultiplier = 2.0,
+                },
+                Heroic =
+                {
+                    MinMultiplier = 2.5,
+                    MaxMultiplier = 2.5,
+                },
+                Legendary =
+                {
+                    MinMultiplier = 3.0,
+                    MaxMultiplier = 3.0,
+                },
+            },
+            PropertyChanges =
+            {
+                {
+                    WeaponNames = { "DarkGun" },
+                    WeaponProperty = "MaxAmmo",
+                    BaseValue = 4,
+                    AsInt = true,
+                    ChangeType = "Add",
+                    ExtractValue =
+                    {
+                        ExtractAs = "TooltipAmmo",
+                        --Format = "PercentDelta",
+                    }
+                },
+            },
+        },
+        -- GunWeapon 2, Aspect of Eris
         DZGunGrenadeSelfEmpowerTrait =
         {
             RequiredWeapon = "DarkGun",
@@ -135,7 +183,7 @@ ModUtil.Table.Merge(
                 },
             },
         },
-        -- DarkGun 3, Aspect of Hestia
+        -- GunWeapon 3, Aspect of Hestia
         DZGunManualReloadTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -274,7 +322,7 @@ ModUtil.Table.Merge(
                 },
             },
         },
-        -- DarkGun 4, Aspect of Lucifer
+        -- GunWeapon 4, Aspect of Lucifer
         DZGunLoadedGrenadeTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
@@ -939,8 +987,9 @@ ModUtil.Table.Merge(
 
 ModUtil.Table.Merge(
     DarkZagreus.WeaponTraits, {
-        "DZGunGrenadeSelfEmpowerTrait",
-        "DZGunManualReloadTrait",
-        "DZGunLoadedGrenadeTrait"
+        GunBaseUpgradeTrait = true,
+        GunGrenadeSelfEmpowerTrait = true,
+        GunManualReloadTrait = true,
+        GunLoadedGrenadeTrait = true
     }
 )
