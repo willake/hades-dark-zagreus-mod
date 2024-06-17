@@ -100,17 +100,25 @@ DZWeaponData =
 	GunWeapon =
 	{
 		Equip = function (enemy)
-			enemy.PrimaryWeapon = "DarkGun"
-			enemy.DashWeapon = "DarkRush"
-			enemy.SpecialAttackWeapon = "DarkGunGrenadeToss"
-			enemy.DashAttackWeapon = "DarkGunDash"
-			enemy.ReloadWeapon = "DarkManualReload"
-			enemy.MaxAmmo = 12
+			enemy.Weapons = { 
+				DarkGun = true, DarkGunDash = true, DarkRush = true, 
+				DarkGunGrenadeToss = true, DarkManualReload = true, DarkSniperGun = true, 
+				DarkSniperGunDash = true }
+
+			enemy.DZActionConfig = {
+				PrimaryWeapon = "DarkGun",
+				DashWeapon = "DarkRush",
+				SpecialAttackWeapon = "DarkGunGrenadeToss",
+				DashAttackWeapon = "DarkGunDash",
+				ReloadWeapon = "DarkManualReload",
+				MaxAmmo = 12
+			}
+
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGun" })
 			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGunDash" })
-		end,
-		PostTraitApply = function (enemy)
-			
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGunGrenadeToss" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkManualReload" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
 		end
 		-- {
 		-- 	Equip = function (enemy)

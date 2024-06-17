@@ -286,5 +286,24 @@
         {
             Name = "DarkManualReload"
         }
+        {
+            Name = "DZManualReloadEffectApplicator"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "null"
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+            Effect = {
+                Name = "DZManualReloadBonus"
+                Duration = 1000.0
+                CanAffectInvulnerable = true
+                FrontFx = "GunManualReloadTraitFx"
+                FlashFrontFxWhenExpiring = true
+                IgnoreName = "_PlayerUnit"
+                // OnlyAffectName = "_PlayerUnit"
+            }
+        }
     ]
 }
