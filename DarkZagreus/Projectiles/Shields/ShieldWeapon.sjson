@@ -200,5 +200,88 @@
             FrontFx = "null"
         }
     }
+    {
+        Name = "DarkShieldThrowDash"
+        Speed = 3000
+        Type = "HOMING"
+        MaxAdjustRate = 400
+        DamageLow = 15
+        DamageHigh = 15
+        InheritFrom = "DarkShieldThrow"
+        Thing = {
+            Graphic = "ProjectileShield"
+            OffsetZ = 70
+            RotateGeometry = true
+            AttachedAnim = "ShieldProjectileShadow"
+            Grip = 999999
+            Points = [
+            {
+                X = 36
+                Y = 32
+            }
+            {
+                X = 36
+                Y = -32
+            }
+            {
+                X = -36
+                Y = -32
+            }
+            {
+                X = -36
+                Y = 32
+            }
+            ]
+      }
+    }
+    {
+        Name = "DarkChaosShieldThrow"
+        InheritFrom = "DarkShieldThrow"
+        NumJumps = 0
+        AffectsSelf = false
+        FinalJumpToOwner = false
+        ReturnToOwnerAfterInactiveSeconds = 0.5
+        OnDeathFiredByAnimation = "null"
+        // AddControlOnDeath = "null"
+        // AddControlOnDeath2 = "null"
+        SpawnOnDeath = "null"
+        UnlimitedObstaclePenetration = false
+        NoJumpTargetRandomSpread = 0
+        AlphaOverride = 1.0
+        IgnoreCoverageAngles = true
+        IgnoreDodge = true
+        Thing = {
+            Graphic = "ProjectileShieldAlt01"
+            OffsetZ = 70
+            RotateGeometry = true
+            AttachedAnim = "ChaosShieldFx"
+            Grip = 999999
+            Color = {
+            Red = 0.5
+            Green = 0.0
+            Blue = 1.0
+            Opacity = 0.5
+            }
+
+            Points = [
+            {
+                X = 36
+                Y = 32
+            }
+            {
+                X = 36
+                Y = -32
+            }
+            {
+                X = -36
+                Y = -32
+            }
+            {
+                X = -36
+                Y = 32
+            }
+            ]
+        }
+    }
   ]
 }

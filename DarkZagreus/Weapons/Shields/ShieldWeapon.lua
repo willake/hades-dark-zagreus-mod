@@ -215,3 +215,57 @@ WeaponData.DarkShieldRush =
 
     Upgrades = { },
 }
+
+DarkShieldThrowDash =
+{
+    InheritFrom = { "DarkShieldThrow", },
+    NotReadySound = "/EmptyCue",
+
+    AIData =
+    {
+        GiveupDistance = 800,
+        SkipMovement = true,
+        WaitUntilProjectileDeath = "DarkShieldThrow",
+    },
+
+    Sounds =
+    {
+        FireSounds =
+        {
+            { Name = "/VO/ZagreusEmotes/EmoteRanged" },
+            { Name = "/SFX/Player Sounds/ZagreusBowFire" },
+            { Name = "/SFX/Player Sounds/ZagreusSpearThrow" },
+            { Name = "/SFX/Player Sounds/ZagreusCriticalFire" },
+        },
+        ImpactSounds =
+        {
+            Invulnerable = "/SFX/SwordWallHitClank",
+            Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Bone = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Brick = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Stone = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            Organic = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            StoneObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            BrickObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            MetalObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+            BushObstacle = "/SFX/Player Sounds/ZagreusShieldRicochet",
+        },
+    },
+}
+
+WeaponData.DarkChaosShieldThrow =
+{
+    InheritFrom = { "DarkShieldThrow", },
+}
+
+
+WeaponData.DZShieldThrowProjectileBonusApplicator =
+{
+    Name = "DZShieldThrowProjectileBonusApplicator",
+}
+
+EffectData.DZThrowProjectileBonus =
+{
+    OnApplyFunctionName = "DZAIShieldThrowProjectileBonusApply",
+    OnClearFunctionName = "DZAIShieldThrowProjectileBonusClear",
+}

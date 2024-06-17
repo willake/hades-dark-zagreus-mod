@@ -136,7 +136,7 @@ ModUtil.Table.Merge(
             },
         },
         -- DarkGun 3, Aspect of Hestia
-        GunManualReloadTrait =
+        DZGunManualReloadTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
             PostWeaponUpgradeScreenAnimation = "ZagreusGunAlt01ReloadEnd",
@@ -275,7 +275,7 @@ ModUtil.Table.Merge(
             },
         },
         -- DarkGun 4, Aspect of Lucifer
-        GunLoadedGrenadeTrait =
+        DZGunLoadedGrenadeTrait =
         {
             InheritFrom = { "WeaponEnchantmentTrait" },
             RarityLevels =

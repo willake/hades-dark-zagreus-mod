@@ -258,14 +258,3 @@ WeaponData.DarkChaosShieldRush =
 
     Upgrades = { },
 }
-
-WeaponData.DarkChaosShieldThrowProjectileBonusApplicator =
-{
-    Name = "DarkChaosShieldThrowProjectileBonusApplicator",
-}
-
-EffectData.DZThrowProjectileBonus =
-{
-    OnApplyFunctionName = "DZAIShieldThrowProjectileBonusApply",
-    OnClearFunctionName = "DZAIShieldThrowProjectileBonusClear",
-}

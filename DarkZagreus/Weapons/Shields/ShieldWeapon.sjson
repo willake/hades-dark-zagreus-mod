@@ -128,6 +128,27 @@
             ]
         }
         {
+            Name = "DarkShieldThrowDash"
+            InheritFrom = "DarkShieldThrow"
+            Control = "Attack3"
+            ControlWindow = 0.45
+            Type = "GUN"
+            Projectile = "DarkShieldThrowDash"
+            AllowMultiFireRequest = false
+            Effects = [
+            {
+                Trigger = "Fire"
+                Name = "ShieldThrowDisable"
+                DurationFrames = 13
+                DisableMove = false
+                DisableRotate = true
+                DisableAttack = true
+                RequestTriggerLock = true
+                Active = false
+                }
+            ]
+        }
+        {
             Name = "DarkShieldRush"
             InheritFrom = "1_BaseDZDamagingWeapon"
             Control = "Attack2"
@@ -337,6 +358,40 @@
                     Active = false
                 }
             ]
+        }
+        {
+            Name = "DarkChaosShieldThrow"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "DarkChaosShieldThrow"
+            // FullyAutomatic = true
+            // AutoLock = true
+            IgnoreOwnerAttackDisabled = true
+            ProjectileAngleStartOffset = 10
+            ProjectileAngleOffset = 20
+            ProjectileOffsetStart = "CENTER"
+            BarrelLength = 30
+            DefaultControl = false
+        }
+        {
+            Name = "DZShieldThrowProjectileBonusApplicator"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "null"
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+            Effect = {
+                Name = "DZThrowProjectileBonus"
+                Modifier = 1
+                Duration = 5
+                CanAffectInvulnerable = true
+                FrontFx = "ChaosShieldBonusFx"
+                FlashFrontFxWhenExpiring = true
+                // OnlyAffectName = "_PlayerUnit"
+                IgnoreName = "_PlayerUnit"
+            }
         }
     ]
 }

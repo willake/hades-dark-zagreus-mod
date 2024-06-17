@@ -178,7 +178,7 @@ function DZAIFireShieldWeapon(enemy, weaponAIData, currentRun, targetId, actionD
 
     if enemy.DZ.TempAction == 4 then
         if DZTemp.AI.Weapon.ItemIndex == 2 then
-			FireWeaponFromUnit({ Weapon = "DarkChaosShieldThrowProjectileBonusApplicator", Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+			FireWeaponFromUnit({ Weapon = "DZShieldThrowProjectileBonusApplicator", Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
 		end
     end
 
@@ -200,11 +200,12 @@ function DZAISelectShieldWeapon(enemy, actionData)
     enemy.DZ.FireTowardTarget = true
 
     local lastAction = DZAIGetLastAction(enemy)
+    local actionConfig = enemy.DZActionConfig
 
     -- use special attack
     if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
-        enemy.WeaponName = enemy.SpecialAttackWeapon
+        enemy.WeaponName = actionConfig.SpecialAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
@@ -212,14 +213,14 @@ function DZAISelectShieldWeapon(enemy, actionData)
     -- use dash
     if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
-        enemy.WeaponName = enemy.DashWeapon
+        enemy.WeaponName = actionConfig.DashWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
-        enemy.WeaponName = enemy.DashWeapon
+        enemy.WeaponName = actionConfig.DashWeapon
         enemy.ChainedWeapon = nil
         enemy.DZ.FireTowardTarget = false
         return enemy.WeaponName
@@ -231,13 +232,13 @@ function DZAISelectShieldWeapon(enemy, actionData)
 
         -- if the last action is dash, do dash attack
         if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-            enemy.WeaponName = enemy.DashAttackWeapon
+            enemy.WeaponName = actionConfig.DashAttackWeapon
             enemy.ChainedWeapon = nil
             return enemy.WeaponName
         end
 
         -- or just do a regular attack
-        enemy.WeaponName = enemy.PrimaryWeapon
+        enemy.WeaponName = actionConfig.PrimaryWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
@@ -247,13 +248,13 @@ function DZAISelectShieldWeapon(enemy, actionData)
 
     -- if the last action is dash, do dash attack
     if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.3 then
-        enemy.WeaponName = enemy.DashAttackWeapon
+        enemy.WeaponName = actionConfig.DashAttackWeapon
         enemy.ChainedWeapon = nil
         return enemy.WeaponName
     end
 
     -- or just do a regular attack
-    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.WeaponName = actionConfig.PrimaryWeapon
     enemy.ChainedWeapon = nil
     return enemy.WeaponName
 end
