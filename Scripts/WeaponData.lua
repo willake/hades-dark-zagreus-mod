@@ -78,48 +78,20 @@ DZWeaponData =
 	BowWeapon =
 	{
 		Equip = function (enemy)
-			enemy.PrimaryWeapon = "DarkBow"
-			enemy.DashWeapon = "DarkRush"
-			enemy.SpecialAttackWeapon = "DarkBowSplitShot"
-			enemy.DashAttackWeapon = "DarkBowDash"
-		end,
-		PostTraitApply = function (enemy)
+			enemy.Weapons = { DarkBow = tue, DarkRush = true, DarkBowSplitShot = true, DarkBowDash = true }
 			
-		end
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkBow"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkBowSplitShot"
-        --         enemy.DashAttackWeapon = "DarkBowDash"
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkChironBow"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkChironBowSplitShot"
-        --         enemy.DashAttackWeapon = "DarkChironBowDash"
-		-- 		-- equip in advance because we need to modify it's property while marking target
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkChironBowSplitShot" })
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkHeraBow"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkHeraBowSplitShot"
-        --         enemy.DashAttackWeapon = "DarkHeraBowDash"
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkRamaBow"
-        --         enemy.DashWeapon = "DarkRush"
-        --         enemy.SpecialAttackWeapon = "DarkRamaBowSplitShot"
-        --         enemy.DashAttackWeapon = "DarkRamaBowDash"
-        --     end
-		-- }
+			enemy.DZActionConfig = {
+				PrimaryWeapon = "DarkBow",
+				DashWeapon = "DarkRush",
+				SpecialAttackWeapon = "DarkBowSplitShot",
+				DashAttackWeapon = "DarkBowDash"
+			}
+
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkBow" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkBowDash" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkBowSplitShot" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
+		end,
 	},
 	ShieldWeapon =
 	{

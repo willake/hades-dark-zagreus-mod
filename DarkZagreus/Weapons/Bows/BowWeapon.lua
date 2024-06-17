@@ -23,7 +23,7 @@ WeaponData.DarkBow =
         -- ChargeFx = "BowCharge",
         IsRangeBasedOnCharge = true,
         MinChargeTime = 0.2,
-        MaxChargeTime = 0.6,
+        MaxChargeTime = 0.8,
         Range = 45,
         ChargeRangeMultiplier = 20,
         WaitUntilProjectileDeath = "DarkBow"
@@ -105,7 +105,7 @@ WeaponData.DarkBowDash =
         IsRangeBasedOnCharge = true,
         ChargeFx = "BowChargeFast",
         MinChargeTime = 0.2,
-        MaxChargeTime = 0.6,
+        MaxChargeTime = 0.8,
         Range = 45,
         ChargeRangeMultiplier = 20,
         WaitUntilProjectileDeath = "DarkBowDash"
@@ -164,6 +164,7 @@ WeaponData.DarkBowSplitShot =
     {
         AttackDistanceMin = 300,
         AttackDistanceMax = 900,
+        AIAngleTowardsPlayerWhileFiring = true,
         AITrackTargetDuringCharge = true,
         AIMoveWithinRangeTimeout = 1.0,
         WaitUntilProjectileDeath = "DarkBowSplitShot",
@@ -190,9 +191,10 @@ WeaponData.DarkBowSplitShot =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
+}
 
-    Upgrades =
-    {
-
-    },
+EffectData.DZMarkTarget =
+{
+    OnApplyFunctionName = "DZAIMarkTargetApply",
+    OnClearFunctionName = "DZAIMarkTargetClear",
 }
