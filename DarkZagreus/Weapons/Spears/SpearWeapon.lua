@@ -442,3 +442,14 @@ WeaponData.DarkSpearThrowImmolation =
 			},
 		},
 	}
+
+EffectData.DZSpearRushBonus =
+	{
+		OnApplyFunctionName = "DZAISpearRushBonusApply",
+	}
+
+EffectData.DZMarkTargetSpin = 
+	{
+		OnApplyFunctionName = "DZAIMarkTargetSpinApply",
+		OnClearFunctionName = "DZAIMarkTargetSpinClear",
+	}

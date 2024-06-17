@@ -18,12 +18,12 @@ function DZAIMarkTargetApply( triggerArgs )
 	if not triggerArgs.Reapplied then
         DZTemp.AI.LastMarkTargetTime = _worldTime
         DZTemp.AI.ValidMarkTime = 3
-        SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = triggerArgs.triggeredById, DataValue = false})
+        SetWeaponProperty({ WeaponName = "DarkBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = triggerArgs.triggeredById, DataValue = false})
 	end
 end
 
 function DZAIMarkTargetClear( triggerArgs )
-	SetWeaponProperty({ WeaponName = "DarkChironBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = -1, DataValue = false})
+	SetWeaponProperty({ WeaponName = "DarkBowSplitShot", DestinationId = DZTemp.AI.ObjectId, Property = "OverrideFireRequestTarget", Value = -1, DataValue = false})
 end
 
 -- deal with this function when rush weapon is fired while using aspect of talos
@@ -61,12 +61,12 @@ function DZAIMarkTargetFistApply( triggerArgs )
 	if not triggerArgs.Reapplied then
 		local validWeapons =
 		{
-			"DarkTalosFist",
-			"DarkTalosFist2",
-			"DarkTalosFist3",
-			"DarkTalosFist4",
-			"DarkTalosFist5",
-			"DarkTalosFistDash",
+			"DarkFist",
+			"DarkFist2",
+			"DarkFist3",
+			"DarkFist4",
+			"DarkFist5",
+			"DarkFistDash",
 		}
 
 		AddIncomingDamageModifier( triggerArgs.TriggeredByTable,
@@ -104,16 +104,16 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
 		-- for aspect of demeter, 12 combos get power special
 		attacker.ComboReady = true
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
+		SetWeaponProperty({ WeaponName = "DarkFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
 		-- if HeroHasTrait( "FistSpecialFireballTrait" ) then
 		-- 	SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = CurrentRun.Hero.ObjectId, Property = "ProjectileInterval", Value = 0.08 })
 		-- else
-        SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+        SetWeaponProperty({ WeaponName = "DarkFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
 		-- end
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 }) -- + GetTotalHeroTraitValue("BonusSpecialHits")
+		SetWeaponProperty({ WeaponName = "DarkFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.03 })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "FistUppercutSpecial" })
 
 		DZTemp.AI.HasPowerShot = true
 
@@ -138,15 +138,15 @@ function DZAICheckComboPowerReset( attacker, weaponData )
 		DZTemp.AI.HasPowerShot = false
 		attacker.ComboReady = false
 		attacker.ComboCount = 0
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 2 })
 		-- if HeroHasTrait( "FistSpecialFireballTrait" ) then
 		-- 	SetWeaponProperty({ WeaponName = "FistWeaponSpecial", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
 		-- end
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0 })
-		SetWeaponProperty({ WeaponName = "DarkDemeterFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecial", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0.13 })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecial", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecialDash", DestinationId = attacker.ObjectId, Property = "NumProjectiles", Value = 1 })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecialDash", DestinationId = attacker.ObjectId, Property = "ProjectileInterval", Value = 0 })
+		SetWeaponProperty({ WeaponName = "DarkFistSpecialDash", DestinationId = attacker.ObjectId, Property = "FireFx2", Value = "null" })
 		if not args or not args.Undelivered then
 			ComboDeliveredPresentation( attacker )
 		end
@@ -162,7 +162,7 @@ function DZAICheckFistDetonation( attacker, victim, triggerArgs )
 		return
 	end
 
-	if ( not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"] ) and triggerArgs.SourceWeapon == "DarkGilgameshFistSpecialDash" then
+	if ( not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"] ) and triggerArgs.SourceWeapon == "DarkFistSpecialDash" then
 		DZDebugPrintString("Pass")
 		local delay = 0.1
 		-- original script use MapState
@@ -173,7 +173,7 @@ function DZAICheckFistDetonation( attacker, victim, triggerArgs )
 		local key = _worldTime + delay
 		DZTemp.AI.QueuedDetonations[_worldTime + delay] = victim
 		wait( delay, RoomThreadName )
-		FireWeaponFromUnit({ Weapon = "DarkGilgameshFistDetonation", Id = attacker.ObjectId, DestinationId = victim.ObjectId, FireFromTarget = true, AutoEquip = true })
+		FireWeaponFromUnit({ Weapon = "DZFistDetonation", Id = attacker.ObjectId, DestinationId = victim.ObjectId, FireFromTarget = true, AutoEquip = true })
 		DZTemp.AI.QueuedDetonations[key] = nil
 		victim.LastRuptureTime = _worldTime
 	end
@@ -272,7 +272,7 @@ end
 
 function DZAIGunBombDetonate( bomb )
 	if DZTemp.AI then
-		FireWeaponFromUnit({ Weapon = "DarkLuciferGunBomb", Id = DZTemp.AI.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
+		FireWeaponFromUnit({ Weapon = "DarkGunBomb", Id = DZTemp.AI.ObjectId, DestinationId = bomb.ObjectId, FireFromTarget = true })
 	end
 end
 
@@ -287,7 +287,7 @@ function DZAISetUpGunBombImmolation( enemy, currentRun, args )
 	CurrentRun.Hero.WeaponSpawns[enemy.ObjectId] = enemy
 
 	while not enemy.IsDead and DZTemp.AI do
-		FireWeaponFromUnit({ Weapon = "DarkLuciferGunBombImmolation", Id = DZTemp.AI.ObjectId, DestinationId = enemy.ObjectId, FireFromTarget = true })
+		FireWeaponFromUnit({ Weapon = "DarkGunBombImmolation", Id = DZTemp.AI.ObjectId, DestinationId = enemy.ObjectId, FireFromTarget = true })
 		if EnemyData[enemy.Name] and EnemyData[enemy.Name].ImmolationInterval then
 			wait( EnemyData[enemy.Name].ImmolationInterval, RoomThreadName )
 		else
@@ -307,12 +307,14 @@ function DZAIClearManualReloadVFX( owner )
 	-- ClearEffect({ Id = owner.ObjectId, Name = "DZManualReloadBonus" })
 end
 
-OnWeaponFired{ "DarkNemesisSwordParry",
+OnWeaponFired{ "DarkSwordParry",
 	function( triggerArgs )
 		-- don't know how to apply this to dark zagreus, the function seems to be only for player character
 		-- AddLimitedWeaponBonus({ AsCrit = true, EffectName = "SwordPostParryCritical", Amount = 100, CritBonus = GetTotalHeroTraitValue("SwordPostParryCriticalAmount")})
-		DZTemp.AI.LastMarkTargetTime = _worldTime
-		DZTemp.AI.ValidMarkTime = 3.0
+		if DZTemp.AI.Weapon.ItemIndex == 2 then
+			DZTemp.AI.LastMarkTargetTime = _worldTime
+			DZTemp.AI.ValidMarkTime = 3.0
+		end
 	end
 }
 
@@ -346,12 +348,12 @@ function DZAIMarkTargetSpinApply( triggerArgs )
 	if not triggerArgs.Reapplied then
 		local validWeapons =
 		{
-			"DarkHadesSpear",
-			"DarkHadesSpear2",
-			"DarkHadesSpear3",
-			"DarkHadesSpearDash",
-			"DarkHadesSpearThrow",
-			"DarkHadesSpearThrowReturn",
+			"DarkSpear",
+			"DarkSpear2",
+			"DarkSpear3",
+			"DarkSpearDash",
+			"DarkSpearThrow",
+			"DarkSpearThrowReturn",
 		}
 
 		AddIncomingDamageModifier( triggerArgs.TriggeredByTable,
