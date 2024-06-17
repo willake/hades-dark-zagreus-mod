@@ -47,7 +47,7 @@ function DZAICheckVacuumPlayer(enemy, targetId, args)
         Stop({ Id = targetId })
         -- DebugPrintf({ Text = "GetRequiredForceToEnemy: " .. GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer )})
 		ApplyForce({ Id = targetId, Speed = GetRequiredForceToEnemy( targetId, enemy.ObjectId, -1 * distanceBuffer / 2), Angle = GetAngleBetween({ Id = targetId, DestinationId = enemy.ObjectId }) })
-		FireWeaponFromUnit({ Weapon = "DarkTalosFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
+		FireWeaponFromUnit({ Weapon = "DarkFistSpecialVacuum", Id = enemy.ObjectId, DestinationId = targetId, AutoEquip = true })
 		DZAIFistVacuumPullPresentation( enemy, targetId, args )
 	end
 end
@@ -91,9 +91,11 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 		return
 	end
     
-    if sourceWeaponData.UseComboPower == nil then
+	-- check if is Aspect of Demeter
+    if DZTemp.AI.Weapon.WeaponName ~= "FistWeapon" or DZTemp.AI.Weapon.ItemIndex ~= 3 then
         return
     end
+
 
 	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
 
@@ -231,7 +233,7 @@ function DZAIOnRuptureDashHit( args )
 	-- if victim.TriggersOnDamageEffects and victim == CurrentRun.Hero then
     if victim == CurrentRun.Hero then
 		if not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"]  then
-			ApplyEffectFromWeapon({ WeaponName = "DarkGilgameshMarkRuptureApplicator", EffectName = "DZMarkRuptureTarget", Id = DZTemp.AI.ObjectId, DestinationId = victim.ObjectId })
+			ApplyEffectFromWeapon({ WeaponName = "DZMarkRuptureApplicator", EffectName = "DZMarkRuptureTarget", Id = DZTemp.AI.ObjectId, DestinationId = victim.ObjectId })
 		end
 	end
 end
@@ -243,7 +245,7 @@ function DZAIOnRuptureWeaponHit( args )
 	local victim = args.TriggeredByTable
 	if victim == CurrentRun.Hero then
 		if victim.ActiveEffects and victim.ActiveEffects["DZMarkRuptureTarget"]  then
-			ApplyEffectFromWeapon({ WeaponName = "DarkGilgameshMarkRuptureApplicator", EffectName = "DZMarkRuptureTarget", Id = DZTemp.AI.ObjectId, DestinationId = victim.ObjectId })
+			ApplyEffectFromWeapon({ WeaponName = "DZMarkRuptureApplicator", EffectName = "DZMarkRuptureTarget", Id = DZTemp.AI.ObjectId, DestinationId = victim.ObjectId })
 		end
 	end
 end

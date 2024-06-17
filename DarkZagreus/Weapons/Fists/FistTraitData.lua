@@ -65,16 +65,70 @@ ModUtil.Table.Merge(
                         "ZagreusFistAlt02DashHayMaker_Bink",
                     }
                 },
-            },
-            AddRush =
-            {
-                FunctionName = "DZAIFistVacuumRush",
-                FunctionArgs =
+
+                DarkFistSpecial =
                 {
-                    Duration = 0.2,
+                    AIData =
+                    {
+                        AttackDistance = 700,
+                        FireDuration = 0.73, -- 0.23 + 0.5
+                        OnWeaponChargeFunction =
+                        {
+                            FunctionName = "DZAICheckVacuumPlayer",
+                            FunctionArgs =
+                            {
+                                Range = 800,				-- Vacuum distance
+                                DistanceBuffer = 130,		-- Space to leave between player and enemy
+                                RushDistanceBuffer = 300,
+                                AutoLockArc = 60,
+                            },
+                        }
+                    },
                 },
-                RunOnce = true,
+                DarkFistSpecialDash =
+                {
+                    AIData =
+                    {
+                        GiveupDistance = 700,
+                        FireDuration = 0.44, -- 0.24 + 0.2
+                        OnWeaponChargeFunction =
+                        {
+                            FunctionName = "DZAICheckVacuumPlayer",
+                            FunctionArgs =
+                            {
+                                Range = 800,				-- Vacuum distance
+                                DistanceBuffer = 130,		-- Space to leave between player and enemy
+                                RushDistanceBuffer = 300,
+                                AutoLockArc = 60,
+                            },
+                        }
+                    },
+                },
+                DarkRush =
+                {
+                    AIData =
+                    {
+                        AddRush = {
+                            FunctionName = "DZAIFistVacuumRush",
+                            FunctionArgs =
+                            {
+                                Duration = 0.2,
+                            },
+                            RunOnce = true,
+                        }
+                    }
+                }
             },
+            -- Note(Huiun): Not sure where it is called, so I add it to my AI code
+            -- AddRush =
+            -- {
+            --     FunctionName = "FistVacuumRush",
+            --     FunctionArgs =
+            --     {
+            --         Duration = 0.2,
+            --     },
+            --     RunOnce = true,
+            -- },
             OnWeaponChargeFunctions =
             {
                 ValidWeapons = { "DarkFistSpecial", "DarkFistSpecialDash" },
@@ -388,9 +442,12 @@ ModUtil.Table.Merge(
                         "ZagreusFistAlt01DashHayMaker_Bink",
                     }
                 },
-
                 DarkFistSpecial =
                 {
+                    AIData =
+                    {
+                        CheckComboPowerReset = true, -- equals to OnFiredFunctionName = "CheckComboPowerReset",
+                    },
                     HitSimSlowCooldown = 0.02,
                     HitSimSlowParameters =
                     {
@@ -404,6 +461,10 @@ ModUtil.Table.Merge(
 
                 DarkFistSpecialDash =
                 {
+                    AIData =
+                    {
+                        CheckComboPowerReset = true, -- equals to OnFiredFunctionName = "CheckComboPowerReset",
+                    },
                     HitSimSlowCooldown = 0.02,
                     HitSimSlowParameters =
                     {
@@ -618,7 +679,7 @@ ModUtil.Table.Merge(
             },
             RequiredWeapons = { "DarkFist", "DarkFistSpecial" },
             RequiredFalseTrait = "DZFistWeaveTrait",
-            PreEquipWeapons = {"RushRuptureWeapon", "FistDetonationWeapon", "MarkRuptureApplicator"},
+            PreEquipWeapons = {"DZRushRuptureWeapon", "DZFistDetonation", "DZMarkRuptureApplicator"},
             WeaponBinks =
             {
                 "ZagreusFistAlt03Idle_Bink",
@@ -638,6 +699,11 @@ ModUtil.Table.Merge(
             {
                 DarkFist =
                 {
+                    AIData = 
+                    { 
+                        FireDuration = 0.47, -- 0.2 + 0.27 
+                    },
+
                     WeaponBinks =
                     {
                         "ZagreusFistAlt03Idle_Bink",
@@ -688,6 +754,10 @@ ModUtil.Table.Merge(
 
                 DarkFist2 =
                 {	
+                    AIData = 
+                    { 
+                        FireDuration = 0.4, -- 0.13 + 0.27
+                    },
                     HitSimSlowCooldown = 0.2,
                     HitSimSlowParameters =
                     {
@@ -720,6 +790,11 @@ ModUtil.Table.Merge(
 
                 DarkFist3 =
                 {
+                    AIData =
+                    {
+                        FireDuration = 0.4, -- 0.13 + 0.27
+                    },
+
                     HitSimSlowCooldown = 0.2,
                     HitSimSlowParameters =
                     {
@@ -754,6 +829,11 @@ ModUtil.Table.Merge(
 
                 DarkFist4 =
                 {
+                    AIData =
+                    {
+                        FireDuration = 0.39, -- 0.12 + 0.27
+                    },
+
                     HitSimSlowCooldown = 0.2,
                     HitSimSlowParameters =
                     {
@@ -788,6 +868,11 @@ ModUtil.Table.Merge(
 
                 DarkFist5 =
                 {
+                    AIData =
+                    {
+                        FireDuration = 0.39, -- 0.12 + 0.27
+                    },
+
                     HitSimSlowCooldown = 0.2,
                     HitSimSlowParameters =
                     {
@@ -823,6 +908,11 @@ ModUtil.Table.Merge(
 
                 DarkFistSpecial =
                 {
+                    AIData =
+                    {
+                        FireDuration = 0.75, -- 0.18 + 0.57
+                    },
+
                     Sounds =
                     {
                         ChargeSounds =
@@ -851,6 +941,10 @@ ModUtil.Table.Merge(
 
                 DarkFistDash =
                 {
+                    AIData = 
+                    {
+                        FireDuration = 0.21, -- 0.07 + 0.14
+                    },
                     Sounds =
                     {
                         FireSounds =
@@ -876,6 +970,10 @@ ModUtil.Table.Merge(
 
                 DarkFistSpecialDash =
                 {
+                    AIData =
+                    {
+                        FireDuration = 0.38, -- 0.1 + 0.28
+                    },
                     HitSimSlowCooldown = 0.2,
                     HitSimSlowParameters =
                     {
@@ -921,16 +1019,17 @@ ModUtil.Table.Merge(
                 },
 
             },
-            OnEnemyDamagedFunction = 
-            {
-                Name = "DZAICheckFistDetonation",
-            },
+            -- Note(Huiun): TODO handle this
+            -- OnEnemyDamagedFunction = 
+            -- {
+            --     Name = "DZAICheckFistDetonation",
+            -- },
             AddOutgoingDamageModifiers =
             {
                 -- Somewhat hacky but ensures detonateion isn't boosted by own status effect @alice
                 ValidWeaponMultiplier = 0.75,
                 Additive = true,
-                ValidEffects = { "DZFistDetonationDamage" },
+                ValidEffects = { "FistDetonationDamage" },
             },
             PropertyChanges =
             {
@@ -1102,7 +1201,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 {
                     WeaponNames = WeaponSets.HeroRushWeapons,
                     ProjectileProperty = "DamageLow",
@@ -1117,7 +1215,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Add",
                     ExcludeLinked = true,
                 },
-
                 -- Gilgamesh Dash
                 {
                     WeaponNames = { "DarkRush" },
@@ -1133,7 +1230,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 -- Gilgamesh Attack
                 {
                     WeaponNames = { "DarkFist", "DarkFist3", "DarkFist5" },
@@ -1186,7 +1282,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 {
                     WeaponNames = { "DarkFist" },
                     WeaponProperty = "ChargeTime",
@@ -1194,7 +1289,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 {
                     WeaponNames = { "DarkFist2", },
                     WeaponProperty = "ChargeTime",
@@ -1202,7 +1296,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 {
                     WeaponNames = { "DarkFist3", },
                     WeaponProperty = "ChargeTime",
@@ -1210,7 +1303,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 {
                     WeaponNames = { "DarkFist4" },
                     WeaponProperty = "ChargeTime",
@@ -1218,7 +1310,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-
                 {
                     WeaponNames = { "DarkFist5" },
                     WeaponProperty = "ChargeTime",
@@ -1226,7 +1317,6 @@ ModUtil.Table.Merge(
                     ChangeType = "Absolute",
                     ExcludeLinked = true,
                 },
-                
                 {
                     WeaponNames = { "DarkFist" },
                     EffectName = "FistDisable",

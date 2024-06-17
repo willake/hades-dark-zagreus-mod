@@ -124,66 +124,47 @@ DZWeaponData =
 	ShieldWeapon =
 	{
 		Equip = function (enemy)
-			enemy.PrimaryWeapon = "DarkShield"
-			enemy.DashWeapon = "DarkRush"
-			enemy.SpecialAttackWeapon = "DarkShieldThrow"
-			enemy.DashAttackWeapon = "DarkShieldDash"
+			enemy.Weapons = { 
+				DarkShield = true, DarkRush = true, DarkShieldThrow = true, DarkShieldDash = true }
+
+			enemy.DZActionConfig = {
+				PrimaryWeapon = "DarkShield",
+				DashWeapon = "DarkRush",
+				SpecialAttackWeapon = "DarkShieldThrow",
+				DashAttackWeapon = "DarkShieldDash"
+			}
+
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkShield" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkShieldThrow" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkShieldDash" })
 		end,
 	},
 	FistWeapon =
 	{
 		Equip = function (enemy)
-			enemy.PrimaryWeapon = "DarkFist"
-			enemy.DashWeapon = "DarkRush"
-			enemy.SpecialAttackWeapon = "DarkFistSpecial"
-			enemy.SpecialDashAttackWeapon = "DarkFistSpecialDash"
-			enemy.DashAttackWeapon = "DarkFistDash"
-		end,
-		PostTraitApply = function (enemy)
+			enemy.Weapons = { 
+				DarkFist = true, DarkFist2 = true, DarkFist3 = true, DarkFist4 = true, DarkFist5 = true, 
+				DarkRush = true, DarkShieldThrow = true, DarkShieldDash = true }
 			
+			enemy.DZActionConfig = {
+				PrimaryWeapon = "DarkFist",
+				DashWeapon = "DarkRush",
+				SpecialAttackWeapon = "DarkFistSpecial",
+				SpecialDashAttackWeapon = "DarkFistSpecialDash",
+				DashAttackWeapon = "DarkFistDash"
+			}
+
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFist" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFist2" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFist3" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFist4" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFist5" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFistDash" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkRush" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFistSpecial" })
+			EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkFistSpecialDash" })
 		end
-		-- {
-		-- 	Equip = function (enemy)
-		-- 		enemy.PrimaryWeapon = "DarkFist"
-		-- 		enemy.DashWeapon = "DarkRush"
-		-- 		enemy.SpecialAttackWeapon = "DarkFistSpecial"
-		-- 		enemy.SpecialDashAttackWeapon = "DarkFistSpecialDash"
-		-- 		enemy.DashAttackWeapon = "DarkFistDash"
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkTalosFist"
-		-- 		enemy.DashWeapon = "DarkTalosRush"
-		-- 		enemy.SpecialAttackWeapon = "DarkTalosFistSpecial"
-		-- 		enemy.SpecialDashAttackWeapon = "DarkTalosFistSpecialDash"
-		-- 		enemy.DashAttackWeapon = "DarkTalosFistDash"
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-        --         enemy.PrimaryWeapon = "DarkDemeterFist"
-		-- 		enemy.DashWeapon = "DarkRush"
-		-- 		enemy.SpecialAttackWeapon = "DarkDemeterFistSpecial"
-		-- 		enemy.SpecialDashAttackWeapon = "DarkDemeterFistSpecialDash"
-		-- 		enemy.DashAttackWeapon = "DarkDemeterFistDash"
-		-- 		-- equip them in advance because Powers.lua will modify their properties
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkDemeterFistSpecial" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkDemeterFistSpecialDash" })
-        --     end
-		-- },
-		-- {
-		-- 	Equip = function (enemy)
-		-- 		enemy.PrimaryWeapon = "DarkGilgameshFist"
-		-- 		enemy.DashWeapon = "DarkGilgameshRush"
-		-- 		enemy.SpecialAttackWeapon = "DarkGilgameshFistSpecial"
-		-- 		enemy.SpecialDashAttackWeapon = "DarkGilgameshFistSpecialDash"
-		-- 		enemy.DashAttackWeapon = "DarkGilgameshFistDash"
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGilgameshRushRupture" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGilgameshFistDetonation" })
-		-- 		EquipWeapon({ DestinationId = enemy.ObjectId, Name = "DarkGilgameshMarkRuptureApplicator" })
-        --     end
-		-- }
 	},
 }
 
