@@ -9,23 +9,17 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
         for enemyId, enemy in pairs( ActiveEnemies ) do
             DZDebugPrintString("Hades Object ID " .. enemy.ObjectId)
 
-            local prevWeaponData = {}
-            local prevTraits = {}
+            local weaponData = DarkZagreus.DefaultAIWeapon
+            local traits = DarkZagreus.DefaultAITraits
 
             if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DarkZagreus.DataVersion then
-                prevWeaponData = DZPersistent.PrevRunRecord.Weapon
+                weaponData = DZPersistent.PrevRunRecord.Weapon
                 
-                if prevWeaponData and DZPersistent.PrevRunRecord.History then
+                if weaponData and DZPersistent.PrevRunRecord.History then
                     DZTrainAI()
                 end
 
-                prevTraits = DZPersistent.PrevRunRecord.Traits or {}
-            end
-
-            local weaponData = DarkZagreus.DefaultAIWeapon
-
-            if prevWeaponData and prevWeaponData.WeaponName and prevWeaponData.ItemIndex then
-                weaponData = prevWeaponData
+                traits = DZPersistent.PrevRunRecord.Traits
             end
             
             -- Note(Huiun): equip weapons first so that we can apply traits 
@@ -33,20 +27,20 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
             DZDebugPrintTable("DZ Weapon Equipped", weaponData)
 
             -- Note(Huiun): apply weapon traits first
-            for index, trait in ipairs(prevTraits) do
+            for index, trait in ipairs(traits) do
                 if trait.Name and DarkZagreus.WeaponTraits[trait.Name] then
-                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = trait.Name, Rarity = trait.Rarity})}) 
+                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZ" .. trait.Name, Rarity = trait.Rarity})}) 
                 end   
             end
-            DZDebugPrintTable("Weapon Trait Applied", weaponData)
+            DZDebugPrintString("Weapon Trait Applied")
 
             -- Note(Huiun): apply traits based on avilable traits
-            for index, trait in ipairs(prevTraits) do
+            for index, trait in ipairs(traits) do
                 if trait.Name and DarkZagreus.AvailableTraits[trait.Name] then
-                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = trait.Name, Rarity = trait.Rarity})}) 
+                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZ" .. trait.Name, Rarity = trait.Rarity})}) 
                 end     
             end
-            DZDebugPrintTable("Other Traits Applied", weaponData)
+            DZDebugPrintString("Other Traits Applied")
         end
     end
 end }

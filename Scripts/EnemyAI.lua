@@ -349,7 +349,7 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
 
-    if enemy.OnFireWeapons[weaponAIData.WeaponName] ~= nil then
+    if enemy.OnFireWeapons and enemy.OnFireWeapons[weaponAIData.WeaponName] then
 		for onFireWeaponName, onFireWeaponData in pairs( enemy.OnFireWeapons[weaponAIData.WeaponName] ) do
 			if type(onFireWeaponData) == "table" then
 				if onFireWeaponData.UseTargetLocation then

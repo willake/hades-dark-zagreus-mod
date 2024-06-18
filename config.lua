@@ -33,6 +33,13 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
     ManualReload = 0.0
 }
 
+DarkZagreus.DefaultAITraits = {
+    {
+        Name = "SwordConsecrationTrait",
+        Rarity = "Legendary"
+    }
+}
+
 DarkZagreus.RecordDirectoryName = "DZRecords"
 DarkZagreus.LoadRecordFileName = "DZRecord"
 
