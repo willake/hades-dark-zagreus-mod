@@ -285,7 +285,8 @@ function DZAISelectSpearWeapon(enemy, actionData)
     -- use charge attack with primary attack weapon
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ChargeAttack then
 
-        if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
+        if  actionConfig.ShouldReturnSpearAfterThrow and
+            TableLength(GetIdsByType({ Name = actionConfig.SpearObstacle })) > 0 then
             enemy.DZ.TempAction = 2
             enemy.WeaponName = actionConfig.SpecialAttackWeaponReturn
             enemy.ChainedWeapon = nil
@@ -309,7 +310,8 @@ function DZAISelectSpearWeapon(enemy, actionData)
 
     -- use attack weapon
 
-    if enemy.SpearObstacle and TableLength(GetIdsByType({ Name = enemy.SpearObstacle })) > 0 then
+    if  actionConfig.ShouldReturnSpearAfterThrow and
+            TableLength(GetIdsByType({ Name = actionConfig.SpearObstacle })) > 0 then
         enemy.DZ.TempAction = 2
         enemy.WeaponName = actionConfig.SpecialAttackWeaponReturn
         enemy.ChainedWeapon = nil

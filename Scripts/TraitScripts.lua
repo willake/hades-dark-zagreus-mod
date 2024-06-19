@@ -58,9 +58,7 @@ function DZUtil.Trait.ApplyDZActionConfig(unit, traitData)
 		end
 
 		for key, val in pairs(traitData.DZActionConfig) do
-			if config then
-				unit.DZActionConfig[key] = val
-			end
+			unit.DZActionConfig[key] = val
 		end
 	end
 end
