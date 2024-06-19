@@ -396,6 +396,7 @@ ModUtil.Table.Merge(
             RequiredWeapon = "DarkSword",
             AddOnFireWeapons = { "DarkConsecrationField" },
             LegalOnFireWeapons = { "DarkSwordParry" },
+            PreEquipWeapons = { "DarkConsecrationField" },
             -- OnProjectileDeathFunction =
             -- {
             --     Name = "DZConsecrationFieldDeath",
