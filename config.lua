@@ -5,7 +5,7 @@ DarkZagreus.Config = {
 }
 
 DarkZagreus.Version = "v1.2.1"
-DarkZagreus.DataVersion = "v6" -- for training data, when the data scheme chages, the version increases
+DarkZagreus.DataVersion = "v7" -- for training data, when the data scheme chages, the version increases
 
 -- Config
 DarkZagreus.EnablePlayerLog = false
@@ -33,8 +33,38 @@ DarkZagreus.DefaultAIActionData = { -- these are the action probabilities
     ManualReload = 0.0
 }
 
+DarkZagreus.DefaultAITraits = {
+    {
+        Name = "SwordConsecrationTrait",
+        Rarity = "Legendary"
+    }
+}
+
 DarkZagreus.RecordDirectoryName = "DZRecords"
 DarkZagreus.LoadRecordFileName = "DZRecord"
+
+DarkZagreus.AvailableTraits = {} -- filled by other scripts, containing traits that implemented
+DarkZagreus.WeaponTraits = {} -- traits for weapon upgrades, should be apllied first so distinguished from other traits
+
+-- setup utility functions
+DZUtil = {
+    AI = {},
+    Upgrade = {},
+    Trait = {},
+    Record = {},
+    Debug = {}
+}
+
+SaveIgnores["DZUtil"] = true
+
+-- DZPersistant for data which can be saved with save files
+DZPersistent = {}
+
+-- DZTemp for data should be deleted after leaving the game
+DZTemp = {}
+
+SaveIgnores["DZTemp"] = true
+
 -- State Scheme
 -- {
 --     OwnHP,

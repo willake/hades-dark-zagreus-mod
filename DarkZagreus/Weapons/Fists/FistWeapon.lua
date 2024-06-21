@@ -160,7 +160,7 @@ WeaponData.DarkFistSpecial =
     StartingWeapon = false,
     -- DamageNumberGenusName = "FistWeaponSpecial",
     -- DashWeapon = "FistWeaponSpecialDash",
-    --ComboPoints = 1,
+    ComboPoints = 1,
     -- OnFiredFunctionName = "CheckComboPowerReset",
     CauseImpactReaction = true,
     ImpactReactionHitsOverride = 2,
@@ -208,7 +208,7 @@ WeaponData.DarkFistSpecialDash =
     StartingWeapon = false,
     CauseImpactReaction = true,
     -- DamageNumberGenusName = "FistWeaponSpecial",
-    --ComboPoints = 1,
+    ComboPoints = 1,
     -- OnFiredFunctionName = "CheckComboPowerReset",
 
     AIData =
@@ -241,4 +241,50 @@ WeaponData.DarkFistSpecialDash =
             BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
         },
     },
+}
+
+WeaponData.DarkFistSpecialVacuum =
+{
+    HitSimSlowParameters =
+    {
+
+        { ScreenPreWait = 0.03, Fraction = 0.02, LerpTime = 0.0 },
+        { ScreenPreWait = 0.02, Fraction = 0.20, LerpTime = 0.03 },
+        { ScreenPreWait = 0.04, Fraction = 1.00, LerpTime = 0.1 },
+    },
+}
+
+EffectData.DZMarkTargetFist =
+{
+    OnApplyFunctionName = "DZAIMarkTargetFistApply",
+    OnClearFunctionName = "DZAIMarkTargetFistClear",
+}
+
+WeaponData.DZRushRupture = {
+    Name = "DZRushRupture"
+}
+
+WeaponData.DZFistDetonation = {
+    Name = "DZFistDetonation",
+}
+
+WeaponData.DZMarkRuptureApplicator = {
+    Name = "DZMarkRuptureApplicator",
+}
+
+EffectData.DZMarkRuptureTargetApplicator =
+{
+    OnApplyFunctionName = "DZAIOnRuptureDashHit",
+}
+
+-- no use
+EffectData.DZPunchRuptureWeapon =
+{
+    OnApplyFunctionName = "DZAIOnRuptureWeaponHit",
+}
+
+EffectData.DZMarkRuptureTarget =
+{
+    OnApplyFunctionName = "DZAIMarkRuptureTargetApply",
+    OnClearFunctionName = "DZAIMarkRuptureTargetClear",
 }

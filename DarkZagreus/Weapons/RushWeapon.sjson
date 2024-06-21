@@ -216,7 +216,7 @@
             }
             {
                 Trigger = "Fire"
-                Name = "DarkGilgameshRushRupture" // original is RushRuptureWeapon, for AspectofGilgamesh
+                Name = "DZRushRupture" // original is RushRuptureWeapon, for AspectofGilgamesh
                 Type = "WEAPON_FIRE"
                 Duration = 0.15
                 Active = false

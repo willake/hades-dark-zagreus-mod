@@ -466,7 +466,24 @@
                 DisableRotate = true
                 DisableAttack = true
                 RequestTriggerLock = true
-                }]
-            }
+            }]
+        }
+        {
+            Name = "DarkSpearThrowInvisibleReturn"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            FireFromObstacle = "DarkSpearReturnPoint"
+            DestroyTargetedObstacle = true
+        }
+        {
+            Name = "DarkSpearThrowImmolation"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "DarkSpearThrowImmolation"
+            ClearFireRequestOnChargeCancel = false
+            // FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            // IgnoreOwnerAttackDisabled = true
+        }
     ]
 }

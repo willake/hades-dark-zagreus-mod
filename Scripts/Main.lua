@@ -1,13 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end 
 DZDebugPrintString(string.format("Mod is loaded. Version: %s Data version: %s", DarkZagreus.Version, DarkZagreus.DataVersion))
 
-DZUtil = {
-    Upgrade = {},
-    Trait = {}
-}
-
-SaveIgnores["DZUtil"] = true
-
 -- entering hades boss room
 OnAnyLoad { "D_Boss01", function(triggerArgs)
     DZDebugPrintString("Enter D_Boss01")
@@ -15,45 +8,42 @@ OnAnyLoad { "D_Boss01", function(triggerArgs)
     if ActiveEnemies ~= nil then
         for enemyId, enemy in pairs( ActiveEnemies ) do
             DZDebugPrintString("Hades Object ID " .. enemy.ObjectId)
-            -- equip weapon
-            local weaponData = {}
-            
-            if DZPersistent.PrevRunRecord then
+
+            local weaponData = DarkZagreus.DefaultAIWeapon
+            local traits = DarkZagreus.DefaultAITraits
+
+            if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version == DarkZagreus.DataVersion then
                 weaponData = DZPersistent.PrevRunRecord.Weapon
                 
                 if weaponData and DZPersistent.PrevRunRecord.History then
                     DZTrainAI()
                 end
+
+                traits = DZPersistent.PrevRunRecord.Traits
             end
+            
+            -- Note(Huiun): equip weapons first so that we can apply traits 
+            DZWeaponData[weaponData.WeaponName].Equip(enemy)
+            DZDebugPrintTable("DZ Weapon Equipped", weaponData)
 
-            if DZPersistent.PrevRunRecord 
-                and DZPersistent.PrevRunRecord.Version == DarkZagreus.DataVersion 
-                and weaponData 
-                and weaponData.WeaponName 
-                and weaponData.ItemIndex then
-                DZWeaponData[weaponData.WeaponName][weaponData.ItemIndex].Equip(enemy)
-                DZDebugPrintTable("DZ Weapon Equipped", weaponData)
-            else
-                DZWeaponData[DarkZagreus.DefaultAIWeapon.WeaponName][DarkZagreus.DefaultAIWeapon.ItemIndex].Equip(enemy)
-                DZDebugPrintTable("DZ Weapon Equipped", 
-                {
-                    WeaponName = DarkZagreus.DefaultAIWeapon.WeaponName,
-                    ItemIndex = DarkZagreus.DefaultAIWeapon.ItemIndex
-                })
-            end 
+            -- Note(Huiun): apply weapon traits first
+            for index, trait in ipairs(traits) do
+                if trait.Name and DarkZagreus.WeaponTraits[trait.Name] then
+                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZ" .. trait.Name, Rarity = trait.Rarity})}) 
+                end   
+            end
+            DZDebugPrintString("Weapon Trait Applied")
 
-            -- DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZSwordCriticalParryTrait", Rarity = "Legendary"})})
+            -- Note(Huiun): apply traits based on avilable traits
+            for index, trait in ipairs(traits) do
+                if trait.Name and DarkZagreus.AvailableTraits[trait.Name] then
+                    DZUtil.Trait.AddTraitToUnit({ Unit = enemy, TraitData = GetProcessedTraitData({Unit = enemy, TraitName = "DZ" .. trait.Name, Rarity = trait.Rarity})}) 
+                end     
+            end
+            DZDebugPrintString("Other Traits Applied")
         end
     end
 end }
-
--- DZPersistant for data which can be saved with save files
-DZPersistent = {}
-
--- DZTemp for data should be deleted after leaving the game
-DZTemp = {}
-
-SaveIgnores["DZTemp"] = true
 
 -- Load Dark Zagreus's portrait
 local package = "DarkZagreus"

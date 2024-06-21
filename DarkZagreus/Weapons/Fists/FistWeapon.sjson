@@ -695,5 +695,55 @@
                 }
             ]
         }
+        {
+            Name = "DarkFistSpecialVacuum"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "DarkFistSpecialVacuum"
+            ClearFireRequestOnChargeCancel = false
+            FullyAutomatic = true
+            // AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+            SetCompleteAngleOnFire = true,
+        }
+        {
+            Name = "DZRushRupture"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "DZRushRuptureProjectile"
+        }
+        {
+            Name = "DZFistDetonation"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            FireSound = "/SFX/StabSplatterSmall"
+            Projectile = "DZFistDetonationProjectile"
+        }
+        {
+            Name = "DZMarkRuptureApplicator"
+            InheritFrom = "1_BaseDZMagicWeapon"
+            Type = "GUN"
+            Projectile = "null"
+            FullyAutomatic = true
+            AutoLock = true
+            FireFx = "null"
+            IgnoreOwnerAttackDisabled = true
+	        Effects = [
+                {
+                    Name = "DZMarkRuptureTarget"
+                    Duration = 10.0
+                    Type = "DAMAGE_OVER_TIME"
+                    Modifier = 0
+                    Active = true
+                    TimeModifierFraction = 0
+                    FrontFx = "null"
+                    BackFx = "null"
+                    Stacks = true
+                    MaxStacks = 100
+                    ExtendDurationOnReapply = false
+                }
+            ]
+        }
     ]
 }

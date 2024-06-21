@@ -7,7 +7,7 @@ WeaponData.DarkSpear =
 
 		AIData =
 		{
-			AttackDistance = 300,
+			AttackDistance = 400,
 			AIAngleTowardsPlayerWhileFiring = true,
 			AITrackTargetDuringCharge = true,
 			ChainedWeapon = "DarkSpear2",
@@ -202,7 +202,6 @@ WeaponData.DarkSpearThrow =
 			AttackDistanceMin = 600,
 			AttackDistanceMax = 880,
 			AIAngleTowardsPlayerWhileFiring = true,
-			AITrackTargetDuringCharge = true,
 			AIMoveWithinRangeTimeout = 1.0,
 			-- PreFireDuration = 0.12, 
 			FireDuration = 0.5, -- 0.12 + 0.4
@@ -361,6 +360,13 @@ WeaponData.DarkSpearRush =
 		Name = "DarkSpearRush",
 		-- FailToFireFunctionName = "SetSpearTeleportBuffer",
 
+		AIData =
+		{
+			FireDuration = 0.4,
+			SkipMovement = true,
+			-- PostFireWeapon = "DarkAchillesSpearThrowInvisibleReturn"
+		},
+
 		SimSlowBlur =
 		{
 			Strength = 0.3,
@@ -401,4 +407,49 @@ WeaponData.DarkSpearRush =
 		NoExpressiveAnim = true,
 
 		Upgrades = { },
+	}
+
+
+WeaponData.DarkSpearThrowInvisibleReturn =
+	{
+		InheritFrom = { "DarkSpearThrowReturn" },
+		CompleteObjectivesOnFire = {},
+	}
+
+WeaponData.DarkSpearThrowImmolation =
+	{
+		InheritFrom = { "DarkSpearSpin" },
+		FireScreenshake = { Distance = 0, Speed = 0, FalloffSpeed = 0, Duration = 0, DynamicAngleOffset = 0 },
+		Sounds =
+		{
+			FireSounds =
+			{
+				{ Name = "/SFX/Player Sounds/ZagreusSpearSwipe" },
+				{ Name = "/SFX/Enemy Sounds/Megaera/MegaeraRapidEnergyBlastFire" }
+			},
+			ImpactSounds =
+			{
+				Invulnerable = "/SFX/SwordWallHitClank",
+				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+				Bone = "/SFX/MetalBoneSmash",
+				Brick = "/SFX/MetalStoneClang",
+				Stone = "/SFX/MetalStoneClang",
+				Organic = "/SFX/StabSplatterSmall",
+				StoneObstacle = "/SFX/SwordWallHitClank",
+				BrickObstacle = "/SFX/SwordWallHitClank",
+				MetalObstacle = "/SFX/SwordWallHitClank",
+				BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+			},
+		},
+	}
+
+EffectData.DZSpearRushBonus =
+	{
+		OnApplyFunctionName = "DZAISpearRushBonusApply",
+	}
+
+EffectData.DZMarkTargetSpin = 
+	{
+		OnApplyFunctionName = "DZAIMarkTargetSpinApply",
+		OnClearFunctionName = "DZAIMarkTargetSpinClear",
 	}

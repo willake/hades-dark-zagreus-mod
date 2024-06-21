@@ -11,8 +11,8 @@ function DarkZagreusAI( enemy, currentRun )
     DZTemp.AI.Weapon = DarkZagreus.DefaultAIWeapon
     DZTemp.AI.HasShieldBonus = false
     DZTemp.AI.HasPowerShot = false
-    if enemy.MaxAmmo then
-        DZTemp.AI.Ammo = enemy.MaxAmmo
+    if enemy.DZActionConfig.MaxAmmo then
+        DZTemp.AI.Ammo = enemy.DZActionConfig.MaxAmmo
     end
 
     local ailoop = _G[DZWeaponAI[DarkZagreus.DefaultAIWeapon.WeaponName]]
@@ -349,6 +349,20 @@ function DZAIDoRegularFire(enemy, weaponAIData, targetId)
 		wait( weaponAIData.FireDuration, enemy.AIThreadName )
 	end
 
+    if enemy.OnFireWeapons and enemy.OnFireWeapons[weaponAIData.WeaponName] then
+		for onFireWeaponName, onFireWeaponData in pairs( enemy.OnFireWeapons[weaponAIData.WeaponName] ) do
+			if type(onFireWeaponData) == "table" then
+				if onFireWeaponData.UseTargetLocation then
+					FireWeaponFromUnit({ Weapon = onFireWeaponName, Id = CurrentRun.Hero.ObjectId, DestinationId = targetId })
+				else
+					FireWeaponFromUnit({ Weapon = onFireWeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+				end
+			else
+				FireWeaponFromUnit({ Weapon = onFireWeaponName, Id = enemy.ObjectId, DestinationId = enemy.ObjectId })
+			end
+		end
+	end
+
     if weaponAIData.FireFxOnSelf then
         StopAnimation({ DestinationId = enemy.ObjectId, Name = weaponAIData.FireFxOnSelf })
     end
@@ -500,4 +514,40 @@ function DZGetRandomAngleInOppositeDirection(angle)
     local r = math.random(0, 180)
 
     return (angle + 90 + r) % 360
+end
+
+function DZUtil.AI.GetWeaponAIData(enemy)
+    local weaponAIData = ShallowCopyTable(enemy.DefaultAIData) or enemy
+	if WeaponData[enemy.WeaponName] ~= nil and WeaponData[enemy.WeaponName].AIData ~= nil then
+		local weaponData = ShallowCopyTable(WeaponData[enemy.WeaponName].AIData)
+
+        -- Note(Huiun): For weapon traits
+        if enemy.WeaponDataOverride and enemy.WeaponDataOverride[enemy.WeaponName] and enemy.WeaponDataOverride[enemy.WeaponName].AIData then
+            OverwriteTableKeys( weaponData, enemy.WeaponDataOverride[enemy.WeaponName].AIData)
+        end
+
+		OverwriteTableKeys( weaponAIData, weaponData)
+	end
+
+	weaponAIData.WeaponName = enemy.WeaponName
+
+	return weaponAIData
+end
+
+function DZUtil.AI.GetWeaponAIDataByName(enemy, weaponName)
+    local weaponAIData = ShallowCopyTable(enemy.DefaultAIData) or enemy
+	if WeaponData[weaponName] ~= nil and WeaponData[weaponName].AIData ~= nil then
+		local weaponData = ShallowCopyTable(WeaponData[weaponName].AIData)
+
+        -- Note(Huiun): For weapon traits
+        if enemy.WeaponDataOverride and enemy.WeaponDataOverride[weaponName] and enemy.WeaponDataOverride[weaponName].AIData then
+            OverwriteTableKeys( weaponData, enemy.WeaponDataOverride[weaponName].AIData)
+        end
+
+		OverwriteTableKeys( weaponAIData, weaponData)
+	end
+
+	weaponAIData.WeaponName = weaponName
+
+	return weaponAIData
 end

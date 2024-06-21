@@ -159,6 +159,8 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
         DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
     end
 
+    DZPersistent.CurRunRecord.Traits = DZUtil.Record.ExtractSimpleTraitTable(CurrentRun.Hero)
+
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
     DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
     -- DZSavePrevRunRecordToFile() -- only working on x86
@@ -192,6 +194,10 @@ DZCreateNewRecord = function()
         },
         History = 
         {
+        },
+        Traits = 
+        {
+
         }
     }
   
@@ -278,3 +284,12 @@ OnAnyLoad { "DeathArea", function(triggerArgs)
         DZClearAllRecordInMemory()
     end 
 end}
+
+function DZUtil.Record.ExtractSimpleTraitTable(hero)
+    local traits = {}
+    for i, v in ipairs(hero.Traits) do
+        table.insert(traits, { Name = v.Name, Rarity = v.Rarity })
+    end
+
+    return traits
+end

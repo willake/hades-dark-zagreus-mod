@@ -229,31 +229,32 @@ function DZAISelectGunWeapon(enemy, actionData)
     enemy.ChainedWeapon = nil
 
     local lastAction = DZAIGetLastAction(enemy)
+    local actionConfig = enemy.DZActionConfig
 
     -- use special attack
     if r < actionData.SpecialAttack then
         enemy.DZ.TempAction = 2
-        enemy.WeaponName = enemy.SpecialAttackWeapon
+        enemy.WeaponName = actionConfig.SpecialAttackWeapon
         return enemy.WeaponName
     end
 
     -- use dash
     if r < actionData.SpecialAttack + actionData.DashToward then
         enemy.DZ.TempAction = 0
-        enemy.WeaponName = enemy.DashWeapon
+        enemy.WeaponName = actionConfig.DashWeapon
         return enemy.WeaponName
     end
 
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway then
         enemy.DZ.TempAction = 3
-        enemy.WeaponName = enemy.DashWeapon
+        enemy.WeaponName = actionConfig.DashWeapon
         enemy.DZ.FireTowardTarget = false
         return enemy.WeaponName
     end
 
     if r < actionData.SpecialAttack + actionData.DashToward + actionData.DashAway + actionData.ManualReload then
         enemy.DZ.TempAction = 5
-        enemy.WeaponName = enemy.ReloadWeapon
+        enemy.WeaponName = actionConfig.ReloadWeapon
         return enemy.WeaponName
     end
 
@@ -268,22 +269,22 @@ function DZAISelectGunWeapon(enemy, actionData)
     if (lastAction.Action == 0 or lastAction.Action == 3) and _worldTime - enemy.DZ.LastActionTime < 0.45 then
 
         if DZTemp.AI.HasPowerShot then
-            enemy.WeaponName = enemy.DashAttackPowerWeapon
+            enemy.WeaponName = actionConfig.DashAttackPowerWeapon
             return enemy.WeaponName    
         end
 
-        enemy.WeaponName = enemy.DashAttackWeapon
+        enemy.WeaponName = actionConfig.DashAttackWeapon
         return enemy.WeaponName
     end
 
     -- or just do a regular attack
 
     if DZTemp.AI.HasPowerShot then
-        enemy.WeaponName = enemy.PrimaryPowerWeapon
+        enemy.WeaponName = actionConfig.PrimaryPowerWeapon
         return enemy.WeaponName    
     end
 
-    enemy.WeaponName = enemy.PrimaryWeapon
+    enemy.WeaponName = actionConfig.PrimaryWeapon
     return enemy.WeaponName
 end
 
@@ -321,7 +322,7 @@ function DZAIReloadGun(enemy)
     if enemy.DashAttackPowerWeapon then
         RunWeaponMethod({ Id = enemy.ObjectId, Weapon = enemy.DashAttackPowerWeapon, Method = "RefillAmmo" }) 
     end
-    DZTemp.AI.Ammo = enemy.MaxAmmo
+    DZTemp.AI.Ammo = enemy.DZActionConfig.MaxAmmo
     DZTemp.AI.Reloading = false
     return true
 end
@@ -335,7 +336,7 @@ function DZAIManualReload( enemy )
 
         local weapon = DZTemp.AI.Weapon
 
-        if DZTemp.AI.Ammo == enemy.MaxAmmo then
+        if DZTemp.AI.Ammo == enemy.DZActionConfig.MaxAmmo then
             -- aspect of hestia can reload whenever
             if weapon and (weapon.WeaponName ~= "GunWeapon" or weapon.ItemIndex ~= 3) then
                 return

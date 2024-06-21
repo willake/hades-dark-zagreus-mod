@@ -29,6 +29,8 @@ function DZUtil.Trait.AddTraitToUnit(args)
 		end
 	end
 
+	DZUtil.Trait.ApplyDZActionConfig(unit, traitData)
+
     -- Note(Huiun): I think I won't need this, but leave here
 	-- if ( traitData.EnemyPropertyChanges or traitData.AddEnemyOnDeathWeapons ) and ActiveEnemies ~= nil then
 	-- 	for enemyId, enemy in pairs( ActiveEnemies ) do
@@ -46,6 +48,19 @@ function DZUtil.Trait.AddTraitToUnit(args)
 	-- 	end
 	-- 	ShowSuperMeter()
 	-- end
+end
+
+-- Note(Huiun): This is my custom function for applying config for actions, like whether return spear after throwing it
+function DZUtil.Trait.ApplyDZActionConfig(unit, traitData)
+	if traitData and traitData.DZActionConfig then
+		if unit.DZActionConfig == nil then
+			unit.DZActionConfig = {}
+		end
+
+		for key, val in pairs(traitData.DZActionConfig) do
+			unit.DZActionConfig[key] = val
+		end
+	end
 end
 
 function DZUtil.Trait.EquipReferencedWeapons( unit, traitData )

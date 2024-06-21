@@ -11,6 +11,85 @@
         IgnoreDodge = true
         Effects = [
           {
+            Name = "StunSpeed"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Duration = 0.0
+            DisableMove = true
+            Active = false
+            CanAffectInvulnerable = true
+            FrontFx = "StunnedFrontAphrodite"
+            BackFx = "StunnedBackAphrodite"
+          }
+          {
+            Name = "StunDisarm"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            DisableAttack = true
+            Duration = 0.0
+            Active = false
+            CanAffectInvulnerable = true
+            FrontFx = "null"
+            FlashFrontFxWhenExpiring = true
+          }
+          {
+            Name = "OnHitStun"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Duration = 0
+            DisableMove = true
+            DisableRotate = true
+            DisableAttack = true
+            Active = false
+            CanAffectInvulnerable = false
+            FrontFx = "null"
+          }
+          {
+            Name = "DemeterSlow"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Duration = 8.0
+            Stacks = true
+            ExtendDurationOnReapply = true
+            IsVulnerabilityEffect = true
+            MaxStacks = 10
+            Active = false
+            StartFx = "DemeterSlowImpact"
+            ReapplyFx = "DemeterSlowImpact"
+            Sound = "/SFX/Player Sounds/DemeterFrozenDebuffSFX"
+            StopSoundOnFinishFade = 0.5
+            FrontFx = "DemeterSlowFront"
+            BackFx = "DemeterSlowBack"
+            FlashFrontFxWhenExpiring = true
+            FlashBackFxWhenExpiring = true
+            TimeModifierFraction = 0
+            ExpiringRapidFlashThreshold = 0.3
+            ElapsedTimeMultiplier = 0.96
+          }
+          {
+            Name = "ReduceDamageOutput"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "DAMAGE_OUTPUT"
+            Duration = 4
+            Modifier = 0.7
+            Active = false
+            TimeModifierFraction = 0
+            BackFx = "AphroditeDebuffB"
+            FlashFrontFxWhenExpiring = true
+            IsVulnerabilityEffect = true
+          }
+          {
+            Name = "IncreaseDamageTaken"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "DAMAGE_TAKEN"
+            Duration = 4
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
+          }
+          {
             Name = "DZMarkTarget"
             Duration = 3.0
             Type = "DAMAGE_TAKEN"
@@ -22,6 +101,29 @@
             IgnoreName = "HydraTooth"
           }
           {
+            Name = "DZMarkBondTarget"
+            Duration = 7.0
+            Type = "DAMAGE_TAKEN"
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
+            FrontFx = "null"
+            BackFx = "null"
+          }
+          {
+            Name = "PunchRuptureWeapon"
+            Duration = 10.0
+            Type = "DAMAGE_OVER_TIME"
+            Modifier = 0
+            Active = false
+            TimeModifierFraction = 0
+            FrontFx = "null"
+            BackFx = "null"
+            Stacks = true
+            MaxStacks = 100
+            ExtendDurationOnReapply = true
+          }
+          {
             Name = "DZMarkTargetSpin"
             Duration = 10.0
             Modifier = 1
@@ -29,6 +131,123 @@
             TimeModifierFraction = 0
             FrontFx = "MarkTargetHades"
             BackFx = "null"
+          }
+          {
+            // Note(Huiun): TODO, implement this
+            Name = "ClearMarkTargetSpin"
+            Duration = 0
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
+            FrontFx = "MarkTargetSecondary"
+            BackFx = "null"
+          }
+          {
+            Name = "DelayedDamage"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "DAMAGE_OVER_TIME"
+            Amount = 0.0
+            Stacks = false
+            ExtendDurationOnReapply = false
+            Duration = 1.1
+            FrontFx = "AresSwordHoverLoop"
+            BackFx = "null"
+            Active = false
+            TimeModifierFraction = 0
+            ExpiringTimeThreshold = 0.26
+            ExpiringFrontFx = "AresSwordHoverDrop"
+            ConsumedFx = "AresSwordHoverExplode"
+            DamageOnExpire = true
+            IsVulnerabilityEffect = true
+          }
+          {
+            Name = "DamageOverTime"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "DAMAGE_OVER_TIME"
+            IsVulnerabilityEffect = true
+            Amount = 0.0
+            Cooldown = 0.5
+            Duration = 4
+            IndependentStackCooldown = true
+            Stacks = true
+            ExtendDurationOnReapply = true
+            MaxStacks = 5
+            FrontFx = "DionysusStatusFx"
+            Active = false
+            TimeModifierFraction = 0
+          }
+          {
+            Name = "WineSlow"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "SPEED"
+            Duration = 3.0
+            Modifier = 1
+            Active = false
+            CanAffectInvulnerable = false
+            TimeModifierFraction = 0
+          }
+          {
+            Name = "DionysusPlagueWeapon"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "WEAPON_FIRE"
+            Duration = 4
+            ExtendDurationOnReapply = true
+            Active = false
+            TimeModifierFraction = 0
+          }
+          {
+            Name = "DamageOverDistance"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "DAMAGE_OVER_DISTANCE"
+            Cooldown = 0.2
+            Duration = 3
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
+            FrontFx = "PoseidonDebuffSurge"
+            ExpiringTimeThreshold = 0.1
+            ExpiringFrontFx = "PoseidonDebuffExpire"
+            MinSpeed = 0
+            SilentImpact = true
+            SpeedCap = 0
+            IsVulnerabilityEffect = true
+          }
+          {
+            Name = "AthenaBackstabVulnerability"
+            Modifier = 1
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            FrontFx = "null"
+            BackFx = "AthenaBackstabDebuffStatus"
+            Duration = 5
+            Active = false
+            IsVulnerabilityEffect = true
+          }
+          {
+            Name = "ZeusAttackPenalty"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            FrontFx = "ZeusStaticArcEmitter"
+            BackFx = "null"
+            Duration = 10
+            Active = false
+            IsVulnerabilityEffect = true
+          }
+          {
+            Name = "DelayedKnockback"
+            OnlyAffectName = "_PlayerUnit"
+            // IgnoreName = "_PlayerUnit"
+            Type = "DELAYED_KNOCKBACK"
+            Cooldown = 0.6
+            Duration = 0.7
+            Modifier = 1
+            Active = false
+            TimeModifierFraction = 0
           }
         ]
         // ignore effects

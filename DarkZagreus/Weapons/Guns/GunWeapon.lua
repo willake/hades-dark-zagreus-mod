@@ -158,11 +158,29 @@ WeaponData.DarkSniperGun = {
     InheritFrom = { "DarkGun" },
     DashWeapon = nil,
     OnFiredFunctionName = "ClearManualReloadVFX",
+
+    AIData =
+    {
+        AttackDistance = 680,
+        AIAngleTowardsPlayerWhileFiring = true,
+        AITrackTargetDuringCharge = true,
+        FireDuration = 0.18, -- 0.07 + 0.1
+        AIMoveWithinRangeTimeout = 0.5,
+    },
 }
 
 WeaponData.DarkSniperGunDash = {
     InheritFrom = { "DarkSniperGun" },
     -- DashWeapon = SniperGunWeaponDash,
+
+    AIData =
+    {
+        GiveupDistance = 680,
+        SkipMovement = true,
+        AIAngleTowardsPlayerWhileFiring = true,
+        AITrackTargetDuringCharge = true,
+        FireDuration = 0.1, -- 0.07 + 0.02
+    },
 }
 
 -- for aspect of lucifer
@@ -182,4 +200,20 @@ WeaponData.DarkManualReload =
     {
         AttackDistance = 680,
     },
+}
+
+WeaponData.DZManualReloadEffectApplicator =
+{
+    -- CompleteObjectivesOnFire = { "ManualReload" },
+}
+
+EffectData.DZManualReloadBonus =
+{
+    OnApplyFunctionName = "DZAIManualReloadBonusApply",
+    OnClearFunctionName = "DZAIManualReloadBonusClear",
+}
+
+EffectData.DZGrenadeSelfDamageOutput =
+{
+    OnApplyFunctionName = "DZAIGrenadeSelfDamageOutputApply",
 }
