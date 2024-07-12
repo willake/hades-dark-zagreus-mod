@@ -99,7 +99,7 @@ function DZAICheckComboPowers( victim, attacker, triggerArgs, sourceWeaponData )
 
 	attacker.ComboCount = (attacker.ComboCount or 0) + sourceWeaponData.ComboPoints
 
-    DZDebugPrintString(string.format("Combo %d", attacker.ComboCount))
+    DZUtil.Debug.PrintString(string.format("Combo %d", attacker.ComboCount))
 
 	if attacker.ComboCount >= attacker.ComboThreshold and not attacker.ComboReady then
 		-- for aspect of demeter, 12 combos get power special
@@ -134,7 +134,7 @@ end
 
 function DZAICheckComboPowerReset( attacker, weaponData )
 	if weaponData ~= nil and attacker.ComboReady then
-        DZDebugPrintString("Reset Combo")
+        DZUtil.Debug.PrintString("Reset Combo")
 		DZTemp.AI.HasPowerShot = false
 		attacker.ComboReady = false
 		attacker.ComboCount = 0
@@ -163,7 +163,7 @@ function DZAICheckFistDetonation( attacker, victim, triggerArgs )
 	end
 
 	if ( not victim.ActiveEffects or not victim.ActiveEffects["DZMarkRuptureTarget"] ) and triggerArgs.SourceWeapon == "DarkFistSpecialDash" then
-		DZDebugPrintString("Pass")
+		DZUtil.Debug.PrintString("Pass")
 		local delay = 0.1
 		-- original script use MapState
 		DZTemp.AI.QueuedDetonations = DZTemp.AI.QueuedDetonations or {}

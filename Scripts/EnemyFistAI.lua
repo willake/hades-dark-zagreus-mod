@@ -59,7 +59,7 @@ function DZAIDoFistAILoop(enemy, currentRun, targetId)
             attackSuccess = DZAIDoFistAttackOnce( enemy, currentRun, targetId, weaponAIData, actionData )
 
             if not attackSuccess then
-                DZDebugPrintString("Attack failed. Gonna try again.")
+                DZUtil.Debug.PrintString("Attack failed. Gonna try again.")
 				enemy.AINotifyName = "CanAttack"..enemy.ObjectId
 				NotifyOnCanAttack({ Id = enemy.ObjectId, Notify = enemy.AINotifyName, Timeout = 9.0 })
 				waitUntil( enemy.AINotifyName, enemy.AIThreadName )

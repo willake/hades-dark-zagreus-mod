@@ -2,11 +2,11 @@
 if not DarkZagreus.Config.Enabled then return end
 
 function DZStyxScribeSaveTrainingData(curRunRecord)
-    DZDebugPrintString("DZStyxScribeLoadTrainingData() - Not really save the file because StyxScribe is not found.")
+    DZUtil.Debug.PrintString("DZStyxScribeLoadTrainingData() - Not really save the file because StyxScribe is not found.")
 end
 
 function DZStyxScribeLoadTrainingData()
-    DZDebugPrintString("DZStyxScribeLoadTrainingData() - Not really load the file because StyxScribe is not found.")
+    DZUtil.Debug.PrintString("DZStyxScribeLoadTrainingData() - Not really load the file because StyxScribe is not found.")
 end
 
 function DZStyxScribeSaveTrainingDataCallback(message)
@@ -85,7 +85,7 @@ if StyxScribe then
     end
     
     DZStyxScribeLoadTrainingDataCallback = function (message)
-        DZDebugPrintString("DZStyxScribeLoadTrainingDataCallback: Recieved data from StyxScribe.")
+        DZUtil.Debug.PrintString("DZStyxScribeLoadTrainingDataCallback: Recieved data from StyxScribe.")
     
         local data = {
             Version = "",
@@ -109,7 +109,7 @@ if StyxScribe then
         end
 
         if data.Version ~= DarkZagreus.DataVersion then
-            DZDebugPrintString("Loaded data version not matched with current data version. Aborting...")
+            DZUtil.Debug.PrintString("Loaded data version not matched with current data version. Aborting...")
         end
     
         for input in fileLines[2]:gmatch("%S+") do
@@ -132,9 +132,9 @@ if StyxScribe then
             end
         end
     
-        DZDebugPrintString(string.format("Version: %s", data.Version))
-        DZDebugPrintTable("Weapon", data.Weapon)
-        DZDebugPrintString(string.format("Data count: %d", #data.History))
+        DZUtil.Debug.PrintString(string.format("Version: %s", data.Version))
+        DZUtil.Debug.PrintTable("Weapon", data.Weapon)
+        DZUtil.Debug.PrintString(string.format("Data count: %d", #data.History))
 
         if data.Weapon ~= nil and data.History ~= nil then
             DZPersistent.PrevRunRecord = data
