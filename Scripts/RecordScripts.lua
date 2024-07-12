@@ -148,9 +148,9 @@ end}
 -- stop recording and train a new model when the run is cleared
 ModUtil.Path.Wrap("RecordRunCleared", function(base)
     if CurrentRun.Cleared ~= nil then
-        DZDebugPrintString("RecordRunCleared() - EndRun " .. tostring(CurrentRun.Cleared)) 
+        DZUtil.Debug.PrintString("RecordRunCleared() - EndRun " .. tostring(CurrentRun.Cleared)) 
     else
-        DZDebugPrintString("RecordRunCleared() - EndRun " .. "false")
+        DZUtil.Debug.PrintString("RecordRunCleared() - EndRun " .. "false")
     end
     DZPersistent.IsRecording = false
 
@@ -172,7 +172,7 @@ end, DarkZagreus)
 
 --- Managing Start/End recording end
 function DZUtil.Record.CreateNewRecord() 
-    DZDebugPrintString("DZUtil.Record.CreateNewRecord() - Create new record file, enable isRecording to true") 
+    DZUtil.Debug.PrintString("DZUtil.Record.CreateNewRecord() - Create new record file, enable isRecording to true") 
     local weapon = GameState.LastInteractedWeaponUpgrade
 
     if weapon == nil then
@@ -209,7 +209,7 @@ end
 
 DZUtil.Record.LogRecord = function (state, action) 
     if DarkZagreus.EnablePlayerLog then
-        DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        DZUtil.Debug.PrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
         state.IsReloading, state.Ammo,
         action.DashToward, action.Attack, action.SpecialAttack, action.DashAway, action.ChargeAttack, action.ManualReload)) 
@@ -243,29 +243,29 @@ function DZUtil.Record.OverridePendingRecord(state, action)
 end
 
 function DZUtil.Record.SaveCurRunRecordAsPrevRunRecord()
-    DZDebugPrintString("DZUtil.Record.SaveCurRunRecordAsPrevRunRecord()")
+    DZUtil.Debug.PrintString("DZUtil.Record.SaveCurRunRecordAsPrevRunRecord()")
     DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
 end
 
 function DZUtil.Record.ClearPrevRecordInMemory()
-    DZDebugPrintString("DZUtil.Record.ClearPrevRecordInMemory() - Clear previous record")
+    DZUtil.Debug.PrintString("DZUtil.Record.ClearPrevRecordInMemory() - Clear previous record")
     DZPersistent.PrevRunRecord = {}
 end
 
 function DZUtil.Record.ClearAllRecordInMemory()
-    DZDebugPrintString("DZClearAllRecord() - Clear all records")
+    DZUtil.Debug.PrintString("DZClearAllRecord() - Clear all records")
     -- DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
     -- DZPersistent.CurRunRecord = {}
 end
 
 function DZUtil.Record.SavePrevRunRecordToFile()
-    DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
+    DZUtil.Debug.PrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
     DZSaveTrainingData(DZPersistent.PrevRunRecord)
 end
 
 function DZUtil.Record.LoadPreRunRecordFromFile()
-    DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
+    DZUtil.Debug.PrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
     local record = DZLoadTrainingData()
     if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
         DZPersistent.PrevRunRecord = record
@@ -278,7 +278,7 @@ end
 -- clean up data if the version is not matched
 OnAnyLoad { "DeathArea", function(triggerArgs)
     if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DarkZagreus.DataVersion then
-        DZDebugPrintString("DataVersion is not matched, clear all previous data")
+        DZUtil.Debug.PrintString("DataVersion is not matched, clear all previous data")
         DZUtil.Record.ClearAllRecordInMemory()
     end 
 end}

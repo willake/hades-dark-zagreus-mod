@@ -105,7 +105,7 @@ function DZUIHandleConfirm(triggerArgs)
     local selection = CodexStatus.SelectedEntryNames[CodexStatus.SelectedChapterName]
 
     if Codex.DZCommands.Entries[selection] ~= nil then
-		DZDebugPrintString("Trying to execute command : " .. selection)
+		DZUtil.Debug.PrintString("Trying to execute command : " .. selection)
 		DZUIUseCommand(selection, triggerArgs)
     end
 end
@@ -156,7 +156,7 @@ function DZUIHandleForceNextRoomBossRoom()
 	if CurrentRun.CurrentRoom == nil or CurrentRun.CurrentRoom.Name == nil or CurrentRun.CurrentRoom.Name == "D_Boss01" then
 		ModUtil.Hades.PrintDisplay("Can't set next room to boss room. Either you haven't started a run or you're already in boss room", 3, {255, 0, 0, 255})
 	else
-		DZDebugForceNextRoomBossRoom()
+		DZUtil.Debug.ForceNextRoomBossRoom()
 		ModUtil.Hades.PrintDisplay("Successfully set next room to boss room", 3, {0, 255, 255, 255})
 	end
 end

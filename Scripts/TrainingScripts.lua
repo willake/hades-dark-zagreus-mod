@@ -3,7 +3,7 @@ if not DarkZagreus.Config.Enabled then return end
 function DZTrainAI()
 
     if DZPersistent.PrevRunRecord.Version ~= DarkZagreus.DataVersion then
-        DZDebugPrintString("DZTrainAI() - Mod version does not match with the current one")
+        DZUtil.Debug.PrintString("DZTrainAI() - Mod version does not match with the current one")
         return
     end
 
@@ -15,12 +15,12 @@ function DZTrainAI()
     local network = Luann:new(settings.ModelArchitecture, settings.LearningRate, threshold)
 
     if DZPersistent.PrevRunRecord == nil then
-        DZDebugPrintString("DZTrainAI() - PrevRunRecord is missing")
+        DZUtil.Debug.PrintString("DZTrainAI() - PrevRunRecord is missing")
         return
     end
 
     if DZPersistent.PrevRunRecord.History == nil or #DZPersistent.PrevRunRecord.History == 0 then
-        DZDebugPrintString("DZTrainAI() - History is missing")
+        DZUtil.Debug.PrintString("DZTrainAI() - History is missing")
         return
     end
 
@@ -42,7 +42,7 @@ function DZTrainAI()
     -- improve generalizability
     DZShuffleDataset(dataset)
 
-    DZDebugPrintString("DZTrainAI() - Start training, data count: " .. tostring(#dataset))
+    DZUtil.Debug.PrintString("DZTrainAI() - Start training, data count: " .. tostring(#dataset))
 
     for i = 1, settings.Epoches do
         for _, data in ipairs(dataset) do
@@ -54,11 +54,11 @@ function DZTrainAI()
 end
 
 function DZSaveTrainingData(curRunRecord)
-    DZDebugPrintString("DZSaveTrainingData() - Not really save the file because it is x64 version.")
+    DZUtil.Debug.PrintString("DZSaveTrainingData() - Not really save the file because it is x64 version.")
 end
 
 function DZLoadTrainingData(filePath)
-    DZDebugPrintString("DZLoadTrainingData() - Not really load a file because it is x64 version.")
+    DZUtil.Debug.PrintString("DZLoadTrainingData() - Not really load a file because it is x64 version.")
     return nil
 end
 
@@ -97,7 +97,7 @@ if io and os then
         local file = io.open(filePath, "w+")
 
         if curRunRecord == nil or curRunRecord.Weapon == nil or curRunRecord.History == nil then
-            DZDebugPrintString("DZSaveTrainingData() - curRunRecord is nil")
+            DZUtil.Debug.PrintString("DZSaveTrainingData() - curRunRecord is nil")
             return
         end
         

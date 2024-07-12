@@ -205,14 +205,14 @@ function DZAIMakeActionData(state, lastActions)
     local consideration = settings.Consideration -- how many last actions need to be considered
 
     if DarkZagreus.EnableAILog then
-        DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
+        DZUtil.Debug.PrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
             state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
             state.IsReloading, state.Ammo))
     end
 
     if DZTemp.Model == nil or #DZTemp.Model == 0 or #lastActions < consideration then
         if DarkZagreus.EnableAILog then
-            DZDebugPrintString("Model is not available, make random data.")
+            DZUtil.Debug.PrintString("Model is not available, make random data.")
         end
             return DZAIMakeRandomActionData(state)
     end
@@ -238,12 +238,12 @@ function DZAIMakeActionData(state, lastActions)
     local manualReloadProb = DZTemp.Model[4].cells[6].signal
 
     if DarkZagreus.EnableAILog then
-        DZDebugPrintString(string.format("dash toward prob | %.3f", dashTowardProb))
-        DZDebugPrintString(string.format("attack prob | %.3f", attackProb))
-        DZDebugPrintString(string.format("special prob | %.3f", specialProb))
-        DZDebugPrintString(string.format("dash away prob | %.3f", dashAwayProb))
-        DZDebugPrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
-        DZDebugPrintString(string.format("manual reload prob | %.3f", manualReloadProb)) 
+        DZUtil.Debug.PrintString(string.format("dash toward prob | %.3f", dashTowardProb))
+        DZUtil.Debug.PrintString(string.format("attack prob | %.3f", attackProb))
+        DZUtil.Debug.PrintString(string.format("special prob | %.3f", specialProb))
+        DZUtil.Debug.PrintString(string.format("dash away prob | %.3f", dashAwayProb))
+        DZUtil.Debug.PrintString(string.format("charged attack prob | %.3f", chargeAttackProb))
+        DZUtil.Debug.PrintString(string.format("manual reload prob | %.3f", manualReloadProb)) 
     end
 
     return {    

@@ -1,6 +1,6 @@
 if not DarkZagreus.Config.Enabled then return end 
 
-function DZDebugForceNextRoomBossRoom()
+function DZUtil.Debug.ForceNextRoomBossRoom()
     -- RoomOpening
     ForceNextRoom = "D_Boss01"
 
@@ -9,7 +9,7 @@ function DZDebugForceNextRoomBossRoom()
         local room = door.Room
         if room ~= nil then
             if ForceNextRoom ~= nil then
-                DZDebugPrintString("ForceNextRoom = " .. tostring(ForceNextRoom))
+                DZUtil.Debug.PrintString("ForceNextRoom = " .. tostring(ForceNextRoom))
             end
 
             local forcedRoomData = RoomData[ForceNextRoom]
@@ -19,11 +19,11 @@ function DZDebugForceNextRoomBossRoom()
     end
 end
 
-function DZDebugPrintString(text)
+function DZUtil.Debug.PrintString(text)
     DebugPrint({ Text = "@DarkZagreus " .. text })
 end
 
-function DZDebugPrintTable(tableName, table, depth)
+function DZUtil.Debug.PrintTable(tableName, table, depth)
     if table == nil then
         DebugPrint({ Text = "@DarkZagreus " .. tableName .. " is nil" })
         return
@@ -46,7 +46,7 @@ function DZDebugPrintTable(tableName, table, depth)
     DebugPrint({ Text = "@DarkZagreus " .. whiteSpaceBegin:sub(0, (depth - 1) * 2) .. (tostring(tableName) or "Table") .. " ={" })
     for k, v in pairs(table) do
         if type(v) == "table" then
-            DZDebugPrintTable(tostring(k), v, newDepth)
+            DZUtil.Debug.PrintTable(tostring(k), v, newDepth)
         else
             DebugPrint({ Text = whiteSpaceBegin .. tostring(k) .. "=" .. tostring(v) })
         end
