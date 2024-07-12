@@ -4,7 +4,7 @@ DarkZagreus.Config = {
     Enabled = true
 }
 
-DarkZagreus.Version = "v1.2.1"
+DarkZagreus.Version = "v1.3"
 DarkZagreus.DataVersion = "v7" -- for training data, when the data scheme chages, the version increases
 
 -- Config
