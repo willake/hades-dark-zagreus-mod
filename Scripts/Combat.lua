@@ -2,7 +2,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 -- check if is damaged
 ModUtil.Path.Wrap("DamageHero", function(base, victim, triggerArgs)
-    if DZCheckCanRecord() then
+    if DZUtil.Record.CheckCanRecord() then
         -- for record
         DZTemp.LastGetDamagedTime = _worldTime
 
@@ -27,7 +27,7 @@ end, DarkZagreus)
 -- check if damaged enemies
 ModUtil.Path.Wrap("DamageEnemy", function(base, victim, triggerArgs)
 
-    if DZCheckCanRecord() then
+    if DZUtil.Record.CheckCanRecord() then
         DZTemp.LastDamageEnemyTime = _worldTime
         
         if DZTemp.AI then
@@ -114,7 +114,7 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 			end
 
 			thread( MarkObjectiveComplete, "GunWeaponManualReload" )
-            if ReloadGun( attacker, weaponData ) and DZCheckCanRecord() then
+            if ReloadGun( attacker, weaponData ) and DZUtil.Record.CheckCanRecord() then
                 -- for training, other codes are the same
                 DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(5))
             end
@@ -122,7 +122,7 @@ ModUtil.Path.Override("ManualReload", function ( attacker )
 			if HeroHasTrait("GunManualReloadTrait") then
 				thread( MarkObjectiveComplete, "ManualReload" )
 				ApplyEffectFromWeapon({ Id = CurrentRun.Hero.ObjectId, DestinationId = CurrentRun.Hero.ObjectId, WeaponName = "ManualReloadEffectApplicator", EffectName = "ManualReloadBonus" })
-                if DZCheckCanRecord() then
+                if DZUtil.Record.CheckCanRecord() then
                     DZTemp.HasPowerShot = true 
                 end
 			end
