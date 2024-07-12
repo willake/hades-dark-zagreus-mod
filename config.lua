@@ -52,7 +52,8 @@ DZUtil = {
     Upgrade = {},
     Trait = {},
     Record = {},
-    Debug = {}
+    Debug = {},
+    Codex = {}
 }
 
 SaveIgnores["DZUtil"] = true

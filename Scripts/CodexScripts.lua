@@ -84,12 +84,12 @@ Codex.DZCommands = DZCommands
 -- handle confirm
 OnControlPressed{ "Confirm",
 	function( triggerArgs )
-		DZUIHandleConfirm(triggerArgs)
+		DZUtil.Codex.HandleConfirm(triggerArgs)
 	end
 }
 
-function DZUIUseCommand(commandName, triggerArgs)
-    local command = "DZUIHandle" .. commandName
+function DZUtil.Codex.UseCommand(commandName, triggerArgs)
+    local command = "DZUtil.Codex." .. commandName
 	local commandFunction = _G[command]
 	if commandFunction ~= nil then
 		CloseCodexScreen()
@@ -97,7 +97,7 @@ function DZUIUseCommand(commandName, triggerArgs)
 	end
 end
 
-function DZUIHandleConfirm(triggerArgs)
+function DZUtil.Codex.HandleConfirm(triggerArgs)
     if CodexUI.Screen == nil or not IsScreenOpen("Codex") or IsScreenOpen("BoonInfoScreen") then
 		return
 	end
@@ -106,12 +106,12 @@ function DZUIHandleConfirm(triggerArgs)
 
     if Codex.DZCommands.Entries[selection] ~= nil then
 		DZUtil.Debug.PrintString("Trying to execute command : " .. selection)
-		DZUIUseCommand(selection, triggerArgs)
+		DZUtil.Codex.UseCommand(selection, triggerArgs)
     end
 end
 
 -- x86 only
-function DZUIHandleExportRecordToFile()
+function DZUtil.Codex.HandleExportRecordToFile()
 	if io == nil then
 		ModUtil.Hades.PrintDisplay("Can't export record. This feature only works on x86(32-bit) version", 3, {255, 0, 0, 255})
 	else
@@ -121,7 +121,7 @@ function DZUIHandleExportRecordToFile()
 end
 
 -- x86 only
-function DZUIHandleLoadRecordFromFile()
+function DZUtil.Codex.HandleLoadRecordFromFile()
 	if CurrentDeathAreaRoom == nil then
 		ModUtil.Hades.PrintDisplay("You can only load record while outside the run", 3, {255, 0, 0, 255})
 	else
@@ -138,7 +138,7 @@ function DZUIHandleLoadRecordFromFile()
 	end
 end
 
-function DZUIHandleClearRecord()
+function DZUtil.Codex.HandleClearRecord()
 	if CurrentDeathAreaRoom == nil then
 		ModUtil.Hades.PrintDisplay("You can only clear record while outside the run", 3, {255, 0, 0, 255})
 	else
@@ -152,7 +152,7 @@ function DZUIHandleClearRecord()
 	end
 end
 
-function DZUIHandleForceNextRoomBossRoom()
+function DZUtil.Codex.HandleForceNextRoomBossRoom()
 	if CurrentRun.CurrentRoom == nil or CurrentRun.CurrentRoom.Name == nil or CurrentRun.CurrentRoom.Name == "D_Boss01" then
 		ModUtil.Hades.PrintDisplay("Can't set next room to boss room. Either you haven't started a run or you're already in boss room", 3, {255, 0, 0, 255})
 	else
@@ -162,7 +162,7 @@ function DZUIHandleForceNextRoomBossRoom()
 end
 
 -- StyxScribe only
-function DZUIHandleExportRecordToFileStyxScribe()
+function DZUtil.Codex.HandleExportRecordToFileStyxScribe()
 	-- TODO: It's not working now. Can't send long message from lua
 
 	-- if StyxScribe == nil then
@@ -174,7 +174,7 @@ function DZUIHandleExportRecordToFileStyxScribe()
 end
 
 -- StyxScribe only
-function DZUIHandleLoadRecordFromFileStyxScribe()
+function DZUtil.Codex.HandleLoadRecordFromFileStyxScribe()
 	if CurrentDeathAreaRoom == nil then
 		ModUtil.Hades.PrintDisplay("You can only load record while outside the run", 3, {255, 0, 0, 255})
 	else
