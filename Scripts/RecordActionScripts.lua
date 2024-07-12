@@ -4,7 +4,7 @@ if not DarkZagreus.Config.Enabled then return end
 -- charging is deprecated in data version v5
 -- OnWeaponCharging { "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
 --     function(triggerArgs)
---         if not DZCheckCanRecord() then
+--         if not DZDZUtil.Record.CheckCanRecord() then
 --             return false
 --         end
         
@@ -15,7 +15,7 @@ if not DarkZagreus.Config.Enabled then return end
 
 OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
@@ -26,13 +26,13 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
         -- end
 
         -- DebugPrint({ Text = "Attack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))
     end
 }
 
 -- OnWeaponCharging { "SwordParry",
 --     function(triggerArgs)
---         if not DZCheckCanRecord() then
+--         if not DZDZUtil.Record.CheckCanRecord() then
 --             return false
 --         end
         
@@ -43,11 +43,11 @@ OnWeaponFired{ "SwordWeapon SwordWeapon2 SwordWeapon3 SwordWeaponDash",
 
 OnWeaponFired{ "SwordParry",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))
 
         -- aspect of nemesis mark critical after fire sword parry
         if HeroHasTrait("SwordCriticalParryTrait") then
@@ -60,22 +60,22 @@ OnWeaponFired{ "SwordParry",
 -- bow
 OnWeaponFired { "BowWeapon BowWeaponDash",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
         
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))
     end 
 }
 
 OnWeaponFired{ "BowSplitShot",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
         -- DebugPrint({ Text = "SpecialAttack" })
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))
     end
 }
 
@@ -83,51 +83,51 @@ OnWeaponFired{ "BowSplitShot",
 -- TODO: not sure if i can catch Flurry Jab
 OnWeaponFired { "SpearWeapon SpearWeapon2 SpearWeapon3 SpearWeaponDash",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))
     end 
 }
 
 OnWeaponFired { "SpearWeaponSpin SpearWeaponSpin2 SpearWeaponSpin3",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(4))     
+        DZOverridePendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(4))     
     end 
 }
 
 OnWeaponFired { "SpearWeaponThrowReturn",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))
     end
 }
 
 OnWeaponFired { "SpearWeaponThrow",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
         
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2)) 
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2)) 
     end 
 }
 
 OnWeaponFired{ "SpearRushWeapon",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))
     end
 }
 
@@ -135,32 +135,32 @@ OnWeaponFired{ "SpearRushWeapon",
 -- TODO: handle Pulverizing Blow
 OnWeaponFired { "ShieldWeapon ShieldWeaponDash",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))     
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))     
     end 
 }
 
 OnWeaponFired { "ShieldWeaponRush",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZOverridePendingRecord(DZGetCurrentState(), DZMakeActionData(4))     
+        DZOverridePendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(4))     
     end 
 }
 
 DZTemp.ShieldThrowed = false
 OnWeaponFired { "ShieldThrow ShieldThrowDash",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))
 
         if DZTemp.ShieldThrowed == false then
             DZTemp.ShieldThrowed = true 
@@ -173,7 +173,7 @@ OnWeaponFired { "ShieldThrow ShieldThrowDash",
 -- handle aspecot of zeus
 OnWeaponFailedToFire { "ShieldThrow",
     function( triggerArgs )
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
@@ -185,7 +185,7 @@ OnWeaponFailedToFire { "ShieldThrow",
 		local weaponData = GetWeaponData( attacker, triggerArgs.name )
 
         if weaponData.RecallOnFailToFire then
-            DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))
+            DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))
 
             DZTemp.ShieldThrowed = false
         end
@@ -202,11 +202,11 @@ OnWeaponFailedToFire { "ShieldThrow",
 -- so I decide to just record it with OnWeaponFired, which is easier 
 OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 FistWeaponDash",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))     
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))     
     end 
 }
 
@@ -214,11 +214,11 @@ OnWeaponFired { "FistWeapon FistWeapon2 FistWeapon3 FistWeapon4 FistWeapon5 Fist
 -- just treat it as normal special
 OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(2))     
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(2))     
     end 
 }
 
@@ -227,11 +227,11 @@ OnWeaponFired { "FistWeaponSpecial FistWeaponSpecialDash",
 -- ignore the bias affected by Delta Chamber, let it be
 OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))  
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))  
         
         if DZTemp.HasPowerShot then
             DZTemp.HasPowerShot = false
@@ -241,11 +241,11 @@ OnWeaponFired { "GunWeapon GunWeaponDash SniperGunWeapon SniperGunWeaponDash",
 
 OnWeaponFired { "GunGrenadeToss",
     function(triggerArgs)
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(1))     
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(1))     
     end 
 }
 
@@ -253,7 +253,7 @@ OnWeaponFired { "GunGrenadeToss",
 OnWeaponFired{ "RushWeapon",
     function( triggerArgs )
         -- DebugPrint({ Text = GetAngle({ Id = CurrentRun.Hero.ObjectId })})
-        if not DZCheckCanRecord() then
+        if not DZUtil.Record.CheckCanRecord() then
             return false
         end
 
@@ -264,7 +264,7 @@ OnWeaponFired{ "RushWeapon",
         local action = (math.abs(angle - angleBetween) > 90) and 3 or 0
         -- this way might miss catch back dash(aiming front but dash back, not sure how to solve it)
         -- dash away or dash toward
-        DZPushPendingRecord(DZGetCurrentState(), DZMakeActionData(action))
+        DZUtil.Record.PushPendingRecord(DZUtil.Record.GetCurrentState(), DZUtil.Record.MakeActionData(action))
     end
 } 
 

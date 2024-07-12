@@ -18,7 +18,7 @@ end
 -- DZTemp.Weapon = {}
 DZTemp.Model = {}
 
-function DZCheckCanRecord()
+function DZUtil.Record.CheckCanRecord()
     if not DZPersistent.IsRecording then
         return false
     end
@@ -39,7 +39,7 @@ function DZCheckCanRecord()
     return true
 end
 
-function DZMakeActionData(action)
+function DZUtil.Record.MakeActionData(action)
     local dashToward = (action == 0) and 1.0 or 0.0
     local attack = (action == 1) and 1.0 or 0.0
     local special = (action == 2) and 1.0 or 0.0
@@ -58,7 +58,7 @@ function DZMakeActionData(action)
     }
 end
 
-function DZGetCurrentState()
+function DZUtil.Record.GetCurrentState()
     local closestId = GetClosest({ Id = CurrentRun.Hero.ObjectId, DestinationName = "EnemyTeam", IgnoreInvulnerable = true, IgnoreHomingIneligible = true})
     local enemy = ActiveEnemies[closestId]
     local distance = 0.00
@@ -127,7 +127,7 @@ end
 -- create a new record when a run starts
 ModUtil.Path.Wrap("StartNewRun", function(base, prevRun, args)
     DZPersistent.IsRecording = true
-    DZCreateNewRecord()
+    DZUtil.Record.CreateNewRecord()
     return base(prevRun, args)
 end, DarkZagreus)
 
@@ -156,14 +156,14 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 
     -- log the last pending record because the last one hasn't been logged
     if DZPersistent.PendingRecord then
-        DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
+        DZUtil.Record.LogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
     end
 
     DZPersistent.CurRunRecord.Traits = DZUtil.Record.ExtractSimpleTraitTable(CurrentRun.Hero)
 
     -- save the CurRunRecord to PrevRunRecord, so that it will also be saved into the save file
-    DZSaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
-    -- DZSavePrevRunRecordToFile() -- only working on x86
+    DZUtil.Record.SaveCurRunRecordAsPrevRunRecord() -- save copy curRunRecord to prevRunRecord
+    -- DZUtil.Record.SavePrevRunRecordToFile() -- only working on x86
 
     DZPersistent.CurRunRecord = {}
 
@@ -171,10 +171,8 @@ ModUtil.Path.Wrap("RecordRunCleared", function(base)
 end, DarkZagreus)
 
 --- Managing Start/End recording end
-
--- if io module is not avilable then just print record out
-DZCreateNewRecord = function() 
-    DZDebugPrintString("DZCreateNewRecord() - Create new record file, enable isRecording to true") 
+function DZUtil.Record.CreateNewRecord() 
+    DZDebugPrintString("DZUtil.Record.CreateNewRecord() - Create new record file, enable isRecording to true") 
     local weapon = GameState.LastInteractedWeaponUpgrade
 
     if weapon == nil then
@@ -209,7 +207,7 @@ DZCreateNewRecord = function()
     DZTemp.HasShieldBonus = false
 end
 
-DZLogRecord = function (state, action) 
+DZUtil.Record.LogRecord = function (state, action) 
     if DarkZagreus.EnablePlayerLog then
         DZDebugPrintString(string.format("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f", 
         state.OwnHP, state.ClosestEnemyHP, state.Distance, state.GetDamagedRecently, state.DamageEnemyRecently, state.MarkTargetRecently,
@@ -231,42 +229,42 @@ end
 -- player is intending to fire spear attack or spear spin
 -- therefore I make a pending record, which push spear attack to pending 
 -- this allows spear spin to override spear attack record, so holding a button will not double counting actions
-DZPushPendingRecord = function(state, action)
+function DZUtil.Record.PushPendingRecord(state, action)
     if DZPersistent.PendingRecord.State and DZPersistent.PendingRecord.Action then
-        DZLogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
+        DZUtil.Record.LogRecord(DZPersistent.PendingRecord.State, DZPersistent.PendingRecord.Action) 
     end
     DZPersistent.PendingRecord.State = state
     DZPersistent.PendingRecord.Action = action
 end
 
-DZOverridePendingRecord = function(state, action)
+function DZUtil.Record.OverridePendingRecord(state, action)
     DZPersistent.PendingRecord.State = state
     DZPersistent.PendingRecord.Action = action
 end
 
-DZSaveCurRunRecordAsPrevRunRecord = function ()
-    DZDebugPrintString("DZSaveCurRunRecordInMemory()")
+function DZUtil.Record.SaveCurRunRecordAsPrevRunRecord()
+    DZDebugPrintString("DZUtil.Record.SaveCurRunRecordAsPrevRunRecord()")
     DZPersistent.PrevRunRecord = DeepCopyTable(DZPersistent.CurRunRecord)
 end
 
-DZClearPrevRecordInMemory = function ()
-    DZDebugPrintString("DZClearPrevRecordInMemory() - Clear previous record")
+function DZUtil.Record.ClearPrevRecordInMemory()
+    DZDebugPrintString("DZUtil.Record.ClearPrevRecordInMemory() - Clear previous record")
     DZPersistent.PrevRunRecord = {}
 end
 
-DZClearAllRecordInMemory = function ()
+function DZUtil.Record.ClearAllRecordInMemory()
     DZDebugPrintString("DZClearAllRecord() - Clear all records")
     -- DZPersistent.PendingRecord = {}
     DZPersistent.PrevRunRecord = {}
     -- DZPersistent.CurRunRecord = {}
 end
 
-DZSavePrevRunRecordToFile = function ()
+function DZUtil.Record.SavePrevRunRecordToFile()
     DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
     DZSaveTrainingData(DZPersistent.PrevRunRecord)
 end
 
-DZLoadPreRunRecordFromFile = function ()
+function DZUtil.Record.LoadPreRunRecordFromFile()
     DZDebugPrintString("DZSaveCurRunRecordToFile() - Save CurRunRecord to file")
     local record = DZLoadTrainingData()
     if record ~= nil and record.Weapon ~= nil and record.History ~= nil then
@@ -281,7 +279,7 @@ end
 OnAnyLoad { "DeathArea", function(triggerArgs)
     if DZPersistent.PrevRunRecord and DZPersistent.PrevRunRecord.Version ~= DarkZagreus.DataVersion then
         DZDebugPrintString("DataVersion is not matched, clear all previous data")
-        DZClearAllRecordInMemory()
+        DZUtil.Record.ClearAllRecordInMemory()
     end 
 end}
 
